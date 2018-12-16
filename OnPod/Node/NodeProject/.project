@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>NodeMKR1000</name>
+	<name>NodeProject</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -44,7 +44,7 @@
 		<link>
 			<name>libraries/Ethernet</name>
 			<type>2</type>
-			<locationURI>WORKSPACE_LOC/Arduino/libraries/Ethernet</locationURI>
+			<location>C:/ARM/Arduino/libraries/Ethernet</location>
 		</link>
 		<link>
 			<name>libraries/SPI</name>
@@ -54,12 +54,12 @@
 		<link>
 			<name>libraries/Sodaq_wdt-1.0.1</name>
 			<type>2</type>
-			<locationURI>WORKSPACE_LOC/Arduino/libraries/Sodaq_wdt-1.0.1</locationURI>
+			<location>C:/ARM/Arduino/libraries/Sodaq_wdt-1.0.1</location>
 		</link>
 		<link>
 			<name>libraries/Timer-2.1</name>
 			<type>2</type>
-			<locationURI>WORKSPACE_LOC/Arduino/libraries/Timer-2.1</locationURI>
+			<location>C:/ARM/Arduino/libraries/Timer-2.1</location>
 		</link>
 	</linkedResources>
 </projectDescription>
