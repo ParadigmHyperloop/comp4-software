@@ -1,2 +1,8 @@
 .metadata
-*Release
+*sloeber.ino.cpp
+*Release/
+*Debug/
+*.d
+*.project
+*.cproject
+*.settings
