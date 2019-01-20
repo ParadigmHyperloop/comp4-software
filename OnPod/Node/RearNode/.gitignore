@@ -1,3 +1,6 @@
 /sloeber.ino.cpp
 /Release/
 /Debug/
+*.d
+*.project
+*.cproject
