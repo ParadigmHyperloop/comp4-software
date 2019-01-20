@@ -1,0 +1,24 @@
+<div class="sidebar" data-color="blue" data-image="{{ url_for('static', filename='./assets/img/sidebar-5.jpg') }}">
+   <!--
+      Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+      Tip 2: you can also add an image using data-image tag
+      -->
+
+   <div class="sidebar-wrapper">
+      <div class="logo">
+         <a href="https://paradigmhyperloop.com" class="simple-text"><img src="{{ url_for('static', filename='./assets/img/paradigm-hz-white.png') }}" width="100%"/></a>
+      </div>
+
+      <ul class="nav">
+        {% for data in navigation_bar %}
+            <li{% if data.id == active_page %} class="active"{% endif
+            %}>
+              <a href="{{ data.href|e }}">
+                <i class="{{ data.icon|e }}"></i>
+                <p>{{ data.title|e }}</p>
+              </a>
+            </li>
+        {% endfor %}
+      </ul>
+   </div>
+</div>

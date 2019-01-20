@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="mainPage">
+        <div class="col-9">
+            {% include '_cards/tanks.html' %}
+        </div>
+        <div class="col-3">
+            {% include '_cards/environment.html' %}
+        </div>
+        <div class="col-6">
+            {% include '_cards/navigation.html' %}
+        </div>
+        <div class="col-6">
+            {% include '_cards/electrical.html' %}
+        </div>
+        <div class="col-5">
+            {% include '_cards/sensor_status.html' %}
+        </div>
+        <div class="col-7">
+            {% include '_cards/events.html' %}
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block scripts %}
+    {{ super() }}
+    <script src="../static/assets/js/dynamic.js"></script>
+
+
+    <script>
+        $('document').ready(function () {
+            {#newVals();#}
+            sensorNaming();
+            sensorRefresh();
+
+        });
+
+    </script>
+{% endblock %}
