@@ -1,22 +1,14 @@
 #include <Ethernet.h>
 #include <Sodaq_wdt.h>
 #include "Timer.h"
+#include <NodeStructs.h>
 
-/* Node 01
+/* Rear Node
  * Stream incrementing data from node, watchdog reset of no connection
  */
 uint8_t nodeNum	 	= 1;
 uint8_t nodeState 	= 0;
 uint8_t bbbState	= 0;
-bool inverterOn 	= false;
-bool brakesOn		= false;
-bool readInverter();
-bool startBrakeSequence(bool fromBBB = 0);
-bool readBrakes();
-void activateSolenoidH1();
-void activateSolenoidH2();
-void activateSolenoidBleed();
-
 
 unsigned char 	mac[] = { 0x02, nodeNum, 0xFF, 0xFF, 0xFF, 0xFF }; //unique mac address
 IPAddress 		serverIP(192,168,0,1);

@@ -25,6 +25,12 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/NodeProject/libraries/Sodaq_wdt-1.0.1/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/NodeProject/libraries/SPI}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/NodeProject/libraries/Timer-2.1}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RearNode/core/core}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RearNode/core/variant}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RearNode/libraries/Ethernet/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RearNode/libraries/Sodaq_wdt-1.0.1/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RearNode/libraries/SPI}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RearNode/libraries/Timer-2.1}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.cpp.sketch.input.97717387" name="CPP source files" superClass="io.sloeber.compiler.cpp.sketch.input"/>
 							</tool>
@@ -36,6 +42,12 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/NodeProject/libraries/Sodaq_wdt-1.0.1/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/NodeProject/libraries/SPI}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/NodeProject/libraries/Timer-2.1}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RearNode/core/core}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RearNode/core/variant}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RearNode/libraries/Ethernet/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RearNode/libraries/Sodaq_wdt-1.0.1/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RearNode/libraries/SPI}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RearNode/libraries/Timer-2.1}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.c.sketch.input.968785221" name="C Source Files" superClass="io.sloeber.compiler.c.sketch.input"/>
 							</tool>
@@ -47,6 +59,12 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/NodeProject/libraries/Sodaq_wdt-1.0.1/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/NodeProject/libraries/SPI}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/NodeProject/libraries/Timer-2.1}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RearNode/core/core}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RearNode/core/variant}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RearNode/libraries/Ethernet/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RearNode/libraries/Sodaq_wdt-1.0.1/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RearNode/libraries/SPI}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RearNode/libraries/Timer-2.1}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.S.sketch.input.30466071" name="Assembly source files" superClass="io.sloeber.compiler.S.sketch.input"/>
 							</tool>
