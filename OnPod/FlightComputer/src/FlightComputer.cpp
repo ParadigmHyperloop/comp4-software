@@ -26,11 +26,11 @@ struct pod {
 };
 
 int main(int argc, char *argv[]) {
-  socketConfig socketInfo;
-  socketInfo = initializeClientSocket();
+  socketConfig socketInfo = initializeClientSocket();
   char *nodeIp[3] = {"127.0.0.1", "127.0.0.1", "127.0.0.1"};
-  sendState2(nodeIp, 3, socketInfo);
-  killClientSocket();
+
+  sendState(nodeIp, 3, socketInfo);
+  killConfigSocket(socketInfo);
 
   return 0;
 }

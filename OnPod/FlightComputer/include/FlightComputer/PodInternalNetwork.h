@@ -7,12 +7,10 @@ struct socketConfig {
   int sckt;
 };
 
-void sendState(char* [], int);
-
-void sendState2(char* [], int, socketConfig);
+void sendState(char* [], int, socketConfig);
 
 socketConfig initializeClientSocket();
 
-void killClientSocket();
+void killConfigSocket(socketConfig);
 
 #endif
