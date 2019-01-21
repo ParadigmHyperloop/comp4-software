@@ -1,7 +1,7 @@
 #include <Ethernet.h>
 #include <Sodaq_wdt.h>
 #include "Timer.h"
-#include <NodeStructs.h>
+#include "NodeStructs.h"
 
 /* Rear Node
  * Stream incrementing data from node, watchdog reset of no connection
