@@ -41,9 +41,8 @@ void sendState(char *addresses[], int numberOfAddresses) {
     host = gethostbyname(addresses[i]);  // Puts address in a hostent struct
     node_addr.sin_addr = *((struct in_addr *)host->h_addr);
     sendto(sckt, "sup", strlen("sup"), 0, (struct sockaddr *)&node_addr,
-           sizeof(struct sockaddr));  // Type cast the sockaddr_in to a sockaddr
-                                      // -- what seemed to work
-    port++;
+           sizeof(struct sockaddr));
+    port++;  // For testing
   }
   close(sckt);
   return;
