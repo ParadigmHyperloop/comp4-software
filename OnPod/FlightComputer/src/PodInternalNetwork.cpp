@@ -9,7 +9,33 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-void initializeSocket() {}
+#define NodeUDPSocketPort 5005
+
+int globalsocket;
+
+socketConfig initializeClientSocket() {
+  // Create destination info struct
+  sockaddr_in node_addr;
+  node_addr.sin_family = AF_INET;
+  node_addr.sin_port =
+      htons(NodeUDPSocketPort);  // Node Port in Network Byte Orderr
+
+  int sckt = socket(AF_INET, SOCK_DGRAM, 0);  // Create the Socket
+
+  globalsocket = sckt;
+
+  if (sckt == -1) {
+    // TODO throw error
+  }
+
+  socketConfig info;
+  info.addr = &node_addr;
+  info.sckt = sckt;
+
+  return info;
+}
+
+void killClientSocket() { close(globalsocket); }
 
 /**
  * Sends a UDP packet to all nodes
@@ -37,7 +63,6 @@ void sendState(char *addresses[], int numberOfAddresses) {
 
   // Loop over all the IP addresses and send a packet to each one
   for (int i = 0; i < numberOfAddresses; i++) {
-    node_addr.sin_port = htons(port);    // Node Port in Network Byte Order
     host = gethostbyname(addresses[i]);  // Puts address in a hostent struct
     node_addr.sin_addr = *((struct in_addr *)host->h_addr);
     sendto(sckt, "sup", strlen("sup"), 0, (struct sockaddr *)&node_addr,
@@ -45,5 +70,21 @@ void sendState(char *addresses[], int numberOfAddresses) {
     port++;  // For testing
   }
   close(sckt);
+  return;
+}
+
+void sendState2(char *addresses[], int numberOfAddresses,
+                socketConfig socketInfo) {
+  struct hostent *host;
+
+  // Loop over all the IP addresses and send a packet to each one
+  for (int i = 0; i < numberOfAddresses; i++) {
+    host = gethostbyname(addresses[i]);  // Puts address in a hostent struct
+
+    socketInfo.addr->sin_addr = *((struct in_addr *)host->h_addr);
+
+    sendto(socketInfo.sckt, "sup", strlen("sup"), 0,
+           (struct sockaddr *)socketInfo.addr, sizeof(struct sockaddr));
+  }
   return;
 }
