@@ -11,8 +11,6 @@
 
 #define NodeUDPSocketPort 5005
 
-int globalsocket;
-
 /**initializeClientSocket
  *
  * Create the socket that outbound UDP packets will be transmitted over. Create
@@ -30,8 +28,6 @@ socketConfig initializeClientSocket() {
       htons(NodeUDPSocketPort);  // Node Port in Network Byte Orderr
 
   int sckt = socket(AF_INET, SOCK_DGRAM, 0);  // Create the Socket
-
-  globalsocket = sckt;
 
   if (sckt == -1) {
     // TODO throw error
