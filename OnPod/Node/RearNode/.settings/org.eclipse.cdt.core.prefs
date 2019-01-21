@@ -688,7 +688,7 @@ environment/project/io.sloeber.core.toolChain.release.1891581881/JANTJE.PACKAGE_
 environment/project/io.sloeber.core.toolChain.release.1891581881/JANTJE.PACKAGE_ID/value=arduino
 environment/project/io.sloeber.core.toolChain.release.1891581881/JANTJE.PROJECT_NAME/delimiter=;
 environment/project/io.sloeber.core.toolChain.release.1891581881/JANTJE.PROJECT_NAME/operation=replace
-environment/project/io.sloeber.core.toolChain.release.1891581881/JANTJE.PROJECT_NAME/value=NodeProject
+environment/project/io.sloeber.core.toolChain.release.1891581881/JANTJE.PROJECT_NAME/value=RearNode
 environment/project/io.sloeber.core.toolChain.release.1891581881/JANTJE.SELECTED.PLATFORM/delimiter=;
 environment/project/io.sloeber.core.toolChain.release.1891581881/JANTJE.SELECTED.PLATFORM/operation=replace
 environment/project/io.sloeber.core.toolChain.release.1891581881/JANTJE.SELECTED.PLATFORM/value=C\:/ARM/Arduino/portable/packages/arduino/hardware/samd/1.6.15
