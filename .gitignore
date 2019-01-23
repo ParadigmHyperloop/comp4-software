@@ -1,9 +1,12 @@
 .metadata
 *sloeber.ino.cpp
 *Release/
-*Debug/
+*.o
 *.d
 *.project
 *.cproject
 *.settings
 .DS_Store
+*Debug/src/
+
+OnPod/FlightComputer/Debug/FlightComputer
