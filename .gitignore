@@ -6,3 +6,7 @@
 *.project
 *.cproject
 *.settings
+.idea
+venv/
+pycache/
+*.pyc

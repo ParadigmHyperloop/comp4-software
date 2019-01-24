@@ -32,7 +32,7 @@ def dbData(id, value):
 # changes randrange for different values, or use random.choice(someList) to randomly chose from arbitrary list
 def addToDB(name):
     for x in range(0,10):
-        client.write_points(test(name, random.randrange(0,100)))
+        client.write_points(dbData(name, random.randrange(0,100)))
 
 # change id value accordingly, but overall shouldn't be used
 def retrieveDBData():
