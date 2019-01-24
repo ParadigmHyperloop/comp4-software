@@ -6,13 +6,13 @@
 
 struct pod {
   // States
-  unsigned char podS = 0;
-  unsigned char terminalS = 0;
-  unsigned char motorS = 0;
+  unsigned char podS;
+  unsigned char terminalS;
+  unsigned char motorS;
   unsigned char rearNodeS;
   // Navigation
-  float distance = 0;
-  float velocity = 0;
+  float distance;
+  float velocity;
   // Rear Node
   float gpioVals;
 };
