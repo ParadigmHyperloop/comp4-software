@@ -36,6 +36,10 @@ endif
 -include ../makefile.defs
 
 # Add inputs and outputs from these tool invocations to the build variables 
+EXECUTABLES += \
+FlightComputer \
+USER_OBJS \
+
 
 # All Target
 all: FlightComputer
@@ -46,6 +50,12 @@ FlightComputer: $(OBJS) $(USER_OBJS)
 	@echo 'Invoking: GCC C++ Linker'
 	g++  -o "FlightComputer" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
+	@echo ' '
+
+USER_OBJS: $(OBJS) $(USER_OBJS)
+	@echo 'Invoking: GCC C++ Linker'
+	g++  -o "USER_OBJS" $(OBJS) $(USER_OBJS) $(LIBS)
+	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
