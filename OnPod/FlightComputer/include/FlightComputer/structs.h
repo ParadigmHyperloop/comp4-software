@@ -1,12 +1,23 @@
+static enum PodStates { STANDBY, ARMING, ARMED, ACCELERATION, COASTING, BRAKING, DISARM, RETRIEVAL, EMERGENCY, BOOTING };
+
+static enum BreakNodeStates { BOOTING, STANDBY, ARMING, ARMED, FLIGHT, BRAKING, VENTING, RETRIEVAL, ERROR};
+
+static enum TerminalStates { CONNECTED, DROPPED, EMERGENCY};
+
+static enum MotorStates { IDLE, DRIVE};
+
+
 struct podValues {
   // States
-  unsigned char podS = 0;
-  unsigned char terminalS = 0;
-  unsigned char motorS = 0;
-  unsigned char rearNodeS;
+  PodStates podS = BOOTING;
+  TerminalStates terminalS;
+  MotorStates motorS;
+  BreakNodeStates breakNodeS;
   // Navigation
-  float distance = 0;
-  float velocity = 0;
+  float distance;
+  float velocity;
   // Rear Node
   float gpioVals;
 };
+
+
