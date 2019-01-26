@@ -1,5 +1,6 @@
 #Object files for tests
-TESTS = testsMain.o test1.o PodInternalNetworkTests.o
+TESTS = testsMain.o PodInternalNetworkTests.o
+
 #Catch Header File
 TESTLIB = catch.hpp
 
@@ -16,18 +17,28 @@ SRC = $(filter-out ../Debug/src/FlightComputer.o,$(ALLSRC))
 
 
 runTests: $(TESTS) $(SRC)
-	$(COMP) -o runTests $(TESTS) $(SRC) $(TSTSRC) $(BLDFLAGS) 
+	$(COMP) -o runTests $(TESTS) $(SRC) $(TSTSRC) $(BLDFLAGS)
+	make test
 
 testsMain.o : testsMain.cpp
 	$(COMP) -c testsMain.cpp $(BLDFLAGS) 
-
-test1.o : test1.cpp
-	$(COMP) -c test1.cpp  $(BLDFLAGS)
 	
 PodInternalNetworkTests.o : PodInternalNetworkTests.cpp
 	$(COMP) -c PodInternalNetworkTests.cpp  $(BLDFLAGS)
 
+
+# -- ADD A TEST --
+# 
+# test_File_Name.o : test_File_Name.cpp
+#	$(COMP) -c test_File_Name.cpp  $(BLDFLAGS)   -- make sure this line is indented with a tab
+#
+#   !!!  Add test_File_Name.o to the TESTS macro at the top of this file
+
+
 #Remove exectuable and object files
 clean: 
 	-rm *.o runTests
-	
+
+test:
+	./runTests
+	make clean
