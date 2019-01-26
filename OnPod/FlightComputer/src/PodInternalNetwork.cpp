@@ -21,11 +21,12 @@
  * Returns : SocketConfig struct
  */
 socketConfig initializeClientSocket() {
+
   // Create destination info struct
   sockaddr_in node_addr;
   node_addr.sin_family = AF_INET;
   node_addr.sin_port =
-      htons(NodeUDPSocketPort);  // Node Port in Network Byte Orderr
+      htons(NodeUDPSocketPort);  // Node Port in Network Byte Order
 
   int sckt = socket(AF_INET, SOCK_DGRAM, 0);  // Create the Socket
 
@@ -52,13 +53,13 @@ void killConfigSocket(socketConfig socketInfo) { close(socketInfo.sckt); }
  * Sends a UDP packet to all IP addresses given using the Socket in the config
  * given
  */
-void sendState(char *addresses[], int numberOfAddresses,
-               socketConfig socketInfo) {
+void sendState( socketConfig socketInfo ) {
   struct hostent *host;
 
   // Loop over all the IP addresses and send a packet to each one
-  for (int i = 0; i < numberOfAddresses; i++) {
-    host = gethostbyname(addresses[i]);  // Puts address in a hostent struct
+  for (int i = 0; i < socketInfo.nodeNum; i++) {
+
+	  host = gethostbyname(socketInfo.nodeIp[i]);  // Puts address in a hostent struct
 
     socketInfo.addr->sin_addr = *((struct in_addr *)host->h_addr);
 
