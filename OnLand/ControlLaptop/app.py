@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 import random
 from datetime import datetime
 from flask import *
@@ -55,7 +54,6 @@ NAV_BAR = [
     'icon': 'pe-7s-video'
   },
 ]
-
 NAV_IDS = [x['id'] for x in NAV_BAR]
 
 

@@ -5,6 +5,7 @@
 *.d
 *.project
 *.cproject
+.DS_Store
 *.settings
 .idea
 venv/
