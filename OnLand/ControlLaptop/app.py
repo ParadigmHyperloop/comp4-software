@@ -112,6 +112,7 @@ def page_not_found(e):
 def index():
     return redirect('/ui/')
 
+
 # TODO change, implement refresh from influxDB
 @app.route("/_refreshTables")
 def getAirSupply():

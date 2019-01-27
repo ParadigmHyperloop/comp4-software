@@ -13,7 +13,7 @@ ported over from [Paradigm Hyperloop/Web-UI](https://github.com/ParadigmHyperloo
     a new venv)
     - If not using PyCharm, or if it doesn't do it automatically, do the following in a Terminal shell, or in the Terminal
     from PyCharm (bottom bar usually): 
-        - `cd` into the git directory (`cd /comp4-software/OnLand/ControlLaptop`)
+        - `cd` into the git directory (`cd ./comp4-software/OnLand/ControlLaptop`)
         - create new venv (`python -m venv ./venv`) 
         - activate it (`source ./bin/activate`
         - install pip dependencies (`sudo pip install -r /path/to/requirements.txt`)
