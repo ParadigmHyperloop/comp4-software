@@ -6,8 +6,19 @@ TESTLIB = catch.hpp
 
 COMP = g++
 
+
 #Catch needs c++11   Add include path for the project
-BLDFLAGS = -std=c++11 -stdlib=libc++ -I"../include/FlightComputer" -Wl
+BLDFLAGS = -std=c++11 -I"../include/FlightComputer"
+
+#Check Linux vs OSX
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	#No added flags
+else
+	BLDFLAGS += -stdlib=libc++ -Wl
+endif
+
+
 
 #Link to object files for project. They should be made as the project is compile prior to runing this make file
 ALLSRC = $(shell find ../Debug/src -name '*.o')
