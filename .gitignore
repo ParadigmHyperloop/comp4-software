@@ -7,6 +7,7 @@
 *.cproject
 *.settings
 .DS_Store
+*.out
 
 
 OnPod/FlightComputer/Debug/FlightComputer
