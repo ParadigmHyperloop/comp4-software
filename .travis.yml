@@ -15,3 +15,5 @@ install:
 script:
   - cd OnPod/FlightComputer/Debug
   - make
+  - cd ../tests
+  - make
