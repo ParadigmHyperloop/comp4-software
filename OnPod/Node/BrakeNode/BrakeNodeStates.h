@@ -1,4 +1,3 @@
-#include <iostream>
 
 enum State {
     BOOT,
@@ -9,52 +8,57 @@ enum State {
     BRAKING,
     VENTING,
     RETRIEVAL,
-    ERROR
+    ERROR 
 }
 
 class BrakeNodeState {
     
     public:
     /*
-     *Checks if the state can be transitioned to Standby
-     * if yes sets state to Standby.
+     *Checks if the state can be transitioned from Boot to the next state.
+     * if yes sets state to the next state.
     */
-    void CanTransitionToStandby();
+    void CheckBoot();
     /*
-     *Checks if the state can be transitioned to Arming
-     * if yes sets state to Arming.
+     *Checks if the state can be transitioned from Standby to the next state.
+     * if yes sets state to the next state.
     */
-    void CanTransitionToArming();
+    void CheckStandby();
     /*
-     *Checks if the state can be transitioned to Armed
-     * if yes sets state to Armed.
+     *Checks if the state can be transitioned from Arming to the next state.
+     * if yes sets state to the next state.
     */
-    void CanTransitionToArmed();
+    void CheckArming();
     /*
-     *Checks if the state can be transitioned to Flight
-     * if yes sets state to Flight.
+     *Checks if the state can be transitioned from Armed to the next state.
+     * if yes sets state to the next state.
     */
-    void CanTransitionToFlgiht();
+    void CheckArmed();
     /*
-     *Checks if the state can be transitioned to Braking
-     * if yes sets state to Braking.
+     *Checks if the state can be transitioned from Flight to the next state.
+     * if yes sets state to the next state.
     */
-    void CanTransitionToBraking();
+    void CheckFlgiht();
     /*
-     *Checks if the state can be transitioned to Venting
-     * if yes sets state to Venting.
+     *Checks if the state can be transitioned from Braking to the next state.
+     * if yes sets state to the next state.
     */
-    void CanTransitionToVenting();
+    void CheckBraking();
     /*
-     *Checks if the state can be transitioned to Retrieval
-     * if yes sets state to Retrieval.
+     *Checks if the state can be transitioned from Venting to the next state.
+     * if yes sets state to the next state.
     */
-    void CanTransitionToRetrieval();
+    void CheckVenting();
     /*
-     *Checks if the state can be transitioned to Error
-     * if yes sets state to Error.
+     *Checks if the state can be transitioned from Retrieval to the next state.
+     * if yes sets state to the next state.
     */
-    void CanTransitionToError();
+    void CheckRetrieval();
+    /*
+     *Checks if the state can be transitioned from Error to the next state.
+     * if yes sets state to the next state.
+    */
+    void CheckError();
     /*
      *Checks what the current state is. Calls the method
      *corresponding to the current state.
@@ -65,4 +69,3 @@ class BrakeNodeState {
     State state_;
     
 };
-
