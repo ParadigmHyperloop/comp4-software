@@ -1,0 +1,36 @@
+syntax = "proto2";
+
+//package fc;
+
+message brakeNodeData {
+  required int32 id = 1;
+ /** 
+  required enum state {
+	bnBooting   = 0; 
+	bnStandby   = 1;
+	bnArming    = 2;
+	bnArmed     = 3; 
+	bnFlight    = 4; 
+	bnBraking   = 5;
+	venting     = 6;
+	bnRetrieval = 7;
+	bnError     = 8;
+  }
+  */
+  optional bool sol1 = 2;
+  optional bool sol2 = 3;
+  optional bool sol3 = 4;
+  optional bool sol4 = 5;
+  optional bool sol5 = 6;
+  optional bool sol6 = 7;
+  
+  
+  optional int32 hp  = 8;
+  optional int32 lp1 = 9;
+  optional int32 lp2 = 10;
+  optional int32 lp3 = 11;
+  optional int32 lp4 = 12;
+  
+  optional int32 temp = 13;
+  
+}
