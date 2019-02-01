@@ -1,22 +1,24 @@
 syntax = "proto2";
 
-//package fc;
+package fc;
 
 message brakeNodeData {
   required int32 id = 1;
- /** 
-  required enum state {
+  
+  enum breakNodeState {
 	bnBooting   = 0; 
 	bnStandby   = 1;
 	bnArming    = 2;
 	bnArmed     = 3; 
 	bnFlight    = 4; 
 	bnBraking   = 5;
-	venting     = 6;
+	bnVenting   = 6;
 	bnRetrieval = 7;
 	bnError     = 8;
   }
-  */
+  
+  required breakNodeState state = 14;
+ 
   optional bool sol1 = 2;
   optional bool sol2 = 3;
   optional bool sol3 = 4;
