@@ -14,6 +14,9 @@ enum State {
 class BrakeNodeState {
     
     public:
+    
+    //Parameterized constructor
+    BrakeNodeState (State s);
     /*
      *Checks if the state can be transitioned from Boot to the next state.
      * if yes sets state to the next state.
