@@ -9,7 +9,7 @@ enum State {
     VENTING,
     RETRIEVAL,
     ERROR 
-}
+};
 
 class BrakeNodeState {
     
@@ -41,7 +41,7 @@ class BrakeNodeState {
      *Checks if the state can be transitioned from Flight to the next state.
      * if yes sets state to the next state.
     */
-    void CheckFlgiht();
+    void CheckFlight();
     /*
      *Checks if the state can be transitioned from Braking to the next state.
      * if yes sets state to the next state.
@@ -68,6 +68,9 @@ class BrakeNodeState {
     */
     void TransitionToNextState();
 
+    //Returns value stored in state_
+    State GetState();
+    
     private:
     State state_;
     

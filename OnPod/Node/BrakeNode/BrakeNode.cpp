@@ -1,63 +1,44 @@
 #include "BrakeNodeStates.h"
 
-BrakeNodeState::BrakeNodeState(State s) : state_s(s) {
+BrakeNodeState::BrakeNodeState(State s) : state_(s) {
 }
 
 void BrakeNodeState::CheckBoot() {
-  
-  BrakeNodeState s(State::STANDBY);
-  s.TransitionToNextState;
+  state_ = State::STANDBY;
 }
 
 void BrakeNodeState::CheckStandby() {
-  
- BrakeNodeState s(State::ARMING);
- s.TransistionToNextState;
+ state_ = State::ARMING;
 
- BrakeNodeState s(State::ERROR);
- s.TransisitionToNextState;
+// state_ = State::ERROR;
 }
 
 void BrakeNodeState::CheckArming() {
+ state_ = State::ARMED;
  
- BrakeNodeState s(State::Armed);
- s.TransitionToNextState;
- 
- BrakeNodeState s(State::Venting);
- s.TransitionToNextState; 
+// state_ = State::VENTING;
 }
 
 void BrakeNodeState::CheckArmed() {
+  state_ = State::FLIGHT;
 
-  BrakeNodeState s(State::FLIGHT);
-  s.TransitionToNextState;
-
-  BrakeNodeState s(State::VENTING);
-  s.TransitionToNextState;
+//  state_ = State::VENTING;
 }
 
 void BrakeNodeState::CheckFlight() {
-
-  BrakeNodeState s(State::BRAKING);
-  s.TransitionToNextState;
+  state_ = State::BRAKING;
 }
 
 void BrakeNodeState::CheckBraking() {
+  state_ = State::VENTING;
 
-  BrakeNodeState s(State::VENTING);
-  s.TransitionToNextState;
-
-  BrakeNodeState s(State::FLIGHT);
-  s.TransitionToNextState;
+//  state_ = State::FLIGHT;
 }
 
 void BrakeNodeState::CheckVenting() {
+  state_ = State::RETRIEVAL;
 
-  BrakeNodeState s(State::RETRIEVAL);
-  s.TransitionToNextState;
-
-  BrakeNodeState s(State::ERROR);
-  s.TransitionToNextState;
+//  state_ = State::ERROR;
 }
 
 void BrakeNodeState::CheckRetrieval() {
@@ -66,9 +47,7 @@ void BrakeNodeState::CheckRetrieval() {
 }
 
 void BrakeNodeState::CheckError() {
-
-  BrakeNodeState s(State::RETRIEVAL);
-  s.TransitionToNextState;
+  state_ = State::RETRIEVAL;
 }
 
 void BrakeNodeState::TransitionToNextState() {
@@ -78,7 +57,7 @@ void BrakeNodeState::TransitionToNextState() {
     else if (state_==State::STANDBY) {
         CheckStandby();
     }
-    else if (state_==Staet::ARMING) {
+    else if (state_==State::ARMING) {
         CheckArming();
     }
     else if (state_==State::ARMED) {
@@ -99,4 +78,8 @@ void BrakeNodeState::TransitionToNextState() {
     else if (state_==State::ERROR) {
         CheckError();
     }
+}
+
+State BrakeNodeState::GetState() {
+  return state_;
 }
