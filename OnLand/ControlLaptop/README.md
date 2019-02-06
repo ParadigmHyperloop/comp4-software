@@ -5,9 +5,18 @@ used to communicate with Pod
 ported over from [Paradigm Hyperloop/Web-UI](https://github.com/ParadigmHyperloop/web-UI)
 
 ### How to:
-- install InfluxDB (on Arch based: `sudo pacman -S influxdb`, on Debian based: `sudo apt-get install influxdb`)
-- enable and start InfluxDB service (`sudo systemctl enable influxdb && sudo systemctl start influxdb`)
-- clone or download
+- Dependencies
+    - Linux
+        -  Arch based: `sudo pacman -S influxdb protobuf`
+        - Debian based: `sudo apt-get install influxdb protobuf`
+    - MacOS (assuming you have brew installed)
+        - `brew install influxdb protobuf`
+    
+    To make sure it's all there, try
+    -  `protoc --version`
+    -  `influx --version`
+
+- clone or download the repo/branch
 - open it in your preferred IDE (I recommend PyCharm)
     - If using PyCharm, it should warn you that no Python interpreter has been defined, clicking on the message will 
     land you on a window allowing you to create a new venv, make sure to uncheck `inherit global site package` and 
@@ -23,11 +32,16 @@ ported over from [Paradigm Hyperloop/Web-UI](https://github.com/ParadigmHyperloo
 - navigate to `localhost:5000`
 
 
+### Troubleshooting
+##### Errors related to InfluxDB
+- make sure Influx service is running (on Linux, `systemctl status influxdb`)
+    - If not, start it: `sudo systemctl start influxdb`
+    - OPTIONAL: make it start on boot time: `sudo systemctl enable influxdb`
+
+
 ### What is left:
-- ~go through the rest of the tables to put IDs on values that need to be accessed and changed by JS~ Done automatically
 - cleanup the HTML and CSS: mostly done
-- implement the Python functions to communicate with Pod (opening TCP/UDP ports, sending commands, fetching telemetry): 
-examples in Examples folder
+- implement TCP server and telemetry (sending commands, fetching telemetry from node boards and wtvr else)
 - implement Google Protobuff: examples in `Examples` folder
 - Improve project structure (separate `@routes` and scripts from `app.py`)
 
@@ -46,3 +60,5 @@ Description of file content and operation
     - ~proposed system: have in `app.py` a Pod Object or similar that keeps track of current state~
     - ~or, have that information stored in InfluxDB alongside telemetry data, and whenever info is needed 
     either JS or Py can ping the db:~ Done. Needs to figure out what exact data is going to be streamed.
+    
+    

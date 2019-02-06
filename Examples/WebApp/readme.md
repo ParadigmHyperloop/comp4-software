@@ -1,6 +1,15 @@
 # Documentation for examples
 
 
+### Protocol buffer
+- Edit the `protoTest.proto` file to reflect changes on the Protobuf packet
+- Compile the `.proto` file
+    - For Python, `protoc --python_out. protoTest.proto` once you've cd'd in the folder
+    - for C, @TODO
+- Launch the `protoReceive.py` script, it'll wait for packets
+- execute the `protoEmit.py` script, it'l generate and send a protobuf packet 
+    - to edit/change its behavior, check the inline comments 
+
 ### `FlaskTableTesting.py`
 Example for how to generate a table that follows the CSS attributes from Bootstrap.
 

@@ -47,7 +47,6 @@ def retrieveDBData():
 addToDB('sensor1')
 
 # or use the following for simulated in real time
-
-#while True:
+# while True:
 #    addToDB('sensor1')
 
