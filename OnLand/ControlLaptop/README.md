@@ -38,6 +38,10 @@ ported over from [Paradigm Hyperloop/Web-UI](https://github.com/ParadigmHyperloo
     - If not, start it: `sudo systemctl start influxdb`
     - OPTIONAL: make it start on boot time: `sudo systemctl enable influxdb`
 
+##### Error with packages (influxdb and/or protobuf)
+- Installation errors
+    - If the error “Calling needs :cxx14 is disabled! There is no replacement.” appears. 
+    run the command `brew cleanup`, or `brew tap ——` the reported directory.
 
 ### What is left:
 - cleanup the HTML and CSS: mostly done

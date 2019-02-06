@@ -24,8 +24,7 @@ def sensor_values():
 
 @app.context_processor
 def inject_now():
-    return {'now': datetime.utcnow(),
-            'navigation_bar': NAV_BAR}
+    return {'now': datetime.utcnow(), 'navigation_bar': NAV_BAR}
 
 
 @app.route("/ui/", defaults={'path': 'index.html'})
@@ -40,20 +39,5 @@ def ui(path):
         title = NAV_BAR[NAV_IDS.index(page)]['title']
     else:
         title = DEFAULT_TITLE
+
     return render_template(path, active_page=page, title=title, test=table)
-
-
-# # DEPRECATED
-# @app.route("/_refreshTables")
-# def DEPRECATED_get_sensor_values():
-#     # generates random dummy values to be returned
-#     status = ['0', '1']
-#     values = []
-#     for x in range(0,100):
-#         values.append(x)
-#
-#     return jsonify(value00=random.choice(values), value01=random.choice(values), value02=random.choice(values), status0=random.choice(status),
-#                    value10=random.choice(values), value11=random.choice(values), value12=random.choice(values), status1=random.choice(status),
-#                    value20=random.choice(values), value21=random.choice(values), value22=random.choice(values), status2=random.choice(status),
-#                    value30=random.choice(values), value31=random.choice(values), value32=random.choice(values), status3=random.choice(status),
-#                    )
