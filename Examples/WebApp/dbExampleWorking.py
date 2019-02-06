@@ -1,7 +1,5 @@
-import _thread
 import datetime
 import random
-import time
 
 from influxdb import *
 

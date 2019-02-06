@@ -30,5 +30,4 @@ function sensorNaming() {
         temp[2].setAttribute('class','min');
         temp[3].setAttribute('class','current');
         temp[4].setAttribute('class','max');
-
     });}

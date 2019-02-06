@@ -1,4 +1,5 @@
-from testing import protoTest_pb2
+from Examples.WebApp import protoTest_pb2
+
 
 message = protoTest_pb2.telemetry()
 message.podState = 132

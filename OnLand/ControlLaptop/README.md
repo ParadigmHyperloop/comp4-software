@@ -47,8 +47,10 @@ ported over from [Paradigm Hyperloop/Web-UI](https://github.com/ParadigmHyperloo
 - cleanup the HTML and CSS: mostly done
 - implement TCP server and telemetry (sending commands, fetching telemetry from node boards and wtvr else)
 - implement Google Protobuff: examples in `Examples` folder
-- Improve project structure (separate `@routes` and scripts from `app.py`)
-
+- Figure out Protobuf packet content to be streamed.
+- Change all pressure units to a multiple of Pascals (e.g. kPa for environment, MPa for pressure tanks).
+- Make buttons grey out/inactive when pod isnt in the correct state.
+    - "Fire" command should be password protected
 
 ### Documentation
 Description of file content and operation
@@ -58,12 +60,5 @@ Description of file content and operation
 - `index.html` extends `base.html`, and adds in cards from `_cards` (tables)
 - sensor table is now dynamically generated from database content, as well as update in real time.
 
-
-### TODO
-- keep track of pod state: 
-    - ~proposed system: have in `app.py` a Pod Object or similar that keeps track of current state~
-    - ~or, have that information stored in InfluxDB alongside telemetry data, and whenever info is needed 
-    either JS or Py can ping the db:~ Done. Needs to figure out what exact data is going to be streamed.
-- Change all pressure units to a multiple of Pascals (e.g. kPa for environment, MPa for pressure tanks).
-- Make buttons grey out/inactive when pod isnt in the correct state.
-    - "Fire" command should be password protected
+- data in the different sensor cards (the first row of sensors) are all static atm, once sensors are defined can have them
+update in real time
