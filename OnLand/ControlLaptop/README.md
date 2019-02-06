@@ -64,5 +64,6 @@ Description of file content and operation
     - ~proposed system: have in `app.py` a Pod Object or similar that keeps track of current state~
     - ~or, have that information stored in InfluxDB alongside telemetry data, and whenever info is needed 
     either JS or Py can ping the db:~ Done. Needs to figure out what exact data is going to be streamed.
-    
-    
+- Change all pressure units to a multiple of Pascals (e.g. kPa for environment, MPa for pressure tanks).
+- Make buttons grey out/inactive when pod isnt in the correct state.
+    - "Fire" command should be password protected
