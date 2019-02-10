@@ -43,7 +43,6 @@ void BrakeNodeState::CheckVenting() {
 
 void BrakeNodeState::CheckRetrieval() {
 
-  
 }
 
 void BrakeNodeState::CheckError() {
