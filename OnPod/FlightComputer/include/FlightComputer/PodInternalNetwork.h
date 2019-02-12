@@ -1,8 +1,8 @@
 #ifndef PODINTERNALNETWORK_H
 
 #define PODINTERNALNETWORK_H
-#include <string>
 #include <stdlib.h>
+#include <string>
 
 struct clientSocketConfig {
   struct sockaddr_in* addr;
@@ -11,7 +11,8 @@ struct clientSocketConfig {
   int nodeNum = 1;
 };
 
-void sendDataUdp(clientSocketConfig, std::string *);
+void sendDataUdp(clientSocketConfig, std::string*);
+void sendDataUdp2();
 
 clientSocketConfig initializeClientSocket();
 
@@ -20,6 +21,5 @@ void killConfigSocket(clientSocketConfig);
 int createNodeServerSocket();
 
 int nodeServerThread(int sckt);
-
 
 #endif
