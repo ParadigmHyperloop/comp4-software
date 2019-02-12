@@ -1,15 +1,21 @@
-#include "FlightComputer/PodInternalNetwork.h"
-#include <netdb.h>
-#include <netinet/in.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/socket.h>
 #include <sys/types.h>
-#include <sys/wait.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 #include <unistd.h>
+#include <netdb.h>
 
-#define NodeUDPSocketPort 5005
+#include "FlightComputer/PodInternalNetwork.h"
+#include "FlightComputer/structs.h"
+#include "FlightComputer/ProtoStructs.pb.h"
+
+
+#define NodeUDPSocketPort 5007
+
+using namespace std;
 
 /**initializeClientSocket
  *
@@ -20,21 +26,23 @@
  * Param:None
  * Returns : SocketConfig struct
  */
-socketConfig initializeClientSocket() {
-
+clientSocketConfig initializeClientSocket() {
+  printf("Creating Client Socket \n");
   // Create destination info struct
   sockaddr_in node_addr;
+  bzero(&node_addr, sizeof node_addr);
   node_addr.sin_family = AF_INET;
-  node_addr.sin_port =
-      htons(NodeUDPSocketPort);  // Node Port in Network Byte Order
-
+  node_addr.sin_port = htons(NodeUDPSocketPort);  // Node Port in Network Byte Order
   int sckt = socket(AF_INET, SOCK_DGRAM, 0);  // Create the Socket
-
-  if (sckt == -1) {
+  if (sckt == -1)
+  {
     // TODO throw error
   }
-
-  socketConfig info;
+  else
+  {
+	  printf("Client Socket Created \n");
+  }
+  clientSocketConfig info;
   info.addr = &node_addr;
   info.sckt = sckt;
 
@@ -46,25 +54,28 @@ socketConfig initializeClientSocket() {
  *Close the socket of the socketConfig struct provided
  *
  */
-void killConfigSocket(socketConfig socketInfo) { close(socketInfo.sckt); }
+void killConfigSocket(clientSocketConfig socketInfo) { close(socketInfo.sckt); return ;}
+
 
 /**SendState
  *
  * Sends a UDP packet to all IP addresses given using the Socket in the config
  * given
  */
-void sendState( socketConfig socketInfo ) {
-  struct hostent *host;
+void sendDataUdp( clientSocketConfig socketInfo, string* data){
+  printf("Sending UDP Packet... \n");
+  struct hostent* host;
+  const char *payLoad = data->c_str();
+  for (int i = 0; i < socketInfo.nodeNum; i++)
+  {
+  host = gethostbyname(socketInfo.nodeIp[i]);
+  socketInfo.addr->sin_addr = *((struct in_addr *)host->h_addr);
 
-  // Loop over all the IP addresses and send a packet to each one
-  for (int i = 0; i < socketInfo.nodeNum; i++) {
-
-	  host = gethostbyname(socketInfo.nodeIp[i]);  // Puts address in a hostent struct
-
-    socketInfo.addr->sin_addr = *((struct in_addr *)host->h_addr);
-
-    sendto(socketInfo.sckt, "sup", strlen("sup"), 0,
+    sendto(socketInfo.sckt, payLoad, strlen(payLoad), 0,
            (struct sockaddr *)socketInfo.addr, sizeof(struct sockaddr));
   }
+  printf("UDP Packets Sent. \n");
   return;
 }
+
+

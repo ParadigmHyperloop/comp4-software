@@ -1,18 +1,25 @@
 #ifndef PODINTERNALNETWORK_H
 
 #define PODINTERNALNETWORK_H
+#include <string>
+#include <stdlib.h>
 
-struct socketConfig {
+struct clientSocketConfig {
   struct sockaddr_in* addr;
   int sckt;
-  char* nodeIp[3];
-  int nodeNum = 3;
+  char* nodeIp[1] = {"127.0.0.1"};
+  int nodeNum = 1;
 };
 
-void sendState(socketConfig);
+void sendDataUdp(clientSocketConfig, std::string *);
 
-socketConfig initializeClientSocket();
+clientSocketConfig initializeClientSocket();
 
-void killConfigSocket(socketConfig);
+void killConfigSocket(clientSocketConfig);
+
+int createNodeServerSocket();
+
+int nodeServerThread(int sckt);
+
 
 #endif
