@@ -36,6 +36,7 @@ This software suite interprets, displays and logs data from the SATS. This data 
     export TEST_STAND_DB=DATABASE_NAME
     ```
 You don't need to create this database - just provide the name you'd like to use
+
 6. Activate your Python virtual environment
 7. Run the script:
  - Navigate to the `ControlLaptop` directory and run:
@@ -48,7 +49,7 @@ You don't need to create this database - just provide the name you'd like to use
  - When finished, type `q` and press enter/return
  - Make any notes you'd like about the test, then press enter/return twice
 
-After any test, inside the folder of the Python  script, there should be a `TestData` directory. Inside this directory there should be a separate directory for each test, with a `.txt` file (for notes) and a `.csv` file (for data). A new test can then be started by running `test_stand.py` again
+After any test, inside the folder of the Python  script, there should be a `TestData` directory. Inside this directory there should be a separate directory for each test, each with a `.txt` file (for notes) and a `.csv` file (for data). A new test can then be started by running `test_stand.py` again
 
 ## Code
 
