@@ -1,5 +1,5 @@
 # Single Actuator Test Stand (SATS) Control and Analysis Software
-___
+
 This software suite interprets, displays and logs data from the SATS. This data is received from sensors interfacing with an Arduino Uno. The Uno then communicates this data over a serial connection to a control laptop where it is read. The software also allows for full control over the stand's solenoid-activated brakes, using the same serial connection.
 
 ## Installation and Dependencies
