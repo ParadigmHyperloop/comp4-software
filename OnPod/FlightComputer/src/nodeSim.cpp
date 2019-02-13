@@ -33,9 +33,8 @@ void runNodeSimulator(clientSocketConfig* sckt) {
 
     nodeUpdate.SerializeToString(nodeUpdateSerialized);
 
-    // sendDataUdp(sckt, nodeUpdateSerialized);
-    sendDataUdp3(sckt);
-    //sendDataUdp2();
+    sendDataUdp(sckt);
+
     std::this_thread::sleep_for(std::chrono::seconds(1));
   }
 

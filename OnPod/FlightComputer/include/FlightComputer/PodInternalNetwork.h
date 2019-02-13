@@ -16,9 +16,8 @@ struct clientSocketConfig {
   int sckt;
 };
 
-void sendDataUdp(clientSocketConfig, std::string*);
-void sendDataUdp2();
-void sendDataUdp3(clientSocketConfig*);
+
+void sendDataUdp(clientSocketConfig*);
 
 clientSocketConfig* initializeClientSocket();
 

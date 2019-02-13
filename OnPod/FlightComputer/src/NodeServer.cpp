@@ -12,6 +12,8 @@
 #include "FlightComputer/PodInternalNetwork.h"
 #include "FlightComputer/ProtoStructs.pb.h"
 
+
+
 int createNodeServerSocket() {
   int port = 5008;
   int sockfd;
@@ -41,3 +43,4 @@ int nodeServerThread(int sckt) {
   close(sckt);
   return 0;
 }
+
