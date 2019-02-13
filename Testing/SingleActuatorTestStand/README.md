@@ -55,8 +55,8 @@ After any test, inside the folder of the Python  script, there should be a `Test
 
 | File | Purpose |
 |:----:|:-------:|
-| test_stand.ino | Main Arduino file - read all sensors and send that data over serial while listening for solenoid commands form the Control Laptop |
-|test_stand.py||
-|database.py||
-|serial_manager.py||
-|csv_logger.py||
+|test_stand.py| __Main Control Laptop file__ - handles user interaction and threading for the serial port listener|
+|database.py| Logs data to and pulls data from the InfluxDB database |
+|serial_manager.py| Reads from and writes to the Arduino serial port |
+|csv_logger.py| Logs test data to a `.csv` file once the test is finished |
+| test_stand.ino | __Arduino file__ - reads all sensors data and sends that data over serial while listening for solenoid commands from the Control Laptop |
