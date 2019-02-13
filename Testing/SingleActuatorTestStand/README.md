@@ -9,10 +9,12 @@ This software suite interprets, displays and logs data from the SATS. This data 
 3. Upload [test_stand.ino](./Arduino/test_stand.ino) to an Arduino Uno
 4. Install [Python](https://www.python.org/downloads/) 3.6 or later
 5. Create a virtual environment with:
+
     ```
     python -m venv ENV_NAME
     ```
     or if you have [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/):
+
     ```
     mkvirtualenv ENV_NAME
     ```
@@ -29,16 +31,17 @@ This software suite interprets, displays and logs data from the SATS. This data 
 3. Open a [snapshot of the Grafana dashboard](https://snapshot.raintank.io/dashboard/snapshot/vAmTL0ja5RnmioAxvtjzRIUPH7ivOTeL) for live data viewing
 4. Start the InfluxDB server. Information on how to do this can be found at the [installation page](https://docs.influxdata.com/influxdb/v1.7/introduction/installation/)
 5. Create an environment variable called `TEST_STAND_DB` with the name of the InfluxDB you'll be using to log the data with:
-```
-export TEST_STAND_DB=DATABASE_NAME
-```
+
+    ```
+    export TEST_STAND_DB=DATABASE_NAME
+    ```
 You don't need to create this database - just provide the name you'd like to use
 6. Activate your Python virtual environment
 7. Run the script:
  - Navigate to the `ControlLaptop` directory and run:
-```
-python test_stand.py
-```
+ ```
+ python test_stand.py
+ ```
  - Select a the serial port the Arduino is connected to from the list that appears
  - When ready, type `start` to start the test
  - Control the solenoid using the enter/return key
