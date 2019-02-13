@@ -1,13 +1,3 @@
-#include <arpa/inet.h>
-#include <netdb.h>
-#include <netinet/in.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <unistd.h>
-
 #include "FlightComputer/PodInternalNetwork.h"
 #include "FlightComputer/ProtoStructs.pb.h"
 #include "FlightComputer/structs.h"
@@ -15,6 +5,18 @@
 #define NodeUDPSocketPort 5008
 
 using namespace std;
+
+
+/**killConfigSocket
+ *
+ *Close the socket of the socketConfig struct provided
+ *
+ */
+void killConfigSocket(clientSocketConfig* socketInfo) {
+  close(socketInfo->sckt);
+  return;
+}
+
 
 /**initializeClientSocket
  *
@@ -25,58 +27,24 @@ using namespace std;
  * Param:None
  * Returns : SocketConfig struct
  */
-clientSocketConfig initializeClientSocket() {
-  printf("Creating Client Socket \n");
-  // Create destination info struct
-  sockaddr_in node_addr;
-  bzero(&node_addr, sizeof node_addr);
-  node_addr.sin_family = AF_INET;
-  node_addr.sin_port =
-      htons(NodeUDPSocketPort);               // Node Port in Network Byte Order
-  int sckt = socket(AF_INET, SOCK_DGRAM, 0);  // Create the Socket
-  if (sckt == -1) {
-    printf("Error creating client Socket \n");
-  } else {
-    printf("Client Socket Created \n");
-  }
-  clientSocketConfig info;
-  info.addr = &node_addr;
-  info.sckt = sckt;
+clientSocketConfig* initializeClientSocket() {
+	  printf("Creating Client Socket \n");
 
-  return info;
-}
+	  int port = NodeUDPSocketPort;
+	  int sockfd;
+	  struct sockaddr_in serverAddr;
+	  memset(&serverAddr, '\0', sizeof(serverAddr));
 
-/**killConfigSocket
- *
- *Close the socket of the socketConfig struct provided
- *
- */
-void killConfigSocket(clientSocketConfig socketInfo) {
-  close(socketInfo.sckt);
-  return;
-}
+	  sockfd = socket(PF_INET, SOCK_DGRAM, 0);
 
-/**SendState
- *
- * Sends a UDP packet to all IP addresses given using the Socket in the config
- * given
- */
-void sendDataUdp(clientSocketConfig socketInfo, string *data) {
-  struct hostent *host;
-  const char *payLoad = data->c_str();
+	  serverAddr.sin_family = AF_INET;
+	  serverAddr.sin_port = htons(port);
 
-  const char *local = "127.0.0.1";
-  host = gethostbyname(local);
+	  clientSocketConfig* info = new clientSocketConfig;
+	  info->addr = serverAddr;
+	  info->sckt = sockfd;
+	  return info;
 
-  socketInfo.addr->sin_addr = *((struct in_addr *)host->h_addr);
-  socketInfo.addr->sin_family = AF_INET;
-
-  int a = sendto(socketInfo.sckt, "hello", strlen("hello"), 0,
-                 (struct sockaddr *)socketInfo.addr, sizeof(struct sockaddr));
-
-  printf("Sending UDP Packet : %m over socket %o \n", a, socketInfo.sckt);
-
-  return;
 }
 
 void sendDataUdp2() {
@@ -84,7 +52,6 @@ void sendDataUdp2() {
   int sockfd;
   struct sockaddr_in serverAddr;
   char buffer[1024];
-  socklen_t addr_size;
 
   sockfd = socket(PF_INET, SOCK_DGRAM, 0);
   memset(&serverAddr, '\0', sizeof(serverAddr));
@@ -98,3 +65,15 @@ void sendDataUdp2() {
          sizeof(serverAddr));
   printf("[+]Data Send: %s", buffer);
 }
+
+void sendDataUdp3(clientSocketConfig* socketInfo){
+	  char buffer[1024];
+	  socketInfo->addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+	  strcpy(buffer, "Hello Server\n");
+
+	  sendto(socketInfo->sckt, buffer, 1024, 0, (struct sockaddr *)&socketInfo->addr,
+	           sizeof(socketInfo->addr));
+	  printf("[+]Data Send: %s", buffer);
+
+}
+

@@ -1,21 +1,16 @@
-#include <arpa/inet.h>
-#include <netdb.h>
-#include <netinet/in.h>
+
+#include <thread>
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <unistd.h>
-#include <thread>
 
-#include "FlightComputer/NodeServer.h"
-#include "FlightComputer/PodInternalNetwork.h"
 #include "FlightComputer/nodeSim.h"
+#include "FlightComputer/PodInternalNetwork.h"
+#include "FlightComputer/NodeServer.h"
 
 int main(int argc, char **argv) {
   int sckt = createNodeServerSocket();
-  clientSocketConfig sckt2 = initializeClientSocket();
+  clientSocketConfig* sckt2 = initializeClientSocket();
 
   std::thread server(nodeServerThread, sckt);
 

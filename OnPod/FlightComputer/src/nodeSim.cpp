@@ -8,7 +8,7 @@
 
 using namespace fc;
 
-void runNodeSimulator(clientSocketConfig sckt) {
+void runNodeSimulator(clientSocketConfig* sckt) {
   std::string payload = "";
 
   for (int i = 0; i < 10; i++) {
@@ -34,7 +34,8 @@ void runNodeSimulator(clientSocketConfig sckt) {
     nodeUpdate.SerializeToString(nodeUpdateSerialized);
 
     // sendDataUdp(sckt, nodeUpdateSerialized);
-    sendDataUdp2();
+    sendDataUdp3(sckt);
+    //sendDataUdp2();
     std::this_thread::sleep_for(std::chrono::seconds(1));
   }
 

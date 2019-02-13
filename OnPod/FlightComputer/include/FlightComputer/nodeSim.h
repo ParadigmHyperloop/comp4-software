@@ -1,3 +1,3 @@
 #include "FlightComputer/PodInternalNetwork.h"
 
-void runNodeSimulator(clientSocketConfig);
+void runNodeSimulator(clientSocketConfig*);
