@@ -35,7 +35,7 @@ This software suite interprets, displays and logs data from the SATS. This data 
     ```
     export TEST_STAND_DB=DATABASE_NAME
     ```
-You don't need to create this database - just provide the name you'd like to use
+    You don't need to create this database - just provide the name you'd like to use
 
 6. Activate your Python virtual environment
 7. Run the script:
