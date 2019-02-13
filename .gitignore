@@ -8,6 +8,7 @@
 *.settings
 .DS_Store
 *.out
+*__pycache__
 
 
 OnPod/FlightComputer/Debug/FlightComputer
