@@ -9,6 +9,9 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include "FlightComputer/ProtoStructs.pb.h"
+#include "FlightComputer/structs.h"
+
 
 
 struct clientSocketConfig {
@@ -17,7 +20,7 @@ struct clientSocketConfig {
 };
 
 
-void sendDataUdp(clientSocketConfig*);
+void sendDataUdp(clientSocketConfig*, void*);
 
 clientSocketConfig* initializeClientSocket();
 

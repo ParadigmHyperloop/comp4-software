@@ -1,6 +1,4 @@
 #include "FlightComputer/PodInternalNetwork.h"
-#include "FlightComputer/ProtoStructs.pb.h"
-#include "FlightComputer/structs.h"
 
 #define NodeUDPSocketPort 5008
 
@@ -44,13 +42,15 @@ clientSocketConfig* initializeClientSocket() {
 
 }
 
-void sendDataUdp(clientSocketConfig* socketInfo){
-	  char buffer[1024];
-	  socketInfo->addr.sin_addr.s_addr = inet_addr("127.0.0.1");
-	  strcpy(buffer, "Hello Server\n");
+void sendDataUdp(clientSocketConfig* socketInfo, void* payload){
 
-	  sendto(socketInfo->sckt, buffer, 1024, 0, (struct sockaddr *)&socketInfo->addr,
+	  socketInfo->addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+
+	  sendto(socketInfo->sckt, payload, sizeof(payload), 0, (struct sockaddr *)&socketInfo->addr,
 	           sizeof(socketInfo->addr));
-	  printf("[+]Data Send: %s", buffer);
+
+	  printf("Data Sent \n");
 
 }
+
+

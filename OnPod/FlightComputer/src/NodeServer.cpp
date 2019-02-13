@@ -1,17 +1,4 @@
-#include <NodeServer.h>
-#include <arpa/inet.h>
-#include <netdb.h>
-#include <netinet/in.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <unistd.h>
-
 #include "FlightComputer/PodInternalNetwork.h"
-#include "FlightComputer/ProtoStructs.pb.h"
-
 
 
 int createNodeServerSocket() {
@@ -28,17 +15,19 @@ int createNodeServerSocket() {
 }
 
 int nodeServerThread(int sckt) {
-  char buffer[1024];
+  char buffer[300];
   while (1) {
     bzero(&buffer, sizeof buffer);
-    printf("Waiting to recieve /n");
-    recvfrom(sckt, buffer, 1024, 0, nullptr, nullptr);
-    printf(buffer);
+    printf("Waiting to recieve on socket: %i \n", sckt);
 
-    // std::string payload = buffer;
-    // fc::brakeNodeData nodeUpdate;
-    // nodeUpdate.ParseFromString(payload);
-    // printf(nodeUpdate.DebugString().c_str());
+    recvfrom(sckt, buffer, 300, 0, nullptr, nullptr);
+
+    fc::brakeNodeData nodeUpdate2;
+
+    bool parsed = nodeUpdate2.ParseFromArray(&buffer, 44);
+    printf("Parse status: %i \n", parsed );
+    printf("Contents are: \n%s \n", nodeUpdate2.DebugString().c_str());
+
   }
   close(sckt);
   return 0;

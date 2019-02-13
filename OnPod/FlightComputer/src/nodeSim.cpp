@@ -11,10 +11,11 @@ using namespace fc;
 void runNodeSimulator(clientSocketConfig* sckt) {
   std::string payload = "";
 
-  for (int i = 0; i < 10; i++) {
+  for (int i = 0; i <2; i++) {
     brakeNodeData nodeUpdate;
     nodeUpdate.set_id(1);
     nodeUpdate.set_state(brakeNodeData::bnVenting);
+
     // Pressure Transducers
     nodeUpdate.set_hp(rand());
     nodeUpdate.set_lp1(rand());
@@ -29,11 +30,13 @@ void runNodeSimulator(clientSocketConfig* sckt) {
     nodeUpdate.set_sol5(rand());
     nodeUpdate.set_sol6(rand());
 
-    std::string* nodeUpdateSerialized = &payload;
+    size_t size = nodeUpdate.ByteSizeLong();
 
-    nodeUpdate.SerializeToString(nodeUpdateSerialized);
+    printf("Prepared Packet Size: %i \n",(int)size);
+    void *buffer = malloc(size);
+    nodeUpdate.SerializeToArray(buffer, size);
 
-    sendDataUdp(sckt);
+    sendDataUdp(sckt, buffer);
 
     std::this_thread::sleep_for(std::chrono::seconds(1));
   }

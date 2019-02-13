@@ -26,7 +26,7 @@ message brakeNodeData {
   optional bool sol5 = 6;
   optional bool sol6 = 7;
   
-  
+ 
   optional int32 hp  = 8;
   optional int32 lp1 = 9;
   optional int32 lp2 = 10;
