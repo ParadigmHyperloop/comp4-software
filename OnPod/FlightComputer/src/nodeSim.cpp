@@ -18,10 +18,11 @@ void runNodeSimulator(clientSocketConfig* sckt) {
 
     // Pressure Transducers
     nodeUpdate.set_hp(rand());
-    nodeUpdate.set_lp1(rand());
-    nodeUpdate.set_lp2(rand());
-    nodeUpdate.set_lp3(rand());
-    nodeUpdate.set_lp4(rand());
+    nodeUpdate.set_lp1(1);
+    nodeUpdate.set_lp2(1);
+    nodeUpdate.set_lp3(1);
+    nodeUpdate.set_lp4(1);
+
     // Solenoids
     nodeUpdate.set_sol1(rand());
     nodeUpdate.set_sol2(rand());
@@ -29,6 +30,8 @@ void runNodeSimulator(clientSocketConfig* sckt) {
     nodeUpdate.set_sol4(rand());
     nodeUpdate.set_sol5(rand());
     nodeUpdate.set_sol6(rand());
+
+    nodeUpdate.set_temp(rand());
 
     size_t size = nodeUpdate.ByteSizeLong();
 

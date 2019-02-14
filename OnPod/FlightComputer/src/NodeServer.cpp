@@ -26,6 +26,8 @@ int nodeServerThread(int sckt) {
     bool parsed = nodeUpdate2.ParseFromArray(&buffer, 44);
     printf("Parse status: %i \n", parsed);
     printf("Contents are: \n%s \n", nodeUpdate2.DebugString().c_str());
+
+    printf("Has State: %i \n", nodeUpdate2.has_state());
   }
   close(sckt);
   return 0;
