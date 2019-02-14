@@ -1,6 +1,5 @@
 #include "FlightComputer/PodInternalNetwork.h"
 
-
 int createNodeServerSocket() {
   int port = 5008;
   int sockfd;
@@ -15,21 +14,19 @@ int createNodeServerSocket() {
 }
 
 int nodeServerThread(int sckt) {
-  char buffer[300];
+  char buffer[100] = {0};
   while (1) {
     bzero(&buffer, sizeof buffer);
     printf("Waiting to recieve on socket: %i \n", sckt);
 
-    recvfrom(sckt, buffer, 300, 0, nullptr, nullptr);
+    int recievedSize = recvfrom(sckt, buffer, 300, 0, nullptr, nullptr);
 
     fc::brakeNodeData nodeUpdate2;
 
     bool parsed = nodeUpdate2.ParseFromArray(&buffer, 44);
-    printf("Parse status: %i \n", parsed );
+    printf("Parse status: %i \n", parsed);
     printf("Contents are: \n%s \n", nodeUpdate2.DebugString().c_str());
-
   }
   close(sckt);
   return 0;
 }
-

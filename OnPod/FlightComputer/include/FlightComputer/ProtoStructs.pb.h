@@ -311,7 +311,7 @@ class brakeNodeData : public ::google::protobuf::Message /* @@protoc_insertion_p
   ::google::protobuf::int32 temp() const;
   void set_temp(::google::protobuf::int32 value);
 
-  // required .fc.brakeNodeData.breakNodeState state = 14;
+  // optional .fc.brakeNodeData.breakNodeState state = 14;
   bool has_state() const;
   void clear_state();
   static const int kStateFieldNumber = 14;
@@ -348,9 +348,6 @@ class brakeNodeData : public ::google::protobuf::Message /* @@protoc_insertion_p
   void clear_has_lp4();
   void set_has_temp();
   void clear_has_temp();
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
@@ -406,7 +403,7 @@ inline void brakeNodeData::set_id(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:fc.brakeNodeData.id)
 }
 
-// required .fc.brakeNodeData.breakNodeState state = 14;
+// optional .fc.brakeNodeData.breakNodeState state = 14;
 inline bool brakeNodeData::has_state() const {
   return (_has_bits_[0] & 0x00002000u) != 0;
 }

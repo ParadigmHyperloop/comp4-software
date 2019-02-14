@@ -113,7 +113,7 @@ void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
       "\n\022ProtoStructs.proto\022\002fc\"\204\003\n\rbrakeNodeDa"
-      "ta\022\n\n\002id\030\001 \002(\005\022/\n\005state\030\016 \002(\0162 .fc.brake"
+      "ta\022\n\n\002id\030\001 \002(\005\022/\n\005state\030\016 \001(\0162 .fc.brake"
       "NodeData.breakNodeState\022\014\n\004sol1\030\002 \001(\010\022\014\n"
       "\004sol2\030\003 \001(\010\022\014\n\004sol3\030\004 \001(\010\022\014\n\004sol4\030\005 \001(\010\022"
       "\014\n\004sol5\030\006 \001(\010\022\014\n\004sol6\030\007 \001(\010\022\n\n\002hp\030\010 \001(\005\022"
@@ -458,7 +458,7 @@ bool brakeNodeData::MergePartialFromCodedStream(
         break;
       }
 
-      // required .fc.brakeNodeData.breakNodeState state = 14;
+      // optional .fc.brakeNodeData.breakNodeState state = 14;
       case 14: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(112u /* 112 & 0xFF */)) {
@@ -570,7 +570,7 @@ void brakeNodeData::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(13, this->temp(), output);
   }
 
-  // required .fc.brakeNodeData.breakNodeState state = 14;
+  // optional .fc.brakeNodeData.breakNodeState state = 14;
   if (cached_has_bits & 0x00002000u) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       14, this->state(), output);
@@ -656,7 +656,7 @@ void brakeNodeData::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(13, this->temp(), target);
   }
 
-  // required .fc.brakeNodeData.breakNodeState state = 14;
+  // optional .fc.brakeNodeData.breakNodeState state = 14;
   if (cached_has_bits & 0x00002000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       14, this->state(), target);
@@ -670,25 +670,6 @@ void brakeNodeData::SerializeWithCachedSizes(
   return target;
 }
 
-size_t brakeNodeData::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:fc.brakeNodeData)
-  size_t total_size = 0;
-
-  if (has_id()) {
-    // required int32 id = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->id());
-  }
-
-  if (has_state()) {
-    // required .fc.brakeNodeData.breakNodeState state = 14;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->state());
-  }
-
-  return total_size;
-}
 size_t brakeNodeData::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:fc.brakeNodeData)
   size_t total_size = 0;
@@ -698,18 +679,11 @@ size_t brakeNodeData::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
-  if (((_has_bits_[0] & 0x00002001) ^ 0x00002001) == 0) {  // All required fields are present.
-    // required int32 id = 1;
+  // required int32 id = 1;
+  if (has_id()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->id());
-
-    // required .fc.brakeNodeData.breakNodeState state = 14;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->state());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
   if (_has_bits_[0 / 32] & 254u) {
     // optional bool sol1 = 2;
@@ -750,7 +724,7 @@ size_t brakeNodeData::ByteSizeLong() const {
     }
 
   }
-  if (_has_bits_[8 / 32] & 7936u) {
+  if (_has_bits_[8 / 32] & 16128u) {
     // optional int32 lp1 = 9;
     if (has_lp1()) {
       total_size += 1 +
@@ -784,6 +758,12 @@ size_t brakeNodeData::ByteSizeLong() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->temp());
+    }
+
+    // optional .fc.brakeNodeData.breakNodeState state = 14;
+    if (has_state()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->state());
     }
 
   }
@@ -880,7 +860,7 @@ void brakeNodeData::CopyFrom(const brakeNodeData& from) {
 }
 
 bool brakeNodeData::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00002001) != 0x00002001) return false;
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
   return true;
 }
 

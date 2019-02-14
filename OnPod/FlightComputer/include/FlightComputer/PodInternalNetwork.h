@@ -2,25 +2,22 @@
 
 #define PODINTERNALNETWORK_H
 
-#include <string>
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <string>
 #include "FlightComputer/ProtoStructs.pb.h"
 #include "FlightComputer/structs.h"
-
-
 
 struct clientSocketConfig {
   sockaddr_in addr;
   int sckt;
 };
 
-
-void sendDataUdp(clientSocketConfig*, void*);
+void sendDataUdp(clientSocketConfig*, void*, int);
 
 clientSocketConfig* initializeClientSocket();
 

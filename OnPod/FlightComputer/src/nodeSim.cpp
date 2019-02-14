@@ -11,7 +11,7 @@ using namespace fc;
 void runNodeSimulator(clientSocketConfig* sckt) {
   std::string payload = "";
 
-  for (int i = 0; i <2; i++) {
+  for (int i = 0; i < 2; i++) {
     brakeNodeData nodeUpdate;
     nodeUpdate.set_id(1);
     nodeUpdate.set_state(brakeNodeData::bnVenting);
@@ -32,11 +32,11 @@ void runNodeSimulator(clientSocketConfig* sckt) {
 
     size_t size = nodeUpdate.ByteSizeLong();
 
-    printf("Prepared Packet Size: %i \n",(int)size);
-    void *buffer = malloc(size);
+    nodeUpdate.SerializeToString(&payload);
+    void* buffer = malloc(size);
     nodeUpdate.SerializeToArray(buffer, size);
 
-    sendDataUdp(sckt, buffer);
+    sendDataUdp(sckt, buffer, (int)size);
 
     std::this_thread::sleep_for(std::chrono::seconds(1));
   }

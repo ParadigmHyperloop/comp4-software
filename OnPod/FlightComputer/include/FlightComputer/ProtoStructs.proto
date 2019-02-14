@@ -17,7 +17,7 @@ message brakeNodeData {
 	bnError     = 8;
   }
   
-  required breakNodeState state = 14;
+  optional breakNodeState state = 14;
  
   optional bool sol1 = 2;
   optional bool sol2 = 3;
