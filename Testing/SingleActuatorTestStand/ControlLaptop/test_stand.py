@@ -23,7 +23,7 @@ class TestStand:
     def start_test(self):
         self.test_num = self.database.find_next_test_number()
         self.csv_logger.test_num = self.test_num
-        print(f'\nStarting test {self.test_num}\n')
+        print(f'\nStarting test {self.csv_logger.test_num}\n')
         self.csv_logger.make_test_data_dir()
         self.csv_logger.make_test_dir()
 
@@ -76,7 +76,7 @@ class TestStand:
             note = input()
         self.csv_logger.log_notes(notes)
 
-        results = self.database.export_as_csv(self.test_num)
+        results = self.database.export_test(self.test_num)
         if results:
             self.csv_logger.log_as_csv(results)
 

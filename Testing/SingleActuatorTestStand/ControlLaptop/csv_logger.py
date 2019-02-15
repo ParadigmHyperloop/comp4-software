@@ -17,18 +17,18 @@ class CSVLogger:
         if not os.path.isdir(f'test_{self.test_num}'):
             os.mkdir(f'test_{self.test_num}')
         os.chdir(f'test_{self.test_num}')
-        self.test_dir = os.getcwd()
+        self.test_directory = os.getcwd()
 
     # creates a .txt file and logs the user's notes inside of it
     def log_notes(self, notes):
-        notes_path = self.test_dir + f'/test_{self.test_num}_notes.txt'
+        notes_path = self.test_directory + f'/test_{self.test_num}_notes.txt'
         with open(notes_path, 'w') as notefile:
             for note in notes:
                 notefile.write(note + '\n')
 
     # creates a .csv file and logs all test data inside of it
     def log_as_csv(self, results):
-        csv_path = self.test_dir + '/test_{}.csv'.format(self.test_num)
+        csv_path = self.test_directory + '/test_{}.csv'.format(self.test_num)
         with open(csv_path, 'w', newline='\n') as csvfile:
             writer = csv.writer(csvfile, delimiter=',')
             writer.writerow(results['columns'])
@@ -37,5 +37,5 @@ class CSVLogger:
 
     # deletes the test's data and note files
     def delete_test_files(self):
-        if self.test_dir:
-            os.remove(self.test_dir)
+        if self.test_directory:
+            os.remove(self.test_directory)

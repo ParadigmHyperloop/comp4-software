@@ -9,7 +9,7 @@ class Database:
         self.client.create_database(os.environ['TEST_STAND_DB'])
         self.client.switch_database(os.environ['TEST_STAND_DB'])
 
-    # logs test data to the database
+    # logs a single row to the database
     def log_data(self, data):
         table_row = [{
             'measurement': 'sensor_data',
@@ -18,7 +18,8 @@ class Database:
         }]
         self.client.write_points(table_row)
 
-    def export_as_csv(self, test_number):
+    # pulls all data from a certain test and returns it
+    def export_test(self, test_number):
         results = self.client.query(
             f'SELECT * FROM "satsdb".."sensor_data" WHERE test_number = {test_number}'
         )
@@ -27,6 +28,7 @@ class Database:
         except KeyError:
             return
 
+    # find the next available number to identify a test
     def find_next_test_number(self):
         results = self.client.query(
             'SELECT test_number FROM "satsdb".."sensor_data"'
