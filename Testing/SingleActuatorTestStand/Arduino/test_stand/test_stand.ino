@@ -17,8 +17,7 @@ void loop() {
   }
   float tank_pressure = random(1, 1000);
   float piston_pressure = random(1, 1000);
-  float temperature_1 = random(1, 1000);
-  float temperature_2 = random(1, 1000);
+  float temperature = random(1, 1000);
   float load = random(1, 1000);
   Serial.print(millis(), 1);
   Serial.print(",");
@@ -26,13 +25,10 @@ void loop() {
   Serial.print(",");
   Serial.print(piston_pressure, 2);
   Serial.print(",");
-  Serial.print(temperature_1, 2);
-  Serial.print(",");
-  Serial.print(temperature_2, 2);
+  Serial.print(temperature, 2);
   Serial.print(",");
   Serial.print(load, 2);
   Serial.print(",");
   Serial.print(solenoid_driven);
   Serial.println(",");
- // delay(50);
 }

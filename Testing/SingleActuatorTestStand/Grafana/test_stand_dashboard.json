@@ -1,4 +1,40 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_INFLUXDB",
+      "label": "InfluxDB",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "influxdb",
+      "pluginName": "InfluxDB"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "5.4.3"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": "5.0.0"
+    },
+    {
+      "type": "datasource",
+      "id": "influxdb",
+      "name": "InfluxDB",
+      "version": "5.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "singlestat",
+      "name": "Singlestat",
+      "version": "5.0.0"
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -15,7 +51,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 1,
+  "id": null,
   "links": [],
   "panels": [
     {
@@ -427,7 +463,7 @@
             [
               {
                 "params": [
-                  "temperature_1"
+                  "temperature"
                 ],
                 "type": "field"
               },
@@ -605,7 +641,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "InfluxDB",
+      "datasource": "${DS_INFLUXDB}",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -835,7 +871,7 @@
       }
     }
   ],
-  "refresh": "1s",
+  "refresh": "50ms",
   "schemaVersion": 16,
   "style": "dark",
   "tags": [],
@@ -843,8 +879,8 @@
     "list": []
   },
   "time": {
-    "from": "now-4h",
-    "to": "now-3h"
+    "from": "now-6h",
+    "to": "now"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -873,5 +909,5 @@
   "timezone": "utc",
   "title": "Single Actuator Test Stand Dashboard",
   "uid": "DnutQr_mz",
-  "version": 13
+  "version": 14
 }
