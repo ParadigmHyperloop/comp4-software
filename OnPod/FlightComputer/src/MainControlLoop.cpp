@@ -63,27 +63,26 @@ bool armedToFlight(PodValues* pvPodValues)
   return false;
 }
 
-int runControlLoop(PodValues* podVals)
+int runControlLoop(PodValues* pvPodValues)
 {
-  ePodStates podState = podVals->PodState;
-
+  ePodStates podState = pvPodValues->PodState;
   switch (podState)
   {
 
     case psStandby:
     {
       eBreakNodeStates bnAccepted[] = {bnsBooting};
-      if (checkFlags(podVals) & nominalStates(podVals->BreakNodeState, bnAccepted, 2))
+      if (checkFlags(pvPodValues) & nominalStates(pvPodValues->BreakNodeState, bnAccepted, 2))
       {
-        if (standbyToArming(podVals))
+        if (standbyToArming(pvPodValues))
         {
-          podVals->PodState = psArming;
+          pvPodValues->PodState = psArming;
         }
         break;
       }
       else
       {
-        podVals->PodState = psDisarm;
+        pvPodValues->PodState = psDisarm;
       }
       break;
     }
@@ -91,17 +90,17 @@ int runControlLoop(PodValues* podVals)
     case psArming:
     {
       eBreakNodeStates bnAccepted[] = {bnsArming, bnsArmed};
-      if (checkFlags(podVals) & nominalStates(podVals->BreakNodeState, bnAccepted, 2))
+      if (checkFlags(pvPodValues) & nominalStates(pvPodValues->BreakNodeState, bnAccepted, 2))
       {
-        if (armingToArmed(podVals))
+        if (armingToArmed(pvPodValues))
         {
-          podVals->PodState = psArmed;
+          pvPodValues->PodState = psArmed;
         }
         break;
       }
       else
       {
-        podVals->PodState = psDisarm;
+        pvPodValues->PodState = psDisarm;
       }
       break;
     }
@@ -109,17 +108,17 @@ int runControlLoop(PodValues* podVals)
     case psArmed:
     {
       eBreakNodeStates bnAccepted[] = {bnsArmed};
-      if (checkFlags(podVals) & nominalStates(podVals->BreakNodeState, bnAccepted, 1))
+      if (checkFlags(pvPodValues) & nominalStates(pvPodValues->BreakNodeState, bnAccepted, 1))
       {
-        if (armedToFlight(podVals))
+        if (armedToFlight(pvPodValues))
         {
-          podVals->PodState = psAcceleration;
+          pvPodValues->PodState = psAcceleration;
         }
         break;
       }
       else
       {
-        podVals->PodState = psDisarm;
+        pvPodValues->PodState = psDisarm;
       }
       break;
     }
