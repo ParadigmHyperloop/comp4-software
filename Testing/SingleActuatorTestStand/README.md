@@ -28,17 +28,24 @@ This software suite interprets, displays and logs data from the SATS. This data 
 
 1. Connect all sensors to the Arduino Uno and connect the Uno to the Control Laptop via USB
 2. Start the Grafana server. Information on how to do this can be found at the [installation page](http://docs.grafana.org/installation/)
-3. Open a [snapshot of the Grafana dashboard](https://snapshot.raintank.io/dashboard/snapshot/vAmTL0ja5RnmioAxvtjzRIUPH7ivOTeL) for live data viewing
-4. Start the InfluxDB server. Information on how to do this can be found at the [installation page](https://docs.influxdata.com/influxdb/v1.7/introduction/installation/)
-5. Create an environment variable called `TEST_STAND_DB` with the name of the InfluxDB database you'll be using to log the data:
+3. Upload the Grafana dashboard:
+   - Visit your Grafana homepage (default address is `localhost:30000`).
+   - On the left-hand sidebar, select the `+` icon, then `Import`.
+   - Select `Upload .json file` and upload [test_stand_dasboard.json](Testing/SingleActuatorTestStand/Grafana/test_stand_dashboard.json).
+   - Change the dashboard's `uid` in the next screen, select an InfluxDB data source, then press `import`.
+4. Configure the dashboard:
+   - Select the cog on the left-hand sidebar, navigate to `Data Sources`, `InfluxDB` then `InfluxDB Details`.
+   - Change the `Database` field to the name of the database you wish to use.
+5. Start the InfluxDB server. Information on how to do this can be found at the [installation page](https://docs.influxdata.com/influxdb/v1.7/introduction/installation/)
+6. Create an environment variable called `TEST_STAND_DB` with the name of the InfluxDB database you'll be using to log data:
 
     ```
     export TEST_STAND_DB=DATABASE_NAME
     ```
     You don't need to create this database - just provide the name you'd like to use
 
-6. Activate your Python virtual environment
-7. Run the script:
+7. Activate your Python virtual environment
+8. Run the script:
    - Navigate to the `ControlLaptop` directory and run:
      ```
      python test_stand.py
@@ -55,8 +62,8 @@ After any test, inside the folder of the Python  script, there should be a `Test
 
 | File | Purpose |
 |:----:|:-------:|
-|test_stand.py| __Main Control Laptop file__ - handles user interaction and threading for the serial port listener|
-|database.py| Logs data to and pulls data from the InfluxDB database |
-|serial_manager.py| Reads from and writes to the Arduino serial port |
-|csv_logger.py| Logs test data to a `.csv` file once the test is finished |
+| test_stand.py | __Main Control Laptop file__ - handles user interaction and threading for the serial port listener|
+| database.py | Logs data to and pulls data from the InfluxDB database |
+| serial_manager.py | Reads from and writes to the Arduino serial port |
+| csv_logger.py | Logs test data to a `.csv` file and writes notes to a `.txt` file once the test is finished. |
 | test_stand.ino | __Arduino file__ - reads all sensors data and sends that data over serial while listening for solenoid commands from the Control Laptop |
