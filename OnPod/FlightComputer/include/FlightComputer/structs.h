@@ -1,5 +1,6 @@
 #ifndef STUCTS_H
 #define STUCTS_H
+#include <netinet/in.h>
 
 enum ePodStates { psStandby, psArming, psArmed, psAcceleration, psCoasting, psBraking, psDisarm, psRetrieval, psEmergency, psBooting };
 
@@ -30,6 +31,21 @@ struct PodValues
   double dTubePressure;
   // Terminal
   eTerminalCommands TerminalCommand = tcTerminalNone;
+
+  // Brake Node
+  bool bSolenoid1;
+  bool bSolenoid2;
+  bool bSolenoid3;
+  bool bSolenoid4;
+  bool bSolenoid5;
+  bool bSolenoid6;
+  int iLowPressure1;
+  int iLowPressure2;
+  int iLowPressure3;
+  int iLowPressure4;
+  int iHighPressure;
+  int iPressureVesselTemperature;
+
 };
 
 struct clientSocketConfig {

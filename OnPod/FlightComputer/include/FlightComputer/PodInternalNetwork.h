@@ -19,6 +19,8 @@ void killConfigSocket(clientSocketConfig*);
 
 int createNodeServerSocket();
 
-int nodeServerThread(int sckt);
+int nodeServerThread(int, PodValues*);
+
+void parseBreakNodePacket(fc::brakeNodeData, PodValues*);
 
 #endif

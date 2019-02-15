@@ -6,15 +6,15 @@ message brakeNodeData {
   required int32 id = 1;
   
   enum breakNodeState {
-	bnBooting   = 0; 
-	bnStandby   = 1;
-	bnArming    = 2;
-	bnArmed     = 3; 
-	bnFlight    = 4; 
-	bnBraking   = 5;
-	bnVenting   = 6;
-	bnRetrieval = 7;
-	bnError     = 8;
+	bnsBooting   = 0; 
+	bnsStandby   = 1;
+	bnsArming    = 2;
+	bnsArmed     = 3; 
+	bnsFlight    = 4; 
+	bnsBraking   = 5;
+	bnsVenting   = 6;
+	bnsRetrieval = 7;
+	bnsError     = 8;
   }
   
   optional breakNodeState state = 14;

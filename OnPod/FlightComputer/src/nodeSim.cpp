@@ -15,7 +15,7 @@ void runNodeSimulator(clientSocketConfig* cscSocket)
   {
     brakeNodeData pNodeUpdate;
     pNodeUpdate.set_id(1);
-    pNodeUpdate.set_state(brakeNodeData::bnVenting);
+    pNodeUpdate.set_state(brakeNodeData::bnsVenting);
     // Pressure Transducers
     pNodeUpdate.set_hp(231);
     pNodeUpdate.set_lp1(666);

@@ -59,19 +59,19 @@ template<> ::fc::brakeNodeData* Arena::CreateMaybeMessage<::fc::brakeNodeData>(A
 namespace fc {
 
 enum brakeNodeData_breakNodeState {
-  brakeNodeData_breakNodeState_bnBooting = 0,
-  brakeNodeData_breakNodeState_bnStandby = 1,
-  brakeNodeData_breakNodeState_bnArming = 2,
-  brakeNodeData_breakNodeState_bnArmed = 3,
-  brakeNodeData_breakNodeState_bnFlight = 4,
-  brakeNodeData_breakNodeState_bnBraking = 5,
-  brakeNodeData_breakNodeState_bnVenting = 6,
-  brakeNodeData_breakNodeState_bnRetrieval = 7,
-  brakeNodeData_breakNodeState_bnError = 8
+  brakeNodeData_breakNodeState_bnsBooting = 0,
+  brakeNodeData_breakNodeState_bnsStandby = 1,
+  brakeNodeData_breakNodeState_bnsArming = 2,
+  brakeNodeData_breakNodeState_bnsArmed = 3,
+  brakeNodeData_breakNodeState_bnsFlight = 4,
+  brakeNodeData_breakNodeState_bnsBraking = 5,
+  brakeNodeData_breakNodeState_bnsVenting = 6,
+  brakeNodeData_breakNodeState_bnsRetrieval = 7,
+  brakeNodeData_breakNodeState_bnsError = 8
 };
 bool brakeNodeData_breakNodeState_IsValid(int value);
-const brakeNodeData_breakNodeState brakeNodeData_breakNodeState_breakNodeState_MIN = brakeNodeData_breakNodeState_bnBooting;
-const brakeNodeData_breakNodeState brakeNodeData_breakNodeState_breakNodeState_MAX = brakeNodeData_breakNodeState_bnError;
+const brakeNodeData_breakNodeState brakeNodeData_breakNodeState_breakNodeState_MIN = brakeNodeData_breakNodeState_bnsBooting;
+const brakeNodeData_breakNodeState brakeNodeData_breakNodeState_breakNodeState_MAX = brakeNodeData_breakNodeState_bnsError;
 const int brakeNodeData_breakNodeState_breakNodeState_ARRAYSIZE = brakeNodeData_breakNodeState_breakNodeState_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* brakeNodeData_breakNodeState_descriptor();
@@ -179,24 +179,24 @@ class brakeNodeData : public ::google::protobuf::Message /* @@protoc_insertion_p
   // nested types ----------------------------------------------------
 
   typedef brakeNodeData_breakNodeState breakNodeState;
-  static const breakNodeState bnBooting =
-    brakeNodeData_breakNodeState_bnBooting;
-  static const breakNodeState bnStandby =
-    brakeNodeData_breakNodeState_bnStandby;
-  static const breakNodeState bnArming =
-    brakeNodeData_breakNodeState_bnArming;
-  static const breakNodeState bnArmed =
-    brakeNodeData_breakNodeState_bnArmed;
-  static const breakNodeState bnFlight =
-    brakeNodeData_breakNodeState_bnFlight;
-  static const breakNodeState bnBraking =
-    brakeNodeData_breakNodeState_bnBraking;
-  static const breakNodeState bnVenting =
-    brakeNodeData_breakNodeState_bnVenting;
-  static const breakNodeState bnRetrieval =
-    brakeNodeData_breakNodeState_bnRetrieval;
-  static const breakNodeState bnError =
-    brakeNodeData_breakNodeState_bnError;
+  static const breakNodeState bnsBooting =
+    brakeNodeData_breakNodeState_bnsBooting;
+  static const breakNodeState bnsStandby =
+    brakeNodeData_breakNodeState_bnsStandby;
+  static const breakNodeState bnsArming =
+    brakeNodeData_breakNodeState_bnsArming;
+  static const breakNodeState bnsArmed =
+    brakeNodeData_breakNodeState_bnsArmed;
+  static const breakNodeState bnsFlight =
+    brakeNodeData_breakNodeState_bnsFlight;
+  static const breakNodeState bnsBraking =
+    brakeNodeData_breakNodeState_bnsBraking;
+  static const breakNodeState bnsVenting =
+    brakeNodeData_breakNodeState_bnsVenting;
+  static const breakNodeState bnsRetrieval =
+    brakeNodeData_breakNodeState_bnsRetrieval;
+  static const breakNodeState bnsError =
+    brakeNodeData_breakNodeState_bnsError;
   static inline bool breakNodeState_IsValid(int value) {
     return brakeNodeData_breakNodeState_IsValid(value);
   }

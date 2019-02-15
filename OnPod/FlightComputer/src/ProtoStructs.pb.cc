@@ -112,20 +112,20 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\022ProtoStructs.proto\022\002fc\"\204\003\n\rbrakeNodeDa"
+      "\n\022ProtoStructs.proto\022\002fc\"\215\003\n\rbrakeNodeDa"
       "ta\022\n\n\002id\030\001 \002(\005\022/\n\005state\030\016 \001(\0162 .fc.brake"
       "NodeData.breakNodeState\022\014\n\004sol1\030\002 \001(\010\022\014\n"
       "\004sol2\030\003 \001(\010\022\014\n\004sol3\030\004 \001(\010\022\014\n\004sol4\030\005 \001(\010\022"
       "\014\n\004sol5\030\006 \001(\010\022\014\n\004sol6\030\007 \001(\010\022\n\n\002hp\030\010 \001(\005\022"
       "\013\n\003lp1\030\t \001(\005\022\013\n\003lp2\030\n \001(\005\022\013\n\003lp3\030\013 \001(\005\022\013"
-      "\n\003lp4\030\014 \001(\005\022\014\n\004temp\030\r \001(\005\"\223\001\n\016breakNodeS"
-      "tate\022\r\n\tbnBooting\020\000\022\r\n\tbnStandby\020\001\022\014\n\010bn"
-      "Arming\020\002\022\013\n\007bnArmed\020\003\022\014\n\010bnFlight\020\004\022\r\n\tb"
-      "nBraking\020\005\022\r\n\tbnVenting\020\006\022\017\n\013bnRetrieval"
-      "\020\007\022\013\n\007bnError\020\010"
+      "\n\003lp4\030\014 \001(\005\022\014\n\004temp\030\r \001(\005\"\234\001\n\016breakNodeS"
+      "tate\022\016\n\nbnsBooting\020\000\022\016\n\nbnsStandby\020\001\022\r\n\t"
+      "bnsArming\020\002\022\014\n\010bnsArmed\020\003\022\r\n\tbnsFlight\020\004"
+      "\022\016\n\nbnsBraking\020\005\022\016\n\nbnsVenting\020\006\022\020\n\014bnsR"
+      "etrieval\020\007\022\014\n\010bnsError\020\010"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 415);
+      descriptor, 424);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "ProtoStructs.proto", &protobuf_RegisterTypes);
 }
@@ -164,15 +164,15 @@ bool brakeNodeData_breakNodeState_IsValid(int value) {
 }
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const brakeNodeData_breakNodeState brakeNodeData::bnBooting;
-const brakeNodeData_breakNodeState brakeNodeData::bnStandby;
-const brakeNodeData_breakNodeState brakeNodeData::bnArming;
-const brakeNodeData_breakNodeState brakeNodeData::bnArmed;
-const brakeNodeData_breakNodeState brakeNodeData::bnFlight;
-const brakeNodeData_breakNodeState brakeNodeData::bnBraking;
-const brakeNodeData_breakNodeState brakeNodeData::bnVenting;
-const brakeNodeData_breakNodeState brakeNodeData::bnRetrieval;
-const brakeNodeData_breakNodeState brakeNodeData::bnError;
+const brakeNodeData_breakNodeState brakeNodeData::bnsBooting;
+const brakeNodeData_breakNodeState brakeNodeData::bnsStandby;
+const brakeNodeData_breakNodeState brakeNodeData::bnsArming;
+const brakeNodeData_breakNodeState brakeNodeData::bnsArmed;
+const brakeNodeData_breakNodeState brakeNodeData::bnsFlight;
+const brakeNodeData_breakNodeState brakeNodeData::bnsBraking;
+const brakeNodeData_breakNodeState brakeNodeData::bnsVenting;
+const brakeNodeData_breakNodeState brakeNodeData::bnsRetrieval;
+const brakeNodeData_breakNodeState brakeNodeData::bnsError;
 const brakeNodeData_breakNodeState brakeNodeData::breakNodeState_MIN;
 const brakeNodeData_breakNodeState brakeNodeData::breakNodeState_MAX;
 const int brakeNodeData::breakNodeState_ARRAYSIZE;

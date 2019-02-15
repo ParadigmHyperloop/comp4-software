@@ -8,9 +8,10 @@
 
 int main(int argc, char** argv)
 {
+  PodValues* pvPodValues;
   int iServerSocket = createNodeServerSocket();
   clientSocketConfig* iClientSocket = initializeClientSocket();
-  std::thread tServer(nodeServerThread, iServerSocket);
+  std::thread tServer(nodeServerThread, iServerSocket, pvPodValues);
   std::thread tSim(runNodeSimulator, iClientSocket);
   tServer.join();
   tSim.join();
