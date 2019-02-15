@@ -20,7 +20,7 @@ bool checkFlags(PodValues* pvPodValues)
  * Checks that the current state of the break node is within
  * one of its expected states.
  */
-bool nominalStates(BreakNodeStates bnsState, BreakNodeStates bnsAcceptedStates[], int iAcceptedStatesSize){
+bool nominalStates(eBreakNodeStates bnsState, eBreakNodeStates bnsAcceptedStates[], int iAcceptedStatesSize){
   for (int i = 0; i < iAcceptedStatesSize; i++)
   {
     if (bnsAcceptedStates[i] == bnsState)
@@ -52,8 +52,8 @@ bool armingToArmed(PodValues* pvPodValues)
 
 bool armedToFlight(PodValues* pvPodValues)
 {
-  TerminalCommands terminalState = pvPodValues->TerminalCommand;
-  BreakNodeStates nodeState = pvPodValues->BreakNodeState;
+  eTerminalCommands terminalState = pvPodValues->TerminalCommand;
+  eBreakNodeStates nodeState = pvPodValues->BreakNodeState;
   if ((terminalState == tcTerminalFlight) & (nodeState == bnsFlight))
   {
     pvPodValues->TerminalCommand = tcTerminalNone;
@@ -65,14 +65,14 @@ bool armedToFlight(PodValues* pvPodValues)
 
 int runControlLoop(PodValues* podVals)
 {
-  PodStates podState = podVals->PodState;
+  ePodStates podState = podVals->PodState;
 
   switch (podState)
   {
 
     case psStandby:
     {
-      BreakNodeStates bnAccepted[] = {bnsBooting};
+      eBreakNodeStates bnAccepted[] = {bnsBooting};
       if (checkFlags(podVals) & nominalStates(podVals->BreakNodeState, bnAccepted, 2))
       {
         if (standbyToArming(podVals))
@@ -90,7 +90,7 @@ int runControlLoop(PodValues* podVals)
 
     case psArming:
     {
-      BreakNodeStates bnAccepted[] = {bnsArming, bnsArmed};
+      eBreakNodeStates bnAccepted[] = {bnsArming, bnsArmed};
       if (checkFlags(podVals) & nominalStates(podVals->BreakNodeState, bnAccepted, 2))
       {
         if (armingToArmed(podVals))
@@ -108,7 +108,7 @@ int runControlLoop(PodValues* podVals)
 
     case psArmed:
     {
-      BreakNodeStates bnAccepted[] = {bnsArmed};
+      eBreakNodeStates bnAccepted[] = {bnsArmed};
       if (checkFlags(podVals) & nominalStates(podVals->BreakNodeState, bnAccepted, 1))
       {
         if (armedToFlight(podVals))

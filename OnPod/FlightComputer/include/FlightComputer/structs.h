@@ -1,20 +1,23 @@
-enum PodStates { psStandby, psArming, psArmed, psAcceleration, psCoasting, psBraking, psDisarm, psRetrieval, psEmergency, psBooting };
+#ifndef STUCTS_H
+#define STUCTS_H
 
-enum BreakNodeStates { bnsBooting, bnsStandby, bnsArming, bnsArmed, bnsFlight, bnsBraking, bnsVenting, bnsRetrieval, bnsError};
+enum ePodStates { psStandby, psArming, psArmed, psAcceleration, psCoasting, psBraking, psDisarm, psRetrieval, psEmergency, psBooting };
 
-enum TerminalStates { tsConnected, tsDropped, tsTerminalEmergency};
+enum eBreakNodeStates { bnsBooting, bnsStandby, bnsArming, bnsArmed, bnsFlight, bnsBraking, bnsVenting, bnsRetrieval, bnsError};
 
-enum TerminalCommands { tcTerminalArm, tcTerminalFlight, tcTerminalStop, tcTerminalNone};
+enum eTerminalStates { tsConnected, tsDropped, tsTerminalEmergency};
 
-enum MotorStates { msIdle, msDrive};
+enum eTerminalCommands { tcTerminalArm, tcTerminalFlight, tcTerminalStop, tcTerminalNone};
+
+enum eMotorStates { msIdle, msDrive};
 
 struct PodValues
 {
   // States
-  PodStates PodState = psBooting;
-  TerminalStates TerminalState;
-  MotorStates MotorState;
-  BreakNodeStates BreakNodeState;
+  ePodStates PodState = psBooting;
+  eTerminalStates TerminalState;
+  eMotorStates MotorState;
+  eBreakNodeStates BreakNodeState;
   // Navigation
   float fDistance;
   float fVelocity;
@@ -26,7 +29,14 @@ struct PodValues
   // Atmosphere
   double dTubePressure;
   // Terminal
-  TerminalCommands TerminalCommand = tcTerminalNone;
+  eTerminalCommands TerminalCommand = tcTerminalNone;
 };
+
+struct clientSocketConfig {
+  sockaddr_in addr;
+  int sckt;
+};
+
+#endif
 
 

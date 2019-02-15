@@ -1,5 +1,4 @@
 #ifndef PODINTERNALNETWORK_H
-
 #define PODINTERNALNETWORK_H
 
 #include <arpa/inet.h>
@@ -11,11 +10,6 @@
 #include <string>
 #include "FlightComputer/ProtoStructs.pb.h"
 #include "FlightComputer/structs.h"
-
-struct clientSocketConfig {
-  sockaddr_in addr;
-  int sckt;
-};
 
 void sendDataUdp(clientSocketConfig*, void*, int);
 
