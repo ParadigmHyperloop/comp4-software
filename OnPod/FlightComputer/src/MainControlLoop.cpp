@@ -1,13 +1,15 @@
-
 #include "FlightComputer/structs.h"
 
 /**
  * The flags array should be all zeros if all systems are nominal.
  * Each index represents a different subsystem.
  */
-bool checkFlags(PodValues* podVals) {
-  for (int i = 0; i < podVals->flagSize; i++) {
-    if (podVals->flagsArray[i] == 1) {
+bool checkFlags(PodValues* pvPodValues)
+{
+  for (int i = 0; i < pvPodValues->iFlagsArraySize; i++)
+  {
+    if (pvPodValues->cFlagsArray[i] == 1)
+    {
       return false;
     }
   }
@@ -18,94 +20,119 @@ bool checkFlags(PodValues* podVals) {
  * Checks that the current state of the break node is within
  * one of its expected states.
  */
-bool nominalStates(BreakNodeStates bnState, BreakNodeStates bnAccepted[],
-                   int bnAcceptedSize) {
-  for (int i = 0; i < bnAcceptedSize; i++) {
-    if (bnAccepted[i] == bnState) {
+bool nominalStates(BreakNodeStates bnsState, BreakNodeStates bnsAcceptedStates[], int iAcceptedStatesSize){
+  for (int i = 0; i < iAcceptedStatesSize; i++)
+  {
+    if (bnsAcceptedStates[i] == bnsState)
+    {
       return true;
     }
   }
   return false;
 }
 
-bool standbyToArming(PodValues* podVals) {
-  if (podVals->terminalCommand == terminalArm) {
-    podVals->terminalCommand = terminalNone;
+bool standbyToArming(PodValues* pvPodValues)
+{
+  if (pvPodValues->TerminalCommand == tcTerminalArm)
+  {
+    pvPodValues->TerminalCommand = tcTerminalNone;
     return true;
   }
   return false;
 }
 
-bool armingToArmed(PodValues* podVals) {
-  if (podVals->breakNodeS == bnArmed) {
+bool armingToArmed(PodValues* pvPodValues)
+{
+  if (pvPodValues->BreakNodeState == bnsArmed)
+  {
     return true;
   }
   return false;
 }
 
-bool armedToFlight(PodValues* podVals) {
-  TerminalCommands terminalState = podVals->terminalCommand;
-  BreakNodeStates nodeState = podVals->breakNodeS;
-  if ((terminalState == terminalFlight) & (nodeState == bnFlight)) {
-    podVals->terminalCommand = terminalNone;
-    podVals->motorS = drive;
+bool armedToFlight(PodValues* pvPodValues)
+{
+  TerminalCommands terminalState = pvPodValues->TerminalCommand;
+  BreakNodeStates nodeState = pvPodValues->BreakNodeState;
+  if ((terminalState == tcTerminalFlight) & (nodeState == bnsFlight))
+  {
+    pvPodValues->TerminalCommand = tcTerminalNone;
+    pvPodValues->MotorState = msDrive;
     return true;
   }
   return false;
 }
 
-int runControlLoop(PodValues* podVals) {
-  PodStates podState = podVals->podS;
+int runControlLoop(PodValues* podVals)
+{
+  PodStates podState = podVals->PodState;
 
-  switch (podState) {
-    case standby: {
-      BreakNodeStates bnAccepted[] = {bnBooting, bnBooting};
+  switch (podState)
+  {
 
-      if (checkFlags(podVals) &
-          nominalStates(podVals->breakNodeS, bnAccepted, 2)) {
-        if (standbyToArming(podVals)) {
-          podVals->podS = arming;
+    case psStandby:
+    {
+      BreakNodeStates bnAccepted[] = {bnsBooting};
+      if (checkFlags(podVals) & nominalStates(podVals->BreakNodeState, bnAccepted, 2))
+      {
+        if (standbyToArming(podVals))
+        {
+          podVals->PodState = psArming;
         }
         break;
-      } else {
-        podVals->podS = disarm;
+      }
+      else
+      {
+        podVals->PodState = psDisarm;
       }
       break;
     }
-    case arming: {
-      BreakNodeStates bnAccepted[] = {bnArming, bnArmed};
 
-      if (checkFlags(podVals) &
-          nominalStates(podVals->breakNodeS, bnAccepted, 2)) {
-        if (armingToArmed(podVals)) {
-          podVals->podS = armed;
+    case psArming:
+    {
+      BreakNodeStates bnAccepted[] = {bnsArming, bnsArmed};
+      if (checkFlags(podVals) & nominalStates(podVals->BreakNodeState, bnAccepted, 2))
+      {
+        if (armingToArmed(podVals))
+        {
+          podVals->PodState = psArmed;
         }
         break;
-      } else {
-        podVals->podS = disarm;
+      }
+      else
+      {
+        podVals->PodState = psDisarm;
       }
       break;
     }
-    case armed: {
-      BreakNodeStates bnAccepted[] = {bnArmed};
 
-      if (checkFlags(podVals) &
-          nominalStates(podVals->breakNodeS, bnAccepted, 1)) {
-        if (armedToFlight(podVals)) {
-          podVals->podS = acceleration;
+    case psArmed:
+    {
+      BreakNodeStates bnAccepted[] = {bnsArmed};
+      if (checkFlags(podVals) & nominalStates(podVals->BreakNodeState, bnAccepted, 1))
+      {
+        if (armedToFlight(podVals))
+        {
+          podVals->PodState = psAcceleration;
         }
         break;
-      } else {
-        podVals->podS = disarm;
+      }
+      else
+      {
+        podVals->PodState = psDisarm;
       }
       break;
     }
-    case acceleration: {
+
+    case psAcceleration:
+    {
       break;
     }
-    case coasting: {
+
+    case psCoasting: {
       break;
     }
+
     default:
       break;
   }

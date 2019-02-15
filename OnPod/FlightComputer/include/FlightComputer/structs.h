@@ -1,47 +1,32 @@
-enum PodStates { standby, arming, armed, acceleration, coasting, braking, disarm, retrieval, emergency, booting };
+enum PodStates { psStandby, psArming, psArmed, psAcceleration, psCoasting, psBraking, psDisarm, psRetrieval, psEmergency, psBooting };
 
-enum BreakNodeStates { bnBooting, bnStandby, bnArming, bnArmed, bnFlight, bnBraking, venting, bnRetrieval, bnError};
+enum BreakNodeStates { bnsBooting, bnsStandby, bnsArming, bnsArmed, bnsFlight, bnsBraking, bnsVenting, bnsRetrieval, bnsError};
 
-enum TerminalStates { connected, dropped, terminalEmergency};
+enum TerminalStates { tsConnected, tsDropped, tsTerminalEmergency};
 
-enum TerminalCommands { terminalArm, terminalFlight, terminalStop, terminalNone};
+enum TerminalCommands { tcTerminalArm, tcTerminalFlight, tcTerminalStop, tcTerminalNone};
 
-enum MotorStates { idle, drive};
+enum MotorStates { msIdle, msDrive};
 
-struct Nominalflags {
-	  char highVoltageFlag;
-	  char lowVoltageFlag;
-	  char nodeWatchdog;
-};
-
-
-struct PodValues {
+struct PodValues
+{
   // States
-  PodStates podS = booting;
-  TerminalStates terminalS;
-  MotorStates motorS;
-  BreakNodeStates breakNodeS;
-
+  PodStates PodState = psBooting;
+  TerminalStates TerminalState;
+  MotorStates MotorState;
+  BreakNodeStates BreakNodeState;
   // Navigation
-  float distance;
-  float velocity;
-
+  float fDistance;
+  float fVelocity;
   // Rear Node
-  float gpioVals;
-
-  // Flags
-  Nominalflags* flags;
-
+  float fGpioValues;
   //FlagsV2
-  char flagsArray[3] = {0};
-  int flagSize = 3;
-
+  char cFlagsArray[3] = {0};
+  int iFlagsArraySize = 3;
   // Atmosphere
-  double tubePressure;
-
+  double dTubePressure;
   // Terminal
-  TerminalCommands terminalCommand = terminalNone;
-
+  TerminalCommands TerminalCommand = tcTerminalNone;
 };
 
 

@@ -1,33 +1,35 @@
 #include "FlightComputer/PodInternalNetwork.h"
 
 int createNodeServerSocket() {
-  int port = 5008;
-  int sockfd;
-  struct sockaddr_in si_me;
-  sockfd = socket(AF_INET, SOCK_DGRAM, 0);
-  memset(&si_me, '\0', sizeof(si_me));
-  si_me.sin_family = AF_INET;
-  si_me.sin_port = htons(port);
-  si_me.sin_addr.s_addr = inet_addr("127.0.0.1");
-  bind(sockfd, (struct sockaddr*)&si_me, sizeof(si_me));
-  return sockfd;
+  int iPort = 5008;
+  int iSocket;
+  struct sockaddr_in SocketAddrStruct;
+  iSocket = socket(AF_INET, SOCK_DGRAM, 0);
+  memset(&SocketAddrStruct, '\0', sizeof(SocketAddrStruct));
+  SocketAddrStruct.sin_family = AF_INET;
+  SocketAddrStruct.sin_port = htons(iPort);
+  SocketAddrStruct.sin_addr.s_addr = inet_addr("127.0.0.1");
+  bind(iSocket, (struct sockaddr*)&SocketAddrStruct, sizeof(SocketAddrStruct));
+  return iSocket;
 }
 
 int nodeServerThread(int sckt) {
-  char buffer[100] = {0};
-  while (1) {
-    bzero(&buffer, sizeof buffer);
+  char cBuffer[100] = {0};
+  while (1)
+  {
+    bzero(&cBuffer, sizeof cBuffer);
     printf("Waiting to recieve on socket: %i \n", sckt);
-
-    int recievedSize = recvfrom(sckt, buffer, 300, 0, nullptr, nullptr);
-
-    fc::brakeNodeData nodeUpdate2;
-
-    bool parsed = nodeUpdate2.ParseFromArray(&buffer, 44);
-    printf("Parse status: %i \n", parsed);
-    printf("Contents are: \n%s \n", nodeUpdate2.DebugString().c_str());
-
-    printf("Has State: %i \n", nodeUpdate2.has_state());
+    int iRecievedPacketSize = recvfrom(sckt, cBuffer, 300, 0, nullptr, nullptr);
+    fc::brakeNodeData pNodeUpdate;
+    bool bProtoPacketParsed = pNodeUpdate.ParseFromArray(&cBuffer, iRecievedPacketSize);
+    if(bProtoPacketParsed)
+    {
+    	printf("Contents are: \n%s \n", pNodeUpdate.DebugString().c_str());
+    }
+    else
+    {
+    	printf("Error Parsing Protobuf packet");
+    }
   }
   close(sckt);
   return 0;
