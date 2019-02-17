@@ -6,7 +6,7 @@ This software suite interprets, displays and logs data from the SATS. This data 
 
 1. Install InfluxDB. Instructions are available for Mac and Linux from the [InfluxDB installation page](https://docs.influxdata.com/influxdb/v1.7/introduction/installation/)
 2. Install Grafana. Instructions are available for Mac, Windows and Linux from the [Grafana installation page](http://docs.grafana.org/installation/)
-3. Upload [test_stand.ino](./Arduino/test_stand.ino) to an Arduino Uno
+3. Upload [test_stand.ino](./Arduino/test_stand/test_stand.ino) to an Arduino Uno
 4. Install [Python](https://www.python.org/downloads/) 3.6 or later
 5. Create a virtual environment with:
 
@@ -31,7 +31,7 @@ This software suite interprets, displays and logs data from the SATS. This data 
 3. Upload the Grafana dashboard:
    - Visit your Grafana homepage (default address is `localhost:30000`).
    - On the left-hand sidebar, select the `+` icon, then `Import`.
-   - Select `Upload .json file` and upload [test_stand_dasboard.json](Testing/SingleActuatorTestStand/Grafana/test_stand_dashboard.json).
+   - Select `Upload .json file` and upload [test_stand_dasboard.json](./Grafana/test_stand_dashboard.json).
    - Change the dashboard's `uid` in the next screen, select an InfluxDB data source, then press `import`.
 4. Configure the dashboard:
    - Select the cog on the left-hand sidebar, navigate to `Data Sources`, `InfluxDB` then `InfluxDB Details`.
