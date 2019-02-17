@@ -10,7 +10,8 @@ ported over from [Paradigm Hyperloop/Web-UI](https://github.com/ParadigmHyperloo
         -  Arch based: `sudo pacman -S influxdb protobuf`
         - Debian based: `sudo apt-get install influxdb protobuf`
     - MacOS (assuming you have brew installed)
-        - `brew install influxdb protobuf`
+        - Install influx and protobuf: `brew install influxdb protobuf`
+        - Start InfluxDB: `brew services start influxdb`
     
     To make sure it's all there, try
     -  `protoc --version`

@@ -1,7 +1,7 @@
 from datetime import datetime
 # import random
 from flask import *
-from OnLand.ControlLaptop.config import *
+from config import *
 
 app = Flask(__name__)
 
