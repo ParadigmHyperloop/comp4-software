@@ -17,6 +17,28 @@ ported over from [Paradigm Hyperloop/Web-UI](https://github.com/ParadigmHyperloo
     -  `protoc --version`
     -  `influx --version`
 
+#### Envrionment (WIP):
+Install pyenv, virtualenv, pyenv-veirtualenv.
+- MacOS (brew)
+    - `brew update`
+    - `brew install pyenv pyenv-virtualenv`
+
+
+    - Paste the following into your ~/.bash_profile:
+        ```
+        export PYENV_ROOT="$HOME/.pyenv"
+        export PATH="$PYENV_ROOT/bin:$PATH"
+        eval "$(pyenv init -)"
+        eval "$(pyenv virtualenv-init -)"
+        ```
+    - Instal python 3.6.3: `pyenv install 3.6.3`
+    - set global python to 3.6.3: `pyenv global 3.6.6`  
+    - create virtualenv: `pyenv activate controlLaptop`
+    - Configure folter to Automatically Activate Enviornment:`pyenv local controlLaptop` 
+
+
+
+
 - clone or download the repo/branch
 - open it in your preferred IDE (I recommend PyCharm)
     - If using PyCharm, it should warn you that no Python interpreter has been defined, clicking on the message will 
