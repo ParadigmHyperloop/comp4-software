@@ -10,34 +10,47 @@ ported over from [Paradigm Hyperloop/Web-UI](https://github.com/ParadigmHyperloo
         -  Arch based: `sudo pacman -S influxdb protobuf`
         - Debian based: `sudo apt-get install influxdb protobuf`
     - MacOS (assuming you have brew installed)
-        - Install influx and protobuf: `brew install influxdb protobuf`
-        - Start InfluxDB: `brew services start influxdb`
-    
-    To make sure it's all there, try
-    -  `protoc --version`
-    -  `influx --version`
+        - Install influx and protobuf: 
+            - `brew install influxdb protobuf`
+        - Start InfluxDB: 
+            - `brew services start influxdb`
+            
+    - Install pyenv, virtualenv, pyenv-virtualenv: 
+        - `brew update`
+        - `brew install pyenv virtualenv pyenv-virtualenv`
 
-#### Envrionment (WIP):
-Install pyenv, virtualenv, pyenv-veirtualenv.
-- MacOS (brew)
-    - `brew update`
-    - `brew install pyenv pyenv-virtualenv`
-
-
-    - Paste the following into your ~/.bash_profile:
+    - Paste the following into your ~/.bash_profile (or what terminal environment you use):
         ```
         export PYENV_ROOT="$HOME/.pyenv"
         export PATH="$PYENV_ROOT/bin:$PATH"
         eval "$(pyenv init -)"
         eval "$(pyenv virtualenv-init -)"
         ```
-    - Instal python 3.6.3: `pyenv install 3.6.3`
-    - set global python to 3.6.3: `pyenv global 3.6.6`  
-    - create virtualenv: `pyenv activate controlLaptop`
-    - Configure folter to Automatically Activate Enviornment:`pyenv local controlLaptop` 
+    - Install python 3.7.1 and set is as global: 
+        1) `pyenv install 3.7.1`
+        2) `pyenv global 3.7.1`
+    - create virtualenv: 
+        - `pyenv activate controlLaptop`
+    - Configure folder to automatically activate environment:
+        - `pyenv local controlLaptop`
+    
+    To make sure it's all there, try
+    -  `protoc --version`
+    -  `influx --version`
+
+- Install requirements:
+    `pip install -r requirements`
+
+- Run the dbExampleWorking.py example: 
+    - `python dbExampleWorking.py`
 
 
-
+#### Environment (WIP):
+- Pycharm: 
+    1) Open Project with ControlLaptop as the root folder.
+    2) Navigate to: Preferences --> Project Interpreter.
+    3) click add and select existing environment.
+    4) Select python labeled: `controlLaptop`
 
 - clone or download the repo/branch
 - open it in your preferred IDE (I recommend PyCharm)
