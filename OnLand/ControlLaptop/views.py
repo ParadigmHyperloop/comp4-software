@@ -16,19 +16,6 @@ def page_not_found(e):
     return render_template('404.html', title="Page Not Found"), 404
 
 
-@app.route("/_sensorsRefresh")
-def sensor_values():
-    temp = get_sensor_values()
-    # return jsonify(tuple(temp))
-    return jsonify(
-        {
-            'last_id_field': 'dummy_sensor',
-            'last_val': '68',
-            'max-val': '99',
-            'time': f'{datetime.utcnow()}'
-        }
-    )
-
 
 @app.context_processor
 def inject_now():
