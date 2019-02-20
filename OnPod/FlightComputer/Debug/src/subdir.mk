@@ -9,7 +9,9 @@ CC_SRCS += \
 CPP_SRCS += \
 ../src/FlightComputer.cpp \
 ../src/MainControlLoop.cpp \
-../src/PodInternalNetwork.cpp 
+../src/NodeServer.cpp \
+../src/PodInternalNetwork.cpp \
+../src/nodeSim.cpp 
 
 CC_DEPS += \
 ./src/ProtoStructs.pb.d 
@@ -17,13 +19,17 @@ CC_DEPS += \
 OBJS += \
 ./src/FlightComputer.o \
 ./src/MainControlLoop.o \
+./src/NodeServer.o \
 ./src/PodInternalNetwork.o \
-./src/ProtoStructs.pb.o 
+./src/ProtoStructs.pb.o \
+./src/nodeSim.o 
 
 CPP_DEPS += \
 ./src/FlightComputer.d \
 ./src/MainControlLoop.d \
-./src/PodInternalNetwork.d 
+./src/NodeServer.d \
+./src/PodInternalNetwork.d \
+./src/nodeSim.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
