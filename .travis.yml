@@ -1,0 +1,19 @@
+sudo: required
+before_install:
+
+  
+# Enable C++ support
+language: cpp
+
+# Compiler selection
+compiler:
+  - gcc
+  
+install:
+
+# Build steps
+script:
+  - cd OnPod/FlightComputer/Debug
+  - make
+  - cd ../tests
+  - make

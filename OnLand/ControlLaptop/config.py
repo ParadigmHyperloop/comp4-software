@@ -18,6 +18,7 @@ def db_query_sensor_names():
 
 
 def get_sensor_values():
+    # TODO: Move this to ODS. Updated design does not connect to DB
     # connect to database
     client = InfluxDBClient('localhost', 8086)
     client.switch_database('test')
@@ -46,7 +47,7 @@ def generate_sensor_table():
     sensor_names = db_query_sensor_names()
     sensors_list = []
     for sensor in sensor_names:
-        sensors_list.append(dict(sensor=sensor, status='', min='', actual='', max=''))
+        sensors_list.append(dict(sensor=sensor, status='asdffsasadfasdf', min='', actual='', max=''))
 
     table = sensor_table(sensors_list, html_attrs={'id': 'sensorTab'}, no_items='Error',
                          classes=['table table-hover table-striped table-condensed'])

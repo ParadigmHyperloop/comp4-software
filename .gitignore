@@ -10,5 +10,6 @@
 .idea
 venv/
 pycache/
+*.out
 *.pyc
 *.swp

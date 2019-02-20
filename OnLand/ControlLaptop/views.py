@@ -19,7 +19,15 @@ def page_not_found(e):
 @app.route("/_sensorsRefresh")
 def sensor_values():
     temp = get_sensor_values()
-    return jsonify(tuple(temp))
+    # return jsonify(tuple(temp))
+    return jsonify(
+        {
+            'last_id_field': 'dummy_sensor',
+            'last_val': '68',
+            'max-val': '99',
+            'time': f'{datetime.utcnow()}'
+        }
+    )
 
 
 @app.context_processor
@@ -32,12 +40,20 @@ def inject_now():
 def ui(path):
     table = generate_sensor_table()
 
-    # idk how this works, came like this, don't wanna break anything
-    # generates the side bar
+    # Checking to return Page Title
     page = path.split('.')[0]
     if page in NAV_IDS:
         title = NAV_BAR[NAV_IDS.index(page)]['title']
     else:
         title = DEFAULT_TITLE
 
-    return render_template(path, active_page=page, title=title, test=table)
+    return render_template(path, active_page=page, title=title, sensors=[TempSensor()])
+
+
+# TODO:
+#   This sensor list should be read and generated from global/JSON file.
+class TempSensor:
+    def __init__(self):
+        self.name = 'name'
+        self.min = 0
+        self.max = 100

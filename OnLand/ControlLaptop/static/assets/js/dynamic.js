@@ -6,8 +6,8 @@ function sensorRefresh() {
 
     $.getJSON("/_sensorsRefresh", function (data) {
         for (i = 0; i < data.length; i++) {
-            // for (j=0;j<data[i].length;j++) {
-            var sensor = data[i].last_id_field;
+            debugger;
+            const sensor = data.last_id_field;
             if (sensor === $(getStr(sensor, "name")).text()) {
                 $(getStr(sensor, "current")).html(data[i].last_val);
                 $(getStr(sensor, "min")).html(data[i].min_val);
@@ -15,7 +15,7 @@ function sensorRefresh() {
             }
         }
     });
-   setTimeout(arguments.callee, 2500);}
+   setTimeout(arguments.callee, 5000);}
 
 
 //adds IDs and Classes to every row/col of the sensor table, to allow for differentiation and automatic
