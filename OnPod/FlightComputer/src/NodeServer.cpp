@@ -1,4 +1,5 @@
 #include "FlightComputer/PodInternalNetwork.h"
+#define UDPPORT 5008
 
 using namespace fc;
 
@@ -67,17 +68,19 @@ void parseBreakNodePacket(fc::brakeNodeData pPayload, PodValues* pvPodValues){
 		pvPodValues->iLowPressure4 = pPayload.lp4();
 		pvPodValues->iHighPressure = pPayload.hp();
 		pvPodValues->iPressureVesselTemperature = pPayload.temp();
-
-
 	}
 }
 
-
-
-
-
+/**
+ * createNodeServerSocket
+ *
+ * returns: The socket discriptor number that is associated with the created socket
+ * params: None
+ *
+ * Create the UDP socket that Pod Internal Work Node telemetry will be recieved on.
+ */
 int createNodeServerSocket() {
-  int iPort = 5008;
+  int iPort = UDPPORT;
   int iSocket;
   struct sockaddr_in SocketAddrStruct;
   iSocket = socket(AF_INET, SOCK_DGRAM, 0);
@@ -89,6 +92,9 @@ int createNodeServerSocket() {
   return iSocket;
 }
 
+/**
+ *Wait on socket, parse the recieved message into a protobuf and hand it off.
+ */
 int nodeServerThread(int iSocket, PodValues* pvPodValues ) {
   char cBuffer[100] = {0};
   while (1)

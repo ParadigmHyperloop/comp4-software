@@ -40,6 +40,16 @@ clientSocketConfig* initializeClientSocket()
   return cscSocketInfo;
 }
 
+/**SendDataUdp
+ *
+ * TODO: attatched logging to the sendto return value for error logging and handeling
+ *
+ * Params:  cscSocketInfo: A client socket config structure that holds all the configurtions values for the socket
+ * 			vPayload: A pointer to the data that is to be sent over the socket
+ * 			iPayloadSize: The size of the data to be sent over the socket
+ *
+ * returns: None
+ */
 void sendDataUdp(clientSocketConfig* cscSocketInfo, void* vPayload, int iPayloadSize)
 {
   cscSocketInfo->addr.sin_addr.s_addr = inet_addr("127.0.0.1");
