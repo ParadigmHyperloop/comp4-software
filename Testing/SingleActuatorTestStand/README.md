@@ -2,6 +2,9 @@
 
 This software suite interprets, displays and logs data from the SATS. This data is received from sensors interfacing with an Arduino Uno. The Uno then communicates this data over a serial connection to a control laptop where it is read. The software also allows for full control over the stand's solenoid-activated brakes, using the same serial connection.
 
+![image](https://user-images.githubusercontent.com/44215543/53060162-0c704800-3494-11e9-808b-b9991d69bbf5.png)
+_Screenshot of the Grafana dashboard (outdated)_
+
 ## Installation and Dependencies
 
 1. Install InfluxDB. Instructions are available for Mac and Linux from the [InfluxDB installation page](https://docs.influxdata.com/influxdb/v1.7/introduction/installation/)
@@ -58,12 +61,13 @@ This software suite interprets, displays and logs data from the SATS. This data 
 
 After any test, inside the folder of the Python  script, there should be a `TestData` directory. Inside this directory there should be a separate directory for each test, each with a `.txt` file (for notes) and a `.csv` file (for data). A new test can then be started by running `test_stand.py` again
 
-## Code
+## Files
 
 | File | Purpose |
 |:----:|:-------:|
-| test_stand.py | __Main Control Laptop file__ - handles user interaction and threading for the serial port listener|
-| database.py | Logs data to and pulls data from the InfluxDB database |
-| serial_manager.py | Reads from and writes to the Arduino serial port |
-| csv_logger.py | Logs test data to a `.csv` file and writes notes to a `.txt` file once the test is finished. |
-| test_stand.ino | __Arduino file__ - reads all sensors data and sends that data over serial while listening for solenoid commands from the Control Laptop |
+| ControlLaptop/test_stand.py | __Main Control Laptop file__ - handles user interaction and threading for the serial port listener|
+| ControlLaptop/database.py | Logs data to and pulls data from the InfluxDB database |
+| ControlLaptop/serial_manager.py | Reads from and writes to the Arduino serial port |
+| ControlLaptop/csv_logger.py | Logs test data to a `.csv` file and writes notes to a `.txt` file once the test is finished. |
+| Arduino/test_stand/test_stand.ino | Arduino File - Reads all sensors data and sends that data over serial while listening for solenoid commands from the Control Laptop |
+| Grafana/test_stand_dashboard.json | A template for the Grafana dashboard used to view the live data |
