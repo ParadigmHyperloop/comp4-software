@@ -14,12 +14,17 @@ ported over from [Paradigm Hyperloop/Web-UI](https://github.com/ParadigmHyperloo
             - `brew install influxdb protobuf`
         - Start InfluxDB: 
             - `brew services start influxdb`
-            
+
+    - To make sure it's all there, try
+      -  `protoc --version`
+      -  `influx --version`
+      - Both Commands should return version installed.
+
     - Install pyenv, virtualenv, pyenv-virtualenv: 
         - `brew update`
         - `brew install pyenv virtualenv pyenv-virtualenv`
 
-    - Paste the following into your ~/.bash_profile (or what terminal environment you use):
+    - Paste the following into your ~/.bash_profile (or your terminal environment config file):
         ```
         export PYENV_ROOT="$HOME/.pyenv"
         export PATH="$PYENV_ROOT/bin:$PATH"
@@ -31,18 +36,16 @@ ported over from [Paradigm Hyperloop/Web-UI](https://github.com/ParadigmHyperloo
         2) `pyenv global 3.7.1`
     - create virtualenv: 
         - `pyenv activate controlLaptop`
-    - Configure folder to automatically activate environment:
+    - Configure folder to automatically activate environment (Note: Make sure 
+    you inside the `/Controllaptop` directory first):
         - `pyenv local controlLaptop`
     
-    To make sure it's all there, try
-    -  `protoc --version`
-    -  `influx --version`
-
 - Install requirements:
     `pip install -r requirements`
 
-- Run the dbExampleWorking.py example: 
-    - `python dbExampleWorking.py`
+- run App (if using terminal):
+  - `export FLASK_APP=controlLaptop.py`
+  - `flask run` 
 
 
 #### Environment (WIP):
@@ -51,21 +54,6 @@ ported over from [Paradigm Hyperloop/Web-UI](https://github.com/ParadigmHyperloo
     2) Navigate to: Preferences --> Project Interpreter.
     3) click add and select existing environment.
     4) Select python labeled: `controlLaptop`
-
-- clone or download the repo/branch
-- open it in your preferred IDE (I recommend PyCharm)
-    - If using PyCharm, it should warn you that no Python interpreter has been defined, clicking on the message will 
-    land you on a window allowing you to create a new venv, make sure to uncheck `inherit global site package` and 
-    create the new venv in `/OnLand/ControlLaptop/venv`
-    - If not using PyCharm, or if it doesn't do it automatically, do the following in a Terminal shell, or in the Terminal
-    from PyCharm (bottom bar usually): 
-        - `cd` into the git directory (`cd ./comp4-software/OnLand/ControlLaptop`)
-        - create new venv (`python -m venv ./venv --no-site-packages`) 
-        - activate it (`source ./bin/activate`
-    - install pip dependencies (`sudo pip install -r /path/to/requirements.txt`)
-- run `comp4-software/Examples/WebApp/dbExampleWorking.py` to initialize db with dummy data
-- run `app.py`
-- navigate to `localhost:5000`
 
 
 ### Troubleshooting

@@ -16,7 +16,6 @@ def page_not_found(e):
     return render_template('404.html', title="Page Not Found"), 404
 
 
-
 @app.context_processor
 def inject_now():
     return {'now': datetime.utcnow(), 'navigation_bar': NAV_BAR}
