@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row">
+       <div class="col-md-3">
+          {% include '_cards/tanks.html' %}
+       </div>
+       <div class="col-md-3">
+          {% include '_cards/environment.html' %}
+       </div>
+       <div class="col-md-3">
+          {% include '_cards/navigation.html' %}
+       </div>
+       <div class="col-md-3">
+          {% include '_cards/electrical.html' %}
+       </div>
+    </div>
+    <div class="row">
+       <div class="col-md-6">
+          {% include '_cards/sensor_status.html' %}
+       </div>
+       <div class="col-md-6">
+          {% include '_cards/events.html' %}
+       </div>
+    </div>
+{% endblock %}
+
+
+{% block scripts %}
+{{ super() }}
+    <script src="../static/assets/js/dynamic.js"></script>
+{% endblock %}

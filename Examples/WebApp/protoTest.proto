@@ -1,0 +1,18 @@
+syntax = "proto3";
+package test;
+
+
+message telemetry {
+    int32 podState = 1;
+    uint32 sensor0Temp = 2;
+    uint32 sensor1Temp = 3;
+    uint32 sensor2Temp = 4;
+    uint32 sensor3Temp = 5;
+    uint32 sensor4Temp = 6;
+    uint32 sensor5Temp = 7;
+    uint32 sensor6Temp = 8;
+    uint32 sensor7Temp = 9;
+    uint32 sensor8Temp = 10;
+    uint32 sensor9Temp = 11;
+    uint32 sensor10Temp = 12;
+}

@@ -1,0 +1,38 @@
+{% block navbar %}
+    <div class="navbar navbar-default navbar-fixed">
+        <span class="navbar-brand hidden-sm hidden-xs" >Comp 2019</span>
+
+        <div class="btn btn-primary btn-fill btn-xs">
+            <span>Status: </span>
+            <span id="status"></span>
+        </div>
+
+        <i class="fa fa-dashboard text-success" style="margin: 0 10px 0 10px"></i>
+        <i class="fa fa-wifi text-success" style="margin: 0 10px 0 10px"></i>
+
+
+         <div class="nav navbar-nav navbar-right">
+
+            <li class="dropdown">
+               <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <p>
+                     Commands&nbsp;<b class="caret"></b>
+                  </p>
+               </a>
+               <ul class="dropdown-menu">
+                  <li><a href="#" id="commandFill">Fill</a></li>
+                  <li><a href="#" id="commandStandy">Standby</a></li>
+                  <li><a href="#" id="commandReboot">Reboot</a></li>
+                  <li class="divider"></li>
+                  <li style="background-color: #00bbff"><a href="#" id="commandArm"><b>Arm</b></a></li>
+                  <li><a href="#" id="commandFire"><b>Fire</b></a></li>
+               </ul>
+            </li>
+            <span style="padding: 4px; margin:10px 20px 10px 0 ">
+                <a href="#" class="btn btn-danger btn-xs btn-fill text-light">ESTOP</a>  </span>
+
+      </div>
+   </div>
+
+
+{% endblock %}
