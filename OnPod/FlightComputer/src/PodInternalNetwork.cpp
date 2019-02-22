@@ -1,4 +1,5 @@
 #include "FlightComputer/PodInternalNetwork.h"
+#include "EasyLogger/easylogging++.h"
 
 #define UDPPORT 5008
 
@@ -26,7 +27,7 @@ void killConfigSocket(clientSocketConfig* cscSocketInfo)
  */
 clientSocketConfig* initializeClientSocket()
 {
-  printf("Creating Client Socket \n");
+  LOG(INFO)<<"Creating Client Socket";
   int iPort = UDPPORT;
   int iSocket;
   struct sockaddr_in SocketAddrStruct;
@@ -55,5 +56,5 @@ void sendDataUdp(clientSocketConfig* cscSocketInfo, void* vPayload, int iPayload
   cscSocketInfo->addr.sin_addr.s_addr = inet_addr("127.0.0.1");
   sendto(cscSocketInfo->sckt, vPayload, iPayloadSize, 0,
          (struct sockaddr*)&cscSocketInfo->addr, sizeof(cscSocketInfo->addr));
-  printf("Data Sent \n");
+  LOG(INFO)<<"Packet Sent";
 }

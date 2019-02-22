@@ -3,12 +3,22 @@
 #include <string.h>
 #include <thread>
 
+//Logging System
+
+#include "EasyLogger/easylogging++.h"
+INITIALIZE_EASYLOGGINGPP
+
+
 #include "FlightComputer/PodInternalNetwork.h"
 #include "FlightComputer/nodeSim.h"
 #include "FlightComputer/MemoryAccess.h"
 
 int main(int argc, char** argv)
 {
+    el::Helpers::setThreadName("main");
+    el::Loggers::reconfigureAllLoggers(conf);
+    el::Configurations conf("/home/lwaghorn/Development/comp4-software/OnPod/FlightComputer/include/EasyLogger/logging.conf");
+    LOG(INFO)<<"Hello World!";
   PodValues pvPodValues;
   MemoryAccess* Pod = new MemoryAccess(pvPodValues);
 
