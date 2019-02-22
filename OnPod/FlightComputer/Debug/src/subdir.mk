@@ -9,6 +9,7 @@ CC_SRCS += \
 CPP_SRCS += \
 ../src/FlightComputer.cpp \
 ../src/MainControlLoop.cpp \
+../src/MemoryAccess.cpp \
 ../src/NodeServer.cpp \
 ../src/PodInternalNetwork.cpp \
 ../src/nodeSim.cpp 
@@ -19,6 +20,7 @@ CC_DEPS += \
 OBJS += \
 ./src/FlightComputer.o \
 ./src/MainControlLoop.o \
+./src/MemoryAccess.o \
 ./src/NodeServer.o \
 ./src/PodInternalNetwork.o \
 ./src/ProtoStructs.pb.o \
@@ -27,6 +29,7 @@ OBJS += \
 CPP_DEPS += \
 ./src/FlightComputer.d \
 ./src/MainControlLoop.d \
+./src/MemoryAccess.d \
 ./src/NodeServer.d \
 ./src/PodInternalNetwork.d \
 ./src/nodeSim.d 

@@ -1,4 +1,5 @@
 #include "FlightComputer/PodInternalNetwork.h"
+#include "FlightComputer/MemoryAccess.h"
 #define UDPPORT 5008
 
 using namespace fc;
@@ -95,27 +96,29 @@ int createNodeServerSocket() {
 /**
  *Wait on socket, parse the recieved message into a protobuf and hand it off.
  */
-int nodeServerThread(int iSocket, PodValues* pvPodValues ) {
-  char cBuffer[100] = {0};
-  while (1)
-  {
-    bzero(&cBuffer, sizeof cBuffer);
-    printf("Waiting to recieve on socket: %i \n", iSocket);
-    int iRecievedPacketSize = recvfrom(iSocket, cBuffer, 300, 0, nullptr, nullptr);
-    fc::brakeNodeData pNodeUpdate;
-    bool bProtoPacketParsed = pNodeUpdate.ParseFromArray(&cBuffer, iRecievedPacketSize);
-    if(bProtoPacketParsed)
-    {
-    	printf("Contents are: \n%s \n", pNodeUpdate.DebugString().c_str());
-    	parseBreakNodePacket( pNodeUpdate,pvPodValues);
-    }
-    else
-    {
-    	printf("Error Parsing Protobuf packet");
-    }
-  }
-  close(iSocket);
-  return 0;
+int nodeServerThread(MemoryAccess Pod)
+{
+	int iSocket = createNodeServerSocket();
+	char cBuffer[100] = {0};
+	while (1)
+	{
+		bzero(&cBuffer, sizeof cBuffer);
+		printf("Waiting to recieve on socket: %i \n", iSocket);
+		int iRecievedPacketSize = recvfrom(iSocket, cBuffer, 300, 0, nullptr, nullptr);
+		fc::brakeNodeData pNodeUpdate;
+		bool bProtoPacketParsed = pNodeUpdate.ParseFromArray(&cBuffer, iRecievedPacketSize);
+		if(bProtoPacketParsed)
+		{
+			printf("Contents are: \n%s \n", pNodeUpdate.DebugString().c_str());
+			parseBreakNodePacket( pNodeUpdate,Pod);
+		}
+		else
+		{
+			printf("Error Parsing Protobuf packet");
+		}
+	}
+	close(iSocket);
+	return 0;
 }
 
 

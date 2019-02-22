@@ -1,14 +1,16 @@
 #include "FlightComputer/structs.h"
+#include "FlightComputer/MemoryAccess.h"
+
 
 /**
  * The flags array should be all zeros if all systems are nominal.
  * Each index represents a different subsystem.
  */
-bool checkFlags(PodValues* pvPodValues)
+bool checkFlags(char cFlagsArray[], int iSize)
 {
-  for (int i = 0; i < pvPodValues->iFlagsArraySize; i++)
+  for (int i = 0; i < iSize; i++)
   {
-    if (pvPodValues->cFlagsArray[i] == 1)
+    if (cFlagsArray[i] == 1)
     {
       return false;
     }
@@ -31,58 +33,65 @@ bool nominalStates(eBreakNodeStates bnsState, eBreakNodeStates bnsAcceptedStates
   return false;
 }
 
-bool standbyToArming(PodValues* pvPodValues)
+bool standbyToArming(MemoryAccess* Pod)
 {
-  if (pvPodValues->TerminalCommand == tcTerminalArm)
+  if (Pod->getTerminalCommand() == tcTerminalArm)
   {
-    pvPodValues->TerminalCommand = tcTerminalNone;
+    if(Pod->setTerminalCommand(tcTerminalNone))
+    {
+    	return true;
+    }
+    else
+    {
+    	//TODO THROW ERROR??
+    	return false;
+    }
+  }
+  return false;
+}
+
+bool armingToArmed(MemoryAccess* Pod)
+{
+  if (Pod->getBrakeNodeState() == bnsArmed)
+  {
     return true;
   }
   return false;
 }
 
-bool armingToArmed(PodValues* pvPodValues)
+bool armedToFlight(MemoryAccess* Pod)
 {
-  if (pvPodValues->BreakNodeState == bnsArmed)
-  {
-    return true;
-  }
-  return false;
-}
-
-bool armedToFlight(PodValues* pvPodValues)
-{
-  eTerminalCommands terminalState = pvPodValues->TerminalCommand;
-  eBreakNodeStates nodeState = pvPodValues->BreakNodeState;
+  eTerminalCommands terminalState = Pod->getTerminalCommand();
+  eBreakNodeStates nodeState = Pod->getBrakeNodeState();
   if ((terminalState == tcTerminalFlight) & (nodeState == bnsFlight))
   {
-    pvPodValues->TerminalCommand = tcTerminalNone;
-    pvPodValues->MotorState = msDrive;
+    Pod->setTerminalCommand(tcTerminalNone);
+    Pod->setMotorState(msDrive);
     return true;
   }
   return false;
 }
 
-int runControlLoop(PodValues* pvPodValues)
+int runControlLoop(MemoryAccess Pod)
 {
-  ePodStates podState = pvPodValues->PodState;
+  ePodStates podState = Pod.sPodValues.PodState;
   switch (podState)
   {
 
     case psStandby:
     {
-      eBreakNodeStates bnAccepted[] = {bnsBooting};
-      if (checkFlags(pvPodValues) & nominalStates(pvPodValues->BreakNodeState, bnAccepted, 2))
+      eBreakNodeStates bnAccepted[] = {bnsStandby};
+      if (checkFlags(Pod.getFlagsArray(), Pod.getFlagsArraySize()) & nominalStates(Pod.getBrakeNodeState(), bnAccepted, 1))
       {
-        if (standbyToArming(pvPodValues))
+        if (standbyToArming(&Pod))
         {
-          pvPodValues->PodState = psArming;
+          Pod.setPodState(psArming);
         }
         break;
       }
       else
       {
-        pvPodValues->PodState = psDisarm;
+        Pod.setPodState(psDisarm);
       }
       break;
     }
@@ -90,17 +99,17 @@ int runControlLoop(PodValues* pvPodValues)
     case psArming:
     {
       eBreakNodeStates bnAccepted[] = {bnsArming, bnsArmed};
-      if (checkFlags(pvPodValues) & nominalStates(pvPodValues->BreakNodeState, bnAccepted, 2))
+      if (checkFlags(Pod.getFlagsArray(), Pod.getFlagsArraySize()) & nominalStates(Pod.getBrakeNodeState(), bnAccepted, 2))
       {
-        if (armingToArmed(pvPodValues))
+        if (armingToArmed(&Pod))
         {
-          pvPodValues->PodState = psArmed;
+          Pod.setPodState(psArmed);
         }
         break;
       }
       else
       {
-        pvPodValues->PodState = psDisarm;
+        Pod.setPodState(psDisarm);
       }
       break;
     }
@@ -108,17 +117,17 @@ int runControlLoop(PodValues* pvPodValues)
     case psArmed:
     {
       eBreakNodeStates bnAccepted[] = {bnsArmed};
-      if (checkFlags(pvPodValues) & nominalStates(pvPodValues->BreakNodeState, bnAccepted, 1))
+      if (checkFlags(Pod.getFlagsArray(), Pod.getFlagsArraySize()) & nominalStates(Pod.getBrakeNodeState(), bnAccepted, 1))
       {
-        if (armedToFlight(pvPodValues))
+        if (armedToFlight(&Pod))
         {
-          pvPodValues->PodState = psAcceleration;
+          Pod.setPodState(psAcceleration);
         }
         break;
       }
       else
       {
-        pvPodValues->PodState = psDisarm;
+        Pod.setPodState(psDisarm);
       }
       break;
     }
