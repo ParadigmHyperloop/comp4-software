@@ -1,4 +1,6 @@
 #include "FlightComputer/PodInternalNetwork.h"
+#include "EasyLogger/easylogging++.h"
+
 #define UDPPORT 5008
 
 using namespace fc;
@@ -96,22 +98,26 @@ int createNodeServerSocket() {
  *Wait on socket, parse the recieved message into a protobuf and hand it off.
  */
 int nodeServerThread(int iSocket, PodValues* pvPodValues ) {
+	el::Helpers::setThreadName("NodeServerThread");
+
   char cBuffer[100] = {0};
   while (1)
   {
     bzero(&cBuffer, sizeof cBuffer);
-    printf("Waiting to recieve on socket: %i \n", iSocket);
+    LOG(INFO)<<"Waiting to recieve on socket: " << iSocket;
     int iRecievedPacketSize = recvfrom(iSocket, cBuffer, 300, 0, nullptr, nullptr);
     fc::brakeNodeData pNodeUpdate;
     bool bProtoPacketParsed = pNodeUpdate.ParseFromArray(&cBuffer, iRecievedPacketSize);
     if(bProtoPacketParsed)
     {
-    	printf("Contents are: \n%s \n", pNodeUpdate.DebugString().c_str());
+    	LOG(INFO)<<"Packet Recieved";
+    	//printf("Contents are: \n%s \n", pNodeUpdate.DebugString().c_str());
     	parseBreakNodePacket( pNodeUpdate,pvPodValues);
     }
     else
     {
-    	printf("Error Parsing Protobuf packet");
+    	LOG(ERROR)<<"Error Parsing Protobuf packet";
+    	//TODO This should probably throw an error/estop? If we cant parse the data then we could me missing critical information
     }
   }
   close(iSocket);

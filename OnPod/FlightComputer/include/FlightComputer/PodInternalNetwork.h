@@ -8,7 +8,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <string>
-#include "FlightComputer/ProtoStructs.pb.h"
+#include "ProtoBuffer/ProtoStructs.pb.h"
 #include "FlightComputer/structs.h"
 
 void sendDataUdp(clientSocketConfig*, void*, int);
