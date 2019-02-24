@@ -1,14 +1,14 @@
 import argparse
 from influxdb import InfluxDBClient
 import datetime
+from random import rantint
+
 
 def main(host='localhost', port=8086):
     """Instantiate a connection to the InfluxDB."""
     user = 'root'
     password = 'root'
-
     dbname = 'test2'
-    query = 'select * from test2;'
 
     client = InfluxDBClient(host, port, user, password, dbname)
 
@@ -21,16 +21,16 @@ def main(host='localhost', port=8086):
 
 
     for x in range(20):
-        data = format_data("sensor_data", "some-tag", x, "some-field", "some-field-data")
-        print("Write points: {0}".format(data))
-        client.write_points(data)
+        point = point("sensor_data", "some-tag", x, "some-field", "some-field-data")
+        print("Write points: {0}".format(point))
+        client.write_points(point)
 
     client.close()
     #
     # print("Drop database: " + dbname)
     # client.drop_database(dbname)
 
-def format_data(measurement, tag, tag_data, field, field_data):
+def point(measurement, tag, tag_data, field, field_data):
 
     json_body = [
         {
@@ -40,7 +40,7 @@ def format_data(measurement, tag, tag_data, field, field_data):
             },
             "time": datetime.datetime.now(),
             "fields": {
-                field: field_data,
+                field: field_data
             }
         }
     ]
