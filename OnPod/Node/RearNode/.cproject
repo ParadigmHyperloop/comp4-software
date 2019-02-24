@@ -19,12 +19,6 @@
 							<builder buildPath="${workspace_loc:/Node}/Release" id="io.sloeber.sketch.builder.181327859" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Arduino sketch builder" superClass="io.sloeber.sketch.builder"/>
 							<tool id="io.sloeber.tool.sketch.compiler.cpp.221439778" name="Arduino C++ Compiler" superClass="io.sloeber.tool.sketch.compiler.cpp">
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="io.sloeber.compiler.cpp.sketch.option.incpath.922890491" name="Include Paths (-I)" superClass="io.sloeber.compiler.cpp.sketch.option.incpath" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/NodeProject/core/core}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/NodeProject/core/variant}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/NodeProject/libraries/Ethernet/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/NodeProject/libraries/Sodaq_wdt-1.0.1/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/NodeProject/libraries/SPI}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/NodeProject/libraries/Timer-2.1}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RearNode/core/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RearNode/core/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RearNode/libraries/Ethernet/src}&quot;"/>
@@ -36,12 +30,6 @@
 							</tool>
 							<tool id="io.sloeber.tool.compiler.c.134857694" name="Arduino C Compiler" superClass="io.sloeber.tool.compiler.c">
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="io.sloeber.compiler.c.sketch.option.incpath.808116088" name="Include Paths (-I)" superClass="io.sloeber.compiler.c.sketch.option.incpath" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/NodeProject/core/core}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/NodeProject/core/variant}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/NodeProject/libraries/Ethernet/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/NodeProject/libraries/Sodaq_wdt-1.0.1/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/NodeProject/libraries/SPI}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/NodeProject/libraries/Timer-2.1}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RearNode/core/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RearNode/core/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RearNode/libraries/Ethernet/src}&quot;"/>
@@ -53,12 +41,6 @@
 							</tool>
 							<tool id="io.sloeber.tool.sketch.compiler.s.731447999" name="Arduino Assembler" superClass="io.sloeber.tool.sketch.compiler.s">
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="io.sloeber.compiler.asm.sketch.option.incpath.266038458" name="Include Paths (-I)" superClass="io.sloeber.compiler.asm.sketch.option.incpath" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/NodeProject/core/core}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/NodeProject/core/variant}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/NodeProject/libraries/Ethernet/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/NodeProject/libraries/Sodaq_wdt-1.0.1/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/NodeProject/libraries/SPI}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/NodeProject/libraries/Timer-2.1}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RearNode/core/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RearNode/core/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RearNode/libraries/Ethernet/src}&quot;"/>
