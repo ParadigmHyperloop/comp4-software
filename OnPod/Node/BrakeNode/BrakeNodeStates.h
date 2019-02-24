@@ -67,7 +67,7 @@ class BrakeNodeState {
      *corresponding to the current state.
     */
     void TransitionToNextState();
-
+    
     //Returns value stored in state_
     State GetState();
     
