@@ -6,51 +6,47 @@ def main(host='localhost', port=8086):
     """Instantiate a connection to the InfluxDB."""
     user = 'root'
     password = 'root'
-    dbname = 'example'
-    dbuser = 'user'
-    dbuser_password = 'my_secret_password'
-    query = 'select value from cpu_load_short;'
-    json_body = [
-        {
-            "measurement": "cpu_load_short",
-            "tags": {
-                "host": "server01",
-                "region": "us-west"
-            },
-            "time": datetime.datetime.now(),
-            "fields": {
-                "Float_value": 0.64,
-                "Int_value": 3,
-                "String_value": "Text",
-                "Bool_value": True
-            }
-        }
-    ]
+
+    dbname = 'test2'
+    query = 'select * from test2;'
 
     client = InfluxDBClient(host, port, user, password, dbname)
 
     print("Create database: " + dbname)
     client.create_database(dbname)
+    client.switch_database(dbname)
 
     print("Create a retention policy")
     client.create_retention_policy('awesome_policy', '3d', 3, default=True)
 
-    print("Switch user: " + dbuser)
-    client.switch_user(dbuser, dbuser_password)
 
-    print("Write points: {0}".format(json_body))
-    client.write_points(json_body)
+    for x in range(20):
+        data = format_data("sensor_data", "some-tag", x, "some-field", "some-field-data")
+        print("Write points: {0}".format(data))
+        client.write_points(data)
 
-    print("Querying data: " + query)
-    result = client.query(query)
+    client.close()
+    #
+    # print("Drop database: " + dbname)
+    # client.drop_database(dbname)
 
-    print("Result: {0}".format(result))
+def format_data(measurement, tag, tag_data, field, field_data):
 
-    print("Switch user: " + user)
-    client.switch_user(user, password)
+    json_body = [
+        {
+            "measurement": measurement,
+            "tags": {
+                tag: tag_data,
+            },
+            "time": datetime.datetime.now(),
+            "fields": {
+                field: field_data,
+            }
+        }
+    ]
+    return json_body
 
-    print("Drop database: " + dbname)
-    client.drop_database(dbname)
+
 
 
 def parse_args():
