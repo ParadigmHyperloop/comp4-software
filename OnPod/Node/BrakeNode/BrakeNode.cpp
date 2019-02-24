@@ -4,64 +4,71 @@ BrakeNodeState::BrakeNodeState(State s) : state_(s) {
 }
 
 void BrakeNodeState::CheckBoot() {
-  if (connectionFlightComp == true) {
-    state_ = State::STANDBY;
-  }
+	state_ = State::STANDBY;
+//  if (connectionFlightComp == true) {
+//    state_ = State::STANDBY;
+//  }
 }
 
 void BrakeNodeState::CheckStandby() {
-  if (flightCompTriggered == true) {
-    state_ = State::ARMING;
-  }
-
-  if (communicationFail == true) {
-    state_ = State::ERROR;
-  }
+	state_ = State::ARMING;
+//  if (flightCompTriggered == true) {
+//    state_ = State::ARMING;
+//  }
+//
+//  if (communicationFail == true) {
+//    state_ = State::ERROR;
+//  }
 }
 
 void BrakeNodeState::CheckArming() {
-  if (nodeValuesNomial == true) {
-    state_ = State::ARMED;
-  }
-  
- if (flightCompCommunicationFail == true) { 
-    state_ = State::VENTING;
- }
+	state_ = State::ARMED;
+//  if (nodeValuesNomial == true) {
+//    state_ = State::ARMED;
+//  }
+//
+// if (flightCompCommunicationFail == true) {
+//    state_ = State::VENTING;
+// }
 }
 
 void BrakeNodeState::CheckArmed() {
-  if (flightCompTriggered == true) {
-    state_ = State::FLIGHT;
-  }
-
-  if (flightCompCommunicationFail == true) {
-    state_ = State::VENTING;
-  }
+	state_ = State::FLIGHT;
+//  if (flightCompTriggered == true) {
+//    state_ = State::FLIGHT;
+//  }
+//
+//  if (flightCompCommunicationFail == true) {
+//    state_ = State::VENTING;
+//  }
 }
 
 void BrakeNodeState::CheckFlight() {
-  if (lossPinConnection or abnormalPressureValues or watchdogTimeout == true) {
-    state_ = State::BRAKING;
-  }
+	state_ = State::BRAKING;
+//  if (lossPinConnection or abnormalPressureValues or watchdogTimeout == true) {
+//    state_ = State::BRAKING;
+//  }
 }
 
 void BrakeNodeState::CheckBraking() {
-  if (flightCompTriggered == true) {
-    state_ = State::VENTING;
-  }
-
-  if (lossPinConnection and abnormalPressureValues and watchdogTimeout == false
-  state_ = State::FLIGHT;
+//  if (flightCompTriggered == true) {
+//    state_ = State::VENTING;
+//  }
+//
+//  if (lossPinConnection and abnormalPressureValues and watchdogTimeout == false) {
+//    state_ = State::FLIGHT;
+//  }
 }
 
 void BrakeNodeState::CheckVenting() {
-  if (ventingSuccessfull == true) {
-    state_ = State::RETRIEVAL;
-  }
-
-  if (ventingSuccessfull == false) {
-   state_ = State::ERROR; 
-  }
+	state_ = State::ERROR;
+//  if (ventingSuccessfull == true) {
+//    state_ = State::RETRIEVAL;
+//  }
+//
+//  if (ventingSuccessfull == false) {
+//   state_ = State::ERROR;
+//  }
 }
 
 void BrakeNodeState::CheckRetrieval() {
