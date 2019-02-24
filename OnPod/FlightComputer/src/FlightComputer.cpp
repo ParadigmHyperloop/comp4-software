@@ -5,15 +5,18 @@
 
 #include "FlightComputer/PodInternalNetwork.h"
 #include "FlightComputer/nodeSim.h"
+#include "FlightComputer/MemoryAccess.h"
 
 int main(int argc, char** argv)
 {
-  PodValues* pvPodValues;
+  PodValues pvPodValues;
+  MemoryAccess* Pod = new MemoryAccess(pvPodValues);
 
-  int iServerSocket = createNodeServerSocket();
+
   clientSocketConfig* iClientSocket = initializeClientSocket();
 
-  std::thread tServer(nodeServerThread, iServerSocket, pvPodValues);
+  std::thread tServer(nodeServerThread, Pod);
+
   std::thread tSim(runNodeSimulator, iClientSocket);
   tServer.join();
   tSim.join();

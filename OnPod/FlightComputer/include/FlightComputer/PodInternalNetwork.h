@@ -10,6 +10,7 @@
 #include <string>
 #include "FlightComputer/ProtoStructs.pb.h"
 #include "FlightComputer/structs.h"
+#include "FlightComputer/MemoryAccess.h"
 
 void sendDataUdp(clientSocketConfig*, void*, int);
 
@@ -19,8 +20,8 @@ void killConfigSocket(clientSocketConfig*);
 
 int createNodeServerSocket();
 
-int nodeServerThread(int, PodValues*);
+int nodeServerThread(MemoryAccess* Pod);
 
-void parseBreakNodePacket(fc::brakeNodeData, PodValues*);
+void parseBreakNodePacket(fc::brakeNodeData, MemoryAccess);
 
 #endif

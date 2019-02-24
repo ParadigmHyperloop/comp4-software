@@ -4,71 +4,72 @@
 
 using namespace fc;
 
-void parseBreakNodePacket(fc::brakeNodeData pPayload, PodValues* pvPodValues){
+void parseBreakNodePacket(fc::brakeNodeData pPayload, MemoryAccess Pod){
 	//Grab State
 	switch (pPayload.state()){
 		case brakeNodeData::bnsBooting:
 		{
-			pvPodValues->BreakNodeState = bnsBooting;
+			Pod.setBrakeNodeState(bnsBooting);
 			break;
 		}
 		case brakeNodeData::bnsStandby:
 		{
-			pvPodValues->BreakNodeState = bnsStandby;
+			Pod.setBrakeNodeState(bnsStandby);
 			break;
 		}
 		case brakeNodeData::bnsArming:
 		{
-			pvPodValues->BreakNodeState = bnsArming;
+			Pod.setBrakeNodeState(bnsArming);
 			break;
 		}
 		case brakeNodeData::bnsArmed:
 		{
-			pvPodValues->BreakNodeState = bnsArmed;
+			Pod.setBrakeNodeState(bnsArmed);
 			break;
 		}
 		case brakeNodeData::bnsFlight:
 		{
-			pvPodValues->BreakNodeState = bnsFlight;
+			Pod.setBrakeNodeState(bnsFlight);
 			break;
 		}
 		case brakeNodeData::bnsBraking:
 		{
-			pvPodValues->BreakNodeState = bnsBraking;
+			Pod.setBrakeNodeState(bnsBraking);
 			break;
 		}
 		case brakeNodeData::bnsVenting:
 		{
-			pvPodValues->BreakNodeState = bnsVenting;
+			Pod.setBrakeNodeState(bnsVenting);
 			break;
 		}
 		case brakeNodeData::bnsRetrieval:
 		{
-			pvPodValues->BreakNodeState = bnsRetrieval;
+			Pod.setBrakeNodeState(bnsRetrieval);
 			break;
 		}
 		case brakeNodeData::bnsError:
 		{
-			pvPodValues->BreakNodeState = bnsError;
+			Pod.setBrakeNodeState(bnsError);
 			break;
 		}
 		default:
 		{
-			pvPodValues->BreakNodeState = bnsError;
+			Pod.setBrakeNodeState(bnsError);
 		}
-		//Offload Data
-		pvPodValues->bSolenoid1 = pPayload.sol1();
-		pvPodValues->bSolenoid2 = pPayload.sol2();
-		pvPodValues->bSolenoid3 = pPayload.sol3();
-		pvPodValues->bSolenoid4 = pPayload.sol4();
-		pvPodValues->bSolenoid5 = pPayload.sol5();
-		pvPodValues->bSolenoid6 = pPayload.sol6();
-		pvPodValues->iLowPressure1 = pPayload.lp1();
-		pvPodValues->iLowPressure2 = pPayload.lp2();
-		pvPodValues->iLowPressure3 = pPayload.lp3();
-		pvPodValues->iLowPressure4 = pPayload.lp4();
-		pvPodValues->iHighPressure = pPayload.hp();
-		pvPodValues->iPressureVesselTemperature = pPayload.temp();
+		/*Offload Data
+		Pod->bSolenoid1 = pPayload.sol1();
+		Pod->bSolenoid2 = pPayload.sol2();
+		Pod->bSolenoid3 = pPayload.sol3();
+		Pod->bSolenoid4 = pPayload.sol4();
+		Pod->bSolenoid5 = pPayload.sol5();
+		Pod->bSolenoid6 = pPayload.sol6();
+		Pod->iLowPressure1 = pPayload.lp1();
+		Pod->iLowPressure2 = pPayload.lp2();
+		Pod->iLowPressure3 = pPayload.lp3();
+		Pod->iLowPressure4 = pPayload.lp4();
+		Pod->iHighPressure = pPayload.hp();
+		Pod->iPressureVesselTemperature = pPayload.temp();
+		*/
 	}
 }
 
@@ -96,7 +97,7 @@ int createNodeServerSocket() {
 /**
  *Wait on socket, parse the recieved message into a protobuf and hand it off.
  */
-int nodeServerThread(MemoryAccess Pod)
+int nodeServerThread(MemoryAccess* Pod)
 {
 	int iSocket = createNodeServerSocket();
 	char cBuffer[100] = {0};
@@ -110,7 +111,7 @@ int nodeServerThread(MemoryAccess Pod)
 		if(bProtoPacketParsed)
 		{
 			printf("Contents are: \n%s \n", pNodeUpdate.DebugString().c_str());
-			parseBreakNodePacket( pNodeUpdate,Pod);
+			parseBreakNodePacket( pNodeUpdate,*Pod);
 		}
 		else
 		{

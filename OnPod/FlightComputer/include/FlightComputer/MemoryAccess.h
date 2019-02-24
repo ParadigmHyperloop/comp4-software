@@ -1,5 +1,7 @@
-#include "FlightComputer/structs.h"
+#ifndef MEMORYACCESS_H
+#define MEMORYACCESS_H
 
+#include "FlightComputer/structs.h"
 
 class MemoryAccess
 {
@@ -35,3 +37,5 @@ class MemoryAccess
 	 char* getFlagsArray();
 	 int getFlagsArraySize();
 };
+
+#endif
