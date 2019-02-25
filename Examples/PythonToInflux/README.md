@@ -1,4 +1,4 @@
-#PythonToInflux
+# PythonToInflux
 
 Before running you will need to configure the path of the InfluxDB in the
 influxd.conf file with 'dir' and 'wal-dir'. Currently these paths are set to my
