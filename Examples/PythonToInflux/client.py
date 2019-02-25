@@ -1,8 +1,8 @@
 import argparse
 from influxdb import InfluxDBClient
 import datetime
-from random import rantint
 
+"""This file is not needed anymore"""
 
 def main(host='localhost', port=8086):
     """Instantiate a connection to the InfluxDB."""
@@ -21,9 +21,9 @@ def main(host='localhost', port=8086):
 
 
     for x in range(20):
-        point = point("sensor_data", "some-tag", x, "some-field", "some-field-data")
-        print("Write points: {0}".format(point))
-        client.write_points(point)
+        data = point("sensor_data", "some-tag", x, "some-field", "some-field-data")
+        print("Write points: {0}".format(data))
+        client.write_points(data)
 
     client.close()
     #
