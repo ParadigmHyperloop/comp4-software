@@ -1,6 +1,6 @@
 #include "FlightComputer/nodeSim.h"
 #include "FlightComputer/PodInternalNetwork.h"
-#include "FlightComputer/ProtoStructs.pb.h"
+#include "ProtoBuffer/ProtoStructs.pb.h"
 
 #include <chrono>
 #include <cstdlib>
@@ -10,6 +10,8 @@ using namespace fc;
 
 void runNodeSimulator(clientSocketConfig* cscSocket)
 {
+  el::Helpers::setThreadName("NodeSimulator");
+
   std::string sPayload = "";
   for (int iIndex = 0; iIndex < 2; iIndex++)
   {

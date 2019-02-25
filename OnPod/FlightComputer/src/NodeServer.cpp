@@ -1,5 +1,7 @@
 #include "FlightComputer/PodInternalNetwork.h"
 #include "FlightComputer/MemoryAccess.h"
+#include "EasyLogger/easylogging++.h"
+
 #define UDPPORT 5008
 
 using namespace fc;
@@ -104,22 +106,24 @@ int nodeServerThread(MemoryAccess* Pod)
 	while (1)
 	{
 		bzero(&cBuffer, sizeof cBuffer);
-		printf("Waiting to recieve on socket: %i \n", iSocket);
+		LOG(INFO)<<"Waiting to recieve on socket: " << iSocket;
 		int iRecievedPacketSize = recvfrom(iSocket, cBuffer, 300, 0, nullptr, nullptr);
 		fc::brakeNodeData pNodeUpdate;
 		bool bProtoPacketParsed = pNodeUpdate.ParseFromArray(&cBuffer, iRecievedPacketSize);
 		if(bProtoPacketParsed)
 		{
-			printf("Contents are: \n%s \n", pNodeUpdate.DebugString().c_str());
+		    LOG(INFO)<<"Packet Recieved";
 			parseBreakNodePacket( pNodeUpdate,*Pod);
 		}
 		else
 		{
-			printf("Error Parsing Protobuf packet");
+		    LOG(ERROR)<<"Error Parsing Protobuf packet";
 		}
 	}
 	close(iSocket);
 	return 0;
+    
+    
 }
 
 

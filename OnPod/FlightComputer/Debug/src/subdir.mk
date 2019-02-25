@@ -4,7 +4,8 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CC_SRCS += \
-../src/ProtoStructs.pb.cc 
+../src/ProtoStructs.pb.cc \
+../src/easylogging++.cc 
 
 CPP_SRCS += \
 ../src/FlightComputer.cpp \
@@ -15,7 +16,8 @@ CPP_SRCS += \
 ../src/nodeSim.cpp 
 
 CC_DEPS += \
-./src/ProtoStructs.pb.d 
+./src/ProtoStructs.pb.d \
+./src/easylogging++.d 
 
 OBJS += \
 ./src/FlightComputer.o \
@@ -24,6 +26,7 @@ OBJS += \
 ./src/NodeServer.o \
 ./src/PodInternalNetwork.o \
 ./src/ProtoStructs.pb.o \
+./src/easylogging++.o \
 ./src/nodeSim.o 
 
 CPP_DEPS += \
