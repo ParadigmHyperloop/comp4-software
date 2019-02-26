@@ -15,20 +15,21 @@ INITIALIZE_EASYLOGGINGPP
 
 int main(int argc, char** argv)
 {
-    el::Helpers::setThreadName("main");
-    el::Loggers::reconfigureAllLoggers(conf);
-    el::Configurations conf("/home/lwaghorn/Development/comp4-software/OnPod/FlightComputer/include/EasyLogger/logging.conf");
-    LOG(INFO)<<"Hello World!";
-  PodValues pvPodValues;
-  MemoryAccess* Pod = new MemoryAccess(pvPodValues);
+	el::Helpers::setThreadName("main");
+	el::Configurations conf("/home/lwaghorn/Development/comp4-software/OnPod/FlightComputer/include/EasyLogger/logging.conf");
+	el::Loggers::reconfigureAllLoggers(conf);
+	LOG(INFO)<<"Hello World!";
+	PodValues pvPodValues;
+	MemoryAccess* Pod = new MemoryAccess(&pvPodValues);
 
 
-  clientSocketConfig* iClientSocket = initializeClientSocket();
+	clientSocketConfig* iClientSocket = initializeClientSocket();
 
-  std::thread tServer(nodeServerThread, Pod);
+	std::thread tServer(nodeServerThread, Pod);
+	std::thread tSim(runNodeSimulator, iClientSocket);
 
-  std::thread tSim(runNodeSimulator, iClientSocket);
-  tServer.join();
-  tSim.join();
-  return 0;
+	tServer.join();
+	tSim.join();
+
+	return 0;
 }

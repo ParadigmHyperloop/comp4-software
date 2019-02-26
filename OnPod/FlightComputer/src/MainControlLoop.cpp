@@ -6,7 +6,7 @@
  * The flags array should be all zeros if all systems are nominal.
  * Each index represents a different subsystem.
  */
-bool checkFlags(char cFlagsArray[], int iSize)
+bool checkFlags(unsigned char cFlagsArray[], int iSize)
 {
   for (int i = 0; i < iSize; i++)
   {
@@ -22,7 +22,7 @@ bool checkFlags(char cFlagsArray[], int iSize)
  * Checks that the current state of the break node is within
  * one of its expected states.
  */
-bool nominalStates(eBreakNodeStates bnsState, eBreakNodeStates bnsAcceptedStates[], int iAcceptedStatesSize){
+bool nominalStates(fc::brakeNodeData::breakNodeState bnsState, fc::brakeNodeData::breakNodeState bnsAcceptedStates[], int iAcceptedStatesSize){
   for (int i = 0; i < iAcceptedStatesSize; i++)
   {
     if (bnsAcceptedStates[i] == bnsState)
@@ -52,7 +52,7 @@ bool standbyToArming(MemoryAccess* Pod)
 
 bool armingToArmed(MemoryAccess* Pod)
 {
-  if (Pod->getBrakeNodeState() == bnsArmed)
+  if (Pod->getBrakeNodeState() == fc::brakeNodeData::bnsArmed)
   {
     return true;
   }
@@ -62,8 +62,8 @@ bool armingToArmed(MemoryAccess* Pod)
 bool armedToFlight(MemoryAccess* Pod)
 {
   eTerminalCommands terminalState = Pod->getTerminalCommand();
-  eBreakNodeStates nodeState = Pod->getBrakeNodeState();
-  if ((terminalState == tcTerminalFlight) & (nodeState == bnsFlight))
+  fc::brakeNodeData::breakNodeState nodeState = Pod->getBrakeNodeState();
+  if ((terminalState == tcTerminalFlight) & (nodeState == fc::brakeNodeData::bnsFlight))
   {
     Pod->setTerminalCommand(tcTerminalNone);
     Pod->setMotorState(msDrive);
@@ -74,13 +74,13 @@ bool armedToFlight(MemoryAccess* Pod)
 
 int runControlLoop(MemoryAccess Pod)
 {
-  ePodStates podState = Pod.sPodValues.PodState;
+  ePodStates podState = Pod.getPodState();
   switch (podState)
   {
 
     case psStandby:
     {
-      eBreakNodeStates bnAccepted[] = {bnsStandby};
+    	fc::brakeNodeData::breakNodeState bnAccepted[] = {fc::brakeNodeData::bnsStandby};
       if (checkFlags(Pod.getFlagsArray(), Pod.getFlagsArraySize()) & nominalStates(Pod.getBrakeNodeState(), bnAccepted, 1))
       {
         if (standbyToArming(&Pod))
@@ -98,7 +98,7 @@ int runControlLoop(MemoryAccess Pod)
 
     case psArming:
     {
-      eBreakNodeStates bnAccepted[] = {bnsArming, bnsArmed};
+    	fc::brakeNodeData::breakNodeState bnAccepted[] = {fc::brakeNodeData::bnsArming, fc::brakeNodeData::bnsArmed};
       if (checkFlags(Pod.getFlagsArray(), Pod.getFlagsArraySize()) & nominalStates(Pod.getBrakeNodeState(), bnAccepted, 2))
       {
         if (armingToArmed(&Pod))
@@ -116,7 +116,7 @@ int runControlLoop(MemoryAccess Pod)
 
     case psArmed:
     {
-      eBreakNodeStates bnAccepted[] = {bnsArmed};
+      fc::brakeNodeData::breakNodeState bnAccepted[] = {fc::brakeNodeData::bnsArmed};
       if (checkFlags(Pod.getFlagsArray(), Pod.getFlagsArraySize()) & nominalStates(Pod.getBrakeNodeState(), bnAccepted, 1))
       {
         if (armedToFlight(&Pod))

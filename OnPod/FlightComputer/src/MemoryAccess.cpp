@@ -1,11 +1,13 @@
 #include "FlightComputer/structs.h"
 #include "FlightComputer/MemoryAccess.h"
+#include "ProtoBuffer/ProtoStructs.pb.h"
 
 
 
- MemoryAccess::MemoryAccess(PodValues sPodValues)
+ MemoryAccess::MemoryAccess(PodValues* sPodValues)
  {
 	 this->sPodValues = sPodValues;
+	 return;
  };
 
 
@@ -13,7 +15,7 @@
  {
 	 if(this->bWritePodState)
 	 {
-		 this->sPodValues.PodState = state;
+		 this->sPodValues->PodState = state;
 		 return 1;
 	 }
 	 else
@@ -24,14 +26,14 @@
 
  ePodStates MemoryAccess::getPodState()
  {
-	 return this->sPodValues.PodState;
+	 return this->sPodValues->PodState;
  }
 
 
- int MemoryAccess::setBrakeNodeState(eBreakNodeStates state){
+ int MemoryAccess::setBrakeNodeState(fc::brakeNodeData::breakNodeState state){
 	 if(this->bWriteBreakNodeState)
 	 {
-		 this->sPodValues.BreakNodeState = state;
+		 this->sPodValues->BreakNodeState = state;
 		 return 1;
 	 }
 	 else
@@ -40,16 +42,16 @@
 	 }
  };
 
- eBreakNodeStates MemoryAccess::getBrakeNodeState()
+ fc::brakeNodeData::breakNodeState MemoryAccess::getBrakeNodeState()
  {
-	 return this->sPodValues.BreakNodeState;
+	 return this->sPodValues->BreakNodeState;
  };
 
 
  int MemoryAccess::setTerminalCommand(eTerminalCommands command){
 	 if(this->bWriteTerminalCommand)
 	 {
-		 this->sPodValues.TerminalCommand= command;
+		 this->sPodValues->TerminalCommand= command;
 		 return 1;
 	 }
 	 else
@@ -60,20 +62,20 @@
 
  eTerminalCommands MemoryAccess::getTerminalCommand()
  {
-	 return this->sPodValues.TerminalCommand;
+	 return this->sPodValues->TerminalCommand;
  };
 
 
  eMotorStates MemoryAccess::getMotorState()
  {
-	 return this->sPodValues.MotorState;
+	 return this->sPodValues->MotorState;
  };
 
  int MemoryAccess::setMotorState(eMotorStates eMotorState)
  {
 	 if(this->bWriteMotorState)
 	 {
-		 this->sPodValues.MotorState= eMotorState;
+		 this->sPodValues->MotorState= eMotorState;
 		 return 1;
 	 }
 	 else
@@ -83,14 +85,14 @@
  };
 
 
- char* MemoryAccess::getFlagsArray()
+ unsigned char* MemoryAccess::getFlagsArray()
  {
-	 return this->sPodValues.cFlagsArray;
+	 return this->sPodValues->cFlagsArray;
  };
 
  int MemoryAccess::getFlagsArraySize()
  {
-	 return this->sPodValues.iFlagsArraySize;
+	 return this->sPodValues->iFlagsArraySize;
  };
 
 

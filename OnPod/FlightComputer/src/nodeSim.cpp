@@ -1,6 +1,7 @@
 #include "FlightComputer/nodeSim.h"
 #include "FlightComputer/PodInternalNetwork.h"
 #include "ProtoBuffer/ProtoStructs.pb.h"
+#include "EasyLogger/easylogging++.h"
 
 #include <chrono>
 #include <cstdlib>
@@ -8,17 +9,36 @@
 
 using namespace fc;
 
+void sendPacket(brakeNodeData pNodeUpdate, clientSocketConfig* cscSocket){
+	std::string sPayload = "";
+	int iProtoPacketSize = pNodeUpdate.ByteSizeLong();
+	pNodeUpdate.SerializeToString(&sPayload);
+	void* vBuffer = malloc(iProtoPacketSize);
+	pNodeUpdate.SerializeToArray(vBuffer, iProtoPacketSize);
+	sendDataUdp(cscSocket, vBuffer, (int)iProtoPacketSize);
+}
+
 void runNodeSimulator(clientSocketConfig* cscSocket)
 {
   el::Helpers::setThreadName("NodeSimulator");
+  brakeNodeData::breakNodeState StateSequence[] = {brakeNodeData::bnsBooting , brakeNodeData::bnsStandby , brakeNodeData::bnsArming, brakeNodeData::bnsArmed};
 
-  std::string sPayload = "";
+
   for (int iIndex = 0; iIndex < 2; iIndex++)
   {
     brakeNodeData pNodeUpdate;
     pNodeUpdate.set_id(1);
     pNodeUpdate.set_state(brakeNodeData::bnsVenting);
-    // Pressure Transducers
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+  }
+  killConfigSocket(cscSocket);
+  return;
+}
+
+
+
+/*
+ *  // Pressure Transducers
     pNodeUpdate.set_hp(231);
     pNodeUpdate.set_lp1(666);
     pNodeUpdate.set_lp2(242);
@@ -33,13 +53,5 @@ void runNodeSimulator(clientSocketConfig* cscSocket)
     pNodeUpdate.set_sol6(1);
     pNodeUpdate.set_temp(100);
 
-    int iProtoPacketSize = pNodeUpdate.ByteSizeLong();
-    pNodeUpdate.SerializeToString(&sPayload);
-    void* vBuffer = malloc(iProtoPacketSize);
-    pNodeUpdate.SerializeToArray(vBuffer, iProtoPacketSize);
-    sendDataUdp(cscSocket, vBuffer, (int)iProtoPacketSize);
-    std::this_thread::sleep_for(std::chrono::seconds(1));
-  }
-  killConfigSocket(cscSocket);
-  return;
-}
+    */
+ */

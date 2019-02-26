@@ -2,62 +2,15 @@
 #include "FlightComputer/MemoryAccess.h"
 #include "EasyLogger/easylogging++.h"
 
+
 #define UDPPORT 5008
 
 using namespace fc;
 
 void parseBreakNodePacket(fc::brakeNodeData pPayload, MemoryAccess Pod){
 	//Grab State
-	switch (pPayload.state()){
-		case brakeNodeData::bnsBooting:
-		{
-			Pod.setBrakeNodeState(bnsBooting);
-			break;
-		}
-		case brakeNodeData::bnsStandby:
-		{
-			Pod.setBrakeNodeState(bnsStandby);
-			break;
-		}
-		case brakeNodeData::bnsArming:
-		{
-			Pod.setBrakeNodeState(bnsArming);
-			break;
-		}
-		case brakeNodeData::bnsArmed:
-		{
-			Pod.setBrakeNodeState(bnsArmed);
-			break;
-		}
-		case brakeNodeData::bnsFlight:
-		{
-			Pod.setBrakeNodeState(bnsFlight);
-			break;
-		}
-		case brakeNodeData::bnsBraking:
-		{
-			Pod.setBrakeNodeState(bnsBraking);
-			break;
-		}
-		case brakeNodeData::bnsVenting:
-		{
-			Pod.setBrakeNodeState(bnsVenting);
-			break;
-		}
-		case brakeNodeData::bnsRetrieval:
-		{
-			Pod.setBrakeNodeState(bnsRetrieval);
-			break;
-		}
-		case brakeNodeData::bnsError:
-		{
-			Pod.setBrakeNodeState(bnsError);
-			break;
-		}
-		default:
-		{
-			Pod.setBrakeNodeState(bnsError);
-		}
+	Pod.setBrakeNodeState(pPayload.state());
+
 		/*Offload Data
 		Pod->bSolenoid1 = pPayload.sol1();
 		Pod->bSolenoid2 = pPayload.sol2();
@@ -72,7 +25,7 @@ void parseBreakNodePacket(fc::brakeNodeData pPayload, MemoryAccess Pod){
 		Pod->iHighPressure = pPayload.hp();
 		Pod->iPressureVesselTemperature = pPayload.temp();
 		*/
-	}
+
 }
 
 /**

@@ -1,10 +1,12 @@
 #ifndef STUCTS_H
 #define STUCTS_H
 #include <netinet/in.h>
+#include "ProtoBuffer/ProtoStructs.pb.h"
+
 
 enum ePodStates { psStandby, psArming, psArmed, psAcceleration, psCoasting, psBraking, psDisarm, psRetrieval, psEmergency, psBooting };
 
-enum eBreakNodeStates { bnsBooting, bnsStandby, bnsArming, bnsArmed, bnsFlight, bnsBraking, bnsVenting, bnsRetrieval, bnsError};
+//enum eBreakNodeStates { bnsBooting, bnsStandby, bnsArming, bnsArmed, bnsFlight, bnsBraking, bnsVenting, bnsRetrieval, bnsError};
 
 enum eTerminalStates { tsConnected, tsDropped, tsTerminalEmergency};
 
@@ -18,20 +20,19 @@ struct PodValues
   ePodStates PodState = psBooting;
   eTerminalStates TerminalState;
   eMotorStates MotorState;
-  eBreakNodeStates BreakNodeState;
+  fc::brakeNodeData::breakNodeState BreakNodeState;
   // Navigation
   float fDistance;
   float fVelocity;
   // Rear Node
   float fGpioValues;
   //FlagsV2
-  char cFlagsArray[3] = {0};
+  unsigned char cFlagsArray[3] = {0};
   int iFlagsArraySize = 3;
   // Atmosphere
   double dTubePressure;
   // Terminal
   eTerminalCommands TerminalCommand = tcTerminalNone;
-
   // Brake Node
   bool bSolenoid1;
   bool bSolenoid2;
