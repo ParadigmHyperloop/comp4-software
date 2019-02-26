@@ -1,15 +1,20 @@
 #include "FlightComputer/PodInternalNetwork.h"
-#include <netdb.h>
-#include <netinet/in.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <unistd.h>
+#include "EasyLogger/easylogging++.h"
 
-#define NodeUDPSocketPort 5005
+#define UDPPORT 5008
+
+using namespace std;
+
+/**killConfigSocket
+ *
+ *Close the socket of the socketConfig struct provided
+ *
+ */
+void killConfigSocket(clientSocketConfig* cscSocketInfo)
+{
+  close(cscSocketInfo->sckt);
+  return;
+}
 
 /**initializeClientSocket
  *
@@ -20,50 +25,36 @@
  * Param:None
  * Returns : SocketConfig struct
  */
-socketConfig initializeClientSocket() {
-  // Create destination info struct
-  sockaddr_in node_addr;
-  node_addr.sin_family = AF_INET;
-  node_addr.sin_port =
-      htons(NodeUDPSocketPort);  // Node Port in Network Byte Orderr
-
-  int sckt = socket(AF_INET, SOCK_DGRAM, 0);  // Create the Socket
-
-  if (sckt == -1) {
-    // TODO throw error
-  }
-
-  socketConfig info;
-  info.addr = &node_addr;
-  info.sckt = sckt;
-
-  return info;
+clientSocketConfig* initializeClientSocket()
+{
+  LOG(INFO)<<"Creating Client Socket";
+  int iPort = UDPPORT;
+  int iSocket;
+  struct sockaddr_in SocketAddrStruct;
+  memset(&SocketAddrStruct, '\0', sizeof(SocketAddrStruct));
+  iSocket = socket(PF_INET, SOCK_DGRAM, 0);
+  SocketAddrStruct.sin_family = AF_INET;
+  SocketAddrStruct.sin_port = htons(iPort);
+  clientSocketConfig* cscSocketInfo = new clientSocketConfig;
+  cscSocketInfo->addr = SocketAddrStruct;
+  cscSocketInfo->sckt = iSocket;
+  return cscSocketInfo;
 }
 
-/**killConfigSocket
+/**SendDataUdp
  *
- *Close the socket of the socketConfig struct provided
+ * TODO: attatched logging to the sendto return value for error logging and handeling
  *
+ * Params:  cscSocketInfo: A client socket config structure that holds all the configurtions values for the socket
+ * 			vPayload: A pointer to the data that is to be sent over the socket
+ * 			iPayloadSize: The size of the data to be sent over the socket
+ *
+ * returns: None
  */
-void killConfigSocket(socketConfig socketInfo) { close(socketInfo.sckt); }
-
-/**SendState
- *
- * Sends a UDP packet to all IP addresses given using the Socket in the config
- * given
- */
-void sendState(char *addresses[], int numberOfAddresses,
-               socketConfig socketInfo) {
-  struct hostent *host;
-
-  // Loop over all the IP addresses and send a packet to each one
-  for (int i = 0; i < numberOfAddresses; i++) {
-    host = gethostbyname(addresses[i]);  // Puts address in a hostent struct
-
-    socketInfo.addr->sin_addr = *((struct in_addr *)host->h_addr);
-
-    sendto(socketInfo.sckt, "sup", strlen("sup"), 0,
-           (struct sockaddr *)socketInfo.addr, sizeof(struct sockaddr));
-  }
-  return;
+void sendDataUdp(clientSocketConfig* cscSocketInfo, void* vPayload,  int32_t iPayloadSize)
+{
+  cscSocketInfo->addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+  sendto(cscSocketInfo->sckt, vPayload, iPayloadSize, 0,
+         (struct sockaddr*)&cscSocketInfo->addr, sizeof(cscSocketInfo->addr));
+  LOG(INFO)<<"Packet Sent";
 }

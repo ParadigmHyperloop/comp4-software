@@ -1,16 +1,27 @@
 #ifndef PODINTERNALNETWORK_H
-
 #define PODINTERNALNETWORK_H
 
-struct socketConfig {
-  struct sockaddr_in* addr;
-  int sckt;
-};
+#include <arpa/inet.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <string>
+#include "ProtoBuffer/NodeTelem.pb.h"
+#include "FlightComputer/structs.h"
+#include "FlightComputer/MemoryAccess.h"
 
-void sendState(char* [], int, socketConfig);
+void sendDataUdp(clientSocketConfig*, void*,  int32_t);
 
-socketConfig initializeClientSocket();
+clientSocketConfig* initializeClientSocket();
 
-void killConfigSocket(socketConfig);
+void killConfigSocket(clientSocketConfig*);
+
+ int32_t createNodeServerSocket();
+
+ int32_t nodeServerThread(MemoryAccess* Pod);
+
+void parseBreakNodePacket(fc::brakeNodeData, MemoryAccess);
 
 #endif

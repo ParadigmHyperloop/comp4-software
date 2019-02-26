@@ -8,7 +8,7 @@ COMP = g++
 
 
 #Catch needs c++11   Add include path for the project
-BLDFLAGS = -std=c++11 -I"../include/FlightComputer"
+BLDFLAGS = -std=c++11 -I../include/FlightComputer -I.././include -lprotoc -pthread -lprotobuf -lpthread
 
 #Check Linux vs OSX
 UNAME_S := $(shell uname -s)
