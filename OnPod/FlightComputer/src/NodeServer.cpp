@@ -75,8 +75,6 @@ int nodeServerThread(MemoryAccess* Pod)
 	}
 	close(iSocket);
 	return 0;
-    
-    
 }
 
 

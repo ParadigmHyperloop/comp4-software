@@ -1,6 +1,6 @@
 #include "FlightComputer/nodeSim.h"
 #include "FlightComputer/PodInternalNetwork.h"
-#include "ProtoBuffer/ProtoStructs.pb.h"
+#include "ProtoBuffer/NodeTelem.pb.h"
 #include "EasyLogger/easylogging++.h"
 
 #include <chrono>
@@ -54,4 +54,4 @@ void runNodeSimulator(clientSocketConfig* cscSocket)
     pNodeUpdate.set_temp(100);
 
     */
- */
+
