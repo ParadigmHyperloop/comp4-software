@@ -12,9 +12,8 @@ if ! type "protoc" > /dev/null; then
   exit
 fi
 
-
-#Running script from pycharm config. This fixes the working directory problem. If your seeing this i forgot to delete it
-cd ../../ProtoBufs
+#Fix pycharm defualt working directory
+#cd ../../ProtoBufs
 
 # C++
 protoc --cpp_out=. NodeTelem.proto
