@@ -13,3 +13,4 @@ pycache/
 *.out
 *.pyc
 *.swp
+*org.eclipse.cdt.core.prefs
