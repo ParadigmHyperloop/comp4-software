@@ -8,7 +8,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <string>
-#include "ProtoBuffer/ProtoStructs.pb.h"
+#include "ProtoBuffer/NodeTelem.pb.h"
 #include "FlightComputer/structs.h"
 #include "FlightComputer/MemoryAccess.h"
 

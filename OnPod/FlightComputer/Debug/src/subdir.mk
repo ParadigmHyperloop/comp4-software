@@ -4,7 +4,7 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CC_SRCS += \
-../src/ProtoStructs.pb.cc \
+../src/NodeTelem.pb.cc \
 ../src/easylogging++.cc 
 
 CPP_SRCS += \
@@ -16,7 +16,7 @@ CPP_SRCS += \
 ../src/nodeSim.cpp 
 
 CC_DEPS += \
-./src/ProtoStructs.pb.d \
+./src/NodeTelem.pb.d \
 ./src/easylogging++.d 
 
 OBJS += \
@@ -24,8 +24,8 @@ OBJS += \
 ./src/MainControlLoop.o \
 ./src/MemoryAccess.o \
 ./src/NodeServer.o \
+./src/NodeTelem.pb.o \
 ./src/PodInternalNetwork.o \
-./src/ProtoStructs.pb.o \
 ./src/easylogging++.o \
 ./src/nodeSim.o 
 
@@ -42,14 +42,14 @@ CPP_DEPS += \
 src/%.o: ../src/%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: GCC C++ Compiler'
-	g++ -std=c++0x -I.././include -I../include/FlightComputer -O0 -g3 -Wall -c -fmessage-length=0  -lsocket -lnsl -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
+	g++ -std=c++0x -I.././include -I../include/FlightComputer -I"/home/lwaghorn/Development/comp4-software/OnPod/FlightComputer/include/ProtoBuffer" -O0 -g3 -Wall -c -fmessage-length=0  -lsocket -lnsl -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
 src/%.o: ../src/%.cc
 	@echo 'Building file: $<'
 	@echo 'Invoking: GCC C++ Compiler'
-	g++ -std=c++0x -I.././include -I../include/FlightComputer -O0 -g3 -Wall -c -fmessage-length=0  -lsocket -lnsl -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
+	g++ -std=c++0x -I.././include -I../include/FlightComputer -I"/home/lwaghorn/Development/comp4-software/OnPod/FlightComputer/include/ProtoBuffer" -O0 -g3 -Wall -c -fmessage-length=0  -lsocket -lnsl -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

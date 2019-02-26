@@ -1,7 +1,7 @@
 #ifndef STUCTS_H
 #define STUCTS_H
 #include <netinet/in.h>
-#include "ProtoBuffer/ProtoStructs.pb.h"
+#include "ProtoBuffer/NodeTelem.pb.h"
 
 
 enum ePodStates { psStandby, psArming, psArmed, psAcceleration, psCoasting, psBraking, psDisarm, psRetrieval, psEmergency, psBooting };

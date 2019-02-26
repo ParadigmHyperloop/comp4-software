@@ -1,6 +1,6 @@
 #include "FlightComputer/structs.h"
 #include "FlightComputer/MemoryAccess.h"
-#include "ProtoBuffer/ProtoStructs.pb.h"
+#include "ProtoBuffer/NodeTelem.pb.h"
 
 
 
