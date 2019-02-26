@@ -36,9 +36,9 @@ void parseBreakNodePacket(fc::brakeNodeData pPayload, MemoryAccess Pod){
  *
  * Create the UDP socket that Pod Internal Work Node telemetry will be recieved on.
  */
-int createNodeServerSocket() {
-  int iPort = UDPPORT;
-  int iSocket;
+ int32_t createNodeServerSocket() {
+   int32_t iPort = UDPPORT;
+   int32_t iSocket;
   struct sockaddr_in SocketAddrStruct;
   iSocket = socket(AF_INET, SOCK_DGRAM, 0);
  // memset(&SocketAddrStruct, '\0', sizeof(SocketAddrStruct));  //Replacement, I read online this isnt even needed??
@@ -52,15 +52,15 @@ int createNodeServerSocket() {
 /**
  *Wait on socket, parse the recieved message into a protobuf and hand it off.
  */
-int nodeServerThread(MemoryAccess* Pod)
+ int32_t nodeServerThread(MemoryAccess* Pod)
 {
-	int iSocket = createNodeServerSocket();
+	 int32_t iSocket = createNodeServerSocket();
 	char cBuffer[100] = {0};
 	while (1)
 	{
 		bzero(&cBuffer, sizeof cBuffer);
 		LOG(INFO)<<"Waiting to recieve on socket: " << iSocket;
-		int iRecievedPacketSize = recvfrom(iSocket, cBuffer, 300, 0, nullptr, nullptr);
+		 int32_t iRecievedPacketSize = recvfrom(iSocket, cBuffer, 300, 0, nullptr, nullptr);
 		fc::brakeNodeData pNodeUpdate;
 		bool bProtoPacketParsed = pNodeUpdate.ParseFromArray(&cBuffer, iRecievedPacketSize);
 		if(bProtoPacketParsed)

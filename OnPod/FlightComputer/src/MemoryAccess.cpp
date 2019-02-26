@@ -11,7 +11,7 @@
  };
 
 
- int MemoryAccess::setPodState(ePodStates state)
+int32_t MemoryAccess::setPodState(ePodStates state)
  {
 	 if(this->bWritePodState)
 	 {
@@ -30,7 +30,8 @@
  }
 
 
- int MemoryAccess::setBrakeNodeState(fc::brakeNodeData::breakNodeState state){
+int32_t MemoryAccess::setBrakeNodeState(fc::brakeNodeData::breakNodeState state)
+{
 	 if(this->bWriteBreakNodeState)
 	 {
 		 this->sPodValues->BreakNodeState = state;
@@ -48,7 +49,7 @@
  };
 
 
- int MemoryAccess::setTerminalCommand(eTerminalCommands command){
+int32_t MemoryAccess::setTerminalCommand(eTerminalCommands command){
 	 if(this->bWriteTerminalCommand)
 	 {
 		 this->sPodValues->TerminalCommand= command;
@@ -71,7 +72,7 @@
 	 return this->sPodValues->MotorState;
  };
 
- int MemoryAccess::setMotorState(eMotorStates eMotorState)
+int32_t MemoryAccess::setMotorState(eMotorStates eMotorState)
  {
 	 if(this->bWriteMotorState)
 	 {
@@ -90,7 +91,7 @@
 	 return this->sPodValues->cFlagsArray;
  };
 
- int MemoryAccess::getFlagsArraySize()
+int32_t MemoryAccess::getFlagsArraySize()
  {
 	 return this->sPodValues->iFlagsArraySize;
  };

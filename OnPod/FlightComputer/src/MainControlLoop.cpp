@@ -6,9 +6,9 @@
  * The flags array should be all zeros if all systems are nominal.
  * Each index represents a different subsystem.
  */
-bool checkFlags(unsigned char cFlagsArray[], int iSize)
+bool checkFlags(unsigned char cFlagsArray[],  int32_t iSize)
 {
-  for (int i = 0; i < iSize; i++)
+  for ( int32_t i = 0; i < iSize; i++)
   {
     if (cFlagsArray[i] == 1)
     {
@@ -22,8 +22,8 @@ bool checkFlags(unsigned char cFlagsArray[], int iSize)
  * Checks that the current state of the break node is within
  * one of its expected states.
  */
-bool nominalStates(fc::brakeNodeData::breakNodeState bnsState, fc::brakeNodeData::breakNodeState bnsAcceptedStates[], int iAcceptedStatesSize){
-  for (int i = 0; i < iAcceptedStatesSize; i++)
+bool nominalStates(fc::brakeNodeData::breakNodeState bnsState, fc::brakeNodeData::breakNodeState bnsAcceptedStates[],  int32_t iAcceptedStatesSize){
+  for ( int32_t i = 0; i < iAcceptedStatesSize; i++)
   {
     if (bnsAcceptedStates[i] == bnsState)
     {
@@ -72,7 +72,7 @@ bool armedToFlight(MemoryAccess* Pod)
   return false;
 }
 
-int runControlLoop(MemoryAccess Pod)
+ int32_t runControlLoop(MemoryAccess Pod)
 {
   ePodStates podState = Pod.getPodState();
   switch (podState)

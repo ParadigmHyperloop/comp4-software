@@ -51,7 +51,7 @@ clientSocketConfig* initializeClientSocket()
  *
  * returns: None
  */
-void sendDataUdp(clientSocketConfig* cscSocketInfo, void* vPayload, int iPayloadSize)
+void sendDataUdp(clientSocketConfig* cscSocketInfo, void* vPayload,  int32_t iPayloadSize)
 {
   cscSocketInfo->addr.sin_addr.s_addr = inet_addr("127.0.0.1");
   sendto(cscSocketInfo->sckt, vPayload, iPayloadSize, 0,

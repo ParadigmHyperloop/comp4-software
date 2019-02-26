@@ -21,20 +21,20 @@ class MemoryAccess
 
 	 MemoryAccess(PodValues*);
 
-	 int setPodState(ePodStates);
+	  int32_t setPodState(ePodStates);
 	 ePodStates getPodState();
 
 	 fc::brakeNodeData::breakNodeState getBrakeNodeState();
-	 int setBrakeNodeState(fc::brakeNodeData::breakNodeState);
+	  int32_t setBrakeNodeState(fc::brakeNodeData::breakNodeState);
 
 	 eTerminalCommands getTerminalCommand();
-	 int setTerminalCommand(eTerminalCommands);
+	  int32_t setTerminalCommand(eTerminalCommands);
 
 	 eMotorStates getMotorState();
-	 int setMotorState(eMotorStates);
+	  int32_t setMotorState(eMotorStates);
 
 	 unsigned char* getFlagsArray();
-	 int getFlagsArraySize();
+	  int32_t getFlagsArraySize();
 };
 
 #endif

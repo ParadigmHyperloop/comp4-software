@@ -12,15 +12,15 @@
 #include "FlightComputer/structs.h"
 #include "FlightComputer/MemoryAccess.h"
 
-void sendDataUdp(clientSocketConfig*, void*, int);
+void sendDataUdp(clientSocketConfig*, void*,  int32_t);
 
 clientSocketConfig* initializeClientSocket();
 
 void killConfigSocket(clientSocketConfig*);
 
-int createNodeServerSocket();
+ int32_t createNodeServerSocket();
 
-int nodeServerThread(MemoryAccess* Pod);
+ int32_t nodeServerThread(MemoryAccess* Pod);
 
 void parseBreakNodePacket(fc::brakeNodeData, MemoryAccess);
 

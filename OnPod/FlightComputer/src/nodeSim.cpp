@@ -11,11 +11,11 @@ using namespace fc;
 
 void sendPacket(brakeNodeData pNodeUpdate, clientSocketConfig* cscSocket){
 	std::string sPayload = "";
-	int iProtoPacketSize = pNodeUpdate.ByteSizeLong();
+	 int32_t iProtoPacketSize = pNodeUpdate.ByteSizeLong();
 	pNodeUpdate.SerializeToString(&sPayload);
 	void* vBuffer = malloc(iProtoPacketSize);
 	pNodeUpdate.SerializeToArray(vBuffer, iProtoPacketSize);
-	sendDataUdp(cscSocket, vBuffer, (int)iProtoPacketSize);
+	sendDataUdp(cscSocket, vBuffer, ( int32_t)iProtoPacketSize);
 }
 
 void runNodeSimulator(clientSocketConfig* cscSocket)

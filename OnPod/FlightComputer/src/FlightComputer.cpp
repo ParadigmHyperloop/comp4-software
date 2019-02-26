@@ -13,7 +13,7 @@ INITIALIZE_EASYLOGGINGPP
 #include "FlightComputer/nodeSim.h"
 #include "FlightComputer/MemoryAccess.h"
 
-int main(int argc, char** argv)
+int main( int32_t argc, char** argv)
 {
 	el::Helpers::setThreadName("main");
 	el::Configurations conf("/home/lwaghorn/Development/comp4-software/OnPod/FlightComputer/include/EasyLogger/logging.conf");
