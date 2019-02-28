@@ -1,12 +1,13 @@
 from abc import ABCMeta, abstractmethod
+from transitions import ConditionalTransition, TimedTransition, AutomaticTransition
 from states import *
-import time
 
 
 class Node(metaclass=ABCMeta):
 
-    def __init__(self):
+    def __init__(self, behaviour):
         self.pod_state = None
+        self.behaviour = behaviour
         pass
 
     @abstractmethod
@@ -19,7 +20,8 @@ class Node(metaclass=ABCMeta):
 
 class BrakeNode(Node):
 
-    def __init__(self):
+    def __init__(self, behaviour):
+        super().__init__(behaviour)
         self.sol1 = list()
         self.state = BrakeNodeStates.BOOT
         self.temperatures = list()
@@ -29,71 +31,6 @@ class BrakeNode(Node):
         update['Solenoids'] = self.sol1
         update['Temperatures'] = self.temperatures
         return update
-
-
-class Transition(metaclass=ABCMeta):
-
-    @abstractmethod
-    def test_transition(self, current_flight_computer_state):
-
-
-class ConditionalTransition(Transition):
-
-    def __init__(self, transitioning_flight_computer_state, new_node_state):
-        self.transitioning_flight_computer_state = transitioning_flight_computer_state
-        self.new_node_state = new_node_state
-
-    def test_transition(self, current_flight_computer_state):
-        if current_flight_computer_state is self.transitioning_flight_computer_state:
-            return self.new_node_state
-        else:
-            return False
-
-class AutomaticTransition(Transition):
-
-    def __init__(self, new_node_state):
-        self.new_node_state = new_node_state
-
-    def test_transition(self, current_flight_computer_state):
-        return self.new_node_state
-
-class TimedTransition(Transition):
-
-    def __init__(self, transitioning_flight_computer_state, new_node_state, wait_time):
-        self.transitioning_flight_computer_state = transitioning_flight_computer_state
-        self.new_node_state = new_node_state
-        self.wait_time = wait_time
-        self.timer_on = False
-        self.start_time = None
-
-    def timer_complete(self):
-        if self.timer_on and ((time.time() - self.start_time) > self.wait_time):
-            return True
-        else:
-            return False
-
-    def timer_running(self):
-        return self.timer_on
-
-    def start_timer(self):
-        self.timer_on = True
-        self.start_time = time.time()
-        return
-
-    def test_transition(self, current_flight_computer_state):
-        if current_flight_computer_state is self.transitioning_flight_computer_state:
-            if self.timer_complete():
-                return self.new_node_state
-            elif not self.timer_running():
-                self.start_timer();
-                return False
-            else:
-                return False
-        else:
-            if self.timer_running():
-                self.reset_timer()
-                return False
-            return False
 
 
 class BrakeNodeStateBehaviour:
