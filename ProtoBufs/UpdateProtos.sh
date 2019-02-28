@@ -7,14 +7,13 @@
 
 flightComputer="../OnPod/FlightComputer/include/ProtoBuffer/"
 
-
 if ! type "protoc" > /dev/null; then
   echo "To use this script you must have the protobuf compiler installed"
   echo "Please see https://developers.google.com/protocol-buffers/ for installation instructions"
   exit
 fi
 
-#Fix pycharm defualt working directory
+#Fix pycharm default working directory
 #cd ../../ProtoBufs
 
 # For any `*.proto` file, will create a folder, along with nested `cpp` & `py` folders, and compile `.proto` file

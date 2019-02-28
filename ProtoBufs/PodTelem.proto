@@ -1,0 +1,10 @@
+syntax = "proto2";
+
+package pds;
+
+@TODO complete this
+message telemetry {
+    required int32 id = 1
+
+}
+
