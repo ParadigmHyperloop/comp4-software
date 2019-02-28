@@ -31,6 +31,7 @@ class SpaceXPacket:
         self.current_sender = None
 
 
+# Includes all SpaceX stuff, connecting to their device, sending data, generating data, wtvr else
 class SpaceX:
     def __init__(self):
         self.ip = env_vars.spaceX_IP
@@ -53,7 +54,8 @@ class SpaceX:
         # @TODO socket.send(spacePacket)
 
 
-def telem():
+# Everything telemetry, connecting to pod, parsing incoming telem, adding to db
+class Telemetry:
     # @TODO heartbeat or connect to pod, do parsing and adding to db
     pass
 
