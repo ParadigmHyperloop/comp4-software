@@ -1,5 +1,7 @@
 from influxdb import InfluxDBClient
 import env_vars
+import PodTelem_pb2
+import struct
 
 
 # @TODO cleanup previous code
@@ -15,9 +17,9 @@ class SpaceXStatus:
 # #TODO double check from newest requirements for SpaceX
 class SpaceXPacket:
     def __init__(self, team_id, status=None, position=None, velocity=None,
-                 acceleration=None, battery_voltage=None,
-                 battery_current=None, battery_temperature=None,
-                 pod_temperature=None, stripe_count=None):
+                 acceleration=None, battery_voltage=0,
+                 battery_current=0, battery_temperature=0,
+                 pod_temperature=0, stripe_count=0):
         self.team_id = team_id
         self.status = status
         self.position = position
@@ -29,6 +31,32 @@ class SpaceXPacket:
         self.pod_temperature = pod_temperature
         self.stripe_count = stripe_count
         self.current_sender = None
+
+        def to_bytes(self):
+            """Convert to bytes"""
+            pattern = '!BB7iI'
+            accel = self.acceleration
+            if accel >= 1073741823 or accel <= -1073741823:
+                accel = 0
+
+            v = self.velocity
+            if v >= 1073741823 or v <= -1073741823:
+                v = 0
+
+            x = self.position
+            if x >= 1073741823 or x <= -1073741823:
+                x = 0
+
+            print("{} {} {} {} {} {}".format(pattern, self.team_id, self.status, accel, x, v))
+            try:
+                b = struct.pack(pattern, self.team_id, self.status, accel,
+                                x, v, 0,
+                                0, 0,
+                                0, 0)
+            except Exception as e:
+                print(e)
+                return b'\0'
+            return b
 
 
 # Includes all SpaceX stuff, connecting to their device, sending data, generating data, wtvr else
@@ -47,17 +75,24 @@ class SpaceX:
 
     def genSpaceXPacket(self):
         # TODO get pod status and info, create a SpaceXPacket object, return it
+        packet = SpaceXPacket(team_id=self .team_id)
+        # self.socket.sendall(packet)
         pass
 
     def send2SpaceX(self):
         spacePacket = self.genSpaceXPacket()
-        # @TODO socket.send(spacePacket)
+        # @TODO self.socket.send(spacePacket)
 
 
 # Everything telemetry, connecting to pod, parsing incoming telem, adding to db
 class Telemetry:
     # @TODO heartbeat or connect to pod, do parsing and adding to db
     pass
+
+    def parseProto(self, input):
+        message = PodTelem_pb2.telemetry()
+        message.parseFromString(input)
+        # @TODO add to db
 
 
 def main():

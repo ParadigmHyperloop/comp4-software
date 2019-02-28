@@ -24,12 +24,15 @@ do
 	protoc --python_out=$dir/py $f
 done
 
-# Move NodeTelemetry files accordingly
+# Move files accordingly
 flightComputer="../OnPod/FlightComputer/include/ProtoBuffer/"
 flightComputerSrc="../OnPod/FlightComputer/src/"
+
+PDS="../OnLand/PDS/"
 
 # Force copy the files, replacing existing ones
 cp -f NodeTelem/cpp/*.pb.h $flightComputer
 cp -f NodeTelem/cpp/*.pb.cc $flightComputerSrc
+cp -f PodTelem/py/* $PDS
 
 echo "Update Complete"
