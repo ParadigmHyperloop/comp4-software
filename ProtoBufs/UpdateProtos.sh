@@ -5,7 +5,6 @@
 
 # WARNING it currently does not move the appropriate files for the PDS.
 
-flightComputer="../OnPod/FlightComputer/include/ProtoBuffer/"
 
 if ! type "protoc" > /dev/null; then
   echo "To use this script you must have the protobuf compiler installed"
@@ -25,7 +24,12 @@ do
 	protoc --python_out=$dir/py $f
 done
 
-rm $flightComputer/NodeTelem*
-cp $dir/cpp/* $flightComputer
+# Move NodeTelemetry files accordingly
+flightComputer="../OnPod/FlightComputer/include/ProtoBuffer/"
+flightComputerSrc="../OnPod/FlightComputer/src/"
+
+# Force copy the files, replacing existing ones
+cp -f NodeTelem/cpp/*.pb.h $flightComputer
+cp -f NodeTelem/cpp/*.pb.cc $flightComputerSrc
 
 echo "Update Complete"
