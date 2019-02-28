@@ -1,4 +1,4 @@
-from Networking import *
+from networking import *
 
 udp_connection = UdpConnection()
 while True:
