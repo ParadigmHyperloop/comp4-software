@@ -1,5 +1,5 @@
 import socket
-from Examples.WebApp import protoTest_pb2
+from WebApp import protoTest_pb2
 
 # Creates the port and all that
 UDP_IP = '127.0.0.1'
