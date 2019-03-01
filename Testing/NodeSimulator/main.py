@@ -1,12 +1,22 @@
 from networking import *
 
-from hardwarestatesimulation import BrakeNode, NominalBrakeNodeBehaviour
+from hardwarestatesimulation import BrakeNode, FlightComputer
+from behaviour import *
 
 udp_connection = UdpConnection()
-nominal_behaviour = NominalBrakeNodeBehaviour()
-node = BrakeNode(nominal_behaviour)
+node_behaviour = NominalBrakeNodeBehaviour()
+fc_behaviour = FlightComputerNominalBehaviour()
+
+node = BrakeNode(node_behaviour)
+fc = FlightComputer(fc_behaviour)
 
 while True:
-    udp_connection.send_data("hello".encode())
+    fc_state = fc.give_update()
+    print(fc_state)
 
+    node.parse_neighbor_update(fc_state)
+    node_state = node.give_update()
+    print(node_state)
+
+    fc.parse_neighbor_update(node_state['State'])
 

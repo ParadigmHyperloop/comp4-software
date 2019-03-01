@@ -25,24 +25,25 @@ class NominalBrakeNodeBehaviour(StateBehaviour):
         super().__init__()
         self.transitions[BrakeNodeStates.BOOT] = AutomaticTransition(BrakeNodeStates.STANDBY)
         self.transitions[BrakeNodeStates.STANDBY] = ConditionalTransition(FlightComputerStates.ARMING, BrakeNodeStates.ARMING)
-        self.transitions[BrakeNodeStates.ARMING] = TimedTransition(FlightComputerStates.ARMING, BrakeNodeStates.ARMED, 10)
+        self.transitions[BrakeNodeStates.ARMING] = TimedTransition(FlightComputerStates.ARMING, BrakeNodeStates.ARMED, 4)
         self.transitions[BrakeNodeStates.ARMED] = ConditionalTransition(FlightComputerStates.ACCELERATION, BrakeNodeStates.FLIGHT)
         self.transitions[BrakeNodeStates.FLIGHT] = ConditionalTransition(FlightComputerStates.BRAKING, BrakeNodeStates.BRAKING)
         self.transitions[BrakeNodeStates.BRAKING] = ConditionalTransition(FlightComputerStates.DISARM, BrakeNodeStates.VENTING)
-        self.transitions[BrakeNodeStates.VENTING] = TimedTransition(FlightComputerStates.DISARM, BrakeNodeStates.RETRIEVAL, 10)
+        self.transitions[BrakeNodeStates.VENTING] = TimedTransition(FlightComputerStates.DISARM, BrakeNodeStates.RETRIEVAL, 4)
+        self.transitions[BrakeNodeStates.RETRIEVAL] = None
 
 
-class FlightComputerNominalBehaviour():
+class FlightComputerNominalBehaviour(StateBehaviour):
 
     def __init__(self):
-        self.transitions = dict()
-        self.transitions[FlightComputerStates.BOOT] = ConditionalTransition()
-        self.transitions[FlightComputerStates.STANDBY] = ConditionalTransition(FlightComputerStates.ARMING, BrakeNodeStates.ARMING)
-        self.transitions[FlightComputerStates.ARMING] = TimedTransition(FlightComputerStates.ARMING, BrakeNodeStates.ARMED, 10)
-        self.transitions[FlightComputerStates.ARMED] = ConditionalTransition(FlightComputerStates.ACCELERATION, BrakeNodeStates.FLIGHT)
-        self.transitions[FlightComputerStates.ACCELERATION] = ConditionalTransition(FlightComputerStates.BRAKING, BrakeNodeStates.BRAKING)
-        self.transitions[FlightComputerStates.COASTING] = ConditionalTransition(FlightComputerStates.DISARM, BrakeNodeStates.VENTING)
-        self.transitions[FlightComputerStates.BRAKING] = TimedTransition(FlightComputerStates.DISARM, BrakeNodeStates.RETRIEVAL, 10)
-        self.transitions[FlightComputerStates.DISARM] = TimedTransition(FlightComputerStates.DISARM, BrakeNodeStates.RETRIEVAL, 10)
-        self.transitions[FlightComputerStates.RETRIEVAL] = TimedTransition(FlightComputerStates.DISARM, BrakeNodeStates.RETRIEVAL, 10)
-        self.transitions[FlightComputerStates.EMERGENCY] = TimedTransition(FlightComputerStates.DISARM, BrakeNodeStates.RETRIEVAL, 10)
+        super().__init__()
+        self.transitions[FlightComputerStates.BOOT] = ConditionalTransition(BrakeNodeStates.STANDBY, FlightComputerStates.STANDBY)
+        self.transitions[FlightComputerStates.STANDBY] = AutomaticTimeTransition(FlightComputerStates.ARMING, 3)
+        self.transitions[FlightComputerStates.ARMING] = ConditionalTransition(BrakeNodeStates.ARMED, FlightComputerStates.ARMED)
+        self.transitions[FlightComputerStates.ARMED] = AutomaticTimeTransition(FlightComputerStates.ACCELERATION, 3)
+        self.transitions[FlightComputerStates.ACCELERATION] = AutomaticTimeTransition(FlightComputerStates.COASTING, 3)
+        self.transitions[FlightComputerStates.COASTING] = AutomaticTimeTransition(FlightComputerStates.BRAKING, 1)
+        self.transitions[FlightComputerStates.BRAKING] = AutomaticTimeTransition(FlightComputerStates.DISARM, 3)
+        self.transitions[FlightComputerStates.DISARM] = ConditionalTransition(BrakeNodeStates.RETRIEVAL, FlightComputerStates.RETRIEVAL)
+        self.transitions[FlightComputerStates.RETRIEVAL] = None
+

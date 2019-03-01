@@ -1,10 +1,12 @@
 from abc import ABCMeta, abstractmethod
 import time
 
+
 class Transition(metaclass=ABCMeta):
 
     @abstractmethod
     def test_transition(self, current_flight_computer_state):
+        pass
 
 
 class ConditionalTransition(Transition):
@@ -20,6 +22,7 @@ class ConditionalTransition(Transition):
         else:
             return False
 
+
 class AutomaticTransition(Transition):
 
     def __init__(self, new_self_state):
@@ -28,6 +31,7 @@ class AutomaticTransition(Transition):
     def test_transition(self, neighbor_state):
         print("Change State")
         return self.new_state
+
 
 class TimedTransition(Transition):
 
@@ -44,6 +48,10 @@ class TimedTransition(Transition):
         else:
             return False
 
+    def reset_timer(self):
+        self.start_time = None
+        self.timer_on = False
+
     def timer_running(self):
         return self.timer_on
 
@@ -55,7 +63,7 @@ class TimedTransition(Transition):
     def test_transition(self, neighbor_state):
         if neighbor_state is self.triggering_neighbor_state:
             if self.timer_complete():
-                print("Change State")
+                self.reset_timer()
                 return self.new_state
             elif not self.timer_running():
                 self.start_timer()
@@ -75,13 +83,14 @@ class TimedTransition(Transition):
 
 class AutomaticTimeTransition(TimedTransition):
 
+    # noinspection PyMissingConstructor
     def __init__(self, new_state, wait_time):
         self.new_state = new_state
         self.wait_time = wait_time
         self.timer_on = False
         self.start_time = None
 
-    def test_transition(self):
+    def test_transition(self, neighbor_state=None):
         if self.timer_complete():
             print("Change State")
             return self.new_state

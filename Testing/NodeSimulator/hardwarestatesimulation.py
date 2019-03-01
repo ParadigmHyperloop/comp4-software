@@ -5,6 +5,7 @@ from states import *
 class HardwareStateSimulation(metaclass=ABCMeta):
 
     def __init__(self, behaviour):
+        self.state = None
         self.neighbor_state = None
         self.behaviour = behaviour
         pass
@@ -13,8 +14,8 @@ class HardwareStateSimulation(metaclass=ABCMeta):
     def give_update(self):
         pass
 
-    def parse_neighbor_update(self, pod_state):
-        self.neighbor_state = pod_state
+    def parse_neighbor_update(self, neighbor_state):
+        self.neighbor_state = neighbor_state
 
 
 class BrakeNode(HardwareStateSimulation):
@@ -26,6 +27,9 @@ class BrakeNode(HardwareStateSimulation):
         self.temperatures = list()
 
     def give_update(self):
+        if self.state is BrakeNodeStates.VENTING:
+            a = 3
+            a = 1
         self.state = self.behaviour.behave(self.state, self.neighbor_state)
         update = dict()
         update['Solenoids'] = self.sol1
@@ -36,6 +40,11 @@ class BrakeNode(HardwareStateSimulation):
 
 class FlightComputer(HardwareStateSimulation):
 
+    def __init__(self, behaviour):
+        super().__init__(behaviour)
+        self.state = FlightComputerStates.BOOT
+
     def give_update(self):
-        return self.behaviour.behave(self.state, self.neighbor_state)
+        self.state = self.behaviour.behave(self.state, self.neighbor_state)
+        return self.state
 
