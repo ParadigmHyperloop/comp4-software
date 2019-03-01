@@ -7,5 +7,5 @@
     ├── NodeTelem_pb2.py        # Magic Protobuf file generated from NodeTelem.proto
     ├── readTelem.py            # Sample reading telem from .pb file
     ├── writeTelem.py           # Sample writing telem to .pb file
-    ├── sendTestTelemetry.py       # Send sample socket notification to telemetry.py
+    ├── sendTestTelemetry.py    # Send sample socket notification to telemetry.py
 ```
