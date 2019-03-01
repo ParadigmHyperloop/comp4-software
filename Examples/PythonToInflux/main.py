@@ -11,9 +11,9 @@ def main():
         # Exit test with q
         if input() == "q":
 
-            # query = "SELECT time FROM sensor-data"
-            # result = someDatabase.client.query(query)
-            # print(result)
+            query = "SELECT time FROM sensor-data"
+            result = someDatabase.client.query(query)
+            print(result)
 
             someDatabase.client.close()
             print("\nTest finished\n")
