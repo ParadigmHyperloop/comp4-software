@@ -4,6 +4,11 @@ This program will connect to the Pod, receive telemetry packet, log them in Infl
 packets to SpaceX servers during the run.
 
 
+## Citations needed
+Some doc I saw at some point said that any non mandatory field had to be 0, SpaceXPacket in `pds.py` has many attributes 
+default to 0.
+
+
 ## Stuff to look out for 
 > The total length of the payload of the packet is **34bytes**. Frames with the wrong payload length will be ignored by 
 SpaceX software. The Pod status field communicates the state of the Pod to SpaceX and the public and contains the 
