@@ -9,29 +9,31 @@ class Transition(metaclass=ABCMeta):
 
 class ConditionalTransition(Transition):
 
-    def __init__(self, transitioning_flight_computer_state, new_node_state):
-        self.transitioning_flight_computer_state = transitioning_flight_computer_state
-        self.new_node_state = new_node_state
+    def __init__(self, triggering_neighbor_state, new_self_state):
+        self.triggering_neighbor_state = triggering_neighbor_state
+        self.new_state = new_self_state
 
-    def test_transition(self, current_flight_computer_state):
-        if current_flight_computer_state is self.transitioning_flight_computer_state:
-            return self.new_node_state
+    def test_transition(self, neighbor_state):
+        if neighbor_state is self.triggering_neighbor_state:
+            print("Change State")
+            return self.new_state
         else:
             return False
 
 class AutomaticTransition(Transition):
 
-    def __init__(self, new_node_state):
-        self.new_node_state = new_node_state
+    def __init__(self, new_self_state):
+        self.new_state = new_self_state
 
-    def test_transition(self, current_flight_computer_state):
-        return self.new_node_state
+    def test_transition(self, neighbor_state):
+        print("Change State")
+        return self.new_state
 
 class TimedTransition(Transition):
 
-    def __init__(self, transitioning_flight_computer_state, new_node_state, wait_time):
-        self.transitioning_flight_computer_state = transitioning_flight_computer_state
-        self.new_node_state = new_node_state
+    def __init__(self, triggering_neighbor_state, new_state, wait_time):
+        self.triggering_neighbor_state = triggering_neighbor_state
+        self.new_state = new_state
         self.wait_time = wait_time
         self.timer_on = False
         self.start_time = None
@@ -50,10 +52,11 @@ class TimedTransition(Transition):
         self.start_time = time.time()
         return
 
-    def test_transition(self, current_flight_computer_state):
-        if current_flight_computer_state is self.transitioning_flight_computer_state:
+    def test_transition(self, neighbor_state):
+        if neighbor_state is self.triggering_neighbor_state:
             if self.timer_complete():
-                return self.new_node_state
+                print("Change State")
+                return self.new_state
             elif not self.timer_running():
                 self.start_timer()
                 return False
@@ -68,3 +71,20 @@ class TimedTransition(Transition):
     def halt_timer(self):
         self.timer_on = False
         return
+
+
+class AutomaticTimeTransition(TimedTransition):
+
+    def __init__(self, new_state, wait_time):
+        self.new_state = new_state
+        self.wait_time = wait_time
+        self.timer_on = False
+        self.start_time = None
+
+    def test_transition(self):
+        if self.timer_complete():
+            print("Change State")
+            return self.new_state
+        elif not self.timer_running():
+            self.start_timer()
+            return False
