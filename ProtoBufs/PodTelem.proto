@@ -1,0 +1,68 @@
+syntax = "proto2";
+
+package pds;
+
+message telemetry {
+    optional int32 podState = 1;
+    optional int32 terminalState = 2;
+    optional int32 podTime = 3;
+    optional int32 flightTime = 4;
+    optional int32 inverterON = 5;
+    optional int32 watchdogTimerValue = 6;
+    optional int32 terminalHeartbeatFlag = 7;
+    optional int32 watchdogFlag = 8;
+    optional int32 motorState = 9;
+    optional int32 inverterState = 10;
+    optional int32 position = 11;
+    optional int32 velocity = 12;
+    optional int32 accelerationX = 13;
+    optional int32 accelerationY = 14;
+    optional int32 accelerationZ = 15;
+    optional int32 imuVelocityX = 16;
+    optional int32 tachometerSpeed = 17;
+    optional int32 tachometerDistance = 18;
+    optional int32 resolverSpeed = 19;
+    optional int32 resolverDistance = 20;
+    optional int32 reflectivityFlags = 21;
+    optional int32 reflectivitySpeed = 22;
+    optional int32 inverterTemperature1 = 23;
+    optional int32 inverterTemperature2 = 24;
+    optional int32 inverterTemperature3 = 25;
+    optional int32 motorPosition = 26;
+    optional int32 invertercurrentInformation = 27;
+    optional int32 invertervoltageInformation = 28;
+    optional int32 inverterinternalVoltages = 29;
+    optional int32 inverterinternalStates = 30;
+    optional int32 BMSStateOfCharge = 31;
+    optional int32 BMSpackVoltage = 32;
+    optional int32 BMSPackCurrent = 33;
+    optional int32 BMStempForCells = 34;
+    optional int32 BMSMinCellVoltage = 35;
+    optional int32 BMSmaxCellVoltage = 36;
+    optional int32 brakeNode1State = 37;
+    optional int32 brakeNode1ValueFlags = 38;
+    optional int32 brakeNode1adcValues = 39;
+    optional int32 brakeNode1solenoidValues = 40;
+    optional int32 brakeNode1dacValues = 41;
+    optional int32 brakeNode1gpioValues = 42;
+    optional int32 brakeNode2bbbState = 43;
+    optional int32 brakeNode2State = 44;
+    optional int32 brakeNode2ValueFlags = 45;
+    optional int32 brakeNode2adcValues = 46;
+    optional int32 brakeNode2SolenoidValues = 47;
+    optional int32 brakeNode2dacValues = 48;
+    optional int32 brakeNode2gpioValues = 49;
+    optional int32 rearSensorNodeValueFlags = 50;
+    optional int32 rearSensorNodeadcValues = 51;
+    optional int32 rearSensorNodesolenoidValues = 52;
+    optional int32 rearSensorNodedacValues = 53;
+    optional int32 rearSensorNodegpioValues = 54;
+    optional int32 lvdcNodeState = 55;
+    optional int32 lvdcNodePack1Voltage = 56;
+    optional int32 lvdcNodePack1Current = 57;
+    optional int32 lvdcNodeack2Voltage = 58;
+    optional int32 lvdcNodePack2Current = 59;
+    optional int32 lvdcNodeRailCurrentFlag = 60;
+    optional int32 lvdcNodeRailVoltageFlag = 61;
+}
+

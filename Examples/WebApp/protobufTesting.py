@@ -1,4 +1,4 @@
-from Examples.WebApp import protoTest_pb2
+from WebApp import protoTest_pb2
 
 
 message = protoTest_pb2.telemetry()

@@ -1,7 +1,7 @@
 import random
 import socket
 
-from Examples.WebApp import protoTest_pb2
+from WebApp import protoTest_pb2
 
 
 def genNonProto():
