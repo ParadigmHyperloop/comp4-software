@@ -1,5 +1,5 @@
 from influxdb import InfluxDBClient
-import env_vars
+import config
 import PodTelem_pb2
 import struct
 
@@ -62,9 +62,9 @@ class SpaceXPacket:
 # Includes all SpaceX stuff, connecting to their device, sending data, generating data, wtvr else
 class SpaceX:
     def __init__(self):
-        self.ip = env_vars.spaceX_IP
-        self.port = env_vars.spaceX_PORT
-        self.team_id = env_vars.team_name
+        self.ip = config.spaceX_IP
+        self.port = config.spaceX_PORT
+        self.team_id = config.team_name
 
         try:
             # @TODO try connecting
@@ -96,12 +96,15 @@ class Telemetry:
 
 
 def main():
+    # Set the environment variables here
+    app = config.Development
+
     # Create connection to influx database
-    influx_db = InfluxDBClient(host=env_vars.influx_host, port=env_vars.influx_port, username=env_vars.influx_user,
-                               password=env_vars.influx_pw)
-    if env_vars.influx_name not in influx_db.get_list_database():
-        influx_db.create_database(env_vars.influx_name)
-        influx_db.switch_database(env_vars.influx_name)
+    influx_db = InfluxDBClient(host=app.influx_host, port=app.influx_port, username=app.influx_user,
+                               password=app.influx_pw)
+    if app.influx_db_name not in influx_db.get_list_database():
+        influx_db.create_database(app.influx_db_name)
+    influx_db.switch_database(app.influx_db_name)
 
     # @TODO spawn threads for pod heartbeat, SpaceX telem
 
