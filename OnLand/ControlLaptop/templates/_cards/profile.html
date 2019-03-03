@@ -6,23 +6,37 @@
     <form action="/submit_configuration" method="post" id="configuration-form">
 {#      <input id = "csrf_token" name = "csrf_token" type = "hidden" />#}
       {{ configuration_form.csrf_token }}
-      {{ configuration_form.air_resistance.label }}
-      {{ configuration_form.air_resistance}}
-      <br>
-      {{ configuration_form.motor_speed.label }}
-      {{ configuration_form.motor_speed}}
-      <br>
-      {{ configuration_form.tube_pressure.label }}
-      {{ configuration_form.tube_pressure}}
-      <br>
-      {{ configuration_form.watchdog_timeout.label }}
-      {{ configuration_form.watchdog_timeout }}
-      <br>
-      {{ configuration_form.pod_ip.label }}
-      {{ configuration_form.pod_ip}}
-      <br>
-      <p id="configration-error-container"></p>
-      {{ configuration_form.submit(class='btn btn-primary btn-fill btn-md') }}
+      <div class="row">
+        <div class="form-group col-md-6">
+        {{ configuration_form.air_resistance.label }}
+        {{ configuration_form.air_resistance (class="form-control")}}
+        </div>
+        <div class="form-group col-md-6">
+          {{ configuration_form.motor_speed.label }}
+          {{ configuration_form.motor_speed (class="form-control")}}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-6">
+          {{ configuration_form.tube_pressure.label }}
+          {{ configuration_form.tube_pressure (class="form-control")}}
+        </div>
+        <div class="form-group col-md-6">
+          {{ configuration_form.watchdog_timeout.label }}
+          {{ configuration_form.watchdog_timeout (class="form-control") }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-12">
+          {{ configuration_form.pod_ip.label }}
+          {{ configuration_form.pod_ip (class="form-control") }}
+        </div>
+      </div>
+      <div class="text-center">
+        <p id="configration-error-container"></p>
+        {{ configuration_form.submit(class='btn btn-primary btn-fill btn-md') }}
+      </div>
     </form>
   </div>
 </div>
