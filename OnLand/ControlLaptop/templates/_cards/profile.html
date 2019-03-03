@@ -3,34 +3,33 @@
     <h4 class="title">Configuration Profile</h4>
   </div>
   <div class="content">
-{#    <form action="/submit_configuration" method="post" id="configuration-form">#}
     <form action="" method="post" id="configuration-form">
       {{ configuration_form.csrf_token }}
       <div class="row">
         <div class="form-group col-md-6">
         {{ configuration_form.air_resistance.label }}
-        {{ configuration_form.air_resistance (class="form-control")}}
+        {{ configuration_form.air_resistance (class="form-control", value=saved_configuration['air_resistance'])}}
         </div>
         <div class="form-group col-md-6">
           {{ configuration_form.motor_speed.label }}
-          {{ configuration_form.motor_speed (class="form-control")}}
+          {{ configuration_form.motor_speed (class="form-control", value=saved_configuration['motor_speed'])}}
         </div>
       </div>
 
       <div class="row">
         <div class="form-group col-md-6">
           {{ configuration_form.tube_pressure.label }}
-          {{ configuration_form.tube_pressure (class="form-control")}}
+          {{ configuration_form.tube_pressure (class="form-control", value=saved_configuration['tube_pressure'])}}
         </div>
         <div class="form-group col-md-6">
           {{ configuration_form.watchdog_timeout.label }}
-          {{ configuration_form.watchdog_timeout (class="form-control") }}
+          {{ configuration_form.watchdog_timeout (class="form-control", value=saved_configuration['watchdog_timeout']) }}
         </div>
       </div>
       <div class="row">
         <div class="form-group col-md-12">
           {{ configuration_form.pod_ip.label }}
-          {{ configuration_form.pod_ip (class="form-control") }}
+          {{ configuration_form.pod_ip (class="form-control", value=saved_configuration['pod_address']) }}
         </div>
       </div>
       <div class="text-center">

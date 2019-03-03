@@ -1,3 +1,18 @@
+function showSuccessConfigrationUpdate(from, align){
+	$.notify({
+		icon: "pe-7s-gift",
+		message: "Configuration <b>Updated Successfully</b>"
+
+	},{
+	  type: 'success',
+		timer: 4000,
+		placement: {
+			from: from,
+			align: align
+		}
+	});
+}
+
 function setupConfigurationFormSubmit() {
   $('#configuration-form').on('submit' , function handleConfigurationFormSubmission(e) {
     console.log("SUBMISSION");
@@ -12,6 +27,7 @@ function setupConfigurationFormSubmit() {
       url: '/submit_configuration',
       data: $('#configuration-form').serialize(),
       success: function handleSucceessFormSubmission(data) {
+        showSuccessConfigrationUpdate('top','right');
         console.log('Submission, Success')
       },
       error: function handleErrorFormSubmission(data) {
@@ -22,6 +38,5 @@ function setupConfigurationFormSubmit() {
 }
 
 $(document).ready(function() {
-  debugger;
   setupConfigurationFormSubmit();
 });

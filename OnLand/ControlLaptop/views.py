@@ -1,6 +1,8 @@
 from datetime import datetime
 # import random
 from flask import *
+
+from LocalStorage.ConfigurationSotrage import LocalStorage, TempSensor
 from config import *
 from forms import FlightConfigurationForm, validate_configuration_values
 
@@ -29,7 +31,7 @@ def submit_configuration():
     if configuration_form.validate_on_submit():
         configuration = validate_configuration_values(configuration_form)
         if configuration['all_values_valid'] is True:
-            # todo: send to POD and return these new values.
+            # todo: send to POD and return these new values. and update local
             return jsonify({'status': 'ok'})
         return jsonify({'error': configuration['error']})
     else:
@@ -39,34 +41,28 @@ def submit_configuration():
 @app.route("/ui/", defaults={'path': 'index.html'})
 @app.route("/ui/<path:path>")
 def ui(path):
-    table = generate_sensor_table()
-
     # Checking to return Page Title
-    configureation_fomr = None
     page = path.split('.')[0]
     if page in NAV_IDS:
         title = NAV_BAR[NAV_IDS.index(page)]['title']
     else:
         title = DEFAULT_TITLE
-    if path == 'profile':
-        # TODO:
-        #   - Read from JSON FILE if it exists
-        #   - and set default Form values.
-        print('Setting up configuration form and validation')
+    if page == 'profile':
+        return get_flight_profile_template(path, page, title)
+    else:
+        return render_template(
+            path,
+            active_page=page,
+            title=title,
+            sensors=[LocalStorage.get_sensors()],
+        )
 
+
+def get_flight_profile_template(path, page, title):
     return render_template(
         path,
         active_page=page,
         title=title,
-        sensors=[TempSensor()],
-        configuration_form=(FlightConfigurationForm() if page == 'profile' else None)
+        configuration_form=FlightConfigurationForm(),
+        saved_configuration=LocalStorage.get_default_configuration()
     )
-
-
-# TODO:
-#   This sensor list should be read and generated from global/JSON file.
-class TempSensor:
-    def __init__(self):
-        self.name = 'name'
-        self.min = 0
-        self.max = 100
