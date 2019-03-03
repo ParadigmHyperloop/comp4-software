@@ -1,4 +1,4 @@
-class Development:
+class DevelopmentConfiguration:
     influx_host = "localhost"
     influx_port = 8086
     influx_db_name = "dev"
@@ -6,7 +6,7 @@ class Development:
     influx_pw = "hyperloop"
 
 
-class Testing:
+class TestingConfiguration:
     influx_host = "localhost"
     influx_port = 8086
     influx_db_name = "test"
@@ -16,7 +16,7 @@ class Testing:
     team_name = "ParaHyp"
 
 
-class Run:
+class FlightConfiguration:
     influx_host = "localhost"
     influx_port = 8086
     influx_db_name = "CompIV"

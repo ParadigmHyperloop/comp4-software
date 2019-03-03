@@ -3,6 +3,8 @@ import config
 import PodTelem_pb2
 import struct
 
+from config import *
+
 
 # #TODO double check from newest requirements for SpaceX
 class SpaceXPacket:
@@ -101,7 +103,7 @@ class Telemetry:
 def main():
     # Set the environment variables here
     global app
-    app = config.Development
+    app = DevelopmentConfiguration
 
     # Create connection to influx database
     influx_db = InfluxDBClient(host=app.influx_host, port=app.influx_port, username=app.influx_user,
