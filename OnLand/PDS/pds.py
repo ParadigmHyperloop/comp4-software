@@ -100,6 +100,8 @@ class Telemetry:
 
 def main():
     # Set the environment variables here
+    # @TODO How to call this? (maybe won't stay global thats just temporary)
+    # @lwaghorn
     global app
     app = config.Development
 
