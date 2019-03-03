@@ -2,8 +2,10 @@ function getStr(_class,_id) {
   return ('.'+_class+' .'+_id+'').toString();}
 
 function setupConfigurationFormSubmit() {
-  $('#configuration-form').submit(function handleConfigurationFormSubmission(e) {
+  $('#configuration-form').on('submit' , function handleConfigurationFormSubmission(e) {
+    console.log("SUBMISSION");
     e.preventDefault();
+    debugger;
     $.ajax({
       type: "POST",
       beforeSend: function(xhr, settings) {
@@ -17,10 +19,15 @@ function setupConfigurationFormSubmit() {
         debugger;
         console.log('Submitted Properly')
       },
+      error: function handleErrorFormSubmission(data) {
+        debugger;
+        console.log(data);
+      }
     })
   });
 }
 
-$('document').ready(function() {
-  setupConfigurationFormSubmit()
+$(document).ready(function() {
+  debugger;
+  setupConfigurationFormSubmit();
 });

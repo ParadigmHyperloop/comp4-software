@@ -2,7 +2,7 @@ from datetime import datetime
 # import random
 from flask import *
 from config import *
-from forms import FlightConfigurationForm
+from forms import FlightConfigurationForm, validate_configuration_values
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secrete-key' # change later
@@ -27,12 +27,13 @@ def inject_now():
 def submit_configuration():
     configuration_form = FlightConfigurationForm()
     if configuration_form.validate_on_submit():
-        # TODO:
-        #    - update JSON file configuration.
-        print('VALID')
-        return jsonify({'status': 'ok'})
+        configuration = validate_configuration_values(configuration_form)
+        if configuration['all_values_valid'] is True:
+            # todo: send to POD and return these new values.
+            return jsonify({'status': 'ok'})
+        return jsonify({'error': configuration['error']})
     else:
-        return jsonify({'error': configuration_form.error})
+        return jsonify({'error': configuration_form.errors})
 
 
 @app.route("/ui/", defaults={'path': 'index.html'})

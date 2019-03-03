@@ -15,3 +15,13 @@ class FlightConfigurationForm(FlaskForm):
     pod_ip = StringField('Pod Address (IP)',
                          validators=[DataRequired("Pod Address")])
     submit = SubmitField('Send Configuration')
+
+
+def validate_configuration_values(configuration_form):
+    # TODO: implement once we know specifics of configuration
+    return {
+        'error': ['Error Messages'],
+        'all_values_valid': True
+    }
+
+
