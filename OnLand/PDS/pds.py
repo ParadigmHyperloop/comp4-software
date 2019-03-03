@@ -4,16 +4,6 @@ import PodTelem_pb2
 import struct
 
 
-# @TODO cleanup previous code
-class SpaceXStatus:
-    FAULT = 0
-    IDLE = 1
-    READY = 2
-    PUSHING = 3
-    COASTING = 4
-    BRAKING = 5
-
-
 # #TODO double check from newest requirements for SpaceX
 class SpaceXPacket:
     def __init__(self, team_id, status=None, position=None, velocity=None,
@@ -61,6 +51,19 @@ class SpaceXPacket:
 
 # Includes all SpaceX stuff, connecting to their device, sending data, generating data, wtvr else
 class SpaceX:
+
+    global app
+
+    status_map = {
+        0: "Fault",
+        1: "Safe to approach",
+        2: "Ready to launch",
+        3: "Launching",
+        4: "Coasting",
+        5: "Braking",
+        6: "Crawling"
+    }
+
     def __init__(self):
         self.ip = config.spaceX_IP
         self.port = config.spaceX_PORT
@@ -97,11 +100,13 @@ class Telemetry:
 
 def main():
     # Set the environment variables here
+    global app
     app = config.Development
 
     # Create connection to influx database
     influx_db = InfluxDBClient(host=app.influx_host, port=app.influx_port, username=app.influx_user,
                                password=app.influx_pw)
+    # add the db if not existent already
     if app.influx_db_name not in influx_db.get_list_database():
         influx_db.create_database(app.influx_db_name)
     influx_db.switch_database(app.influx_db_name)
