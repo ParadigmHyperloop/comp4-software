@@ -11,7 +11,7 @@ def main():
         # Exit test with q
         if input() == "q":
 
-            query = "SELECT time FROM sensor-data"
+            query = 'SELECT "reading" FROM "pod-data".."sensor_data"'
             result = someDatabase.client.query(query)
             print(result)
 
@@ -21,7 +21,7 @@ def main():
 
         # Input some random integer into sensor_data
         value = randint(0,9999)
-        measurement = "sensor_data"
+        measurement = "sensor-data"
         someDatabase.log(measurement, value)
         print("Value of " + measurement + " value " + str(value))
 
