@@ -12,11 +12,11 @@ void setup() {
 }
 
 void loop() {
-    adcSPI.beginTransaction(adcSPISettings)
+    adcSPI.beginTransaction(adcSPISettings);
     digitalWrite(PIN_SPI1_SS, LOW);
     uint16_t received_data = adcSPI.transfer(CH7_READ);
     digitalWrite(PIN_SPI1_SS, HIGH);
-    adcSPI.endTransaction()
+    adcSPI.endTransaction();
     Serial.println(received_data);
     delay(500);
 }
