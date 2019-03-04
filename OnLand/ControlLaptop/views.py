@@ -2,12 +2,16 @@ from datetime import datetime
 # import random
 from flask import *
 
-from LocalStorage.ConfigurationSotrage import LocalStorage, TempSensor
+from LocalStorage.ConfigurationSotrage import LocalStorage
 from config import *
 from forms import FlightConfigurationForm, validate_configuration_values
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secrete-key' # change later
+
+# TODO:
+#   - Instantiate PodCommunicator as a global.
+#   - call its run method as a global thread.
 
 
 @app.route("/")
