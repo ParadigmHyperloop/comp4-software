@@ -46,3 +46,7 @@ enum batteryManagementStates {
 enum rearNodeStates{
 
 }
+
+enum lvdcNodeStates{
+
+}
