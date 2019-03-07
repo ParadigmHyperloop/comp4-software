@@ -11,6 +11,10 @@ message telemetry {
     optional motorStates motorState = 3;
     optional controlsInterfaceStates controlsInterfaceState = 4;
     optional inverterStates inverterState = 5;
+    optional lvdcNodeStates lvdcNodeState = 54;
+    optional batteryManagementStates batteryManagementState = 25;
+    optional podStates breakNodePerceivedPodState = 31;
+    optional rearNodeStates rearNodeState = 47;
 
 // Time
     optional int32 missionTime = 6;
@@ -42,7 +46,6 @@ message telemetry {
     //optional int32 inverterInternalStates = 30;
 
 // HV-BMS
-    optional batteryManagementStates batteryManagementState = 25;
     repeated int32 batteryPackVoltages = 26;
     repeated int32 batteryPackCurrent = 27;
     repeated int32 batteryCellTemperatures = 28;
@@ -50,7 +53,6 @@ message telemetry {
     optional int32 batteryPackMaxVoltage = 30;
 
 // Brake Node
-    optional podStates breakNodePerceivedPodState = 31;
     optional bool sol1 = 32;
     optional bool sol2 = 33;
     optional bool sol3 = 34;
@@ -69,7 +71,6 @@ message telemetry {
     optional int32 railDisplacementY = 46;
 
 // Rear Node
-    optional rearNodeStates rearNodeState = 47;
     optional int32 tubePressure = 48;
     optional int32 coolantPressure1 = 49;
     optional int32 coolantPressure2 = 50;
@@ -78,7 +79,6 @@ message telemetry {
     optional int32 railTemperature = 53;
 
 // Ghost Train
-    optional lvdcNodeStates lvdcNodeState = 54;
     optional int32 pack1Voltage = 55;
     optional int32 pack2Voltage = 56;
     optional int32 pack1Current = 57;
