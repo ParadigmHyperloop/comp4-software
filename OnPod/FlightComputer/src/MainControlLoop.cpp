@@ -33,6 +33,7 @@ bool nominalStates(fc::brakeNodeData::breakNodeState bnsState, fc::brakeNodeData
   return false;
 }
 
+
 bool standbyToArming(MemoryAccess* Pod)
 {
   if (Pod->getTerminalCommand() == tcTerminalArm)
@@ -80,7 +81,7 @@ bool armedToFlight(MemoryAccess* Pod)
 
     case psStandby:
     {
-    	fc::brakeNodeData::breakNodeState bnAccepted[] = {fc::brakeNodeData::bnsStandby};
+      fc::brakeNodeData::breakNodeState bnAccepted[] = {fc::brakeNodeData::bnsStandby};
       if (checkFlags(Pod.getFlagsArray(), Pod.getFlagsArraySize()) & nominalStates(Pod.getBrakeNodeState(), bnAccepted, 1))
       {
         if (standbyToArming(&Pod))

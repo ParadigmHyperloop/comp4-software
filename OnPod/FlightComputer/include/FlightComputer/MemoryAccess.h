@@ -6,18 +6,6 @@
 class MemoryAccess
 {
 	public:
-	 PodValues* sPodValues;
-	 bool bWritePodState = 0;
-	 bool bWriteTerminalCommand = 0;
-	 bool bWriteMotorState = 0;
-	 bool bWriteBreakNodeState = 0;
-
-	 bool bWritePosition = 0;
-	 bool bWriteDistance = 0;
-	 bool bWriteVelocity = 0;
-	 bool bWriteFlagsArray = 0;
-	 bool bWriteTubePressure = 0;
-	 bool bWriteBrakeNode = 0;
 
 	 MemoryAccess(PodValues*);
 
@@ -35,6 +23,23 @@ class MemoryAccess
 
 	 unsigned char* getFlagsArray();
 	  int32_t getFlagsArraySize();
+
+	private:
+
+	  // Permissions
+		 PodValues* sPodValues;
+		 bool bWritePodState = 0;
+		 bool bWriteTerminalCommand = 0;
+		 bool bWriteMotorState = 0;
+		 bool bWriteBreakNodeState = 0;
+
+		 bool bWritePosition = 0;
+		 bool bWriteDistance = 0;
+		 bool bWriteVelocity = 0;
+		 bool bWriteFlagsArray = 0;
+		 bool bWriteTubePressure = 0;
+		 bool bWriteBrakeNode = 0;
+
 };
 
 #endif
