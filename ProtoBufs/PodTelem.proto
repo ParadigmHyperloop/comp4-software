@@ -1,68 +1,104 @@
 syntax = "proto2";
 
+import "states.proto"
 package pds;
 
 message telemetry {
-    optional int32 podState = 1;
-    optional int32 terminalState = 2;
-    optional int32 podTime = 3;
-    optional int32 flightTime = 4;
-    optional int32 inverterON = 5;
-    optional int32 watchdogTimerValue = 6;
-    optional int32 terminalHeartbeatFlag = 7;
-    optional int32 watchdogFlag = 8;
-    optional int32 motorState = 9;
-    optional int32 inverterState = 10;
-    optional int32 position = 11;
-    optional int32 velocity = 12;
-    optional int32 accelerationX = 13;
-    optional int32 accelerationY = 14;
-    optional int32 accelerationZ = 15;
-    optional int32 imuVelocityX = 16;
-    optional int32 tachometerSpeed = 17;
-    optional int32 tachometerDistance = 18;
-    optional int32 resolverSpeed = 19;
-    optional int32 resolverDistance = 20;
-    optional int32 reflectivityFlags = 21;
-    optional int32 reflectivitySpeed = 22;
-    optional int32 inverterTemperature1 = 23;
-    optional int32 inverterTemperature2 = 24;
-    optional int32 inverterTemperature3 = 25;
-    optional int32 motorPosition = 26;
-    optional int32 invertercurrentInformation = 27;
-    optional int32 invertervoltageInformation = 28;
-    optional int32 inverterinternalVoltages = 29;
-    optional int32 inverterinternalStates = 30;
-    optional int32 BMSStateOfCharge = 31;
-    optional int32 BMSpackVoltage = 32;
-    optional int32 BMSPackCurrent = 33;
-    optional int32 BMStempForCells = 34;
-    optional int32 BMSMinCellVoltage = 35;
-    optional int32 BMSmaxCellVoltage = 36;
-    optional int32 brakeNode1State = 37;
-    optional int32 brakeNode1ValueFlags = 38;
-    optional int32 brakeNode1adcValues = 39;
-    optional int32 brakeNode1solenoidValues = 40;
-    optional int32 brakeNode1dacValues = 41;
-    optional int32 brakeNode1gpioValues = 42;
-    optional int32 brakeNode2bbbState = 43;
-    optional int32 brakeNode2State = 44;
-    optional int32 brakeNode2ValueFlags = 45;
-    optional int32 brakeNode2adcValues = 46;
-    optional int32 brakeNode2SolenoidValues = 47;
-    optional int32 brakeNode2dacValues = 48;
-    optional int32 brakeNode2gpioValues = 49;
-    optional int32 rearSensorNodeValueFlags = 50;
-    optional int32 rearSensorNodeadcValues = 51;
-    optional int32 rearSensorNodesolenoidValues = 52;
-    optional int32 rearSensorNodedacValues = 53;
-    optional int32 rearSensorNodegpioValues = 54;
-    optional int32 lvdcNodeState = 55;
-    optional int32 lvdcNodePack1Voltage = 56;
-    optional int32 lvdcNodePack1Current = 57;
-    optional int32 lvdcNodeack2Voltage = 58;
-    optional int32 lvdcNodePack2Current = 59;
-    optional int32 lvdcNodeRailCurrentFlag = 60;
-    optional int32 lvdcNodeRailVoltageFlag = 61;
+
+// States
+    optional podStates podState = 1;
+    optional breakNodeStates breakNodeState = 2;
+    optional motorStates motorState = 3;
+    optional controlsInterfaceStates controlsInterfaceState = 4;
+    optional inverterStates inverterState = 5;
+    optional lvdcNodeStates lvdcNodeState = 54;
+    optional batteryManagementStates batteryManagementState = 25;
+    optional podStates breakNodePerceivedPodState = 31;
+    optional rearNodeStates rearNodeState = 47;
+
+// Time
+    optional int32 missionTime = 6;
+    optional int32 flightTime = 7;
+
+// HeatBeats
+    repeated int32 heartbeatFlags = 8;
+    repeated int32 heartbeatValues = 71;
+
+// Navigation
+    optional int32 podPosition = 9;
+    optional int32 podVelocity = 10;
+    optional int32 podAccelerationX = 11;
+    optional int32 podAccelerationY = 12;
+    optional int32 podAccelerationZ = 13;
+    optional int32 imuVelocity = 14;
+    optional int32 imuAccelerationX = 15;
+    optional int32 tachometerVelocity = 16;
+    optional int32 resolverVelocity = 17;
+
+// Inverter
+    optional int32 inverterTemperature1 = 18;
+    optional int32 inverterTemperature2 = 19;
+    optional int32 inverterTemperature3 = 20;
+    optional int32 motorCurrent = 21;
+    optional int32 motorVoltage = 22;
+    optional int32 inverterVoltages = 23;
+    optional int32 inverterCurrents = 24;
+    //optional int32 inverterInternalStates = 30;
+
+// HV-BMS
+    repeated int32 batteryPackVoltages = 26;
+    repeated int32 batteryPackCurrent = 27;
+    repeated int32 batteryCellTemperatures = 28;
+    optional int32 batteryPackMinimumVoltage = 29;
+    optional int32 batteryPackMaxVoltage = 30;
+
+// Brake Node
+    optional bool sol1 = 32;
+    optional bool sol2 = 33;
+    optional bool sol3 = 34;
+    optional bool sol4 = 35;
+    optional bool sol5 = 36;
+    optional bool sol6 = 37;
+    optional int32 hp  = 38;
+    optional int32 lp1 = 39;
+    optional int32 lp2 = 40;
+    optional int32 lp3 = 41;
+    optional int32 lp4 = 42;
+    optional int32 pressureVesselTemperature = 43;
+
+    optional int32 electronicsEnclosurePressure = 44;
+    optional int32 railDisplacementX = 45;
+    optional int32 railDisplacementY = 46;
+
+// Rear Node
+    optional int32 tubePressure = 48;
+    optional int32 coolantPressure1 = 49;
+    optional int32 coolantPressure2 = 50;
+    optional int32 coolantPressure3 = 51;
+    optional int32 coolantTemperature = 52;
+    optional int32 railTemperature = 53;
+
+// Ghost Train
+    optional int32 pack1Voltage = 55;
+    optional int32 pack2Voltage = 56;
+    optional int32 pack1Current = 57;
+    optional int32 pack2Current = 58;
+    optional int32 rail1Voltage = 59;
+    optional int32 rail2Voltage = 60;
+    optional int32 rail3Voltage = 61;
+    optional int32 rail4Voltage = 62;
+    optional int32 railVoltageFlag = 72;
+
+    optional int32 railCurrentSensor1 = 63;
+    optional int32 railCurrentSensor2 = 64;
+    optional int32 railCurrentSensor3 = 65;
+    optional int32 railCurrentSensor4 = 66;
+    optional int32 railCurrentSensor5 = 67;
+    optional int32 railCurrentSensor6 = 68;
+    optional int32 railCurrentSensor7 = 69;
+    optional int32 railCurrentSensor8 = 70;
+    optional int32 railCurrentFlag = 73;
+
+
 }
 
