@@ -1,0 +1,52 @@
+enum breakNodeStates {
+    bnsBooting   = 0;
+    bnsStandby   = 1;
+    bnsArming    = 2;
+    bnsArmed     = 3;
+    bnsFlight    = 4;
+    bnsBraking   = 5;
+    bnsVenting   = 6;
+    bnsRetrieval = 7;
+    bnsError     = 8;
+}
+
+enum podStates {
+    psBooting   = 0;
+    psStandby   = 1;
+    psArming    = 2;
+    psArmed     = 3;
+    psFlight    = 4;
+    psBraking   = 5;
+    psVenting   = 6;
+    psRetrieval = 7;
+    psError     = 8;
+}
+
+enum motorStates {
+    msOff       = 0;
+    msCharging  = 1;
+    msIdle      = 2;
+    msEngaged   = 3;
+}
+
+enum controlsInterfaceStates {
+
+
+}
+
+enum inverterStates {
+
+
+}
+
+enum batteryManagementStates {
+
+}
+
+enum rearNodeStates{
+
+}
+
+enum lvdcNodeStates{
+
+}

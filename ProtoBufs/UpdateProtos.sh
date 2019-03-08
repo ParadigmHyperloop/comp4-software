@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 #  This file compiles the .proto descriptor file for the proto packet that is sent from the pod to the PDS.
-#  It handels moving the created files to the appropriate folders for the flight computer.
+#  It handles moving the created files to the appropriate folders for the flight computer.
 
 # WARNING it currently does not move the appropriate files for the PDS.
 
@@ -12,17 +12,27 @@ if ! type "protoc" > /dev/null; then
   exit
 fi
 
-#Fix pycharm defualt working directory
+#Fix pycharm default working directory
 #cd ../../ProtoBufs
 
-# C++
-protoc --cpp_out=. NodeTelem.proto
+# For any `*.proto` file, will create a folder, along with nested `cpp` & `py` folders, and compile `.proto` file
+for f in *.proto
+do
+    dir=${f%.*}
+    mkdir -p $dir/cpp $dir/py
+	protoc --cpp_out=$dir/cpp $f
+	protoc --python_out=$dir/py $f
+done
 
-rm ../OnPod/FlightComputer/include/ProtoBuffer/NodeTelem.pb.h
-cp NodeTelem.pb.h ../OnPod/FlightComputer/include/ProtoBuffer/
-rm ../OnPod/FlightComputer/src/NodeTelem.pb.cc
-cp NodeTelem.pb.cc ../OnPod/FlightComputer/src
+# Move files accordingly
+flightComputer="../OnPod/FlightComputer/include/ProtoBuffer/"
+flightComputerSrc="../OnPod/FlightComputer/src/"
+
+PDS="../OnLand/PDS/"
+
+# Force copy the files, replacing existing ones
+cp -f NodeTelem/cpp/*.pb.h $flightComputer
+cp -f NodeTelem/cpp/*.pb.cc $flightComputerSrc
+cp -f PodTelem/py/* $PDS
 
 echo "Update Complete"
-
-# TODO: Python
