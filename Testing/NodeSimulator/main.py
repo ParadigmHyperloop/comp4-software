@@ -11,6 +11,11 @@ node = BrakeNode(node_behaviour)
 fc = FlightComputer(fc_behaviour)
 
 while True:
+    connection_data = udp_connection.get_data()
+    if connection_data:
+
+
+
     fc_state = fc.give_update()
     print(fc_state)
 
