@@ -1,6 +1,6 @@
 syntax = "proto2";
 
-import "states.proto"
+import "states.proto";
 package pds;
 
 message telemetry {
