@@ -27,9 +27,6 @@ class BrakeNode(HardwareStateSimulation):
         self.temperatures = list()
 
     def give_update(self):
-        if self.state is BrakeNodeStates.VENTING:
-            a = 3
-            a = 1
         self.state = self.behaviour.behave(self.state, self.neighbor_state)
         update = dict()
         update['Solenoids'] = self.sol1
@@ -46,5 +43,7 @@ class FlightComputer(HardwareStateSimulation):
 
     def give_update(self):
         self.state = self.behaviour.behave(self.state, self.neighbor_state)
-        return self.state
+        update = dict()
+        update['State'] = self.state
+        return update
 

@@ -17,7 +17,6 @@ class ConditionalTransition(Transition):
 
     def test_transition(self, neighbor_state):
         if neighbor_state is self.triggering_neighbor_state:
-            print("Change State")
             return self.new_state
         else:
             return False
@@ -29,7 +28,6 @@ class AutomaticTransition(Transition):
         self.new_state = new_self_state
 
     def test_transition(self, neighbor_state):
-        print("Change State")
         return self.new_state
 
 
@@ -92,7 +90,6 @@ class AutomaticTimeTransition(TimedTransition):
 
     def test_transition(self, neighbor_state=None):
         if self.timer_complete():
-            print("Change State")
             return self.new_state
         elif not self.timer_running():
             self.start_timer()
