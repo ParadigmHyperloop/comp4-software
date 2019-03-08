@@ -1,3 +1,4 @@
+syntax = "proto2";
 enum breakNodeStates {
     bnsBooting   = 0;
     bnsStandby   = 1;
@@ -30,23 +31,24 @@ enum motorStates {
 }
 
 enum controlsInterfaceStates {
-
+    ciConnected = 0;
 
 }
 
 enum inverterStates {
-
+    iConnected = 0;
 
 }
 
 enum batteryManagementStates {
-
+    bmsNominal = 0;
 }
 
 enum rearNodeStates{
-
+    rnBooting = 0;
+    rnNominal = 1;
 }
 
 enum lvdcNodeStates{
-
+    lvdcBooting = 0;
 }
