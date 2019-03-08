@@ -1,6 +1,6 @@
 from networking import *
 from logger import TerminalLogger
-from hardwarestatesimulation import BrakeNode, FlightComputer
+from hardwareStateSimulation import BrakeNode, FlightComputer
 from behaviour import *
 
 udp_connection = UdpConnection()

@@ -30,6 +30,7 @@
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
 #include <google/protobuf/unknown_field_set.h>
+#include "states.pb.h"
 // @@protoc_insertion_point(includes)
 #define PROTOBUF_INTERNAL_EXPORT_protobuf_PodTelem_2eproto 
 
@@ -153,622 +154,757 @@ class telemetry : public ::google::protobuf::Message /* @@protoc_insertion_point
 
   // accessors -------------------------------------------------------
 
-  // optional int32 podState = 1;
+  // repeated int32 heartbeatFlags = 8;
+  int heartbeatflags_size() const;
+  void clear_heartbeatflags();
+  static const int kHeartbeatFlagsFieldNumber = 8;
+  ::google::protobuf::int32 heartbeatflags(int index) const;
+  void set_heartbeatflags(int index, ::google::protobuf::int32 value);
+  void add_heartbeatflags(::google::protobuf::int32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+      heartbeatflags() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+      mutable_heartbeatflags();
+
+  // repeated int32 batteryPackVoltages = 26;
+  int batterypackvoltages_size() const;
+  void clear_batterypackvoltages();
+  static const int kBatteryPackVoltagesFieldNumber = 26;
+  ::google::protobuf::int32 batterypackvoltages(int index) const;
+  void set_batterypackvoltages(int index, ::google::protobuf::int32 value);
+  void add_batterypackvoltages(::google::protobuf::int32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+      batterypackvoltages() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+      mutable_batterypackvoltages();
+
+  // repeated int32 batteryPackCurrent = 27;
+  int batterypackcurrent_size() const;
+  void clear_batterypackcurrent();
+  static const int kBatteryPackCurrentFieldNumber = 27;
+  ::google::protobuf::int32 batterypackcurrent(int index) const;
+  void set_batterypackcurrent(int index, ::google::protobuf::int32 value);
+  void add_batterypackcurrent(::google::protobuf::int32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+      batterypackcurrent() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+      mutable_batterypackcurrent();
+
+  // repeated int32 batteryCellTemperatures = 28;
+  int batterycelltemperatures_size() const;
+  void clear_batterycelltemperatures();
+  static const int kBatteryCellTemperaturesFieldNumber = 28;
+  ::google::protobuf::int32 batterycelltemperatures(int index) const;
+  void set_batterycelltemperatures(int index, ::google::protobuf::int32 value);
+  void add_batterycelltemperatures(::google::protobuf::int32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+      batterycelltemperatures() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+      mutable_batterycelltemperatures();
+
+  // repeated int32 heartbeatValues = 71;
+  int heartbeatvalues_size() const;
+  void clear_heartbeatvalues();
+  static const int kHeartbeatValuesFieldNumber = 71;
+  ::google::protobuf::int32 heartbeatvalues(int index) const;
+  void set_heartbeatvalues(int index, ::google::protobuf::int32 value);
+  void add_heartbeatvalues(::google::protobuf::int32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+      heartbeatvalues() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+      mutable_heartbeatvalues();
+
+  // optional .podStates podState = 1;
   bool has_podstate() const;
   void clear_podstate();
   static const int kPodStateFieldNumber = 1;
-  ::google::protobuf::int32 podstate() const;
-  void set_podstate(::google::protobuf::int32 value);
+  ::podStates podstate() const;
+  void set_podstate(::podStates value);
 
-  // optional int32 terminalState = 2;
-  bool has_terminalstate() const;
-  void clear_terminalstate();
-  static const int kTerminalStateFieldNumber = 2;
-  ::google::protobuf::int32 terminalstate() const;
-  void set_terminalstate(::google::protobuf::int32 value);
+  // optional .breakNodeStates breakNodeState = 2;
+  bool has_breaknodestate() const;
+  void clear_breaknodestate();
+  static const int kBreakNodeStateFieldNumber = 2;
+  ::breakNodeStates breaknodestate() const;
+  void set_breaknodestate(::breakNodeStates value);
 
-  // optional int32 podTime = 3;
-  bool has_podtime() const;
-  void clear_podtime();
-  static const int kPodTimeFieldNumber = 3;
-  ::google::protobuf::int32 podtime() const;
-  void set_podtime(::google::protobuf::int32 value);
+  // optional .motorStates motorState = 3;
+  bool has_motorstate() const;
+  void clear_motorstate();
+  static const int kMotorStateFieldNumber = 3;
+  ::motorStates motorstate() const;
+  void set_motorstate(::motorStates value);
 
-  // optional int32 flightTime = 4;
+  // optional .controlsInterfaceStates controlsInterfaceState = 4;
+  bool has_controlsinterfacestate() const;
+  void clear_controlsinterfacestate();
+  static const int kControlsInterfaceStateFieldNumber = 4;
+  ::controlsInterfaceStates controlsinterfacestate() const;
+  void set_controlsinterfacestate(::controlsInterfaceStates value);
+
+  // optional .inverterStates inverterState = 5;
+  bool has_inverterstate() const;
+  void clear_inverterstate();
+  static const int kInverterStateFieldNumber = 5;
+  ::inverterStates inverterstate() const;
+  void set_inverterstate(::inverterStates value);
+
+  // optional int32 missionTime = 6;
+  bool has_missiontime() const;
+  void clear_missiontime();
+  static const int kMissionTimeFieldNumber = 6;
+  ::google::protobuf::int32 missiontime() const;
+  void set_missiontime(::google::protobuf::int32 value);
+
+  // optional int32 flightTime = 7;
   bool has_flighttime() const;
   void clear_flighttime();
-  static const int kFlightTimeFieldNumber = 4;
+  static const int kFlightTimeFieldNumber = 7;
   ::google::protobuf::int32 flighttime() const;
   void set_flighttime(::google::protobuf::int32 value);
 
-  // optional int32 inverterON = 5;
-  bool has_inverteron() const;
-  void clear_inverteron();
-  static const int kInverterONFieldNumber = 5;
-  ::google::protobuf::int32 inverteron() const;
-  void set_inverteron(::google::protobuf::int32 value);
+  // optional int32 podPosition = 9;
+  bool has_podposition() const;
+  void clear_podposition();
+  static const int kPodPositionFieldNumber = 9;
+  ::google::protobuf::int32 podposition() const;
+  void set_podposition(::google::protobuf::int32 value);
 
-  // optional int32 watchdogTimerValue = 6;
-  bool has_watchdogtimervalue() const;
-  void clear_watchdogtimervalue();
-  static const int kWatchdogTimerValueFieldNumber = 6;
-  ::google::protobuf::int32 watchdogtimervalue() const;
-  void set_watchdogtimervalue(::google::protobuf::int32 value);
+  // optional int32 podVelocity = 10;
+  bool has_podvelocity() const;
+  void clear_podvelocity();
+  static const int kPodVelocityFieldNumber = 10;
+  ::google::protobuf::int32 podvelocity() const;
+  void set_podvelocity(::google::protobuf::int32 value);
 
-  // optional int32 terminalHeartbeatFlag = 7;
-  bool has_terminalheartbeatflag() const;
-  void clear_terminalheartbeatflag();
-  static const int kTerminalHeartbeatFlagFieldNumber = 7;
-  ::google::protobuf::int32 terminalheartbeatflag() const;
-  void set_terminalheartbeatflag(::google::protobuf::int32 value);
+  // optional int32 podAccelerationX = 11;
+  bool has_podaccelerationx() const;
+  void clear_podaccelerationx();
+  static const int kPodAccelerationXFieldNumber = 11;
+  ::google::protobuf::int32 podaccelerationx() const;
+  void set_podaccelerationx(::google::protobuf::int32 value);
 
-  // optional int32 watchdogFlag = 8;
-  bool has_watchdogflag() const;
-  void clear_watchdogflag();
-  static const int kWatchdogFlagFieldNumber = 8;
-  ::google::protobuf::int32 watchdogflag() const;
-  void set_watchdogflag(::google::protobuf::int32 value);
+  // optional int32 podAccelerationY = 12;
+  bool has_podaccelerationy() const;
+  void clear_podaccelerationy();
+  static const int kPodAccelerationYFieldNumber = 12;
+  ::google::protobuf::int32 podaccelerationy() const;
+  void set_podaccelerationy(::google::protobuf::int32 value);
 
-  // optional int32 motorState = 9;
-  bool has_motorstate() const;
-  void clear_motorstate();
-  static const int kMotorStateFieldNumber = 9;
-  ::google::protobuf::int32 motorstate() const;
-  void set_motorstate(::google::protobuf::int32 value);
+  // optional int32 podAccelerationZ = 13;
+  bool has_podaccelerationz() const;
+  void clear_podaccelerationz();
+  static const int kPodAccelerationZFieldNumber = 13;
+  ::google::protobuf::int32 podaccelerationz() const;
+  void set_podaccelerationz(::google::protobuf::int32 value);
 
-  // optional int32 inverterState = 10;
-  bool has_inverterstate() const;
-  void clear_inverterstate();
-  static const int kInverterStateFieldNumber = 10;
-  ::google::protobuf::int32 inverterstate() const;
-  void set_inverterstate(::google::protobuf::int32 value);
+  // optional int32 imuVelocity = 14;
+  bool has_imuvelocity() const;
+  void clear_imuvelocity();
+  static const int kImuVelocityFieldNumber = 14;
+  ::google::protobuf::int32 imuvelocity() const;
+  void set_imuvelocity(::google::protobuf::int32 value);
 
-  // optional int32 position = 11;
-  bool has_position() const;
-  void clear_position();
-  static const int kPositionFieldNumber = 11;
-  ::google::protobuf::int32 position() const;
-  void set_position(::google::protobuf::int32 value);
+  // optional int32 imuAccelerationX = 15;
+  bool has_imuaccelerationx() const;
+  void clear_imuaccelerationx();
+  static const int kImuAccelerationXFieldNumber = 15;
+  ::google::protobuf::int32 imuaccelerationx() const;
+  void set_imuaccelerationx(::google::protobuf::int32 value);
 
-  // optional int32 velocity = 12;
-  bool has_velocity() const;
-  void clear_velocity();
-  static const int kVelocityFieldNumber = 12;
-  ::google::protobuf::int32 velocity() const;
-  void set_velocity(::google::protobuf::int32 value);
+  // optional int32 tachometerVelocity = 16;
+  bool has_tachometervelocity() const;
+  void clear_tachometervelocity();
+  static const int kTachometerVelocityFieldNumber = 16;
+  ::google::protobuf::int32 tachometervelocity() const;
+  void set_tachometervelocity(::google::protobuf::int32 value);
 
-  // optional int32 accelerationX = 13;
-  bool has_accelerationx() const;
-  void clear_accelerationx();
-  static const int kAccelerationXFieldNumber = 13;
-  ::google::protobuf::int32 accelerationx() const;
-  void set_accelerationx(::google::protobuf::int32 value);
+  // optional int32 resolverVelocity = 17;
+  bool has_resolvervelocity() const;
+  void clear_resolvervelocity();
+  static const int kResolverVelocityFieldNumber = 17;
+  ::google::protobuf::int32 resolvervelocity() const;
+  void set_resolvervelocity(::google::protobuf::int32 value);
 
-  // optional int32 accelerationY = 14;
-  bool has_accelerationy() const;
-  void clear_accelerationy();
-  static const int kAccelerationYFieldNumber = 14;
-  ::google::protobuf::int32 accelerationy() const;
-  void set_accelerationy(::google::protobuf::int32 value);
-
-  // optional int32 accelerationZ = 15;
-  bool has_accelerationz() const;
-  void clear_accelerationz();
-  static const int kAccelerationZFieldNumber = 15;
-  ::google::protobuf::int32 accelerationz() const;
-  void set_accelerationz(::google::protobuf::int32 value);
-
-  // optional int32 imuVelocityX = 16;
-  bool has_imuvelocityx() const;
-  void clear_imuvelocityx();
-  static const int kImuVelocityXFieldNumber = 16;
-  ::google::protobuf::int32 imuvelocityx() const;
-  void set_imuvelocityx(::google::protobuf::int32 value);
-
-  // optional int32 tachometerSpeed = 17;
-  bool has_tachometerspeed() const;
-  void clear_tachometerspeed();
-  static const int kTachometerSpeedFieldNumber = 17;
-  ::google::protobuf::int32 tachometerspeed() const;
-  void set_tachometerspeed(::google::protobuf::int32 value);
-
-  // optional int32 tachometerDistance = 18;
-  bool has_tachometerdistance() const;
-  void clear_tachometerdistance();
-  static const int kTachometerDistanceFieldNumber = 18;
-  ::google::protobuf::int32 tachometerdistance() const;
-  void set_tachometerdistance(::google::protobuf::int32 value);
-
-  // optional int32 resolverSpeed = 19;
-  bool has_resolverspeed() const;
-  void clear_resolverspeed();
-  static const int kResolverSpeedFieldNumber = 19;
-  ::google::protobuf::int32 resolverspeed() const;
-  void set_resolverspeed(::google::protobuf::int32 value);
-
-  // optional int32 resolverDistance = 20;
-  bool has_resolverdistance() const;
-  void clear_resolverdistance();
-  static const int kResolverDistanceFieldNumber = 20;
-  ::google::protobuf::int32 resolverdistance() const;
-  void set_resolverdistance(::google::protobuf::int32 value);
-
-  // optional int32 reflectivityFlags = 21;
-  bool has_reflectivityflags() const;
-  void clear_reflectivityflags();
-  static const int kReflectivityFlagsFieldNumber = 21;
-  ::google::protobuf::int32 reflectivityflags() const;
-  void set_reflectivityflags(::google::protobuf::int32 value);
-
-  // optional int32 reflectivitySpeed = 22;
-  bool has_reflectivityspeed() const;
-  void clear_reflectivityspeed();
-  static const int kReflectivitySpeedFieldNumber = 22;
-  ::google::protobuf::int32 reflectivityspeed() const;
-  void set_reflectivityspeed(::google::protobuf::int32 value);
-
-  // optional int32 inverterTemperature1 = 23;
+  // optional int32 inverterTemperature1 = 18;
   bool has_invertertemperature1() const;
   void clear_invertertemperature1();
-  static const int kInverterTemperature1FieldNumber = 23;
+  static const int kInverterTemperature1FieldNumber = 18;
   ::google::protobuf::int32 invertertemperature1() const;
   void set_invertertemperature1(::google::protobuf::int32 value);
 
-  // optional int32 inverterTemperature2 = 24;
+  // optional int32 inverterTemperature2 = 19;
   bool has_invertertemperature2() const;
   void clear_invertertemperature2();
-  static const int kInverterTemperature2FieldNumber = 24;
+  static const int kInverterTemperature2FieldNumber = 19;
   ::google::protobuf::int32 invertertemperature2() const;
   void set_invertertemperature2(::google::protobuf::int32 value);
 
-  // optional int32 inverterTemperature3 = 25;
+  // optional int32 inverterTemperature3 = 20;
   bool has_invertertemperature3() const;
   void clear_invertertemperature3();
-  static const int kInverterTemperature3FieldNumber = 25;
+  static const int kInverterTemperature3FieldNumber = 20;
   ::google::protobuf::int32 invertertemperature3() const;
   void set_invertertemperature3(::google::protobuf::int32 value);
 
-  // optional int32 motorPosition = 26;
-  bool has_motorposition() const;
-  void clear_motorposition();
-  static const int kMotorPositionFieldNumber = 26;
-  ::google::protobuf::int32 motorposition() const;
-  void set_motorposition(::google::protobuf::int32 value);
+  // optional int32 motorCurrent = 21;
+  bool has_motorcurrent() const;
+  void clear_motorcurrent();
+  static const int kMotorCurrentFieldNumber = 21;
+  ::google::protobuf::int32 motorcurrent() const;
+  void set_motorcurrent(::google::protobuf::int32 value);
 
-  // optional int32 invertercurrentInformation = 27;
-  bool has_invertercurrentinformation() const;
-  void clear_invertercurrentinformation();
-  static const int kInvertercurrentInformationFieldNumber = 27;
-  ::google::protobuf::int32 invertercurrentinformation() const;
-  void set_invertercurrentinformation(::google::protobuf::int32 value);
+  // optional int32 motorVoltage = 22;
+  bool has_motorvoltage() const;
+  void clear_motorvoltage();
+  static const int kMotorVoltageFieldNumber = 22;
+  ::google::protobuf::int32 motorvoltage() const;
+  void set_motorvoltage(::google::protobuf::int32 value);
 
-  // optional int32 invertervoltageInformation = 28;
-  bool has_invertervoltageinformation() const;
-  void clear_invertervoltageinformation();
-  static const int kInvertervoltageInformationFieldNumber = 28;
-  ::google::protobuf::int32 invertervoltageinformation() const;
-  void set_invertervoltageinformation(::google::protobuf::int32 value);
+  // optional int32 inverterVoltages = 23;
+  bool has_invertervoltages() const;
+  void clear_invertervoltages();
+  static const int kInverterVoltagesFieldNumber = 23;
+  ::google::protobuf::int32 invertervoltages() const;
+  void set_invertervoltages(::google::protobuf::int32 value);
 
-  // optional int32 inverterinternalVoltages = 29;
-  bool has_inverterinternalvoltages() const;
-  void clear_inverterinternalvoltages();
-  static const int kInverterinternalVoltagesFieldNumber = 29;
-  ::google::protobuf::int32 inverterinternalvoltages() const;
-  void set_inverterinternalvoltages(::google::protobuf::int32 value);
+  // optional int32 inverterCurrents = 24;
+  bool has_invertercurrents() const;
+  void clear_invertercurrents();
+  static const int kInverterCurrentsFieldNumber = 24;
+  ::google::protobuf::int32 invertercurrents() const;
+  void set_invertercurrents(::google::protobuf::int32 value);
 
-  // optional int32 inverterinternalStates = 30;
-  bool has_inverterinternalstates() const;
-  void clear_inverterinternalstates();
-  static const int kInverterinternalStatesFieldNumber = 30;
-  ::google::protobuf::int32 inverterinternalstates() const;
-  void set_inverterinternalstates(::google::protobuf::int32 value);
+  // optional .batteryManagementStates batteryManagementState = 25;
+  bool has_batterymanagementstate() const;
+  void clear_batterymanagementstate();
+  static const int kBatteryManagementStateFieldNumber = 25;
+  ::batteryManagementStates batterymanagementstate() const;
+  void set_batterymanagementstate(::batteryManagementStates value);
 
-  // optional int32 BMSStateOfCharge = 31;
-  bool has_bmsstateofcharge() const;
-  void clear_bmsstateofcharge();
-  static const int kBMSStateOfChargeFieldNumber = 31;
-  ::google::protobuf::int32 bmsstateofcharge() const;
-  void set_bmsstateofcharge(::google::protobuf::int32 value);
+  // optional int32 batteryPackMinimumVoltage = 29;
+  bool has_batterypackminimumvoltage() const;
+  void clear_batterypackminimumvoltage();
+  static const int kBatteryPackMinimumVoltageFieldNumber = 29;
+  ::google::protobuf::int32 batterypackminimumvoltage() const;
+  void set_batterypackminimumvoltage(::google::protobuf::int32 value);
 
-  // optional int32 BMSpackVoltage = 32;
-  bool has_bmspackvoltage() const;
-  void clear_bmspackvoltage();
-  static const int kBMSpackVoltageFieldNumber = 32;
-  ::google::protobuf::int32 bmspackvoltage() const;
-  void set_bmspackvoltage(::google::protobuf::int32 value);
+  // optional int32 batteryPackMaxVoltage = 30;
+  bool has_batterypackmaxvoltage() const;
+  void clear_batterypackmaxvoltage();
+  static const int kBatteryPackMaxVoltageFieldNumber = 30;
+  ::google::protobuf::int32 batterypackmaxvoltage() const;
+  void set_batterypackmaxvoltage(::google::protobuf::int32 value);
 
-  // optional int32 BMSPackCurrent = 33;
-  bool has_bmspackcurrent() const;
-  void clear_bmspackcurrent();
-  static const int kBMSPackCurrentFieldNumber = 33;
-  ::google::protobuf::int32 bmspackcurrent() const;
-  void set_bmspackcurrent(::google::protobuf::int32 value);
+  // optional .podStates breakNodePerceivedPodState = 31;
+  bool has_breaknodeperceivedpodstate() const;
+  void clear_breaknodeperceivedpodstate();
+  static const int kBreakNodePerceivedPodStateFieldNumber = 31;
+  ::podStates breaknodeperceivedpodstate() const;
+  void set_breaknodeperceivedpodstate(::podStates value);
 
-  // optional int32 BMStempForCells = 34;
-  bool has_bmstempforcells() const;
-  void clear_bmstempforcells();
-  static const int kBMStempForCellsFieldNumber = 34;
-  ::google::protobuf::int32 bmstempforcells() const;
-  void set_bmstempforcells(::google::protobuf::int32 value);
+  // optional bool sol1 = 32;
+  bool has_sol1() const;
+  void clear_sol1();
+  static const int kSol1FieldNumber = 32;
+  bool sol1() const;
+  void set_sol1(bool value);
 
-  // optional int32 BMSMinCellVoltage = 35;
-  bool has_bmsmincellvoltage() const;
-  void clear_bmsmincellvoltage();
-  static const int kBMSMinCellVoltageFieldNumber = 35;
-  ::google::protobuf::int32 bmsmincellvoltage() const;
-  void set_bmsmincellvoltage(::google::protobuf::int32 value);
+  // optional bool sol2 = 33;
+  bool has_sol2() const;
+  void clear_sol2();
+  static const int kSol2FieldNumber = 33;
+  bool sol2() const;
+  void set_sol2(bool value);
 
-  // optional int32 BMSmaxCellVoltage = 36;
-  bool has_bmsmaxcellvoltage() const;
-  void clear_bmsmaxcellvoltage();
-  static const int kBMSmaxCellVoltageFieldNumber = 36;
-  ::google::protobuf::int32 bmsmaxcellvoltage() const;
-  void set_bmsmaxcellvoltage(::google::protobuf::int32 value);
+  // optional bool sol3 = 34;
+  bool has_sol3() const;
+  void clear_sol3();
+  static const int kSol3FieldNumber = 34;
+  bool sol3() const;
+  void set_sol3(bool value);
 
-  // optional int32 brakeNode1State = 37;
-  bool has_brakenode1state() const;
-  void clear_brakenode1state();
-  static const int kBrakeNode1StateFieldNumber = 37;
-  ::google::protobuf::int32 brakenode1state() const;
-  void set_brakenode1state(::google::protobuf::int32 value);
+  // optional bool sol4 = 35;
+  bool has_sol4() const;
+  void clear_sol4();
+  static const int kSol4FieldNumber = 35;
+  bool sol4() const;
+  void set_sol4(bool value);
 
-  // optional int32 brakeNode1ValueFlags = 38;
-  bool has_brakenode1valueflags() const;
-  void clear_brakenode1valueflags();
-  static const int kBrakeNode1ValueFlagsFieldNumber = 38;
-  ::google::protobuf::int32 brakenode1valueflags() const;
-  void set_brakenode1valueflags(::google::protobuf::int32 value);
+  // optional bool sol5 = 36;
+  bool has_sol5() const;
+  void clear_sol5();
+  static const int kSol5FieldNumber = 36;
+  bool sol5() const;
+  void set_sol5(bool value);
 
-  // optional int32 brakeNode1adcValues = 39;
-  bool has_brakenode1adcvalues() const;
-  void clear_brakenode1adcvalues();
-  static const int kBrakeNode1AdcValuesFieldNumber = 39;
-  ::google::protobuf::int32 brakenode1adcvalues() const;
-  void set_brakenode1adcvalues(::google::protobuf::int32 value);
+  // optional bool sol6 = 37;
+  bool has_sol6() const;
+  void clear_sol6();
+  static const int kSol6FieldNumber = 37;
+  bool sol6() const;
+  void set_sol6(bool value);
 
-  // optional int32 brakeNode1solenoidValues = 40;
-  bool has_brakenode1solenoidvalues() const;
-  void clear_brakenode1solenoidvalues();
-  static const int kBrakeNode1SolenoidValuesFieldNumber = 40;
-  ::google::protobuf::int32 brakenode1solenoidvalues() const;
-  void set_brakenode1solenoidvalues(::google::protobuf::int32 value);
+  // optional int32 hp = 38;
+  bool has_hp() const;
+  void clear_hp();
+  static const int kHpFieldNumber = 38;
+  ::google::protobuf::int32 hp() const;
+  void set_hp(::google::protobuf::int32 value);
 
-  // optional int32 brakeNode1dacValues = 41;
-  bool has_brakenode1dacvalues() const;
-  void clear_brakenode1dacvalues();
-  static const int kBrakeNode1DacValuesFieldNumber = 41;
-  ::google::protobuf::int32 brakenode1dacvalues() const;
-  void set_brakenode1dacvalues(::google::protobuf::int32 value);
+  // optional int32 lp1 = 39;
+  bool has_lp1() const;
+  void clear_lp1();
+  static const int kLp1FieldNumber = 39;
+  ::google::protobuf::int32 lp1() const;
+  void set_lp1(::google::protobuf::int32 value);
 
-  // optional int32 brakeNode1gpioValues = 42;
-  bool has_brakenode1gpiovalues() const;
-  void clear_brakenode1gpiovalues();
-  static const int kBrakeNode1GpioValuesFieldNumber = 42;
-  ::google::protobuf::int32 brakenode1gpiovalues() const;
-  void set_brakenode1gpiovalues(::google::protobuf::int32 value);
+  // optional int32 lp2 = 40;
+  bool has_lp2() const;
+  void clear_lp2();
+  static const int kLp2FieldNumber = 40;
+  ::google::protobuf::int32 lp2() const;
+  void set_lp2(::google::protobuf::int32 value);
 
-  // optional int32 brakeNode2bbbState = 43;
-  bool has_brakenode2bbbstate() const;
-  void clear_brakenode2bbbstate();
-  static const int kBrakeNode2BbbStateFieldNumber = 43;
-  ::google::protobuf::int32 brakenode2bbbstate() const;
-  void set_brakenode2bbbstate(::google::protobuf::int32 value);
+  // optional int32 lp3 = 41;
+  bool has_lp3() const;
+  void clear_lp3();
+  static const int kLp3FieldNumber = 41;
+  ::google::protobuf::int32 lp3() const;
+  void set_lp3(::google::protobuf::int32 value);
 
-  // optional int32 brakeNode2State = 44;
-  bool has_brakenode2state() const;
-  void clear_brakenode2state();
-  static const int kBrakeNode2StateFieldNumber = 44;
-  ::google::protobuf::int32 brakenode2state() const;
-  void set_brakenode2state(::google::protobuf::int32 value);
+  // optional int32 lp4 = 42;
+  bool has_lp4() const;
+  void clear_lp4();
+  static const int kLp4FieldNumber = 42;
+  ::google::protobuf::int32 lp4() const;
+  void set_lp4(::google::protobuf::int32 value);
 
-  // optional int32 brakeNode2ValueFlags = 45;
-  bool has_brakenode2valueflags() const;
-  void clear_brakenode2valueflags();
-  static const int kBrakeNode2ValueFlagsFieldNumber = 45;
-  ::google::protobuf::int32 brakenode2valueflags() const;
-  void set_brakenode2valueflags(::google::protobuf::int32 value);
+  // optional int32 pressureVesselTemperature = 43;
+  bool has_pressurevesseltemperature() const;
+  void clear_pressurevesseltemperature();
+  static const int kPressureVesselTemperatureFieldNumber = 43;
+  ::google::protobuf::int32 pressurevesseltemperature() const;
+  void set_pressurevesseltemperature(::google::protobuf::int32 value);
 
-  // optional int32 brakeNode2adcValues = 46;
-  bool has_brakenode2adcvalues() const;
-  void clear_brakenode2adcvalues();
-  static const int kBrakeNode2AdcValuesFieldNumber = 46;
-  ::google::protobuf::int32 brakenode2adcvalues() const;
-  void set_brakenode2adcvalues(::google::protobuf::int32 value);
+  // optional int32 electronicsEnclosurePressure = 44;
+  bool has_electronicsenclosurepressure() const;
+  void clear_electronicsenclosurepressure();
+  static const int kElectronicsEnclosurePressureFieldNumber = 44;
+  ::google::protobuf::int32 electronicsenclosurepressure() const;
+  void set_electronicsenclosurepressure(::google::protobuf::int32 value);
 
-  // optional int32 brakeNode2SolenoidValues = 47;
-  bool has_brakenode2solenoidvalues() const;
-  void clear_brakenode2solenoidvalues();
-  static const int kBrakeNode2SolenoidValuesFieldNumber = 47;
-  ::google::protobuf::int32 brakenode2solenoidvalues() const;
-  void set_brakenode2solenoidvalues(::google::protobuf::int32 value);
+  // optional int32 railDisplacementX = 45;
+  bool has_raildisplacementx() const;
+  void clear_raildisplacementx();
+  static const int kRailDisplacementXFieldNumber = 45;
+  ::google::protobuf::int32 raildisplacementx() const;
+  void set_raildisplacementx(::google::protobuf::int32 value);
 
-  // optional int32 brakeNode2dacValues = 48;
-  bool has_brakenode2dacvalues() const;
-  void clear_brakenode2dacvalues();
-  static const int kBrakeNode2DacValuesFieldNumber = 48;
-  ::google::protobuf::int32 brakenode2dacvalues() const;
-  void set_brakenode2dacvalues(::google::protobuf::int32 value);
+  // optional int32 railDisplacementY = 46;
+  bool has_raildisplacementy() const;
+  void clear_raildisplacementy();
+  static const int kRailDisplacementYFieldNumber = 46;
+  ::google::protobuf::int32 raildisplacementy() const;
+  void set_raildisplacementy(::google::protobuf::int32 value);
 
-  // optional int32 brakeNode2gpioValues = 49;
-  bool has_brakenode2gpiovalues() const;
-  void clear_brakenode2gpiovalues();
-  static const int kBrakeNode2GpioValuesFieldNumber = 49;
-  ::google::protobuf::int32 brakenode2gpiovalues() const;
-  void set_brakenode2gpiovalues(::google::protobuf::int32 value);
+  // optional .rearNodeStates rearNodeState = 47;
+  bool has_rearnodestate() const;
+  void clear_rearnodestate();
+  static const int kRearNodeStateFieldNumber = 47;
+  ::rearNodeStates rearnodestate() const;
+  void set_rearnodestate(::rearNodeStates value);
 
-  // optional int32 rearSensorNodeValueFlags = 50;
-  bool has_rearsensornodevalueflags() const;
-  void clear_rearsensornodevalueflags();
-  static const int kRearSensorNodeValueFlagsFieldNumber = 50;
-  ::google::protobuf::int32 rearsensornodevalueflags() const;
-  void set_rearsensornodevalueflags(::google::protobuf::int32 value);
+  // optional int32 tubePressure = 48;
+  bool has_tubepressure() const;
+  void clear_tubepressure();
+  static const int kTubePressureFieldNumber = 48;
+  ::google::protobuf::int32 tubepressure() const;
+  void set_tubepressure(::google::protobuf::int32 value);
 
-  // optional int32 rearSensorNodeadcValues = 51;
-  bool has_rearsensornodeadcvalues() const;
-  void clear_rearsensornodeadcvalues();
-  static const int kRearSensorNodeadcValuesFieldNumber = 51;
-  ::google::protobuf::int32 rearsensornodeadcvalues() const;
-  void set_rearsensornodeadcvalues(::google::protobuf::int32 value);
+  // optional int32 coolantPressure1 = 49;
+  bool has_coolantpressure1() const;
+  void clear_coolantpressure1();
+  static const int kCoolantPressure1FieldNumber = 49;
+  ::google::protobuf::int32 coolantpressure1() const;
+  void set_coolantpressure1(::google::protobuf::int32 value);
 
-  // optional int32 rearSensorNodesolenoidValues = 52;
-  bool has_rearsensornodesolenoidvalues() const;
-  void clear_rearsensornodesolenoidvalues();
-  static const int kRearSensorNodesolenoidValuesFieldNumber = 52;
-  ::google::protobuf::int32 rearsensornodesolenoidvalues() const;
-  void set_rearsensornodesolenoidvalues(::google::protobuf::int32 value);
+  // optional int32 coolantPressure2 = 50;
+  bool has_coolantpressure2() const;
+  void clear_coolantpressure2();
+  static const int kCoolantPressure2FieldNumber = 50;
+  ::google::protobuf::int32 coolantpressure2() const;
+  void set_coolantpressure2(::google::protobuf::int32 value);
 
-  // optional int32 rearSensorNodedacValues = 53;
-  bool has_rearsensornodedacvalues() const;
-  void clear_rearsensornodedacvalues();
-  static const int kRearSensorNodedacValuesFieldNumber = 53;
-  ::google::protobuf::int32 rearsensornodedacvalues() const;
-  void set_rearsensornodedacvalues(::google::protobuf::int32 value);
+  // optional int32 coolantPressure3 = 51;
+  bool has_coolantpressure3() const;
+  void clear_coolantpressure3();
+  static const int kCoolantPressure3FieldNumber = 51;
+  ::google::protobuf::int32 coolantpressure3() const;
+  void set_coolantpressure3(::google::protobuf::int32 value);
 
-  // optional int32 rearSensorNodegpioValues = 54;
-  bool has_rearsensornodegpiovalues() const;
-  void clear_rearsensornodegpiovalues();
-  static const int kRearSensorNodegpioValuesFieldNumber = 54;
-  ::google::protobuf::int32 rearsensornodegpiovalues() const;
-  void set_rearsensornodegpiovalues(::google::protobuf::int32 value);
+  // optional int32 coolantTemperature = 52;
+  bool has_coolanttemperature() const;
+  void clear_coolanttemperature();
+  static const int kCoolantTemperatureFieldNumber = 52;
+  ::google::protobuf::int32 coolanttemperature() const;
+  void set_coolanttemperature(::google::protobuf::int32 value);
 
-  // optional int32 lvdcNodeState = 55;
+  // optional int32 railTemperature = 53;
+  bool has_railtemperature() const;
+  void clear_railtemperature();
+  static const int kRailTemperatureFieldNumber = 53;
+  ::google::protobuf::int32 railtemperature() const;
+  void set_railtemperature(::google::protobuf::int32 value);
+
+  // optional .lvdcNodeStates lvdcNodeState = 54;
   bool has_lvdcnodestate() const;
   void clear_lvdcnodestate();
-  static const int kLvdcNodeStateFieldNumber = 55;
-  ::google::protobuf::int32 lvdcnodestate() const;
-  void set_lvdcnodestate(::google::protobuf::int32 value);
+  static const int kLvdcNodeStateFieldNumber = 54;
+  ::lvdcNodeStates lvdcnodestate() const;
+  void set_lvdcnodestate(::lvdcNodeStates value);
 
-  // optional int32 lvdcNodePack1Voltage = 56;
-  bool has_lvdcnodepack1voltage() const;
-  void clear_lvdcnodepack1voltage();
-  static const int kLvdcNodePack1VoltageFieldNumber = 56;
-  ::google::protobuf::int32 lvdcnodepack1voltage() const;
-  void set_lvdcnodepack1voltage(::google::protobuf::int32 value);
+  // optional int32 pack1Voltage = 55;
+  bool has_pack1voltage() const;
+  void clear_pack1voltage();
+  static const int kPack1VoltageFieldNumber = 55;
+  ::google::protobuf::int32 pack1voltage() const;
+  void set_pack1voltage(::google::protobuf::int32 value);
 
-  // optional int32 lvdcNodePack1Current = 57;
-  bool has_lvdcnodepack1current() const;
-  void clear_lvdcnodepack1current();
-  static const int kLvdcNodePack1CurrentFieldNumber = 57;
-  ::google::protobuf::int32 lvdcnodepack1current() const;
-  void set_lvdcnodepack1current(::google::protobuf::int32 value);
+  // optional int32 pack2Voltage = 56;
+  bool has_pack2voltage() const;
+  void clear_pack2voltage();
+  static const int kPack2VoltageFieldNumber = 56;
+  ::google::protobuf::int32 pack2voltage() const;
+  void set_pack2voltage(::google::protobuf::int32 value);
 
-  // optional int32 lvdcNodeack2Voltage = 58;
-  bool has_lvdcnodeack2voltage() const;
-  void clear_lvdcnodeack2voltage();
-  static const int kLvdcNodeack2VoltageFieldNumber = 58;
-  ::google::protobuf::int32 lvdcnodeack2voltage() const;
-  void set_lvdcnodeack2voltage(::google::protobuf::int32 value);
+  // optional int32 pack1Current = 57;
+  bool has_pack1current() const;
+  void clear_pack1current();
+  static const int kPack1CurrentFieldNumber = 57;
+  ::google::protobuf::int32 pack1current() const;
+  void set_pack1current(::google::protobuf::int32 value);
 
-  // optional int32 lvdcNodePack2Current = 59;
-  bool has_lvdcnodepack2current() const;
-  void clear_lvdcnodepack2current();
-  static const int kLvdcNodePack2CurrentFieldNumber = 59;
-  ::google::protobuf::int32 lvdcnodepack2current() const;
-  void set_lvdcnodepack2current(::google::protobuf::int32 value);
+  // optional int32 pack2Current = 58;
+  bool has_pack2current() const;
+  void clear_pack2current();
+  static const int kPack2CurrentFieldNumber = 58;
+  ::google::protobuf::int32 pack2current() const;
+  void set_pack2current(::google::protobuf::int32 value);
 
-  // optional int32 lvdcNodeRailCurrentFlag = 60;
-  bool has_lvdcnoderailcurrentflag() const;
-  void clear_lvdcnoderailcurrentflag();
-  static const int kLvdcNodeRailCurrentFlagFieldNumber = 60;
-  ::google::protobuf::int32 lvdcnoderailcurrentflag() const;
-  void set_lvdcnoderailcurrentflag(::google::protobuf::int32 value);
+  // optional int32 rail1Voltage = 59;
+  bool has_rail1voltage() const;
+  void clear_rail1voltage();
+  static const int kRail1VoltageFieldNumber = 59;
+  ::google::protobuf::int32 rail1voltage() const;
+  void set_rail1voltage(::google::protobuf::int32 value);
 
-  // optional int32 lvdcNodeRailVoltageFlag = 61;
-  bool has_lvdcnoderailvoltageflag() const;
-  void clear_lvdcnoderailvoltageflag();
-  static const int kLvdcNodeRailVoltageFlagFieldNumber = 61;
-  ::google::protobuf::int32 lvdcnoderailvoltageflag() const;
-  void set_lvdcnoderailvoltageflag(::google::protobuf::int32 value);
+  // optional int32 rail2Voltage = 60;
+  bool has_rail2voltage() const;
+  void clear_rail2voltage();
+  static const int kRail2VoltageFieldNumber = 60;
+  ::google::protobuf::int32 rail2voltage() const;
+  void set_rail2voltage(::google::protobuf::int32 value);
+
+  // optional int32 rail3Voltage = 61;
+  bool has_rail3voltage() const;
+  void clear_rail3voltage();
+  static const int kRail3VoltageFieldNumber = 61;
+  ::google::protobuf::int32 rail3voltage() const;
+  void set_rail3voltage(::google::protobuf::int32 value);
+
+  // optional int32 rail4Voltage = 62;
+  bool has_rail4voltage() const;
+  void clear_rail4voltage();
+  static const int kRail4VoltageFieldNumber = 62;
+  ::google::protobuf::int32 rail4voltage() const;
+  void set_rail4voltage(::google::protobuf::int32 value);
+
+  // optional int32 railCurrentSensor1 = 63;
+  bool has_railcurrentsensor1() const;
+  void clear_railcurrentsensor1();
+  static const int kRailCurrentSensor1FieldNumber = 63;
+  ::google::protobuf::int32 railcurrentsensor1() const;
+  void set_railcurrentsensor1(::google::protobuf::int32 value);
+
+  // optional int32 railCurrentSensor2 = 64;
+  bool has_railcurrentsensor2() const;
+  void clear_railcurrentsensor2();
+  static const int kRailCurrentSensor2FieldNumber = 64;
+  ::google::protobuf::int32 railcurrentsensor2() const;
+  void set_railcurrentsensor2(::google::protobuf::int32 value);
+
+  // optional int32 railCurrentSensor3 = 65;
+  bool has_railcurrentsensor3() const;
+  void clear_railcurrentsensor3();
+  static const int kRailCurrentSensor3FieldNumber = 65;
+  ::google::protobuf::int32 railcurrentsensor3() const;
+  void set_railcurrentsensor3(::google::protobuf::int32 value);
+
+  // optional int32 railCurrentSensor4 = 66;
+  bool has_railcurrentsensor4() const;
+  void clear_railcurrentsensor4();
+  static const int kRailCurrentSensor4FieldNumber = 66;
+  ::google::protobuf::int32 railcurrentsensor4() const;
+  void set_railcurrentsensor4(::google::protobuf::int32 value);
+
+  // optional int32 railCurrentSensor5 = 67;
+  bool has_railcurrentsensor5() const;
+  void clear_railcurrentsensor5();
+  static const int kRailCurrentSensor5FieldNumber = 67;
+  ::google::protobuf::int32 railcurrentsensor5() const;
+  void set_railcurrentsensor5(::google::protobuf::int32 value);
+
+  // optional int32 railCurrentSensor6 = 68;
+  bool has_railcurrentsensor6() const;
+  void clear_railcurrentsensor6();
+  static const int kRailCurrentSensor6FieldNumber = 68;
+  ::google::protobuf::int32 railcurrentsensor6() const;
+  void set_railcurrentsensor6(::google::protobuf::int32 value);
+
+  // optional int32 railCurrentSensor7 = 69;
+  bool has_railcurrentsensor7() const;
+  void clear_railcurrentsensor7();
+  static const int kRailCurrentSensor7FieldNumber = 69;
+  ::google::protobuf::int32 railcurrentsensor7() const;
+  void set_railcurrentsensor7(::google::protobuf::int32 value);
+
+  // optional int32 railCurrentSensor8 = 70;
+  bool has_railcurrentsensor8() const;
+  void clear_railcurrentsensor8();
+  static const int kRailCurrentSensor8FieldNumber = 70;
+  ::google::protobuf::int32 railcurrentsensor8() const;
+  void set_railcurrentsensor8(::google::protobuf::int32 value);
+
+  // optional int32 railVoltageFlag = 72;
+  bool has_railvoltageflag() const;
+  void clear_railvoltageflag();
+  static const int kRailVoltageFlagFieldNumber = 72;
+  ::google::protobuf::int32 railvoltageflag() const;
+  void set_railvoltageflag(::google::protobuf::int32 value);
+
+  // optional int32 railCurrentFlag = 73;
+  bool has_railcurrentflag() const;
+  void clear_railcurrentflag();
+  static const int kRailCurrentFlagFieldNumber = 73;
+  ::google::protobuf::int32 railcurrentflag() const;
+  void set_railcurrentflag(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:pds.telemetry)
  private:
   void set_has_podstate();
   void clear_has_podstate();
-  void set_has_terminalstate();
-  void clear_has_terminalstate();
-  void set_has_podtime();
-  void clear_has_podtime();
-  void set_has_flighttime();
-  void clear_has_flighttime();
-  void set_has_inverteron();
-  void clear_has_inverteron();
-  void set_has_watchdogtimervalue();
-  void clear_has_watchdogtimervalue();
-  void set_has_terminalheartbeatflag();
-  void clear_has_terminalheartbeatflag();
-  void set_has_watchdogflag();
-  void clear_has_watchdogflag();
+  void set_has_breaknodestate();
+  void clear_has_breaknodestate();
   void set_has_motorstate();
   void clear_has_motorstate();
+  void set_has_controlsinterfacestate();
+  void clear_has_controlsinterfacestate();
   void set_has_inverterstate();
   void clear_has_inverterstate();
-  void set_has_position();
-  void clear_has_position();
-  void set_has_velocity();
-  void clear_has_velocity();
-  void set_has_accelerationx();
-  void clear_has_accelerationx();
-  void set_has_accelerationy();
-  void clear_has_accelerationy();
-  void set_has_accelerationz();
-  void clear_has_accelerationz();
-  void set_has_imuvelocityx();
-  void clear_has_imuvelocityx();
-  void set_has_tachometerspeed();
-  void clear_has_tachometerspeed();
-  void set_has_tachometerdistance();
-  void clear_has_tachometerdistance();
-  void set_has_resolverspeed();
-  void clear_has_resolverspeed();
-  void set_has_resolverdistance();
-  void clear_has_resolverdistance();
-  void set_has_reflectivityflags();
-  void clear_has_reflectivityflags();
-  void set_has_reflectivityspeed();
-  void clear_has_reflectivityspeed();
+  void set_has_lvdcnodestate();
+  void clear_has_lvdcnodestate();
+  void set_has_batterymanagementstate();
+  void clear_has_batterymanagementstate();
+  void set_has_breaknodeperceivedpodstate();
+  void clear_has_breaknodeperceivedpodstate();
+  void set_has_rearnodestate();
+  void clear_has_rearnodestate();
+  void set_has_missiontime();
+  void clear_has_missiontime();
+  void set_has_flighttime();
+  void clear_has_flighttime();
+  void set_has_podposition();
+  void clear_has_podposition();
+  void set_has_podvelocity();
+  void clear_has_podvelocity();
+  void set_has_podaccelerationx();
+  void clear_has_podaccelerationx();
+  void set_has_podaccelerationy();
+  void clear_has_podaccelerationy();
+  void set_has_podaccelerationz();
+  void clear_has_podaccelerationz();
+  void set_has_imuvelocity();
+  void clear_has_imuvelocity();
+  void set_has_imuaccelerationx();
+  void clear_has_imuaccelerationx();
+  void set_has_tachometervelocity();
+  void clear_has_tachometervelocity();
+  void set_has_resolvervelocity();
+  void clear_has_resolvervelocity();
   void set_has_invertertemperature1();
   void clear_has_invertertemperature1();
   void set_has_invertertemperature2();
   void clear_has_invertertemperature2();
   void set_has_invertertemperature3();
   void clear_has_invertertemperature3();
-  void set_has_motorposition();
-  void clear_has_motorposition();
-  void set_has_invertercurrentinformation();
-  void clear_has_invertercurrentinformation();
-  void set_has_invertervoltageinformation();
-  void clear_has_invertervoltageinformation();
-  void set_has_inverterinternalvoltages();
-  void clear_has_inverterinternalvoltages();
-  void set_has_inverterinternalstates();
-  void clear_has_inverterinternalstates();
-  void set_has_bmsstateofcharge();
-  void clear_has_bmsstateofcharge();
-  void set_has_bmspackvoltage();
-  void clear_has_bmspackvoltage();
-  void set_has_bmspackcurrent();
-  void clear_has_bmspackcurrent();
-  void set_has_bmstempforcells();
-  void clear_has_bmstempforcells();
-  void set_has_bmsmincellvoltage();
-  void clear_has_bmsmincellvoltage();
-  void set_has_bmsmaxcellvoltage();
-  void clear_has_bmsmaxcellvoltage();
-  void set_has_brakenode1state();
-  void clear_has_brakenode1state();
-  void set_has_brakenode1valueflags();
-  void clear_has_brakenode1valueflags();
-  void set_has_brakenode1adcvalues();
-  void clear_has_brakenode1adcvalues();
-  void set_has_brakenode1solenoidvalues();
-  void clear_has_brakenode1solenoidvalues();
-  void set_has_brakenode1dacvalues();
-  void clear_has_brakenode1dacvalues();
-  void set_has_brakenode1gpiovalues();
-  void clear_has_brakenode1gpiovalues();
-  void set_has_brakenode2bbbstate();
-  void clear_has_brakenode2bbbstate();
-  void set_has_brakenode2state();
-  void clear_has_brakenode2state();
-  void set_has_brakenode2valueflags();
-  void clear_has_brakenode2valueflags();
-  void set_has_brakenode2adcvalues();
-  void clear_has_brakenode2adcvalues();
-  void set_has_brakenode2solenoidvalues();
-  void clear_has_brakenode2solenoidvalues();
-  void set_has_brakenode2dacvalues();
-  void clear_has_brakenode2dacvalues();
-  void set_has_brakenode2gpiovalues();
-  void clear_has_brakenode2gpiovalues();
-  void set_has_rearsensornodevalueflags();
-  void clear_has_rearsensornodevalueflags();
-  void set_has_rearsensornodeadcvalues();
-  void clear_has_rearsensornodeadcvalues();
-  void set_has_rearsensornodesolenoidvalues();
-  void clear_has_rearsensornodesolenoidvalues();
-  void set_has_rearsensornodedacvalues();
-  void clear_has_rearsensornodedacvalues();
-  void set_has_rearsensornodegpiovalues();
-  void clear_has_rearsensornodegpiovalues();
-  void set_has_lvdcnodestate();
-  void clear_has_lvdcnodestate();
-  void set_has_lvdcnodepack1voltage();
-  void clear_has_lvdcnodepack1voltage();
-  void set_has_lvdcnodepack1current();
-  void clear_has_lvdcnodepack1current();
-  void set_has_lvdcnodeack2voltage();
-  void clear_has_lvdcnodeack2voltage();
-  void set_has_lvdcnodepack2current();
-  void clear_has_lvdcnodepack2current();
-  void set_has_lvdcnoderailcurrentflag();
-  void clear_has_lvdcnoderailcurrentflag();
-  void set_has_lvdcnoderailvoltageflag();
-  void clear_has_lvdcnoderailvoltageflag();
+  void set_has_motorcurrent();
+  void clear_has_motorcurrent();
+  void set_has_motorvoltage();
+  void clear_has_motorvoltage();
+  void set_has_invertervoltages();
+  void clear_has_invertervoltages();
+  void set_has_invertercurrents();
+  void clear_has_invertercurrents();
+  void set_has_batterypackminimumvoltage();
+  void clear_has_batterypackminimumvoltage();
+  void set_has_batterypackmaxvoltage();
+  void clear_has_batterypackmaxvoltage();
+  void set_has_sol1();
+  void clear_has_sol1();
+  void set_has_sol2();
+  void clear_has_sol2();
+  void set_has_sol3();
+  void clear_has_sol3();
+  void set_has_sol4();
+  void clear_has_sol4();
+  void set_has_sol5();
+  void clear_has_sol5();
+  void set_has_sol6();
+  void clear_has_sol6();
+  void set_has_hp();
+  void clear_has_hp();
+  void set_has_lp1();
+  void clear_has_lp1();
+  void set_has_lp2();
+  void clear_has_lp2();
+  void set_has_lp3();
+  void clear_has_lp3();
+  void set_has_lp4();
+  void clear_has_lp4();
+  void set_has_pressurevesseltemperature();
+  void clear_has_pressurevesseltemperature();
+  void set_has_electronicsenclosurepressure();
+  void clear_has_electronicsenclosurepressure();
+  void set_has_raildisplacementx();
+  void clear_has_raildisplacementx();
+  void set_has_raildisplacementy();
+  void clear_has_raildisplacementy();
+  void set_has_tubepressure();
+  void clear_has_tubepressure();
+  void set_has_coolantpressure1();
+  void clear_has_coolantpressure1();
+  void set_has_coolantpressure2();
+  void clear_has_coolantpressure2();
+  void set_has_coolantpressure3();
+  void clear_has_coolantpressure3();
+  void set_has_coolanttemperature();
+  void clear_has_coolanttemperature();
+  void set_has_railtemperature();
+  void clear_has_railtemperature();
+  void set_has_pack1voltage();
+  void clear_has_pack1voltage();
+  void set_has_pack2voltage();
+  void clear_has_pack2voltage();
+  void set_has_pack1current();
+  void clear_has_pack1current();
+  void set_has_pack2current();
+  void clear_has_pack2current();
+  void set_has_rail1voltage();
+  void clear_has_rail1voltage();
+  void set_has_rail2voltage();
+  void clear_has_rail2voltage();
+  void set_has_rail3voltage();
+  void clear_has_rail3voltage();
+  void set_has_rail4voltage();
+  void clear_has_rail4voltage();
+  void set_has_railvoltageflag();
+  void clear_has_railvoltageflag();
+  void set_has_railcurrentsensor1();
+  void clear_has_railcurrentsensor1();
+  void set_has_railcurrentsensor2();
+  void clear_has_railcurrentsensor2();
+  void set_has_railcurrentsensor3();
+  void clear_has_railcurrentsensor3();
+  void set_has_railcurrentsensor4();
+  void clear_has_railcurrentsensor4();
+  void set_has_railcurrentsensor5();
+  void clear_has_railcurrentsensor5();
+  void set_has_railcurrentsensor6();
+  void clear_has_railcurrentsensor6();
+  void set_has_railcurrentsensor7();
+  void clear_has_railcurrentsensor7();
+  void set_has_railcurrentsensor8();
+  void clear_has_railcurrentsensor8();
+  void set_has_railcurrentflag();
+  void clear_has_railcurrentflag();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::HasBits<2> _has_bits_;
-  ::google::protobuf::int32 podstate_;
-  ::google::protobuf::int32 terminalstate_;
-  ::google::protobuf::int32 podtime_;
+  ::google::protobuf::internal::HasBits<3> _has_bits_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > heartbeatflags_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > batterypackvoltages_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > batterypackcurrent_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > batterycelltemperatures_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > heartbeatvalues_;
+  int podstate_;
+  int breaknodestate_;
+  int motorstate_;
+  int controlsinterfacestate_;
+  int inverterstate_;
+  ::google::protobuf::int32 missiontime_;
   ::google::protobuf::int32 flighttime_;
-  ::google::protobuf::int32 inverteron_;
-  ::google::protobuf::int32 watchdogtimervalue_;
-  ::google::protobuf::int32 terminalheartbeatflag_;
-  ::google::protobuf::int32 watchdogflag_;
-  ::google::protobuf::int32 motorstate_;
-  ::google::protobuf::int32 inverterstate_;
-  ::google::protobuf::int32 position_;
-  ::google::protobuf::int32 velocity_;
-  ::google::protobuf::int32 accelerationx_;
-  ::google::protobuf::int32 accelerationy_;
-  ::google::protobuf::int32 accelerationz_;
-  ::google::protobuf::int32 imuvelocityx_;
-  ::google::protobuf::int32 tachometerspeed_;
-  ::google::protobuf::int32 tachometerdistance_;
-  ::google::protobuf::int32 resolverspeed_;
-  ::google::protobuf::int32 resolverdistance_;
-  ::google::protobuf::int32 reflectivityflags_;
-  ::google::protobuf::int32 reflectivityspeed_;
+  ::google::protobuf::int32 podposition_;
+  ::google::protobuf::int32 podvelocity_;
+  ::google::protobuf::int32 podaccelerationx_;
+  ::google::protobuf::int32 podaccelerationy_;
+  ::google::protobuf::int32 podaccelerationz_;
+  ::google::protobuf::int32 imuvelocity_;
+  ::google::protobuf::int32 imuaccelerationx_;
+  ::google::protobuf::int32 tachometervelocity_;
+  ::google::protobuf::int32 resolvervelocity_;
   ::google::protobuf::int32 invertertemperature1_;
   ::google::protobuf::int32 invertertemperature2_;
   ::google::protobuf::int32 invertertemperature3_;
-  ::google::protobuf::int32 motorposition_;
-  ::google::protobuf::int32 invertercurrentinformation_;
-  ::google::protobuf::int32 invertervoltageinformation_;
-  ::google::protobuf::int32 inverterinternalvoltages_;
-  ::google::protobuf::int32 inverterinternalstates_;
-  ::google::protobuf::int32 bmsstateofcharge_;
-  ::google::protobuf::int32 bmspackvoltage_;
-  ::google::protobuf::int32 bmspackcurrent_;
-  ::google::protobuf::int32 bmstempforcells_;
-  ::google::protobuf::int32 bmsmincellvoltage_;
-  ::google::protobuf::int32 bmsmaxcellvoltage_;
-  ::google::protobuf::int32 brakenode1state_;
-  ::google::protobuf::int32 brakenode1valueflags_;
-  ::google::protobuf::int32 brakenode1adcvalues_;
-  ::google::protobuf::int32 brakenode1solenoidvalues_;
-  ::google::protobuf::int32 brakenode1dacvalues_;
-  ::google::protobuf::int32 brakenode1gpiovalues_;
-  ::google::protobuf::int32 brakenode2bbbstate_;
-  ::google::protobuf::int32 brakenode2state_;
-  ::google::protobuf::int32 brakenode2valueflags_;
-  ::google::protobuf::int32 brakenode2adcvalues_;
-  ::google::protobuf::int32 brakenode2solenoidvalues_;
-  ::google::protobuf::int32 brakenode2dacvalues_;
-  ::google::protobuf::int32 brakenode2gpiovalues_;
-  ::google::protobuf::int32 rearsensornodevalueflags_;
-  ::google::protobuf::int32 rearsensornodeadcvalues_;
-  ::google::protobuf::int32 rearsensornodesolenoidvalues_;
-  ::google::protobuf::int32 rearsensornodedacvalues_;
-  ::google::protobuf::int32 rearsensornodegpiovalues_;
-  ::google::protobuf::int32 lvdcnodestate_;
-  ::google::protobuf::int32 lvdcnodepack1voltage_;
-  ::google::protobuf::int32 lvdcnodepack1current_;
-  ::google::protobuf::int32 lvdcnodeack2voltage_;
-  ::google::protobuf::int32 lvdcnodepack2current_;
-  ::google::protobuf::int32 lvdcnoderailcurrentflag_;
-  ::google::protobuf::int32 lvdcnoderailvoltageflag_;
-  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  ::google::protobuf::int32 motorcurrent_;
+  ::google::protobuf::int32 motorvoltage_;
+  ::google::protobuf::int32 invertervoltages_;
+  ::google::protobuf::int32 invertercurrents_;
+  int batterymanagementstate_;
+  ::google::protobuf::int32 batterypackminimumvoltage_;
+  ::google::protobuf::int32 batterypackmaxvoltage_;
+  int breaknodeperceivedpodstate_;
+  bool sol1_;
+  bool sol2_;
+  bool sol3_;
+  bool sol4_;
+  bool sol5_;
+  bool sol6_;
+  ::google::protobuf::int32 hp_;
+  ::google::protobuf::int32 lp1_;
+  ::google::protobuf::int32 lp2_;
+  ::google::protobuf::int32 lp3_;
+  ::google::protobuf::int32 lp4_;
+  ::google::protobuf::int32 pressurevesseltemperature_;
+  ::google::protobuf::int32 electronicsenclosurepressure_;
+  ::google::protobuf::int32 raildisplacementx_;
+  ::google::protobuf::int32 raildisplacementy_;
+  int rearnodestate_;
+  ::google::protobuf::int32 tubepressure_;
+  ::google::protobuf::int32 coolantpressure1_;
+  ::google::protobuf::int32 coolantpressure2_;
+  ::google::protobuf::int32 coolantpressure3_;
+  ::google::protobuf::int32 coolanttemperature_;
+  ::google::protobuf::int32 railtemperature_;
+  int lvdcnodestate_;
+  ::google::protobuf::int32 pack1voltage_;
+  ::google::protobuf::int32 pack2voltage_;
+  ::google::protobuf::int32 pack1current_;
+  ::google::protobuf::int32 pack2current_;
+  ::google::protobuf::int32 rail1voltage_;
+  ::google::protobuf::int32 rail2voltage_;
+  ::google::protobuf::int32 rail3voltage_;
+  ::google::protobuf::int32 rail4voltage_;
+  ::google::protobuf::int32 railcurrentsensor1_;
+  ::google::protobuf::int32 railcurrentsensor2_;
+  ::google::protobuf::int32 railcurrentsensor3_;
+  ::google::protobuf::int32 railcurrentsensor4_;
+  ::google::protobuf::int32 railcurrentsensor5_;
+  ::google::protobuf::int32 railcurrentsensor6_;
+  ::google::protobuf::int32 railcurrentsensor7_;
+  ::google::protobuf::int32 railcurrentsensor8_;
+  ::google::protobuf::int32 railvoltageflag_;
+  ::google::protobuf::int32 railcurrentflag_;
   friend struct ::protobuf_PodTelem_2eproto::TableStruct;
 };
 // ===================================================================
@@ -782,7 +918,7 @@ class telemetry : public ::google::protobuf::Message /* @@protoc_insertion_point
 #endif  // __GNUC__
 // telemetry
 
-// optional int32 podState = 1;
+// optional .podStates podState = 1;
 inline bool telemetry::has_podstate() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -796,73 +932,250 @@ inline void telemetry::clear_podstate() {
   podstate_ = 0;
   clear_has_podstate();
 }
-inline ::google::protobuf::int32 telemetry::podstate() const {
+inline ::podStates telemetry::podstate() const {
   // @@protoc_insertion_point(field_get:pds.telemetry.podState)
-  return podstate_;
+  return static_cast< ::podStates >(podstate_);
 }
-inline void telemetry::set_podstate(::google::protobuf::int32 value) {
+inline void telemetry::set_podstate(::podStates value) {
+  assert(::podStates_IsValid(value));
   set_has_podstate();
   podstate_ = value;
   // @@protoc_insertion_point(field_set:pds.telemetry.podState)
 }
 
-// optional int32 terminalState = 2;
-inline bool telemetry::has_terminalstate() const {
+// optional .breakNodeStates breakNodeState = 2;
+inline bool telemetry::has_breaknodestate() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void telemetry::set_has_terminalstate() {
+inline void telemetry::set_has_breaknodestate() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void telemetry::clear_has_terminalstate() {
+inline void telemetry::clear_has_breaknodestate() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void telemetry::clear_terminalstate() {
-  terminalstate_ = 0;
-  clear_has_terminalstate();
+inline void telemetry::clear_breaknodestate() {
+  breaknodestate_ = 0;
+  clear_has_breaknodestate();
 }
-inline ::google::protobuf::int32 telemetry::terminalstate() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.terminalState)
-  return terminalstate_;
+inline ::breakNodeStates telemetry::breaknodestate() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.breakNodeState)
+  return static_cast< ::breakNodeStates >(breaknodestate_);
 }
-inline void telemetry::set_terminalstate(::google::protobuf::int32 value) {
-  set_has_terminalstate();
-  terminalstate_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.terminalState)
+inline void telemetry::set_breaknodestate(::breakNodeStates value) {
+  assert(::breakNodeStates_IsValid(value));
+  set_has_breaknodestate();
+  breaknodestate_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.breakNodeState)
 }
 
-// optional int32 podTime = 3;
-inline bool telemetry::has_podtime() const {
+// optional .motorStates motorState = 3;
+inline bool telemetry::has_motorstate() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void telemetry::set_has_podtime() {
+inline void telemetry::set_has_motorstate() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void telemetry::clear_has_podtime() {
+inline void telemetry::clear_has_motorstate() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void telemetry::clear_podtime() {
-  podtime_ = 0;
-  clear_has_podtime();
+inline void telemetry::clear_motorstate() {
+  motorstate_ = 0;
+  clear_has_motorstate();
 }
-inline ::google::protobuf::int32 telemetry::podtime() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.podTime)
-  return podtime_;
+inline ::motorStates telemetry::motorstate() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.motorState)
+  return static_cast< ::motorStates >(motorstate_);
 }
-inline void telemetry::set_podtime(::google::protobuf::int32 value) {
-  set_has_podtime();
-  podtime_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.podTime)
+inline void telemetry::set_motorstate(::motorStates value) {
+  assert(::motorStates_IsValid(value));
+  set_has_motorstate();
+  motorstate_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.motorState)
 }
 
-// optional int32 flightTime = 4;
-inline bool telemetry::has_flighttime() const {
+// optional .controlsInterfaceStates controlsInterfaceState = 4;
+inline bool telemetry::has_controlsinterfacestate() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void telemetry::set_has_flighttime() {
+inline void telemetry::set_has_controlsinterfacestate() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void telemetry::clear_has_flighttime() {
+inline void telemetry::clear_has_controlsinterfacestate() {
   _has_bits_[0] &= ~0x00000008u;
+}
+inline void telemetry::clear_controlsinterfacestate() {
+  controlsinterfacestate_ = 0;
+  clear_has_controlsinterfacestate();
+}
+inline ::controlsInterfaceStates telemetry::controlsinterfacestate() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.controlsInterfaceState)
+  return static_cast< ::controlsInterfaceStates >(controlsinterfacestate_);
+}
+inline void telemetry::set_controlsinterfacestate(::controlsInterfaceStates value) {
+  assert(::controlsInterfaceStates_IsValid(value));
+  set_has_controlsinterfacestate();
+  controlsinterfacestate_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.controlsInterfaceState)
+}
+
+// optional .inverterStates inverterState = 5;
+inline bool telemetry::has_inverterstate() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void telemetry::set_has_inverterstate() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void telemetry::clear_has_inverterstate() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void telemetry::clear_inverterstate() {
+  inverterstate_ = 0;
+  clear_has_inverterstate();
+}
+inline ::inverterStates telemetry::inverterstate() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.inverterState)
+  return static_cast< ::inverterStates >(inverterstate_);
+}
+inline void telemetry::set_inverterstate(::inverterStates value) {
+  assert(::inverterStates_IsValid(value));
+  set_has_inverterstate();
+  inverterstate_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.inverterState)
+}
+
+// optional .lvdcNodeStates lvdcNodeState = 54;
+inline bool telemetry::has_lvdcnodestate() const {
+  return (_has_bits_[1] & 0x00020000u) != 0;
+}
+inline void telemetry::set_has_lvdcnodestate() {
+  _has_bits_[1] |= 0x00020000u;
+}
+inline void telemetry::clear_has_lvdcnodestate() {
+  _has_bits_[1] &= ~0x00020000u;
+}
+inline void telemetry::clear_lvdcnodestate() {
+  lvdcnodestate_ = 0;
+  clear_has_lvdcnodestate();
+}
+inline ::lvdcNodeStates telemetry::lvdcnodestate() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.lvdcNodeState)
+  return static_cast< ::lvdcNodeStates >(lvdcnodestate_);
+}
+inline void telemetry::set_lvdcnodestate(::lvdcNodeStates value) {
+  assert(::lvdcNodeStates_IsValid(value));
+  set_has_lvdcnodestate();
+  lvdcnodestate_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.lvdcNodeState)
+}
+
+// optional .batteryManagementStates batteryManagementState = 25;
+inline bool telemetry::has_batterymanagementstate() const {
+  return (_has_bits_[0] & 0x00800000u) != 0;
+}
+inline void telemetry::set_has_batterymanagementstate() {
+  _has_bits_[0] |= 0x00800000u;
+}
+inline void telemetry::clear_has_batterymanagementstate() {
+  _has_bits_[0] &= ~0x00800000u;
+}
+inline void telemetry::clear_batterymanagementstate() {
+  batterymanagementstate_ = 0;
+  clear_has_batterymanagementstate();
+}
+inline ::batteryManagementStates telemetry::batterymanagementstate() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.batteryManagementState)
+  return static_cast< ::batteryManagementStates >(batterymanagementstate_);
+}
+inline void telemetry::set_batterymanagementstate(::batteryManagementStates value) {
+  assert(::batteryManagementStates_IsValid(value));
+  set_has_batterymanagementstate();
+  batterymanagementstate_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.batteryManagementState)
+}
+
+// optional .podStates breakNodePerceivedPodState = 31;
+inline bool telemetry::has_breaknodeperceivedpodstate() const {
+  return (_has_bits_[0] & 0x04000000u) != 0;
+}
+inline void telemetry::set_has_breaknodeperceivedpodstate() {
+  _has_bits_[0] |= 0x04000000u;
+}
+inline void telemetry::clear_has_breaknodeperceivedpodstate() {
+  _has_bits_[0] &= ~0x04000000u;
+}
+inline void telemetry::clear_breaknodeperceivedpodstate() {
+  breaknodeperceivedpodstate_ = 0;
+  clear_has_breaknodeperceivedpodstate();
+}
+inline ::podStates telemetry::breaknodeperceivedpodstate() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.breakNodePerceivedPodState)
+  return static_cast< ::podStates >(breaknodeperceivedpodstate_);
+}
+inline void telemetry::set_breaknodeperceivedpodstate(::podStates value) {
+  assert(::podStates_IsValid(value));
+  set_has_breaknodeperceivedpodstate();
+  breaknodeperceivedpodstate_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.breakNodePerceivedPodState)
+}
+
+// optional .rearNodeStates rearNodeState = 47;
+inline bool telemetry::has_rearnodestate() const {
+  return (_has_bits_[1] & 0x00000400u) != 0;
+}
+inline void telemetry::set_has_rearnodestate() {
+  _has_bits_[1] |= 0x00000400u;
+}
+inline void telemetry::clear_has_rearnodestate() {
+  _has_bits_[1] &= ~0x00000400u;
+}
+inline void telemetry::clear_rearnodestate() {
+  rearnodestate_ = 0;
+  clear_has_rearnodestate();
+}
+inline ::rearNodeStates telemetry::rearnodestate() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.rearNodeState)
+  return static_cast< ::rearNodeStates >(rearnodestate_);
+}
+inline void telemetry::set_rearnodestate(::rearNodeStates value) {
+  assert(::rearNodeStates_IsValid(value));
+  set_has_rearnodestate();
+  rearnodestate_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.rearNodeState)
+}
+
+// optional int32 missionTime = 6;
+inline bool telemetry::has_missiontime() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void telemetry::set_has_missiontime() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void telemetry::clear_has_missiontime() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void telemetry::clear_missiontime() {
+  missiontime_ = 0;
+  clear_has_missiontime();
+}
+inline ::google::protobuf::int32 telemetry::missiontime() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.missionTime)
+  return missiontime_;
+}
+inline void telemetry::set_missiontime(::google::protobuf::int32 value) {
+  set_has_missiontime();
+  missiontime_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.missionTime)
+}
+
+// optional int32 flightTime = 7;
+inline bool telemetry::has_flighttime() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void telemetry::set_has_flighttime() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void telemetry::clear_has_flighttime() {
+  _has_bits_[0] &= ~0x00000040u;
 }
 inline void telemetry::clear_flighttime() {
   flighttime_ = 0;
@@ -878,447 +1191,291 @@ inline void telemetry::set_flighttime(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:pds.telemetry.flightTime)
 }
 
-// optional int32 inverterON = 5;
-inline bool telemetry::has_inverteron() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+// repeated int32 heartbeatFlags = 8;
+inline int telemetry::heartbeatflags_size() const {
+  return heartbeatflags_.size();
 }
-inline void telemetry::set_has_inverteron() {
-  _has_bits_[0] |= 0x00000010u;
+inline void telemetry::clear_heartbeatflags() {
+  heartbeatflags_.Clear();
 }
-inline void telemetry::clear_has_inverteron() {
-  _has_bits_[0] &= ~0x00000010u;
+inline ::google::protobuf::int32 telemetry::heartbeatflags(int index) const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.heartbeatFlags)
+  return heartbeatflags_.Get(index);
 }
-inline void telemetry::clear_inverteron() {
-  inverteron_ = 0;
-  clear_has_inverteron();
+inline void telemetry::set_heartbeatflags(int index, ::google::protobuf::int32 value) {
+  heartbeatflags_.Set(index, value);
+  // @@protoc_insertion_point(field_set:pds.telemetry.heartbeatFlags)
 }
-inline ::google::protobuf::int32 telemetry::inverteron() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.inverterON)
-  return inverteron_;
+inline void telemetry::add_heartbeatflags(::google::protobuf::int32 value) {
+  heartbeatflags_.Add(value);
+  // @@protoc_insertion_point(field_add:pds.telemetry.heartbeatFlags)
 }
-inline void telemetry::set_inverteron(::google::protobuf::int32 value) {
-  set_has_inverteron();
-  inverteron_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.inverterON)
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+telemetry::heartbeatflags() const {
+  // @@protoc_insertion_point(field_list:pds.telemetry.heartbeatFlags)
+  return heartbeatflags_;
 }
-
-// optional int32 watchdogTimerValue = 6;
-inline bool telemetry::has_watchdogtimervalue() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void telemetry::set_has_watchdogtimervalue() {
-  _has_bits_[0] |= 0x00000020u;
-}
-inline void telemetry::clear_has_watchdogtimervalue() {
-  _has_bits_[0] &= ~0x00000020u;
-}
-inline void telemetry::clear_watchdogtimervalue() {
-  watchdogtimervalue_ = 0;
-  clear_has_watchdogtimervalue();
-}
-inline ::google::protobuf::int32 telemetry::watchdogtimervalue() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.watchdogTimerValue)
-  return watchdogtimervalue_;
-}
-inline void telemetry::set_watchdogtimervalue(::google::protobuf::int32 value) {
-  set_has_watchdogtimervalue();
-  watchdogtimervalue_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.watchdogTimerValue)
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+telemetry::mutable_heartbeatflags() {
+  // @@protoc_insertion_point(field_mutable_list:pds.telemetry.heartbeatFlags)
+  return &heartbeatflags_;
 }
 
-// optional int32 terminalHeartbeatFlag = 7;
-inline bool telemetry::has_terminalheartbeatflag() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
+// repeated int32 heartbeatValues = 71;
+inline int telemetry::heartbeatvalues_size() const {
+  return heartbeatvalues_.size();
 }
-inline void telemetry::set_has_terminalheartbeatflag() {
-  _has_bits_[0] |= 0x00000040u;
+inline void telemetry::clear_heartbeatvalues() {
+  heartbeatvalues_.Clear();
 }
-inline void telemetry::clear_has_terminalheartbeatflag() {
-  _has_bits_[0] &= ~0x00000040u;
+inline ::google::protobuf::int32 telemetry::heartbeatvalues(int index) const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.heartbeatValues)
+  return heartbeatvalues_.Get(index);
 }
-inline void telemetry::clear_terminalheartbeatflag() {
-  terminalheartbeatflag_ = 0;
-  clear_has_terminalheartbeatflag();
+inline void telemetry::set_heartbeatvalues(int index, ::google::protobuf::int32 value) {
+  heartbeatvalues_.Set(index, value);
+  // @@protoc_insertion_point(field_set:pds.telemetry.heartbeatValues)
 }
-inline ::google::protobuf::int32 telemetry::terminalheartbeatflag() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.terminalHeartbeatFlag)
-  return terminalheartbeatflag_;
+inline void telemetry::add_heartbeatvalues(::google::protobuf::int32 value) {
+  heartbeatvalues_.Add(value);
+  // @@protoc_insertion_point(field_add:pds.telemetry.heartbeatValues)
 }
-inline void telemetry::set_terminalheartbeatflag(::google::protobuf::int32 value) {
-  set_has_terminalheartbeatflag();
-  terminalheartbeatflag_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.terminalHeartbeatFlag)
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+telemetry::heartbeatvalues() const {
+  // @@protoc_insertion_point(field_list:pds.telemetry.heartbeatValues)
+  return heartbeatvalues_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+telemetry::mutable_heartbeatvalues() {
+  // @@protoc_insertion_point(field_mutable_list:pds.telemetry.heartbeatValues)
+  return &heartbeatvalues_;
 }
 
-// optional int32 watchdogFlag = 8;
-inline bool telemetry::has_watchdogflag() const {
+// optional int32 podPosition = 9;
+inline bool telemetry::has_podposition() const {
   return (_has_bits_[0] & 0x00000080u) != 0;
 }
-inline void telemetry::set_has_watchdogflag() {
+inline void telemetry::set_has_podposition() {
   _has_bits_[0] |= 0x00000080u;
 }
-inline void telemetry::clear_has_watchdogflag() {
+inline void telemetry::clear_has_podposition() {
   _has_bits_[0] &= ~0x00000080u;
 }
-inline void telemetry::clear_watchdogflag() {
-  watchdogflag_ = 0;
-  clear_has_watchdogflag();
+inline void telemetry::clear_podposition() {
+  podposition_ = 0;
+  clear_has_podposition();
 }
-inline ::google::protobuf::int32 telemetry::watchdogflag() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.watchdogFlag)
-  return watchdogflag_;
+inline ::google::protobuf::int32 telemetry::podposition() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.podPosition)
+  return podposition_;
 }
-inline void telemetry::set_watchdogflag(::google::protobuf::int32 value) {
-  set_has_watchdogflag();
-  watchdogflag_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.watchdogFlag)
+inline void telemetry::set_podposition(::google::protobuf::int32 value) {
+  set_has_podposition();
+  podposition_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.podPosition)
 }
 
-// optional int32 motorState = 9;
-inline bool telemetry::has_motorstate() const {
+// optional int32 podVelocity = 10;
+inline bool telemetry::has_podvelocity() const {
   return (_has_bits_[0] & 0x00000100u) != 0;
 }
-inline void telemetry::set_has_motorstate() {
+inline void telemetry::set_has_podvelocity() {
   _has_bits_[0] |= 0x00000100u;
 }
-inline void telemetry::clear_has_motorstate() {
+inline void telemetry::clear_has_podvelocity() {
   _has_bits_[0] &= ~0x00000100u;
 }
-inline void telemetry::clear_motorstate() {
-  motorstate_ = 0;
-  clear_has_motorstate();
+inline void telemetry::clear_podvelocity() {
+  podvelocity_ = 0;
+  clear_has_podvelocity();
 }
-inline ::google::protobuf::int32 telemetry::motorstate() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.motorState)
-  return motorstate_;
+inline ::google::protobuf::int32 telemetry::podvelocity() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.podVelocity)
+  return podvelocity_;
 }
-inline void telemetry::set_motorstate(::google::protobuf::int32 value) {
-  set_has_motorstate();
-  motorstate_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.motorState)
+inline void telemetry::set_podvelocity(::google::protobuf::int32 value) {
+  set_has_podvelocity();
+  podvelocity_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.podVelocity)
 }
 
-// optional int32 inverterState = 10;
-inline bool telemetry::has_inverterstate() const {
+// optional int32 podAccelerationX = 11;
+inline bool telemetry::has_podaccelerationx() const {
   return (_has_bits_[0] & 0x00000200u) != 0;
 }
-inline void telemetry::set_has_inverterstate() {
+inline void telemetry::set_has_podaccelerationx() {
   _has_bits_[0] |= 0x00000200u;
 }
-inline void telemetry::clear_has_inverterstate() {
+inline void telemetry::clear_has_podaccelerationx() {
   _has_bits_[0] &= ~0x00000200u;
 }
-inline void telemetry::clear_inverterstate() {
-  inverterstate_ = 0;
-  clear_has_inverterstate();
+inline void telemetry::clear_podaccelerationx() {
+  podaccelerationx_ = 0;
+  clear_has_podaccelerationx();
 }
-inline ::google::protobuf::int32 telemetry::inverterstate() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.inverterState)
-  return inverterstate_;
+inline ::google::protobuf::int32 telemetry::podaccelerationx() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.podAccelerationX)
+  return podaccelerationx_;
 }
-inline void telemetry::set_inverterstate(::google::protobuf::int32 value) {
-  set_has_inverterstate();
-  inverterstate_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.inverterState)
+inline void telemetry::set_podaccelerationx(::google::protobuf::int32 value) {
+  set_has_podaccelerationx();
+  podaccelerationx_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.podAccelerationX)
 }
 
-// optional int32 position = 11;
-inline bool telemetry::has_position() const {
+// optional int32 podAccelerationY = 12;
+inline bool telemetry::has_podaccelerationy() const {
   return (_has_bits_[0] & 0x00000400u) != 0;
 }
-inline void telemetry::set_has_position() {
+inline void telemetry::set_has_podaccelerationy() {
   _has_bits_[0] |= 0x00000400u;
 }
-inline void telemetry::clear_has_position() {
+inline void telemetry::clear_has_podaccelerationy() {
   _has_bits_[0] &= ~0x00000400u;
 }
-inline void telemetry::clear_position() {
-  position_ = 0;
-  clear_has_position();
+inline void telemetry::clear_podaccelerationy() {
+  podaccelerationy_ = 0;
+  clear_has_podaccelerationy();
 }
-inline ::google::protobuf::int32 telemetry::position() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.position)
-  return position_;
+inline ::google::protobuf::int32 telemetry::podaccelerationy() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.podAccelerationY)
+  return podaccelerationy_;
 }
-inline void telemetry::set_position(::google::protobuf::int32 value) {
-  set_has_position();
-  position_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.position)
+inline void telemetry::set_podaccelerationy(::google::protobuf::int32 value) {
+  set_has_podaccelerationy();
+  podaccelerationy_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.podAccelerationY)
 }
 
-// optional int32 velocity = 12;
-inline bool telemetry::has_velocity() const {
+// optional int32 podAccelerationZ = 13;
+inline bool telemetry::has_podaccelerationz() const {
   return (_has_bits_[0] & 0x00000800u) != 0;
 }
-inline void telemetry::set_has_velocity() {
+inline void telemetry::set_has_podaccelerationz() {
   _has_bits_[0] |= 0x00000800u;
 }
-inline void telemetry::clear_has_velocity() {
+inline void telemetry::clear_has_podaccelerationz() {
   _has_bits_[0] &= ~0x00000800u;
 }
-inline void telemetry::clear_velocity() {
-  velocity_ = 0;
-  clear_has_velocity();
+inline void telemetry::clear_podaccelerationz() {
+  podaccelerationz_ = 0;
+  clear_has_podaccelerationz();
 }
-inline ::google::protobuf::int32 telemetry::velocity() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.velocity)
-  return velocity_;
+inline ::google::protobuf::int32 telemetry::podaccelerationz() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.podAccelerationZ)
+  return podaccelerationz_;
 }
-inline void telemetry::set_velocity(::google::protobuf::int32 value) {
-  set_has_velocity();
-  velocity_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.velocity)
+inline void telemetry::set_podaccelerationz(::google::protobuf::int32 value) {
+  set_has_podaccelerationz();
+  podaccelerationz_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.podAccelerationZ)
 }
 
-// optional int32 accelerationX = 13;
-inline bool telemetry::has_accelerationx() const {
+// optional int32 imuVelocity = 14;
+inline bool telemetry::has_imuvelocity() const {
   return (_has_bits_[0] & 0x00001000u) != 0;
 }
-inline void telemetry::set_has_accelerationx() {
+inline void telemetry::set_has_imuvelocity() {
   _has_bits_[0] |= 0x00001000u;
 }
-inline void telemetry::clear_has_accelerationx() {
+inline void telemetry::clear_has_imuvelocity() {
   _has_bits_[0] &= ~0x00001000u;
 }
-inline void telemetry::clear_accelerationx() {
-  accelerationx_ = 0;
-  clear_has_accelerationx();
+inline void telemetry::clear_imuvelocity() {
+  imuvelocity_ = 0;
+  clear_has_imuvelocity();
 }
-inline ::google::protobuf::int32 telemetry::accelerationx() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.accelerationX)
-  return accelerationx_;
+inline ::google::protobuf::int32 telemetry::imuvelocity() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.imuVelocity)
+  return imuvelocity_;
 }
-inline void telemetry::set_accelerationx(::google::protobuf::int32 value) {
-  set_has_accelerationx();
-  accelerationx_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.accelerationX)
+inline void telemetry::set_imuvelocity(::google::protobuf::int32 value) {
+  set_has_imuvelocity();
+  imuvelocity_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.imuVelocity)
 }
 
-// optional int32 accelerationY = 14;
-inline bool telemetry::has_accelerationy() const {
+// optional int32 imuAccelerationX = 15;
+inline bool telemetry::has_imuaccelerationx() const {
   return (_has_bits_[0] & 0x00002000u) != 0;
 }
-inline void telemetry::set_has_accelerationy() {
+inline void telemetry::set_has_imuaccelerationx() {
   _has_bits_[0] |= 0x00002000u;
 }
-inline void telemetry::clear_has_accelerationy() {
+inline void telemetry::clear_has_imuaccelerationx() {
   _has_bits_[0] &= ~0x00002000u;
 }
-inline void telemetry::clear_accelerationy() {
-  accelerationy_ = 0;
-  clear_has_accelerationy();
+inline void telemetry::clear_imuaccelerationx() {
+  imuaccelerationx_ = 0;
+  clear_has_imuaccelerationx();
 }
-inline ::google::protobuf::int32 telemetry::accelerationy() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.accelerationY)
-  return accelerationy_;
+inline ::google::protobuf::int32 telemetry::imuaccelerationx() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.imuAccelerationX)
+  return imuaccelerationx_;
 }
-inline void telemetry::set_accelerationy(::google::protobuf::int32 value) {
-  set_has_accelerationy();
-  accelerationy_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.accelerationY)
+inline void telemetry::set_imuaccelerationx(::google::protobuf::int32 value) {
+  set_has_imuaccelerationx();
+  imuaccelerationx_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.imuAccelerationX)
 }
 
-// optional int32 accelerationZ = 15;
-inline bool telemetry::has_accelerationz() const {
+// optional int32 tachometerVelocity = 16;
+inline bool telemetry::has_tachometervelocity() const {
   return (_has_bits_[0] & 0x00004000u) != 0;
 }
-inline void telemetry::set_has_accelerationz() {
+inline void telemetry::set_has_tachometervelocity() {
   _has_bits_[0] |= 0x00004000u;
 }
-inline void telemetry::clear_has_accelerationz() {
+inline void telemetry::clear_has_tachometervelocity() {
   _has_bits_[0] &= ~0x00004000u;
 }
-inline void telemetry::clear_accelerationz() {
-  accelerationz_ = 0;
-  clear_has_accelerationz();
+inline void telemetry::clear_tachometervelocity() {
+  tachometervelocity_ = 0;
+  clear_has_tachometervelocity();
 }
-inline ::google::protobuf::int32 telemetry::accelerationz() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.accelerationZ)
-  return accelerationz_;
+inline ::google::protobuf::int32 telemetry::tachometervelocity() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.tachometerVelocity)
+  return tachometervelocity_;
 }
-inline void telemetry::set_accelerationz(::google::protobuf::int32 value) {
-  set_has_accelerationz();
-  accelerationz_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.accelerationZ)
+inline void telemetry::set_tachometervelocity(::google::protobuf::int32 value) {
+  set_has_tachometervelocity();
+  tachometervelocity_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.tachometerVelocity)
 }
 
-// optional int32 imuVelocityX = 16;
-inline bool telemetry::has_imuvelocityx() const {
+// optional int32 resolverVelocity = 17;
+inline bool telemetry::has_resolvervelocity() const {
   return (_has_bits_[0] & 0x00008000u) != 0;
 }
-inline void telemetry::set_has_imuvelocityx() {
+inline void telemetry::set_has_resolvervelocity() {
   _has_bits_[0] |= 0x00008000u;
 }
-inline void telemetry::clear_has_imuvelocityx() {
+inline void telemetry::clear_has_resolvervelocity() {
   _has_bits_[0] &= ~0x00008000u;
 }
-inline void telemetry::clear_imuvelocityx() {
-  imuvelocityx_ = 0;
-  clear_has_imuvelocityx();
+inline void telemetry::clear_resolvervelocity() {
+  resolvervelocity_ = 0;
+  clear_has_resolvervelocity();
 }
-inline ::google::protobuf::int32 telemetry::imuvelocityx() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.imuVelocityX)
-  return imuvelocityx_;
+inline ::google::protobuf::int32 telemetry::resolvervelocity() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.resolverVelocity)
+  return resolvervelocity_;
 }
-inline void telemetry::set_imuvelocityx(::google::protobuf::int32 value) {
-  set_has_imuvelocityx();
-  imuvelocityx_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.imuVelocityX)
+inline void telemetry::set_resolvervelocity(::google::protobuf::int32 value) {
+  set_has_resolvervelocity();
+  resolvervelocity_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.resolverVelocity)
 }
 
-// optional int32 tachometerSpeed = 17;
-inline bool telemetry::has_tachometerspeed() const {
+// optional int32 inverterTemperature1 = 18;
+inline bool telemetry::has_invertertemperature1() const {
   return (_has_bits_[0] & 0x00010000u) != 0;
 }
-inline void telemetry::set_has_tachometerspeed() {
+inline void telemetry::set_has_invertertemperature1() {
   _has_bits_[0] |= 0x00010000u;
 }
-inline void telemetry::clear_has_tachometerspeed() {
-  _has_bits_[0] &= ~0x00010000u;
-}
-inline void telemetry::clear_tachometerspeed() {
-  tachometerspeed_ = 0;
-  clear_has_tachometerspeed();
-}
-inline ::google::protobuf::int32 telemetry::tachometerspeed() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.tachometerSpeed)
-  return tachometerspeed_;
-}
-inline void telemetry::set_tachometerspeed(::google::protobuf::int32 value) {
-  set_has_tachometerspeed();
-  tachometerspeed_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.tachometerSpeed)
-}
-
-// optional int32 tachometerDistance = 18;
-inline bool telemetry::has_tachometerdistance() const {
-  return (_has_bits_[0] & 0x00020000u) != 0;
-}
-inline void telemetry::set_has_tachometerdistance() {
-  _has_bits_[0] |= 0x00020000u;
-}
-inline void telemetry::clear_has_tachometerdistance() {
-  _has_bits_[0] &= ~0x00020000u;
-}
-inline void telemetry::clear_tachometerdistance() {
-  tachometerdistance_ = 0;
-  clear_has_tachometerdistance();
-}
-inline ::google::protobuf::int32 telemetry::tachometerdistance() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.tachometerDistance)
-  return tachometerdistance_;
-}
-inline void telemetry::set_tachometerdistance(::google::protobuf::int32 value) {
-  set_has_tachometerdistance();
-  tachometerdistance_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.tachometerDistance)
-}
-
-// optional int32 resolverSpeed = 19;
-inline bool telemetry::has_resolverspeed() const {
-  return (_has_bits_[0] & 0x00040000u) != 0;
-}
-inline void telemetry::set_has_resolverspeed() {
-  _has_bits_[0] |= 0x00040000u;
-}
-inline void telemetry::clear_has_resolverspeed() {
-  _has_bits_[0] &= ~0x00040000u;
-}
-inline void telemetry::clear_resolverspeed() {
-  resolverspeed_ = 0;
-  clear_has_resolverspeed();
-}
-inline ::google::protobuf::int32 telemetry::resolverspeed() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.resolverSpeed)
-  return resolverspeed_;
-}
-inline void telemetry::set_resolverspeed(::google::protobuf::int32 value) {
-  set_has_resolverspeed();
-  resolverspeed_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.resolverSpeed)
-}
-
-// optional int32 resolverDistance = 20;
-inline bool telemetry::has_resolverdistance() const {
-  return (_has_bits_[0] & 0x00080000u) != 0;
-}
-inline void telemetry::set_has_resolverdistance() {
-  _has_bits_[0] |= 0x00080000u;
-}
-inline void telemetry::clear_has_resolverdistance() {
-  _has_bits_[0] &= ~0x00080000u;
-}
-inline void telemetry::clear_resolverdistance() {
-  resolverdistance_ = 0;
-  clear_has_resolverdistance();
-}
-inline ::google::protobuf::int32 telemetry::resolverdistance() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.resolverDistance)
-  return resolverdistance_;
-}
-inline void telemetry::set_resolverdistance(::google::protobuf::int32 value) {
-  set_has_resolverdistance();
-  resolverdistance_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.resolverDistance)
-}
-
-// optional int32 reflectivityFlags = 21;
-inline bool telemetry::has_reflectivityflags() const {
-  return (_has_bits_[0] & 0x00100000u) != 0;
-}
-inline void telemetry::set_has_reflectivityflags() {
-  _has_bits_[0] |= 0x00100000u;
-}
-inline void telemetry::clear_has_reflectivityflags() {
-  _has_bits_[0] &= ~0x00100000u;
-}
-inline void telemetry::clear_reflectivityflags() {
-  reflectivityflags_ = 0;
-  clear_has_reflectivityflags();
-}
-inline ::google::protobuf::int32 telemetry::reflectivityflags() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.reflectivityFlags)
-  return reflectivityflags_;
-}
-inline void telemetry::set_reflectivityflags(::google::protobuf::int32 value) {
-  set_has_reflectivityflags();
-  reflectivityflags_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.reflectivityFlags)
-}
-
-// optional int32 reflectivitySpeed = 22;
-inline bool telemetry::has_reflectivityspeed() const {
-  return (_has_bits_[0] & 0x00200000u) != 0;
-}
-inline void telemetry::set_has_reflectivityspeed() {
-  _has_bits_[0] |= 0x00200000u;
-}
-inline void telemetry::clear_has_reflectivityspeed() {
-  _has_bits_[0] &= ~0x00200000u;
-}
-inline void telemetry::clear_reflectivityspeed() {
-  reflectivityspeed_ = 0;
-  clear_has_reflectivityspeed();
-}
-inline ::google::protobuf::int32 telemetry::reflectivityspeed() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.reflectivitySpeed)
-  return reflectivityspeed_;
-}
-inline void telemetry::set_reflectivityspeed(::google::protobuf::int32 value) {
-  set_has_reflectivityspeed();
-  reflectivityspeed_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.reflectivitySpeed)
-}
-
-// optional int32 inverterTemperature1 = 23;
-inline bool telemetry::has_invertertemperature1() const {
-  return (_has_bits_[0] & 0x00400000u) != 0;
-}
-inline void telemetry::set_has_invertertemperature1() {
-  _has_bits_[0] |= 0x00400000u;
-}
 inline void telemetry::clear_has_invertertemperature1() {
-  _has_bits_[0] &= ~0x00400000u;
+  _has_bits_[0] &= ~0x00010000u;
 }
 inline void telemetry::clear_invertertemperature1() {
   invertertemperature1_ = 0;
@@ -1334,15 +1491,15 @@ inline void telemetry::set_invertertemperature1(::google::protobuf::int32 value)
   // @@protoc_insertion_point(field_set:pds.telemetry.inverterTemperature1)
 }
 
-// optional int32 inverterTemperature2 = 24;
+// optional int32 inverterTemperature2 = 19;
 inline bool telemetry::has_invertertemperature2() const {
-  return (_has_bits_[0] & 0x00800000u) != 0;
+  return (_has_bits_[0] & 0x00020000u) != 0;
 }
 inline void telemetry::set_has_invertertemperature2() {
-  _has_bits_[0] |= 0x00800000u;
+  _has_bits_[0] |= 0x00020000u;
 }
 inline void telemetry::clear_has_invertertemperature2() {
-  _has_bits_[0] &= ~0x00800000u;
+  _has_bits_[0] &= ~0x00020000u;
 }
 inline void telemetry::clear_invertertemperature2() {
   invertertemperature2_ = 0;
@@ -1358,15 +1515,15 @@ inline void telemetry::set_invertertemperature2(::google::protobuf::int32 value)
   // @@protoc_insertion_point(field_set:pds.telemetry.inverterTemperature2)
 }
 
-// optional int32 inverterTemperature3 = 25;
+// optional int32 inverterTemperature3 = 20;
 inline bool telemetry::has_invertertemperature3() const {
-  return (_has_bits_[0] & 0x01000000u) != 0;
+  return (_has_bits_[0] & 0x00040000u) != 0;
 }
 inline void telemetry::set_has_invertertemperature3() {
-  _has_bits_[0] |= 0x01000000u;
+  _has_bits_[0] |= 0x00040000u;
 }
 inline void telemetry::clear_has_invertertemperature3() {
-  _has_bits_[0] &= ~0x01000000u;
+  _has_bits_[0] &= ~0x00040000u;
 }
 inline void telemetry::clear_invertertemperature3() {
   invertertemperature3_ = 0;
@@ -1382,868 +1539,1174 @@ inline void telemetry::set_invertertemperature3(::google::protobuf::int32 value)
   // @@protoc_insertion_point(field_set:pds.telemetry.inverterTemperature3)
 }
 
-// optional int32 motorPosition = 26;
-inline bool telemetry::has_motorposition() const {
+// optional int32 motorCurrent = 21;
+inline bool telemetry::has_motorcurrent() const {
+  return (_has_bits_[0] & 0x00080000u) != 0;
+}
+inline void telemetry::set_has_motorcurrent() {
+  _has_bits_[0] |= 0x00080000u;
+}
+inline void telemetry::clear_has_motorcurrent() {
+  _has_bits_[0] &= ~0x00080000u;
+}
+inline void telemetry::clear_motorcurrent() {
+  motorcurrent_ = 0;
+  clear_has_motorcurrent();
+}
+inline ::google::protobuf::int32 telemetry::motorcurrent() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.motorCurrent)
+  return motorcurrent_;
+}
+inline void telemetry::set_motorcurrent(::google::protobuf::int32 value) {
+  set_has_motorcurrent();
+  motorcurrent_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.motorCurrent)
+}
+
+// optional int32 motorVoltage = 22;
+inline bool telemetry::has_motorvoltage() const {
+  return (_has_bits_[0] & 0x00100000u) != 0;
+}
+inline void telemetry::set_has_motorvoltage() {
+  _has_bits_[0] |= 0x00100000u;
+}
+inline void telemetry::clear_has_motorvoltage() {
+  _has_bits_[0] &= ~0x00100000u;
+}
+inline void telemetry::clear_motorvoltage() {
+  motorvoltage_ = 0;
+  clear_has_motorvoltage();
+}
+inline ::google::protobuf::int32 telemetry::motorvoltage() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.motorVoltage)
+  return motorvoltage_;
+}
+inline void telemetry::set_motorvoltage(::google::protobuf::int32 value) {
+  set_has_motorvoltage();
+  motorvoltage_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.motorVoltage)
+}
+
+// optional int32 inverterVoltages = 23;
+inline bool telemetry::has_invertervoltages() const {
+  return (_has_bits_[0] & 0x00200000u) != 0;
+}
+inline void telemetry::set_has_invertervoltages() {
+  _has_bits_[0] |= 0x00200000u;
+}
+inline void telemetry::clear_has_invertervoltages() {
+  _has_bits_[0] &= ~0x00200000u;
+}
+inline void telemetry::clear_invertervoltages() {
+  invertervoltages_ = 0;
+  clear_has_invertervoltages();
+}
+inline ::google::protobuf::int32 telemetry::invertervoltages() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.inverterVoltages)
+  return invertervoltages_;
+}
+inline void telemetry::set_invertervoltages(::google::protobuf::int32 value) {
+  set_has_invertervoltages();
+  invertervoltages_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.inverterVoltages)
+}
+
+// optional int32 inverterCurrents = 24;
+inline bool telemetry::has_invertercurrents() const {
+  return (_has_bits_[0] & 0x00400000u) != 0;
+}
+inline void telemetry::set_has_invertercurrents() {
+  _has_bits_[0] |= 0x00400000u;
+}
+inline void telemetry::clear_has_invertercurrents() {
+  _has_bits_[0] &= ~0x00400000u;
+}
+inline void telemetry::clear_invertercurrents() {
+  invertercurrents_ = 0;
+  clear_has_invertercurrents();
+}
+inline ::google::protobuf::int32 telemetry::invertercurrents() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.inverterCurrents)
+  return invertercurrents_;
+}
+inline void telemetry::set_invertercurrents(::google::protobuf::int32 value) {
+  set_has_invertercurrents();
+  invertercurrents_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.inverterCurrents)
+}
+
+// repeated int32 batteryPackVoltages = 26;
+inline int telemetry::batterypackvoltages_size() const {
+  return batterypackvoltages_.size();
+}
+inline void telemetry::clear_batterypackvoltages() {
+  batterypackvoltages_.Clear();
+}
+inline ::google::protobuf::int32 telemetry::batterypackvoltages(int index) const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.batteryPackVoltages)
+  return batterypackvoltages_.Get(index);
+}
+inline void telemetry::set_batterypackvoltages(int index, ::google::protobuf::int32 value) {
+  batterypackvoltages_.Set(index, value);
+  // @@protoc_insertion_point(field_set:pds.telemetry.batteryPackVoltages)
+}
+inline void telemetry::add_batterypackvoltages(::google::protobuf::int32 value) {
+  batterypackvoltages_.Add(value);
+  // @@protoc_insertion_point(field_add:pds.telemetry.batteryPackVoltages)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+telemetry::batterypackvoltages() const {
+  // @@protoc_insertion_point(field_list:pds.telemetry.batteryPackVoltages)
+  return batterypackvoltages_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+telemetry::mutable_batterypackvoltages() {
+  // @@protoc_insertion_point(field_mutable_list:pds.telemetry.batteryPackVoltages)
+  return &batterypackvoltages_;
+}
+
+// repeated int32 batteryPackCurrent = 27;
+inline int telemetry::batterypackcurrent_size() const {
+  return batterypackcurrent_.size();
+}
+inline void telemetry::clear_batterypackcurrent() {
+  batterypackcurrent_.Clear();
+}
+inline ::google::protobuf::int32 telemetry::batterypackcurrent(int index) const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.batteryPackCurrent)
+  return batterypackcurrent_.Get(index);
+}
+inline void telemetry::set_batterypackcurrent(int index, ::google::protobuf::int32 value) {
+  batterypackcurrent_.Set(index, value);
+  // @@protoc_insertion_point(field_set:pds.telemetry.batteryPackCurrent)
+}
+inline void telemetry::add_batterypackcurrent(::google::protobuf::int32 value) {
+  batterypackcurrent_.Add(value);
+  // @@protoc_insertion_point(field_add:pds.telemetry.batteryPackCurrent)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+telemetry::batterypackcurrent() const {
+  // @@protoc_insertion_point(field_list:pds.telemetry.batteryPackCurrent)
+  return batterypackcurrent_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+telemetry::mutable_batterypackcurrent() {
+  // @@protoc_insertion_point(field_mutable_list:pds.telemetry.batteryPackCurrent)
+  return &batterypackcurrent_;
+}
+
+// repeated int32 batteryCellTemperatures = 28;
+inline int telemetry::batterycelltemperatures_size() const {
+  return batterycelltemperatures_.size();
+}
+inline void telemetry::clear_batterycelltemperatures() {
+  batterycelltemperatures_.Clear();
+}
+inline ::google::protobuf::int32 telemetry::batterycelltemperatures(int index) const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.batteryCellTemperatures)
+  return batterycelltemperatures_.Get(index);
+}
+inline void telemetry::set_batterycelltemperatures(int index, ::google::protobuf::int32 value) {
+  batterycelltemperatures_.Set(index, value);
+  // @@protoc_insertion_point(field_set:pds.telemetry.batteryCellTemperatures)
+}
+inline void telemetry::add_batterycelltemperatures(::google::protobuf::int32 value) {
+  batterycelltemperatures_.Add(value);
+  // @@protoc_insertion_point(field_add:pds.telemetry.batteryCellTemperatures)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+telemetry::batterycelltemperatures() const {
+  // @@protoc_insertion_point(field_list:pds.telemetry.batteryCellTemperatures)
+  return batterycelltemperatures_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+telemetry::mutable_batterycelltemperatures() {
+  // @@protoc_insertion_point(field_mutable_list:pds.telemetry.batteryCellTemperatures)
+  return &batterycelltemperatures_;
+}
+
+// optional int32 batteryPackMinimumVoltage = 29;
+inline bool telemetry::has_batterypackminimumvoltage() const {
+  return (_has_bits_[0] & 0x01000000u) != 0;
+}
+inline void telemetry::set_has_batterypackminimumvoltage() {
+  _has_bits_[0] |= 0x01000000u;
+}
+inline void telemetry::clear_has_batterypackminimumvoltage() {
+  _has_bits_[0] &= ~0x01000000u;
+}
+inline void telemetry::clear_batterypackminimumvoltage() {
+  batterypackminimumvoltage_ = 0;
+  clear_has_batterypackminimumvoltage();
+}
+inline ::google::protobuf::int32 telemetry::batterypackminimumvoltage() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.batteryPackMinimumVoltage)
+  return batterypackminimumvoltage_;
+}
+inline void telemetry::set_batterypackminimumvoltage(::google::protobuf::int32 value) {
+  set_has_batterypackminimumvoltage();
+  batterypackminimumvoltage_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.batteryPackMinimumVoltage)
+}
+
+// optional int32 batteryPackMaxVoltage = 30;
+inline bool telemetry::has_batterypackmaxvoltage() const {
   return (_has_bits_[0] & 0x02000000u) != 0;
 }
-inline void telemetry::set_has_motorposition() {
+inline void telemetry::set_has_batterypackmaxvoltage() {
   _has_bits_[0] |= 0x02000000u;
 }
-inline void telemetry::clear_has_motorposition() {
+inline void telemetry::clear_has_batterypackmaxvoltage() {
   _has_bits_[0] &= ~0x02000000u;
 }
-inline void telemetry::clear_motorposition() {
-  motorposition_ = 0;
-  clear_has_motorposition();
+inline void telemetry::clear_batterypackmaxvoltage() {
+  batterypackmaxvoltage_ = 0;
+  clear_has_batterypackmaxvoltage();
 }
-inline ::google::protobuf::int32 telemetry::motorposition() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.motorPosition)
-  return motorposition_;
+inline ::google::protobuf::int32 telemetry::batterypackmaxvoltage() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.batteryPackMaxVoltage)
+  return batterypackmaxvoltage_;
 }
-inline void telemetry::set_motorposition(::google::protobuf::int32 value) {
-  set_has_motorposition();
-  motorposition_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.motorPosition)
-}
-
-// optional int32 invertercurrentInformation = 27;
-inline bool telemetry::has_invertercurrentinformation() const {
-  return (_has_bits_[0] & 0x04000000u) != 0;
-}
-inline void telemetry::set_has_invertercurrentinformation() {
-  _has_bits_[0] |= 0x04000000u;
-}
-inline void telemetry::clear_has_invertercurrentinformation() {
-  _has_bits_[0] &= ~0x04000000u;
-}
-inline void telemetry::clear_invertercurrentinformation() {
-  invertercurrentinformation_ = 0;
-  clear_has_invertercurrentinformation();
-}
-inline ::google::protobuf::int32 telemetry::invertercurrentinformation() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.invertercurrentInformation)
-  return invertercurrentinformation_;
-}
-inline void telemetry::set_invertercurrentinformation(::google::protobuf::int32 value) {
-  set_has_invertercurrentinformation();
-  invertercurrentinformation_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.invertercurrentInformation)
+inline void telemetry::set_batterypackmaxvoltage(::google::protobuf::int32 value) {
+  set_has_batterypackmaxvoltage();
+  batterypackmaxvoltage_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.batteryPackMaxVoltage)
 }
 
-// optional int32 invertervoltageInformation = 28;
-inline bool telemetry::has_invertervoltageinformation() const {
+// optional bool sol1 = 32;
+inline bool telemetry::has_sol1() const {
   return (_has_bits_[0] & 0x08000000u) != 0;
 }
-inline void telemetry::set_has_invertervoltageinformation() {
+inline void telemetry::set_has_sol1() {
   _has_bits_[0] |= 0x08000000u;
 }
-inline void telemetry::clear_has_invertervoltageinformation() {
+inline void telemetry::clear_has_sol1() {
   _has_bits_[0] &= ~0x08000000u;
 }
-inline void telemetry::clear_invertervoltageinformation() {
-  invertervoltageinformation_ = 0;
-  clear_has_invertervoltageinformation();
+inline void telemetry::clear_sol1() {
+  sol1_ = false;
+  clear_has_sol1();
 }
-inline ::google::protobuf::int32 telemetry::invertervoltageinformation() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.invertervoltageInformation)
-  return invertervoltageinformation_;
+inline bool telemetry::sol1() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.sol1)
+  return sol1_;
 }
-inline void telemetry::set_invertervoltageinformation(::google::protobuf::int32 value) {
-  set_has_invertervoltageinformation();
-  invertervoltageinformation_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.invertervoltageInformation)
+inline void telemetry::set_sol1(bool value) {
+  set_has_sol1();
+  sol1_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.sol1)
 }
 
-// optional int32 inverterinternalVoltages = 29;
-inline bool telemetry::has_inverterinternalvoltages() const {
+// optional bool sol2 = 33;
+inline bool telemetry::has_sol2() const {
   return (_has_bits_[0] & 0x10000000u) != 0;
 }
-inline void telemetry::set_has_inverterinternalvoltages() {
+inline void telemetry::set_has_sol2() {
   _has_bits_[0] |= 0x10000000u;
 }
-inline void telemetry::clear_has_inverterinternalvoltages() {
+inline void telemetry::clear_has_sol2() {
   _has_bits_[0] &= ~0x10000000u;
 }
-inline void telemetry::clear_inverterinternalvoltages() {
-  inverterinternalvoltages_ = 0;
-  clear_has_inverterinternalvoltages();
+inline void telemetry::clear_sol2() {
+  sol2_ = false;
+  clear_has_sol2();
 }
-inline ::google::protobuf::int32 telemetry::inverterinternalvoltages() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.inverterinternalVoltages)
-  return inverterinternalvoltages_;
+inline bool telemetry::sol2() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.sol2)
+  return sol2_;
 }
-inline void telemetry::set_inverterinternalvoltages(::google::protobuf::int32 value) {
-  set_has_inverterinternalvoltages();
-  inverterinternalvoltages_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.inverterinternalVoltages)
+inline void telemetry::set_sol2(bool value) {
+  set_has_sol2();
+  sol2_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.sol2)
 }
 
-// optional int32 inverterinternalStates = 30;
-inline bool telemetry::has_inverterinternalstates() const {
+// optional bool sol3 = 34;
+inline bool telemetry::has_sol3() const {
   return (_has_bits_[0] & 0x20000000u) != 0;
 }
-inline void telemetry::set_has_inverterinternalstates() {
+inline void telemetry::set_has_sol3() {
   _has_bits_[0] |= 0x20000000u;
 }
-inline void telemetry::clear_has_inverterinternalstates() {
+inline void telemetry::clear_has_sol3() {
   _has_bits_[0] &= ~0x20000000u;
 }
-inline void telemetry::clear_inverterinternalstates() {
-  inverterinternalstates_ = 0;
-  clear_has_inverterinternalstates();
+inline void telemetry::clear_sol3() {
+  sol3_ = false;
+  clear_has_sol3();
 }
-inline ::google::protobuf::int32 telemetry::inverterinternalstates() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.inverterinternalStates)
-  return inverterinternalstates_;
+inline bool telemetry::sol3() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.sol3)
+  return sol3_;
 }
-inline void telemetry::set_inverterinternalstates(::google::protobuf::int32 value) {
-  set_has_inverterinternalstates();
-  inverterinternalstates_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.inverterinternalStates)
+inline void telemetry::set_sol3(bool value) {
+  set_has_sol3();
+  sol3_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.sol3)
 }
 
-// optional int32 BMSStateOfCharge = 31;
-inline bool telemetry::has_bmsstateofcharge() const {
+// optional bool sol4 = 35;
+inline bool telemetry::has_sol4() const {
   return (_has_bits_[0] & 0x40000000u) != 0;
 }
-inline void telemetry::set_has_bmsstateofcharge() {
+inline void telemetry::set_has_sol4() {
   _has_bits_[0] |= 0x40000000u;
 }
-inline void telemetry::clear_has_bmsstateofcharge() {
+inline void telemetry::clear_has_sol4() {
   _has_bits_[0] &= ~0x40000000u;
 }
-inline void telemetry::clear_bmsstateofcharge() {
-  bmsstateofcharge_ = 0;
-  clear_has_bmsstateofcharge();
+inline void telemetry::clear_sol4() {
+  sol4_ = false;
+  clear_has_sol4();
 }
-inline ::google::protobuf::int32 telemetry::bmsstateofcharge() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.BMSStateOfCharge)
-  return bmsstateofcharge_;
+inline bool telemetry::sol4() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.sol4)
+  return sol4_;
 }
-inline void telemetry::set_bmsstateofcharge(::google::protobuf::int32 value) {
-  set_has_bmsstateofcharge();
-  bmsstateofcharge_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.BMSStateOfCharge)
+inline void telemetry::set_sol4(bool value) {
+  set_has_sol4();
+  sol4_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.sol4)
 }
 
-// optional int32 BMSpackVoltage = 32;
-inline bool telemetry::has_bmspackvoltage() const {
+// optional bool sol5 = 36;
+inline bool telemetry::has_sol5() const {
   return (_has_bits_[0] & 0x80000000u) != 0;
 }
-inline void telemetry::set_has_bmspackvoltage() {
+inline void telemetry::set_has_sol5() {
   _has_bits_[0] |= 0x80000000u;
 }
-inline void telemetry::clear_has_bmspackvoltage() {
+inline void telemetry::clear_has_sol5() {
   _has_bits_[0] &= ~0x80000000u;
 }
-inline void telemetry::clear_bmspackvoltage() {
-  bmspackvoltage_ = 0;
-  clear_has_bmspackvoltage();
+inline void telemetry::clear_sol5() {
+  sol5_ = false;
+  clear_has_sol5();
 }
-inline ::google::protobuf::int32 telemetry::bmspackvoltage() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.BMSpackVoltage)
-  return bmspackvoltage_;
+inline bool telemetry::sol5() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.sol5)
+  return sol5_;
 }
-inline void telemetry::set_bmspackvoltage(::google::protobuf::int32 value) {
-  set_has_bmspackvoltage();
-  bmspackvoltage_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.BMSpackVoltage)
+inline void telemetry::set_sol5(bool value) {
+  set_has_sol5();
+  sol5_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.sol5)
 }
 
-// optional int32 BMSPackCurrent = 33;
-inline bool telemetry::has_bmspackcurrent() const {
+// optional bool sol6 = 37;
+inline bool telemetry::has_sol6() const {
   return (_has_bits_[1] & 0x00000001u) != 0;
 }
-inline void telemetry::set_has_bmspackcurrent() {
+inline void telemetry::set_has_sol6() {
   _has_bits_[1] |= 0x00000001u;
 }
-inline void telemetry::clear_has_bmspackcurrent() {
+inline void telemetry::clear_has_sol6() {
   _has_bits_[1] &= ~0x00000001u;
 }
-inline void telemetry::clear_bmspackcurrent() {
-  bmspackcurrent_ = 0;
-  clear_has_bmspackcurrent();
+inline void telemetry::clear_sol6() {
+  sol6_ = false;
+  clear_has_sol6();
 }
-inline ::google::protobuf::int32 telemetry::bmspackcurrent() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.BMSPackCurrent)
-  return bmspackcurrent_;
+inline bool telemetry::sol6() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.sol6)
+  return sol6_;
 }
-inline void telemetry::set_bmspackcurrent(::google::protobuf::int32 value) {
-  set_has_bmspackcurrent();
-  bmspackcurrent_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.BMSPackCurrent)
+inline void telemetry::set_sol6(bool value) {
+  set_has_sol6();
+  sol6_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.sol6)
 }
 
-// optional int32 BMStempForCells = 34;
-inline bool telemetry::has_bmstempforcells() const {
+// optional int32 hp = 38;
+inline bool telemetry::has_hp() const {
   return (_has_bits_[1] & 0x00000002u) != 0;
 }
-inline void telemetry::set_has_bmstempforcells() {
+inline void telemetry::set_has_hp() {
   _has_bits_[1] |= 0x00000002u;
 }
-inline void telemetry::clear_has_bmstempforcells() {
+inline void telemetry::clear_has_hp() {
   _has_bits_[1] &= ~0x00000002u;
 }
-inline void telemetry::clear_bmstempforcells() {
-  bmstempforcells_ = 0;
-  clear_has_bmstempforcells();
+inline void telemetry::clear_hp() {
+  hp_ = 0;
+  clear_has_hp();
 }
-inline ::google::protobuf::int32 telemetry::bmstempforcells() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.BMStempForCells)
-  return bmstempforcells_;
+inline ::google::protobuf::int32 telemetry::hp() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.hp)
+  return hp_;
 }
-inline void telemetry::set_bmstempforcells(::google::protobuf::int32 value) {
-  set_has_bmstempforcells();
-  bmstempforcells_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.BMStempForCells)
+inline void telemetry::set_hp(::google::protobuf::int32 value) {
+  set_has_hp();
+  hp_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.hp)
 }
 
-// optional int32 BMSMinCellVoltage = 35;
-inline bool telemetry::has_bmsmincellvoltage() const {
+// optional int32 lp1 = 39;
+inline bool telemetry::has_lp1() const {
   return (_has_bits_[1] & 0x00000004u) != 0;
 }
-inline void telemetry::set_has_bmsmincellvoltage() {
+inline void telemetry::set_has_lp1() {
   _has_bits_[1] |= 0x00000004u;
 }
-inline void telemetry::clear_has_bmsmincellvoltage() {
+inline void telemetry::clear_has_lp1() {
   _has_bits_[1] &= ~0x00000004u;
 }
-inline void telemetry::clear_bmsmincellvoltage() {
-  bmsmincellvoltage_ = 0;
-  clear_has_bmsmincellvoltage();
+inline void telemetry::clear_lp1() {
+  lp1_ = 0;
+  clear_has_lp1();
 }
-inline ::google::protobuf::int32 telemetry::bmsmincellvoltage() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.BMSMinCellVoltage)
-  return bmsmincellvoltage_;
+inline ::google::protobuf::int32 telemetry::lp1() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.lp1)
+  return lp1_;
 }
-inline void telemetry::set_bmsmincellvoltage(::google::protobuf::int32 value) {
-  set_has_bmsmincellvoltage();
-  bmsmincellvoltage_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.BMSMinCellVoltage)
+inline void telemetry::set_lp1(::google::protobuf::int32 value) {
+  set_has_lp1();
+  lp1_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.lp1)
 }
 
-// optional int32 BMSmaxCellVoltage = 36;
-inline bool telemetry::has_bmsmaxcellvoltage() const {
+// optional int32 lp2 = 40;
+inline bool telemetry::has_lp2() const {
   return (_has_bits_[1] & 0x00000008u) != 0;
 }
-inline void telemetry::set_has_bmsmaxcellvoltage() {
+inline void telemetry::set_has_lp2() {
   _has_bits_[1] |= 0x00000008u;
 }
-inline void telemetry::clear_has_bmsmaxcellvoltage() {
+inline void telemetry::clear_has_lp2() {
   _has_bits_[1] &= ~0x00000008u;
 }
-inline void telemetry::clear_bmsmaxcellvoltage() {
-  bmsmaxcellvoltage_ = 0;
-  clear_has_bmsmaxcellvoltage();
+inline void telemetry::clear_lp2() {
+  lp2_ = 0;
+  clear_has_lp2();
 }
-inline ::google::protobuf::int32 telemetry::bmsmaxcellvoltage() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.BMSmaxCellVoltage)
-  return bmsmaxcellvoltage_;
+inline ::google::protobuf::int32 telemetry::lp2() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.lp2)
+  return lp2_;
 }
-inline void telemetry::set_bmsmaxcellvoltage(::google::protobuf::int32 value) {
-  set_has_bmsmaxcellvoltage();
-  bmsmaxcellvoltage_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.BMSmaxCellVoltage)
+inline void telemetry::set_lp2(::google::protobuf::int32 value) {
+  set_has_lp2();
+  lp2_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.lp2)
 }
 
-// optional int32 brakeNode1State = 37;
-inline bool telemetry::has_brakenode1state() const {
+// optional int32 lp3 = 41;
+inline bool telemetry::has_lp3() const {
   return (_has_bits_[1] & 0x00000010u) != 0;
 }
-inline void telemetry::set_has_brakenode1state() {
+inline void telemetry::set_has_lp3() {
   _has_bits_[1] |= 0x00000010u;
 }
-inline void telemetry::clear_has_brakenode1state() {
+inline void telemetry::clear_has_lp3() {
   _has_bits_[1] &= ~0x00000010u;
 }
-inline void telemetry::clear_brakenode1state() {
-  brakenode1state_ = 0;
-  clear_has_brakenode1state();
+inline void telemetry::clear_lp3() {
+  lp3_ = 0;
+  clear_has_lp3();
 }
-inline ::google::protobuf::int32 telemetry::brakenode1state() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.brakeNode1State)
-  return brakenode1state_;
+inline ::google::protobuf::int32 telemetry::lp3() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.lp3)
+  return lp3_;
 }
-inline void telemetry::set_brakenode1state(::google::protobuf::int32 value) {
-  set_has_brakenode1state();
-  brakenode1state_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.brakeNode1State)
+inline void telemetry::set_lp3(::google::protobuf::int32 value) {
+  set_has_lp3();
+  lp3_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.lp3)
 }
 
-// optional int32 brakeNode1ValueFlags = 38;
-inline bool telemetry::has_brakenode1valueflags() const {
+// optional int32 lp4 = 42;
+inline bool telemetry::has_lp4() const {
   return (_has_bits_[1] & 0x00000020u) != 0;
 }
-inline void telemetry::set_has_brakenode1valueflags() {
+inline void telemetry::set_has_lp4() {
   _has_bits_[1] |= 0x00000020u;
 }
-inline void telemetry::clear_has_brakenode1valueflags() {
+inline void telemetry::clear_has_lp4() {
   _has_bits_[1] &= ~0x00000020u;
 }
-inline void telemetry::clear_brakenode1valueflags() {
-  brakenode1valueflags_ = 0;
-  clear_has_brakenode1valueflags();
+inline void telemetry::clear_lp4() {
+  lp4_ = 0;
+  clear_has_lp4();
 }
-inline ::google::protobuf::int32 telemetry::brakenode1valueflags() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.brakeNode1ValueFlags)
-  return brakenode1valueflags_;
+inline ::google::protobuf::int32 telemetry::lp4() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.lp4)
+  return lp4_;
 }
-inline void telemetry::set_brakenode1valueflags(::google::protobuf::int32 value) {
-  set_has_brakenode1valueflags();
-  brakenode1valueflags_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.brakeNode1ValueFlags)
+inline void telemetry::set_lp4(::google::protobuf::int32 value) {
+  set_has_lp4();
+  lp4_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.lp4)
 }
 
-// optional int32 brakeNode1adcValues = 39;
-inline bool telemetry::has_brakenode1adcvalues() const {
+// optional int32 pressureVesselTemperature = 43;
+inline bool telemetry::has_pressurevesseltemperature() const {
   return (_has_bits_[1] & 0x00000040u) != 0;
 }
-inline void telemetry::set_has_brakenode1adcvalues() {
+inline void telemetry::set_has_pressurevesseltemperature() {
   _has_bits_[1] |= 0x00000040u;
 }
-inline void telemetry::clear_has_brakenode1adcvalues() {
+inline void telemetry::clear_has_pressurevesseltemperature() {
   _has_bits_[1] &= ~0x00000040u;
 }
-inline void telemetry::clear_brakenode1adcvalues() {
-  brakenode1adcvalues_ = 0;
-  clear_has_brakenode1adcvalues();
+inline void telemetry::clear_pressurevesseltemperature() {
+  pressurevesseltemperature_ = 0;
+  clear_has_pressurevesseltemperature();
 }
-inline ::google::protobuf::int32 telemetry::brakenode1adcvalues() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.brakeNode1adcValues)
-  return brakenode1adcvalues_;
+inline ::google::protobuf::int32 telemetry::pressurevesseltemperature() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.pressureVesselTemperature)
+  return pressurevesseltemperature_;
 }
-inline void telemetry::set_brakenode1adcvalues(::google::protobuf::int32 value) {
-  set_has_brakenode1adcvalues();
-  brakenode1adcvalues_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.brakeNode1adcValues)
+inline void telemetry::set_pressurevesseltemperature(::google::protobuf::int32 value) {
+  set_has_pressurevesseltemperature();
+  pressurevesseltemperature_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.pressureVesselTemperature)
 }
 
-// optional int32 brakeNode1solenoidValues = 40;
-inline bool telemetry::has_brakenode1solenoidvalues() const {
+// optional int32 electronicsEnclosurePressure = 44;
+inline bool telemetry::has_electronicsenclosurepressure() const {
   return (_has_bits_[1] & 0x00000080u) != 0;
 }
-inline void telemetry::set_has_brakenode1solenoidvalues() {
+inline void telemetry::set_has_electronicsenclosurepressure() {
   _has_bits_[1] |= 0x00000080u;
 }
-inline void telemetry::clear_has_brakenode1solenoidvalues() {
+inline void telemetry::clear_has_electronicsenclosurepressure() {
   _has_bits_[1] &= ~0x00000080u;
 }
-inline void telemetry::clear_brakenode1solenoidvalues() {
-  brakenode1solenoidvalues_ = 0;
-  clear_has_brakenode1solenoidvalues();
+inline void telemetry::clear_electronicsenclosurepressure() {
+  electronicsenclosurepressure_ = 0;
+  clear_has_electronicsenclosurepressure();
 }
-inline ::google::protobuf::int32 telemetry::brakenode1solenoidvalues() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.brakeNode1solenoidValues)
-  return brakenode1solenoidvalues_;
+inline ::google::protobuf::int32 telemetry::electronicsenclosurepressure() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.electronicsEnclosurePressure)
+  return electronicsenclosurepressure_;
 }
-inline void telemetry::set_brakenode1solenoidvalues(::google::protobuf::int32 value) {
-  set_has_brakenode1solenoidvalues();
-  brakenode1solenoidvalues_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.brakeNode1solenoidValues)
+inline void telemetry::set_electronicsenclosurepressure(::google::protobuf::int32 value) {
+  set_has_electronicsenclosurepressure();
+  electronicsenclosurepressure_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.electronicsEnclosurePressure)
 }
 
-// optional int32 brakeNode1dacValues = 41;
-inline bool telemetry::has_brakenode1dacvalues() const {
+// optional int32 railDisplacementX = 45;
+inline bool telemetry::has_raildisplacementx() const {
   return (_has_bits_[1] & 0x00000100u) != 0;
 }
-inline void telemetry::set_has_brakenode1dacvalues() {
+inline void telemetry::set_has_raildisplacementx() {
   _has_bits_[1] |= 0x00000100u;
 }
-inline void telemetry::clear_has_brakenode1dacvalues() {
+inline void telemetry::clear_has_raildisplacementx() {
   _has_bits_[1] &= ~0x00000100u;
 }
-inline void telemetry::clear_brakenode1dacvalues() {
-  brakenode1dacvalues_ = 0;
-  clear_has_brakenode1dacvalues();
+inline void telemetry::clear_raildisplacementx() {
+  raildisplacementx_ = 0;
+  clear_has_raildisplacementx();
 }
-inline ::google::protobuf::int32 telemetry::brakenode1dacvalues() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.brakeNode1dacValues)
-  return brakenode1dacvalues_;
+inline ::google::protobuf::int32 telemetry::raildisplacementx() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.railDisplacementX)
+  return raildisplacementx_;
 }
-inline void telemetry::set_brakenode1dacvalues(::google::protobuf::int32 value) {
-  set_has_brakenode1dacvalues();
-  brakenode1dacvalues_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.brakeNode1dacValues)
+inline void telemetry::set_raildisplacementx(::google::protobuf::int32 value) {
+  set_has_raildisplacementx();
+  raildisplacementx_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.railDisplacementX)
 }
 
-// optional int32 brakeNode1gpioValues = 42;
-inline bool telemetry::has_brakenode1gpiovalues() const {
+// optional int32 railDisplacementY = 46;
+inline bool telemetry::has_raildisplacementy() const {
   return (_has_bits_[1] & 0x00000200u) != 0;
 }
-inline void telemetry::set_has_brakenode1gpiovalues() {
+inline void telemetry::set_has_raildisplacementy() {
   _has_bits_[1] |= 0x00000200u;
 }
-inline void telemetry::clear_has_brakenode1gpiovalues() {
+inline void telemetry::clear_has_raildisplacementy() {
   _has_bits_[1] &= ~0x00000200u;
 }
-inline void telemetry::clear_brakenode1gpiovalues() {
-  brakenode1gpiovalues_ = 0;
-  clear_has_brakenode1gpiovalues();
+inline void telemetry::clear_raildisplacementy() {
+  raildisplacementy_ = 0;
+  clear_has_raildisplacementy();
 }
-inline ::google::protobuf::int32 telemetry::brakenode1gpiovalues() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.brakeNode1gpioValues)
-  return brakenode1gpiovalues_;
+inline ::google::protobuf::int32 telemetry::raildisplacementy() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.railDisplacementY)
+  return raildisplacementy_;
 }
-inline void telemetry::set_brakenode1gpiovalues(::google::protobuf::int32 value) {
-  set_has_brakenode1gpiovalues();
-  brakenode1gpiovalues_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.brakeNode1gpioValues)
-}
-
-// optional int32 brakeNode2bbbState = 43;
-inline bool telemetry::has_brakenode2bbbstate() const {
-  return (_has_bits_[1] & 0x00000400u) != 0;
-}
-inline void telemetry::set_has_brakenode2bbbstate() {
-  _has_bits_[1] |= 0x00000400u;
-}
-inline void telemetry::clear_has_brakenode2bbbstate() {
-  _has_bits_[1] &= ~0x00000400u;
-}
-inline void telemetry::clear_brakenode2bbbstate() {
-  brakenode2bbbstate_ = 0;
-  clear_has_brakenode2bbbstate();
-}
-inline ::google::protobuf::int32 telemetry::brakenode2bbbstate() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.brakeNode2bbbState)
-  return brakenode2bbbstate_;
-}
-inline void telemetry::set_brakenode2bbbstate(::google::protobuf::int32 value) {
-  set_has_brakenode2bbbstate();
-  brakenode2bbbstate_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.brakeNode2bbbState)
+inline void telemetry::set_raildisplacementy(::google::protobuf::int32 value) {
+  set_has_raildisplacementy();
+  raildisplacementy_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.railDisplacementY)
 }
 
-// optional int32 brakeNode2State = 44;
-inline bool telemetry::has_brakenode2state() const {
+// optional int32 tubePressure = 48;
+inline bool telemetry::has_tubepressure() const {
   return (_has_bits_[1] & 0x00000800u) != 0;
 }
-inline void telemetry::set_has_brakenode2state() {
+inline void telemetry::set_has_tubepressure() {
   _has_bits_[1] |= 0x00000800u;
 }
-inline void telemetry::clear_has_brakenode2state() {
+inline void telemetry::clear_has_tubepressure() {
   _has_bits_[1] &= ~0x00000800u;
 }
-inline void telemetry::clear_brakenode2state() {
-  brakenode2state_ = 0;
-  clear_has_brakenode2state();
+inline void telemetry::clear_tubepressure() {
+  tubepressure_ = 0;
+  clear_has_tubepressure();
 }
-inline ::google::protobuf::int32 telemetry::brakenode2state() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.brakeNode2State)
-  return brakenode2state_;
+inline ::google::protobuf::int32 telemetry::tubepressure() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.tubePressure)
+  return tubepressure_;
 }
-inline void telemetry::set_brakenode2state(::google::protobuf::int32 value) {
-  set_has_brakenode2state();
-  brakenode2state_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.brakeNode2State)
+inline void telemetry::set_tubepressure(::google::protobuf::int32 value) {
+  set_has_tubepressure();
+  tubepressure_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.tubePressure)
 }
 
-// optional int32 brakeNode2ValueFlags = 45;
-inline bool telemetry::has_brakenode2valueflags() const {
+// optional int32 coolantPressure1 = 49;
+inline bool telemetry::has_coolantpressure1() const {
   return (_has_bits_[1] & 0x00001000u) != 0;
 }
-inline void telemetry::set_has_brakenode2valueflags() {
+inline void telemetry::set_has_coolantpressure1() {
   _has_bits_[1] |= 0x00001000u;
 }
-inline void telemetry::clear_has_brakenode2valueflags() {
+inline void telemetry::clear_has_coolantpressure1() {
   _has_bits_[1] &= ~0x00001000u;
 }
-inline void telemetry::clear_brakenode2valueflags() {
-  brakenode2valueflags_ = 0;
-  clear_has_brakenode2valueflags();
+inline void telemetry::clear_coolantpressure1() {
+  coolantpressure1_ = 0;
+  clear_has_coolantpressure1();
 }
-inline ::google::protobuf::int32 telemetry::brakenode2valueflags() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.brakeNode2ValueFlags)
-  return brakenode2valueflags_;
+inline ::google::protobuf::int32 telemetry::coolantpressure1() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.coolantPressure1)
+  return coolantpressure1_;
 }
-inline void telemetry::set_brakenode2valueflags(::google::protobuf::int32 value) {
-  set_has_brakenode2valueflags();
-  brakenode2valueflags_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.brakeNode2ValueFlags)
+inline void telemetry::set_coolantpressure1(::google::protobuf::int32 value) {
+  set_has_coolantpressure1();
+  coolantpressure1_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.coolantPressure1)
 }
 
-// optional int32 brakeNode2adcValues = 46;
-inline bool telemetry::has_brakenode2adcvalues() const {
+// optional int32 coolantPressure2 = 50;
+inline bool telemetry::has_coolantpressure2() const {
   return (_has_bits_[1] & 0x00002000u) != 0;
 }
-inline void telemetry::set_has_brakenode2adcvalues() {
+inline void telemetry::set_has_coolantpressure2() {
   _has_bits_[1] |= 0x00002000u;
 }
-inline void telemetry::clear_has_brakenode2adcvalues() {
+inline void telemetry::clear_has_coolantpressure2() {
   _has_bits_[1] &= ~0x00002000u;
 }
-inline void telemetry::clear_brakenode2adcvalues() {
-  brakenode2adcvalues_ = 0;
-  clear_has_brakenode2adcvalues();
+inline void telemetry::clear_coolantpressure2() {
+  coolantpressure2_ = 0;
+  clear_has_coolantpressure2();
 }
-inline ::google::protobuf::int32 telemetry::brakenode2adcvalues() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.brakeNode2adcValues)
-  return brakenode2adcvalues_;
+inline ::google::protobuf::int32 telemetry::coolantpressure2() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.coolantPressure2)
+  return coolantpressure2_;
 }
-inline void telemetry::set_brakenode2adcvalues(::google::protobuf::int32 value) {
-  set_has_brakenode2adcvalues();
-  brakenode2adcvalues_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.brakeNode2adcValues)
+inline void telemetry::set_coolantpressure2(::google::protobuf::int32 value) {
+  set_has_coolantpressure2();
+  coolantpressure2_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.coolantPressure2)
 }
 
-// optional int32 brakeNode2SolenoidValues = 47;
-inline bool telemetry::has_brakenode2solenoidvalues() const {
+// optional int32 coolantPressure3 = 51;
+inline bool telemetry::has_coolantpressure3() const {
   return (_has_bits_[1] & 0x00004000u) != 0;
 }
-inline void telemetry::set_has_brakenode2solenoidvalues() {
+inline void telemetry::set_has_coolantpressure3() {
   _has_bits_[1] |= 0x00004000u;
 }
-inline void telemetry::clear_has_brakenode2solenoidvalues() {
+inline void telemetry::clear_has_coolantpressure3() {
   _has_bits_[1] &= ~0x00004000u;
 }
-inline void telemetry::clear_brakenode2solenoidvalues() {
-  brakenode2solenoidvalues_ = 0;
-  clear_has_brakenode2solenoidvalues();
+inline void telemetry::clear_coolantpressure3() {
+  coolantpressure3_ = 0;
+  clear_has_coolantpressure3();
 }
-inline ::google::protobuf::int32 telemetry::brakenode2solenoidvalues() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.brakeNode2SolenoidValues)
-  return brakenode2solenoidvalues_;
+inline ::google::protobuf::int32 telemetry::coolantpressure3() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.coolantPressure3)
+  return coolantpressure3_;
 }
-inline void telemetry::set_brakenode2solenoidvalues(::google::protobuf::int32 value) {
-  set_has_brakenode2solenoidvalues();
-  brakenode2solenoidvalues_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.brakeNode2SolenoidValues)
+inline void telemetry::set_coolantpressure3(::google::protobuf::int32 value) {
+  set_has_coolantpressure3();
+  coolantpressure3_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.coolantPressure3)
 }
 
-// optional int32 brakeNode2dacValues = 48;
-inline bool telemetry::has_brakenode2dacvalues() const {
+// optional int32 coolantTemperature = 52;
+inline bool telemetry::has_coolanttemperature() const {
   return (_has_bits_[1] & 0x00008000u) != 0;
 }
-inline void telemetry::set_has_brakenode2dacvalues() {
+inline void telemetry::set_has_coolanttemperature() {
   _has_bits_[1] |= 0x00008000u;
 }
-inline void telemetry::clear_has_brakenode2dacvalues() {
+inline void telemetry::clear_has_coolanttemperature() {
   _has_bits_[1] &= ~0x00008000u;
 }
-inline void telemetry::clear_brakenode2dacvalues() {
-  brakenode2dacvalues_ = 0;
-  clear_has_brakenode2dacvalues();
+inline void telemetry::clear_coolanttemperature() {
+  coolanttemperature_ = 0;
+  clear_has_coolanttemperature();
 }
-inline ::google::protobuf::int32 telemetry::brakenode2dacvalues() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.brakeNode2dacValues)
-  return brakenode2dacvalues_;
+inline ::google::protobuf::int32 telemetry::coolanttemperature() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.coolantTemperature)
+  return coolanttemperature_;
 }
-inline void telemetry::set_brakenode2dacvalues(::google::protobuf::int32 value) {
-  set_has_brakenode2dacvalues();
-  brakenode2dacvalues_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.brakeNode2dacValues)
+inline void telemetry::set_coolanttemperature(::google::protobuf::int32 value) {
+  set_has_coolanttemperature();
+  coolanttemperature_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.coolantTemperature)
 }
 
-// optional int32 brakeNode2gpioValues = 49;
-inline bool telemetry::has_brakenode2gpiovalues() const {
+// optional int32 railTemperature = 53;
+inline bool telemetry::has_railtemperature() const {
   return (_has_bits_[1] & 0x00010000u) != 0;
 }
-inline void telemetry::set_has_brakenode2gpiovalues() {
+inline void telemetry::set_has_railtemperature() {
   _has_bits_[1] |= 0x00010000u;
 }
-inline void telemetry::clear_has_brakenode2gpiovalues() {
+inline void telemetry::clear_has_railtemperature() {
   _has_bits_[1] &= ~0x00010000u;
 }
-inline void telemetry::clear_brakenode2gpiovalues() {
-  brakenode2gpiovalues_ = 0;
-  clear_has_brakenode2gpiovalues();
+inline void telemetry::clear_railtemperature() {
+  railtemperature_ = 0;
+  clear_has_railtemperature();
 }
-inline ::google::protobuf::int32 telemetry::brakenode2gpiovalues() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.brakeNode2gpioValues)
-  return brakenode2gpiovalues_;
+inline ::google::protobuf::int32 telemetry::railtemperature() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.railTemperature)
+  return railtemperature_;
 }
-inline void telemetry::set_brakenode2gpiovalues(::google::protobuf::int32 value) {
-  set_has_brakenode2gpiovalues();
-  brakenode2gpiovalues_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.brakeNode2gpioValues)
-}
-
-// optional int32 rearSensorNodeValueFlags = 50;
-inline bool telemetry::has_rearsensornodevalueflags() const {
-  return (_has_bits_[1] & 0x00020000u) != 0;
-}
-inline void telemetry::set_has_rearsensornodevalueflags() {
-  _has_bits_[1] |= 0x00020000u;
-}
-inline void telemetry::clear_has_rearsensornodevalueflags() {
-  _has_bits_[1] &= ~0x00020000u;
-}
-inline void telemetry::clear_rearsensornodevalueflags() {
-  rearsensornodevalueflags_ = 0;
-  clear_has_rearsensornodevalueflags();
-}
-inline ::google::protobuf::int32 telemetry::rearsensornodevalueflags() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.rearSensorNodeValueFlags)
-  return rearsensornodevalueflags_;
-}
-inline void telemetry::set_rearsensornodevalueflags(::google::protobuf::int32 value) {
-  set_has_rearsensornodevalueflags();
-  rearsensornodevalueflags_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.rearSensorNodeValueFlags)
+inline void telemetry::set_railtemperature(::google::protobuf::int32 value) {
+  set_has_railtemperature();
+  railtemperature_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.railTemperature)
 }
 
-// optional int32 rearSensorNodeadcValues = 51;
-inline bool telemetry::has_rearsensornodeadcvalues() const {
+// optional int32 pack1Voltage = 55;
+inline bool telemetry::has_pack1voltage() const {
   return (_has_bits_[1] & 0x00040000u) != 0;
 }
-inline void telemetry::set_has_rearsensornodeadcvalues() {
+inline void telemetry::set_has_pack1voltage() {
   _has_bits_[1] |= 0x00040000u;
 }
-inline void telemetry::clear_has_rearsensornodeadcvalues() {
+inline void telemetry::clear_has_pack1voltage() {
   _has_bits_[1] &= ~0x00040000u;
 }
-inline void telemetry::clear_rearsensornodeadcvalues() {
-  rearsensornodeadcvalues_ = 0;
-  clear_has_rearsensornodeadcvalues();
+inline void telemetry::clear_pack1voltage() {
+  pack1voltage_ = 0;
+  clear_has_pack1voltage();
 }
-inline ::google::protobuf::int32 telemetry::rearsensornodeadcvalues() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.rearSensorNodeadcValues)
-  return rearsensornodeadcvalues_;
+inline ::google::protobuf::int32 telemetry::pack1voltage() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.pack1Voltage)
+  return pack1voltage_;
 }
-inline void telemetry::set_rearsensornodeadcvalues(::google::protobuf::int32 value) {
-  set_has_rearsensornodeadcvalues();
-  rearsensornodeadcvalues_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.rearSensorNodeadcValues)
+inline void telemetry::set_pack1voltage(::google::protobuf::int32 value) {
+  set_has_pack1voltage();
+  pack1voltage_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.pack1Voltage)
 }
 
-// optional int32 rearSensorNodesolenoidValues = 52;
-inline bool telemetry::has_rearsensornodesolenoidvalues() const {
+// optional int32 pack2Voltage = 56;
+inline bool telemetry::has_pack2voltage() const {
   return (_has_bits_[1] & 0x00080000u) != 0;
 }
-inline void telemetry::set_has_rearsensornodesolenoidvalues() {
+inline void telemetry::set_has_pack2voltage() {
   _has_bits_[1] |= 0x00080000u;
 }
-inline void telemetry::clear_has_rearsensornodesolenoidvalues() {
+inline void telemetry::clear_has_pack2voltage() {
   _has_bits_[1] &= ~0x00080000u;
 }
-inline void telemetry::clear_rearsensornodesolenoidvalues() {
-  rearsensornodesolenoidvalues_ = 0;
-  clear_has_rearsensornodesolenoidvalues();
+inline void telemetry::clear_pack2voltage() {
+  pack2voltage_ = 0;
+  clear_has_pack2voltage();
 }
-inline ::google::protobuf::int32 telemetry::rearsensornodesolenoidvalues() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.rearSensorNodesolenoidValues)
-  return rearsensornodesolenoidvalues_;
+inline ::google::protobuf::int32 telemetry::pack2voltage() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.pack2Voltage)
+  return pack2voltage_;
 }
-inline void telemetry::set_rearsensornodesolenoidvalues(::google::protobuf::int32 value) {
-  set_has_rearsensornodesolenoidvalues();
-  rearsensornodesolenoidvalues_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.rearSensorNodesolenoidValues)
+inline void telemetry::set_pack2voltage(::google::protobuf::int32 value) {
+  set_has_pack2voltage();
+  pack2voltage_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.pack2Voltage)
 }
 
-// optional int32 rearSensorNodedacValues = 53;
-inline bool telemetry::has_rearsensornodedacvalues() const {
+// optional int32 pack1Current = 57;
+inline bool telemetry::has_pack1current() const {
   return (_has_bits_[1] & 0x00100000u) != 0;
 }
-inline void telemetry::set_has_rearsensornodedacvalues() {
+inline void telemetry::set_has_pack1current() {
   _has_bits_[1] |= 0x00100000u;
 }
-inline void telemetry::clear_has_rearsensornodedacvalues() {
+inline void telemetry::clear_has_pack1current() {
   _has_bits_[1] &= ~0x00100000u;
 }
-inline void telemetry::clear_rearsensornodedacvalues() {
-  rearsensornodedacvalues_ = 0;
-  clear_has_rearsensornodedacvalues();
+inline void telemetry::clear_pack1current() {
+  pack1current_ = 0;
+  clear_has_pack1current();
 }
-inline ::google::protobuf::int32 telemetry::rearsensornodedacvalues() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.rearSensorNodedacValues)
-  return rearsensornodedacvalues_;
+inline ::google::protobuf::int32 telemetry::pack1current() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.pack1Current)
+  return pack1current_;
 }
-inline void telemetry::set_rearsensornodedacvalues(::google::protobuf::int32 value) {
-  set_has_rearsensornodedacvalues();
-  rearsensornodedacvalues_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.rearSensorNodedacValues)
+inline void telemetry::set_pack1current(::google::protobuf::int32 value) {
+  set_has_pack1current();
+  pack1current_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.pack1Current)
 }
 
-// optional int32 rearSensorNodegpioValues = 54;
-inline bool telemetry::has_rearsensornodegpiovalues() const {
+// optional int32 pack2Current = 58;
+inline bool telemetry::has_pack2current() const {
   return (_has_bits_[1] & 0x00200000u) != 0;
 }
-inline void telemetry::set_has_rearsensornodegpiovalues() {
+inline void telemetry::set_has_pack2current() {
   _has_bits_[1] |= 0x00200000u;
 }
-inline void telemetry::clear_has_rearsensornodegpiovalues() {
+inline void telemetry::clear_has_pack2current() {
   _has_bits_[1] &= ~0x00200000u;
 }
-inline void telemetry::clear_rearsensornodegpiovalues() {
-  rearsensornodegpiovalues_ = 0;
-  clear_has_rearsensornodegpiovalues();
+inline void telemetry::clear_pack2current() {
+  pack2current_ = 0;
+  clear_has_pack2current();
 }
-inline ::google::protobuf::int32 telemetry::rearsensornodegpiovalues() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.rearSensorNodegpioValues)
-  return rearsensornodegpiovalues_;
+inline ::google::protobuf::int32 telemetry::pack2current() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.pack2Current)
+  return pack2current_;
 }
-inline void telemetry::set_rearsensornodegpiovalues(::google::protobuf::int32 value) {
-  set_has_rearsensornodegpiovalues();
-  rearsensornodegpiovalues_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.rearSensorNodegpioValues)
+inline void telemetry::set_pack2current(::google::protobuf::int32 value) {
+  set_has_pack2current();
+  pack2current_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.pack2Current)
 }
 
-// optional int32 lvdcNodeState = 55;
-inline bool telemetry::has_lvdcnodestate() const {
+// optional int32 rail1Voltage = 59;
+inline bool telemetry::has_rail1voltage() const {
   return (_has_bits_[1] & 0x00400000u) != 0;
 }
-inline void telemetry::set_has_lvdcnodestate() {
+inline void telemetry::set_has_rail1voltage() {
   _has_bits_[1] |= 0x00400000u;
 }
-inline void telemetry::clear_has_lvdcnodestate() {
+inline void telemetry::clear_has_rail1voltage() {
   _has_bits_[1] &= ~0x00400000u;
 }
-inline void telemetry::clear_lvdcnodestate() {
-  lvdcnodestate_ = 0;
-  clear_has_lvdcnodestate();
+inline void telemetry::clear_rail1voltage() {
+  rail1voltage_ = 0;
+  clear_has_rail1voltage();
 }
-inline ::google::protobuf::int32 telemetry::lvdcnodestate() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.lvdcNodeState)
-  return lvdcnodestate_;
+inline ::google::protobuf::int32 telemetry::rail1voltage() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.rail1Voltage)
+  return rail1voltage_;
 }
-inline void telemetry::set_lvdcnodestate(::google::protobuf::int32 value) {
-  set_has_lvdcnodestate();
-  lvdcnodestate_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.lvdcNodeState)
+inline void telemetry::set_rail1voltage(::google::protobuf::int32 value) {
+  set_has_rail1voltage();
+  rail1voltage_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.rail1Voltage)
 }
 
-// optional int32 lvdcNodePack1Voltage = 56;
-inline bool telemetry::has_lvdcnodepack1voltage() const {
+// optional int32 rail2Voltage = 60;
+inline bool telemetry::has_rail2voltage() const {
   return (_has_bits_[1] & 0x00800000u) != 0;
 }
-inline void telemetry::set_has_lvdcnodepack1voltage() {
+inline void telemetry::set_has_rail2voltage() {
   _has_bits_[1] |= 0x00800000u;
 }
-inline void telemetry::clear_has_lvdcnodepack1voltage() {
+inline void telemetry::clear_has_rail2voltage() {
   _has_bits_[1] &= ~0x00800000u;
 }
-inline void telemetry::clear_lvdcnodepack1voltage() {
-  lvdcnodepack1voltage_ = 0;
-  clear_has_lvdcnodepack1voltage();
+inline void telemetry::clear_rail2voltage() {
+  rail2voltage_ = 0;
+  clear_has_rail2voltage();
 }
-inline ::google::protobuf::int32 telemetry::lvdcnodepack1voltage() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.lvdcNodePack1Voltage)
-  return lvdcnodepack1voltage_;
+inline ::google::protobuf::int32 telemetry::rail2voltage() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.rail2Voltage)
+  return rail2voltage_;
 }
-inline void telemetry::set_lvdcnodepack1voltage(::google::protobuf::int32 value) {
-  set_has_lvdcnodepack1voltage();
-  lvdcnodepack1voltage_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.lvdcNodePack1Voltage)
+inline void telemetry::set_rail2voltage(::google::protobuf::int32 value) {
+  set_has_rail2voltage();
+  rail2voltage_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.rail2Voltage)
 }
 
-// optional int32 lvdcNodePack1Current = 57;
-inline bool telemetry::has_lvdcnodepack1current() const {
+// optional int32 rail3Voltage = 61;
+inline bool telemetry::has_rail3voltage() const {
   return (_has_bits_[1] & 0x01000000u) != 0;
 }
-inline void telemetry::set_has_lvdcnodepack1current() {
+inline void telemetry::set_has_rail3voltage() {
   _has_bits_[1] |= 0x01000000u;
 }
-inline void telemetry::clear_has_lvdcnodepack1current() {
+inline void telemetry::clear_has_rail3voltage() {
   _has_bits_[1] &= ~0x01000000u;
 }
-inline void telemetry::clear_lvdcnodepack1current() {
-  lvdcnodepack1current_ = 0;
-  clear_has_lvdcnodepack1current();
+inline void telemetry::clear_rail3voltage() {
+  rail3voltage_ = 0;
+  clear_has_rail3voltage();
 }
-inline ::google::protobuf::int32 telemetry::lvdcnodepack1current() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.lvdcNodePack1Current)
-  return lvdcnodepack1current_;
+inline ::google::protobuf::int32 telemetry::rail3voltage() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.rail3Voltage)
+  return rail3voltage_;
 }
-inline void telemetry::set_lvdcnodepack1current(::google::protobuf::int32 value) {
-  set_has_lvdcnodepack1current();
-  lvdcnodepack1current_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.lvdcNodePack1Current)
+inline void telemetry::set_rail3voltage(::google::protobuf::int32 value) {
+  set_has_rail3voltage();
+  rail3voltage_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.rail3Voltage)
 }
 
-// optional int32 lvdcNodeack2Voltage = 58;
-inline bool telemetry::has_lvdcnodeack2voltage() const {
+// optional int32 rail4Voltage = 62;
+inline bool telemetry::has_rail4voltage() const {
   return (_has_bits_[1] & 0x02000000u) != 0;
 }
-inline void telemetry::set_has_lvdcnodeack2voltage() {
+inline void telemetry::set_has_rail4voltage() {
   _has_bits_[1] |= 0x02000000u;
 }
-inline void telemetry::clear_has_lvdcnodeack2voltage() {
+inline void telemetry::clear_has_rail4voltage() {
   _has_bits_[1] &= ~0x02000000u;
 }
-inline void telemetry::clear_lvdcnodeack2voltage() {
-  lvdcnodeack2voltage_ = 0;
-  clear_has_lvdcnodeack2voltage();
+inline void telemetry::clear_rail4voltage() {
+  rail4voltage_ = 0;
+  clear_has_rail4voltage();
 }
-inline ::google::protobuf::int32 telemetry::lvdcnodeack2voltage() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.lvdcNodeack2Voltage)
-  return lvdcnodeack2voltage_;
+inline ::google::protobuf::int32 telemetry::rail4voltage() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.rail4Voltage)
+  return rail4voltage_;
 }
-inline void telemetry::set_lvdcnodeack2voltage(::google::protobuf::int32 value) {
-  set_has_lvdcnodeack2voltage();
-  lvdcnodeack2voltage_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.lvdcNodeack2Voltage)
+inline void telemetry::set_rail4voltage(::google::protobuf::int32 value) {
+  set_has_rail4voltage();
+  rail4voltage_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.rail4Voltage)
 }
 
-// optional int32 lvdcNodePack2Current = 59;
-inline bool telemetry::has_lvdcnodepack2current() const {
+// optional int32 railVoltageFlag = 72;
+inline bool telemetry::has_railvoltageflag() const {
+  return (_has_bits_[2] & 0x00000004u) != 0;
+}
+inline void telemetry::set_has_railvoltageflag() {
+  _has_bits_[2] |= 0x00000004u;
+}
+inline void telemetry::clear_has_railvoltageflag() {
+  _has_bits_[2] &= ~0x00000004u;
+}
+inline void telemetry::clear_railvoltageflag() {
+  railvoltageflag_ = 0;
+  clear_has_railvoltageflag();
+}
+inline ::google::protobuf::int32 telemetry::railvoltageflag() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.railVoltageFlag)
+  return railvoltageflag_;
+}
+inline void telemetry::set_railvoltageflag(::google::protobuf::int32 value) {
+  set_has_railvoltageflag();
+  railvoltageflag_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.railVoltageFlag)
+}
+
+// optional int32 railCurrentSensor1 = 63;
+inline bool telemetry::has_railcurrentsensor1() const {
   return (_has_bits_[1] & 0x04000000u) != 0;
 }
-inline void telemetry::set_has_lvdcnodepack2current() {
+inline void telemetry::set_has_railcurrentsensor1() {
   _has_bits_[1] |= 0x04000000u;
 }
-inline void telemetry::clear_has_lvdcnodepack2current() {
+inline void telemetry::clear_has_railcurrentsensor1() {
   _has_bits_[1] &= ~0x04000000u;
 }
-inline void telemetry::clear_lvdcnodepack2current() {
-  lvdcnodepack2current_ = 0;
-  clear_has_lvdcnodepack2current();
+inline void telemetry::clear_railcurrentsensor1() {
+  railcurrentsensor1_ = 0;
+  clear_has_railcurrentsensor1();
 }
-inline ::google::protobuf::int32 telemetry::lvdcnodepack2current() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.lvdcNodePack2Current)
-  return lvdcnodepack2current_;
+inline ::google::protobuf::int32 telemetry::railcurrentsensor1() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.railCurrentSensor1)
+  return railcurrentsensor1_;
 }
-inline void telemetry::set_lvdcnodepack2current(::google::protobuf::int32 value) {
-  set_has_lvdcnodepack2current();
-  lvdcnodepack2current_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.lvdcNodePack2Current)
+inline void telemetry::set_railcurrentsensor1(::google::protobuf::int32 value) {
+  set_has_railcurrentsensor1();
+  railcurrentsensor1_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.railCurrentSensor1)
 }
 
-// optional int32 lvdcNodeRailCurrentFlag = 60;
-inline bool telemetry::has_lvdcnoderailcurrentflag() const {
+// optional int32 railCurrentSensor2 = 64;
+inline bool telemetry::has_railcurrentsensor2() const {
   return (_has_bits_[1] & 0x08000000u) != 0;
 }
-inline void telemetry::set_has_lvdcnoderailcurrentflag() {
+inline void telemetry::set_has_railcurrentsensor2() {
   _has_bits_[1] |= 0x08000000u;
 }
-inline void telemetry::clear_has_lvdcnoderailcurrentflag() {
+inline void telemetry::clear_has_railcurrentsensor2() {
   _has_bits_[1] &= ~0x08000000u;
 }
-inline void telemetry::clear_lvdcnoderailcurrentflag() {
-  lvdcnoderailcurrentflag_ = 0;
-  clear_has_lvdcnoderailcurrentflag();
+inline void telemetry::clear_railcurrentsensor2() {
+  railcurrentsensor2_ = 0;
+  clear_has_railcurrentsensor2();
 }
-inline ::google::protobuf::int32 telemetry::lvdcnoderailcurrentflag() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.lvdcNodeRailCurrentFlag)
-  return lvdcnoderailcurrentflag_;
+inline ::google::protobuf::int32 telemetry::railcurrentsensor2() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.railCurrentSensor2)
+  return railcurrentsensor2_;
 }
-inline void telemetry::set_lvdcnoderailcurrentflag(::google::protobuf::int32 value) {
-  set_has_lvdcnoderailcurrentflag();
-  lvdcnoderailcurrentflag_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.lvdcNodeRailCurrentFlag)
+inline void telemetry::set_railcurrentsensor2(::google::protobuf::int32 value) {
+  set_has_railcurrentsensor2();
+  railcurrentsensor2_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.railCurrentSensor2)
 }
 
-// optional int32 lvdcNodeRailVoltageFlag = 61;
-inline bool telemetry::has_lvdcnoderailvoltageflag() const {
+// optional int32 railCurrentSensor3 = 65;
+inline bool telemetry::has_railcurrentsensor3() const {
   return (_has_bits_[1] & 0x10000000u) != 0;
 }
-inline void telemetry::set_has_lvdcnoderailvoltageflag() {
+inline void telemetry::set_has_railcurrentsensor3() {
   _has_bits_[1] |= 0x10000000u;
 }
-inline void telemetry::clear_has_lvdcnoderailvoltageflag() {
+inline void telemetry::clear_has_railcurrentsensor3() {
   _has_bits_[1] &= ~0x10000000u;
 }
-inline void telemetry::clear_lvdcnoderailvoltageflag() {
-  lvdcnoderailvoltageflag_ = 0;
-  clear_has_lvdcnoderailvoltageflag();
+inline void telemetry::clear_railcurrentsensor3() {
+  railcurrentsensor3_ = 0;
+  clear_has_railcurrentsensor3();
 }
-inline ::google::protobuf::int32 telemetry::lvdcnoderailvoltageflag() const {
-  // @@protoc_insertion_point(field_get:pds.telemetry.lvdcNodeRailVoltageFlag)
-  return lvdcnoderailvoltageflag_;
+inline ::google::protobuf::int32 telemetry::railcurrentsensor3() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.railCurrentSensor3)
+  return railcurrentsensor3_;
 }
-inline void telemetry::set_lvdcnoderailvoltageflag(::google::protobuf::int32 value) {
-  set_has_lvdcnoderailvoltageflag();
-  lvdcnoderailvoltageflag_ = value;
-  // @@protoc_insertion_point(field_set:pds.telemetry.lvdcNodeRailVoltageFlag)
+inline void telemetry::set_railcurrentsensor3(::google::protobuf::int32 value) {
+  set_has_railcurrentsensor3();
+  railcurrentsensor3_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.railCurrentSensor3)
+}
+
+// optional int32 railCurrentSensor4 = 66;
+inline bool telemetry::has_railcurrentsensor4() const {
+  return (_has_bits_[1] & 0x20000000u) != 0;
+}
+inline void telemetry::set_has_railcurrentsensor4() {
+  _has_bits_[1] |= 0x20000000u;
+}
+inline void telemetry::clear_has_railcurrentsensor4() {
+  _has_bits_[1] &= ~0x20000000u;
+}
+inline void telemetry::clear_railcurrentsensor4() {
+  railcurrentsensor4_ = 0;
+  clear_has_railcurrentsensor4();
+}
+inline ::google::protobuf::int32 telemetry::railcurrentsensor4() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.railCurrentSensor4)
+  return railcurrentsensor4_;
+}
+inline void telemetry::set_railcurrentsensor4(::google::protobuf::int32 value) {
+  set_has_railcurrentsensor4();
+  railcurrentsensor4_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.railCurrentSensor4)
+}
+
+// optional int32 railCurrentSensor5 = 67;
+inline bool telemetry::has_railcurrentsensor5() const {
+  return (_has_bits_[1] & 0x40000000u) != 0;
+}
+inline void telemetry::set_has_railcurrentsensor5() {
+  _has_bits_[1] |= 0x40000000u;
+}
+inline void telemetry::clear_has_railcurrentsensor5() {
+  _has_bits_[1] &= ~0x40000000u;
+}
+inline void telemetry::clear_railcurrentsensor5() {
+  railcurrentsensor5_ = 0;
+  clear_has_railcurrentsensor5();
+}
+inline ::google::protobuf::int32 telemetry::railcurrentsensor5() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.railCurrentSensor5)
+  return railcurrentsensor5_;
+}
+inline void telemetry::set_railcurrentsensor5(::google::protobuf::int32 value) {
+  set_has_railcurrentsensor5();
+  railcurrentsensor5_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.railCurrentSensor5)
+}
+
+// optional int32 railCurrentSensor6 = 68;
+inline bool telemetry::has_railcurrentsensor6() const {
+  return (_has_bits_[1] & 0x80000000u) != 0;
+}
+inline void telemetry::set_has_railcurrentsensor6() {
+  _has_bits_[1] |= 0x80000000u;
+}
+inline void telemetry::clear_has_railcurrentsensor6() {
+  _has_bits_[1] &= ~0x80000000u;
+}
+inline void telemetry::clear_railcurrentsensor6() {
+  railcurrentsensor6_ = 0;
+  clear_has_railcurrentsensor6();
+}
+inline ::google::protobuf::int32 telemetry::railcurrentsensor6() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.railCurrentSensor6)
+  return railcurrentsensor6_;
+}
+inline void telemetry::set_railcurrentsensor6(::google::protobuf::int32 value) {
+  set_has_railcurrentsensor6();
+  railcurrentsensor6_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.railCurrentSensor6)
+}
+
+// optional int32 railCurrentSensor7 = 69;
+inline bool telemetry::has_railcurrentsensor7() const {
+  return (_has_bits_[2] & 0x00000001u) != 0;
+}
+inline void telemetry::set_has_railcurrentsensor7() {
+  _has_bits_[2] |= 0x00000001u;
+}
+inline void telemetry::clear_has_railcurrentsensor7() {
+  _has_bits_[2] &= ~0x00000001u;
+}
+inline void telemetry::clear_railcurrentsensor7() {
+  railcurrentsensor7_ = 0;
+  clear_has_railcurrentsensor7();
+}
+inline ::google::protobuf::int32 telemetry::railcurrentsensor7() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.railCurrentSensor7)
+  return railcurrentsensor7_;
+}
+inline void telemetry::set_railcurrentsensor7(::google::protobuf::int32 value) {
+  set_has_railcurrentsensor7();
+  railcurrentsensor7_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.railCurrentSensor7)
+}
+
+// optional int32 railCurrentSensor8 = 70;
+inline bool telemetry::has_railcurrentsensor8() const {
+  return (_has_bits_[2] & 0x00000002u) != 0;
+}
+inline void telemetry::set_has_railcurrentsensor8() {
+  _has_bits_[2] |= 0x00000002u;
+}
+inline void telemetry::clear_has_railcurrentsensor8() {
+  _has_bits_[2] &= ~0x00000002u;
+}
+inline void telemetry::clear_railcurrentsensor8() {
+  railcurrentsensor8_ = 0;
+  clear_has_railcurrentsensor8();
+}
+inline ::google::protobuf::int32 telemetry::railcurrentsensor8() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.railCurrentSensor8)
+  return railcurrentsensor8_;
+}
+inline void telemetry::set_railcurrentsensor8(::google::protobuf::int32 value) {
+  set_has_railcurrentsensor8();
+  railcurrentsensor8_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.railCurrentSensor8)
+}
+
+// optional int32 railCurrentFlag = 73;
+inline bool telemetry::has_railcurrentflag() const {
+  return (_has_bits_[2] & 0x00000008u) != 0;
+}
+inline void telemetry::set_has_railcurrentflag() {
+  _has_bits_[2] |= 0x00000008u;
+}
+inline void telemetry::clear_has_railcurrentflag() {
+  _has_bits_[2] &= ~0x00000008u;
+}
+inline void telemetry::clear_railcurrentflag() {
+  railcurrentflag_ = 0;
+  clear_has_railcurrentflag();
+}
+inline ::google::protobuf::int32 telemetry::railcurrentflag() const {
+  // @@protoc_insertion_point(field_get:pds.telemetry.railCurrentFlag)
+  return railcurrentflag_;
+}
+inline void telemetry::set_railcurrentflag(::google::protobuf::int32 value) {
+  set_has_railcurrentflag();
+  railcurrentflag_ = value;
+  // @@protoc_insertion_point(field_set:pds.telemetry.railCurrentFlag)
 }
 
 #ifdef __GNUC__
