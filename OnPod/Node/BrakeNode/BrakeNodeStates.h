@@ -12,6 +12,18 @@ enum State {
     ERROR 
 };
 
+enum flightComputerStates{
+    BOOT,
+    STANDBY,
+    ARMING,
+    ARMED,
+    FLIGHT,
+    BRAKING,
+    VENTING,
+    RETRIEVAL,
+    ERROR
+};
+
 class BrakeNodeState {
     
     public:
