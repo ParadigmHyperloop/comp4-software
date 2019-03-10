@@ -3,15 +3,23 @@ from datetime import datetime
 from flask import *
 
 from LocalStorage.ConfigurationSotrage import LocalStorage
+from SocketController import PodCommunicator
 from config import *
 from forms import FlightConfigurationForm, validate_configuration_values
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secrete-key' # change later
 
-# TODO:
-#   - Instantiate PodCommunicator as a global.
-#   - call its run method as a global thread.
+with app.app_context():
+    try:
+        pod_communicator = PodCommunicator.get_pod_communicator()
+    except:
+        print("COULD NOT CONNECT TO POD")
+
+# --------------------------------------------------------------
+# END SETUP
+# --------------------------------------------------------------
 
 
 @app.route("/")
@@ -40,6 +48,16 @@ def submit_configuration():
         return jsonify({'error': configuration['error']})
     else:
         return jsonify({'error': configuration_form.errors})
+
+
+@app.route('/send_command', methods=["POST"])
+def send_command():
+    # pod_c = PodCommunicator.get_pod_communicator()
+    command = request.get_json()['command']
+    try:
+        pod_communicator.send_command(command)
+    finally:
+        return jsonify({'status': 'ok'})
 
 
 @app.route("/ui/", defaults={'path': 'index.html'})

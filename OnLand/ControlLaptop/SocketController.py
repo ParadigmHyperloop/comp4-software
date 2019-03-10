@@ -1,7 +1,5 @@
 import socket
 
-from flask import jsonify
-
 
 class PodConstants:
     POD_COMMAND_PORT = 65432
@@ -13,12 +11,12 @@ class PodCommunicator:
     _pod_communicator_instance = None
     _pod_address = None
     _pod_port = None
-    _command_socket = None
-    _queue = None
+    _pod_socket = None
+    _command_queue = None
 
+    """ Virtual Private Constructor. DO NOT CALL"""
     def __init__(self, pod_address=PodConstants.POD_ADDRESS,
                  pod_port=PodConstants.POD_COMMAND_PORT):
-        """ Virtual Private Constructor"""
         if PodCommunicator._pod_communicator_instance is not None:
             raise Exception("Pod-Communicator Instance Already exists")
         else:
@@ -28,21 +26,26 @@ class PodCommunicator:
             self._connect_to_pod()
 
     def _connect_to_pod(self):
-        self._command_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self._pod_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
-            self._command_socket.connect((self._pod_address, PodConstants.POD_COMMAND_PORT))
+            self._pod_socket.connect((self._pod_address, PodConstants.POD_COMMAND_PORT))
         finally:
             print('Connected...')
 
-    def _send_command(self, command):
-        self._command_socket.sendall(jsonify(command=command))
-        data = self._command_socket.recv(1024)
+    def send_command(self, command):
+        command_json = '{command: ' + command + '}'
+        print(f'sending: {command_json}')
+        self._pod_socket.sendall(command_json.encode())
+        # data = self._pod_socket.recv(1024)
+
+    def shutdown(self):
+        self._pod_socket.close()
 
     @staticmethod
     def get_pod_communicator():
         if PodCommunicator._pod_communicator_instance is None:
             PodCommunicator()
-            return PodCommunicator._pod_communicator_instance
+        return PodCommunicator._pod_communicator_instance
 
     def update_pod_address(self, new_address):
         self._pod_address = new_address
