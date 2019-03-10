@@ -44,6 +44,7 @@ ported over from [Paradigm Hyperloop/Web-UI](https://github.com/ParadigmHyperloo
     `pip install -r requirements`
 
 - run App (if using terminal):
+  - `python pod_echo_server`
   - `export FLASK_APP=controlLaptop.py`
   - `flask run` 
 
