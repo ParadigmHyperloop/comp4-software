@@ -36,9 +36,9 @@ class PodCommunicator:
         command_json = '{command: ' + command + '}'
         print(f'sending: {command_json}')
         self._pod_socket.sendall(command_json.encode())
-        # data = self._pod_socket.recv(1024)
 
     def shutdown(self):
+        data = self._pod_socket.recv(1024)
         self._pod_socket.close()
 
     @staticmethod

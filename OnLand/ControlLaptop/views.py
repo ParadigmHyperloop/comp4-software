@@ -52,12 +52,17 @@ def submit_configuration():
 
 @app.route('/send_command', methods=["POST"])
 def send_command():
-    # pod_c = PodCommunicator.get_pod_communicator()
     command = request.get_json()['command']
     try:
         pod_communicator.send_command(command)
     finally:
         return jsonify({'status': 'ok'})
+
+
+@app.route('/disconnect_from_pod', methods=["POST"])
+def disconnect_from_pod():
+    pod_communicator.shutdown()
+    return jsonify({'status': 'ok'})
 
 
 @app.route("/ui/", defaults={'path': 'index.html'})
