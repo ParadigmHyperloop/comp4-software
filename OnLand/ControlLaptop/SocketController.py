@@ -1,4 +1,7 @@
+import json
 import socket
+
+from LocalStorage.ConfigurationSotrage import DEFAULT_CONFIGURATION
 
 
 class PodConstants:
@@ -36,6 +39,9 @@ class PodCommunicator:
         command_json = '{command: ' + command + '}'
         print(f'sending: {command_json}')
         self._pod_socket.sendall(command_json.encode())
+
+    def send_configuration(self, configuration=DEFAULT_CONFIGURATION):
+        self._pod_socket.sendall(json.dumps(configuration).encode())
 
     def shutdown(self):
         data = self._pod_socket.recv(1024)

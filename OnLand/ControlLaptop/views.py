@@ -43,7 +43,7 @@ def submit_configuration():
     if configuration_form.validate_on_submit():
         configuration = validate_configuration_values(configuration_form)
         if configuration['all_values_valid'] is True:
-            # todo: send to POD and return these new values. and update local
+            pod_communicator.send_configuration()
             return jsonify({'status': 'ok'})
         return jsonify({'error': configuration['error']})
     else:
