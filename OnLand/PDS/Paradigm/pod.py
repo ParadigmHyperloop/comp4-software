@@ -2,44 +2,22 @@ import socket
 import logging
 import select
 import threading
-from datetime import datetime, timedelta
 
 
 MAX_MESSAGE_SIZE = 2048
-PING_TIMEOUT = timedelta(seconds=1)
 
 
 class PodStateType(type):
     MAP = {
-        'POST': 0,
-        'BOOT': 1,
-        'HPFILL': 2,
-        'LOAD': 3,
-        'STANDBY': 4,
-        'ARMED': 5,
-        'PUSHING': 6,
-        'COASTING': 7,
-        'BRAKING': 8,
-        'VENT': 9,
-        'RETRIEVAL': 10,
-        'EMERGENCY': 11,
-        'SHUTDOWN': 12
-    }
-
-    SHORT_MAP = {
-        'POST': 0,
-        'BOOT': 1,
-        'HPFL': 2,
-        'LOAD': 3,
-        'STBY': 4,
-        'ARMD': 5,
-        'PUSH': 6,
-        'COAS': 7,
-        'BRKE': 8,
-        'VENT': 9,
-        'RETR': 10,
-        'EMRG': 11,
-        'SDWN': 12
+        'psBooting'  : 0,
+        'psStandby'  : 1,
+        'psArming'   : 2,
+        'psArmed'    : 3,
+        'psFlight'   : 4,
+        'psBraking'  : 5,
+        'psVenting'  : 6,
+        'psRetrieval': 7,
+        'psError'    : 8,
     }
 
     def __getattr__(cls, name):
@@ -49,6 +27,9 @@ class PodStateType(type):
 
 
 class PodState(metaclass=PodStateType):
+    """
+    Helper Methods for Pod states
+    """
     def __init__(self, state):
         self.state = int(state)
 
@@ -66,14 +47,6 @@ class PodState(metaclass=PodStateType):
         else:
             return keys[0]
 
-    def short(self):
-        keys = [key for key, val in PodState.SHORT_MAP.items()
-                if val == self.state]
-        if not keys:
-            return "----"
-        else:
-            return keys[0]
-
     def __eq__(self, other):
         if isinstance(other, self.__class__):
             return self.state == other.state
@@ -81,6 +54,10 @@ class PodState(metaclass=PodStateType):
 
 
 class Pod:
+    """
+    Pod Telemetry
+    Basically 1-way UDP-Socket listening + some helper methods
+    """
     def __init__(self, addr):
         self.sock = None
         self.addr = addr
@@ -89,23 +66,7 @@ class Pod:
         self.lock = threading.Lock()
         self.timeout_handler = None
 
-    def ping(self, _):
-        if not self.is_connected():
-            return None
-        response = self.run("ping", timeout=PING_TIMEOUT)
-        if response is None:
-            if self.timeout_handler is not None:
-                self.timeout_handler()
-            self.close()
-            self.state = None
-        else:
-            if 'PONG:' in response:
-                self.state = PodState(response.strip().split(':')[1])
-
     def run(self, cmd, timeout=None):
-        if timeout is None:
-            timeout = timedelta(seconds=1)
-
         if not self.is_connected():
             return None
 
@@ -121,17 +82,6 @@ class Pod:
 
     def transcribe(self, data):
         logging.info("[DATA] {}".format(data))
-
-    def send(self, data):
-        if not self.is_connected():
-            raise RuntimeError("Pod is not connected")
-
-        try:
-            logging.debug("Sending {}".format(data))
-            self.sock.send(data.encode('utf-8'))
-        except Exception as e:
-            self.close()
-            raise e
 
     def recv(self, timeout=None):
         if not self.is_connected():
@@ -161,7 +111,6 @@ class Pod:
                 self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
 
             self.recieved = 0
-            self.last_ping = datetime.now()
         except Exception as e:
             self.close()
             raise e
