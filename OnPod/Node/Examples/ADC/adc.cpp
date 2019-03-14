@@ -39,7 +39,11 @@ void ExtADC::readChannels() {
     transfer(READ_NEXT);
     for(uint8_t i = 0; i < iNumChannels; i++) {
         uint16_t iConversionData = transfer(READ_NEXT);
+<<<<<<< HEAD
         // ADC channel is the 4 leftmost bits
+=======
+        // adc channel is the 4 leftmost bits
+>>>>>>> b3ba3ec0759ceec97209ce3f459d25058882140d
         uint8_t iChannelNumber = (iConversionData & 0xF000) >> 12;
         // conversion is the 12 rightmost bits
         iADCData[iChannelNumber] = iConversionData & 0x0FFF;
