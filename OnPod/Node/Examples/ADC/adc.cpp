@@ -2,7 +2,7 @@
 #include <SPI.h>
 #include "adc.h"
 
-ExtADC::ExtADC(uint16_t iActiveChannels) : iActiveChannels(iActiveChannels) {
+ADS7953::ADS7953(uint16_t iActiveChannels) : iActiveChannels(iActiveChannels) {
     // find the number of ones in iActiveChannels; number of channels used
     uint16_t i = iActiveChannels;
     while(i != 0) {
@@ -11,7 +11,7 @@ ExtADC::ExtADC(uint16_t iActiveChannels) : iActiveChannels(iActiveChannels) {
     }
 }
 
-void ExtADC::init() {
+void ADS7953::init() {
     SPI.begin();
     pinMode(SS1, OUTPUT);
     pinMode(POWER_SEQ_ADC, OUTPUT);
@@ -23,7 +23,7 @@ void ExtADC::init() {
     transfer(CONFIG_PROGRAM_REG); // configures the ADC to use 0-5V
 }
 
-uint16_t ExtADC::transfer(uint16_t iData) {
+uint16_t ADS7953::transfer(uint16_t iData) {
     SPI.beginTransaction(Settings);
     digitalWrite(SS1, LOW);
     uint16_t iRecievedData = SPI.transfer16(iData);
@@ -32,7 +32,7 @@ uint16_t ExtADC::transfer(uint16_t iData) {
     return iRecievedData;
 }
 
-void ExtADC::readChannels() {
+void ADS7953::readChannels() {
     // data results are from two read commands ago;
     // send two data requests before we start to read
     transfer(READ_RESET);

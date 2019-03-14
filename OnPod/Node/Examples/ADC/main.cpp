@@ -3,7 +3,7 @@
 #include "adc.h"
 
 // start ADC object ussing channels 5, 11, and 13
-ExtADC adc(0b0010100000100000);
+ADS7953 adc(0b0010100000100000);
 
 void setup() {
   Serial.begin(9600);

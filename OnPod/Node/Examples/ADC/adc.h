@@ -1,7 +1,7 @@
 #ifndef ADC_H
 #define ADC_H
 
-class ExtADC {
+class ADS7953 {
 private:
     SPIClass SPI = SPIClass(&PERIPH_SPI1, MISO1, SCK1, MOSI1, PAD_SPI1_TX, PAD_SPI1_RX);
     SPISettings Settings = SPISettings(20000000, MSBFIRST, SPI_MODE0);
@@ -17,7 +17,7 @@ private:
 
     uint16_t transfer(uint16_t iData);
 public:
-    ExtADC(uint16_t iActiveChannels);
+    ADS7953(uint16_t iActiveChannels);
     void init();
     void readChannels();
 };
