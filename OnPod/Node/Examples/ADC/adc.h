@@ -8,8 +8,9 @@ private:
     // 16-bit data words for SPI
     const uint16_t SET_CHANNEL_REG = 0x8000;
     const uint16_t CONFIG_PROGRAM_REG = 2840;
-    const uint16_t READ_RESET = 0x2C00;
-    const uint16_t READ_NEXT = 0x2000;
+    const uint16_t MANUAL_READ = 0x1000;
+    const uint16_t AUTO_READ_RESET = 0x2C00;
+    const uint16_t AUTO_READ_NEXT = 0x2000;
     uint16_t iActiveChannels; // each bit represents a channel; 1=used, 0=unused
     uint16_t iNumChannels = 0; // number of channels being used;
 
@@ -19,6 +20,7 @@ public:
 
     ADS7953(SPIClass spi, SPISettings spiSettings);
     void init();
+    uint16_t readSingleChannel(uint8_t);
     void readActiveChannels();
     void enableChannel(uint8_t);
     void disableChannel(uint8_t);

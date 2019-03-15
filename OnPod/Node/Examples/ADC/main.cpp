@@ -10,11 +10,15 @@ void setup() {
     Serial.begin(9600);
     adc.init();
     adc.enableChannel(5);
-    adc.enableChannel(11);
-    adc.enableChannel(13);
 }
 
 void loop() {
+    // read a single channel
+    uint16_t ch5_single = adc.readSingleChannel(5);
+
+    // read all active channels then access this data through adc.iADCData
     adc.readActiveChannels();
+    uint16_t ch5_auto = adc.iADCData[5];
+
     delay(500);
 }
