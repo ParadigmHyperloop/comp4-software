@@ -14,3 +14,10 @@ pycache/
 *.pyc
 *.swp
 *org.eclipse.cdt.core.prefs
+*platformio.ini
+*platformio
+*.pio
+*.pioenvs
+*.piolibdeps
+*.clang_complete
+*.gcc-flags.json
