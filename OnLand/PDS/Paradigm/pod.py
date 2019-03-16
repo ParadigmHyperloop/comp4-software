@@ -10,15 +10,15 @@ MAX_MESSAGE_SIZE = 1024
 
 class PodStateType(type):
     MAP = {
-        'psBooting'  : 0,
-        'psStandby'  : 1,
-        'psArming'   : 2,
-        'psArmed'    : 3,
-        'psFlight'   : 4,
-        'psBraking'  : 5,
-        'psVenting'  : 6,
+        'psBooting': 0,
+        'psStandby': 1,
+        'psArming': 2,
+        'psArmed': 3,
+        'psFlight': 4,
+        'psBraking': 5,
+        'psVenting': 6,
         'psRetrieval': 7,
-        'psError'    : 8,
+        'psError': 8,
     }
 
     def __getattr__(cls, name):
@@ -89,14 +89,13 @@ class Pod:
             return
 
         try:
-            (ready, _, _) = select.select([self.sock], [], [],
-                                          timeout.total_seconds())
+            (ready, _, _) = select.select([self.sock], [], [], timeout.total_seconds())
             if self.sock in ready:
                 data = self.sock.recv(MAX_MESSAGE_SIZE)
-                
+
                 pod_data = NodeTelem_pb2.telemetry()
                 pod_data = MessageToDict(pod_data.ParseFromString(data))
-                
+
                 logging.debug("Sending {}".format(pod_data))
                 return pod_data
 
@@ -132,14 +131,14 @@ class Pod:
 
     def __str__(self):
         return "%s:%d" % self.addrport
-    
-    
+
+
 def main():
     pod = Pod('127.0.0.1:5000')
     pod.connect()
     print("is connected?", pod.is_connected())
-    
-    
+
+
 if __name__ == "main":
     try:
         main()
