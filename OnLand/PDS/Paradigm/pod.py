@@ -2,9 +2,10 @@ import socket
 import logging
 import select
 import threading
+from Sources import NodeTelem_pb2
+from google.protobuf.json_format import MessageToDict
 
-
-MAX_MESSAGE_SIZE = 2048
+MAX_MESSAGE_SIZE = 1024
 
 
 class PodStateType(type):
@@ -91,9 +92,13 @@ class Pod:
             (ready, _, _) = select.select([self.sock], [], [],
                                           timeout.total_seconds())
             if self.sock in ready:
-                data = self.sock.recv(MAX_MESSAGE_SIZE).decode('utf-8')
-                logging.debug("Sending {}".format(data))
-                return data
+                data = self.sock.recv(MAX_MESSAGE_SIZE)
+                
+                pod_data = NodeTelem_pb2.telemetry()
+                pod_data = MessageToDict(pod_data.ParseFromString(data))
+                
+                logging.debug("Sending {}".format(pod_data))
+                return pod_data
 
         except Exception as e:
             self.close()
@@ -106,10 +111,11 @@ class Pod:
         try:
             self.sock = socket.create_connection(self.addr, 1)
 
-            self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            self.sock.setsockopt(socket.AF_INET, socket.SOCK_DGRAM, 1)
+            """
             if getattr(socket, 'SO_REUSEPORT', None) is not None:
                 self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
-
+            """
             self.recieved = 0
         except Exception as e:
             self.close()
@@ -126,3 +132,17 @@ class Pod:
 
     def __str__(self):
         return "%s:%d" % self.addrport
+    
+    
+def main():
+    pod = Pod('127.0.0.1:5000')
+    pod.connect()
+    print("is connected?", pod.is_connected())
+    
+    
+if __name__ == "main":
+    try:
+        main()
+    except KeyboardInterrupt:
+        print('Killed by user')
+        exit(0)
