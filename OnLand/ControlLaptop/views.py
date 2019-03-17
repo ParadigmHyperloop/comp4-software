@@ -1,5 +1,4 @@
 from datetime import datetime
-# import random
 from flask import *
 
 from LocalStorage.ConfigurationSotrage import LocalStorage
@@ -9,8 +8,9 @@ from forms import FlightConfigurationForm, validate_configuration_values
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secrete-key' # change later
+app.config['SECRET_KEY'] = 'secrete-key'  # change later.
 
+# Creating Flask Global PodCommunicator and connecting to Pod
 with app.app_context():
     try:
         pod_communicator = PodCommunicator.get_pod_communicator()
