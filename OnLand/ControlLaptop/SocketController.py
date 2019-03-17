@@ -46,6 +46,7 @@ class PodCommunicator:
     def send_configuration(self, configuration=DEFAULT_CONFIGURATION):
         self._pod_socket.sendall(json.dumps(configuration).encode())
 
+    # Disconnect from Pod/Socket
     def shutdown(self):
         self._pod_socket.close()
 
