@@ -87,15 +87,16 @@ class Pod:
             return
 
         try:
-            (ready, _, _) = select.select([self.sock], [], [], timeout.total_seconds())
+            (_, ready, _) = select.select([], [self.sock], [], timeout.total_seconds())
             if self.sock in ready:
-                data = self.sock.recvfrom(MAX_MESSAGE_SIZE)
+                data, addr = self.sock.recvfrom(MAX_MESSAGE_SIZE)
 
                 if data is not None:
                     pod_data = PodTelem_pb2.telemetry()
-                    pod_data = MessageToDict(pod_data.ParseFromString(data))
-
-                    logging.debug("Sending {}".format(pod_data))
+                    pod_data.ParseFromString(data)
+                    pod_data = MessageToDict(pod_data)
+    
+                    logging.debug("Recv {}".format(pod_data))
                     return pod_data
 
         except Exception as e:
@@ -129,11 +130,15 @@ class Pod:
 
 
 def main():
-    pod = Pod('127.0.0.1', 5000)
+    pod = Pod('127.0.0.1', 6000)
     pod.connect()
-
+    
     while pod.is_connected():
-        print(pod.recv(timedelta(seconds=0.3)))
+        data = pod.recv(timedelta(seconds=0.01))
+        if data is not None:
+            print("Success!")
+            for key, value in data.items():
+                print(key, "-", value)
 
     pod.close()
 
