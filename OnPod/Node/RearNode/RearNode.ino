@@ -3,46 +3,73 @@
 #include "Timer.h"
 #include "NodeStructs.h"
 
-/* Rear Node
- * Stream incrementing data from node, watchdog reset of no connection
- */
-uint8_t nodeNum	 	= REAR;
-RearPkg data;
-unsigned bbbTXDelayMS = MIN; // MIN = 100ms
-unsigned readADCDelay = 80;  // ms
+// Rear Node - Stream incrementing data from node, watchdog reset if no connection
 
-// Ethernet setup for tcp
-unsigned char 	mac[] = { 0x03, nodeNum, 0xFF, 0xFF, 0xFF, 0xFF }; //unique mac address
+// ----------- User Configurable ------------
+uint8_t nodeNum	 	  = REAR;
+unsigned bbbTXDelayMS = MIN; // MIN = 100ms
+
+// Ethernet
+unsigned char mac[]   = { 0x03, nodeNum, 0xFF, 0xFF, 0xFF, 0xFF }; //unique mac address
 IPAddress 		serverIP(192,168,0,1);
 EthernetServer 	server(80); //server port
+
+// --------------- Globals  -----------------
+RearPkg 		data;
 EthernetClient 	tcpClient;
 
-// TX timer for sending over Ethernet
+// TX timer for sending over Ethernet to BBB
 Timer txTimer;
 void sendToBBB(void *ignore );
-unsigned txNum = 0;
+unsigned txNum = 0; // transmission number
 
-// Timer for how often to read ADC's
-Timer readADCTimer;
-void readADCs(void *ignore );
-
-// globals, can be cleaned up / moved to NodeStruct.h
-String 			readString;
-unsigned long ulStartTime;
-unsigned long ulCurrentTime;
-unsigned long ticks = 0;
-unsigned int  sends = 0;
+String 		  readString;
 unsigned char cDataBuffer[256];
-
-bool bSend = false;
 bool bTCPConnected = false;
-bool bSendCallback;
 
+//------------- Ethernet Functions ------------
+
+// parse tcp message and update data's values
+void readTCP(){
+	if (tcpClient.available()) {
+		int numRead = tcpClient.read(cDataBuffer, 256);
+		Serial.write(cDataBuffer, numRead);
+		Serial.println();
+		Serial.write("numRead = ");
+		Serial.println(numRead);
+		if (numRead >= 1){
+			sodaq_wdt_reset();
+			bTCPConnected = true;
+			tcpClient.print(numRead);
+		}
+		if (cDataBuffer[0] == 'S'){ // if S is recvd, feed timer and update value
+			sodaq_wdt_reset();
+			data.bbbState = cDataBuffer[6]; // should be 1
+		}
+	}
+}
+
+// send node data to bbb
+void sendToBBB(void *ignore){
+	Serial.println("sendToBBB triggered");
+	if (tcpClient.connected()) {
+		sodaq_wdt_reset(); // remove from here when receiving consistently
+		Serial.println("trying to send to tcp client 'txNum'");
+		tcpClient.write("txNum = ");
+		tcpClient.print(txNum);
+		tcpClient.write(" ");
+		tcpClient.write("confirming bbbState ");
+		tcpClient.print(data.bbbState); // send what noode thinks bbbState is
+		tcpClient.write(" ");
+		tcpClient.println();
+	}
+}
+
+// -------------------- setup -----------------------
 void setup(){
 	Serial.begin(9600);
 	Serial.write("Rear Node Serial started, starting Ethernet next\r\n");
 
-	//Ethernet.init(pin) to configure the CS pin
 	Ethernet.init(NW_CS);
 	Ethernet.begin(mac, serverIP);
 
@@ -68,79 +95,20 @@ void setup(){
 	// TCP send timer
 	txTimer.every(bbbTXDelayMS, sendToBBB, (void*)0);
 	Serial.println("txTimer started");
-	readADCTimer.every(readADCDelay, readADCs, (void*)0);
-	Serial.println("readAdcTimer started");
 }
 
-// main
+// --------------------- main loop -------------------------------
 void loop() {
 	// if no tcp connection, listen for incoming clients
 	if (!tcpClient.connected()) {
 		tcpClient = server.available();
 		if (tcpClient){
 			Serial.println("tcp server available");
-			connectToTCP();
+			readTCP();
 		}
 	}
 	else {
 		readTCP();
 		txTimer.update();
-		readADCTimer.update();
 	}
-}
-
-void connectToTCP(){
-	Serial.println("new tcp client");
-	if (tcpClient.available()) {
-		int numRead = tcpClient.read(cDataBuffer, 256);
-		Serial.write(cDataBuffer, numRead);
-		Serial.println();
-		Serial.write("numRead = ");
-		Serial.println(numRead);
-		if (numRead >= 1){
-			sodaq_wdt_reset();
-			bTCPConnected = true;
-			tcpClient.print(numRead);
-		}
-	}
-}
-
-// parse tcp message and update data's bbbState value
-void readTCP(){
-	if (tcpClient.available()) {
-		int numRead = tcpClient.read(cDataBuffer, 256);
-		Serial.write(cDataBuffer, numRead);
-		Serial.println();
-		Serial.write("numRead = ");
-		Serial.println(numRead);
-		if (numRead >= 1){
-			sodaq_wdt_reset();
-			bTCPConnected = true;
-			tcpClient.print(numRead);
-		}
-		if (cDataBuffer[0] == 'S'){ // test msg of hex: 53 74 61 74 65 20 31 20 66 72 6f 6d 20 42 42 42
-			sodaq_wdt_reset();
-			data.bbbState = cDataBuffer[6]; // should be 1
-		}
-	}
-}
-
-void sendToBBB(void *ignore){
-	Serial.println("sendToBBB triggered");
-	if (tcpClient.connected()) {
-		sodaq_wdt_reset(); // remove from here when receiving consistently
-		Serial.println("trying to send to tcp client 'ticks'");
-		tcpClient.write("txNum = ");
-		tcpClient.print(txNum);
-		tcpClient.write(" ");
-		tcpClient.write("confirming bbbState ");
-		tcpClient.print(data.bbbState); // send what noode thinks bbbState is
-		tcpClient.write(" ");
-		tcpClient.println();
-	}
-}
-
-// implement reading ADC values over spi
-void readADCs(void *ignore){
-	;
 }

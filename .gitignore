@@ -1,13 +1,19 @@
 .metadata
 *sloeber.ino.cpp
 *Release/
-*.o
+*Debug/
 *.d
 *.project
 *.cproject
-*.settings
 .DS_Store
+*.settings
+.idea
+venv/
+pycache/
 *.out
+*.pyc
+*.swp
+*org.eclipse.cdt.core.prefs
 
 
 OnPod/FlightComputer/Debug/FlightComputer
