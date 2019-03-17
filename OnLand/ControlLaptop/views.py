@@ -14,7 +14,7 @@ app.config['SECRET_KEY'] = 'secrete-key' # change later
 with app.app_context():
     try:
         pod_communicator = PodCommunicator.get_pod_communicator()
-    except:
+    except Exception as e:
         print("COULD NOT CONNECT TO POD")
 
 # --------------------------------------------------------------
