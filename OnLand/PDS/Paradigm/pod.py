@@ -2,7 +2,8 @@ import socket
 import logging
 import select
 import threading
-from Sources import NodeTelem_pb2
+from datetime import timedelta
+from Sources import PodTelem_pb2
 from google.protobuf.json_format import MessageToDict
 
 MAX_MESSAGE_SIZE = 1024
@@ -38,8 +39,7 @@ class PodState(metaclass=PodStateType):
         return self.state == PodState.EMERGENCY
 
     def is_moving(self):
-        return self.state in (PodState.BRAKING, PodState.COASTING,
-                              PodState.PUSHING)
+        return self.state in (PodState.BRAKING, PodState.COASTING, PodState.PUSHING)
 
     def __str__(self):
         keys = [key for key, val in PodState.MAP.items() if val == self.state]
@@ -56,16 +56,14 @@ class PodState(metaclass=PodStateType):
 
 class Pod:
     """
-    Pod Telemetry
+    All PDS Pod Telemetry
     Basically 1-way UDP-Socket listening + some helper methods
     """
-    def __init__(self, addr):
+    def __init__(self, ip, port):
         self.sock = None
-        self.addr = addr
-        self.recieved = 0
-        self.state = None
+        self.ip = ip
+        self.port = port
         self.lock = threading.Lock()
-        self.timeout_handler = None
 
     def run(self, cmd, timeout=None):
         if not self.is_connected():
@@ -91,13 +89,14 @@ class Pod:
         try:
             (ready, _, _) = select.select([self.sock], [], [], timeout.total_seconds())
             if self.sock in ready:
-                data = self.sock.recv(MAX_MESSAGE_SIZE)
+                data = self.sock.recvfrom(MAX_MESSAGE_SIZE)
 
-                pod_data = NodeTelem_pb2.telemetry()
-                pod_data = MessageToDict(pod_data.ParseFromString(data))
+                if data is not None:
+                    pod_data = PodTelem_pb2.telemetry()
+                    pod_data = MessageToDict(pod_data.ParseFromString(data))
 
-                logging.debug("Sending {}".format(pod_data))
-                return pod_data
+                    logging.debug("Sending {}".format(pod_data))
+                    return pod_data
 
         except Exception as e:
             self.close()
@@ -108,14 +107,10 @@ class Pod:
 
     def connect(self):
         try:
-            self.sock = socket.create_connection(self.addr, 1)
+            self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-            self.sock.setsockopt(socket.AF_INET, socket.SOCK_DGRAM, 1)
-            """
-            if getattr(socket, 'SO_REUSEPORT', None) is not None:
-                self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
-            """
-            self.recieved = 0
+            self.sock.bind((self.ip, self.port))
         except Exception as e:
             self.close()
             raise e
@@ -134,12 +129,16 @@ class Pod:
 
 
 def main():
-    pod = Pod('127.0.0.1:5000')
+    pod = Pod('127.0.0.1', 5000)
     pod.connect()
-    print("is connected?", pod.is_connected())
+
+    while pod.is_connected():
+        print(pod.recv(timedelta(seconds=0.3)))
+
+    pod.close()
 
 
-if __name__ == "main":
+if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
