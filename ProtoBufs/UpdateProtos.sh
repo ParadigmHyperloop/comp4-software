@@ -34,6 +34,14 @@ NODESIM="../Testing/NodeSimulator/Protobuf"
 # Force copy the files, replacing existing ones
 cp -f NodeTelem/cpp/*.pb.h $flightComputer
 cp -f NodeTelem/cpp/*.pb.cc $flightComputerSrc
+
+cp -f States/cpp/*.pb.h $flightComputer
+cp -f States/cpp/*.pb.cc $flightComputerSrc
+
+cp -f PodTelem/cpp/*.pb.h $flightComputer
+cp -f PodTelem/cpp/*.pb.cc $flightComputerSrc
+
+
 cp -f PodTelem/py/* $PDS
 cp -f PodTelem/py/* $NODESIM
 

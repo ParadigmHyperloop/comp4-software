@@ -1,5 +1,5 @@
 syntax = "proto2";
-enum breakNodeStates {
+enum BreakNodeStates {
     bnsBooting   = 0;
     bnsStandby   = 1;
     bnsArming    = 2;
@@ -11,7 +11,7 @@ enum breakNodeStates {
     bnsError     = 8;
 }
 
-enum podStates {
+enum PodStates {
     psBooting   = 0;
     psStandby   = 1;
     psArming    = 2;
@@ -23,32 +23,33 @@ enum podStates {
     psError     = 8;
 }
 
-enum motorStates {
+enum MotorStates {
     msOff       = 0;
     msCharging  = 1;
     msIdle      = 2;
     msEngaged   = 3;
 }
 
-enum controlsInterfaceStates {
+enum ControlsInterfaceStates {
     ciConnected = 0;
 
 }
 
-enum inverterStates {
+
+enum InverterStates {
     iConnected = 0;
 
 }
 
-enum batteryManagementStates {
+enum BatteryManagementStates {
     bmsNominal = 0;
 }
 
-enum rearNodeStates{
+enum RearNodeStates {
     rnBooting = 0;
     rnNominal = 1;
 }
 
-enum lvdcNodeStates{
+enum LvdcNodeStates {
     lvdcBooting = 0;
 }

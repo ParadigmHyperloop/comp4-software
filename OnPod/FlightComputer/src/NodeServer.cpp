@@ -121,8 +121,10 @@ const char* getPodUpdateMessage(Pod* Pod)
 		{
 			sendDataUdp(&cscNodeClientSocket, cMesssage, strlen(cMesssage), cNodeAddresses[i]);
 		}
+
 		// Check all sockets for an update and parse
 		retrieveNodeUpdate(Pod, iNodeServerSocket);
+
 	}
 }
 

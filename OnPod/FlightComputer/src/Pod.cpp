@@ -11,11 +11,11 @@
  };
 
 
-int32_t Pod::setPodState(ePodStates state)
+int32_t Pod::setPodState(PodStates state)
  {
 	 if(this->bWritePodState)
 	 {
-		 this->sPodValues->PodState = state;
+		 this->sPodValues->ePodState = state;
 		 return 1;
 	 }
 	 else
@@ -24,9 +24,9 @@ int32_t Pod::setPodState(ePodStates state)
 	 }
  };
 
- ePodStates Pod::getPodState()
+ PodStates Pod::getPodState()
  {
-	 return this->sPodValues->PodState;
+	 return this->sPodValues->ePodState;
  }
 
 
@@ -49,10 +49,10 @@ int32_t Pod::setBrakeNodeState(fc::brakeNodeData::breakNodeState state)
  };
 
 
-int32_t Pod::setTerminalCommand(eTerminalCommands command){
+int32_t Pod::setTerminalCommand(TerminalCommands command){
 	 if(this->bWriteTerminalCommand)
 	 {
-		 this->sPodValues->TerminalCommand= command;
+		 this->sPodValues->eTerminalCommand= command;
 		 return 1;
 	 }
 	 else
@@ -61,22 +61,22 @@ int32_t Pod::setTerminalCommand(eTerminalCommands command){
 	 }
  };
 
- eTerminalCommands Pod::getTerminalCommand()
+ TerminalCommands Pod::getTerminalCommand()
  {
-	 return this->sPodValues->TerminalCommand;
+	 return this->sPodValues->eTerminalCommand;
  };
 
 
- eMotorStates Pod::getMotorState()
+ MotorStates Pod::getMotorState()
  {
-	 return this->sPodValues->MotorState;
+	 return this->sPodValues->eMotorState;
  };
 
-int32_t Pod::setMotorState(eMotorStates eMotorState)
+int32_t Pod::setMotorState(MotorStates eMotorState)
  {
 	 if(this->bWriteMotorState)
 	 {
-		 this->sPodValues->MotorState= eMotorState;
+		 this->sPodValues->eMotorState= eMotorState;
 		 return 1;
 	 }
 	 else
