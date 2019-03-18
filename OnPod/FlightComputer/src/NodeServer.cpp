@@ -32,19 +32,19 @@ using namespace fc;
 
  void parseBrakeNodeUpdate(Pod* Pod, char cUpdate[])
  {
-	 brakeNodeData::breakNodeState bnsBrakeNodeStates[9] = {brakeNodeData::bnsBooting,
-			 	 	 	 								 brakeNodeData::bnsStandby,
-														 brakeNodeData::bnsArming,
-														 brakeNodeData::bnsArmed,
-														 brakeNodeData::bnsFlight,
-														 brakeNodeData::bnsBraking,
-														 brakeNodeData::bnsVenting,
-														 brakeNodeData::bnsRetrieval,
-														 brakeNodeData::bnsError};
+	 BrakeNodeStates bnsBrakeNodeStates[9] = {bnsBooting,
+			 	 	 	 					  bnsStandby,
+											  bnsArming,
+											  bnsArmed,
+											  bnsFlight,
+											  bnsBraking,
+											  bnsVenting,
+											  bnsRetrieval,
+											  bnsError};
 	 std::string sNodeState(cUpdate);
 	 int32_t iStateNumber = std::stoi(sNodeState);
-	 brakeNodeData::breakNodeState bnsNodeState = bnsBrakeNodeStates[iStateNumber];
-	 Pod->setBrakeNodeState(bnsNodeState);
+	 BrakeNodeStates eBrakeNodeState = bnsBrakeNodeStates[iStateNumber];
+	 Pod->setBrakeNodeState(eBrakeNodeState);
 	 return;
  }
 
@@ -68,7 +68,7 @@ using namespace fc;
 
 const char* getPodUpdateMessage(Pod* Pod)
 {
-	ePodStates PodState = Pod->getPodState();
+	PodStates PodState = Pod->getPodState();
 	switch(PodState)
 	{
 	case psBooting:
@@ -79,14 +79,16 @@ const char* getPodUpdateMessage(Pod* Pod)
 		return "Arming";
 	case psArmed:
 		return "Armed";
+	case psPreFlight:
+		return "PreFlight";
 	case psAcceleration:
 		return "Acceleration";
 	case psCoasting:
 		return "Coasting";
 	case psBraking:
 		return "Braking";
-	case psDisarm:
-		return "Disarm";
+	case psDisarming:
+		return "Disarming";
 	case psRetrieval:
 		return "Retrieval";
 	default:
@@ -100,22 +102,22 @@ const char* getPodUpdateMessage(Pod* Pod)
 /**
  *Wait on socket, parse the recieved message into a protobuf and hand it off.
  */
- int32_t podInternalNetworkThread(Pod* Pod)
+ int32_t podInternalNetworkThread(Pod Pod)
 {
-	 Pod->sPodValues->iNodeServerPortNumber = 5005;
+	 Pod.sPodValues->iNodeServerPortNumber = 5005;
 
 	// Store in Config
 	std::string cNodeAddresses[] = {"127.0.0.1","127.0.0.1"};
 	int32_t iNumberOfNodes = 2;
 	// Network setup
-	int32_t iNodeServerSocket = createNodeServerSocket(Pod->getNodeServerPortNumber());
+	int32_t iNodeServerSocket = createNodeServerSocket(Pod.getNodeServerPortNumber());
 	clientSocketConfig cscNodeClientSocket = initializeClientSocket();
 
 	// While mode isnt shutdown
 	while(1){
 		// Serve all nodes with an update
 		// Create Update Packet
-		const char* cMesssage = getPodUpdateMessage(Pod);
+		const char* cMesssage = getPodUpdateMessage(&Pod);
 		//Serve Update to all Nodes
 		for (int i=0 ; i<iNumberOfNodes ; i++)
 		{
@@ -123,7 +125,7 @@ const char* getPodUpdateMessage(Pod* Pod)
 		}
 
 		// Check all sockets for an update and parse
-		retrieveNodeUpdate(Pod, iNodeServerSocket);
+		retrieveNodeUpdate(&Pod, iNodeServerSocket);
 
 	}
 }

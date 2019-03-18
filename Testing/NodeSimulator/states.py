@@ -18,11 +18,12 @@ class FlightComputerStates(Enum):
     STANDBY = 2
     ARMING = 3
     ARMED = 4
-    ACCELERATION = 5
-    COASTING = 6
-    BRAKING = 7
-    DISARM = 8
-    RETRIEVAL = 9
-    EMERGENCY = 10
+    PREFLIGHT = 5
+    ACCELERATION = 6
+    COASTING = 7
+    BRAKING = 8
+    DISARMING = 9
+    RETRIEVAL = 10
+    EMERGENCY = 11
 
 

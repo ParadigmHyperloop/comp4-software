@@ -7,7 +7,7 @@ message telemetry {
 
 // States
     optional PodStates podState = 1;
-    optional BreakNodeStates breakNodeState = 2;
+    optional BrakeNodeStates breakNodeState = 2;
     optional MotorStates motorState = 3;
     optional ControlsInterfaceStates controlsInterfaceState = 4;
     optional InverterStates inverterState = 5;

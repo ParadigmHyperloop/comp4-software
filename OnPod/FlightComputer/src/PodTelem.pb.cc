@@ -231,7 +231,7 @@ void AddDescriptorsImpl() {
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
       "\n\016PodTelem.proto\022\003pds\032\014States.proto\"\214\017\n\t"
       "telemetry\022\034\n\010podState\030\001 \001(\0162\n.PodStates\022"
-      "(\n\016breakNodeState\030\002 \001(\0162\020.BreakNodeState"
+      "(\n\016breakNodeState\030\002 \001(\0162\020.BrakeNodeState"
       "s\022 \n\nmotorState\030\003 \001(\0162\014.MotorStates\0228\n\026c"
       "ontrolsInterfaceState\030\004 \001(\0162\030.ControlsIn"
       "terfaceStates\022&\n\rinverterState\030\005 \001(\0162\017.I"
@@ -524,7 +524,7 @@ bool telemetry::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .BreakNodeStates breakNodeState = 2;
+      // optional .BrakeNodeStates breakNodeState = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
@@ -532,8 +532,8 @@ bool telemetry::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::BreakNodeStates_IsValid(value)) {
-            set_breaknodestate(static_cast< ::BreakNodeStates >(value));
+          if (::BrakeNodeStates_IsValid(value)) {
+            set_breaknodestate(static_cast< ::BrakeNodeStates >(value));
           } else {
             mutable_unknown_fields()->AddVarint(
                 2, static_cast< ::google::protobuf::uint64>(value));
@@ -1638,7 +1638,7 @@ void telemetry::SerializeWithCachedSizes(
       1, this->podstate(), output);
   }
 
-  // optional .BreakNodeStates breakNodeState = 2;
+  // optional .BrakeNodeStates breakNodeState = 2;
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       2, this->breaknodestate(), output);
@@ -2034,7 +2034,7 @@ void telemetry::SerializeWithCachedSizes(
       1, this->podstate(), target);
   }
 
-  // optional .BreakNodeStates breakNodeState = 2;
+  // optional .BrakeNodeStates breakNodeState = 2;
   if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       2, this->breaknodestate(), target);
@@ -2468,7 +2468,7 @@ size_t telemetry::ByteSizeLong() const {
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->podstate());
     }
 
-    // optional .BreakNodeStates breakNodeState = 2;
+    // optional .BrakeNodeStates breakNodeState = 2;
     if (has_breaknodestate()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->breaknodestate());

@@ -26,10 +26,10 @@ class NominalBrakeNodeBehaviour(StateBehaviour):
         self.transitions[BrakeNodeStates.BOOT] = AutomaticTransition(BrakeNodeStates.STANDBY)
         self.transitions[BrakeNodeStates.STANDBY] = ConditionalTransition(FlightComputerStates.ARMING, BrakeNodeStates.ARMING)
         self.transitions[BrakeNodeStates.ARMING] = TimedTransition(FlightComputerStates.ARMING, BrakeNodeStates.ARMED, 4)
-        self.transitions[BrakeNodeStates.ARMED] = ConditionalTransition(FlightComputerStates.ACCELERATION, BrakeNodeStates.FLIGHT)
+        self.transitions[BrakeNodeStates.ARMED] = ConditionalTransition(FlightComputerStates.PREFLIGHT, BrakeNodeStates.FLIGHT)
         self.transitions[BrakeNodeStates.FLIGHT] = ConditionalTransition(FlightComputerStates.BRAKING, BrakeNodeStates.BRAKING)
-        self.transitions[BrakeNodeStates.BRAKING] = ConditionalTransition(FlightComputerStates.DISARM, BrakeNodeStates.VENTING)
-        self.transitions[BrakeNodeStates.VENTING] = TimedTransition(FlightComputerStates.DISARM, BrakeNodeStates.RETRIEVAL, 4)
+        self.transitions[BrakeNodeStates.BRAKING] = ConditionalTransition(FlightComputerStates.DISARMING, BrakeNodeStates.VENTING)
+        self.transitions[BrakeNodeStates.VENTING] = TimedTransition(FlightComputerStates.DISARMING, BrakeNodeStates.RETRIEVAL, 4)
         self.transitions[BrakeNodeStates.RETRIEVAL] = None
 
 
@@ -43,7 +43,7 @@ class FlightComputerNominalBehaviour(StateBehaviour):
         self.transitions[FlightComputerStates.ARMED] = AutomaticTimeTransition(FlightComputerStates.ACCELERATION, 3)
         self.transitions[FlightComputerStates.ACCELERATION] = AutomaticTimeTransition(FlightComputerStates.COASTING, 3)
         self.transitions[FlightComputerStates.COASTING] = AutomaticTimeTransition(FlightComputerStates.BRAKING, 1)
-        self.transitions[FlightComputerStates.BRAKING] = AutomaticTimeTransition(FlightComputerStates.DISARM, 3)
+        self.transitions[FlightComputerStates.BRAKING] = AutomaticTimeTransition(FlightComputerStates.DISARMING, 3)
         self.transitions[FlightComputerStates.DISARM] = ConditionalTransition(BrakeNodeStates.RETRIEVAL, FlightComputerStates.RETRIEVAL)
         self.transitions[FlightComputerStates.RETRIEVAL] = None
 

@@ -221,12 +221,12 @@ class telemetry : public ::google::protobuf::Message /* @@protoc_insertion_point
   ::PodStates podstate() const;
   void set_podstate(::PodStates value);
 
-  // optional .BreakNodeStates breakNodeState = 2;
+  // optional .BrakeNodeStates breakNodeState = 2;
   bool has_breaknodestate() const;
   void clear_breaknodestate();
   static const int kBreakNodeStateFieldNumber = 2;
-  ::BreakNodeStates breaknodestate() const;
-  void set_breaknodestate(::BreakNodeStates value);
+  ::BrakeNodeStates breaknodestate() const;
+  void set_breaknodestate(::BrakeNodeStates value);
 
   // optional .MotorStates motorState = 3;
   bool has_motorstate() const;
@@ -943,7 +943,7 @@ inline void telemetry::set_podstate(::PodStates value) {
   // @@protoc_insertion_point(field_set:pds.telemetry.podState)
 }
 
-// optional .BreakNodeStates breakNodeState = 2;
+// optional .BrakeNodeStates breakNodeState = 2;
 inline bool telemetry::has_breaknodestate() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -957,12 +957,12 @@ inline void telemetry::clear_breaknodestate() {
   breaknodestate_ = 0;
   clear_has_breaknodestate();
 }
-inline ::BreakNodeStates telemetry::breaknodestate() const {
+inline ::BrakeNodeStates telemetry::breaknodestate() const {
   // @@protoc_insertion_point(field_get:pds.telemetry.breakNodeState)
-  return static_cast< ::BreakNodeStates >(breaknodestate_);
+  return static_cast< ::BrakeNodeStates >(breaknodestate_);
 }
-inline void telemetry::set_breaknodestate(::BreakNodeStates value) {
-  assert(::BreakNodeStates_IsValid(value));
+inline void telemetry::set_breaknodestate(::BrakeNodeStates value) {
+  assert(::BrakeNodeStates_IsValid(value));
   set_has_breaknodestate();
   breaknodestate_ = value;
   // @@protoc_insertion_point(field_set:pds.telemetry.breakNodeState)

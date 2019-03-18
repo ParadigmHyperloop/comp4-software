@@ -22,7 +22,7 @@ struct PodValues
 	PodStates ePodState = psBooting;
 	ControlsInterfaceStates eTerminalState;
 	MotorStates eMotorState;
-	fc::brakeNodeData::breakNodeState BreakNodeState;
+	BrakeNodeStates eBreakNodeState;
 	// Navigation
 	float fDistance;
 	float fVelocity;

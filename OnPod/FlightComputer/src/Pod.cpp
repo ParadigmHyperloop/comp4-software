@@ -1,6 +1,7 @@
 #include "FlightComputer/structs.h"
 #include "FlightComputer/Pod.h"
 #include "ProtoBuffer/NodeTelem.pb.h"
+#include "EasyLogger/easylogging++.h"
 
 
 
@@ -11,10 +12,12 @@
  };
 
 
-int32_t Pod::setPodState(PodStates state)
+int32_t Pod::setPodState(PodStates state,  const char* reason)
  {
+
 	 if(this->bWritePodState)
 	 {
+		 LOG(INFO)<< reason;
 		 this->sPodValues->ePodState = state;
 		 return 1;
 	 }
@@ -30,11 +33,11 @@ int32_t Pod::setPodState(PodStates state)
  }
 
 
-int32_t Pod::setBrakeNodeState(fc::brakeNodeData::breakNodeState state)
+int32_t Pod::setBrakeNodeState(BrakeNodeStates eState)
 {
 	 if(this->bWriteBreakNodeState)
 	 {
-		 this->sPodValues->BreakNodeState = state;
+		 this->sPodValues->eBreakNodeState = eState;
 		 return 1;
 	 }
 	 else
@@ -43,13 +46,13 @@ int32_t Pod::setBrakeNodeState(fc::brakeNodeData::breakNodeState state)
 	 }
  };
 
- fc::brakeNodeData::breakNodeState Pod::getBrakeNodeState()
+BrakeNodeStates Pod::getBrakeNodeState()
  {
-	 return this->sPodValues->BreakNodeState;
+	 return this->sPodValues->eBreakNodeState;
  };
 
 
-int32_t Pod::setTerminalCommand(TerminalCommands command){
+int32_t Pod::setTerminalCommand(ControlsInterfaceStates command){
 	 if(this->bWriteTerminalCommand)
 	 {
 		 this->sPodValues->eTerminalCommand= command;
@@ -61,7 +64,7 @@ int32_t Pod::setTerminalCommand(TerminalCommands command){
 	 }
  };
 
- TerminalCommands Pod::getTerminalCommand()
+ControlsInterfaceStates Pod::getTerminalCommand()
  {
 	 return this->sPodValues->eTerminalCommand;
  };

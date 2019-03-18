@@ -31,14 +31,16 @@ class StringHandler(MessageHandler):
             return FlightComputerStates.ARMING
         elif message == "Armed":
             return FlightComputerStates.ARMED
+        elif message == "PreFlight":
+            return FlightComputerStates.PREFLIGHT
         elif message == "Acceleration":
             return FlightComputerStates.ACCELERATION
         elif message == "Coasting":
             return FlightComputerStates.COASTING
         elif message == "Braking":
             return FlightComputerStates.BRAKING
-        elif message == "Disarm":
-            return FlightComputerStates.DISARM
+        elif message == "Disarming":
+            return FlightComputerStates.DISARMING
         elif message == "Retrieval":
             return FlightComputerStates.RETRIEVAL
         else:

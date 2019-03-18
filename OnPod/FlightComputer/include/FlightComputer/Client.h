@@ -24,7 +24,7 @@ void killConfigSocket(clientSocketConfig*);
 
 void parseBreakNodePacket(fc::brakeNodeData, Pod);
 
-int32_t podInternalNetworkThread(Pod*);
+int32_t podInternalNetworkThread(Pod);
 
 const char* getPodUpdateMessage(Pod*);
 

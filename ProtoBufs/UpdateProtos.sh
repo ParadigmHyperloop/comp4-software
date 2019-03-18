@@ -44,5 +44,6 @@ cp -f PodTelem/cpp/*.pb.cc $flightComputerSrc
 
 cp -f PodTelem/py/* $PDS
 cp -f PodTelem/py/* $NODESIM
+cp -f States/py/* $NODESIM
 
 echo "Update Complete"

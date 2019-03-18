@@ -45,7 +45,7 @@ struct TableStruct {
 void AddDescriptors();
 }  // namespace protobuf_States_2eproto
 
-enum BreakNodeStates {
+enum BrakeNodeStates {
   bnsBooting = 0,
   bnsStandby = 1,
   bnsArming = 2,
@@ -56,35 +56,37 @@ enum BreakNodeStates {
   bnsRetrieval = 7,
   bnsError = 8
 };
-bool BreakNodeStates_IsValid(int value);
-const BreakNodeStates BreakNodeStates_MIN = bnsBooting;
-const BreakNodeStates BreakNodeStates_MAX = bnsError;
-const int BreakNodeStates_ARRAYSIZE = BreakNodeStates_MAX + 1;
+bool BrakeNodeStates_IsValid(int value);
+const BrakeNodeStates BrakeNodeStates_MIN = bnsBooting;
+const BrakeNodeStates BrakeNodeStates_MAX = bnsError;
+const int BrakeNodeStates_ARRAYSIZE = BrakeNodeStates_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* BreakNodeStates_descriptor();
-inline const ::std::string& BreakNodeStates_Name(BreakNodeStates value) {
+const ::google::protobuf::EnumDescriptor* BrakeNodeStates_descriptor();
+inline const ::std::string& BrakeNodeStates_Name(BrakeNodeStates value) {
   return ::google::protobuf::internal::NameOfEnum(
-    BreakNodeStates_descriptor(), value);
+    BrakeNodeStates_descriptor(), value);
 }
-inline bool BreakNodeStates_Parse(
-    const ::std::string& name, BreakNodeStates* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<BreakNodeStates>(
-    BreakNodeStates_descriptor(), name, value);
+inline bool BrakeNodeStates_Parse(
+    const ::std::string& name, BrakeNodeStates* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<BrakeNodeStates>(
+    BrakeNodeStates_descriptor(), name, value);
 }
 enum PodStates {
   psBooting = 0,
   psStandby = 1,
   psArming = 2,
   psArmed = 3,
-  psFlight = 4,
-  psBraking = 5,
-  psVenting = 6,
-  psRetrieval = 7,
-  psError = 8
+  psPreFlight = 4,
+  psAcceleration = 5,
+  psCoasting = 6,
+  psBraking = 7,
+  psDisarming = 8,
+  psRetrieval = 9,
+  psEmergency = 10
 };
 bool PodStates_IsValid(int value);
 const PodStates PodStates_MIN = psBooting;
-const PodStates PodStates_MAX = psError;
+const PodStates PodStates_MAX = psEmergency;
 const int PodStates_ARRAYSIZE = PodStates_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* PodStates_descriptor();
@@ -231,10 +233,10 @@ inline bool LvdcNodeStates_Parse(
 namespace google {
 namespace protobuf {
 
-template <> struct is_proto_enum< ::BreakNodeStates> : ::std::true_type {};
+template <> struct is_proto_enum< ::BrakeNodeStates> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::BreakNodeStates>() {
-  return ::BreakNodeStates_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::BrakeNodeStates>() {
+  return ::BrakeNodeStates_descriptor();
 }
 template <> struct is_proto_enum< ::PodStates> : ::std::true_type {};
 template <>

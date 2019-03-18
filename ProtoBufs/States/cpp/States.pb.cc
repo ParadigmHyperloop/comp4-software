@@ -48,24 +48,25 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\014States.proto*\235\001\n\017BreakNodeStates\022\016\n\nbn"
+      "\n\014States.proto*\235\001\n\017BrakeNodeStates\022\016\n\nbn"
       "sBooting\020\000\022\016\n\nbnsStandby\020\001\022\r\n\tbnsArming\020"
       "\002\022\014\n\010bnsArmed\020\003\022\r\n\tbnsFlight\020\004\022\016\n\nbnsBra"
       "king\020\005\022\016\n\nbnsVenting\020\006\022\020\n\014bnsRetrieval\020\007"
-      "\022\014\n\010bnsError\020\010*\216\001\n\tPodStates\022\r\n\tpsBootin"
+      "\022\014\n\010bnsError\020\010*\273\001\n\tPodStates\022\r\n\tpsBootin"
       "g\020\000\022\r\n\tpsStandby\020\001\022\014\n\010psArming\020\002\022\013\n\007psAr"
-      "med\020\003\022\014\n\010psFlight\020\004\022\r\n\tpsBraking\020\005\022\r\n\tps"
-      "Venting\020\006\022\017\n\013psRetrieval\020\007\022\013\n\007psError\020\010*"
-      "C\n\013MotorStates\022\t\n\005msOff\020\000\022\016\n\nmsCharging\020"
-      "\001\022\n\n\006msIdle\020\002\022\r\n\tmsEngaged\020\003**\n\027Controls"
-      "InterfaceStates\022\017\n\013ciConnected\020\000* \n\016Inve"
-      "rterStates\022\016\n\niConnected\020\000*)\n\027BatteryMan"
-      "agementStates\022\016\n\nbmsNominal\020\000*.\n\016RearNod"
-      "eStates\022\r\n\trnBooting\020\000\022\r\n\trnNominal\020\001*!\n"
-      "\016LvdcNodeStates\022\017\n\013lvdcBooting\020\000"
+      "med\020\003\022\017\n\013psPreFlight\020\004\022\022\n\016psAcceleration"
+      "\020\005\022\016\n\npsCoasting\020\006\022\r\n\tpsBraking\020\007\022\017\n\013psD"
+      "isarming\020\010\022\017\n\013psRetrieval\020\t\022\017\n\013psEmergen"
+      "cy\020\n*C\n\013MotorStates\022\t\n\005msOff\020\000\022\016\n\nmsChar"
+      "ging\020\001\022\n\n\006msIdle\020\002\022\r\n\tmsEngaged\020\003**\n\027Con"
+      "trolsInterfaceStates\022\017\n\013ciConnected\020\000* \n"
+      "\016InverterStates\022\016\n\niConnected\020\000*)\n\027Batte"
+      "ryManagementStates\022\016\n\nbmsNominal\020\000*.\n\016Re"
+      "arNodeStates\022\r\n\trnBooting\020\000\022\r\n\trnNominal"
+      "\020\001*!\n\016LvdcNodeStates\022\017\n\013lvdcBooting\020\000"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 592);
+      descriptor, 637);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "States.proto", &protobuf_RegisterTypes);
 }
@@ -81,11 +82,11 @@ struct StaticDescriptorInitializer {
   }
 } static_descriptor_initializer;
 }  // namespace protobuf_States_2eproto
-const ::google::protobuf::EnumDescriptor* BreakNodeStates_descriptor() {
+const ::google::protobuf::EnumDescriptor* BrakeNodeStates_descriptor() {
   protobuf_States_2eproto::protobuf_AssignDescriptorsOnce();
   return protobuf_States_2eproto::file_level_enum_descriptors[0];
 }
-bool BreakNodeStates_IsValid(int value) {
+bool BrakeNodeStates_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:
@@ -117,6 +118,8 @@ bool PodStates_IsValid(int value) {
     case 6:
     case 7:
     case 8:
+    case 9:
+    case 10:
       return true;
     default:
       return false;

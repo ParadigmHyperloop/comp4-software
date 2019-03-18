@@ -1,5 +1,6 @@
 #include "FlightComputer/structs.h"
 #include "FlightComputer/Pod.h"
+#include "FlightComputer/CoreControl.h"
 
 
 //template allowableStates
@@ -11,12 +12,17 @@
 void commonChecks(Pod podValues){
 	// Check flags
 	// Check heartbeat flags
+
 }
 
 void bootingTransitions(Pod podValues)
 {
 	// If all nodes are in standby go to standby
-	podValues.setPodState(psStandby);
+	BrakeNodeStates eBrakeNodeState = podValues.getBrakeNodeState();
+	if(eBrakeNodeState == bnsStandby)
+	{
+		podValues.setPodState(psStandby, "All nodes in Standby");
+	}
 }
 
 void standyTransitions(Pod podValues)
@@ -26,14 +32,18 @@ void standyTransitions(Pod podValues)
 	// Nodes stay in standby
 
 	// Abort transitions coverred by commonChecks
-	podValues.setPodState(psArming);
+	podValues.setPodState(psArming, "Automatic");
 }
 
 void armingTransitions(Pod podValues)
 {
 	// If all brake nodes are in an armed state then go to armed
 	// Abort transitions coverred by commonChecks
-	podValues.setPodState(psArmed);
+	BrakeNodeStates eBrakeNodeState = podValues.getBrakeNodeState();
+	if(eBrakeNodeState == bnsArmed)
+	{
+	podValues.setPodState(psArmed, "All nodes Armed");
+	}
 }
 
 void armedTransitions(Pod podValues)
@@ -42,8 +52,18 @@ void armedTransitions(Pod podValues)
 	// check if all brake nodes are still armed
 
 	// Terminal command to flight
-	podValues.setPodState(psAcceleration);
+	podValues.setPodState(psPreFlight,"Automatic");
 
+}
+
+void preflightTransitions(Pod podValues)
+{
+	// Or we are given a command to override the state --  this might be done through the commander
+	BrakeNodeStates eBrakeNodeState = podValues.getBrakeNodeState();
+	if(eBrakeNodeState == bnsFlight)
+	{
+	podValues.setPodState(psAcceleration,"Brake Node in Flight State");
+	}
 }
 
 void accelerationTransitions(Pod podValues)
@@ -55,13 +75,13 @@ void accelerationTransitions(Pod podValues)
 
 	// Check Navigation module state
 
-	podValues.setPodState(psCoasting);
+	podValues.setPodState(psCoasting,"Automatic");
 }
 
 void coastingTranstions(Pod podValues)
 {
 	// go to braking
-	podValues.setPodState(psBraking);
+	podValues.setPodState(psBraking,"Automatic");
 }
 
 void brakingTransitons(Pod podValues)
@@ -71,7 +91,11 @@ void brakingTransitons(Pod podValues)
 	// The navs have to say we are at rest
 
 	// Or we are given a command to override the state --  this might be done through the commander
-	podValues.setPodState(psDisarm);
+	BrakeNodeStates eBrakeNodeState = podValues.getBrakeNodeState();
+	if(eBrakeNodeState == bnsBraking)
+	{
+	podValues.setPodState(psDisarming,"Brake Node in Braking");
+	}
 }
 
 void disarmTransitions(Pod podValues)
@@ -82,7 +106,11 @@ void disarmTransitions(Pod podValues)
 	// check the BMS is all good
 
 	// Go to retrieval
-	podValues.setPodState(psRetrieval);
+	BrakeNodeStates eBrakeNodeState = podValues.getBrakeNodeState();
+	if(eBrakeNodeState == bnsRetrieval)
+	{
+	podValues.setPodState(psRetrieval,"Brake Node in Retrieval");
+	}
 }
 
 void retrievalTransitions(Pod podValues)
@@ -117,11 +145,14 @@ void coreControlLoop(Pod podValues){
 			armingTransitions(podValues);
 			break;
 		}
-
-		}
 		case psArmed:
 		{
 			armedTransitions(podValues);
+			break;
+		}
+		case psPreFlight:
+		{
+			preflightTransitions(podValues);
 			break;
 		}
 		case psAcceleration:
@@ -139,7 +170,7 @@ void coreControlLoop(Pod podValues){
 			brakingTransitons(podValues);
 			break;
 		}
-		case psDisarm:
+		case psDisarming:
 		{
 			disarmTransitions(podValues);
 			break;
@@ -154,8 +185,9 @@ void coreControlLoop(Pod podValues){
 			break;
 		}
 	}
-
+	}
 }
+
 
 
 

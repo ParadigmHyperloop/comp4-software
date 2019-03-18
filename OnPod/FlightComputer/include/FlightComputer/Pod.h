@@ -9,14 +9,14 @@ class Pod
 		PodValues* sPodValues;
 		Pod(PodValues*);
 		// Pod States
-		int32_t setPodState(PodStates);
+		int32_t setPodState(PodStates, const char*);
 		PodStates getPodState();
 		// Brake Node State
-		fc::brakeNodeData::breakNodeState getBrakeNodeState();
-		int32_t setBrakeNodeState(fc::brakeNodeData::breakNodeState);
+		BrakeNodeStates getBrakeNodeState();
+		int32_t setBrakeNodeState(BrakeNodeStates);
 		// Terminal Commnand
-		TerminalCommands getTerminalCommand();
-		int32_t setTerminalCommand(TerminalCommands);
+		ControlsInterfaceStates getTerminalCommand();
+		int32_t setTerminalCommand(ControlsInterfaceStates);
 		// Motor State
 		MotorStates getMotorState();
 		int32_t setMotorState(MotorStates);
