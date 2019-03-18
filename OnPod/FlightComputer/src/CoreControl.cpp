@@ -46,8 +46,35 @@ void accelerationTransitions(){
 }
 
 void coastingTranstions(){
-
+	// go to braking
 }
+
+void brakingTransitons(){
+	// we have to brake for XX seconds
+
+	// The navs have to say we are at rest
+
+	// Or we are given a command to override the state --  this might be done through the commander
+}
+
+void disarmTransitions(){
+
+	// Check that the state of all nodes are in retrieval
+
+	// check the BMS is all good
+
+	// Go to retrieval
+}
+
+void retrievalTransitions(){
+
+	//Hold retrieval conditions
+}
+
+
+
+
+
 
 
 

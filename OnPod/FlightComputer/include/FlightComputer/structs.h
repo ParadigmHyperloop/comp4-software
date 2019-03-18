@@ -48,6 +48,9 @@ struct PodValues
 	int32_t iHighPressure;
 	int32_t iPressureVesselTemperature;
 
+	//Network
+	int32_t iNodeServerPortNumber;
+
 };
 
 struct clientSocketConfig {

@@ -1,5 +1,8 @@
+///   This file was a temp node simulator and Protobuf playground. Now it holds old protobuf examples and useful functions.
+
+
+#include <Client.h>
 #include "FlightComputer/nodeSim.h"
-#include "FlightComputer/PodInternalNetwork.h"
 #include "ProtoBuffer/NodeTelem.pb.h"
 #include "EasyLogger/easylogging++.h"
 
@@ -15,7 +18,7 @@ void sendPacket(brakeNodeData pNodeUpdate, clientSocketConfig* cscSocket){
 	pNodeUpdate.SerializeToString(&sPayload);
 	void* vBuffer = malloc(iProtoPacketSize);
 	pNodeUpdate.SerializeToArray(vBuffer, iProtoPacketSize);
-	sendDataUdp(cscSocket, vBuffer, ( int32_t)iProtoPacketSize);
+	sendDataUdp(cscSocket, vBuffer, (int32_t)iProtoPacketSize);
 }
 
 void runNodeSimulator(clientSocketConfig* cscSocket)
@@ -36,22 +39,18 @@ void runNodeSimulator(clientSocketConfig* cscSocket)
 }
 
 
-
-/*
- *  // Pressure Transducers
-    pNodeUpdate.set_hp(231);
-    pNodeUpdate.set_lp1(666);
-    pNodeUpdate.set_lp2(242);
-    pNodeUpdate.set_lp3(65);
-    pNodeUpdate.set_lp4(34);
-    // Solenoids
-    pNodeUpdate.set_sol1(1);
-    pNodeUpdate.set_sol2(1);
-    pNodeUpdate.set_sol3(0);
-    pNodeUpdate.set_sol4(0);
-    pNodeUpdate.set_sol5(0);
-    pNodeUpdate.set_sol6(1);
-    pNodeUpdate.set_temp(100);
-
-    */
+void parseBrakeNodeProto(Pod* Pod, char cBuffer, int iRecievedPacketSize)
+{
+	fc::brakeNodeData pNodeUpdate;
+	bool bProtoPacketParsed = pNodeUpdate.ParseFromArray(&cBuffer, iRecievedPacketSize);
+	if(bProtoPacketParsed)
+	{
+		LOG(INFO)<<"Packet Recieved";
+		parseBreakNodePacket( pNodeUpdate,*Pod);
+	}
+	else
+	{
+		LOG(ERROR)<<"Error Parsing Protobuf packet";
+	}
+}
 

@@ -9,27 +9,24 @@
 INITIALIZE_EASYLOGGINGPP
 
 
-#include "FlightComputer/PodInternalNetwork.h"
+#include <Client.h>
 #include "FlightComputer/nodeSim.h"
-#include "FlightComputer/MemoryAccess.h"
+#include "FlightComputer/Pod.h"
 
 int main( int32_t argc, char** argv)
 {
 	el::Helpers::setThreadName("main");
 	el::Configurations conf("/home/lwaghorn/Development/comp4-software/OnPod/FlightComputer/include/EasyLogger/logging.conf");
 	el::Loggers::reconfigureAllLoggers(conf);
-	LOG(INFO)<<"Hello World!";
+	LOG(INFO)<<"Main Thread Started";
+
 	PodValues pvPodValues;
-	MemoryAccess* Pod = new MemoryAccess(&pvPodValues);
+	Pod* pPodInternalNetwork = new Pod(&pvPodValues);
+	pPodInternalNetwork->bWriteBreakNodeState = true;
 
-
-	clientSocketConfig* iClientSocket = initializeClientSocket();
-
-	std::thread tServer(nodeServerThread, Pod);
-	std::thread tSim(runNodeSimulator, iClientSocket);
+	std::thread tServer(podInternalNetworkThread, pPodInternalNetwork);
 
 	tServer.join();
-	tSim.join();
 
 	return 0;
 }

@@ -1,17 +1,17 @@
 #include "FlightComputer/structs.h"
-#include "FlightComputer/MemoryAccess.h"
+#include "FlightComputer/Pod.h"
 #include "ProtoBuffer/NodeTelem.pb.h"
 
 
 
- MemoryAccess::MemoryAccess(PodValues* sPodValues)
+ Pod::Pod(PodValues* sPodValues)
  {
 	 this->sPodValues = sPodValues;
 	 return;
  };
 
 
-int32_t MemoryAccess::setPodState(ePodStates state)
+int32_t Pod::setPodState(ePodStates state)
  {
 	 if(this->bWritePodState)
 	 {
@@ -24,13 +24,13 @@ int32_t MemoryAccess::setPodState(ePodStates state)
 	 }
  };
 
- ePodStates MemoryAccess::getPodState()
+ ePodStates Pod::getPodState()
  {
 	 return this->sPodValues->PodState;
  }
 
 
-int32_t MemoryAccess::setBrakeNodeState(fc::brakeNodeData::breakNodeState state)
+int32_t Pod::setBrakeNodeState(fc::brakeNodeData::breakNodeState state)
 {
 	 if(this->bWriteBreakNodeState)
 	 {
@@ -43,13 +43,13 @@ int32_t MemoryAccess::setBrakeNodeState(fc::brakeNodeData::breakNodeState state)
 	 }
  };
 
- fc::brakeNodeData::breakNodeState MemoryAccess::getBrakeNodeState()
+ fc::brakeNodeData::breakNodeState Pod::getBrakeNodeState()
  {
 	 return this->sPodValues->BreakNodeState;
  };
 
 
-int32_t MemoryAccess::setTerminalCommand(eTerminalCommands command){
+int32_t Pod::setTerminalCommand(eTerminalCommands command){
 	 if(this->bWriteTerminalCommand)
 	 {
 		 this->sPodValues->TerminalCommand= command;
@@ -61,18 +61,18 @@ int32_t MemoryAccess::setTerminalCommand(eTerminalCommands command){
 	 }
  };
 
- eTerminalCommands MemoryAccess::getTerminalCommand()
+ eTerminalCommands Pod::getTerminalCommand()
  {
 	 return this->sPodValues->TerminalCommand;
  };
 
 
- eMotorStates MemoryAccess::getMotorState()
+ eMotorStates Pod::getMotorState()
  {
 	 return this->sPodValues->MotorState;
  };
 
-int32_t MemoryAccess::setMotorState(eMotorStates eMotorState)
+int32_t Pod::setMotorState(eMotorStates eMotorState)
  {
 	 if(this->bWriteMotorState)
 	 {
@@ -86,15 +86,18 @@ int32_t MemoryAccess::setMotorState(eMotorStates eMotorState)
  };
 
 
- unsigned char* MemoryAccess::getFlagsArray()
+ unsigned char* Pod::getFlagsArray()
  {
 	 return this->sPodValues->cFlagsArray;
  };
 
-int32_t MemoryAccess::getFlagsArraySize()
+int32_t Pod::getFlagsArraySize()
  {
 	 return this->sPodValues->iFlagsArraySize;
  };
 
-
+int32_t Pod::getNodeServerPortNumber()
+{
+	return this->sPodValues->iNodeServerPortNumber;
+}
 

@@ -19,3 +19,7 @@ pycache/
 OnPod/FlightComputer/Debug/FlightComputer
 
 ProtoBufs/\.idea/
+
+Testing/NodeSimulator/__pycache__/
+
+*.xml
