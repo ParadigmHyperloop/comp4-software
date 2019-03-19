@@ -1,5 +1,5 @@
-#ifndef MEMORYACCESS_H
-#define MEMORYACCESS_H
+#ifndef POD_H
+#define POD_H
 
 #include "FlightComputer/structs.h"
 

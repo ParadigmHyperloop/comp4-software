@@ -68,6 +68,7 @@ using namespace fc;
 
 const char* getPodUpdateMessage(Pod* Pod)
 {
+	// A temporary plain text message for easy debugging on the node sim side
 	PodStates PodState = Pod->getPodState();
 	switch(PodState)
 	{
