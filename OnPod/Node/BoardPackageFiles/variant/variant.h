@@ -29,8 +29,8 @@
 #define VARIANT_MCK     (48000000ul)
 
 // Number of pins defined in PinDescription array
-#define PINS_COUNT           (34u)
-#define NUM_DIGITAL_PINS     (8u)
+#define PINS_COUNT           (26u)
+#define NUM_DIGITAL_PINS     (25u)
 #define NUM_ANALOG_INPUTS    (1u)
 #define NUM_ANALOG_OUTPUTS   (0u)
 #define analogInputToDigitalPin(p)  ((p < 7u) ? (p) + 15u : -1)
@@ -42,23 +42,24 @@
 #define portModeRegister(port)   (&(port->DIR.reg))
 #define digitalPinHasPWM(P)      (g_APinDescription[P].ulPWMChannel != NOT_ON_PWM || g_APinDescription[P].ulTCChannel != NOT_ON_TIMER)
 
-// Node pins
-#define NW_CS 				 7u
 
-// Anaog Pins AREF
-#define PIN_A0               (6ul)
-static const uint8_t A0   = PIN_A0;
-static const uint8_t DAC0 =  (6ul);
-#define ADC_RESOLUTION		  12
+// Analog Pins AREF
+// Internal SAMD stuff
+#define PIN_A0               (0ul)
+static const uint8_t A0   =  PIN_A0;
+static const uint8_t DAC0 =  (0ul);
+#define ADC_RESOLUTION		 12
+
 
 // SPI Interfaces
-#define SPI_INTERFACES_COUNT 1
+#define SPI_INTERFACES_COUNT 3
 
-// SPI - Wiznet
-#define PIN_SPI_MISO  		8
-#define PIN_SPI_MOSI  		10
-#define PIN_SPI_SCK   		9
-#define PIN_SPI_SS   		7
+// W5500 SPI
+#define NW_CS 				6
+#define PIN_SPI_MISO  		7
+#define PIN_SPI_MOSI  		9
+#define PIN_SPI_SCK   		8
+#define PIN_SPI_SS   		6
 #define PERIPH_SPI   		sercom0
 #define PAD_SPI_TX    		SPI_PAD_2_SCK_3
 #define PAD_SPI_RX    		SERCOM_RX_PAD_1
@@ -67,23 +68,43 @@ static const uint8_t MOSI = PIN_SPI_MOSI;
 static const uint8_t MISO = PIN_SPI_MISO;
 static const uint8_t SCK  = PIN_SPI_SCK;
 
-// SPI1 - ADC's
-#define PIN_SPI1_MISO 	 	 17
-#define PIN_SPI1_MOSI 	 	 19
-#define PIN_SPI1_SCK  	 	 18
-#define PIN_SPI1_SS   	 	 16
+// ADC SPI
+#define PIN_SPI1_MISO 	 	 16
+#define PIN_SPI1_MOSI 	 	 15
+#define PIN_SPI1_SCK  	 	 14
+#define PIN_SPI1_SS   	 	 13
 #define PERIPH_SPI1   	 	 sercom2
-#define PAD_SPI1_TX   	 	 SPI_PAD_2_SCK_3
-#define PAD_SPI1_RX   		 SERCOM_RX_PAD_0
+#define PAD_SPI1_TX   	 	 SPI_PAD_0_SCK_3
+#define PAD_SPI1_RX   		 SERCOM_RX_PAD_2
 static const uint8_t SS1   = PIN_SPI1_SS;
 static const uint8_t MOSI1 = PIN_SPI1_MOSI;
 static const uint8_t MISO1 = PIN_SPI1_MISO;
 static const uint8_t SCK1  = PIN_SPI1_SCK;
 
+// ADC POWER
+static const uint8_t POWER_SEQ_ADC = 17;
+
+// SPI2 - DACs
+#define PIN_SPI2_MISO 	 	 21
+#define PIN_SPI2_MOSI 	 	 20
+#define PIN_SPI2_SCK  	 	 19
+#define PIN_SPI2_SS   	 	 18
+#define PERIPH_SPI2   	 	 sercom4
+#define PAD_SPI2_TX   	 	 SPI_PAD_3_SCK_1
+#define PAD_SPI2_RX   		 SERCOM_RX_PAD_2
+static const uint8_t SS2   = PIN_SPI2_SS;
+static const uint8_t MOSI2 = PIN_SPI2_MOSI;
+static const uint8_t MISO2 = PIN_SPI2_MISO;
+static const uint8_t SCK2  = PIN_SPI2_SCK;
+
+// DAC POWER
+static const uint8_t POWER_SEQ_DAC = 24;
+static const uint8_t DAC_SEQ_START = 25;
+
 // USB
-#define PIN_USB_HOST_ENABLE (3ul)
-#define PIN_USB_DM          (4ul)
-#define PIN_USB_DP          (5ul)
+#define PIN_USB_HOST_ENABLE (4ul)
+#define PIN_USB_DM          (5ul)
+#define PIN_USB_DP          (6ul)
 
 // Serial ports
 #ifdef __cplusplus
