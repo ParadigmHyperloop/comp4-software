@@ -128,6 +128,7 @@ class Pod:
         return "%s:%d" % self.addrport
 
 
+# %% Sample implimentation for testing %%
 def main():
     pod = Pod('127.0.0.1', 5000)
     pod.connect()
