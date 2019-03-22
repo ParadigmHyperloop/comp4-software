@@ -55,11 +55,10 @@ static const uint8_t DAC0 =  (0ul);
 #define SPI_INTERFACES_COUNT 3
 
 // W5500 SPI
-#define NW_CS 				6
-#define PIN_SPI_MISO  		7
+#define PIN_SPI_MISO  		10
 #define PIN_SPI_MOSI  		9
 #define PIN_SPI_SCK   		8
-#define PIN_SPI_SS   		6
+#define PIN_SPI_SS   		7
 #define PERIPH_SPI   		sercom0
 #define PAD_SPI_TX    		SPI_PAD_2_SCK_3
 #define PAD_SPI_RX    		SERCOM_RX_PAD_1
