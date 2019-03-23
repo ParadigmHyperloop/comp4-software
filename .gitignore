@@ -6,7 +6,7 @@
 *.project
 *.cproject
 .DS_Store
-*.settings
+*.settings*
 .idea
 venv/
 pycache/
