@@ -1,5 +1,16 @@
 #pragma once
 
+struct flagStruct {
+	bool heartbeatValid = true;
+	bool estop = false;
+	bool sensorsValid = true;
+	bool taxiCommand = false;
+	bool moveToRetrieval = true;
+	flightComputerStates podStates = BOOT;
+};
+
+
+
 enum State {
     BOOT,
     STANDBY,
@@ -27,6 +38,7 @@ enum flightComputerStates{
 class BrakeNodeState {
     
     public:
+	flagStruct flagStruct_;
     
     //Parameterized constructor
     BrakeNodeState (State s);
