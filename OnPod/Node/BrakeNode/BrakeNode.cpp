@@ -4,7 +4,8 @@ BrakeNodeState::BrakeNodeState(State s) : state_(s) {
 }
 
 void BrakeNodeState::CheckBoot() {
-  if (0-Sol-1 == open and 0-Sol-2 == open and 1-Sol-1 == open and 2-Sol-1 == open and 3-Sol-1 == open and EnclosureTemp == nominal) {
+  if (0-Sol-1 == open and 0-Sol-2 == open and 1-Sol-1 == open
+		  and 2-Sol-1 == open and 3-Sol-1 == open and EnclosureTemp == nominal) {
     state_ = State::STANDBY;
   }
 }
