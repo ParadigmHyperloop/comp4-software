@@ -2,8 +2,8 @@
 #include <SPI.h>
 #include "adc.h"
 
-ADS7953::ADS7953(SPIClass spi, SPISettings spiSettings) :
-    spi(spi), spiSettings(spiSettings)
+ADS7953::ADS7953(SPIClass spi, SPISettings spiSettings, uint16_t activeChannelMask) :
+    spi(spi), spiSettings(spiSettings), iActiveChannels(activeChannelMask)
     {}
 
 void ADS7953::init() {
