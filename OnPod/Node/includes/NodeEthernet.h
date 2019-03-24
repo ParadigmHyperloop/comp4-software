@@ -12,6 +12,7 @@ private:
     EthernetUDP Udp;
     uint32_t rxPacketNum = 0;
     uint32_t txPacketNum = 1;
+    uint32_t bbbState    = 0;
 
 public:
     UDPClass(uint8_t ETHERNET_SS_PIN, IPAddress NODE_IP,
@@ -24,6 +25,7 @@ public:
     char iPacketRecvBuffer[UDP_TX_PACKET_MAX_SIZE];
     char iPacketSendBuffer[UDP_TX_PACKET_MAX_SIZE];
     uint32_t getTxPacketNum(){return txPacketNum;};
+    uint32_t getRxPacketNum(){return rxPacketNum;};
 };
 
 #endif

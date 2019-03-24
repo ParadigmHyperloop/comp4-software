@@ -38,12 +38,15 @@ bool UDPClass::readPacket() {
 
 bool UDPClass::sendPacket(IPAddress iDestinationIP, uint16_t iDestinationPort) {
     // return false if there was an error resolving the IP or port
-    if (!Udp.beginPacket(iDestinationIP, iDestinationPort))
+    if (!Udp.beginPacket(iDestinationIP, iDestinationPort)){
         return false;
+    }
     Udp.write(iPacketSendBuffer);
     // return false if there was an error sending the packet
-    if (Udp.endPacket())
+    if (Udp.endPacket()){
         return false;
+    }
+    txPacketNum ++;
     return true;
 }
 
@@ -52,6 +55,7 @@ void UDPClass::parseRearPacket(){
 	uint32_t packet = iPacketRecvBuffer[sizeof(NodeType)];
 	if (type == REAR && packet > rxPacketNum){ // check if recent packet
 		rxPacketNum = packet;
+
 		// can memcopy packet to a struct here but not needed for rear node at this time
 	}
 }

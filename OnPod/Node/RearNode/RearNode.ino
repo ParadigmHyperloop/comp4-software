@@ -6,12 +6,19 @@
 #include "NodeEthernet.h"
 #include "NodeStructs.h"
 
-const NodeType NODE_TYPE = REAR;
-const NodeNum  NODE_NUM  = PRIMARY;
-RearNodeTxPkg NodeValues;
+/////// Node User Configurable //////////
+const NodeType NODE_TYPE   = REAR;
+const NodeNum  NODE_NUM    = PRIMARY;
+
+const uint8_t  UDP_TX_IP[] = {192, 168, 0, 1};
+const uint16_t UDP_TX_Port = 8888;
+UDPClass udp(PIN_SPI_SS, IPAddress(192, 168, 2, 50), 777, NODE_TYPE); // Rx info
+
+/////// End User Configurable ///////////
+RearNodeTxPkg NodeValues = {0, {0}, {0}, 0};
 
 // instantiate an ethernet object
-UDPClass udp(PIN_SPI_SS, IPAddress(192, 168, 2, 50), 777, NODE_TYPE);
+
 
 void setup() {
 	udp.init();	
@@ -25,11 +32,10 @@ void loop() {
 	}
 
 	NodeValues.packetNum = udp.getTxPacketNum();
-	//NodeValues.adcValues = 0;
-	//NodeValues.dacValues = 0;
+	NodeValues.errCode = udp.getRxPacketNum();
 	memcpy(udp.iPacketSendBuffer, &NodeValues, sizeof(NodeValues));
 	// example send to an arbitrary IP and port
-	if (udp.sendPacket(IPAddress(192, 168, 0, 1), 8888)) {
+	if (udp.sendPacket(IPAddress(UDP_TX_IP), UDP_TX_Port)) {
 		// the data in the buffer has been sent successfully
 	}
 	else {

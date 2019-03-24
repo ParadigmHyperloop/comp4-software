@@ -45,6 +45,7 @@ struct RearNodeTxPkg {
 	uint32_t packetNum;
 	uint32_t adcValues[16];
 	uint32_t dacValues[2];
+	uint32_t errCode;
 };
 
 #endif
