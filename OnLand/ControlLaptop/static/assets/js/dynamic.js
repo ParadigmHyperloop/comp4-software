@@ -9,6 +9,8 @@ function sendCommand(command) {
     }),
     success: function HANDLE_COMMAND_SEND_SUCCESS (data) {
     },
+    error: function HANDLE_COMMAND_SEND_ERROR(data) {
+    },
   })
 }
 
@@ -23,6 +25,8 @@ function registerDisconnectFromPodClick() {
         command: 'DISCONNECT'
       }),
       success: function HANDLE_DISCONNECT_SUCCESS (data) {
+      },
+      error: function HANDLE_COMMAND_SEND_ERROR(data) {
       },
     })
   });

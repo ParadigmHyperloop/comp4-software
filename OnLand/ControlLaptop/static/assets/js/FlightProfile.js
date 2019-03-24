@@ -1,4 +1,4 @@
-function showSuccessConfigrationUpdate(from, align){
+function showSuccessConfigurationUpdate(from, align){
 	$.notify({
 		icon: "pe-7s-gift",
 		message: "Configuration <b>Updated Successfully</b>"
@@ -27,11 +27,11 @@ function setupConfigurationFormSubmit() {
       url: '/submit_configuration',
       data: $('#configuration-form').serialize(),
       success: function handleSucceessFormSubmission(data) {
-        showSuccessConfigrationUpdate('top','right');
+        showSuccessConfigurationUpdate('top','right');
         console.log('Submission, Success')
       },
       error: function handleErrorFormSubmission(data) {
-        console.log(data);
+        console.log("FAILED");
       }
     })
   });
