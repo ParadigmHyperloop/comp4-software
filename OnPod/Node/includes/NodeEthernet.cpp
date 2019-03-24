@@ -3,16 +3,17 @@
 #include <EthernetUdp.h>
 #include "NodeEthernet.h"
 
-UDPClass::UDPClass(uint8_t ETHERNET_SS_PIN, IPAddress NODE_IP,
-                    uint16_t NODE_PORT, uint8_t NODE_TYPE):
-    ETHERNET_SS_PIN(ETHERNET_SS_PIN),
-    NODE_IP(NODE_IP),
-    NODE_PORT(NODE_PORT),
-    NODE_TYPE(NODE_TYPE)
+UDPClass::UDPClass(uint8_t ethernetSSPin, IPAddress nodeIp,
+                    uint16_t nodePort, uint8_t nodeType, uint8_t nodeNum):
+    ETHERNET_SS_PIN(ethernetSSPin),
+    NODE_IP(nodeIp),
+    NODE_PORT(nodePort),
+    NODE_TYPE(nodeType),
+	NODE_NUM(nodeNum)
     {}
 
 void UDPClass::init() {
-    uint8_t mac[] = {NODE_TYPE, 0xFF, 0xFF, 0xFF, 0xFF};
+    uint8_t mac[] = {NODE_TYPE, NODE_NUM, 0xFF, 0xFF, 0xFF};
     Ethernet.init(ETHERNET_SS_PIN);
     Ethernet.begin(mac, NODE_IP);
     // blocks until W5500 responds and an ethernet cable is connected

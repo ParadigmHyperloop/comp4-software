@@ -18,7 +18,7 @@ private:
 public:
     uint16_t iADCData[16] {}; //array of the latest data; 0 for channels not being used
 
-    ADS7953(SPIClass spi, SPISettings spiSettings);
+    ADS7953(SPIClass spi, SPISettings spiSettings, uint16_t activeChannelMask = 0);
     void init();
     uint16_t readSingleChannel(uint8_t);
     void readActiveChannels();

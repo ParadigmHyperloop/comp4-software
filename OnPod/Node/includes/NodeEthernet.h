@@ -9,14 +9,15 @@ private:
     const IPAddress NODE_IP;
     const uint16_t NODE_PORT;
     const uint8_t NODE_TYPE;
+    const uint8_t NODE_NUM;
     EthernetUDP Udp;
     uint32_t rxPacketNum = 0;
     uint32_t txPacketNum = 1;
     uint32_t bbbState    = 0;
 
 public:
-    UDPClass(uint8_t ETHERNET_SS_PIN, IPAddress NODE_IP,
-             uint16_t NODE_PORT, uint8_t NODE_TYPE);
+    UDPClass(uint8_t ethernetSSPin, IPAddress nodeIp,
+            uint16_t nodePort, uint8_t nodeType, uint8_t nodeNum);
     void init();
     bool readPacket();
     bool sendPacket(IPAddress iDestinationIP, uint16_t iDestinationPort);
