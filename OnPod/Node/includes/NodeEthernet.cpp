@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <Ethernet.h>
 #include <EthernetUdp.h>
-#include "ethernet.h"
+#include "NodeEthernet.h"
 
 UDPClass::UDPClass(uint8_t ETHERNET_SS_PIN, IPAddress NODE_IP,
                     uint16_t NODE_PORT, uint8_t NODE_TYPE):
@@ -45,4 +45,13 @@ bool UDPClass::sendPacket(IPAddress iDestinationIP, uint16_t iDestinationPort) {
     if (Udp.endPacket())
         return false;
     return true;
+}
+
+void UDPClass::parseRearPacket(){
+	NodeType type = (NodeType)iPacketRecvBuffer[0];
+	uint32_t packet = iPacketRecvBuffer[sizeof(NodeType)];
+	if (type == REAR && packet > rxPacketNum){ // check if recent packet
+		rxPacketNum = packet;
+		// can memcopy packet to a struct here but not needed for rear node at this time
+	}
 }
