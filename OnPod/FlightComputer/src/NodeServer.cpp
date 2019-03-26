@@ -19,6 +19,10 @@ using namespace fc;
 	int32_t iSocket;
 	struct sockaddr_in SocketAddrStruct;
 	iSocket = socket(AF_INET, SOCK_DGRAM, 0);
+    if (iSocket < 0)
+    {
+    	LOG(INFO)<<"ERROR Making Node Server Socket";
+    }
 	int flags = fcntl(iSocket, F_GETFL);
 	flags |= O_NONBLOCK;
 	fcntl(iSocket, F_SETFL, flags);
