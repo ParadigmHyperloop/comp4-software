@@ -5,37 +5,40 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CC_SRCS += \
 ../src/NodeTelem.pb.cc \
+../src/PodTelem.pb.cc \
+../src/States.pb.cc \
 ../src/easylogging++.cc 
 
 CPP_SRCS += \
+../src/Client.cpp \
+../src/CoreControl.cpp \
 ../src/FlightComputer.cpp \
-../src/MainControlLoop.cpp \
-../src/MemoryAccess.cpp \
 ../src/NodeServer.cpp \
-../src/PodInternalNetwork.cpp \
-../src/nodeSim.cpp 
+../src/Pod.cpp 
 
 CC_DEPS += \
 ./src/NodeTelem.pb.d \
+./src/PodTelem.pb.d \
+./src/States.pb.d \
 ./src/easylogging++.d 
 
 OBJS += \
+./src/Client.o \
+./src/CoreControl.o \
 ./src/FlightComputer.o \
-./src/MainControlLoop.o \
-./src/MemoryAccess.o \
 ./src/NodeServer.o \
 ./src/NodeTelem.pb.o \
-./src/PodInternalNetwork.o \
-./src/easylogging++.o \
-./src/nodeSim.o 
+./src/Pod.o \
+./src/PodTelem.pb.o \
+./src/States.pb.o \
+./src/easylogging++.o 
 
 CPP_DEPS += \
+./src/Client.d \
+./src/CoreControl.d \
 ./src/FlightComputer.d \
-./src/MainControlLoop.d \
-./src/MemoryAccess.d \
 ./src/NodeServer.d \
-./src/PodInternalNetwork.d \
-./src/nodeSim.d 
+./src/Pod.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

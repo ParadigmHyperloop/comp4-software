@@ -1,20 +1,20 @@
 syntax = "proto2";
 
-import "states.proto";
+import "States.proto";
 package pds;
 
 message telemetry {
 
 // States
-    optional podStates podState = 1;
-    optional breakNodeStates breakNodeState = 2;
-    optional motorStates motorState = 3;
-    optional controlsInterfaceStates controlsInterfaceState = 4;
-    optional inverterStates inverterState = 5;
-    optional lvdcNodeStates lvdcNodeState = 54;
-    optional batteryManagementStates batteryManagementState = 25;
-    optional podStates breakNodePerceivedPodState = 31;
-    optional rearNodeStates rearNodeState = 47;
+    optional PodStates podState = 1;
+    optional BrakeNodeStates breakNodeState = 2;
+    optional MotorStates motorState = 3;
+    optional ControlsInterfaceStates controlsInterfaceState = 4;
+    optional InverterStates inverterState = 5;
+    optional LvdcNodeStates lvdcNodeState = 54;
+    optional BatteryManagementStates batteryManagementState = 25;
+    optional PodStates breakNodePerceivedPodState = 31;
+    optional RearNodeStates rearNodeState = 47;
 
 // Time
     optional int32 missionTime = 6;

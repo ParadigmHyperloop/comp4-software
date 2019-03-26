@@ -1,33 +1,12 @@
-#include "FlightComputer/PodInternalNetwork.h"
-#include "FlightComputer/MemoryAccess.h"
+#include <Client.h>
+#include "FlightComputer/Pod.h"
+#include "ProtoBuffer/NodeTelem.pb.h"
 #include "EasyLogger/easylogging++.h"
-
-
-#define UDPPORT 5008
+#include <fcntl.h>
+#include <iostream>
+#include <string>
 
 using namespace fc;
-
-void parseBreakNodePacket(fc::brakeNodeData pPayload, MemoryAccess Pod){
-	//Grab State
-	Pod.setBrakeNodeState(pPayload.state());
-
-		/*Offload Data
-		Pod->bSolenoid1 = pPayload.sol1();
-		Pod->bSolenoid2 = pPayload.sol2();
-		Pod->bSolenoid3 = pPayload.sol3();
-		Pod->bSolenoid4 = pPayload.sol4();
-		Pod->bSolenoid5 = pPayload.sol5();
-		Pod->bSolenoid6 = pPayload.sol6();
-		Pod->iLowPressure1 = pPayload.lp1();
-		Pod->iLowPressure2 = pPayload.lp2();
-		Pod->iLowPressure3 = pPayload.lp3();
-		Pod->iLowPressure4 = pPayload.lp4();
-		Pod->iHighPressure = pPayload.hp();
-		Pod->iPressureVesselTemperature = pPayload.temp();
-		*/
-
-}
-
 /**
  * createNodeServerSocket
  *
@@ -36,45 +15,120 @@ void parseBreakNodePacket(fc::brakeNodeData pPayload, MemoryAccess Pod){
  *
  * Create the UDP socket that Pod Internal Work Node telemetry will be recieved on.
  */
- int32_t createNodeServerSocket() {
-   int32_t iPort = UDPPORT;
-   int32_t iSocket;
-  struct sockaddr_in SocketAddrStruct;
-  iSocket = socket(AF_INET, SOCK_DGRAM, 0);
- // memset(&SocketAddrStruct, '\0', sizeof(SocketAddrStruct));  //Replacement, I read online this isnt even needed??
-  SocketAddrStruct.sin_family = AF_INET;
-  SocketAddrStruct.sin_port = htons(iPort);
-  SocketAddrStruct.sin_addr.s_addr = inet_addr("127.0.0.1");
-  bind(iSocket, (struct sockaddr*)&SocketAddrStruct, sizeof(SocketAddrStruct));
-  return iSocket;
+ int32_t createNodeServerSocket(int32_t iPortNumber) {
+	int32_t iSocket;
+	struct sockaddr_in SocketAddrStruct;
+	iSocket = socket(AF_INET, SOCK_DGRAM, 0);
+	int flags = fcntl(iSocket, F_GETFL);
+	flags |= O_NONBLOCK;
+	fcntl(iSocket, F_SETFL, flags);
+	SocketAddrStruct.sin_family = AF_INET;
+	SocketAddrStruct.sin_port = htons(iPortNumber);
+	SocketAddrStruct.sin_addr.s_addr = inet_addr("127.0.0.1");
+	bind(iSocket, (struct sockaddr*)&SocketAddrStruct, sizeof(SocketAddrStruct));
+	return iSocket;
 }
+
+
+ void parseBrakeNodeUpdate(Pod* Pod, char cUpdate[])
+ {
+	 BrakeNodeStates bnsBrakeNodeStates[9] = {bnsBooting,
+			 	 	 	 					  bnsStandby,
+											  bnsArming,
+											  bnsArmed,
+											  bnsFlight,
+											  bnsBraking,
+											  bnsVenting,
+											  bnsRetrieval,
+											  bnsError};
+	 std::string sNodeState(cUpdate);
+	 int32_t iStateNumber = std::stoi(sNodeState);
+	 BrakeNodeStates eBrakeNodeState = bnsBrakeNodeStates[iStateNumber];
+	 Pod->setBrakeNodeState(eBrakeNodeState);
+	 return;
+ }
+
+
+ void retrieveNodeUpdate(Pod* Pod, int32_t iNodeServerSocket)
+ {
+		char cBuffer[30] = {0};
+		bzero(&cBuffer, sizeof cBuffer);
+		LOG(DEBUG)<<"Waiting to recieve on socket: " << iNodeServerSocket;
+		int32_t iRecievedPacketSize = recvfrom(iNodeServerSocket, cBuffer, 300, 0, nullptr, nullptr);
+		if(iRecievedPacketSize != -1)
+		{
+			parseBrakeNodeUpdate(Pod, cBuffer);
+			LOG(DEBUG)<<"Packet Recieved on socket:" << iRecievedPacketSize;
+		}
+		else
+		{
+			LOG(DEBUG)<<"No Packet Recieved on socket:" << iNodeServerSocket;
+		}
+ }
+
+const char* getPodUpdateMessage(Pod* Pod)
+{
+	// A temporary plain text message for easy debugging on the node sim side
+	PodStates PodState = Pod->getPodState();
+	switch(PodState)
+	{
+	case psBooting:
+		return "Booting";
+	case psStandby:
+		return "StandBy";
+	case psArming:
+		return "Arming";
+	case psArmed:
+		return "Armed";
+	case psPreFlight:
+		return "PreFlight";
+	case psAcceleration:
+		return "Acceleration";
+	case psCoasting:
+		return "Coasting";
+	case psBraking:
+		return "Braking";
+	case psDisarming:
+		return "Disarming";
+	case psRetrieval:
+		return "Retrieval";
+	default:
+		return "Emergency";
+	}
+}
+
+
+
 
 /**
  *Wait on socket, parse the recieved message into a protobuf and hand it off.
  */
- int32_t nodeServerThread(MemoryAccess* Pod)
+ int32_t podInternalNetworkThread(Pod Pod)
 {
-	 int32_t iSocket = createNodeServerSocket();
-	char cBuffer[100] = {0};
-	while (1)
-	{
-		bzero(&cBuffer, sizeof cBuffer);
-		LOG(INFO)<<"Waiting to recieve on socket: " << iSocket;
-		 int32_t iRecievedPacketSize = recvfrom(iSocket, cBuffer, 300, 0, nullptr, nullptr);
-		fc::brakeNodeData pNodeUpdate;
-		bool bProtoPacketParsed = pNodeUpdate.ParseFromArray(&cBuffer, iRecievedPacketSize);
-		if(bProtoPacketParsed)
+	 Pod.sPodValues->iNodeServerPortNumber = 5005;
+
+	// Store in Config
+	std::string cNodeAddresses[] = {"127.0.0.1","127.0.0.1"};
+	int32_t iNumberOfNodes = 2;
+	// Network setup
+	int32_t iNodeServerSocket = createNodeServerSocket(Pod.getNodeServerPortNumber());
+	clientSocketConfig cscNodeClientSocket = initializeClientSocket();
+
+	// While mode isnt shutdown
+	while(1){
+		// Serve all nodes with an update
+		// Create Update Packet
+		const char* cMesssage = getPodUpdateMessage(&Pod);
+		//Serve Update to all Nodes
+		for (int i=0 ; i<iNumberOfNodes ; i++)
 		{
-		    LOG(INFO)<<"Packet Recieved";
-			parseBreakNodePacket( pNodeUpdate,*Pod);
+			sendDataUdp(&cscNodeClientSocket, cMesssage, strlen(cMesssage), cNodeAddresses[i]);
 		}
-		else
-		{
-		    LOG(ERROR)<<"Error Parsing Protobuf packet";
-		}
+
+		// Check all sockets for an update and parse
+		retrieveNodeUpdate(&Pod, iNodeServerSocket);
+
 	}
-	close(iSocket);
-	return 0;
 }
 
 

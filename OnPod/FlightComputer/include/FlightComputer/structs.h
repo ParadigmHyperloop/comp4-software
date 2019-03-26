@@ -2,26 +2,27 @@
 #define STUCTS_H
 #include <netinet/in.h>
 #include <cstdint>
-#include "ProtoBuffer/NodeTelem.pb.h"
+#include "ProtoBuffer/States.pb.h"
 
 
-enum ePodStates { psStandby, psArming, psArmed, psAcceleration, psCoasting, psBraking, psDisarm, psRetrieval, psEmergency, psBooting };
+
+//enum PodStates { psStandby, psArming, psArmed, psAcceleration, psCoasting, psBraking, psDisarm, psRetrieval, psEmergency, psBooting };
 
 //enum eBreakNodeStates { bnsBooting, bnsStandby, bnsArming, bnsArmed, bnsFlight, bnsBraking, bnsVenting, bnsRetrieval, bnsError};
 
-enum eTerminalStates { tsConnected, tsDropped, tsTerminalEmergency};
+//enum TerminalStates { tsConnected, tsDropped, tsTerminalEmergency};
 
-enum eTerminalCommands { tcTerminalArm, tcTerminalFlight, tcTerminalStop, tcTerminalNone};
+//enum TerminalCommands { tcTerminalArm, tcTerminalFlight, tcTerminalStop, tcTerminalNone};
 
-enum eMotorStates { msIdle, msDrive};
+//enum MotorStates { msIdle, msDrive};
 
 struct PodValues
 {
 	// States
-	ePodStates PodState = psBooting;
-	eTerminalStates TerminalState;
-	eMotorStates MotorState;
-	fc::brakeNodeData::breakNodeState BreakNodeState;
+	PodStates ePodState = psBooting;
+	ControlsInterfaceStates eTerminalState;
+	MotorStates eMotorState;
+	BrakeNodeStates eBreakNodeState;
 	// Navigation
 	float fDistance;
 	float fVelocity;
@@ -33,7 +34,7 @@ struct PodValues
 	// Atmosphere
 	double dTubePressure;
 	// Terminal
-	eTerminalCommands TerminalCommand = tcTerminalNone;
+	ControlsInterfaceStates eTerminalCommand = ciConnected;
 	// Brake Node
 	bool bSolenoid1;
 	bool bSolenoid2;
@@ -47,6 +48,9 @@ struct PodValues
 	int32_t iLowPressure4;
 	int32_t iHighPressure;
 	int32_t iPressureVesselTemperature;
+
+	//Network
+	int32_t iNodeServerPortNumber;
 
 };
 

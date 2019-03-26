@@ -14,6 +14,17 @@ pycache/
 *.pyc
 *.swp
 *org.eclipse.cdt.core.prefs
+
+
+
+OnPod/FlightComputer/Debug/FlightComputer
+
+ProtoBufs/\.idea/
+
+Testing/NodeSimulator/__pycache__/
+
+*.xml
+
 *platformio.ini
 *platformio
 *.pio
@@ -21,3 +32,4 @@ pycache/
 *.piolibdeps
 *.clang_complete
 *.gcc-flags.json
+

@@ -1,7 +1,7 @@
-#include "FlightComputer/PodInternalNetwork.h"
+#include <Client.h>
 #include "EasyLogger/easylogging++.h"
 
-#define UDPPORT 5008
+#define UDPPORT 5000
 
 using namespace std;
 
@@ -25,7 +25,7 @@ void killConfigSocket(clientSocketConfig* cscSocketInfo)
  * Param:None
  * Returns : SocketConfig struct
  */
-clientSocketConfig* initializeClientSocket()
+clientSocketConfig initializeClientSocket()
 {
   LOG(INFO)<<"Creating Client Socket";
   int iPort = UDPPORT;
@@ -35,9 +35,9 @@ clientSocketConfig* initializeClientSocket()
   iSocket = socket(PF_INET, SOCK_DGRAM, 0);
   SocketAddrStruct.sin_family = AF_INET;
   SocketAddrStruct.sin_port = htons(iPort);
-  clientSocketConfig* cscSocketInfo = new clientSocketConfig;
-  cscSocketInfo->addr = SocketAddrStruct;
-  cscSocketInfo->sckt = iSocket;
+  clientSocketConfig cscSocketInfo;
+  cscSocketInfo.addr = SocketAddrStruct;
+  cscSocketInfo.sckt = iSocket;
   return cscSocketInfo;
 }
 
@@ -51,10 +51,13 @@ clientSocketConfig* initializeClientSocket()
  *
  * returns: None
  */
-void sendDataUdp(clientSocketConfig* cscSocketInfo, void* vPayload,  int32_t iPayloadSize)
+void sendDataUdp(clientSocketConfig* cscSocketInfo, const void* vPayload,  int32_t iPayloadSize, std::string sAddress)
 {
-  cscSocketInfo->addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+  cscSocketInfo->addr.sin_addr.s_addr = inet_addr(sAddress.c_str());
   sendto(cscSocketInfo->sckt, vPayload, iPayloadSize, 0,
          (struct sockaddr*)&cscSocketInfo->addr, sizeof(cscSocketInfo->addr));
-  LOG(INFO)<<"Packet Sent";
 }
+
+
+
+
