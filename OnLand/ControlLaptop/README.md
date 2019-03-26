@@ -4,6 +4,12 @@ used to communicate with Pod
 
 ported over from [Paradigm Hyperloop/Web-UI](https://github.com/ParadigmHyperloop/web-UI)
 
+# License
+Copyright 2017 Creative Tim (http://www.creative-tim.com)
+Licensed under MIT (https://github.com/creativetimofficial/light-bootstrap-dashboard/blob/master/LICENSE.md)
+
+
+
 ### How to:
 - Dependencies
     - Linux
