@@ -41,6 +41,8 @@ cp -f States/cpp/*.pb.cc $flightComputerSrc
 cp -f PodTelem/cpp/*.pb.h $flightComputer
 cp -f PodTelem/cpp/*.pb.cc $flightComputerSrc
 
+cp -f PodCommand/cpp/*.pb.h $flightComputer
+cp -f PodCommand/cpp/*.pb.cc $flightComputerSrc
 
 cp -f PodTelem/py/* $PDS
 cp -f PodTelem/py/* $NODESIM
