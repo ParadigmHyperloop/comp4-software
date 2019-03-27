@@ -7,6 +7,9 @@
 #include <netinet/in.h>
 
 #include "EasyLogger/easylogging++.h"
+#include "FlightComputer/Commander.h"
+
+// Get manual state change commands. Get Estop command
 
  int32_t createCommanderServerSocket(int32_t iPortNumber) {
 	 int32_t iSockfd, iNewSockFd;
@@ -30,19 +33,21 @@
 
      listen(iSockfd,5);
      clilen = sizeof(cli_addr);
-     iNewSockFd = accept(iSockfd, 
-                 (struct sockaddr *) &cli_addr, 
-                 &clilen);
+     iNewSockFd = accept(iSockfd, (struct sockaddr *) &cli_addr, &clilen);
      if (iNewSockFd < 0)
      {
     	 LOG(INFO)<<"ERROR on accept";
      }
      bzero(buffer,256);
      iMessageSize = read(iNewSockFd,buffer,255);
-     if (n < 0) error("ERROR reading from socket");
-     printf("Here is the message: %s\iMessageSize",buffer);
+     if (iMessageSize < 0){
+    	 LOG(INFO)<<"ERROR reading from socket";
+     }
+     LOG(INFO)<<"Here is the message: " << buffer;
      iMessageSize = write(iNewSockFd,"I got your message",18);
-     if (n < 0) error("ERROR writing to socket");
+     if (iMessageSize < 0){
+    	 LOG(INFO)<<"ERROR writing to socket";
+     }
      close(iNewSockFd);
      close(iSockfd);
      return 0; 

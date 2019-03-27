@@ -13,6 +13,7 @@ INITIALIZE_EASYLOGGINGPP
 #include "FlightComputer/nodeSim.h"
 #include "FlightComputer/Pod.h"
 #include "FlightComputer/CoreControl.h"
+#include "FlightComputer/Commander.h"
 
 int main( int32_t argc, char** argv)
 {
@@ -35,6 +36,10 @@ int main( int32_t argc, char** argv)
 	pCoreControlLoop.bWritePodState = true;
 	std::thread tControlLoop(coreControlLoop, pCoreControlLoop);
 
+	// Controls Interface Connection Thread
+	std::thread tControlsInterfaceConnection(createCommanderServerSocket, 5009);
+
+	tControlsInterfaceConnection.join();
 	tServer.join();
 	tControlLoop.join();
 

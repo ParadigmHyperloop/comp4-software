@@ -11,6 +11,7 @@ CC_SRCS += \
 
 CPP_SRCS += \
 ../src/Client.cpp \
+../src/Commander.cpp \
 ../src/CoreControl.cpp \
 ../src/FlightComputer.cpp \
 ../src/NodeServer.cpp \
@@ -24,6 +25,7 @@ CC_DEPS += \
 
 OBJS += \
 ./src/Client.o \
+./src/Commander.o \
 ./src/CoreControl.o \
 ./src/FlightComputer.o \
 ./src/NodeServer.o \
@@ -35,6 +37,7 @@ OBJS += \
 
 CPP_DEPS += \
 ./src/Client.d \
+./src/Commander.d \
 ./src/CoreControl.d \
 ./src/FlightComputer.d \
 ./src/NodeServer.d \
