@@ -37,3 +37,7 @@ Testing/NodeSimulator/__pycache__/
 *.clang_complete
 *.gcc-flags.json
 
+
+*.pb.h
+*.pb.cc
+*_pb2.py
