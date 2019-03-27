@@ -7,7 +7,10 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include <string>
+#include <stdlib.h>
+#include <string.h>
+
+
 #include "ProtoBuffer/NodeTelem.pb.h"
 #include "FlightComputer/structs.h"
 #include "FlightComputer/Pod.h"
@@ -16,16 +19,18 @@ void sendDataUdp(clientSocketConfig*, const void*,  int32_t,  std::string);
 
 clientSocketConfig initializeClientSocket();
 
-void killConfigSocket(clientSocketConfig*);
+int32_t createNodeServerSocket(int32_t);
 
- int32_t createNodeServerSocket(int32_t);
-
- int32_t nodeServerThread(Pod* Pod);
+int32_t nodeServerThread(Pod Pod);
 
 void parseBreakNodePacket(fc::brakeNodeData, Pod);
 
 int32_t podInternalNetworkThread(Pod);
 
 const char* getPodUpdateMessage(Pod*);
+
+int32_t createCommanderServerSocket(int32_t);
+
+void commanderThread(Pod);
 
 #endif

@@ -1,4 +1,4 @@
-#include <Client.h>
+#include <Network.h>
 #include "FlightComputer/Pod.h"
 #include "ProtoBuffer/NodeTelem.pb.h"
 #include "EasyLogger/easylogging++.h"
@@ -7,6 +7,7 @@
 #include <string>
 
 using namespace fc;
+
 /**
  * createNodeServerSocket
  *
@@ -34,8 +35,8 @@ using namespace fc;
 }
 
 
- void parseBrakeNodeUpdate(Pod* Pod, char cUpdate[])
- {
+void parseBrakeNodeUpdate(Pod* Pod, char cUpdate[])
+{
 	 BrakeNodeStates bnsBrakeNodeStates[9] = {bnsBooting,
 			 	 	 	 					  bnsStandby,
 											  bnsArming,
@@ -50,11 +51,11 @@ using namespace fc;
 	 BrakeNodeStates eBrakeNodeState = bnsBrakeNodeStates[iStateNumber];
 	 Pod->setBrakeNodeState(eBrakeNodeState);
 	 return;
- }
+}
 
 
- void retrieveNodeUpdate(Pod* Pod, int32_t iNodeServerSocket)
- {
+void retrieveNodeUpdate(Pod* Pod, int32_t iNodeServerSocket)
+{
 		char cBuffer[30] = {0};
 		bzero(&cBuffer, sizeof cBuffer);
 		LOG(DEBUG)<<"Waiting to recieve on socket: " << iNodeServerSocket;
@@ -68,7 +69,8 @@ using namespace fc;
 		{
 			LOG(DEBUG)<<"No Packet Recieved on socket:" << iNodeServerSocket;
 		}
- }
+}
+
 
 const char* getPodUpdateMessage(Pod* Pod)
 {
@@ -102,8 +104,6 @@ const char* getPodUpdateMessage(Pod* Pod)
 }
 
 
-
-
 /**
  *Wait on socket, parse the recieved message into a protobuf and hand it off.
  */
@@ -133,6 +133,10 @@ const char* getPodUpdateMessage(Pod* Pod)
 		retrieveNodeUpdate(&Pod, iNodeServerSocket);
 
 	}
+
+	close(cscNodeClientSocket.sckt);
+	close(iNodeServerSocket);
+
 }
 
 

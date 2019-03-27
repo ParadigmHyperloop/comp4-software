@@ -1,20 +1,10 @@
-#include <Client.h>
+#include <Network.h>
 #include "EasyLogger/easylogging++.h"
 
 #define UDPPORT 5000
 
 using namespace std;
 
-/**killConfigSocket
- *
- *Close the socket of the socketConfig struct provided
- *
- */
-void killConfigSocket(clientSocketConfig* cscSocketInfo)
-{
-  close(cscSocketInfo->sckt);
-  return;
-}
 
 /**initializeClientSocket
  *

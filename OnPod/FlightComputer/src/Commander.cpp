@@ -1,22 +1,11 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/types.h> 
-#include <sys/socket.h>
-#include <netinet/in.h>
-
+#include "FlightComputer/Network.h"
 #include "EasyLogger/easylogging++.h"
-#include "FlightComputer/Commander.h"
 
 // Get manual state change commands. Get Estop command
 
  int32_t createCommanderServerSocket(int32_t iPortNumber) {
-	 int32_t iSockfd, iNewSockFd;
-     socklen_t clilen;
-     char buffer[256];
-     struct sockaddr_in serv_addr, cli_addr;
-     int32_t iMessageSize;
+	 int32_t iSockfd;
+     struct sockaddr_in serv_addr;
      iSockfd = socket(AF_INET, SOCK_STREAM, 0);
      if (iSockfd < 0)
      {
@@ -30,26 +19,65 @@
      {
     	 LOG(INFO)<<"ERROR binding commander socket";
      }
+     //Queue 3 requests before regecting
+     listen(iSockfd,3);
+     return iSockfd;
+ }
 
-     listen(iSockfd,5);
-     clilen = sizeof(cli_addr);
-     iNewSockFd = accept(iSockfd, (struct sockaddr *) &cli_addr, &clilen);
-     if (iNewSockFd < 0)
-     {
-    	 LOG(INFO)<<"ERROR on accept";
-     }
-     bzero(buffer,256);
-     iMessageSize = read(iNewSockFd,buffer,255);
-     if (iMessageSize < 0){
-    	 LOG(INFO)<<"ERROR reading from socket";
-     }
-     LOG(INFO)<<"Here is the message: " << buffer;
-     iMessageSize = write(iNewSockFd,"I got your message",18);
-     if (iMessageSize < 0){
-    	 LOG(INFO)<<"ERROR writing to socket";
-     }
+int32_t unserializeProtoMessage(*char cBuffer, iMessageSize)
+{
+	fc::brakeNodeData pNodeUpdate;
+	bool bProtoPacketParsed = pNodeUpdate.ParseFromArray(&cBuffer, iRecievedPacketSize);
+	if(bProtoPacketParsed)
+	{
+		LOG(INFO)<<"Packet Recieved";
+		parseBreakNodePacket( pNodeUpdate,*Pod);
+	}
+	else
+	{
+		LOG(ERROR)<<"Error Parsing Protobuf packet";
+	}
+	return 1;
+}
+
+
+void commanderThread(Pod Pod)
+ {
+	 socklen_t clilen;
+	 int32_t iNewSockFd, iMessageSize;
+	 int32_t iSockfd = createCommanderServerSocket(5009);
+	 struct sockaddr_in cli_addr;
+	 clilen = sizeof(cli_addr);
+	 char buffer[256];
+
+	 //pod state != shutdown
+	 while(1)
+	 {
+		 //Accepted connection gets put on a new socket
+		 iNewSockFd = accept(iSockfd, (struct sockaddr *) &cli_addr, &clilen);
+		 if (iNewSockFd < 0)
+		 {
+			 LOG(INFO)<<"ERROR on accept";
+		 }
+		 //Zero the recieving buffer
+		 bzero(buffer,256);
+		 iMessageSize = read(iNewSockFd,buffer,255);
+		 if (iMessageSize < 0){
+			 LOG(INFO)<<"ERROR reading from socket";
+		 }
+		 LOG(INFO)<<"Here is the message: " << buffer;
+
+		 int32_t = unserializeProtoMessage(&buffer, iMessageSize);
+
+		 //Return 1 to confirm reception
+		 iMessageSize = write(iNewSockFd,"1",1);
+		 if (iMessageSize < 0){
+			 LOG(INFO)<<"ERROR writing to socket";
+		 }
+	 }
      close(iNewSockFd);
      close(iSockfd);
-     return 0; 
-	 
-}
+ }
+
+
+
