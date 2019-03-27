@@ -14,7 +14,6 @@ message telemetry {
     optional LvdcNodeStates lvdcNodeState = 54;
     optional BatteryManagementStates batteryManagementState = 25;
     optional PodStates breakNodePerceivedPodState = 31;
-    optional RearNodeStates rearNodeState = 47;
 
 // Time
     optional int32 missionTime = 6;

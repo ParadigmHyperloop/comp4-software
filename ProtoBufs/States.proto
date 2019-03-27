@@ -33,8 +33,9 @@ enum MotorStates {
 }
 
 enum ControlsInterfaceStates {
-    ciConnected = 0;
-
+    ciArm = 0;
+    ciFlight = 1;
+    ciEmergencyStop = 2;
 }
 
 
