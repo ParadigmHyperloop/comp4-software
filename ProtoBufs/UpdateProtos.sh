@@ -30,6 +30,7 @@ flightComputerSrc="../OnPod/FlightComputer/src/"
 
 PDS="../OnLand/PDS/"
 NODESIM="../Testing/NodeSimulator/Protobuf"
+COMMANDTEST="../Testing/ManualCommandTesting"
 
 # Force copy the files, replacing existing ones
 cp -f NodeTelem/cpp/*.pb.h $flightComputer
@@ -47,5 +48,8 @@ cp -f PodCommand/cpp/*.pb.cc $flightComputerSrc
 cp -f PodTelem/py/* $PDS
 cp -f PodTelem/py/* $NODESIM
 cp -f States/py/* $NODESIM
+
+cp -f PodCommand/py/* $COMMANDTEST
+cp -f States/py/* $COMMANDTEST
 
 echo "Update Complete"

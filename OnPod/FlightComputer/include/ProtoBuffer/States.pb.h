@@ -121,11 +121,13 @@ inline bool MotorStates_Parse(
     MotorStates_descriptor(), name, value);
 }
 enum ControlsInterfaceStates {
-  ciConnected = 0
+  ciArm = 0,
+  ciFlight = 1,
+  ciEmergencyStop = 2
 };
 bool ControlsInterfaceStates_IsValid(int value);
-const ControlsInterfaceStates ControlsInterfaceStates_MIN = ciConnected;
-const ControlsInterfaceStates ControlsInterfaceStates_MAX = ciConnected;
+const ControlsInterfaceStates ControlsInterfaceStates_MIN = ciArm;
+const ControlsInterfaceStates ControlsInterfaceStates_MAX = ciEmergencyStop;
 const int ControlsInterfaceStates_ARRAYSIZE = ControlsInterfaceStates_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ControlsInterfaceStates_descriptor();

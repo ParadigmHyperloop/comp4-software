@@ -6,7 +6,7 @@ package pds;
 message podCommand {
     optional ControlsInterfaceStates controlsInterfaceState = 1;
     optional PodStates manualPodState = 2;
-    optional BrakeNodeStates manualBreakNodeState = 3;
+    optional BrakeNodeStates manualBrakeNodeState = 3;
     optional MotorStates manualMotorState = 4;
     optional LvdcNodeStates manualLvdcNodeState = 5;
     optional bool automaticStateTransitions = 6;

@@ -1,4 +1,4 @@
-#include "Client.h"
+#include "Network.h"
 #include "catch.hpp"
 #include "structs.h"
 

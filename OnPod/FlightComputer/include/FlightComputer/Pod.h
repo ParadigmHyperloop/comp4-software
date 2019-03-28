@@ -11,19 +11,30 @@ class Pod
 		// Pod States
 		int32_t setPodState(PodStates, const char*);
 		PodStates getPodState();
+
 		// Brake Node State
 		BrakeNodeStates getBrakeNodeState();
 		int32_t setBrakeNodeState(BrakeNodeStates);
-		// Terminal Commnand
-		ControlsInterfaceStates getTerminalCommand();
-		int32_t setTerminalCommand(ControlsInterfaceStates);
+
 		// Motor State
 		MotorStates getMotorState();
 		int32_t setMotorState(MotorStates);
+
 		// Flags Array
 		unsigned char* getFlagsArray();
 		int32_t getFlagsArraySize();
+
 		int32_t getNodeServerPortNumber();
+
+		// Controls Interface
+		void setControlsInterfaceState(ControlsInterfaceStates);
+		ControlsInterfaceStates getControlsInterfaceState();
+
+		// Manual State Control
+		void setAutomaticTransitions(bool);
+		void setManualBrakeNodeState(BrakeNodeStates);
+		void setManualLvdcNodeState(LvdcNodeStates);
+		void setManualPodState(PodStates);
 
 		// Permissions
 		bool bWritePodState = 0;
@@ -36,6 +47,7 @@ class Pod
 		bool bWriteFlagsArray = 0;
 		bool bWriteTubePressure = 0;
 		bool bWriteBrakeNode = 0;
+		bool bWriteManualStates = 0;
 
 };
 

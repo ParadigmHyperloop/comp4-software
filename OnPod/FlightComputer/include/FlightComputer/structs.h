@@ -22,7 +22,17 @@ struct PodValues
 	PodStates ePodState = psBooting;
 	ControlsInterfaceStates eTerminalState;
 	MotorStates eMotorState;
-	BrakeNodeStates eBreakNodeState;
+	BrakeNodeStates eBrakeNodeState;
+	LvdcNodeStates eLvdcNodeState;
+
+	//Manual States
+	PodStates eManualPodState;
+	ControlsInterfaceStates eManualTerminalState;
+	MotorStates eManualMotorState;
+	BrakeNodeStates eManualBrakeNodeState;
+	LvdcNodeStates eManualLvdcNodeState;
+	bool bAutomaticTransitions;
+
 	// Navigation
 	float fDistance;
 	float fVelocity;
@@ -34,7 +44,7 @@ struct PodValues
 	// Atmosphere
 	double dTubePressure;
 	// Terminal
-	ControlsInterfaceStates eTerminalCommand = ciConnected;
+	ControlsInterfaceStates eTerminalCommand;
 	// Brake Node
 	bool bSolenoid1;
 	bool bSolenoid2;

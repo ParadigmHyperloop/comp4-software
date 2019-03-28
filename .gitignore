@@ -41,3 +41,4 @@ Testing/NodeSimulator/__pycache__/
 *.pb.h
 *.pb.cc
 *_pb2.py
+OnPod/FlightComputer/tests/myeasylog\.log

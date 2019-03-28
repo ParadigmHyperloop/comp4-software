@@ -58,15 +58,16 @@ void AddDescriptorsImpl() {
       "\020\005\022\016\n\npsCoasting\020\006\022\r\n\tpsBraking\020\007\022\017\n\013psD"
       "isarming\020\010\022\017\n\013psRetrieval\020\t\022\017\n\013psEmergen"
       "cy\020\n*C\n\013MotorStates\022\t\n\005msOff\020\000\022\016\n\nmsChar"
-      "ging\020\001\022\n\n\006msIdle\020\002\022\r\n\tmsEngaged\020\003**\n\027Con"
-      "trolsInterfaceStates\022\017\n\013ciConnected\020\000* \n"
-      "\016InverterStates\022\016\n\niConnected\020\000*)\n\027Batte"
-      "ryManagementStates\022\016\n\nbmsNominal\020\000*.\n\016Re"
-      "arNodeStates\022\r\n\trnBooting\020\000\022\r\n\trnNominal"
-      "\020\001*!\n\016LvdcNodeStates\022\017\n\013lvdcBooting\020\000"
+      "ging\020\001\022\n\n\006msIdle\020\002\022\r\n\tmsEngaged\020\003*G\n\027Con"
+      "trolsInterfaceStates\022\t\n\005ciArm\020\000\022\014\n\010ciFli"
+      "ght\020\001\022\023\n\017ciEmergencyStop\020\002* \n\016InverterSt"
+      "ates\022\016\n\niConnected\020\000*)\n\027BatteryManagemen"
+      "tStates\022\016\n\nbmsNominal\020\000*.\n\016RearNodeState"
+      "s\022\r\n\trnBooting\020\000\022\r\n\trnNominal\020\001*!\n\016LvdcN"
+      "odeStates\022\017\n\013lvdcBooting\020\000"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 637);
+      descriptor, 666);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "States.proto", &protobuf_RegisterTypes);
 }
@@ -149,6 +150,8 @@ const ::google::protobuf::EnumDescriptor* ControlsInterfaceStates_descriptor() {
 bool ControlsInterfaceStates_IsValid(int value) {
   switch (value) {
     case 0:
+    case 1:
+    case 2:
       return true;
     default:
       return false;

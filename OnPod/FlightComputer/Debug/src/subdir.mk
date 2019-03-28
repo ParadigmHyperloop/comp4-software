@@ -5,6 +5,7 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CC_SRCS += \
 ../src/NodeTelem.pb.cc \
+../src/PodCommand.pb.cc \
 ../src/PodTelem.pb.cc \
 ../src/States.pb.cc \
 ../src/easylogging++.cc 
@@ -19,6 +20,7 @@ CPP_SRCS += \
 
 CC_DEPS += \
 ./src/NodeTelem.pb.d \
+./src/PodCommand.pb.d \
 ./src/PodTelem.pb.d \
 ./src/States.pb.d \
 ./src/easylogging++.d 
@@ -31,6 +33,7 @@ OBJS += \
 ./src/NodeServer.o \
 ./src/NodeTelem.pb.o \
 ./src/Pod.o \
+./src/PodCommand.pb.o \
 ./src/PodTelem.pb.o \
 ./src/States.pb.o \
 ./src/easylogging++.o 

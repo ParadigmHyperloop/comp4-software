@@ -1,5 +1,8 @@
 #include "FlightComputer/Network.h"
 #include "EasyLogger/easylogging++.h"
+#include "ProtoBuffer/PodCommand.pb.h"
+
+using namespace pds;
 
 // Get manual state change commands. Get Estop command
 
@@ -24,20 +27,45 @@
      return iSockfd;
  }
 
-int32_t unserializeProtoMessage(*char cBuffer, iMessageSize)
+void parseProtoCommand(podCommand pPodCommand, Pod* Pod)
 {
-	fc::brakeNodeData pNodeUpdate;
-	bool bProtoPacketParsed = pNodeUpdate.ParseFromArray(&cBuffer, iRecievedPacketSize);
+	if(pPodCommand.has_automaticstatetransitions())
+	{
+		Pod->setAutomaticTransitions(pPodCommand.automaticstatetransitions());
+	}
+	if(pPodCommand.has_controlsinterfacestate())
+	{
+		Pod->setControlsInterfaceState(pPodCommand.controlsinterfacestate());
+	}
+	if(pPodCommand.has_manualbrakenodestate())
+	{
+		Pod->setManualBrakeNodeState(pPodCommand.manualbrakenodestate());
+	}
+	if(pPodCommand.has_manuallvdcnodestate())
+	{
+		Pod->setManualLvdcNodeState(pPodCommand.manuallvdcnodestate());
+	}
+	if(pPodCommand.has_manualpodstate())
+	{
+		Pod->setManualPodState(pPodCommand.manualpodstate());
+	}
+}
+
+int32_t unserializeProtoMessage(Pod* Pod,char cBuffer[], int32_t iMessageSize)
+{
+	podCommand pPodCommand;
+	bool bProtoPacketParsed = pPodCommand.ParseFromArray(cBuffer, iMessageSize);
 	if(bProtoPacketParsed)
 	{
-		LOG(INFO)<<"Packet Recieved";
-		parseBreakNodePacket( pNodeUpdate,*Pod);
+		parseProtoCommand(pPodCommand, Pod);
+		LOG(INFO)<<"Command Recieved";
+		return 1;
 	}
 	else
 	{
-		LOG(ERROR)<<"Error Parsing Protobuf packet";
+		LOG(ERROR)<<"Error Parsing Command";
+		return 0;
 	}
-	return 1;
 }
 
 
@@ -67,10 +95,17 @@ void commanderThread(Pod Pod)
 		 }
 		 LOG(INFO)<<"Here is the message: " << buffer;
 
-		 int32_t = unserializeProtoMessage(&buffer, iMessageSize);
+		 int32_t parsed = unserializeProtoMessage(&Pod, buffer, iMessageSize);
+		 if(parsed){
+			 //Return 1 to confirm reception
+			 iMessageSize = write(iNewSockFd,"1",1);
+		 }
+		 else
+		 {
+			 //Return 1 to confirm reception
+			 iMessageSize = write(iNewSockFd,"0",1);
+		 }
 
-		 //Return 1 to confirm reception
-		 iMessageSize = write(iNewSockFd,"1",1);
 		 if (iMessageSize < 0){
 			 LOG(INFO)<<"ERROR writing to socket";
 		 }
