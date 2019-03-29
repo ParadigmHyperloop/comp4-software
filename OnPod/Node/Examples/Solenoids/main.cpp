@@ -1,13 +1,21 @@
 #include <Arduino.h>
-#include <SPI.h>
+#include "solenoid.h"
 
-SPIClass solSPI (&PERIPH_SPI2, MISO2, SCK2, MOSI2, PAD_SPI2_TX, PAD_SPI2_RX);
-SPISettings solSPISettings (20000000, MSBFIRST, SPI_MODE0);
+DRV8806 solenoidDriver(SS2, MOSI2, MISO2, SCK2);
 
 void setup() {
     Serial.begin(9600);
+    solenoidDriver.init();
 }
 
 void loop() {
+    solenoidDriver.enableSolenoid(5);
+    solenoidDriver.enableSolenoid(7);
+    solenoidDriver.updateSolenoids();
+    delay(1000);
 
+    solenoidDriver.disableSolenoid(5);
+    solenoidDriver.disableSolenoid(7);
+    solenoidDriver.updateSolenoids();
+    delay(1000);
 }
