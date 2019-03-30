@@ -42,15 +42,21 @@ class PodCommunicator:
     def send_command(self, command):
         command_json = '{command: ' + command + '}'
         print(f'sending: {command_json}')
-        self._pod_socket.sendall(command_json.encode())
-        data = self._pod_socket.recv(1024)
+        try:
+            self._pod_socket.sendall(command_json.encode())
+            data = self._pod_socket.recv(1024)
+        except socket.error as e:
+            print("Failed to send command")
+            self.shutdown()
+            self._connect_to_pod()
 
     def send_configuration(self, configuration=DEFAULT_CONFIGURATION):
         try:
             self._pod_socket.sendall(json.dumps(configuration).encode())
         except socket.error as e:
             print("Failed to send config")
-            raise e
+            self.shutdown()
+            self._connect_to_pod()
 
     # Disconnect from Pod/Socket
     def shutdown(self):
