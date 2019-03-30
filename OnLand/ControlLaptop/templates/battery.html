@@ -3,8 +3,20 @@
 {% block content %}
 
 <div class="row">
-    <div class="col-md-12">
-        {% include '_cards/cells.html' %}
+    {% include '_cards/battery_header.html' %}
+</div>
+<div class="row">
+    <div class="col-md-3">
+        {% include '_cards/cells1.html' %}
+    </div>
+    <div class="col-md-3">
+        {% include '_cards/cells2.html' %}
+    </div>
+    <div class="col-md-3">
+        {% include '_cards/cells3.html' %}
+    </div>
+    <div class="col-md-3">
+        {% include '_cards/cells4.html' %}
     </div>
 </div>
 
