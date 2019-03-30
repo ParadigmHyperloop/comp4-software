@@ -20,12 +20,12 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=None,
-  serialized_pb=_b('\n\x0cstates.proto*\x9d\x01\n\x0f\x62reakNodeStates\x12\x0e\n\nbnsBooting\x10\x00\x12\x0e\n\nbnsStandby\x10\x01\x12\r\n\tbnsArming\x10\x02\x12\x0c\n\x08\x62nsArmed\x10\x03\x12\r\n\tbnsFlight\x10\x04\x12\x0e\n\nbnsBraking\x10\x05\x12\x0e\n\nbnsVenting\x10\x06\x12\x10\n\x0c\x62nsRetrieval\x10\x07\x12\x0c\n\x08\x62nsError\x10\x08*\x8e\x01\n\tpodStates\x12\r\n\tpsBooting\x10\x00\x12\r\n\tpsStandby\x10\x01\x12\x0c\n\x08psArming\x10\x02\x12\x0b\n\x07psArmed\x10\x03\x12\x0c\n\x08psFlight\x10\x04\x12\r\n\tpsBraking\x10\x05\x12\r\n\tpsVenting\x10\x06\x12\x0f\n\x0bpsRetrieval\x10\x07\x12\x0b\n\x07psError\x10\x08*C\n\x0bmotorStates\x12\t\n\x05msOff\x10\x00\x12\x0e\n\nmsCharging\x10\x01\x12\n\n\x06msIdle\x10\x02\x12\r\n\tmsEngaged\x10\x03**\n\x17\x63ontrolsInterfaceStates\x12\x0f\n\x0b\x63iConnected\x10\x00* \n\x0einverterStates\x12\x0e\n\niConnected\x10\x00*)\n\x17\x62\x61tteryManagementStates\x12\x0e\n\nbmsNominal\x10\x00*.\n\x0erearNodeStates\x12\r\n\trnBooting\x10\x00\x12\r\n\trnNominal\x10\x01*!\n\x0elvdcNodeStates\x12\x0f\n\x0blvdcBooting\x10\x00')
+  serialized_pb=_b('\n\x0cStates.proto*\x9d\x01\n\x0f\x42rakeNodeStates\x12\x0e\n\nbnsBooting\x10\x00\x12\x0e\n\nbnsStandby\x10\x01\x12\r\n\tbnsArming\x10\x02\x12\x0c\n\x08\x62nsArmed\x10\x03\x12\r\n\tbnsFlight\x10\x04\x12\x0e\n\nbnsBraking\x10\x05\x12\x0e\n\nbnsVenting\x10\x06\x12\x10\n\x0c\x62nsRetrieval\x10\x07\x12\x0c\n\x08\x62nsError\x10\x08*\xbb\x01\n\tPodStates\x12\r\n\tpsBooting\x10\x00\x12\r\n\tpsStandby\x10\x01\x12\x0c\n\x08psArming\x10\x02\x12\x0b\n\x07psArmed\x10\x03\x12\x0f\n\x0bpsPreFlight\x10\x04\x12\x12\n\x0epsAcceleration\x10\x05\x12\x0e\n\npsCoasting\x10\x06\x12\r\n\tpsBraking\x10\x07\x12\x0f\n\x0bpsDisarming\x10\x08\x12\x0f\n\x0bpsRetrieval\x10\t\x12\x0f\n\x0bpsEmergency\x10\n*C\n\x0bMotorStates\x12\t\n\x05msOff\x10\x00\x12\x0e\n\nmsCharging\x10\x01\x12\n\n\x06msIdle\x10\x02\x12\r\n\tmsEngaged\x10\x03**\n\x17\x43ontrolsInterfaceStates\x12\x0f\n\x0b\x63iConnected\x10\x00* \n\x0eInverterStates\x12\x0e\n\niConnected\x10\x00*)\n\x17\x42\x61tteryManagementStates\x12\x0e\n\nbmsNominal\x10\x00*.\n\x0eRearNodeStates\x12\r\n\trnBooting\x10\x00\x12\r\n\trnNominal\x10\x01*!\n\x0eLvdcNodeStates\x12\x0f\n\x0blvdcBooting\x10\x00')
 )
 
-_BREAKNODESTATES = _descriptor.EnumDescriptor(
-  name='breakNodeStates',
-  full_name='breakNodeStates',
+_BRAKENODESTATES = _descriptor.EnumDescriptor(
+  name='BrakeNodeStates',
+  full_name='BrakeNodeStates',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -71,12 +71,12 @@ _BREAKNODESTATES = _descriptor.EnumDescriptor(
   serialized_start=17,
   serialized_end=174,
 )
-_sym_db.RegisterEnumDescriptor(_BREAKNODESTATES)
+_sym_db.RegisterEnumDescriptor(_BRAKENODESTATES)
 
-breakNodeStates = enum_type_wrapper.EnumTypeWrapper(_BREAKNODESTATES)
+BrakeNodeStates = enum_type_wrapper.EnumTypeWrapper(_BRAKENODESTATES)
 _PODSTATES = _descriptor.EnumDescriptor(
-  name='podStates',
-  full_name='podStates',
+  name='PodStates',
+  full_name='PodStates',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -97,37 +97,45 @@ _PODSTATES = _descriptor.EnumDescriptor(
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='psFlight', index=4, number=4,
+      name='psPreFlight', index=4, number=4,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='psBraking', index=5, number=5,
+      name='psAcceleration', index=5, number=5,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='psVenting', index=6, number=6,
+      name='psCoasting', index=6, number=6,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='psRetrieval', index=7, number=7,
+      name='psBraking', index=7, number=7,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='psError', index=8, number=8,
+      name='psDisarming', index=8, number=8,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='psRetrieval', index=9, number=9,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='psEmergency', index=10, number=10,
       serialized_options=None,
       type=None),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=177,
-  serialized_end=319,
+  serialized_end=364,
 )
 _sym_db.RegisterEnumDescriptor(_PODSTATES)
 
-podStates = enum_type_wrapper.EnumTypeWrapper(_PODSTATES)
+PodStates = enum_type_wrapper.EnumTypeWrapper(_PODSTATES)
 _MOTORSTATES = _descriptor.EnumDescriptor(
-  name='motorStates',
-  full_name='motorStates',
+  name='MotorStates',
+  full_name='MotorStates',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -150,15 +158,15 @@ _MOTORSTATES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=321,
-  serialized_end=388,
+  serialized_start=366,
+  serialized_end=433,
 )
 _sym_db.RegisterEnumDescriptor(_MOTORSTATES)
 
-motorStates = enum_type_wrapper.EnumTypeWrapper(_MOTORSTATES)
+MotorStates = enum_type_wrapper.EnumTypeWrapper(_MOTORSTATES)
 _CONTROLSINTERFACESTATES = _descriptor.EnumDescriptor(
-  name='controlsInterfaceStates',
-  full_name='controlsInterfaceStates',
+  name='ControlsInterfaceStates',
+  full_name='ControlsInterfaceStates',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -169,15 +177,15 @@ _CONTROLSINTERFACESTATES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=390,
-  serialized_end=432,
+  serialized_start=435,
+  serialized_end=477,
 )
 _sym_db.RegisterEnumDescriptor(_CONTROLSINTERFACESTATES)
 
-controlsInterfaceStates = enum_type_wrapper.EnumTypeWrapper(_CONTROLSINTERFACESTATES)
+ControlsInterfaceStates = enum_type_wrapper.EnumTypeWrapper(_CONTROLSINTERFACESTATES)
 _INVERTERSTATES = _descriptor.EnumDescriptor(
-  name='inverterStates',
-  full_name='inverterStates',
+  name='InverterStates',
+  full_name='InverterStates',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -188,15 +196,15 @@ _INVERTERSTATES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=434,
-  serialized_end=466,
+  serialized_start=479,
+  serialized_end=511,
 )
 _sym_db.RegisterEnumDescriptor(_INVERTERSTATES)
 
-inverterStates = enum_type_wrapper.EnumTypeWrapper(_INVERTERSTATES)
+InverterStates = enum_type_wrapper.EnumTypeWrapper(_INVERTERSTATES)
 _BATTERYMANAGEMENTSTATES = _descriptor.EnumDescriptor(
-  name='batteryManagementStates',
-  full_name='batteryManagementStates',
+  name='BatteryManagementStates',
+  full_name='BatteryManagementStates',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -207,15 +215,15 @@ _BATTERYMANAGEMENTSTATES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=468,
-  serialized_end=509,
+  serialized_start=513,
+  serialized_end=554,
 )
 _sym_db.RegisterEnumDescriptor(_BATTERYMANAGEMENTSTATES)
 
-batteryManagementStates = enum_type_wrapper.EnumTypeWrapper(_BATTERYMANAGEMENTSTATES)
+BatteryManagementStates = enum_type_wrapper.EnumTypeWrapper(_BATTERYMANAGEMENTSTATES)
 _REARNODESTATES = _descriptor.EnumDescriptor(
-  name='rearNodeStates',
-  full_name='rearNodeStates',
+  name='RearNodeStates',
+  full_name='RearNodeStates',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -230,15 +238,15 @@ _REARNODESTATES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=511,
-  serialized_end=557,
+  serialized_start=556,
+  serialized_end=602,
 )
 _sym_db.RegisterEnumDescriptor(_REARNODESTATES)
 
-rearNodeStates = enum_type_wrapper.EnumTypeWrapper(_REARNODESTATES)
+RearNodeStates = enum_type_wrapper.EnumTypeWrapper(_REARNODESTATES)
 _LVDCNODESTATES = _descriptor.EnumDescriptor(
-  name='lvdcNodeStates',
-  full_name='lvdcNodeStates',
+  name='LvdcNodeStates',
+  full_name='LvdcNodeStates',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -249,12 +257,12 @@ _LVDCNODESTATES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=559,
-  serialized_end=592,
+  serialized_start=604,
+  serialized_end=637,
 )
 _sym_db.RegisterEnumDescriptor(_LVDCNODESTATES)
 
-lvdcNodeStates = enum_type_wrapper.EnumTypeWrapper(_LVDCNODESTATES)
+LvdcNodeStates = enum_type_wrapper.EnumTypeWrapper(_LVDCNODESTATES)
 bnsBooting = 0
 bnsStandby = 1
 bnsArming = 2
@@ -268,11 +276,13 @@ psBooting = 0
 psStandby = 1
 psArming = 2
 psArmed = 3
-psFlight = 4
-psBraking = 5
-psVenting = 6
-psRetrieval = 7
-psError = 8
+psPreFlight = 4
+psAcceleration = 5
+psCoasting = 6
+psBraking = 7
+psDisarming = 8
+psRetrieval = 9
+psEmergency = 10
 msOff = 0
 msCharging = 1
 msIdle = 2
@@ -285,14 +295,14 @@ rnNominal = 1
 lvdcBooting = 0
 
 
-DESCRIPTOR.enum_types_by_name['breakNodeStates'] = _BREAKNODESTATES
-DESCRIPTOR.enum_types_by_name['podStates'] = _PODSTATES
-DESCRIPTOR.enum_types_by_name['motorStates'] = _MOTORSTATES
-DESCRIPTOR.enum_types_by_name['controlsInterfaceStates'] = _CONTROLSINTERFACESTATES
-DESCRIPTOR.enum_types_by_name['inverterStates'] = _INVERTERSTATES
-DESCRIPTOR.enum_types_by_name['batteryManagementStates'] = _BATTERYMANAGEMENTSTATES
-DESCRIPTOR.enum_types_by_name['rearNodeStates'] = _REARNODESTATES
-DESCRIPTOR.enum_types_by_name['lvdcNodeStates'] = _LVDCNODESTATES
+DESCRIPTOR.enum_types_by_name['BrakeNodeStates'] = _BRAKENODESTATES
+DESCRIPTOR.enum_types_by_name['PodStates'] = _PODSTATES
+DESCRIPTOR.enum_types_by_name['MotorStates'] = _MOTORSTATES
+DESCRIPTOR.enum_types_by_name['ControlsInterfaceStates'] = _CONTROLSINTERFACESTATES
+DESCRIPTOR.enum_types_by_name['InverterStates'] = _INVERTERSTATES
+DESCRIPTOR.enum_types_by_name['BatteryManagementStates'] = _BATTERYMANAGEMENTSTATES
+DESCRIPTOR.enum_types_by_name['RearNodeStates'] = _REARNODESTATES
+DESCRIPTOR.enum_types_by_name['LvdcNodeStates'] = _LVDCNODESTATES
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
