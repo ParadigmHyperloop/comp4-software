@@ -1,42 +1,102 @@
 #include "BrakeNodeStates.h"
 
 BrakeNodeState::BrakeNodeState(State s) : state_(s) {
-	if (flagStruct_.heartbeatValid == true){
-		state_= State::STANDBY;
-	}
 }
 
 void BrakeNodeState::CheckBoot() {
-
+	if (flagStruct_.setupFail == true){
+    if (flagStruct_.nodeConnectFC == true) {
+      state_=State::STANDBY;
+    }
+    else {
+      state_ = State::BOOT;
+    }
+	}
+	else {
+		state_ = State::ERROR;
+	}
 }
 
 void BrakeNodeState::CheckStandby() {
-	state_ = State::ARMING;
-
+  if (flagStruct_.heartbeatValid == true and flagStruct_.sensorsValid == true) {
+    if (flagStruct_.FCstate_ == flightComputerStates::FCARMING) {
+      state_ = State::ARMING;
+    }
+    else {
+      state_ = State::STANDBY;
+    }
+  }
+  else {
+    state_ = State::ERROR;
+  }
 }
 
 void BrakeNodeState::CheckArming() {
-	state_ = State::ARMED;
-
+  if (flagStruct_.heartbeatValid == true and flagStruct_.sensorsValid == true) {
+    if (flagStruct_.FCstate_ == flightComputerStates::FCVENTING) {
+      state_ = State::VENTING;
+    }
+    else {
+      state_ = State::ARMED;
+    }
+  }
+  else {
+    state_ = State::ERROR;
+  }
 }
 
 void BrakeNodeState::CheckArmed() {
-	state_ = State::FLIGHT;
-
+  if (flagStruct_.heartbeatValid == true and flagStruct_.sensorsValid == true){
+    if (flagStruct_.FCstate_ == flightComputerStates::FCVENTING) {
+      state_ = State::VENTING;
+    }
+    else if (flagStruct_.FCstate_ == flightComputerStates::FCPREFLIGHT) {
+      state_ = State::FLIGHT;
+    }
+    else {
+      state_ = State::ARMED;
+    }
+  }
+  else {
+    state_ = State::ERROR;
+  }
 }
 
 void BrakeNodeState::CheckFlight() {
-	state_ = State::BRAKING;
-
+  if (flagStruct_.heartbeatValid == true and flagStruct_.sensorsValid == true and flagStruct_.estop == false) {
+    state_ = State::FLIGHT;
+  }
+  else {
+    state_ = State::BRAKING;
+  }
 }
 
 void BrakeNodeState::CheckBraking() {
-
+  if (flagStruct_.FCstate_ == flightComputerStates::FCVENTING) {
+    state_ = State::VENTING; 
+  }
+  else {
+    state_ = State::BRAKING;
+  }
 }
 
 void BrakeNodeState::CheckVenting() {
-	state_ = State::ERROR;
-
+  if (flagStruct_.taxiCommand == false) {
+    if (flagStruct_.sensorsValid == true){
+      if (flagStruct_.moveToRetrieval == true) {
+        state_ = State::RETRIEVAL;
+      }
+      else {
+        state_ = State::VENTING;
+      }
+    }
+    else {
+      state_ = State::ERROR;
+    }
+  }
+  else {
+    state_ = State::FLIGHT;
+  }
 }
 
 void BrakeNodeState::CheckRetrieval() {
@@ -44,7 +104,13 @@ void BrakeNodeState::CheckRetrieval() {
 }
 
 void BrakeNodeState::CheckError() {
-  state_ = State::RETRIEVAL;
+  if (flagStruct_.moveToRetrieval == true) {
+    state_ = State::RETRIEVAL;
+  }
+  else {
+    state_ = State::ERROR;
+  }
+
 }
 
 void BrakeNodeState::TransitionToNextState() {

@@ -6,13 +6,10 @@
 void setup() {
   Serial.begin(9600);
   Serial.write("Brake Node Serial started, starting Ethernet next\r\n");
-
-  BrakeNodeState s(State::BOOT);
-  s.flagStruct_.heartbeatValid = true;
-
 }
 
-
+  BrakeNodeState s(State::BOOT);
+  
 
 void loop() {
   s.TransitionToNextState();

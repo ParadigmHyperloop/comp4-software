@@ -1,14 +1,27 @@
 #pragma once
 
-struct flagStruct {
-	bool heartbeatValid = true;
-	bool estop = false;
-	bool sensorsValid = true;
-	bool taxiCommand = false;
-	bool moveToRetrieval = true;
-	flightComputerStates podStates = BOOT;
+enum flightComputerStates{
+    FCBOOT,
+    FCSTANDBY,
+    FCARMING,
+    FCARMED,
+    FCPREFLIGHT,
+    FCBRAKING,
+    FCVENTING,
+    FCRETRIEVAL,
+    FCERROR
 };
 
+struct flagStruct {
+    bool setupFail = true;
+	  bool nodeConnectFC = true;
+	  bool heartbeatValid = true;
+	  bool estop = false;
+	  bool sensorsValid = true;
+	  bool taxiCommand = false;
+	  bool moveToRetrieval = true;
+	  flightComputerStates FCstate_ = FCBOOT;
+};
 
 
 enum State {
@@ -23,17 +36,7 @@ enum State {
     ERROR 
 };
 
-enum flightComputerStates{
-    BOOT,
-    STANDBY,
-    ARMING,
-    ARMED,
-    FLIGHT,
-    BRAKING,
-    VENTING,
-    RETRIEVAL,
-    ERROR
-};
+
 
 class BrakeNodeState {
     
@@ -98,5 +101,4 @@ class BrakeNodeState {
     
     private:
     State state_;
-    
 };
