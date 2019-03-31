@@ -24,15 +24,15 @@ void DRV8806::updateSolenoids() {
     for (uint8_t i = 0; i < 8; i++) {
         uint8_t iSolenoid = 7 - i;
         bool bState = (iActiveSolenoids >> iSolenoid) & 1;
-        digitalWrite(PIN_DOUT, bState);
+        digitalWrite(PIN_DIN, bState);
         delayMicroseconds(1);
         digitalWrite(PIN_SCLK, HIGH);
         delayMicroseconds(1);
         digitalWrite(PIN_SCLK, LOW);
         delayMicroseconds(1);
     }
+    delayMicroseconds(10);
     digitalWrite(PIN_LATCH, HIGH);
-    Serial.println(iActiveSolenoids, BIN);
 }
 
 void DRV8806::enableSolenoid(uint8_t iSolenoid) {
