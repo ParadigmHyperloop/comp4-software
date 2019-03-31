@@ -9,8 +9,8 @@ DRV8806::DRV8806(uint8_t PIN_LATCH, uint8_t PIN_DOUT, uint8_t PIN_DIN, uint8_t P
 void DRV8806::init() {
     pinMode(PIN_SCLK, OUTPUT);
     pinMode(PIN_LATCH, OUTPUT);
-    pinMode(PIN_DOUT, OUTPUT);
-    pinMode(PIN_DIN, INPUT);
+    pinMode(PIN_DOUT, INPUT); // DRV8806 => SAMD21
+    pinMode(PIN_DIN, OUTPUT); // SAMD21 => DRV8806
     digitalWrite(PIN_SCLK, LOW);
     digitalWrite(PIN_LATCH, HIGH);
     digitalWrite(PIN_DOUT, LOW);
@@ -21,6 +21,8 @@ void DRV8806::updateSolenoids() {
     digitalWrite(PIN_SCLK, LOW);
     delayMicroseconds(10);
 
+    // loop through iActiveSolenoids and write DIN to the value of each bit
+    // then write SCLK high then low to shift the bit in
     for (uint8_t i = 0; i < 8; i++) {
         uint8_t iSolenoid = 7 - i;
         bool bState = (iActiveSolenoids >> iSolenoid) & 1;
@@ -36,9 +38,11 @@ void DRV8806::updateSolenoids() {
 }
 
 void DRV8806::enableSolenoid(uint8_t iSolenoid) {
+    // set the selected iActiveSolenoids bit to 1
     iActiveSolenoids |= (1 << iSolenoid);
 }
 
 void DRV8806::disableSolenoid(uint8_t iSolenoid) {
+    // set the selected iActiveSolenoids bit to 0
     iActiveSolenoids &= ~(1 << iSolenoid);
 }
