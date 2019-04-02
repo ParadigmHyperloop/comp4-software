@@ -1,12 +1,45 @@
-function getStr(_class,_id) {
-    return ('.'+_class+' .'+_id+'').toString();}
-
-
-function sensorRefresh() {
-    // TBD: Wire up SocketIO and unload sensor values to table
+function sendCommand(command) {
+  $.ajax({
+    type: "POST",
+    url: '/send_command',
+    dataType: 'json',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      command: command
+    }),
+    success: function HANDLE_COMMAND_SEND_SUCCESS (data) {
+    },
+    error: function HANDLE_COMMAND_SEND_ERROR(data) {
+    },
+  })
 }
 
+function registerDisconnectFromPodClick() {
+  $('#disconnect').on('click', function sendESTOPCOMMAND() {
+    $.ajax({
+      type: "POST",
+      url: '/disconnect_from_pod',
+      dataType: 'json',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        command: 'DISCONNECT'
+      }),
+      success: function HANDLE_DISCONNECT_SUCCESS (data) {
+      },
+      error: function HANDLE_COMMAND_SEND_ERROR(data) {
+      },
+    })
+  });
+}
 
-$('document').ready(function() {
+function registerESTOPCommandClick()
+{
+  $('#e-stop').on('click', function sendESTOPCOMMAND() {
+    sendCommand('ESTOP');
+  });
+}
 
+$(document).ready(function() {
+  registerESTOPCommandClick();
+  registerDisconnectFromPodClick();
 });

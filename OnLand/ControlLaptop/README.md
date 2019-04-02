@@ -50,6 +50,7 @@ Licensed under MIT (https://github.com/creativetimofficial/light-bootstrap-dashb
     `pip install -r requirements`
 
 - run App (if using terminal):
+  - `python pod_echo_server`
   - `export FLASK_APP=controlLaptop.py`
   - `flask run` 
 
