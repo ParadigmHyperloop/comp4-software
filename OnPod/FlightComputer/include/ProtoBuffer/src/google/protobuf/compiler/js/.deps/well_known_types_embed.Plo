@@ -1,0 +1,11 @@
+google/protobuf/compiler/js/well_known_types_embed.lo: \
+ google/protobuf/compiler/js/well_known_types_embed.cc \
+ /usr/arm-linux-gnueabihf/include/stdc-predef.h \
+ google/protobuf/compiler/js/well_known_types_embed.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stddef.h
+
+/usr/arm-linux-gnueabihf/include/stdc-predef.h:
+
+google/protobuf/compiler/js/well_known_types_embed.h:
+
+/usr/lib/gcc-cross/arm-linux-gnueabihf/5/include/stddef.h:
