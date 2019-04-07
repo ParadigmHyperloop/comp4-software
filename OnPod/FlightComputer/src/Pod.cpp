@@ -1,7 +1,6 @@
 #include "FlightComputer/structs.h"
 #include "FlightComputer/Pod.h"
-#include "ProtoBuffer/States.pb.h"
-#include "ProtoBuffer/NodeTelem.pb.h"
+#include "ProtoBuffer/Paradigm.pb.h"
 #include "EasyLogger/easylogging++.h"
 
 

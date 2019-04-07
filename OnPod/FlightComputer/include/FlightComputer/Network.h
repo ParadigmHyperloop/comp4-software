@@ -11,7 +11,7 @@
 #include <string.h>
 
 
-#include "ProtoBuffer/NodeTelem.pb.h"
+#include "ProtoBuffer/Paradigm.pb.h"
 #include "FlightComputer/structs.h"
 #include "FlightComputer/Pod.h"
 
@@ -23,7 +23,7 @@ int32_t createNodeServerSocket(int32_t);
 
 int32_t nodeServerThread(Pod Pod);
 
-void parseBreakNodePacket(fc::brakeNodeData, Pod);
+void parseBreakNodePacket(brakeNodeData, Pod);
 
 int32_t podInternalNetworkThread(Pod);
 

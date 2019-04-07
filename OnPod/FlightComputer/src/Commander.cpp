@@ -1,8 +1,7 @@
 #include "FlightComputer/Network.h"
 #include "EasyLogger/easylogging++.h"
-#include "ProtoBuffer/PodCommand.pb.h"
+#include "ProtoBuffer/Paradigm.pb.h"
 
-using namespace pds;
 
 // Get manual state change commands. Get Estop command
 

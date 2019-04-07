@@ -1,12 +1,11 @@
 #include <FlightComputer/Network.h>
 #include "FlightComputer/Pod.h"
-#include "ProtoBuffer/NodeTelem.pb.h"
+#include "ProtoBuffer/Paradigm.pb.h"
 #include "EasyLogger/easylogging++.h"
 #include <fcntl.h>
 #include <iostream>
 #include <string>
 
-using namespace fc;
 
 /**
  * createNodeServerSocket
