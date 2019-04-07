@@ -6,28 +6,23 @@
 #include <algorithm>
 
 #include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/io/coded_stream.h>
+#include <google/protobuf/extension_set.h>
 #include <google/protobuf/wire_format_lite_inl.h>
 #include <google/protobuf/descriptor.h>
 #include <google/protobuf/generated_message_reflection.h>
 #include <google/protobuf/reflection_ops.h>
 #include <google/protobuf/wire_format.h>
-// This is a temporary google only hack
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-#include "third_party/protobuf/version.h"
-#endif
 // @@protoc_insertion_point(includes)
+#include <google/protobuf/port_def.inc>
 
 namespace pds {
 class podCommandDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<podCommand>
-      _instance;
+  ::google::protobuf::internal::ExplicitlyConstructed<podCommand> _instance;
 } _podCommand_default_instance_;
 }  // namespace pds
-namespace protobuf_PodCommand_2eproto {
-static void InitDefaultspodCommand() {
+static void InitDefaultspodCommand_PodCommand_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
@@ -38,27 +33,29 @@ static void InitDefaultspodCommand() {
   ::pds::podCommand::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<0> scc_info_podCommand =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultspodCommand}, {}};
+::google::protobuf::internal::SCCInfo<0> scc_info_podCommand_PodCommand_2eproto =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultspodCommand_PodCommand_2eproto}, {}};
 
-void InitDefaults() {
-  ::google::protobuf::internal::InitSCC(&scc_info_podCommand.base);
+void InitDefaults_PodCommand_2eproto() {
+  ::google::protobuf::internal::InitSCC(&scc_info_podCommand_PodCommand_2eproto.base);
 }
 
-::google::protobuf::Metadata file_level_metadata[1];
+::google::protobuf::Metadata file_level_metadata_PodCommand_2eproto[1];
+constexpr ::google::protobuf::EnumDescriptor const** file_level_enum_descriptors_PodCommand_2eproto = nullptr;
+constexpr ::google::protobuf::ServiceDescriptor const** file_level_service_descriptors_PodCommand_2eproto = nullptr;
 
-const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pds::podCommand, _has_bits_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pds::podCommand, _internal_metadata_),
+const ::google::protobuf::uint32 TableStruct_PodCommand_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+  PROTOBUF_FIELD_OFFSET(::pds::podCommand, _has_bits_),
+  PROTOBUF_FIELD_OFFSET(::pds::podCommand, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pds::podCommand, controlsinterfacestate_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pds::podCommand, manualpodstate_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pds::podCommand, manualbrakenodestate_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pds::podCommand, manualmotorstate_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pds::podCommand, manuallvdcnodestate_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pds::podCommand, automaticstatetransitions_),
+  PROTOBUF_FIELD_OFFSET(::pds::podCommand, controlsinterfacestate_),
+  PROTOBUF_FIELD_OFFSET(::pds::podCommand, manualpodstate_),
+  PROTOBUF_FIELD_OFFSET(::pds::podCommand, manualbrakenodestate_),
+  PROTOBUF_FIELD_OFFSET(::pds::podCommand, manualmotorstate_),
+  PROTOBUF_FIELD_OFFSET(::pds::podCommand, manuallvdcnodestate_),
+  PROTOBUF_FIELD_OFFSET(::pds::podCommand, automaticstatetransitions_),
   0,
   1,
   2,
@@ -66,7 +63,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   4,
   5,
 };
-static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
+static const ::google::protobuf::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, 11, sizeof(::pds::podCommand)},
 };
 
@@ -74,60 +71,66 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::pds::_podCommand_default_instance_),
 };
 
-void protobuf_AssignDescriptors() {
-  AddDescriptors();
-  AssignDescriptors(
-      "PodCommand.proto", schemas, file_default_instances, TableStruct::offsets,
-      file_level_metadata, NULL, NULL);
-}
+::google::protobuf::internal::AssignDescriptorsTable assign_descriptors_table_PodCommand_2eproto = {
+  {}, AddDescriptors_PodCommand_2eproto, "PodCommand.proto", schemas,
+  file_default_instances, TableStruct_PodCommand_2eproto::offsets,
+  file_level_metadata_PodCommand_2eproto, 1, file_level_enum_descriptors_PodCommand_2eproto, file_level_service_descriptors_PodCommand_2eproto,
+};
 
-void protobuf_AssignDescriptorsOnce() {
-  static ::google::protobuf::internal::once_flag once;
-  ::google::protobuf::internal::call_once(once, protobuf_AssignDescriptors);
-}
+const char descriptor_table_protodef_PodCommand_2eproto[] =
+  "\n\020PodCommand.proto\022\003pds\032\014States.proto\"\223\002"
+  "\n\npodCommand\0228\n\026controlsInterfaceState\030\001"
+  " \001(\0162\030.ControlsInterfaceStates\022\"\n\016manual"
+  "PodState\030\002 \001(\0162\n.PodStates\022.\n\024manualBrak"
+  "eNodeState\030\003 \001(\0162\020.BrakeNodeStates\022&\n\020ma"
+  "nualMotorState\030\004 \001(\0162\014.MotorStates\022,\n\023ma"
+  "nualLvdcNodeState\030\005 \001(\0162\017.LvdcNodeStates"
+  "\022!\n\031automaticStateTransitions\030\006 \001(\010"
+  ;
+::google::protobuf::internal::DescriptorTable descriptor_table_PodCommand_2eproto = {
+  false, InitDefaults_PodCommand_2eproto, 
+  descriptor_table_protodef_PodCommand_2eproto,
+  "PodCommand.proto", &assign_descriptors_table_PodCommand_2eproto, 315,
+};
 
-void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
-void protobuf_RegisterTypes(const ::std::string&) {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 1);
-}
-
-void AddDescriptorsImpl() {
-  InitDefaults();
-  static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\020PodCommand.proto\022\003pds\032\014States.proto\"\223\002"
-      "\n\npodCommand\0228\n\026controlsInterfaceState\030\001"
-      " \001(\0162\030.ControlsInterfaceStates\022\"\n\016manual"
-      "PodState\030\002 \001(\0162\n.PodStates\022.\n\024manualBrak"
-      "eNodeState\030\003 \001(\0162\020.BrakeNodeStates\022&\n\020ma"
-      "nualMotorState\030\004 \001(\0162\014.MotorStates\022,\n\023ma"
-      "nualLvdcNodeState\030\005 \001(\0162\017.LvdcNodeStates"
-      "\022!\n\031automaticStateTransitions\030\006 \001(\010"
+void AddDescriptors_PodCommand_2eproto() {
+  static constexpr ::google::protobuf::internal::InitFunc deps[1] =
+  {
+    ::AddDescriptors_States_2eproto,
   };
-  ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 315);
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
-    "PodCommand.proto", &protobuf_RegisterTypes);
-  ::protobuf_States_2eproto::AddDescriptors();
+ ::google::protobuf::internal::AddDescriptors(&descriptor_table_PodCommand_2eproto, deps, 1);
 }
 
-void AddDescriptors() {
-  static ::google::protobuf::internal::once_flag once;
-  ::google::protobuf::internal::call_once(once, AddDescriptorsImpl);
-}
-// Force AddDescriptors() to be called at dynamic initialization time.
-struct StaticDescriptorInitializer {
-  StaticDescriptorInitializer() {
-    AddDescriptors();
-  }
-} static_descriptor_initializer;
-}  // namespace protobuf_PodCommand_2eproto
+// Force running AddDescriptors() at dynamic initialization time.
+static bool dynamic_init_dummy_PodCommand_2eproto = []() { AddDescriptors_PodCommand_2eproto(); return true; }();
 namespace pds {
 
 // ===================================================================
 
 void podCommand::InitAsDefaultInstance() {
 }
+class podCommand::HasBitSetters {
+ public:
+  static void set_has_controlsinterfacestate(podCommand* msg) {
+    msg->_has_bits_[0] |= 0x00000001u;
+  }
+  static void set_has_manualpodstate(podCommand* msg) {
+    msg->_has_bits_[0] |= 0x00000002u;
+  }
+  static void set_has_manualbrakenodestate(podCommand* msg) {
+    msg->_has_bits_[0] |= 0x00000004u;
+  }
+  static void set_has_manualmotorstate(podCommand* msg) {
+    msg->_has_bits_[0] |= 0x00000008u;
+  }
+  static void set_has_manuallvdcnodestate(podCommand* msg) {
+    msg->_has_bits_[0] |= 0x00000010u;
+  }
+  static void set_has_automaticstatetransitions(podCommand* msg) {
+    msg->_has_bits_[0] |= 0x00000020u;
+  }
+};
+
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int podCommand::kControlsInterfaceStateFieldNumber;
 const int podCommand::kManualPodStateFieldNumber;
@@ -138,15 +141,13 @@ const int podCommand::kAutomaticStateTransitionsFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 podCommand::podCommand()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_PodCommand_2eproto::scc_info_podCommand.base);
+  : ::google::protobuf::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:pds.podCommand)
 }
 podCommand::podCommand(const podCommand& from)
   : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
+      _internal_metadata_(nullptr),
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&controlsinterfacestate_, &from.controlsinterfacestate_,
@@ -172,13 +173,8 @@ void podCommand::SharedDtor() {
 void podCommand::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* podCommand::descriptor() {
-  ::protobuf_PodCommand_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_PodCommand_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const podCommand& podCommand::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_PodCommand_2eproto::scc_info_podCommand.base);
+  ::google::protobuf::internal::InitSCC(&::scc_info_podCommand_PodCommand_2eproto.base);
   return *internal_default_instance();
 }
 
@@ -190,7 +186,7 @@ void podCommand::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 63u) {
+  if (cached_has_bits & 0x0000003fu) {
     ::memset(&controlsinterfacestate_, 0, static_cast<size_t>(
         reinterpret_cast<char*>(&automaticstatetransitions_) -
         reinterpret_cast<char*>(&controlsinterfacestate_)) + sizeof(automaticstatetransitions_));
@@ -199,9 +195,106 @@ void podCommand::Clear() {
   _internal_metadata_.Clear();
 }
 
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* podCommand::_InternalParse(const char* begin, const char* end, void* object,
+                  ::google::protobuf::internal::ParseContext* ctx) {
+  auto msg = static_cast<podCommand*>(object);
+  ::google::protobuf::int32 size; (void)size;
+  int depth; (void)depth;
+  ::google::protobuf::uint32 tag;
+  ::google::protobuf::internal::ParseFunc parser_till_end; (void)parser_till_end;
+  auto ptr = begin;
+  while (ptr < end) {
+    ptr = ::google::protobuf::io::Parse32(ptr, &tag);
+    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+    switch (tag >> 3) {
+      // optional .ControlsInterfaceStates controlsInterfaceState = 1;
+      case 1: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 8) goto handle_unusual;
+        ::google::protobuf::uint64 val = ::google::protobuf::internal::ReadVarint(&ptr);
+        if (!::ControlsInterfaceStates_IsValid(val)) {
+          ::google::protobuf::internal::WriteVarint(1, val, msg->mutable_unknown_fields());
+          break;
+        }
+        msg->set_controlsinterfacestate(static_cast<::ControlsInterfaceStates>(val));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // optional .PodStates manualPodState = 2;
+      case 2: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 16) goto handle_unusual;
+        ::google::protobuf::uint64 val = ::google::protobuf::internal::ReadVarint(&ptr);
+        if (!::PodStates_IsValid(val)) {
+          ::google::protobuf::internal::WriteVarint(2, val, msg->mutable_unknown_fields());
+          break;
+        }
+        msg->set_manualpodstate(static_cast<::PodStates>(val));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // optional .BrakeNodeStates manualBrakeNodeState = 3;
+      case 3: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 24) goto handle_unusual;
+        ::google::protobuf::uint64 val = ::google::protobuf::internal::ReadVarint(&ptr);
+        if (!::BrakeNodeStates_IsValid(val)) {
+          ::google::protobuf::internal::WriteVarint(3, val, msg->mutable_unknown_fields());
+          break;
+        }
+        msg->set_manualbrakenodestate(static_cast<::BrakeNodeStates>(val));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // optional .MotorStates manualMotorState = 4;
+      case 4: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 32) goto handle_unusual;
+        ::google::protobuf::uint64 val = ::google::protobuf::internal::ReadVarint(&ptr);
+        if (!::MotorStates_IsValid(val)) {
+          ::google::protobuf::internal::WriteVarint(4, val, msg->mutable_unknown_fields());
+          break;
+        }
+        msg->set_manualmotorstate(static_cast<::MotorStates>(val));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // optional .LvdcNodeStates manualLvdcNodeState = 5;
+      case 5: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 40) goto handle_unusual;
+        ::google::protobuf::uint64 val = ::google::protobuf::internal::ReadVarint(&ptr);
+        if (!::LvdcNodeStates_IsValid(val)) {
+          ::google::protobuf::internal::WriteVarint(5, val, msg->mutable_unknown_fields());
+          break;
+        }
+        msg->set_manuallvdcnodestate(static_cast<::LvdcNodeStates>(val));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // optional bool automaticStateTransitions = 6;
+      case 6: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 48) goto handle_unusual;
+        msg->set_automaticstatetransitions(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->EndGroup(tag);
+          return ptr;
+        }
+        auto res = UnknownFieldParse(tag, {_InternalParse, msg},
+          ptr, end, msg->_internal_metadata_.mutable_unknown_fields(), ctx);
+        ptr = res.first;
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr != nullptr);
+        if (res.second) return ptr;
+      }
+    }  // switch
+  }  // while
+  return ptr;
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 bool podCommand::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:pds.podCommand)
   for (;;) {
@@ -211,9 +304,8 @@ bool podCommand::MergePartialFromCodedStream(
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional .ControlsInterfaceStates controlsInterfaceState = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          int value;
+        if (static_cast< ::google::protobuf::uint8>(tag) == (8 & 0xFF)) {
+          int value = 0;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
@@ -221,7 +313,7 @@ bool podCommand::MergePartialFromCodedStream(
             set_controlsinterfacestate(static_cast< ::ControlsInterfaceStates >(value));
           } else {
             mutable_unknown_fields()->AddVarint(
-                1, static_cast< ::google::protobuf::uint64>(value));
+                1, static_cast<::google::protobuf::uint64>(value));
           }
         } else {
           goto handle_unusual;
@@ -231,9 +323,8 @@ bool podCommand::MergePartialFromCodedStream(
 
       // optional .PodStates manualPodState = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-          int value;
+        if (static_cast< ::google::protobuf::uint8>(tag) == (16 & 0xFF)) {
+          int value = 0;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
@@ -241,7 +332,7 @@ bool podCommand::MergePartialFromCodedStream(
             set_manualpodstate(static_cast< ::PodStates >(value));
           } else {
             mutable_unknown_fields()->AddVarint(
-                2, static_cast< ::google::protobuf::uint64>(value));
+                2, static_cast<::google::protobuf::uint64>(value));
           }
         } else {
           goto handle_unusual;
@@ -251,9 +342,8 @@ bool podCommand::MergePartialFromCodedStream(
 
       // optional .BrakeNodeStates manualBrakeNodeState = 3;
       case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
-          int value;
+        if (static_cast< ::google::protobuf::uint8>(tag) == (24 & 0xFF)) {
+          int value = 0;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
@@ -261,7 +351,7 @@ bool podCommand::MergePartialFromCodedStream(
             set_manualbrakenodestate(static_cast< ::BrakeNodeStates >(value));
           } else {
             mutable_unknown_fields()->AddVarint(
-                3, static_cast< ::google::protobuf::uint64>(value));
+                3, static_cast<::google::protobuf::uint64>(value));
           }
         } else {
           goto handle_unusual;
@@ -271,9 +361,8 @@ bool podCommand::MergePartialFromCodedStream(
 
       // optional .MotorStates manualMotorState = 4;
       case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
-          int value;
+        if (static_cast< ::google::protobuf::uint8>(tag) == (32 & 0xFF)) {
+          int value = 0;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
@@ -281,7 +370,7 @@ bool podCommand::MergePartialFromCodedStream(
             set_manualmotorstate(static_cast< ::MotorStates >(value));
           } else {
             mutable_unknown_fields()->AddVarint(
-                4, static_cast< ::google::protobuf::uint64>(value));
+                4, static_cast<::google::protobuf::uint64>(value));
           }
         } else {
           goto handle_unusual;
@@ -291,9 +380,8 @@ bool podCommand::MergePartialFromCodedStream(
 
       // optional .LvdcNodeStates manualLvdcNodeState = 5;
       case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(40u /* 40 & 0xFF */)) {
-          int value;
+        if (static_cast< ::google::protobuf::uint8>(tag) == (40 & 0xFF)) {
+          int value = 0;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
@@ -301,7 +389,7 @@ bool podCommand::MergePartialFromCodedStream(
             set_manuallvdcnodestate(static_cast< ::LvdcNodeStates >(value));
           } else {
             mutable_unknown_fields()->AddVarint(
-                5, static_cast< ::google::protobuf::uint64>(value));
+                5, static_cast<::google::protobuf::uint64>(value));
           }
         } else {
           goto handle_unusual;
@@ -311,9 +399,8 @@ bool podCommand::MergePartialFromCodedStream(
 
       // optional bool automaticStateTransitions = 6;
       case 6: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(48u /* 48 & 0xFF */)) {
-          set_has_automaticstatetransitions();
+        if (static_cast< ::google::protobuf::uint8>(tag) == (48 & 0xFF)) {
+          HasBitSetters::set_has_automaticstatetransitions(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &automaticstatetransitions_)));
@@ -342,6 +429,7 @@ failure:
   return false;
 #undef DO_
 }
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 
 void podCommand::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
@@ -393,8 +481,7 @@ void podCommand::SerializeWithCachedSizes(
 }
 
 ::google::protobuf::uint8* podCommand::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+    ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:pds.podCommand)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
@@ -452,39 +539,44 @@ size_t podCommand::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
-  if (_has_bits_[0 / 32] & 63u) {
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 0x0000003fu) {
     // optional .ControlsInterfaceStates controlsInterfaceState = 1;
-    if (has_controlsinterfacestate()) {
+    if (cached_has_bits & 0x00000001u) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->controlsinterfacestate());
     }
 
     // optional .PodStates manualPodState = 2;
-    if (has_manualpodstate()) {
+    if (cached_has_bits & 0x00000002u) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->manualpodstate());
     }
 
     // optional .BrakeNodeStates manualBrakeNodeState = 3;
-    if (has_manualbrakenodestate()) {
+    if (cached_has_bits & 0x00000004u) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->manualbrakenodestate());
     }
 
     // optional .MotorStates manualMotorState = 4;
-    if (has_manualmotorstate()) {
+    if (cached_has_bits & 0x00000008u) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->manualmotorstate());
     }
 
     // optional .LvdcNodeStates manualLvdcNodeState = 5;
-    if (has_manuallvdcnodestate()) {
+    if (cached_has_bits & 0x00000010u) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->manuallvdcnodestate());
     }
 
     // optional bool automaticStateTransitions = 6;
-    if (has_automaticstatetransitions()) {
+    if (cached_has_bits & 0x00000020u) {
       total_size += 1 + 1;
     }
 
@@ -498,9 +590,9 @@ void podCommand::MergeFrom(const ::google::protobuf::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:pds.podCommand)
   GOOGLE_DCHECK_NE(&from, this);
   const podCommand* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const podCommand>(
+      ::google::protobuf::DynamicCastToGenerated<podCommand>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:pds.podCommand)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
@@ -517,7 +609,7 @@ void podCommand::MergeFrom(const podCommand& from) {
   (void) cached_has_bits;
 
   cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 63u) {
+  if (cached_has_bits & 0x0000003fu) {
     if (cached_has_bits & 0x00000001u) {
       controlsinterfacestate_ = from.controlsinterfacestate_;
     }
@@ -564,19 +656,19 @@ void podCommand::Swap(podCommand* other) {
 }
 void podCommand::InternalSwap(podCommand* other) {
   using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
   swap(controlsinterfacestate_, other->controlsinterfacestate_);
   swap(manualpodstate_, other->manualpodstate_);
   swap(manualbrakenodestate_, other->manualbrakenodestate_);
   swap(manualmotorstate_, other->manualmotorstate_);
   swap(manuallvdcnodestate_, other->manuallvdcnodestate_);
   swap(automaticstatetransitions_, other->automaticstatetransitions_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
 ::google::protobuf::Metadata podCommand::GetMetadata() const {
-  protobuf_PodCommand_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_PodCommand_2eproto::file_level_metadata[kIndexInFileMessages];
+  ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_PodCommand_2eproto);
+  return ::file_level_metadata_PodCommand_2eproto[kIndexInFileMessages];
 }
 
 
@@ -584,10 +676,11 @@ void podCommand::InternalSwap(podCommand* other) {
 }  // namespace pds
 namespace google {
 namespace protobuf {
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::pds::podCommand* Arena::CreateMaybeMessage< ::pds::podCommand >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::pds::podCommand* Arena::CreateMaybeMessage< ::pds::podCommand >(Arena* arena) {
   return Arena::CreateInternal< ::pds::podCommand >(arena);
 }
 }  // namespace protobuf
 }  // namespace google
 
 // @@protoc_insertion_point(global_scope)
+#include <google/protobuf/port_undef.inc>

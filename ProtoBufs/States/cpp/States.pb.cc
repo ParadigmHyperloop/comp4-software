@@ -6,86 +6,69 @@
 #include <algorithm>
 
 #include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/io/coded_stream.h>
+#include <google/protobuf/extension_set.h>
 #include <google/protobuf/wire_format_lite_inl.h>
 #include <google/protobuf/descriptor.h>
 #include <google/protobuf/generated_message_reflection.h>
 #include <google/protobuf/reflection_ops.h>
 #include <google/protobuf/wire_format.h>
-// This is a temporary google only hack
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-#include "third_party/protobuf/version.h"
-#endif
 // @@protoc_insertion_point(includes)
+#include <google/protobuf/port_def.inc>
 
-namespace protobuf_States_2eproto {
-void InitDefaults() {
+void InitDefaults_States_2eproto() {
 }
 
-const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[8];
-const ::google::protobuf::uint32 TableStruct::offsets[1] = {};
-static const ::google::protobuf::internal::MigrationSchema* schemas = NULL;
-static const ::google::protobuf::Message* const* file_default_instances = NULL;
+constexpr ::google::protobuf::Metadata* file_level_metadata_States_2eproto = nullptr;
+const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors_States_2eproto[8];
+constexpr ::google::protobuf::ServiceDescriptor const** file_level_service_descriptors_States_2eproto = nullptr;
+const ::google::protobuf::uint32 TableStruct_States_2eproto::offsets[1] = {};
+static constexpr ::google::protobuf::internal::MigrationSchema* schemas = nullptr;
+static constexpr ::google::protobuf::Message* const* file_default_instances = nullptr;
 
-void protobuf_AssignDescriptors() {
-  AddDescriptors();
-  AssignDescriptors(
-      "States.proto", schemas, file_default_instances, TableStruct::offsets,
-      NULL, file_level_enum_descriptors, NULL);
-}
+::google::protobuf::internal::AssignDescriptorsTable assign_descriptors_table_States_2eproto = {
+  {}, AddDescriptors_States_2eproto, "States.proto", schemas,
+  file_default_instances, TableStruct_States_2eproto::offsets,
+  file_level_metadata_States_2eproto, 0, file_level_enum_descriptors_States_2eproto, file_level_service_descriptors_States_2eproto,
+};
 
-void protobuf_AssignDescriptorsOnce() {
-  static ::google::protobuf::internal::once_flag once;
-  ::google::protobuf::internal::call_once(once, protobuf_AssignDescriptors);
-}
+const char descriptor_table_protodef_States_2eproto[] =
+  "\n\014States.proto*\235\001\n\017BrakeNodeStates\022\016\n\nbn"
+  "sBooting\020\000\022\016\n\nbnsStandby\020\001\022\r\n\tbnsArming\020"
+  "\002\022\014\n\010bnsArmed\020\003\022\r\n\tbnsFlight\020\004\022\016\n\nbnsBra"
+  "king\020\005\022\016\n\nbnsVenting\020\006\022\020\n\014bnsRetrieval\020\007"
+  "\022\014\n\010bnsError\020\010*\273\001\n\tPodStates\022\r\n\tpsBootin"
+  "g\020\000\022\r\n\tpsStandby\020\001\022\014\n\010psArming\020\002\022\013\n\007psAr"
+  "med\020\003\022\017\n\013psPreFlight\020\004\022\022\n\016psAcceleration"
+  "\020\005\022\016\n\npsCoasting\020\006\022\r\n\tpsBraking\020\007\022\017\n\013psD"
+  "isarming\020\010\022\017\n\013psRetrieval\020\t\022\017\n\013psEmergen"
+  "cy\020\n*C\n\013MotorStates\022\t\n\005msOff\020\000\022\016\n\nmsChar"
+  "ging\020\001\022\n\n\006msIdle\020\002\022\r\n\tmsEngaged\020\003*G\n\027Con"
+  "trolsInterfaceStates\022\t\n\005ciArm\020\000\022\014\n\010ciFli"
+  "ght\020\001\022\023\n\017ciEmergencyStop\020\002* \n\016InverterSt"
+  "ates\022\016\n\niConnected\020\000*)\n\027BatteryManagemen"
+  "tStates\022\016\n\nbmsNominal\020\000*.\n\016RearNodeState"
+  "s\022\r\n\trnBooting\020\000\022\r\n\trnNominal\020\001*!\n\016LvdcN"
+  "odeStates\022\017\n\013lvdcBooting\020\000"
+  ;
+::google::protobuf::internal::DescriptorTable descriptor_table_States_2eproto = {
+  false, InitDefaults_States_2eproto, 
+  descriptor_table_protodef_States_2eproto,
+  "States.proto", &assign_descriptors_table_States_2eproto, 666,
+};
 
-void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
-void protobuf_RegisterTypes(const ::std::string&) {
-  protobuf_AssignDescriptorsOnce();
-}
-
-void AddDescriptorsImpl() {
-  InitDefaults();
-  static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\014States.proto*\235\001\n\017BrakeNodeStates\022\016\n\nbn"
-      "sBooting\020\000\022\016\n\nbnsStandby\020\001\022\r\n\tbnsArming\020"
-      "\002\022\014\n\010bnsArmed\020\003\022\r\n\tbnsFlight\020\004\022\016\n\nbnsBra"
-      "king\020\005\022\016\n\nbnsVenting\020\006\022\020\n\014bnsRetrieval\020\007"
-      "\022\014\n\010bnsError\020\010*\273\001\n\tPodStates\022\r\n\tpsBootin"
-      "g\020\000\022\r\n\tpsStandby\020\001\022\014\n\010psArming\020\002\022\013\n\007psAr"
-      "med\020\003\022\017\n\013psPreFlight\020\004\022\022\n\016psAcceleration"
-      "\020\005\022\016\n\npsCoasting\020\006\022\r\n\tpsBraking\020\007\022\017\n\013psD"
-      "isarming\020\010\022\017\n\013psRetrieval\020\t\022\017\n\013psEmergen"
-      "cy\020\n*C\n\013MotorStates\022\t\n\005msOff\020\000\022\016\n\nmsChar"
-      "ging\020\001\022\n\n\006msIdle\020\002\022\r\n\tmsEngaged\020\003*G\n\027Con"
-      "trolsInterfaceStates\022\t\n\005ciArm\020\000\022\014\n\010ciFli"
-      "ght\020\001\022\023\n\017ciEmergencyStop\020\002* \n\016InverterSt"
-      "ates\022\016\n\niConnected\020\000*)\n\027BatteryManagemen"
-      "tStates\022\016\n\nbmsNominal\020\000*.\n\016RearNodeState"
-      "s\022\r\n\trnBooting\020\000\022\r\n\trnNominal\020\001*!\n\016LvdcN"
-      "odeStates\022\017\n\013lvdcBooting\020\000"
+void AddDescriptors_States_2eproto() {
+  static constexpr ::google::protobuf::internal::InitFunc deps[1] =
+  {
   };
-  ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 666);
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
-    "States.proto", &protobuf_RegisterTypes);
+ ::google::protobuf::internal::AddDescriptors(&descriptor_table_States_2eproto, deps, 0);
 }
 
-void AddDescriptors() {
-  static ::google::protobuf::internal::once_flag once;
-  ::google::protobuf::internal::call_once(once, AddDescriptorsImpl);
-}
-// Force AddDescriptors() to be called at dynamic initialization time.
-struct StaticDescriptorInitializer {
-  StaticDescriptorInitializer() {
-    AddDescriptors();
-  }
-} static_descriptor_initializer;
-}  // namespace protobuf_States_2eproto
+// Force running AddDescriptors() at dynamic initialization time.
+static bool dynamic_init_dummy_States_2eproto = []() { AddDescriptors_States_2eproto(); return true; }();
 const ::google::protobuf::EnumDescriptor* BrakeNodeStates_descriptor() {
-  protobuf_States_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_States_2eproto::file_level_enum_descriptors[0];
+  ::google::protobuf::internal::AssignDescriptors(&assign_descriptors_table_States_2eproto);
+  return file_level_enum_descriptors_States_2eproto[0];
 }
 bool BrakeNodeStates_IsValid(int value) {
   switch (value) {
@@ -105,8 +88,8 @@ bool BrakeNodeStates_IsValid(int value) {
 }
 
 const ::google::protobuf::EnumDescriptor* PodStates_descriptor() {
-  protobuf_States_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_States_2eproto::file_level_enum_descriptors[1];
+  ::google::protobuf::internal::AssignDescriptors(&assign_descriptors_table_States_2eproto);
+  return file_level_enum_descriptors_States_2eproto[1];
 }
 bool PodStates_IsValid(int value) {
   switch (value) {
@@ -128,8 +111,8 @@ bool PodStates_IsValid(int value) {
 }
 
 const ::google::protobuf::EnumDescriptor* MotorStates_descriptor() {
-  protobuf_States_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_States_2eproto::file_level_enum_descriptors[2];
+  ::google::protobuf::internal::AssignDescriptors(&assign_descriptors_table_States_2eproto);
+  return file_level_enum_descriptors_States_2eproto[2];
 }
 bool MotorStates_IsValid(int value) {
   switch (value) {
@@ -144,8 +127,8 @@ bool MotorStates_IsValid(int value) {
 }
 
 const ::google::protobuf::EnumDescriptor* ControlsInterfaceStates_descriptor() {
-  protobuf_States_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_States_2eproto::file_level_enum_descriptors[3];
+  ::google::protobuf::internal::AssignDescriptors(&assign_descriptors_table_States_2eproto);
+  return file_level_enum_descriptors_States_2eproto[3];
 }
 bool ControlsInterfaceStates_IsValid(int value) {
   switch (value) {
@@ -159,8 +142,8 @@ bool ControlsInterfaceStates_IsValid(int value) {
 }
 
 const ::google::protobuf::EnumDescriptor* InverterStates_descriptor() {
-  protobuf_States_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_States_2eproto::file_level_enum_descriptors[4];
+  ::google::protobuf::internal::AssignDescriptors(&assign_descriptors_table_States_2eproto);
+  return file_level_enum_descriptors_States_2eproto[4];
 }
 bool InverterStates_IsValid(int value) {
   switch (value) {
@@ -172,8 +155,8 @@ bool InverterStates_IsValid(int value) {
 }
 
 const ::google::protobuf::EnumDescriptor* BatteryManagementStates_descriptor() {
-  protobuf_States_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_States_2eproto::file_level_enum_descriptors[5];
+  ::google::protobuf::internal::AssignDescriptors(&assign_descriptors_table_States_2eproto);
+  return file_level_enum_descriptors_States_2eproto[5];
 }
 bool BatteryManagementStates_IsValid(int value) {
   switch (value) {
@@ -185,8 +168,8 @@ bool BatteryManagementStates_IsValid(int value) {
 }
 
 const ::google::protobuf::EnumDescriptor* RearNodeStates_descriptor() {
-  protobuf_States_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_States_2eproto::file_level_enum_descriptors[6];
+  ::google::protobuf::internal::AssignDescriptors(&assign_descriptors_table_States_2eproto);
+  return file_level_enum_descriptors_States_2eproto[6];
 }
 bool RearNodeStates_IsValid(int value) {
   switch (value) {
@@ -199,8 +182,8 @@ bool RearNodeStates_IsValid(int value) {
 }
 
 const ::google::protobuf::EnumDescriptor* LvdcNodeStates_descriptor() {
-  protobuf_States_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_States_2eproto::file_level_enum_descriptors[7];
+  ::google::protobuf::internal::AssignDescriptors(&assign_descriptors_table_States_2eproto);
+  return file_level_enum_descriptors_States_2eproto[7];
 }
 bool LvdcNodeStates_IsValid(int value) {
   switch (value) {
@@ -219,3 +202,4 @@ namespace protobuf {
 }  // namespace google
 
 // @@protoc_insertion_point(global_scope)
+#include <google/protobuf/port_undef.inc>

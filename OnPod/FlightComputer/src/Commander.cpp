@@ -29,13 +29,13 @@ using namespace pds;
 
 void parseProtoCommand(podCommand pPodCommand, Pod* Pod)
 {
-	if(pPodCommand.has_automaticstatetransitions())
-	{
-		Pod->setAutomaticTransitions(pPodCommand.automaticstatetransitions());
-	}
 	if(pPodCommand.has_controlsinterfacestate())
 	{
 		Pod->setControlsInterfaceState(pPodCommand.controlsinterfacestate());
+	}
+	if(pPodCommand.has_automaticstatetransitions())
+	{
+		Pod->setAutomaticTransitions(pPodCommand.automaticstatetransitions());
 	}
 	if(pPodCommand.has_manualbrakenodestate())
 	{
@@ -49,6 +49,7 @@ void parseProtoCommand(podCommand pPodCommand, Pod* Pod)
 	{
 		Pod->setManualPodState(pPodCommand.manualpodstate());
 	}
+	return;
 }
 
 int32_t unserializeProtoMessage(Pod* Pod,char cBuffer[], int32_t iMessageSize)

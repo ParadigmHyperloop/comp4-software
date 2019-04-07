@@ -1,4 +1,4 @@
-#include <Network.h>
+#include <FlightComputer/Network.h>
 #include "FlightComputer/Pod.h"
 #include "ProtoBuffer/NodeTelem.pb.h"
 #include "EasyLogger/easylogging++.h"
@@ -23,14 +23,20 @@ using namespace fc;
     if (iSocket < 0)
     {
     	LOG(INFO)<<"ERROR Making Node Server Socket";
+    	return iSocket;
     }
 	int flags = fcntl(iSocket, F_GETFL);
 	flags |= O_NONBLOCK;
 	fcntl(iSocket, F_SETFL, flags);
 	SocketAddrStruct.sin_family = AF_INET;
 	SocketAddrStruct.sin_port = htons(iPortNumber);
-	SocketAddrStruct.sin_addr.s_addr = inet_addr("127.0.0.1");
-	bind(iSocket, (struct sockaddr*)&SocketAddrStruct, sizeof(SocketAddrStruct));
+	SocketAddrStruct.sin_addr.s_addr = INADDR_ANY;
+	int iBind = bind(iSocket, (struct sockaddr*)&SocketAddrStruct, sizeof(SocketAddrStruct));
+	if(iBind < 0)
+	{
+    	LOG(INFO)<<"ERROR Binding Node Server Socket";
+    	return iBind;
+	}
 	return iSocket;
 }
 
@@ -58,12 +64,11 @@ void retrieveNodeUpdate(Pod* Pod, int32_t iNodeServerSocket)
 {
 		char cBuffer[30] = {0};
 		bzero(&cBuffer, sizeof cBuffer);
-		LOG(DEBUG)<<"Waiting to recieve on socket: " << iNodeServerSocket;
 		int32_t iRecievedPacketSize = recvfrom(iNodeServerSocket, cBuffer, 300, 0, nullptr, nullptr);
 		if(iRecievedPacketSize != -1)
 		{
-			parseBrakeNodeUpdate(Pod, cBuffer);
 			LOG(DEBUG)<<"Packet Recieved on socket:" << iRecievedPacketSize;
+			parseBrakeNodeUpdate(Pod, cBuffer);
 		}
 		else
 		{
@@ -109,13 +114,19 @@ const char* getPodUpdateMessage(Pod* Pod)
  */
  int32_t podInternalNetworkThread(Pod Pod)
 {
-	 Pod.sPodValues->iNodeServerPortNumber = 5005;
+	 Pod.sPodValues->iNodeServerPortNumber = 5010;
 
 	// Store in Config
-	std::string cNodeAddresses[] = {"127.0.0.1","127.0.0.1"};
+	std::string cNodeAddresses[] = {"192.168.7.1","127.0.0.1"};
 	int32_t iNumberOfNodes = 2;
 	// Network setup
 	int32_t iNodeServerSocket = createNodeServerSocket(Pod.getNodeServerPortNumber());
+	if(iNodeServerSocket < 1)
+	{
+		LOG(INFO)<<"ERROR Making Node Server Socket";
+		return iNodeServerSocket;
+	}
+
 	clientSocketConfig cscNodeClientSocket = initializeClientSocket();
 
 	// While mode isnt shutdown
@@ -136,7 +147,7 @@ const char* getPodUpdateMessage(Pod* Pod)
 
 	close(cscNodeClientSocket.sckt);
 	close(iNodeServerSocket);
-
+	return 0;
 }
 
 
