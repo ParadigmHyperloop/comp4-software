@@ -9,8 +9,7 @@ void setup() {
 }
 
   BrakeNodeState s(State::BOOT);
-  
-
+ 
 void loop() {
   s.TransitionToNextState();
   delay(2000);

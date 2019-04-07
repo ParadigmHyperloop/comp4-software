@@ -1,26 +1,32 @@
 #pragma once
 
+
 enum flightComputerStates{
     FCBOOT,
     FCSTANDBY,
     FCARMING,
     FCARMED,
     FCPREFLIGHT,
+    FCACCELERATION,
+    FCCOASTING,
     FCBRAKING,
     FCVENTING,
-    FCRETRIEVAL,
-    FCERROR
+    FCDISARM
+
 };
 
 struct flagStruct {
     bool setupFail = true;
 	  bool nodeConnectFC = true;
 	  bool heartbeatValid = true;
-	  bool estop = false;
+    bool watchDogTimeout = true;
+	  bool estop = true;
 	  bool sensorsValid = true;
 	  bool taxiCommand = false;
 	  bool moveToRetrieval = true;
-	  flightComputerStates FCstate_ = FCBOOT;
+    bool ventAttemptsDone = true;
+    bool brakePressureAmbient = true;
+	  flightComputerStates FCstate_ = FCVENTING;
 };
 
 
@@ -95,6 +101,8 @@ class BrakeNodeState {
      *corresponding to the current state.
     */
     void TransitionToNextState();
+
+    //void(* resetFunc) (void) = 0;
     
     //Returns value stored in state_
     State GetState();
