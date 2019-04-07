@@ -22,7 +22,7 @@ install:
 
 # Build steps
 script:
-  - cd OnPod/FlightComputer/Debug
+  - cd OnPod/FlightComputer/Host
   - make
   - cd ../tests
   - make
