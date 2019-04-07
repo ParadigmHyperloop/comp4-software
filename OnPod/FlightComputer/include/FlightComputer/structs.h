@@ -58,10 +58,14 @@ struct PodValues
 	int32_t iLowPressure4;
 	int32_t iHighPressure;
 	int32_t iPressureVesselTemperature;
+};
 
-	//Network
-	int32_t iNodeServerPortNumber;
-
+struct PodNetwork
+{
+ std::vector<std::string> cNodeIpAddrs; //IP addrs of all nodes order: Brake, Rear, LVDC, Enclosure
+ int32_t iNodeServerPortNumber;
+ int32_t iNodePort; //Port # used by nodes to recieve UDP updates
+ int32_t iCommanderPortNumber; //Port # used by TCP Commander socket
 };
 
 struct clientSocketConfig {

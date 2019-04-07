@@ -15,7 +15,7 @@ messageHandler = StringHandler()
 
 logger = TerminalLogger({'FlightComputer': None, 'Node': None})
 
-fc_state = None
+fc_state = None500
 node_state = None
 
 while True:

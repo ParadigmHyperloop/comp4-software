@@ -17,7 +17,7 @@
 
 void sendDataUdp(clientSocketConfig*, const void*,  int32_t,  std::string);
 
-clientSocketConfig initializeClientSocket();
+clientSocketConfig initializeClientSocket(Pod);
 
 int32_t createNodeServerSocket(int32_t);
 
@@ -31,6 +31,6 @@ const char* getPodUpdateMessage(Pod*);
 
 int32_t createCommanderServerSocket(int32_t);
 
-void commanderThread(Pod);
+int32_t commanderThread(Pod);
 
 #endif

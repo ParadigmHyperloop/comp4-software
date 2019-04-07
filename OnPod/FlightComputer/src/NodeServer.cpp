@@ -7,6 +7,7 @@
 #include <string>
 
 
+using namespace std;
 /**
  * createNodeServerSocket
  *
@@ -113,20 +114,17 @@ const char* getPodUpdateMessage(Pod* Pod)
  */
  int32_t podInternalNetworkThread(Pod Pod)
 {
-	 Pod.sPodValues->iNodeServerPortNumber = 5010;
-
-	// Store in Config
-	std::string cNodeAddresses[] = {"192.168.7.1","127.0.0.1"};
-	int32_t iNumberOfNodes = 2;
 	// Network setup
-	int32_t iNodeServerSocket = createNodeServerSocket(Pod.getNodeServerPortNumber());
+	int32_t iNodeServerSocket = createNodeServerSocket(Pod.sPodNetworkValues->iNodeServerPortNumber);
+	vector<std::string> cNodeIpAddrs = Pod.sPodNetworkValues->cNodeIpAddrs;
+
 	if(iNodeServerSocket < 1)
 	{
 		LOG(INFO)<<"ERROR Making Node Server Socket";
 		return iNodeServerSocket;
 	}
 
-	clientSocketConfig cscNodeClientSocket = initializeClientSocket();
+	clientSocketConfig cscNodeClientSocket = initializeClientSocket(Pod);
 
 	// While mode isnt shutdown
 	while(1){
@@ -134,9 +132,10 @@ const char* getPodUpdateMessage(Pod* Pod)
 		// Create Update Packet
 		const char* cMesssage = getPodUpdateMessage(&Pod);
 		//Serve Update to all Nodes
-		for (int i=0 ; i<iNumberOfNodes ; i++)
+
+		for(std::size_t i=0; i<cNodeIpAddrs.size(); ++i)
 		{
-			sendDataUdp(&cscNodeClientSocket, cMesssage, strlen(cMesssage), cNodeAddresses[i]);
+			sendDataUdp(&cscNodeClientSocket, cMesssage, strlen(cMesssage), cNodeIpAddrs[i]);
 		}
 
 		// Check all sockets for an update and parse

@@ -12,6 +12,7 @@
      if (iSockfd < 0)
      {
          LOG(INFO)<<"ERROR opening commander socket";
+         return -1;
      }
      bzero((char *) &serv_addr, sizeof(serv_addr));
      serv_addr.sin_family = AF_INET;
@@ -20,8 +21,9 @@
      if (bind(iSockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0)
      {
     	 LOG(INFO)<<"ERROR binding commander socket";
+    	 return -1;
      }
-     //Queue 3 requests before regecting
+     //Queue 3 requests before rejecting
      listen(iSockfd,3);
      return iSockfd;
  }
@@ -69,11 +71,18 @@ int32_t unserializeProtoMessage(Pod* Pod,char cBuffer[], int32_t iMessageSize)
 }
 
 
-void commanderThread(Pod Pod)
+int32_t commanderThread(Pod Pod)
  {
 	 socklen_t clilen;
 	 int32_t iNewSockFd, iMessageSize;
-	 int32_t iSockfd = createCommanderServerSocket(5009);
+	 int32_t iSockfd = createCommanderServerSocket(Pod.sPodNetworkValues->iCommanderPortNumber);
+	 if(iSockfd < 0 )
+	 {
+		 // Restart thread?
+		 LOG(INFO)<<"ERROR initializing commader thread";
+		 return 0;
+	 }
+
 	 struct sockaddr_in cli_addr;
 	 clilen = sizeof(cli_addr);
 	 char buffer[256];
@@ -83,34 +92,35 @@ void commanderThread(Pod Pod)
 	 {
 		 //Accepted connection gets put on a new socket
 		 iNewSockFd = accept(iSockfd, (struct sockaddr *) &cli_addr, &clilen);
-		 if (iNewSockFd < 0)
-		 {
-			 LOG(INFO)<<"ERROR on accept";
-		 }
-		 //Zero the recieving buffer
-		 bzero(buffer,256);
-		 iMessageSize = read(iNewSockFd,buffer,255);
-		 if (iMessageSize < 0){
-			 LOG(INFO)<<"ERROR reading from socket";
-		 }
-		 LOG(INFO)<<"Here is the message: " << buffer;
+		 while(1){
+			 if (iNewSockFd < 0)
+			 {
+				 LOG(INFO)<<"ERROR on accept";
+			 }
+			 //Zero the recieving buffer
+			 bzero(buffer,256);
+			 iMessageSize = read(iNewSockFd,buffer,255);
+			 if(iMessageSize < 0){
+				 LOG(INFO)<<"ERROR reading from socket";
+			 }
 
-		 int32_t parsed = unserializeProtoMessage(&Pod, buffer, iMessageSize);
-		 if(parsed){
-			 //Return 1 to confirm reception
-			 iMessageSize = write(iNewSockFd,"1",1);
+			 int32_t iParseMessage = unserializeProtoMessage(&Pod, buffer, iMessageSize);
+			 if(iParseMessage){
+				 //Return 1 to confirm reception
+				 iMessageSize = write(iNewSockFd,"1",1);
+			 }
+			 else
+			 {
+				 //Return 0 indicating bad message
+				 iMessageSize = write(iNewSockFd,"0",1);
+			 }
+			 if (iMessageSize < 0){
+				 LOG(INFO)<<"ERROR writing to socket";
+			 }
 		 }
-		 else
-		 {
-			 //Return 1 to confirm reception
-			 iMessageSize = write(iNewSockFd,"0",1);
-		 }
-
-		 if (iMessageSize < 0){
-			 LOG(INFO)<<"ERROR writing to socket";
-		 }
+		 close(iNewSockFd);
 	 }
-     close(iNewSockFd);
+
      close(iSockfd);
  }
 

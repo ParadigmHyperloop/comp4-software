@@ -1,5 +1,7 @@
 from PodCommand_pb2 import podCommand
 from States_pb2 import *
+import select
+
 
 import socket
 
@@ -12,13 +14,27 @@ BUFFER_SIZE = 1024
 podMessage = podCommand()
 podMessage.controlsInterfaceState = ciFlight
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((TCP_IP, TCP_PORT))
-s.send(podMessage.SerializeToString())
-data = s.recv(BUFFER_SIZE)
-s.close()
+podSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+a = podSocket.connect((TCP_IP, TCP_PORT))
+connected = True
 
-print("received data:", data)
+while connected:
+    try:
+        podSocket.send(podMessage.SerializeToString())
+    except socket.error as e:
+        connected = False
+        break
+
+    ready = select.select([podSocket], [], [], 3)
+    if ready[0]:
+        data = podSocket.recv(BUFFER_SIZE)
+        print("received data:", data)
+    else:
+        print("timeout");
+        connected = False
+
+podSocket.close()
+
 
 
 

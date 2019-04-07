@@ -5,9 +5,10 @@
 
 
 
-Pod::Pod(PodValues* sPodValues)
+Pod::Pod(PodValues* sPodValues, PodNetwork* sNetworkVals)
 {
 	this->sPodValues = sPodValues;
+	this->sPodNetworkValues = sNetworkVals;
 	return;
 };
 
@@ -34,7 +35,7 @@ PodStates Pod::getPodState()
 
 void Pod::setControlsInterfaceState(ControlsInterfaceStates eTerminalState)
 {
-	if(this->bWriteTerminalCommand)
+	if(this->bWriteControlsInterfaceState)
 	{
 		this->sPodValues->eTerminalState = eTerminalState;
 	}
@@ -99,10 +100,6 @@ int32_t Pod::getFlagsArraySize()
  return this->sPodValues->iFlagsArraySize;
 };
 
-int32_t Pod::getNodeServerPortNumber()
-{
-	return this->sPodValues->iNodeServerPortNumber;
-}
 
 void Pod::setAutomaticTransitions(bool val)
 {

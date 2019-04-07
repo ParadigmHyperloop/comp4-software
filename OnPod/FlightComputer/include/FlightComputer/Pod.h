@@ -7,7 +7,9 @@ class Pod
 {
 	public:
 		PodValues* sPodValues;
-		Pod(PodValues*);
+		PodNetwork* sPodNetworkValues;
+
+		Pod(PodValues*, PodNetwork*);
 		// Pod States
 		int32_t setPodState(PodStates, const char*);
 		PodStates getPodState();
@@ -38,7 +40,7 @@ class Pod
 
 		// Permissions
 		bool bWritePodState = 0;
-		bool bWriteTerminalCommand = 0;
+		bool bWriteControlsInterfaceState = 0;
 		bool bWriteMotorState = 0;
 		bool bWriteBreakNodeState = 0;
 		bool bWritePosition = 0;
