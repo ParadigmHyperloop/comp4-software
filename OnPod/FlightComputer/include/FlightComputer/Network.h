@@ -9,7 +9,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <netinet/tcp.h>
 
 #include "ProtoBuffer/Paradigm.pb.h"
 #include "FlightComputer/structs.h"

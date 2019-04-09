@@ -1,6 +1,7 @@
 #include "FlightComputer/Network.h"
 #include "EasyLogger/easylogging++.h"
 #include "ProtoBuffer/Paradigm.pb.h"
+#include <strings.h>
 
 
 // Get manual state change commands. Get Estop command
@@ -85,37 +86,55 @@ int32_t commanderThread(Pod Pod)
 
 	 struct sockaddr_in cli_addr;
 	 clilen = sizeof(cli_addr);
-	 char buffer[256];
+	 char buffer[256]={0};
 
 	 //pod state != shutdown
 	 while(1)
 	 {
 		 //Accepted connection gets put on a new socket
 		 iNewSockFd = accept(iSockfd, (struct sockaddr *) &cli_addr, &clilen);
+		 int toggle = 1;
+		 int idle = 1;	/* Number of idle seconds before sending a KeepAlive probe. */
+		 int interval = 1;	/* How often in seconds to resend an unacked KeepAlive probe. */
+		 int count = 1;	/* How many times to resend a KA probe if previous probe was unacked. */
+		 /* Switch KeepAlive on or off for this side of the socket. */
+		 if (setsockopt(iNewSockFd, SOL_SOCKET, SO_KEEPALIVE, &toggle, sizeof(toggle)) < 0)
+		 {
+			 //error
+		 }
+		 setsockopt(iNewSockFd, IPPROTO_TCP, TCP_KEEPIDLE, &idle, sizeof(idle));
+		 setsockopt(iNewSockFd, IPPROTO_TCP, TCP_KEEPINTVL, &interval, sizeof(interval));
+		 setsockopt(iNewSockFd, IPPROTO_TCP, TCP_KEEPCNT, &count, sizeof(count));
+
 		 while(1){
 			 if (iNewSockFd < 0)
 			 {
 				 LOG(INFO)<<"ERROR on accept";
 			 }
-			 //Zero the recieving buffer
-			 bzero(buffer,256);
 			 iMessageSize = read(iNewSockFd,buffer,255);
 			 if(iMessageSize < 0){
 				 LOG(INFO)<<"ERROR reading from socket";
 			 }
-
-			 int32_t iParseMessage = unserializeProtoMessage(&Pod, buffer, iMessageSize);
-			 if(iParseMessage){
-				 //Return 1 to confirm reception
-				 iMessageSize = write(iNewSockFd,"1",1);
+			 else if(iMessageSize == 0){
+				 // No Message
 			 }
-			 else
+			 else if(iMessageSize > 0)
 			 {
-				 //Return 0 indicating bad message
-				 iMessageSize = write(iNewSockFd,"0",1);
-			 }
-			 if (iMessageSize < 0){
-				 LOG(INFO)<<"ERROR writing to socket";
+				 int32_t iParseMessage = unserializeProtoMessage(&Pod, buffer, iMessageSize);
+				 memset(buffer, 0, sizeof buffer);
+				 if(iParseMessage){
+					 //Return 1 to confirm reception
+					 //iMessageSize = write(iNewSockFd,"1",1);
+				 }
+				 else
+				 {
+					 //Return 0 indicating bad message
+					 //iMessageSize = write(iNewSockFd,"0",1);
+				 }
+				 if (iMessageSize < 0){
+					 LOG(INFO)<<"ERROR writing to socket";
+					 break;
+				 }
 			 }
 		 }
 		 close(iNewSockFd);
