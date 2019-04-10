@@ -17,6 +17,10 @@ podMessage.controlsInterfaceState = ciFlight
 podSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 a = podSocket.connect((TCP_IP, TCP_PORT))
 connected = True
+try:
+    podSocket.send(podMessage.SerializeToString())
+except socket.error as e:
+    #connected = False
 
 while connected:
     try:
@@ -30,9 +34,6 @@ while connected:
     if ready[0]:
         data = podSocket.recv(BUFFER_SIZE)
         print("received data:", data)
-    else:
-        print("timeout");
-        connected = False
 
 podSocket.close()
 
