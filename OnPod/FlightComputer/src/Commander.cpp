@@ -1,8 +1,6 @@
 #include "FlightComputer/Network.h"
 #include "EasyLogger/easylogging++.h"
 #include "ProtoBuffer/Paradigm.pb.h"
-#include <strings.h>
-
 
 // Get manual state change commands. Get Estop command
 
@@ -91,26 +89,37 @@ int32_t commanderThread(Pod Pod)
 	 //pod state != shutdown
 	 while(1)
 	 {
+
 		 //Accepted connection gets put on a new socket
 		 iNewSockFd = accept(iSockfd, (struct sockaddr *) &cli_addr, &clilen);
-		 int toggle = 1;
-		 int idle = 1;	/* Number of idle seconds before sending a KeepAlive probe. */
-		 int interval = 1;	/* How often in seconds to resend an unacked KeepAlive probe. */
-		 int count = 1;	/* How many times to resend a KA probe if previous probe was unacked. */
-		 /* Switch KeepAlive on or off for this side of the socket. */
-		 if (setsockopt(iNewSockFd, SOL_SOCKET, SO_KEEPALIVE, &toggle, sizeof(toggle)) < 0)
+		 if (iNewSockFd < 0)
 		 {
-			 //error
+			 LOG(INFO)<<"ERROR on accept";
 		 }
-		 setsockopt(iNewSockFd, IPPROTO_TCP, TCP_KEEPIDLE, &idle, sizeof(idle));
+
+		 int iOn = 1;
+		 //int idle = 1;	/* Number of idle seconds before sending a KeepAlive probe. */
+		 int interval = 3;	/* How often in seconds to resend an unacked KeepAlive probe. */
+		 int count = 3;	/* How many times to resend a KA probe if previous probe was unacked. */
+
+		 // Switch KeepAlive on or off for this side of the socket. */
+		 if (setsockopt(iNewSockFd, SOL_SOCKET, SO_KEEPALIVE, &iOn, sizeof(int)) < 0)
+		 {
+			 LOG(INFO)<< "Error creating keep alive socket";
+			 return -1;
+		 }
+
+		 //setsockopt(iNewSockFd, IPPROTO_TCP, TCP_KEEPIDLE, &idle, sizeof(idle));
 		 setsockopt(iNewSockFd, IPPROTO_TCP, TCP_KEEPINTVL, &interval, sizeof(interval));
 		 setsockopt(iNewSockFd, IPPROTO_TCP, TCP_KEEPCNT, &count, sizeof(count));
 
+		 // For OSX you just need this config
+		 setsockopt(iNewSockFd, IPPROTO_TCP, TCP_KEEPALIVE, &interval, sizeof(interval));
+
+
+		 LOG(INFO)<< "Controls Interface Heart Beat Connected";
 		 while(1){
-			 if (iNewSockFd < 0)
-			 {
-				 LOG(INFO)<<"ERROR on accept";
-			 }
+
 			 iMessageSize = read(iNewSockFd,buffer,255);
 			 if(iMessageSize < 0){
 				 LOG(INFO)<<"ERROR reading from socket";

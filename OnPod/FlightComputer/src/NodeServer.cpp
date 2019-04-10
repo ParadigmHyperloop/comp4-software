@@ -1,13 +1,13 @@
-#include <FlightComputer/Network.h>
 #include "FlightComputer/Pod.h"
 #include "ProtoBuffer/Paradigm.pb.h"
 #include "EasyLogger/easylogging++.h"
-#include <fcntl.h>
+#include <FlightComputer/Network.h>
+
+
 #include <iostream>
-#include <string>
 
 
-using namespace std;
+
 /**
  * createNodeServerSocket
  *
@@ -31,7 +31,7 @@ using namespace std;
 	SocketAddrStruct.sin_family = AF_INET;
 	SocketAddrStruct.sin_port = htons(iPortNumber);
 	SocketAddrStruct.sin_addr.s_addr = INADDR_ANY;
-	int iBind = bind(iSocket, (struct sockaddr*)&SocketAddrStruct, sizeof(SocketAddrStruct));
+	int32_t iBind = bind(iSocket, (struct sockaddr*)&SocketAddrStruct, sizeof(SocketAddrStruct));
 	if(iBind < 0)
 	{
     	LOG(INFO)<<"ERROR Binding Node Server Socket";
@@ -116,7 +116,7 @@ const char* getPodUpdateMessage(Pod* Pod)
 {
 	// Network setup
 	int32_t iNodeServerSocket = createNodeServerSocket(Pod.sPodNetworkValues->iNodeServerPortNumber);
-	vector<std::string> cNodeIpAddrs = Pod.sPodNetworkValues->cNodeIpAddrs;
+	std::vector<std::string> cNodeIpAddrs = Pod.sPodNetworkValues->cNodeIpAddrs;
 
 	if(iNodeServerSocket < 1)
 	{

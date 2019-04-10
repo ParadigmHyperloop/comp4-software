@@ -20,7 +20,8 @@ connected = True
 
 while connected:
     try:
-        podSocket.send(podMessage.SerializeToString())
+        pass
+        # podSocket.send(podMessage.SerializeToString())
     except socket.error as e:
         connected = False
         break

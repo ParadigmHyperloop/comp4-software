@@ -32,7 +32,7 @@ int main( int32_t argc, char** argv)
 	}
 	else
 	{
-		el::Configurations conf("/home/lwaghorn/Development/comp4-software/OnPod/FlightComputer/include/EasyLogger/logging.conf");
+		el::Configurations conf("/Users/liamwaghorn/Development/comp4-software/OnPod/FlightComputer/include/EasyLogger/logging.conf");
 		el::Loggers::reconfigureAllLoggers(conf);
 	}
 	LOG(INFO)<<"Main Thread Started";
@@ -51,9 +51,9 @@ int main( int32_t argc, char** argv)
 
 
 	// Pod Internal Network Thread
-	Pod pPodInternalNetwork = Pod(&sPodValues, &sPodNetworkValues);
-	pPodInternalNetwork.bWriteBreakNodeState = true;
-	std::thread tServer(podInternalNetworkThread, pPodInternalNetwork);
+	//Pod pPodInternalNetwork = Pod(&sPodValues, &sPodNetworkValues);
+	//pPodInternalNetwork.bWriteBreakNodeState = true;
+	//std::thread tServer(podInternalNetworkThread, pPodInternalNetwork);
 
 
 	// Core Control Loop Thread
@@ -70,7 +70,7 @@ int main( int32_t argc, char** argv)
 
 	tControlLoop.join();
 
-	tServer.join();
+	//tServer.join();
 
 	return 0;
 }
