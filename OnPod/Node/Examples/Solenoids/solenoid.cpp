@@ -23,8 +23,7 @@ void DRV8806::updateSolenoids() {
 
     // loop through iActiveSolenoids and write DIN to the value of each bit
     // then write SCLK high then low to shift the bit in
-    for (uint8_t i = 0; i < 8; i++) {
-        uint8_t uSolenoid = 7 - i;
+    for (uint8_t uSolenoid = 7; uSolenoid >= 0; uSolenoid--) {
         bool bState = (uActiveSolenoids >> uSolenoid) & 1;
         digitalWrite(PIN_DIN, bState);
         delayMicroseconds(1);
