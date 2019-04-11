@@ -1,40 +1,66 @@
-from PodCommand_pb2 import podCommand
-from States_pb2 import *
+from Paradigm_pb2 import podCommand, ControlsInterfaceStates
 import select
-
+import time
+import errno
 
 import socket
 
-TCP_IP = '128.224.146.221'
-#TCP_IP = '127.0.0.1'
+milliseconds = int(round(time.time() * 1000))
+#TCP_IP = '128.224.146.221'
+TCP_IP = '127.0.0.1'
 TCP_PORT = 5005
 BUFFER_SIZE = 1024
 
 # Generate packet
 podMessage = podCommand()
-podMessage.controlsInterfaceState = ciFlight
+podMessage.controlsInterfaceState = ControlsInterfaceStates.ciFlight
 
 podSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-a = podSocket.connect((TCP_IP, TCP_PORT))
+podSocket.connect((TCP_IP, TCP_PORT))
+podSocket.setblocking(False)
 connected = True
-try:
-    podSocket.send(podMessage.SerializeToString())
-except socket.error as e:
-    pass
-    # connected = False
 
-while True:
+lastPacket = milliseconds
+while connected:
+
+    # Send Packet
+    elapsed = milliseconds - lastPacket
+    print(elapsed)
+    if elapsed > 200:
+        total_sent = 0
+        payload = podMessage.SerializeToString()
+        print(payload)
+        payload_size = len(payload)
+        while len(payload):
+            try:
+                sent = podSocket.send(payload)
+                total_sent += sent
+                payload = payload[sent:]
+            except socket.error as e:
+                if e.errno != errno.EAGAIN:
+                    raise e
+                select.select([], [podSocket], [])  # This blocks until
+
+    # Receive Packet
     try:
-        pass
-        # podSocket.send(podMessage.SerializeToString())
+        msg = podSocket.recv(4096)
     except socket.error as e:
-        connected = False
-        break
-
-    ready = select.select([podSocket], [], [], 3)
-    if ready[0]:
-        data = podSocket.recv(BUFFER_SIZE)
-        print("received data:", data)
+        err = e.args[0]
+        if err == errno.EAGAIN or err == errno.EWOULDBLOCK:
+            # No data received
+            elapsed = milliseconds - lastPacket
+            print(elapsed)
+            if elapsed > 1000:
+                print("Timeout")
+                connected = False
+        else:
+            # Real Error
+            connected = False
+    else:
+        if not msg:
+            print('orderly shutdown on server end')
+        else:
+            lastPacket = milliseconds
 
 podSocket.close()
 

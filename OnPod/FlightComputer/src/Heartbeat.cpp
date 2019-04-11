@@ -1,4 +1,5 @@
 #include "FlightComputer/Heartbeat.h"
+#include "EasyLogger/easylogging++.h"
 
 Heartbeat::Heartbeat(int iTimeOutMs)
 {
@@ -17,6 +18,7 @@ bool Heartbeat::expired()
 	{
 		return 1;
 	}
+	LOG(INFO)<< std::chrono::duration_cast<std::chrono::milliseconds>(current - this->aLastStart).count();
 	return 0;
 }
 

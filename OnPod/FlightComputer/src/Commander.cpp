@@ -1,6 +1,7 @@
 #include "FlightComputer/Network.h"
 #include "EasyLogger/easylogging++.h"
 #include "ProtoBuffer/Paradigm.pb.h"
+#include "FlightComputer/Heartbeat.h"
 
 // Get manual state change commands. Get Estop command
 
@@ -72,15 +73,14 @@ int32_t unserializeProtoMessage(Pod* Pod,char cBuffer[], int32_t iMessageSize)
 
 int32_t commanderThread(Pod Pod)
  {
+	//Logging
 	el::Helpers::setThreadName("Commander Thread");
 	LOG(INFO)<<"Starting Commander Thread";
 
-
-
-	 socklen_t clilen;
+	//Sockets and buffers
 	 int32_t iNewSockFd, iMessageSize;
 	 int32_t iSockfd = createCommanderServerSocket(Pod.sPodNetworkValues->iCommanderPortNumber);
-
+	 char buffer[256]={0};
 	 if(iSockfd < 0 )
 	 {
 		 // Restart thread?
@@ -88,63 +88,54 @@ int32_t commanderThread(Pod Pod)
 		 return 0;
 	 }
 
-	 struct sockaddr_in cli_addr;
-	 clilen = sizeof(cli_addr);
-	 char buffer[256]={0};
+	 //Watchdog
+	 Heartbeat HeartBeat = Heartbeat(1000);
 
 	 //pod state != shutdown
 	 while(1)
 	 {
 
-		 //Accepted connection gets put on a new socket
-		 iNewSockFd = accept(iSockfd, (struct sockaddr *) &cli_addr, &clilen);
+		 /* Accepted connection gets put iNewSockfd,
+		  * thread will hang here until a connection is recieved.
+		  */
+
+		 iNewSockFd = accept(iSockfd, nullptr, nullptr);
 		 if (iNewSockFd < 0)
 		 {
 			 LOG(INFO)<<"ERROR on accept";
 		 }
 
-		 int iOn = 1;
-		 int idle = 1;	/* Number of idle seconds before sending a KeepAlive probe. */
-		 int interval = 1;	/* How often in seconds to resend an unacked KeepAlive probe. */
-		 int count = 0;	/* How many times to resend a KA probe if previous probe was unacked. */
+		 LOG(INFO)<< "Controls Interface Connected";
+		 HeartBeat.feed();
 
-		 // Switch KeepAlive on or off for this side of the socket. */
-		 if (setsockopt(iNewSockFd, SOL_SOCKET, SO_KEEPALIVE, &iOn, sizeof(int)) < 0)
-		 {
-			 LOG(INFO)<< "Error creating keep alive socket";
-			 return -1;
-		 }
-
-		 setsockopt(iNewSockFd, IPPROTO_TCP, TCP_KEEPIDLE, &idle, sizeof(idle));
-		 setsockopt(iNewSockFd, IPPROTO_TCP, TCP_KEEPINTVL, &interval, sizeof(interval));
-		 setsockopt(iNewSockFd, IPPROTO_TCP, TCP_KEEPCNT, &count, sizeof(count));
-
-		 // For OSX you just need this config
-		 //setsockopt(iNewSockFd, IPPROTO_TCP, TCP_KEEPALIVE, &interval, sizeof(interval));
-
-
-		 LOG(INFO)<< "Controls Interface Heart Beat Connected";
 		 while(1){
 
 			 iMessageSize = read(iNewSockFd,buffer,255);
 			 if(iMessageSize < 0){
 				 LOG(INFO)<<"ERROR reading from socket";
+				 break;
 			 }
 			 else if(iMessageSize == 0){
-				 // No Message
+				 if(HeartBeat.expired())
+				 {
+					 LOG(INFO)<<"ERROR: Controls Interface Connection Closed";
+					 break;
+				 }
 			 }
 			 else if(iMessageSize > 0)
 			 {
+				 HeartBeat.feed();
+				 LOG(INFO)<<buffer;
 				 int32_t iParseMessage = unserializeProtoMessage(&Pod, buffer, iMessageSize);
 				 memset(buffer, 0, sizeof buffer);
 				 if(iParseMessage){
 					 //Return 1 to confirm reception
-					 //iMessageSize = write(iNewSockFd,"1",1);
+					 iMessageSize = write(iNewSockFd,"1",1);
 				 }
 				 else
 				 {
 					 //Return 0 indicating bad message
-					 //iMessageSize = write(iNewSockFd,"0",1);
+					 iMessageSize = write(iNewSockFd,"0",1);
 				 }
 				 if (iMessageSize < 0){
 					 LOG(INFO)<<"ERROR writing to socket";
