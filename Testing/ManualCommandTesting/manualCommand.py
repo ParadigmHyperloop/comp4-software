@@ -5,9 +5,9 @@ import select
 
 import socket
 
-
-TCP_IP = '127.0.0.1'
-TCP_PORT = 5009
+TCP_IP = '128.224.146.221'
+#TCP_IP = '127.0.0.1'
+TCP_PORT = 5005
 BUFFER_SIZE = 1024
 
 # Generate packet
@@ -20,9 +20,10 @@ connected = True
 try:
     podSocket.send(podMessage.SerializeToString())
 except socket.error as e:
-    #connected = False
+    pass
+    # connected = False
 
-while connected:
+while True:
     try:
         pass
         # podSocket.send(podMessage.SerializeToString())

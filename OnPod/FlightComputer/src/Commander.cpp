@@ -72,9 +72,15 @@ int32_t unserializeProtoMessage(Pod* Pod,char cBuffer[], int32_t iMessageSize)
 
 int32_t commanderThread(Pod Pod)
  {
+	el::Helpers::setThreadName("Commander Thread");
+	LOG(INFO)<<"Starting Commander Thread";
+
+
+
 	 socklen_t clilen;
 	 int32_t iNewSockFd, iMessageSize;
 	 int32_t iSockfd = createCommanderServerSocket(Pod.sPodNetworkValues->iCommanderPortNumber);
+
 	 if(iSockfd < 0 )
 	 {
 		 // Restart thread?
@@ -98,9 +104,9 @@ int32_t commanderThread(Pod Pod)
 		 }
 
 		 int iOn = 1;
-		 //int idle = 1;	/* Number of idle seconds before sending a KeepAlive probe. */
-		 int interval = 3;	/* How often in seconds to resend an unacked KeepAlive probe. */
-		 int count = 3;	/* How many times to resend a KA probe if previous probe was unacked. */
+		 int idle = 1;	/* Number of idle seconds before sending a KeepAlive probe. */
+		 int interval = 1;	/* How often in seconds to resend an unacked KeepAlive probe. */
+		 int count = 0;	/* How many times to resend a KA probe if previous probe was unacked. */
 
 		 // Switch KeepAlive on or off for this side of the socket. */
 		 if (setsockopt(iNewSockFd, SOL_SOCKET, SO_KEEPALIVE, &iOn, sizeof(int)) < 0)
@@ -109,12 +115,12 @@ int32_t commanderThread(Pod Pod)
 			 return -1;
 		 }
 
-		 //setsockopt(iNewSockFd, IPPROTO_TCP, TCP_KEEPIDLE, &idle, sizeof(idle));
+		 setsockopt(iNewSockFd, IPPROTO_TCP, TCP_KEEPIDLE, &idle, sizeof(idle));
 		 setsockopt(iNewSockFd, IPPROTO_TCP, TCP_KEEPINTVL, &interval, sizeof(interval));
 		 setsockopt(iNewSockFd, IPPROTO_TCP, TCP_KEEPCNT, &count, sizeof(count));
 
 		 // For OSX you just need this config
-		 setsockopt(iNewSockFd, IPPROTO_TCP, TCP_KEEPALIVE, &interval, sizeof(interval));
+		 //setsockopt(iNewSockFd, IPPROTO_TCP, TCP_KEEPALIVE, &interval, sizeof(interval));
 
 
 		 LOG(INFO)<< "Controls Interface Heart Beat Connected";
