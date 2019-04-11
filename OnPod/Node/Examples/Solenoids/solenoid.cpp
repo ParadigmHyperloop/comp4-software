@@ -24,8 +24,8 @@ void DRV8806::updateSolenoids() {
     // loop through iActiveSolenoids and write DIN to the value of each bit
     // then write SCLK high then low to shift the bit in
     for (uint8_t i = 0; i < 8; i++) {
-        uint8_t iSolenoid = 7 - i;
-        bool bState = (iActiveSolenoids >> iSolenoid) & 1;
+        uint8_t uSolenoid = 7 - i;
+        bool bState = (uActiveSolenoids >> uSolenoid) & 1;
         digitalWrite(PIN_DIN, bState);
         delayMicroseconds(1);
         digitalWrite(PIN_SCLK, HIGH);
@@ -37,12 +37,12 @@ void DRV8806::updateSolenoids() {
     digitalWrite(PIN_LATCH, HIGH);
 }
 
-void DRV8806::enableSolenoid(uint8_t iSolenoid) {
+void DRV8806::enableSolenoid(uint8_t uSolenoid) {
     // set the selected iActiveSolenoids bit to 1
-    iActiveSolenoids |= (1 << iSolenoid);
+    uActiveSolenoids |= (1 << uSolenoid);
 }
 
-void DRV8806::disableSolenoid(uint8_t iSolenoid) {
+void DRV8806::disableSolenoid(uint8_t uSolenoid) {
     // set the selected iActiveSolenoids bit to 0
-    iActiveSolenoids &= ~(1 << iSolenoid);
+    uActiveSolenoids &= ~(1 << uSolenoid);
 }

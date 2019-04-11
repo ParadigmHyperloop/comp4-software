@@ -12,8 +12,8 @@ public:
     DRV8806(uint8_t PIN_LATCH, uint8_t PIN_DOUT, uint8_t PIN_DIN, uint8_t PIN_SCLK);
     void init();
     void updateSolenoids();
-    void enableSolenoid(uint8_t iSolenoids);
-    void disableSolenoid(uint8_t iSolenoids);
+    void enableSolenoid(uint8_t uSolenoids);
+    void disableSolenoid(uint8_t uSolenoids);
 };
 
 #endif
