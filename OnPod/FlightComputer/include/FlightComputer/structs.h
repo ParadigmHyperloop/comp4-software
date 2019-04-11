@@ -2,7 +2,7 @@
 #define STUCTS_H
 #include <netinet/in.h>
 #include <cstdint>
-#include "ProtoBuffer/States.pb.h"
+#include "ProtoBuffer/Paradigm.pb.h"
 
 
 
