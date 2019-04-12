@@ -29,8 +29,8 @@
 #define VARIANT_MCK     (48000000ul)
 
 // Number of pins defined in PinDescription array
-#define PINS_COUNT           (26u)
-#define NUM_DIGITAL_PINS     (25u)
+#define PINS_COUNT           (32u)
+#define NUM_DIGITAL_PINS     (31u)
 #define NUM_ANALOG_INPUTS    (1u)
 #define NUM_ANALOG_OUTPUTS   (0u)
 #define analogInputToDigitalPin(p)  ((p < 7u) ? (p) + 15u : -1)
@@ -99,6 +99,16 @@ static const uint8_t SCK2  = PIN_SPI2_SCK;
 // DAC POWER
 static const uint8_t POWER_SEQ_DAC = 24;
 static const uint8_t DAC_SEQ_START = 25;
+
+// SOLENOID DRIVER SERIAL
+static const uint8_t SOL_CS = 26;
+static const uint8_t SOL_DIN = 27;
+static const uint8_t SOL_DOUT = 29;
+static const uint8_t SOL_CLK = 28;
+
+// SOLENOID DRIVER GPIO
+static const uint8_t SOL_RESET = 30;
+static const uint8_t SOL_ENABLE = 31;
 
 // USB
 #define PIN_USB_HOST_ENABLE (4ul)
