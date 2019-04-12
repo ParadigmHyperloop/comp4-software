@@ -1,3 +1,5 @@
+#include <cerrno>
+
 #include "FlightComputer/Network.h"
 #include "EasyLogger/easylogging++.h"
 #include "ProtoBuffer/Paradigm.pb.h"
@@ -89,7 +91,7 @@ int32_t commanderThread(Pod Pod)
 	 }
 
 	 //Watchdog
-	 Heartbeat HeartBeat = Heartbeat(1000);
+	 Heartbeat pulse = Heartbeat(Pod.sPodNetworkValues->iCommaderTimeoutMili);
 
 	 //pod state != shutdown
 	 while(1)
@@ -102,30 +104,40 @@ int32_t commanderThread(Pod Pod)
 		 iNewSockFd = accept(iSockfd, nullptr, nullptr);
 		 if (iNewSockFd < 0)
 		 {
+
 			 LOG(INFO)<<"ERROR on accept";
 		 }
+		 fcntl(iNewSockFd, F_SETFL, fcntl(iNewSockFd, F_GETFL, 0) | O_NONBLOCK);
+
 
 		 LOG(INFO)<< "Controls Interface Connected";
-		 HeartBeat.feed();
+		 pulse.feed();
 
 		 while(1){
-
 			 iMessageSize = read(iNewSockFd,buffer,255);
-			 if(iMessageSize < 0){
-				 LOG(INFO)<<"ERROR reading from socket";
-				 break;
-			 }
-			 else if(iMessageSize == 0){
-				 if(HeartBeat.expired())
+			 if(iMessageSize < 0)
+			 {
+				 if(errno == 11)
 				 {
-					 LOG(INFO)<<"ERROR: Controls Interface Connection Closed";
-					 break;
+					 if(pulse.expired())
+					 {
+						 LOG(INFO)<<"ERROR: Controls Interface Connection Timeout";
+						 break;
+					 }
 				 }
+				 else
+				 {
+					 LOG(INFO)<<"ERROR: Receveiving message";
+				 }
+			 }
+			 if(iMessageSize == 0)
+			 {
+				 LOG(INFO)<<"ERROR: Controls Interface Connection Closed";
+				 break;
 			 }
 			 else if(iMessageSize > 0)
 			 {
-				 HeartBeat.feed();
-				 LOG(INFO)<<buffer;
+				 pulse.feed();
 				 int32_t iParseMessage = unserializeProtoMessage(&Pod, buffer, iMessageSize);
 				 memset(buffer, 0, sizeof buffer);
 				 if(iParseMessage){
@@ -138,7 +150,14 @@ int32_t commanderThread(Pod Pod)
 					 iMessageSize = write(iNewSockFd,"0",1);
 				 }
 				 if (iMessageSize < 0){
-					 LOG(INFO)<<"ERROR writing to socket";
+					 if(errno == 104)
+					 {
+						 LOG(INFO)<<"ERROR: Controls Interface Connection Closed";
+					 }
+					 else
+					 {
+						 LOG(INFO)<<"ERROR writing to socket: "<< errno;
+					 }
 					 break;
 				 }
 			 }

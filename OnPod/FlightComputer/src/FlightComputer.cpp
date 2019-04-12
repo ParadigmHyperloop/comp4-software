@@ -43,18 +43,20 @@ int main( int32_t argc, char** argv)
 	PodNetwork sPodNetworkValues;
 	PodValues sPodValues;
 
+	// Network Configs
 	string cNodeIpAddrs[] =  {"192.168.7.1","127.0.0.1"};
 	sPodNetworkValues.cNodeIpAddrs.assign(begin(cNodeIpAddrs), end(cNodeIpAddrs)); // Node IPs
 	sPodNetworkValues.iCommanderPortNumber = 5005; //Port # for TCP Commander
 	sPodNetworkValues.iNodePort = 5000; // Port # that Nodes are listening on
 	sPodNetworkValues.iNodeServerPortNumber = 5010; // Port # to recieve UDP from Nodes
+	sPodNetworkValues.iCommaderTimeoutMili = 2000; // Timeout for heartbeat to Control Interace
 
 
 
-	// Pod Internal Network Thread
-	//Pod pPodInternalNetwork = Pod(&sPodValues, &sPodNetworkValues);
-	//pPodInternalNetwork.bWriteBreakNodeState = true;
-	//std::thread tServer(podInternalNetworkThread, pPodInternalNetwork);
+	//Pod Internal Network Thread
+	Pod pPodInternalNetwork = Pod(&sPodValues, &sPodNetworkValues);
+	pPodInternalNetwork.bWriteBreakNodeState = true;
+	std::thread tServer(podInternalNetworkThread, pPodInternalNetwork);
 
 
 	// Core Control Loop Thread
@@ -71,7 +73,7 @@ int main( int32_t argc, char** argv)
 
 	tControlLoop.join();
 
-	//tServer.join();
+	tServer.join();
 
 	return 0;
 }

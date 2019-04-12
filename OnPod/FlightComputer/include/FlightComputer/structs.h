@@ -66,6 +66,7 @@ struct PodNetwork
  int32_t iNodeServerPortNumber;
  int32_t iNodePort; //Port # used by nodes to recieve UDP updates
  int32_t iCommanderPortNumber; //Port # used by TCP Commander socket
+ int32_t iCommaderTimeoutMili; //Timeout
 };
 
 struct clientSocketConfig {

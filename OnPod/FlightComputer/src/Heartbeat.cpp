@@ -1,9 +1,9 @@
 #include "FlightComputer/Heartbeat.h"
 #include "EasyLogger/easylogging++.h"
 
-Heartbeat::Heartbeat(int iTimeOutMs)
+Heartbeat::Heartbeat(int iTimeOut)
 {
-	this->iTimeOutms = iTimeOutms;
+	this->iTimeOutms = iTimeOut;
 }
 
 void Heartbeat::feed()
@@ -13,12 +13,11 @@ void Heartbeat::feed()
 
 bool Heartbeat::expired()
 {
-	auto current = std::chrono::steady_clock::now();
-	if(std::chrono::duration_cast<std::chrono::milliseconds>(current - this->aLastStart).count() > this->iTimeOutms)
+	std::chrono::steady_clock::time_point current = std::chrono::steady_clock::now();
+    if(std::chrono::duration_cast<std::chrono::milliseconds>(current - this->aLastStart).count() > this->iTimeOutms)
 	{
 		return 1;
 	}
-	LOG(INFO)<< std::chrono::duration_cast<std::chrono::milliseconds>(current - this->aLastStart).count();
 	return 0;
 }
 
