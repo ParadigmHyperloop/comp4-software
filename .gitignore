@@ -41,3 +41,6 @@ Testing/NodeSimulator/__pycache__/
 *.pb.h
 *.pb.cc
 *_pb2.py
+OnPod/FlightComputer/Host/src/
+
+OnPod/FlightComputer/BeagleBone/src/
