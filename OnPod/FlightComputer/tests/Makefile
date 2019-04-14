@@ -21,10 +21,10 @@ endif
 
 
 #Link to object files for project. They should be made as the project is compile prior to runing this make file
-ALLSRC = $(shell find ../Debug/src -name '*.o')
+ALLSRC = $(shell find ../Host/src -name '*.o')
 
 #Filter out object file for main control loop to avoid multiple definitions of 'main()'
-SRC = $(filter-out ../Debug/src/FlightComputer.o,$(ALLSRC))
+SRC = $(filter-out ../Host/src/FlightComputer.o,$(ALLSRC))
 
 
 runTests: $(TESTS) $(SRC)

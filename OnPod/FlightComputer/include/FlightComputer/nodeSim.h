@@ -1,7 +1,7 @@
 #ifndef NODESIM_H
 #define NODESIM_H
 
-#include "FlightComputer/Client.h"
+#include "FlightComputer/Network.h"
 void runNodeSimulator(clientSocketConfig*);
 
 #endif

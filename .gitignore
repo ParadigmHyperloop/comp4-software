@@ -44,3 +44,12 @@ Testing/NodeSimulator/__pycache__/
 OnPod/FlightComputer/Host/src/
 
 OnPod/FlightComputer/BeagleBone/src/
+
+
+OnPod/FlightComputer/tests/myeasylog\.log
+
+OnPod/FlightComputer/BeagleBone/
+
+OnPod/FlightComputer/Host/src/
+
+OnPod/FlightComputer/myeasylog\.log

@@ -30,6 +30,7 @@ flightComputerSrc="../OnPod/FlightComputer/src/"
 
 PDS="../OnLand/PDS/"
 NODESIM="../Testing/NodeSimulator/Protobuf"
+COMMANDTEST="../Testing/ManualCommandTesting"
 
 # Force copy the files, replacing existing ones
 cp -f Paradigm/cpp/*.pb.h $flightComputer
