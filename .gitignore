@@ -38,6 +38,11 @@ Testing/NodeSimulator/__pycache__/
 *.gcc-flags.json
 
 
-*.pb.h
-*.pb.cc
-*_pb2.py
+
+OnPod/FlightComputer/tests/myeasylog\.log
+
+OnPod/FlightComputer/BeagleBone/
+
+OnPod/FlightComputer/Host/src/
+
+OnPod/FlightComputer/myeasylog\.log

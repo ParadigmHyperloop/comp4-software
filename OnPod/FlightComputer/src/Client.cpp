@@ -1,20 +1,8 @@
-#include <Client.h>
+#include <FlightComputer/Network.h>
 #include "EasyLogger/easylogging++.h"
-
-#define UDPPORT 5000
 
 using namespace std;
 
-/**killConfigSocket
- *
- *Close the socket of the socketConfig struct provided
- *
- */
-void killConfigSocket(clientSocketConfig* cscSocketInfo)
-{
-  close(cscSocketInfo->sckt);
-  return;
-}
 
 /**initializeClientSocket
  *
@@ -25,16 +13,16 @@ void killConfigSocket(clientSocketConfig* cscSocketInfo)
  * Param:None
  * Returns : SocketConfig struct
  */
-clientSocketConfig initializeClientSocket()
+clientSocketConfig initializeClientSocket(Pod Pod)
 {
   LOG(INFO)<<"Creating Client Socket";
-  int iPort = UDPPORT;
+  int iNodePort = Pod.sPodNetworkValues->iNodePort; // Node Port
   int iSocket;
   struct sockaddr_in SocketAddrStruct;
   memset(&SocketAddrStruct, '\0', sizeof(SocketAddrStruct));
   iSocket = socket(PF_INET, SOCK_DGRAM, 0);
   SocketAddrStruct.sin_family = AF_INET;
-  SocketAddrStruct.sin_port = htons(iPort);
+  SocketAddrStruct.sin_port = htons(iNodePort);
   clientSocketConfig cscSocketInfo;
   cscSocketInfo.addr = SocketAddrStruct;
   cscSocketInfo.sckt = iSocket;

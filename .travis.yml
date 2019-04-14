@@ -1,9 +1,9 @@
 sudo: required
 before_install:
   - sudo apt-get install autoconf automake libtool curl make g++ unzip
-  - wget "https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protobuf-cpp-3.6.1.tar.gz"
-  - tar xvzf protobuf-cpp-3.6.1.tar.gz
-  - cd protobuf-3.6.1
+  - wget "https://github.com/protocolbuffers/protobuf/releases/download/v3.7.1/protobuf-cpp-3.7.1.tar.gz"
+  - tar xvzf protobuf-cpp-3.7.1.tar.gz
+  - cd protobuf-3.7.1
   - ./configure
   - make
   - make check
@@ -22,7 +22,6 @@ install:
 
 # Build steps
 script:
-  - cd OnPod/FlightComputer/Debug
+  - cd OnPod/FlightComputer/Host
   - make
-  - cd ../tests
-  - make
+

@@ -15,13 +15,13 @@ class Connection(metaclass=ABCMeta):
 
 class UdpConnection(Connection):
 
-    def __init__(self, flight_computer_port=5005, node_sim_port=5000, flight_computer_ip="127.0.0.1"):
+    def __init__(self, flight_computer_port=5008, node_sim_port=5000, flight_computer_ip="127.0.0.1"):
         self.flight_computer_port = flight_computer_port
         self.flight_computer_ip = flight_computer_ip
         self.outbound_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.inbound_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.inbound_socket.setblocking(0)
-        self.inbound_socket.bind(("127.0.0.1", node_sim_port))
+        self.inbound_socket.bind(('0.0.0.0', node_sim_port))
         return
 
     def send_data(self, data):
