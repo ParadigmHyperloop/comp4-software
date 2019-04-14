@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Paradigm Dynamic Test Stand Controls</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="/static/css/simple-sidebar.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-black">
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-grey" id="sidebar-wrapper">
+      <div class="sidebar-heading"><img src="/static/img/paradigm.png"style="height: 100px"></div>
+      <div class="list-group list-group-flush">
+        <a class="bg-black nav-select">Controls</a>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+        <div class="page-panel container bg-grey">
+
+            <div class="row panel-heading">
+              <div class="col-sm">
+                <p><b>DTS | </b>Controls</p>
+              </div>
+            </div>
+
+            <div class="row light-border panel-content">
+              <div class="container-fluid">
+
+                <!-- Connection Status -->
+                <div class="row ptop20">
+                  <div class="col-sm text-center btn-header">
+                    Connection: <span id="connection-status" class="font-red">Disconnected</span><br>
+                    Last Message: <span id="last-ping" class="font-red"> -- </span>s
+                  </div>
+                </div>
+                <!-- #/Connection Status -->
+
+                <!-- On Off Btns -->
+                <div class="row ptop20">
+                  <div class="col-sm text-center btn-header">
+                      Brake State
+                  </div>
+                </div>
+                <div class="row  pbottom20">
+                  <div class="col-sm text-center">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn brake-btn btn-grey btn-on btn-lg">
+                        <input id="on-btn" type="radio" name="options" autocomplete="off"> ON
+                      </label>
+                      <label class="btn btn-grey brake-btn btn-off btn-lg active">
+                        <input id="off-btn" type="radio" name="options" autocomplete="off"> OFF
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <!-- #/On Off Btns -->
+
+                <!-- Temp -->
+                <div class="row ptop20">
+                  <div class="col-sm text-center btn-header">
+                      Disk Temperature <br>
+                    Temperature: <span> -- </span>
+                  </div>
+                </div>
+                <!-- #/Temp -->
+
+
+
+
+              </div>
+            </div>
+        </div>
+      </div>
+
+
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="/static/vendor/jquery/jquery.min.js"></script>
+  <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+  <!-- JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js"></script>
+  <script src="/static/DtsControl.js"></script>
+
+
+
+</body>
+
+</html>

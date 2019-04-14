@@ -7,7 +7,7 @@ socket_io = SocketIO(app)
 
 @app.route('/')
 def landing_page():
-    return render_template('DtsControlPanel.html')
+    return render_template('DtsControl.html')
 
 @socket_io.on('json')
 def handle_json(message):

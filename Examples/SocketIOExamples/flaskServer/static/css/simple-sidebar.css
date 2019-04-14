@@ -1,0 +1,131 @@
+
+.btn-header{
+  color: white;
+  font-size: 12px;
+}
+
+.btn-on.active{
+ background-color: #85CD9F;
+}
+
+.btn-off.active{
+  background:#F79499;
+}
+
+.btn-grey{
+  background-color: #5F646D;
+  color: white;
+}
+
+.bg-grey{
+  background-color: #41454B !important;
+}
+
+.bg-black{
+  background: #181A1E !important;
+}
+
+.panel-heading{
+  color: white;
+  padding-top: 20px;
+  font-size: 25px;
+}
+
+.nav-select{
+  color: white !important;
+  font-size: 20px !important;
+  position: relative;
+  display: block;
+  padding: .75rem 1.25rem;
+  margin-bottom: -1px;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,.125);
+}
+
+.page-panel {
+  margin-top: 5vh;
+  margin-left: 1vw;
+  padding-bottom: 10px;
+}
+
+.light-border{
+  border: #747981;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.panel-content {
+  margin-right: 1vw;
+  margin-bottom: 1vw;
+  margin-left: 0px;
+}
+
+
+.ptop20{
+  padding-top: 20px;
+}
+
+.pbottom20{
+  padding-bottom: 20px;
+}
+.font-green{
+  color: #85CD9F;
+}
+
+.font-red{
+  color: #F79499;
+}
+
+
+/*!
+ * Start Bootstrap - Simple Sidebar (https://startbootstrap.com/template-overviews/simple-sidebar)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/LICENSE)
+ */
+body {
+  overflow-x: hidden;
+
+}
+
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -15rem;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+  color: white;
+  text-align: center;
+}
+
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+  }
+}

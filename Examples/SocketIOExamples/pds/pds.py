@@ -1,6 +1,6 @@
 import socketio
 import json
-from pds.Paradigm_pb2 import *
+from Paradigm_pb2 import *
 
 # Globals
 pod_message = podCommand()
@@ -38,4 +38,4 @@ def on_command(json_string):
 sio.connect('http://localhost:5000')
 
 while True:
-    pass
+    sio.emit()
