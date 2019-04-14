@@ -24,5 +24,4 @@ install:
 script:
   - cd OnPod/FlightComputer/Host
   - make
-  - cd ../tests
-  - make
+
