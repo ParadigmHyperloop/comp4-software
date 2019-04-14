@@ -1,4 +1,4 @@
-var socket = io();
+socket = io();
 
 socket.on('connect', () => {
 console.log(socket.connected);
@@ -14,15 +14,17 @@ $("#menu-toggle").click(function(e) {
   $("#wrapper").toggleClass("toggled");
 });
 
+
+
+
 $(".brake-btn").click(function () {
-  status = 0;
+  status = '0';
   btnId = $(this).attr("id");
 
   if( btnId === "btn-on"){
     console.log("allo")
+    status = '1'
   }
 
-
-
-
+  socket.emit('command',status)
 });

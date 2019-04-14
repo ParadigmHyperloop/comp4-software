@@ -66,6 +66,7 @@ int main( int32_t argc, char** argv)
 
 	// Controls Interface Connection Thread
 	Pod pCommanderThread = Pod(&sPodValues, &sPodNetworkValues);
+	pCommanderThread.bWriteManualStates = 1;
 	pCommanderThread.bWriteControlsInterfaceState = 1;
 	std::thread tControlsInterfaceConnection(commanderThread, pCommanderThread);
 

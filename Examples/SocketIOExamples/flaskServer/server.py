@@ -30,6 +30,11 @@ def pod_pulse(pulse):
     print('pulse')
     socket_io.emit("pod pulse", pulse)
 
+@socket_io.on('command')
+def interface_command(command):
+    print('command')
+    socket_io.emit("command", command)
+
 
 if __name__ == "__main__":
     socket_io.run(app, debug=True)
