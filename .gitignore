@@ -11,14 +11,11 @@
 venv/
 pycache/
 *.out
-<<<<<<< HEAD
 *.pyc
 *.swp
 *org.eclipse.cdt.core.prefs
 
-=======
 *__pycache__
->>>>>>> SOF-102-Single-Actuator-Test-Stand
 
 
 OnPod/FlightComputer/Debug/FlightComputer
@@ -36,7 +33,7 @@ Testing/NodeSimulator/__pycache__/
 *.piolibdeps
 *.clang_complete
 *.gcc-flags.json
-
+Testing/DynamicTestStand/Node/include
 
 *.pb.h
 *.pb.cc
