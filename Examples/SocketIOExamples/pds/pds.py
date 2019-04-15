@@ -15,7 +15,7 @@ BUFFER_SIZE = 1024
 PULSE_SPEED = 1000
 BACKUP_PULSE = 1500
 TIMEOUT_TIME = 2000
-
+last_packet_time = 0
 
 # Create socket to connect to server
 sio = socketio.Client()
@@ -60,54 +60,63 @@ def send_packet(payload, sock):
     return
 
 
-# Start PDS
-connected = False
-# Attempt to reconnect
-while not connected:
-    podSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+def time_since_last_packet():
+    return current_time_milli() - last_packet_time
+
+
+def connect_to_pod(ip_addr, port):
+    connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
-        podSocket.connect((TCP_IP, TCP_PORT))
+        connection.connect((ip_addr, port))
     except ConnectionRefusedError:
-        # No connection keep going
+        # No connection
+        return False
         pass
     except:
         print("Unexpected Error on connect")
     else:
-        podSocket.setblocking(False)
+        connection.setblocking(False)
+        return connection
+
+
+connected = False
+while not connected:
+    pod_socket = connect_to_pod(TCP_IP, TCP_PORT)
+    if pod_socket:
         connected = True
+    else:
+        time.sleep(2)
 
-    lastPacket = current_time_milli()
-    while connected:
+lastPacket = current_time_milli()
+while connected:
 
-        # Send Packet, non blocking sockets require a little extra magic to make sure the whole
-        # packet gets sent.
-        # Send a packets every 500 milliseconds.
-        elapsed = current_time_milli() - lastPacket
-        if elapsed > PULSE_SPEED:
-            send_packet(podMessage.SerializeToString(), podSocket)
+    # Send Packet, non blocking sockets require a little extra magic to make sure the whole
+    # packet gets sent.
+    # Send a packets every 500 milliseconds.
+    if time_since_last_packet() > PULSE_SPEED:
+        send_packet(podMessage.SerializeToString(), podSocket)
 
-            # Receive Packet
-            while elapsed > PULSE_SPEED and connected:
-                try:
-                    msg = podSocket.recv(BUFFER_SIZE)
-                except BlockingIOError:
-                    # When a non block socket doesnt receive anything it throws BlockingIOError
-                    elapsed = current_time_milli() - lastPacket
-                    if elapsed > BACKUP_PULSE:  # If we're getting close to timeout, send another one.
-                        send_packet(podMessage.SerializeToString(), podSocket)
-                    if elapsed > TIMEOUT_TIME:  # Heartbeat expired
-                        print("Timeout")
-                        connected = False
-                except:  # Real Error
-                    print("Error on reading packet")
+        # Receive Packet
+        while time_since_last_packet() > PULSE_SPEED and connected:
+            try:
+                msg = podSocket.recv(BUFFER_SIZE)
+            except BlockingIOError:
+                # When a non block socket doesnt receive anything it throws BlockingIOError
+                elapsed = current_time_milli() - lastPacket
+                if elapsed > BACKUP_PULSE:  # If we're getting close to timeout, send another one.
+                    send_packet(podMessage.SerializeToString(), podSocket)
+                if elapsed > TIMEOUT_TIME:  # Heartbeat expired
+                    print("Timeout")
                     connected = False
-                else:  # No error, msg received
-                    if not msg:  # Empty message means that the connection was terminated by the pod
-                        print('Pod closed connection')
-                        connected = False
-                    else:
-                        lastPacket = current_time_milli()
-            elapsed = current_time_milli() - lastPacket
+            except:  # Real Error
+                print("Error on reading packet")
+                connected = False
+            else:  # No error, msg received
+                if not msg:  # Empty message means that the connection was terminated by the pod
+                    print('Pod closed connection')
+                    connected = False
+                else:
+                    lastPacket = current_time_milli()
 
-    # If we lose connection, close the socket and start another one.
-    podSocket.close()
+# If we lose connection, close the socket and start another one.
+podSocket.close()
