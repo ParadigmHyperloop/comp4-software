@@ -1,9 +1,5 @@
 #include "adc.h"
 
-ADS7953::ADS7953(SPIClass spi, SPISettings spiSettings) :
-    spi(spi), spiSettings(spiSettings)
-    {}
-
 void ADS7953::init() {
     spi.begin();
     pinMode(SS1, OUTPUT);
