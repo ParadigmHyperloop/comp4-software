@@ -141,7 +141,6 @@ const char* getPodUpdateMessage(Pod* Pod)
 		retrieveNodeUpdate(&Pod, iNodeServerSocket);
 
 	}
-
 	close(cscNodeClientSocket.sckt);
 	close(iNodeServerSocket);
 	return 0;

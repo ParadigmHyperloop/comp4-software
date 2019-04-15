@@ -1,11 +1,27 @@
 socket = io();
 
 socket.on('connect', () => {
-console.log(socket.connected);
+console.log("Connection: " + socket.connected);
 });
 
 socket.on('pds packet', () => {
 console.log("packet!");
+});
+
+socket.on('ping', function(ping){
+  console.log(ping);
+
+  conectionLoader = $("#connected-loader");
+  noConnectionLoader = $("#no-connection-loader");
+  if(ping == 1 && conectionLoader.css('display') == "none"){
+    console.log("here");
+    conectionLoader.css('display','block');
+    noConnectionLoader.css('display','none');
+  }
+  else if(conectionLoader.css('display') == 'block' && ping == 0){
+      conectionLoader.css('display','none');
+      noConnectionLoader.css('display','block');
+  }
 });
 
 
@@ -25,6 +41,8 @@ $(".brake-btn").click(function () {
     console.log("allo")
     status = '1'
   }
-
   socket.emit('command',status)
 });
+
+
+$('.loader-inner').loaders()

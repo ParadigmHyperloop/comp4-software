@@ -30,10 +30,17 @@ def pod_pulse(pulse):
     print('pulse')
     socket_io.emit("pod pulse", pulse)
 
+
 @socket_io.on('command')
 def interface_command(command):
     print('command')
     socket_io.emit("command", command)
+
+
+@socket_io.on('ping')
+def interface_command(ping):
+    print(ping)
+    socket_io.emit("ping", ping)
 
 
 if __name__ == "__main__":
