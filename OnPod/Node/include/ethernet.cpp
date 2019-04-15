@@ -1,6 +1,3 @@
-#include <Arduino.h>
-#include <Ethernet.h>
-#include <EthernetUdp.h>
 #include "ethernet.h"
 
 UDPClass::UDPClass(uint8_t ETHERNET_SS_PIN, IPAddress NODE_IP,

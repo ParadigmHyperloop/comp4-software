@@ -1,6 +1,9 @@
 #ifndef ETHERNET_H
 #define ETHERNET_H
 
+#include <Ethernet.h>
+#include <EthernetUdp.h>
+
 class UDPClass {
 private:
     const uint8_t ETHERNET_SS_PIN;
