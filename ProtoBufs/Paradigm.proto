@@ -196,8 +196,22 @@ message telemetry {
     optional int32 railCurrentSensor7 = 69;
     optional int32 railCurrentSensor8 = 70;
     optional int32 railCurrentFlag = 73;
-
-
 }
 
+// flight computer to DTS node
+message dtsFcToNode {
+    enum nodeState {
+        STANDBY = 0;
+        ACCELERATING = 1;
+        BRAKING = 2;
+        VENTING = 3;
+    }
+    optional nodeState state = 1 [default = STANDBY];
+}
 
+// DTS node to flight computer
+message dtsNodeToFc {
+    optional bool brakeSolenoidState = 1 [default = false];
+    optional bool ventSolenoidState = 2 [default = false];
+    optional float rotorTemperature = 3;
+}
