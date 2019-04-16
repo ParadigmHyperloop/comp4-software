@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_socketio import SocketIO
 
 app = Flask(__name__)
@@ -9,9 +9,16 @@ socket_io = SocketIO(app)
 def landing_page():
     return render_template('DtsControl.html')
 
+
 @socket_io.on('json')
 def handle_json(message):
     print('received json: ' + message)
+
+
+@socket_io.on('disconnect')
+def handle_disconnect():
+    a = request
+    print("someone left")
 
 
 @socket_io.on('connect')

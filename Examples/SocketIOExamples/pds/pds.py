@@ -89,38 +89,39 @@ while not connected:
     else:
         time.sleep(2)
 
-last_packet_time = current_time_milli()
-while connected:
+    last_packet_time = current_time_milli()
+    while connected:
 
-    # Send Packet, non blocking sockets require a little extra magic to make sure the whole
-    # packet gets sent.
-    # Send a packets every 500 milliseconds.
-    if time_since_last_packet() > PULSE_SPEED:
-        send_packet(podMessage.SerializeToString(), pod_socket)
+        # Send Packet, non blocking sockets require a little extra magic to make sure the whole
+        # packet gets sent.
+        # Send a packets every PULSE_SPEED milliseconds.
+        if time_since_last_packet() > PULSE_SPEED:
+            send_packet(podMessage.SerializeToString(), pod_socket)
 
-        # Receive Packet
-        while time_since_last_packet() > PULSE_SPEED and connected:
-            try:
-                msg = pod_socket.recv(BUFFER_SIZE)
-            except BlockingIOError:
-                # When a non block socket doesnt receive anything it throws BlockingIOError
-                if time_since_last_packet() > BACKUP_PULSE:  # If we're getting close to timeout, send another one.
-                    send_packet(podMessage.SerializeToString(), pod_socket)
-                if time_since_last_packet() > TIMEOUT_TIME:  # Heartbeat expired
-                    print("Timeout")
-                    connected = False
-            # except:  # Real Error
-            #     print("Error on reading packet")
-            #     connected = False
-            else:  # No error, msg received
-                if not msg:  # Empty message means that the connection was terminated by the pod
-                    print('Pod closed connection')
-                    connected = False
-                else:
-                    sio.emit('ping', '1')
-                    last_packet_time = current_time_milli()
+            # Receive Packet
+            while time_since_last_packet() > PULSE_SPEED and connected:
+                try:
+                    msg = pod_socket.recv(BUFFER_SIZE)
+                except BlockingIOError:
+                    # When a non block socket doesnt receive anything it throws BlockingIOError
+                    if time_since_last_packet() > BACKUP_PULSE:  # If we're getting close to timeout, send another one.
+                        send_packet(podMessage.SerializeToString(), pod_socket)
+                    if time_since_last_packet() > TIMEOUT_TIME:  # Heartbeat expired
+                        print("Timeout")
+                        connected = False
+                except:  # Real Error
+                     print("Error on reading packet")
+                     connected = False
+                else:  # No error, msg received
+                    if not msg:  # Empty message means that the connection was terminated by the pod
+                        print('Pod closed connection')
+                        connected = False
+                    else:
+                        sio.emit('ping', '1')
+                        last_packet_time = current_time_milli()
 
-# If we lose connection, close the socket and start another one.
-sio.emit('ping', '0')
-print("ping 0")
-pod_socket.close()
+    # If we lose connection, close the socket and start another one.
+    sio.emit('ping', '0')
+
+print("done")
+
