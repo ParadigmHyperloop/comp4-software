@@ -34,7 +34,7 @@ Testing/NodeSimulator/__pycache__/
 *.clang_complete
 *.gcc-flags.json
 Testing/DynamicTestStand/Node/include
-
+ProtoBufs/UpdateNanoPbProtos.sh
 
 OnPod/FlightComputer/tests/myeasylog\.log
 
