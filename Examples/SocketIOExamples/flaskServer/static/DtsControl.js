@@ -36,11 +36,11 @@ $("#menu-toggle").click(function(e) {
 $(".brake-btn").click(function () {
   status = '0';
   btnId = $(this).attr("id");
-
-  if( btnId === "btn-on"){
-    console.log("allo")
+    console.log(btnId)
+  if( btnId === "on-btn"){
     status = '1'
   }
+  console.log(status)
   socket.emit('command',status)
 });
 

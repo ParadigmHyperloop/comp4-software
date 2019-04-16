@@ -35,7 +35,7 @@ def on_disconnect():
 def on_command(command):
     if command is '1':
         podMessage.manualBrakeNodeState = bnsBraking
-    if command is '0':
+    else:
         podMessage.manualBrakeNodeState = bnsStandby
 
 
