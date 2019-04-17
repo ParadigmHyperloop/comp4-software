@@ -61,19 +61,7 @@ enum LvdcNodeStates {
 message brakeNodeData {
   required int32 id = 1;
 
-  enum breakNodeState {
-	bnsBooting   = 0;
-	bnsStandby   = 1;
-	bnsArming    = 2;
-	bnsArmed     = 3;
-	bnsFlight    = 4;
-	bnsBraking   = 5;
-	bnsVenting   = 6;
-	bnsRetrieval = 7;
-	bnsError     = 8;
-  }
-
-  optional breakNodeState state = 14;
+  optional BrakeNodeStates state = 14;
 
   optional bool sol1 = 2;
   optional bool sol2 = 3;
@@ -199,9 +187,9 @@ message telemetry {
 }
 
 // flight computer to DTS node
-message dtsFcToNode {
-    optional PodStates podState = 1
-    optional NodeStates manualNodeState = 2;
+message fcToBrakeNode {
+    optional PodStates podState = 1;
+    optional BrakeNodeStates manualNodeState = 2;
 }
 
 // DTS node to flight computer
@@ -209,4 +197,7 @@ message dtsNodeToFc {
     optional bool brakeSolenoidState = 1 [default = false];
     optional bool ventSolenoidState = 2 [default = false];
     optional float rotorTemperature = 3;
+    optional int32 pressureTemperature = 4;
+    optional int32 highPressure = 5;
+    optional int32 lowPressure = 6;
 }
