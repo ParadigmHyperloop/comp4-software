@@ -200,13 +200,8 @@ message telemetry {
 
 // flight computer to DTS node
 message dtsFcToNode {
-    enum nodeState {
-        STANDBY = 0;
-        ACCELERATING = 1;
-        BRAKING = 2;
-        VENTING = 3;
-    }
-    optional nodeState state = 1 [default = STANDBY];
+    optional PodStates podState = 1
+    optional NodeStates manualNodeState = 2;
 }
 
 // DTS node to flight computer
