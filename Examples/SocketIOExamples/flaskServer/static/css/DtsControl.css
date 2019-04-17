@@ -1,15 +1,25 @@
+:root {
+  --black-bg-color: #252A2D ;
+  --grey-bg-color:  #42474C ;
+  --white-font-color: white;
+  --lightRed:#F79499;
+  --lightGreen:#85CD9F;
+  --lightYellow:#FF8834;
+}
+
+
 .ball-scale-ripple{
   display: none;
 }
 
 .ball-scale-ripple > div {
- background-color: #85CD9F !important;
- border-color: #85CD9F !important;
+ background-color: var(--lightGreen) !important;
+ border-color: var(--lightGreen) !important;
  margin: auto;
 }
 
 .ball-pulse > div {
-  background-color: #F79499!important ;
+  background-color: var(--lightRed)!important ;
   margin: auto;
 }
 
@@ -19,24 +29,28 @@
 }
 
 .btn-on.active{
- background-color: #85CD9F;
+ background-color: var(--lightGreen);
+}
+
+.btn-vent.active{
+  background-color: var(--lightYellow);
 }
 
 .btn-off.active{
-  background:#F79499;
+  background:var(--lightRed);
 }
 
 .btn-grey{
-  background-color: #5F646D;
+  background-color:var(--grey-bg-color);
   color: white;
 }
 
 .bg-grey{
-  background-color: #41454B !important;
+  background-color: var(--grey-bg-color) !important;
 }
 
 .bg-black{
-  background: #181A1E !important;
+  background:var(--black-bg-color) !important;
 }
 
 .panel-heading{
@@ -83,11 +97,11 @@
   padding-bottom: 20px;
 }
 .font-green{
-  color: #85CD9F;
+  color: var(--lightGreen);
 }
 
 .font-red{
-  color: #F79499;
+  color:var(--lightRed);
 }
 
 
@@ -142,4 +156,8 @@ body {
   #wrapper.toggled #sidebar-wrapper {
     margin-left: -15rem;
   }
+}
+
+.no-padding{
+  padding: 0px !important;
 }

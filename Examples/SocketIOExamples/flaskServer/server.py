@@ -1,3 +1,4 @@
+import json
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO
 
@@ -7,7 +8,9 @@ socket_io = SocketIO(app)
 
 @app.route('/')
 def landing_page():
-    return render_template('DtsControl.html')
+    with open('DtsSensors.json') as json_file:
+        sensor_params = json.load(json_file)
+    return render_template('DtsControl.html', sensors=sensor_params)
 
 
 @socket_io.on('json')

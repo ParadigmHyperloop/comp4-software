@@ -71,31 +71,69 @@
                 <div class="row  pbottom20">
                   <div class="col-sm text-center">
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                      <label id="on-btn" class="btn brake-btn btn-grey btn-on btn-lg">
-                        <input  type="radio" name="options" autocomplete="off"> ON
+                      <label id="vent-btn" class="btn brake-btn btn-grey btn-vent btn-lg">
+                        <input  type="radio" name="options" autocomplete="off"> VENT
                       </label>
                       <label id="off-btn" class="btn btn-grey brake-btn btn-off btn-lg active">
                         <input  type="radio" name="options" autocomplete="off"> OFF
+                      </label>
+                      <label id="on-btn" class="btn brake-btn btn-grey btn-on btn-lg">
+                        <input  type="radio" name="options" autocomplete="off"> ENGAGED
                       </label>
                     </div>
                   </div>
                 </div>
                 <!-- #/On Off Btns -->
-
-                <!-- Temp -->
-                <div class="row ptop20">
-                  <div class="col-sm text-center btn-header">
-                      Disk Temperature <br>
-                    Temperature: <span> -- </span>
-                  </div>
-                </div>
-                <!-- #/Temp -->
-
-
-
-
               </div>
             </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="page-panel container bg-grey">
+
+          <div class="row panel-heading">
+            <div class="col-sm">
+              <p><b>DTS | </b>Values</p>
+            </div>
+          </div>
+
+          <div class="row panel-content">
+            <div class="container-fluid">
+
+              <!-- Connection Status -->
+              <div class="row ptop20">
+                <div class="col-sm no-padding btn-header">
+                  <!-- Table -->
+                  <table class="table table-dark table-striped table-hover table-bordered">
+                    <thead>
+                    <tr class="d-flex">
+                      <th class="col-5" scope="col">Name</th>
+                      <th class="col-2" scope="col">Min</th>
+                      <th class="col-3" scope="col">Actual</th>
+                      <th class="col-2" scope="col">Max</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      {% for key, value in sensors.items() %}
+                        <tr class="d-flex">
+                          <th class="text-center col-5" scope="row">{{key}}</th>
+                          <td class="col-2"></td>
+                          <td class="col-3"></td>
+                          <td class="col-2"></td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                  </table>
+                  <!-- #/Table -->
+                </div>
+
+              </div>
+              <!-- #/Connection Status -->
+
+            </div>
+          </div>
         </div>
       </div>
 
