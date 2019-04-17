@@ -124,7 +124,7 @@ const char* getPodUpdateMessage(Pod* Pod)
 	}
 
 	clientSocketConfig cscNodeClientSocket = initializeClientSocket(Pod);
-
+	LOG(INFO)<<"Starting Node Server Thread";
 	// While mode isnt shutdown
 	while(1){
 		// Serve all nodes with an update

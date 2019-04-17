@@ -63,7 +63,7 @@ int32_t unserializeProtoMessage(Pod* Pod,char cBuffer[], int32_t iMessageSize)
 	if(bProtoPacketParsed)
 	{
 		parseProtoCommand(pPodCommand, Pod);
-		LOG(INFO)<<"Command Recieved";
+		LOG(INFO)<<"Command/HeartBeat Recieved";
 		return 1;
 	}
 	else

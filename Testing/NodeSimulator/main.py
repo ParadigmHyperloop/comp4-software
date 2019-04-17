@@ -4,7 +4,7 @@ from messageHandler import StringHandler
 from hardwareStateSimulation import BrakeNode, FlightComputer
 from behaviour import *
 
-udp_connection = UdpConnection(flight_computer_port=5010, node_sim_port=5000, flight_computer_ip='128.224.146.208')
+udp_connection = UdpConnection(flight_computer_port=5010, node_sim_port=5000, flight_computer_ip='127.0.0.1')
 node_behaviour = NominalBrakeNodeBehaviour()
 node = BrakeNode(node_behaviour)
 
@@ -15,7 +15,7 @@ messageHandler = StringHandler()
 
 logger = TerminalLogger({'FlightComputer': None, 'Node': None})
 
-fc_state = None500
+fc_state = None
 node_state = None
 
 while True:
