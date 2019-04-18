@@ -65,31 +65,44 @@ def disconnect_from_pod():
     return jsonify({'status': 'ok'})
 
 
-@app.route("/ui/", defaults={'path': 'index.html'})
+@app.route("/ui/", defaults={'path': 'dashboard'})
 @app.route("/ui/<path:path>")
 def ui(path):
-    # Checking to return Page Title
-    page = path.split('.')[0]
-    if page in NAV_IDS:
-        title = NAV_BAR[NAV_IDS.index(page)]['title']
-    else:
-        title = DEFAULT_TITLE
-    if page == 'profile':
-        return get_flight_profile_template(path, page, title)
-    else:
-        return render_template(
-            path,
-            active_page=page,
-            title=title,
-            sensors=[LocalStorage.get_sensors()],
-        )
-
-
-def get_flight_profile_template(path, page, title):
+    title = get_page_title(path)
     return render_template(
-        path,
+        path+".html",
+        active_page=path,
+        title=title,
+        sensors=[LocalStorage.get_sensors()],
+    )
+
+
+@app.route('/dts')
+def dts():
+    page = 'dts'
+    title = get_page_title(page)
+    with open('LocalStorage/DtsSensors.json') as json_file:
+        sensors = json.load(json_file)
+    return render_template(
+        page+".html",
+        active_page=page,
+        title=title,
+        sensors=sensors,
+    )
+
+
+@app.route('/profile')
+def get_flight_profile_template():
+    page = 'profile'
+    title = get_page_title(page)
+    return render_template(
+        page+".html",
         active_page=page,
         title=title,
         configuration_form=FlightConfigurationForm(),
         saved_configuration=LocalStorage.get_default_configuration()
     )
+
+
+
+

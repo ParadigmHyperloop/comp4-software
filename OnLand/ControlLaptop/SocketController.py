@@ -41,7 +41,7 @@ class PodCommunicator:
 
     def send_command(self, command):
         command_json = '{command: ' + command + '}'
-        print(f'sending: {command_json}')
+        print('sending: {command_json}')
         try:
             self._pod_socket.sendall(command_json.encode())
             data = self._pod_socket.recv(1024)

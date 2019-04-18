@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+
+{% block pageStyles %}
+ <link href="{{ url_for('static', filename='assets/css/DtsControl.css') }}" rel="stylesheet" />
+{% endblock %}
+
+
+{% block content %}
+
+    <!-- On Off Btns -->
+    <div class="row ptop20">
+        <div class="col-sm text-center btn-header">
+            Brake State
+        </div>
+    </div>
+    <div class="row  pbottom20">
+        <div class="col-sm text-center">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label id="vent-btn" class="btn brake-btn btn-vent btn-lg">
+                    <input type="radio" name="options" autocomplete="off"> VENT
+                </label>
+                <label id="off-btn" class="btn brake-btn btn-off btn-lg active">
+                    <input type="radio" name="options" autocomplete="off"> OFF
+                </label>
+                <label id="on-btn" class="btn brake-btn btn-on btn-lg">
+                    <input type="radio" name="options" autocomplete="off"> ENGAGED
+                </label>
+            </div>
+        </div>
+    </div>
+    <!-- #/On Off Btns -->
+
+
+    <div class="row">
+        <div class="col-md-7 no-padding btn-header">
+            <!-- Table -->
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                <tr class="d-flex">
+                    <th class="col-5" scope="col">Name</th>
+                    <th class="col-2" scope="col">Min</th>
+                    <th class="col-3" scope="col">Actual</th>
+                    <th class="col-2" scope="col">Max</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for key, value in sensors.items() %}
+                    <tr class="d-flex">
+                        <th class="text-center col-5" scope="row">{{ key }}</th>
+                        <td class="col-2"></td>
+                        <td class="col-3"></td>
+                        <td class="col-2"></td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+            <!-- #/Table -->
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block pageScripts %}
+    <script src="{{ url_for('static',filename='assets/js/DtsControl.js') }}"></script>
+{% endblock %}
