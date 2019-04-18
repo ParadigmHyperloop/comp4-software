@@ -1,6 +1,6 @@
 from abc import ABCMeta, abstractmethod
-from Protobuf import PodTelem_pb2
-from states import FlightComputerStates, BrakeNodeStates
+from Paradigm_pb2 import *
+from states import *
 
 
 class MessageHandler(metaclass=ABCMeta):
@@ -44,7 +44,7 @@ class StringHandler(MessageHandler):
         elif message == "Retrieval":
             return FlightComputerStates.RETRIEVAL
         else:
-            print("Failed to prase flight computer message")
+            print("Failed to prase flight computer message: " + message)
             return FlightComputerStates.EMERGENCY
 
     def prepare_brake_node_message(self, brake_node_state):

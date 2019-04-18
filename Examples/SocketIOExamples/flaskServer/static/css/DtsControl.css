@@ -1,0 +1,163 @@
+:root {
+  --black-bg-color: #252A2D ;
+  --grey-bg-color:  #42474C ;
+  --white-font-color: white;
+  --lightRed:#F79499;
+  --lightGreen:#85CD9F;
+  --lightYellow:#FF8834;
+}
+
+
+.ball-scale-ripple{
+  display: none;
+}
+
+.ball-scale-ripple > div {
+ background-color: var(--lightGreen) !important;
+ border-color: var(--lightGreen) !important;
+ margin: auto;
+}
+
+.ball-pulse > div {
+  background-color: var(--lightRed)!important ;
+  margin: auto;
+}
+
+.btn-header{
+  color: white;
+  font-size: 12px;
+}
+
+.btn-on.active{
+ background-color: var(--lightGreen);
+}
+
+.btn-vent.active{
+  background-color: var(--lightYellow);
+}
+
+.btn-off.active{
+  background:var(--lightRed);
+}
+
+.btn-grey{
+  background-color:var(--grey-bg-color);
+  color: white;
+}
+
+.bg-grey{
+  background-color: var(--grey-bg-color) !important;
+}
+
+.bg-black{
+  background:var(--black-bg-color) !important;
+}
+
+.panel-heading{
+  color: white;
+  padding-top: 20px;
+  font-size: 25px;
+}
+
+.nav-select{
+  color: white !important;
+  font-size: 20px !important;
+  position: relative;
+  display: block;
+  padding: .75rem 1.25rem;
+  margin-bottom: -1px;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,.125);
+}
+
+.page-panel {
+  margin-top: 5vh;
+  margin-left: 1vw;
+  padding-bottom: 10px;
+}
+
+.light-border{
+  border: #747981;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.panel-content {
+  margin-right: 1vw;
+  margin-bottom: 1vw;
+  margin-left: 0px;
+}
+
+
+.ptop20{
+  padding-top: 20px;
+}
+
+.pbottom20{
+  padding-bottom: 20px;
+}
+.font-green{
+  color: var(--lightGreen);
+}
+
+.font-red{
+  color:var(--lightRed);
+}
+
+
+/*!
+ * Start Bootstrap - Simple Sidebar (https://startbootstrap.com/template-overviews/simple-sidebar)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/LICENSE)
+ */
+body {
+  overflow-x: hidden;
+
+}
+
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -15rem;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+  color: white;
+  text-align: center;
+}
+
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+  }
+}
+
+.no-padding{
+  padding: 0px !important;
+}

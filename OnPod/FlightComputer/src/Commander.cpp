@@ -43,6 +43,7 @@ void parseProtoCommand(podCommand pPodCommand, Pod* Pod)
 	if(pPodCommand.has_manualbrakenodestate())
 	{
 		Pod->setManualBrakeNodeState(pPodCommand.manualbrakenodestate());
+		LOG(INFO)<<pPodCommand.manualbrakenodestate();
 	}
 	if(pPodCommand.has_manuallvdcnodestate())
 	{
@@ -62,7 +63,7 @@ int32_t unserializeProtoMessage(Pod* Pod,char cBuffer[], int32_t iMessageSize)
 	if(bProtoPacketParsed)
 	{
 		parseProtoCommand(pPodCommand, Pod);
-		LOG(INFO)<<"Command Recieved";
+		LOG(INFO)<<"Command/HeartBeat Recieved";
 		return 1;
 	}
 	else
@@ -98,9 +99,8 @@ int32_t commanderThread(Pod Pod)
 	 {
 
 		 /* Accepted connection gets put iNewSockfd,
-		  * thread will hang here until a connection is recieved.
-		  */
-
+		 * thread will hang here until a connection is recieved.
+		 */
 		 iNewSockFd = accept(iSockfd, nullptr, nullptr);
 		 if (iNewSockFd < 0)
 		 {
@@ -108,16 +108,13 @@ int32_t commanderThread(Pod Pod)
 			 LOG(INFO)<<"ERROR on accept";
 		 }
 		 fcntl(iNewSockFd, F_SETFL, fcntl(iNewSockFd, F_GETFL, 0) | O_NONBLOCK);
-
-
 		 LOG(INFO)<< "Controls Interface Connected";
 		 pulse.feed();
-
 		 while(1){
 			 iMessageSize = read(iNewSockFd,buffer,255);
 			 if(iMessageSize < 0)
 			 {
-				 if(errno == 11)
+				 if(errno == 11) //Erno 11 means no message available on non blocking socket
 				 {
 					 if(pulse.expired())
 					 {
@@ -127,12 +124,12 @@ int32_t commanderThread(Pod Pod)
 				 }
 				 else
 				 {
-					 LOG(INFO)<<"ERROR: Receveiving message";
+					 LOG(INFO)<<"ERROR: Receveiving message : "<< errno;
 				 }
 			 }
 			 if(iMessageSize == 0)
 			 {
-				 LOG(INFO)<<"ERROR: Controls Interface Connection Closed";
+				 LOG(INFO)<<"Controls Interface Connection Closed";
 				 break;
 			 }
 			 else if(iMessageSize > 0)
@@ -152,7 +149,7 @@ int32_t commanderThread(Pod Pod)
 				 if (iMessageSize < 0){
 					 if(errno == 104)
 					 {
-						 LOG(INFO)<<"ERROR: Controls Interface Connection Closed";
+						 LOG(INFO)<<"Controls Interface Connection Closed";
 					 }
 					 else
 					 {
@@ -164,7 +161,6 @@ int32_t commanderThread(Pod Pod)
 		 }
 		 close(iNewSockFd);
 	 }
-
      close(iSockfd);
  }
 
