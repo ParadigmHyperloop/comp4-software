@@ -11,7 +11,7 @@
     <!-- Bootstrap core CSS     -->
     <link href="{{ url_for('static', filename='assets/vendors/bootstrap/bootstrap.min.css') }}" rel="stylesheet" />
 
-    <!-- Light Bootstrap Table core CSS    -->
+    <!-- Light Bootstrap Theme core CSS    -->
     <link href="{{ url_for('static', filename='assets/vendors/bootstrap/light-bootstrap-dashboard.css') }}" rel="stylesheet"/>
 
     <!--  Fonts and icons -->
@@ -21,6 +21,10 @@
 
     <!-- Animated Icons -->
     <link href="{{ url_for('static',filename='assets/vendors/loaders/loaders.css') }}" rel="stylesheet">
+
+    <!-- Connection Bar -->
+    <link href="{{ url_for('static',filename='assets/css/ConnectionBar.css') }}" rel="stylesheet">
+
 
 {% endblock %}
 
@@ -61,7 +65,7 @@
       <div class="content">
          <div class="container-fluid">
 
-            {% include '_toolbar.html' %}
+            {% include '_connectionbar.html' %}
 
             {% block content %} {% endblock %}
          </div>

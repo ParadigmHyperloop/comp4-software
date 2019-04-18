@@ -13,20 +13,7 @@
 }
 
 
-.ball-scale-ripple{
-  display: none;
-}
 
-.ball-scale-ripple > div {
- background-color: var(--lightGreen) !important;
- border-color: var(--lightGreen) !important;
- margin: auto;
-}
-
-.ball-pulse > div {
-  background-color: #FF4A55 ;
-  margin: auto;
-}
 
 .btn-header{
   color: white;

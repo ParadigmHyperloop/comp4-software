@@ -1,0 +1,45 @@
+<div class="row">
+   <div class="col-xs-8">
+     <div class="card">
+        <div class="header">
+           <h4 class="title">State</h4>
+        </div>
+        <div class="content">
+           <div class="text-center">
+             <div style="height:20px" class="clearfix">&nbsp;</div>
+              <span class="btn btn-primary btn-fill btn-md"><b>Standby</b></span> <br>
+              <div style="height:10px" class="clearfix">&nbsp;</div>
+              State 11
+           </div>
+        </div>
+     </div>
+   </div>
+
+   <div class="col-xs-2">
+     <div class="card text-center connection-card">
+        <div class="header">
+           <h4 class="title">Connection</h4>
+        </div>
+        <div class="content">
+           <div id="connected-loader" class="connection-logo loader-inner ball-scale-ripple"></div>
+           <div id="no-connection-loader"class="no-connection-logo loader-inner ball-pulse"></div>
+           <br>
+        </div>
+     </div>
+   </div>
+   <div class="col-xs-2">
+     <div class="card text-center connection-card">
+        <div class="header">
+           <h4 class="title">Telemetry Update</h4>
+        </div>
+        <div class="content">
+          <!-- <div id="no-telemetry-loader"class="no-connection-logo loader-inner ball-pulse"></div> -->
+           <div id="no-telemetry-loader"class="connection-logo loader-inner line-scale-party"></div>
+           <br>
+           <span id="telem-received-num"></span> Packets Received
+        </div>
+     </div>
+   </div>
+ </div>
+
+ {% include '_alerts.html' %}
