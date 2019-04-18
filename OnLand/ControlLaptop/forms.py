@@ -4,14 +4,20 @@ from wtforms.validators import DataRequired
 
 
 class FlightConfigurationForm(FlaskForm):
-    air_resistance = StringField('Air Resistance (units)',
-                                 validators=[DataRequired("Air Resistance")])
-    motor_speed = StringField('Motor Speed (units)',
+    retrieval_timeout = StringField('Retrieval Timeout (s)',
+                                    validators=[DataRequired("Air Resistance")])
+    max_flight_time = StringField('Max Flight Time (s)',
+                                  validators=[DataRequired("Motor Speed")])
+    motor_speed = StringField('Max Flight Time(units)',
                               validators=[DataRequired("Motor Speed")])
-    tube_pressure = StringField('Tube Pressure (units)',
-                                validators=[DataRequired("Tube Pressure")])
-    watchdog_timeout = StringField('Watchdog Timeout (ms)',
-                                   validators=[DataRequired("Watchdog Timer")])
+    telemetry_port = StringField('PDS Telemetry Port',
+                                 validators=[DataRequired("PDS Port")])
+    command_port = StringField('PDS Command Port',
+                               validators=[DataRequired("PDS Port")])
+    flight_Length = StringField('Flight Length (s)',
+                                validators=[DataRequired("Expected FLight Length")])
+    heartbeat_timout = StringField('HeartBeat Timeout (s)',
+                                   validators=[DataRequired("HeartBeat Timeout")])
     pod_ip = StringField('Pod Address (IP)',
                          validators=[DataRequired("Pod Address")])
     submit = SubmitField('Send Configuration')
