@@ -1,17 +1,15 @@
 #include "ethernet.h"
 
-UDPClass::UDPClass(uint8_t ETHERNET_SS_PIN, IPAddress NODE_IP,
-                    uint16_t NODE_PORT, uint8_t NODE_TYPE):
-    ETHERNET_SS_PIN(ETHERNET_SS_PIN),
+UDPClass::UDPClass(IPAddress NODE_IP, uint16_t NODE_PORT, uint8_t NODE_TYPE):
     NODE_IP(NODE_IP),
     NODE_PORT(NODE_PORT),
     NODE_TYPE(NODE_TYPE)
     {}
 
 void UDPClass::init() {
-    uint8_t mac[] = {NODE_TYPE, 0xFF, 0xFF, 0xFF, 0xFF};
+    uint8_t uMac[] = {NODE_TYPE, 0xFF, 0xFF, 0xFF, 0xFF};
     Ethernet.init(ETHERNET_SS_PIN);
-    Ethernet.begin(mac, NODE_IP);
+    Ethernet.begin(uMac, NODE_IP);
     // blocks until W5500 responds and an ethernet cable is connected
     while (Ethernet.linkStatus() == LinkOFF ||
            Ethernet.hardwareStatus() == EthernetNoHardware) {
@@ -22,24 +20,18 @@ void UDPClass::init() {
 
 bool UDPClass::readPacket() {
     Udp.parsePacket();
-    // return false if no data is available
     if (!Udp.available()) {
-        return false;
+        return false;  // return false if no data is available
     }
-    // zero the receive buffer
-    memset(&iPacketRecvBuffer, 0, UDP_TX_PACKET_MAX_SIZE);
-    // read a packet into the receive buffer
-    Udp.read(iPacketRecvBuffer, UDP_TX_PACKET_MAX_SIZE);
+    Udp.read(cRecvBuffer, BUFFER_SIZE);  // read a packet into the receive buffer
     return true;
 }
 
-bool UDPClass::sendPacket(IPAddress iDestinationIP, uint16_t iDestinationPort) {
-    // return false if there was an error resolving the IP or port
-    if (!Udp.beginPacket(iDestinationIP, iDestinationPort))
-        return false;
-    Udp.write(iPacketSendBuffer);
-    // return false if there was an error sending the packet
+bool UDPClass::sendPacket(IPAddress ipDestinationIP, uint16_t uDestinationPort) {
+    if (!Udp.beginPacket(ipDestinationIP, uDestinationPort))
+        return false; // return false if there was an error resolving the IP or port
+    Udp.write(cSendBuffer);
     if (Udp.endPacket())
-        return false;
+        return false; // return false if there was an error sending the packet
     return true;
 }
