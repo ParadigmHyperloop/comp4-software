@@ -1,7 +1,7 @@
 import socketio
 import logging
 from datetime import timedelta
-from telemetry.PodUdpConnection import PodUdpConnection
+from Telemetry.PodUdpConnection import PodUdpConnection
 from PDS.config import *
 from Paradigm_pb2 import *
 from google.protobuf import json_format
@@ -22,8 +22,9 @@ def on_disconnect():
 
 def main():
     sio.connect(SOCKET_SERVER)
-    pod = PodUdpConnection('ye127.0.0.1', 6000)
+    pod = PodUdpConnection(POD_IP, UDP_TELEM_PORT)
     pod.connect()
+
     while pod.is_connected():
         data = pod.recv(timedelta(seconds=UDP_TELEM_TIMEOUT))
         if data is not None:
