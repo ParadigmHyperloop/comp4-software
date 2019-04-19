@@ -41,7 +41,6 @@ def main():
         pod.connect()
 
         while pod.is_connected():
-            timer.pulse()
             # Send Packet, non blocking sockets require a little extra magic to make sure the whole
             # packet gets sent.
             # Send a packets every PULSE_SPEED milliseconds.
