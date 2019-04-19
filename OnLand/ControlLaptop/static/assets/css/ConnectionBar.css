@@ -25,25 +25,26 @@
  margin: auto;
 }
 
+.line-scale-party{
+    display: none;
+}
+
 .line-scale-party > div {
  background-color: var(--lightGreen) !important;
  border-color: var(--lightGreen) !important;
 
 }
 
+.ball-pulse{
+        padding-top: 20px !important;
+
+}
 
 .ball-pulse > div {
     background-color: #FF4A55;
     margin: auto;
 }
 
-
-
-
 .connection-card{
     height: 160px;
-}
-
-.no-connection-logo{
-    padding-top: 20px !important;
 }

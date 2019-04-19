@@ -24,8 +24,6 @@
 
     <!-- Connection Bar -->
     <link href="{{ url_for('static',filename='assets/css/ConnectionBar.css') }}" rel="stylesheet">
-
-
 {% endblock %}
 
 {% block pageStyles %}
@@ -64,9 +62,6 @@
       {% include '_header.html' %}
       <div class="content">
          <div class="container-fluid">
-
-            {% include '_connectionbar.html' %}
-
             {% block content %} {% endblock %}
          </div>
       </div>

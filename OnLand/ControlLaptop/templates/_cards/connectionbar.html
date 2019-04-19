@@ -1,5 +1,6 @@
 <div class="row">
-   <div class="col-xs-8">
+   <div class="col-md-8">
+     {% block connectionStates %}
      <div class="card">
         <div class="header">
            <h4 class="title">State</h4>
@@ -13,12 +14,13 @@
            </div>
         </div>
      </div>
+     {% endblock %}
    </div>
 
-   <div class="col-xs-2">
+   <div class="col-md-2">
      <div class="card text-center connection-card">
         <div class="header">
-           <h4 class="title">Connection</h4>
+           <h5 class="title">Connection</h5>
         </div>
         <div class="content">
            <div id="connected-loader" class="connection-logo loader-inner ball-scale-ripple"></div>
@@ -27,16 +29,18 @@
         </div>
      </div>
    </div>
-   <div class="col-xs-2">
+   <div class="col-md-2">
      <div class="card text-center connection-card">
         <div class="header">
-           <h4 class="title">Telemetry Update</h4>
+           <h5 class="title">Telemetry</h5>
         </div>
         <div class="content">
-          <!-- <div id="no-telemetry-loader"class="no-connection-logo loader-inner ball-pulse"></div> -->
-           <div id="no-telemetry-loader"class="connection-logo loader-inner line-scale-party"></div>
+           <div id="no-telemetry-loader"class="no-telemetry-logo loader-inner ball-pulse"></div>
+           <div id="telemetry-loader"class="telemetry-logo loader-inner line-scale-party"></div>
            <br>
-           <span id="telem-received-num"></span> Packets Received
+           <h7 id="telem-received-num">0</h7>
+            <br>
+            Packets Received
         </div>
      </div>
    </div>
