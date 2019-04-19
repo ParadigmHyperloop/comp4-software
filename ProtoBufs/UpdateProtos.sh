@@ -28,7 +28,7 @@ done
 flightComputer="../OnPod/FlightComputer/include/ProtoBuffer/"
 flightComputerSrc="../OnPod/FlightComputer/src/"
 
-PDS="../OnLand/PDS/"
+PDS="../OnLand/PDS/Paradigm/Sources"
 NODESIM="../Testing/NodeSimulator/Protobuf"
 COMMANDTEST="../Testing/ManualCommandTesting"
 

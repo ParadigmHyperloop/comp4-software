@@ -1,3 +1,5 @@
+socketio
+google
 certifi==2019.3.9
 chardet==3.0.4
 Click==7.0

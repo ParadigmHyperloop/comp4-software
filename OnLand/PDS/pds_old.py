@@ -4,7 +4,6 @@ import PodTelem_pb2
 import struct
 
 
-# @TODO cleanup previous code
 class SpaceXStatus:
     FAULT = 0
     IDLE = 1
@@ -61,6 +60,7 @@ class SpaceXPacket:
 
 # Includes all SpaceX stuff, connecting to their device, sending data, generating data, wtvr else
 class SpaceX:
+
     def __init__(self):
         self.ip = env_vars.spaceX_IP
         self.port = env_vars.spaceX_PORT
