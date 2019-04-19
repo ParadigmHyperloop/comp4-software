@@ -40,18 +40,3 @@ void DRV8806::disableSolenoid(uint8_t uSolenoid) {
     // set the selected iActiveSolenoids bit to 0
     uActiveSolenoids &= ~(1 << uSolenoid);
 }
-
-Solenoid::Solenoid(DRV8806 driver, uint8_t uSolenoidChannel) :
-    driver(driver),
-    uSolenoidChannel(uSolenoidChannel)
-    {}
-
-void Solenoid::enable() {
-    driver.enableSolenoid(uSolenoidChannel);
-    driver.updateSolenoids();
-}
-
-void Solenoid::disable() {
-    driver.disableSolenoid(uSolenoidChannel);
-    driver.updateSolenoids();
-}

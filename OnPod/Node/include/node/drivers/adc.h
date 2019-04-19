@@ -18,7 +18,7 @@ private:
     uint16_t uActiveChannels = 0; // each bit represents a channel; 1=used, 0=unused
     uint16_t uNumChannels = 0; // number of channels being used;
 
-    uint16_t transfer(uint16_t iData);
+    uint16_t transfer(uint16_t uData);
 public:
     uint16_t uADCData[16] {}; //array of the latest data; 0 for channels not being used
     void init();

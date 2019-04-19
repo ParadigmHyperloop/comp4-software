@@ -1,5 +1,7 @@
-#ifndef SOLENOID_H
-#define SOLENOID_H
+#ifndef SOLENOID_DRIVER_H
+#define SOLENOID_DRIVER_H
+
+#include <Arduino.h>
 
 class DRV8806 {
 private:
@@ -13,16 +15,6 @@ public:
     void updateSolenoids();
     void enableSolenoid(uint8_t uSolenoids);
     void disableSolenoid(uint8_t uSolenoids);
-};
-
-class Solenoid {
-private:
-    DRV8806 driver;
-    uint8_t uSolenoidChannel;
-public:
-    Solenoid(DRV8806 driver, uint8_t uSolenoidChannel);
-    void enable();
-    void disable();
 };
 
 #endif
