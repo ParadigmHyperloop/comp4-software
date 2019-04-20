@@ -46,6 +46,18 @@
           {{ configuration_form.pod_ip (class="form-control", value=saved_configuration['pod_address']) }}
         </div>
       </div>
+      <div class="row">
+        <div class="text-center">
+          <div class=" bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-animate bootstrap-switch-off" style="width: 72px">
+            <div class="bootstrap-switch-container" style="width: 122px; margin-left: -50px;">
+              <span class="bootstrap-switch-handle-on bootstrap-switch-info" style="width: 50px;">ON</span>
+              <span class="bootstrap-switch-label" style="width: 30px;">&nbsp;</span><span class="bootstrap-switch-handle-off bootstrap-switch-info" style="width: 50px;">OFF</span>
+              <input type="checkbox" checked="" data-toggle="switch" data-on-color="info" data-off-color="info">
+            </div>
+          </div>
+          <span class="toggle"></span>
+        </div>
+      </div>
       <div class="text-center">
         <p id="configuration-error-container"></p>
         {{ configuration_form.submit(class='btn btn-primary btn-fill btn-md') }}
