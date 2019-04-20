@@ -1,5 +1,5 @@
 from influxdb import InfluxDBClient
-from flask_table import Col, create_table
+
 
 DEFAULT_TITLE = "Control Interface"
 
@@ -36,67 +36,45 @@ def db_query_sensor_values(input):
     return str("select last(*), min(*), max(*) from test.autogen.sensors where id=" + "'" + input + "'")
 
 
-def generate_sensor_table():
-    # generates sensor table
-    column = ['sensor', 'status', 'min', 'actual', 'max']
-
-    sensor_table = create_table('sensors')
-    for col in column:
-        sensor_table.add_column(str(col), Col(str(col)))
-
-    sensor_names = db_query_sensor_names()
-    sensors_list = []
-    for sensor in sensor_names:
-        sensors_list.append(dict(sensor=sensor, status='asdffsasadfasdf', min='', actual='', max=''))
-
-    table = sensor_table(sensors_list, html_attrs={'id': 'sensorTab'}, no_items='Error',
-                         classes=['table table-hover table-striped table-condensed'])
-
-    return table
-
 
 NAV_BAR = [
     {
-        'id': 'index',
-        'href': 'index.html',
+        'id': 'dashboard',
+        'href': 'ui/dashboard',
         'title': 'Vehicle Dashboard',
-        'icon': 'pe-7s-graph'
+        'icon': 'pe-7s-rocket'
+    },
+    {
+        'id': 'dts',
+        'href': 'dts',
+        'title': 'Dynamic Test Stand',
+        'icon': 'pe-7s-joy'
     },
     {
         'id': 'battery',
-        'href': 'battery.html',
+        'href': 'ui/battery',
         'title': 'Batteries',
         'icon': 'pe-7s-battery'
     },
     {
-        'id': 'pid',
-        'href': 'pid.html',
-        'title': 'Air Supply',
-        'icon': 'pe-7s-share'
-    },
-    {
         'id': 'profile',
-        'href': 'profile.html',
+        'href': 'profile',
         'title': 'Flight Profile',
         'icon': 'pe-7s-user'
     },
     {
-        'id': 'overrides',
-        'href': 'overrides.html',
-        'title': 'Sensor Overrides',
-        'icon': 'pe-7s-note2'
-    },
-    {
-        'id': 'manual',
-        'href': 'manual.html',
-        'title': 'Manual Control',
-        'icon': 'pe-7s-news-paper'
-    },
-    {
         'id': 'feeds',
-        'href': 'feeds.html',
+        'href': 'ui/feeds',
         'title': 'Live Streams',
         'icon': 'pe-7s-video'
     },
 ]
 NAV_IDS = [x['id'] for x in NAV_BAR]
+
+
+def get_page_title(page):
+    if page in NAV_IDS:
+        title = NAV_BAR[NAV_IDS.index(page)]['title']
+    else:
+        title = DEFAULT_TITLE
+    return title

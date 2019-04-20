@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=None,
-  serialized_pb=_b('\n\x0eParadigm.proto\"\x8a\x03\n\rbrakeNodeData\x12\n\n\x02id\x18\x01 \x02(\x05\x12,\n\x05state\x18\x0e \x01(\x0e\x32\x1d.brakeNodeData.breakNodeState\x12\x0c\n\x04sol1\x18\x02 \x01(\x08\x12\x0c\n\x04sol2\x18\x03 \x01(\x08\x12\x0c\n\x04sol3\x18\x04 \x01(\x08\x12\x0c\n\x04sol4\x18\x05 \x01(\x08\x12\x0c\n\x04sol5\x18\x06 \x01(\x08\x12\x0c\n\x04sol6\x18\x07 \x01(\x08\x12\n\n\x02hp\x18\x08 \x01(\x05\x12\x0b\n\x03lp1\x18\t \x01(\x05\x12\x0b\n\x03lp2\x18\n \x01(\x05\x12\x0b\n\x03lp3\x18\x0b \x01(\x05\x12\x0b\n\x03lp4\x18\x0c \x01(\x05\x12\x0c\n\x04temp\x18\r \x01(\x05\"\x9c\x01\n\x0e\x62reakNodeState\x12\x0e\n\nbnsBooting\x10\x00\x12\x0e\n\nbnsStandby\x10\x01\x12\r\n\tbnsArming\x10\x02\x12\x0c\n\x08\x62nsArmed\x10\x03\x12\r\n\tbnsFlight\x10\x04\x12\x0e\n\nbnsBraking\x10\x05\x12\x0e\n\nbnsVenting\x10\x06\x12\x10\n\x0c\x62nsRetrieval\x10\x07\x12\x0c\n\x08\x62nsError\x10\x08\"\x93\x02\n\npodCommand\x12\x38\n\x16\x63ontrolsInterfaceState\x18\x01 \x01(\x0e\x32\x18.ControlsInterfaceStates\x12\"\n\x0emanualPodState\x18\x02 \x01(\x0e\x32\n.PodStates\x12.\n\x14manualBrakeNodeState\x18\x03 \x01(\x0e\x32\x10.BrakeNodeStates\x12&\n\x10manualMotorState\x18\x04 \x01(\x0e\x32\x0c.MotorStates\x12,\n\x13manualLvdcNodeState\x18\x05 \x01(\x0e\x32\x0f.LvdcNodeStates\x12!\n\x19\x61utomaticStateTransitions\x18\x06 \x01(\x08\"\xe4\x0e\n\ttelemetry\x12\x1c\n\x08podState\x18\x01 \x01(\x0e\x32\n.PodStates\x12(\n\x0e\x62reakNodeState\x18\x02 \x01(\x0e\x32\x10.BrakeNodeStates\x12 \n\nmotorState\x18\x03 \x01(\x0e\x32\x0c.MotorStates\x12\x38\n\x16\x63ontrolsInterfaceState\x18\x04 \x01(\x0e\x32\x18.ControlsInterfaceStates\x12&\n\rinverterState\x18\x05 \x01(\x0e\x32\x0f.InverterStates\x12&\n\rlvdcNodeState\x18\x36 \x01(\x0e\x32\x0f.LvdcNodeStates\x12\x38\n\x16\x62\x61tteryManagementState\x18\x19 \x01(\x0e\x32\x18.BatteryManagementStates\x12.\n\x1a\x62reakNodePerceivedPodState\x18\x1f \x01(\x0e\x32\n.PodStates\x12\x13\n\x0bmissionTime\x18\x06 \x01(\x05\x12\x12\n\nflightTime\x18\x07 \x01(\x05\x12\x16\n\x0eheartbeatFlags\x18\x08 \x03(\x05\x12\x17\n\x0fheartbeatValues\x18G \x03(\x05\x12\x13\n\x0bpodPosition\x18\t \x01(\x05\x12\x13\n\x0bpodVelocity\x18\n \x01(\x05\x12\x18\n\x10podAccelerationX\x18\x0b \x01(\x05\x12\x18\n\x10podAccelerationY\x18\x0c \x01(\x05\x12\x18\n\x10podAccelerationZ\x18\r \x01(\x05\x12\x13\n\x0bimuVelocity\x18\x0e \x01(\x05\x12\x18\n\x10imuAccelerationX\x18\x0f \x01(\x05\x12\x1a\n\x12tachometerVelocity\x18\x10 \x01(\x05\x12\x18\n\x10resolverVelocity\x18\x11 \x01(\x05\x12\x1c\n\x14inverterTemperature1\x18\x12 \x01(\x05\x12\x1c\n\x14inverterTemperature2\x18\x13 \x01(\x05\x12\x1c\n\x14inverterTemperature3\x18\x14 \x01(\x05\x12\x14\n\x0cmotorCurrent\x18\x15 \x01(\x05\x12\x14\n\x0cmotorVoltage\x18\x16 \x01(\x05\x12\x18\n\x10inverterVoltages\x18\x17 \x01(\x05\x12\x18\n\x10inverterCurrents\x18\x18 \x01(\x05\x12\x1b\n\x13\x62\x61tteryPackVoltages\x18\x1a \x03(\x05\x12\x1a\n\x12\x62\x61tteryPackCurrent\x18\x1b \x03(\x05\x12\x1f\n\x17\x62\x61tteryCellTemperatures\x18\x1c \x03(\x05\x12!\n\x19\x62\x61tteryPackMinimumVoltage\x18\x1d \x01(\x05\x12\x1d\n\x15\x62\x61tteryPackMaxVoltage\x18\x1e \x01(\x05\x12\x0c\n\x04sol1\x18  \x01(\x08\x12\x0c\n\x04sol2\x18! \x01(\x08\x12\x0c\n\x04sol3\x18\" \x01(\x08\x12\x0c\n\x04sol4\x18# \x01(\x08\x12\x0c\n\x04sol5\x18$ \x01(\x08\x12\x0c\n\x04sol6\x18% \x01(\x08\x12\n\n\x02hp\x18& \x01(\x05\x12\x0b\n\x03lp1\x18\' \x01(\x05\x12\x0b\n\x03lp2\x18( \x01(\x05\x12\x0b\n\x03lp3\x18) \x01(\x05\x12\x0b\n\x03lp4\x18* \x01(\x05\x12!\n\x19pressureVesselTemperature\x18+ \x01(\x05\x12$\n\x1c\x65lectronicsEnclosurePressure\x18, \x01(\x05\x12\x19\n\x11railDisplacementX\x18- \x01(\x05\x12\x19\n\x11railDisplacementY\x18. \x01(\x05\x12\x14\n\x0ctubePressure\x18\x30 \x01(\x05\x12\x18\n\x10\x63oolantPressure1\x18\x31 \x01(\x05\x12\x18\n\x10\x63oolantPressure2\x18\x32 \x01(\x05\x12\x18\n\x10\x63oolantPressure3\x18\x33 \x01(\x05\x12\x1a\n\x12\x63oolantTemperature\x18\x34 \x01(\x05\x12\x17\n\x0frailTemperature\x18\x35 \x01(\x05\x12\x14\n\x0cpack1Voltage\x18\x37 \x01(\x05\x12\x14\n\x0cpack2Voltage\x18\x38 \x01(\x05\x12\x14\n\x0cpack1Current\x18\x39 \x01(\x05\x12\x14\n\x0cpack2Current\x18: \x01(\x05\x12\x14\n\x0crail1Voltage\x18; \x01(\x05\x12\x14\n\x0crail2Voltage\x18< \x01(\x05\x12\x14\n\x0crail3Voltage\x18= \x01(\x05\x12\x14\n\x0crail4Voltage\x18> \x01(\x05\x12\x17\n\x0frailVoltageFlag\x18H \x01(\x05\x12\x1a\n\x12railCurrentSensor1\x18? \x01(\x05\x12\x1a\n\x12railCurrentSensor2\x18@ \x01(\x05\x12\x1a\n\x12railCurrentSensor3\x18\x41 \x01(\x05\x12\x1a\n\x12railCurrentSensor4\x18\x42 \x01(\x05\x12\x1a\n\x12railCurrentSensor5\x18\x43 \x01(\x05\x12\x1a\n\x12railCurrentSensor6\x18\x44 \x01(\x05\x12\x1a\n\x12railCurrentSensor7\x18\x45 \x01(\x05\x12\x1a\n\x12railCurrentSensor8\x18\x46 \x01(\x05\x12\x17\n\x0frailCurrentFlag\x18I \x01(\x05*\x9d\x01\n\x0f\x42rakeNodeStates\x12\x0e\n\nbnsBooting\x10\x00\x12\x0e\n\nbnsStandby\x10\x01\x12\r\n\tbnsArming\x10\x02\x12\x0c\n\x08\x62nsArmed\x10\x03\x12\r\n\tbnsFlight\x10\x04\x12\x0e\n\nbnsBraking\x10\x05\x12\x0e\n\nbnsVenting\x10\x06\x12\x10\n\x0c\x62nsRetrieval\x10\x07\x12\x0c\n\x08\x62nsError\x10\x08*\xbb\x01\n\tPodStates\x12\r\n\tpsBooting\x10\x00\x12\r\n\tpsStandby\x10\x01\x12\x0c\n\x08psArming\x10\x02\x12\x0b\n\x07psArmed\x10\x03\x12\x0f\n\x0bpsPreFlight\x10\x04\x12\x12\n\x0epsAcceleration\x10\x05\x12\x0e\n\npsCoasting\x10\x06\x12\r\n\tpsBraking\x10\x07\x12\x0f\n\x0bpsDisarming\x10\x08\x12\x0f\n\x0bpsRetrieval\x10\t\x12\x0f\n\x0bpsEmergency\x10\n*C\n\x0bMotorStates\x12\t\n\x05msOff\x10\x00\x12\x0e\n\nmsCharging\x10\x01\x12\n\n\x06msIdle\x10\x02\x12\r\n\tmsEngaged\x10\x03*G\n\x17\x43ontrolsInterfaceStates\x12\t\n\x05\x63iArm\x10\x00\x12\x0c\n\x08\x63iFlight\x10\x01\x12\x13\n\x0f\x63iEmergencyStop\x10\x02* \n\x0eInverterStates\x12\x0e\n\niConnected\x10\x00*)\n\x17\x42\x61tteryManagementStates\x12\x0e\n\nbmsNominal\x10\x00*.\n\x0eRearNodeStates\x12\r\n\trnBooting\x10\x00\x12\r\n\trnNominal\x10\x01*!\n\x0eLvdcNodeStates\x12\x0f\n\x0blvdcBooting\x10\x00')
+  serialized_pb=_b('\n\x0eParadigm.proto\"\xde\x01\n\rbrakeNodeData\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x1f\n\x05state\x18\x0e \x01(\x0e\x32\x10.BrakeNodeStates\x12\x0c\n\x04sol1\x18\x02 \x01(\x08\x12\x0c\n\x04sol2\x18\x03 \x01(\x08\x12\x0c\n\x04sol3\x18\x04 \x01(\x08\x12\x0c\n\x04sol4\x18\x05 \x01(\x08\x12\x0c\n\x04sol5\x18\x06 \x01(\x08\x12\x0c\n\x04sol6\x18\x07 \x01(\x08\x12\n\n\x02hp\x18\x08 \x01(\x05\x12\x0b\n\x03lp1\x18\t \x01(\x05\x12\x0b\n\x03lp2\x18\n \x01(\x05\x12\x0b\n\x03lp3\x18\x0b \x01(\x05\x12\x0b\n\x03lp4\x18\x0c \x01(\x05\x12\x0c\n\x04temp\x18\r \x01(\x05\"\x93\x02\n\npodCommand\x12\x38\n\x16\x63ontrolsInterfaceState\x18\x01 \x01(\x0e\x32\x18.ControlsInterfaceStates\x12\"\n\x0emanualPodState\x18\x02 \x01(\x0e\x32\n.PodStates\x12.\n\x14manualBrakeNodeState\x18\x03 \x01(\x0e\x32\x10.BrakeNodeStates\x12&\n\x10manualMotorState\x18\x04 \x01(\x0e\x32\x0c.MotorStates\x12,\n\x13manualLvdcNodeState\x18\x05 \x01(\x0e\x32\x0f.LvdcNodeStates\x12!\n\x19\x61utomaticStateTransitions\x18\x06 \x01(\x08\"\xe4\x0e\n\ttelemetry\x12\x1c\n\x08podState\x18\x01 \x01(\x0e\x32\n.PodStates\x12(\n\x0e\x62reakNodeState\x18\x02 \x01(\x0e\x32\x10.BrakeNodeStates\x12 \n\nmotorState\x18\x03 \x01(\x0e\x32\x0c.MotorStates\x12\x38\n\x16\x63ontrolsInterfaceState\x18\x04 \x01(\x0e\x32\x18.ControlsInterfaceStates\x12&\n\rinverterState\x18\x05 \x01(\x0e\x32\x0f.InverterStates\x12&\n\rlvdcNodeState\x18\x36 \x01(\x0e\x32\x0f.LvdcNodeStates\x12\x38\n\x16\x62\x61tteryManagementState\x18\x19 \x01(\x0e\x32\x18.BatteryManagementStates\x12.\n\x1a\x62reakNodePerceivedPodState\x18\x1f \x01(\x0e\x32\n.PodStates\x12\x13\n\x0bmissionTime\x18\x06 \x01(\x05\x12\x12\n\nflightTime\x18\x07 \x01(\x05\x12\x16\n\x0eheartbeatFlags\x18\x08 \x03(\x05\x12\x17\n\x0fheartbeatValues\x18G \x03(\x05\x12\x13\n\x0bpodPosition\x18\t \x01(\x05\x12\x13\n\x0bpodVelocity\x18\n \x01(\x05\x12\x18\n\x10podAccelerationX\x18\x0b \x01(\x05\x12\x18\n\x10podAccelerationY\x18\x0c \x01(\x05\x12\x18\n\x10podAccelerationZ\x18\r \x01(\x05\x12\x13\n\x0bimuVelocity\x18\x0e \x01(\x05\x12\x18\n\x10imuAccelerationX\x18\x0f \x01(\x05\x12\x1a\n\x12tachometerVelocity\x18\x10 \x01(\x05\x12\x18\n\x10resolverVelocity\x18\x11 \x01(\x05\x12\x1c\n\x14inverterTemperature1\x18\x12 \x01(\x05\x12\x1c\n\x14inverterTemperature2\x18\x13 \x01(\x05\x12\x1c\n\x14inverterTemperature3\x18\x14 \x01(\x05\x12\x14\n\x0cmotorCurrent\x18\x15 \x01(\x05\x12\x14\n\x0cmotorVoltage\x18\x16 \x01(\x05\x12\x18\n\x10inverterVoltages\x18\x17 \x01(\x05\x12\x18\n\x10inverterCurrents\x18\x18 \x01(\x05\x12\x1b\n\x13\x62\x61tteryPackVoltages\x18\x1a \x03(\x05\x12\x1a\n\x12\x62\x61tteryPackCurrent\x18\x1b \x03(\x05\x12\x1f\n\x17\x62\x61tteryCellTemperatures\x18\x1c \x03(\x05\x12!\n\x19\x62\x61tteryPackMinimumVoltage\x18\x1d \x01(\x05\x12\x1d\n\x15\x62\x61tteryPackMaxVoltage\x18\x1e \x01(\x05\x12\x0c\n\x04sol1\x18  \x01(\x08\x12\x0c\n\x04sol2\x18! \x01(\x08\x12\x0c\n\x04sol3\x18\" \x01(\x08\x12\x0c\n\x04sol4\x18# \x01(\x08\x12\x0c\n\x04sol5\x18$ \x01(\x08\x12\x0c\n\x04sol6\x18% \x01(\x08\x12\n\n\x02hp\x18& \x01(\x05\x12\x0b\n\x03lp1\x18\' \x01(\x05\x12\x0b\n\x03lp2\x18( \x01(\x05\x12\x0b\n\x03lp3\x18) \x01(\x05\x12\x0b\n\x03lp4\x18* \x01(\x05\x12!\n\x19pressureVesselTemperature\x18+ \x01(\x05\x12$\n\x1c\x65lectronicsEnclosurePressure\x18, \x01(\x05\x12\x19\n\x11railDisplacementX\x18- \x01(\x05\x12\x19\n\x11railDisplacementY\x18. \x01(\x05\x12\x14\n\x0ctubePressure\x18\x30 \x01(\x05\x12\x18\n\x10\x63oolantPressure1\x18\x31 \x01(\x05\x12\x18\n\x10\x63oolantPressure2\x18\x32 \x01(\x05\x12\x18\n\x10\x63oolantPressure3\x18\x33 \x01(\x05\x12\x1a\n\x12\x63oolantTemperature\x18\x34 \x01(\x05\x12\x17\n\x0frailTemperature\x18\x35 \x01(\x05\x12\x14\n\x0cpack1Voltage\x18\x37 \x01(\x05\x12\x14\n\x0cpack2Voltage\x18\x38 \x01(\x05\x12\x14\n\x0cpack1Current\x18\x39 \x01(\x05\x12\x14\n\x0cpack2Current\x18: \x01(\x05\x12\x14\n\x0crail1Voltage\x18; \x01(\x05\x12\x14\n\x0crail2Voltage\x18< \x01(\x05\x12\x14\n\x0crail3Voltage\x18= \x01(\x05\x12\x14\n\x0crail4Voltage\x18> \x01(\x05\x12\x17\n\x0frailVoltageFlag\x18H \x01(\x05\x12\x1a\n\x12railCurrentSensor1\x18? \x01(\x05\x12\x1a\n\x12railCurrentSensor2\x18@ \x01(\x05\x12\x1a\n\x12railCurrentSensor3\x18\x41 \x01(\x05\x12\x1a\n\x12railCurrentSensor4\x18\x42 \x01(\x05\x12\x1a\n\x12railCurrentSensor5\x18\x43 \x01(\x05\x12\x1a\n\x12railCurrentSensor6\x18\x44 \x01(\x05\x12\x1a\n\x12railCurrentSensor7\x18\x45 \x01(\x05\x12\x1a\n\x12railCurrentSensor8\x18\x46 \x01(\x05\x12\x17\n\x0frailCurrentFlag\x18I \x01(\x05\"X\n\rfcToBrakeNode\x12\x1c\n\x08podState\x18\x01 \x01(\x0e\x32\n.PodStates\x12)\n\x0fmanualNodeState\x18\x02 \x01(\x0e\x32\x10.BrakeNodeStates\"\xb4\x01\n\x0b\x64tsNodeToFc\x12!\n\x12\x62rakeSolenoidState\x18\x01 \x01(\x08:\x05\x66\x61lse\x12 \n\x11ventSolenoidState\x18\x02 \x01(\x08:\x05\x66\x61lse\x12\x18\n\x10rotorTemperature\x18\x03 \x01(\x02\x12\x1b\n\x13pressureTemperature\x18\x04 \x01(\x05\x12\x14\n\x0chighPressure\x18\x05 \x01(\x05\x12\x13\n\x0blowPressure\x18\x06 \x01(\x05*\x9d\x01\n\x0f\x42rakeNodeStates\x12\x0e\n\nbnsBooting\x10\x00\x12\x0e\n\nbnsStandby\x10\x01\x12\r\n\tbnsArming\x10\x02\x12\x0c\n\x08\x62nsArmed\x10\x03\x12\r\n\tbnsFlight\x10\x04\x12\x0e\n\nbnsBraking\x10\x05\x12\x0e\n\nbnsVenting\x10\x06\x12\x10\n\x0c\x62nsRetrieval\x10\x07\x12\x0c\n\x08\x62nsError\x10\x08*\xbb\x01\n\tPodStates\x12\r\n\tpsBooting\x10\x00\x12\r\n\tpsStandby\x10\x01\x12\x0c\n\x08psArming\x10\x02\x12\x0b\n\x07psArmed\x10\x03\x12\x0f\n\x0bpsPreFlight\x10\x04\x12\x12\n\x0epsAcceleration\x10\x05\x12\x0e\n\npsCoasting\x10\x06\x12\r\n\tpsBraking\x10\x07\x12\x0f\n\x0bpsDisarming\x10\x08\x12\x0f\n\x0bpsRetrieval\x10\t\x12\x0f\n\x0bpsEmergency\x10\n*C\n\x0bMotorStates\x12\t\n\x05msOff\x10\x00\x12\x0e\n\nmsCharging\x10\x01\x12\n\n\x06msIdle\x10\x02\x12\r\n\tmsEngaged\x10\x03*G\n\x17\x43ontrolsInterfaceStates\x12\t\n\x05\x63iArm\x10\x00\x12\x0c\n\x08\x63iFlight\x10\x01\x12\x13\n\x0f\x63iEmergencyStop\x10\x02* \n\x0eInverterStates\x12\x0e\n\niConnected\x10\x00*)\n\x17\x42\x61tteryManagementStates\x12\x0e\n\nbmsNominal\x10\x00*.\n\x0eRearNodeStates\x12\r\n\trnBooting\x10\x00\x12\r\n\trnNominal\x10\x01*!\n\x0eLvdcNodeStates\x12\x0f\n\x0blvdcBooting\x10\x00')
 )
 
 _BRAKENODESTATES = _descriptor.EnumDescriptor(
@@ -69,8 +69,8 @@ _BRAKENODESTATES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2589,
-  serialized_end=2746,
+  serialized_start=2690,
+  serialized_end=2847,
 )
 _sym_db.RegisterEnumDescriptor(_BRAKENODESTATES)
 
@@ -128,8 +128,8 @@ _PODSTATES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2749,
-  serialized_end=2936,
+  serialized_start=2850,
+  serialized_end=3037,
 )
 _sym_db.RegisterEnumDescriptor(_PODSTATES)
 
@@ -159,8 +159,8 @@ _MOTORSTATES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2938,
-  serialized_end=3005,
+  serialized_start=3039,
+  serialized_end=3106,
 )
 _sym_db.RegisterEnumDescriptor(_MOTORSTATES)
 
@@ -186,8 +186,8 @@ _CONTROLSINTERFACESTATES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3007,
-  serialized_end=3078,
+  serialized_start=3108,
+  serialized_end=3179,
 )
 _sym_db.RegisterEnumDescriptor(_CONTROLSINTERFACESTATES)
 
@@ -205,8 +205,8 @@ _INVERTERSTATES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3080,
-  serialized_end=3112,
+  serialized_start=3181,
+  serialized_end=3213,
 )
 _sym_db.RegisterEnumDescriptor(_INVERTERSTATES)
 
@@ -224,8 +224,8 @@ _BATTERYMANAGEMENTSTATES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3114,
-  serialized_end=3155,
+  serialized_start=3215,
+  serialized_end=3256,
 )
 _sym_db.RegisterEnumDescriptor(_BATTERYMANAGEMENTSTATES)
 
@@ -247,8 +247,8 @@ _REARNODESTATES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3157,
-  serialized_end=3203,
+  serialized_start=3258,
+  serialized_end=3304,
 )
 _sym_db.RegisterEnumDescriptor(_REARNODESTATES)
 
@@ -266,8 +266,8 @@ _LVDCNODESTATES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3205,
-  serialized_end=3238,
+  serialized_start=3306,
+  serialized_end=3339,
 )
 _sym_db.RegisterEnumDescriptor(_LVDCNODESTATES)
 
@@ -305,56 +305,6 @@ rnBooting = 0
 rnNominal = 1
 lvdcBooting = 0
 
-
-_BRAKENODEDATA_BREAKNODESTATE = _descriptor.EnumDescriptor(
-  name='breakNodeState',
-  full_name='brakeNodeData.breakNodeState',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='bnsBooting', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='bnsStandby', index=1, number=1,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='bnsArming', index=2, number=2,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='bnsArmed', index=3, number=3,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='bnsFlight', index=4, number=4,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='bnsBraking', index=5, number=5,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='bnsVenting', index=6, number=6,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='bnsRetrieval', index=7, number=7,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='bnsError', index=8, number=8,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=257,
-  serialized_end=413,
-)
-_sym_db.RegisterEnumDescriptor(_BRAKENODEDATA_BREAKNODESTATE)
 
 
 _BRAKENODEDATA = _descriptor.Descriptor(
@@ -467,7 +417,6 @@ _BRAKENODEDATA = _descriptor.Descriptor(
   ],
   nested_types=[],
   enum_types=[
-    _BRAKENODEDATA_BREAKNODESTATE,
   ],
   serialized_options=None,
   is_extendable=False,
@@ -476,7 +425,7 @@ _BRAKENODEDATA = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=19,
-  serialized_end=413,
+  serialized_end=241,
 )
 
 
@@ -541,8 +490,8 @@ _PODCOMMAND = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=416,
-  serialized_end=691,
+  serialized_start=244,
+  serialized_end=519,
 )
 
 
@@ -1069,12 +1018,115 @@ _TELEMETRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=694,
-  serialized_end=2586,
+  serialized_start=522,
+  serialized_end=2414,
 )
 
-_BRAKENODEDATA.fields_by_name['state'].enum_type = _BRAKENODEDATA_BREAKNODESTATE
-_BRAKENODEDATA_BREAKNODESTATE.containing_type = _BRAKENODEDATA
+
+_FCTOBRAKENODE = _descriptor.Descriptor(
+  name='fcToBrakeNode',
+  full_name='fcToBrakeNode',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='podState', full_name='fcToBrakeNode.podState', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='manualNodeState', full_name='fcToBrakeNode.manualNodeState', index=1,
+      number=2, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2416,
+  serialized_end=2504,
+)
+
+
+_DTSNODETOFC = _descriptor.Descriptor(
+  name='dtsNodeToFc',
+  full_name='dtsNodeToFc',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='brakeSolenoidState', full_name='dtsNodeToFc.brakeSolenoidState', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=True, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='ventSolenoidState', full_name='dtsNodeToFc.ventSolenoidState', index=1,
+      number=2, type=8, cpp_type=7, label=1,
+      has_default_value=True, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='rotorTemperature', full_name='dtsNodeToFc.rotorTemperature', index=2,
+      number=3, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='pressureTemperature', full_name='dtsNodeToFc.pressureTemperature', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='highPressure', full_name='dtsNodeToFc.highPressure', index=4,
+      number=5, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='lowPressure', full_name='dtsNodeToFc.lowPressure', index=5,
+      number=6, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2507,
+  serialized_end=2687,
+)
+
+_BRAKENODEDATA.fields_by_name['state'].enum_type = _BRAKENODESTATES
 _PODCOMMAND.fields_by_name['controlsInterfaceState'].enum_type = _CONTROLSINTERFACESTATES
 _PODCOMMAND.fields_by_name['manualPodState'].enum_type = _PODSTATES
 _PODCOMMAND.fields_by_name['manualBrakeNodeState'].enum_type = _BRAKENODESTATES
@@ -1088,9 +1140,13 @@ _TELEMETRY.fields_by_name['inverterState'].enum_type = _INVERTERSTATES
 _TELEMETRY.fields_by_name['lvdcNodeState'].enum_type = _LVDCNODESTATES
 _TELEMETRY.fields_by_name['batteryManagementState'].enum_type = _BATTERYMANAGEMENTSTATES
 _TELEMETRY.fields_by_name['breakNodePerceivedPodState'].enum_type = _PODSTATES
+_FCTOBRAKENODE.fields_by_name['podState'].enum_type = _PODSTATES
+_FCTOBRAKENODE.fields_by_name['manualNodeState'].enum_type = _BRAKENODESTATES
 DESCRIPTOR.message_types_by_name['brakeNodeData'] = _BRAKENODEDATA
 DESCRIPTOR.message_types_by_name['podCommand'] = _PODCOMMAND
 DESCRIPTOR.message_types_by_name['telemetry'] = _TELEMETRY
+DESCRIPTOR.message_types_by_name['fcToBrakeNode'] = _FCTOBRAKENODE
+DESCRIPTOR.message_types_by_name['dtsNodeToFc'] = _DTSNODETOFC
 DESCRIPTOR.enum_types_by_name['BrakeNodeStates'] = _BRAKENODESTATES
 DESCRIPTOR.enum_types_by_name['PodStates'] = _PODSTATES
 DESCRIPTOR.enum_types_by_name['MotorStates'] = _MOTORSTATES
@@ -1121,6 +1177,20 @@ telemetry = _reflection.GeneratedProtocolMessageType('telemetry', (_message.Mess
   # @@protoc_insertion_point(class_scope:telemetry)
   ))
 _sym_db.RegisterMessage(telemetry)
+
+fcToBrakeNode = _reflection.GeneratedProtocolMessageType('fcToBrakeNode', (_message.Message,), dict(
+  DESCRIPTOR = _FCTOBRAKENODE,
+  __module__ = 'Paradigm_pb2'
+  # @@protoc_insertion_point(class_scope:fcToBrakeNode)
+  ))
+_sym_db.RegisterMessage(fcToBrakeNode)
+
+dtsNodeToFc = _reflection.GeneratedProtocolMessageType('dtsNodeToFc', (_message.Message,), dict(
+  DESCRIPTOR = _DTSNODETOFC,
+  __module__ = 'Paradigm_pb2'
+  # @@protoc_insertion_point(class_scope:dtsNodeToFc)
+  ))
+_sym_db.RegisterMessage(dtsNodeToFc)
 
 
 # @@protoc_insertion_point(module_scope)

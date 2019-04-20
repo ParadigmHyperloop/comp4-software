@@ -49,7 +49,7 @@ int main( int32_t argc, char** argv)
 	sPodNetworkValues.iCommanderPortNumber = 5005; //Port # for TCP Commander
 	sPodNetworkValues.iNodePort = 5000; // Port # that Nodes are listening on
 	sPodNetworkValues.iNodeServerPortNumber = 5010; // Port # to recieve UDP from Nodes
-	sPodNetworkValues.iCommaderTimeoutMili = 2000; // Timeout for heartbeat to Control Interace
+	sPodNetworkValues.iCommaderTimeoutMili = 30000; // Timeout for heartbeat to Control Interace
 
 
 
@@ -66,6 +66,7 @@ int main( int32_t argc, char** argv)
 
 	// Controls Interface Connection Thread
 	Pod pCommanderThread = Pod(&sPodValues, &sPodNetworkValues);
+	pCommanderThread.bWriteManualStates = 1;
 	pCommanderThread.bWriteControlsInterfaceState = 1;
 	std::thread tControlsInterfaceConnection(commanderThread, pCommanderThread);
 
