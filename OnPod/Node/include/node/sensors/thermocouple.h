@@ -9,7 +9,7 @@ private:
     uint8_t uAdcChannel;
 public:
     THERMO_NAME(ADS7953 *adc, uint8_t uAdcChannel);
-    float readTemperature();
+    float read();
 };
 
 #endif
