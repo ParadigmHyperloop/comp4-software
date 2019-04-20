@@ -11,7 +11,6 @@ def handle_json(message):
 
 @socket_io.on('disconnect')
 def handle_disconnect():
-    a = request
     print("someone left")
 
 
@@ -39,7 +38,19 @@ def interface_command(command):
 
 
 @socket_io.on('ping')
-def interface_command(ping):
+def pod_pulse(ping):
     print(ping)
     socket_io.emit("ping", ping)
+
+
+@socket_io.on('telemetry_connection')
+def telemetry_setup(status):
+    print("Telemetry Connection:" + status)
+    socket_io.emit("telemetry_connection", status)
+
+
+@socket_io.on('telemetry')
+def pod_telemetry(data):
+    print("Transferring Telemetry")
+    socket_io.emit("telemetry", data)
 

@@ -12,32 +12,34 @@ sio = socketio.Client()
 @sio.on('connect')
 def on_connect():
     print("Telemetry Thread Connected to Server")
-    sio.emit('connected', "telem")
+    sio.emit('connected', "telemetry")
 
 
 @sio.on('disconnect')
 def on_disconnect():
+    sio.emit('telemetry_connection', '0')
     print('I\'m disconnected!')
 
 
 def main():
     sio.connect(SOCKET_SERVER)
-    pod = PodUdpConnection(POD_IP, UDP_TELEM_PORT)
-    pod.connect()
-
-    while pod.is_connected():
-        data = pod.recv(timedelta(seconds=UDP_TELEM_TIMEOUT))
+    udp_socket = PodUdpConnection(POD_IP, UDP_TELEM_PORT)
+    udp_socket.connect()
+    if udp_socket.is_connected():
+        sio.emit('telemetry_connection', '1')
+    while udp_socket.is_connected():
+        data = udp_socket.recv(timedelta(seconds=UDP_TELEM_TIMEOUT))
         if data is not None:
+            print("asdf")
             pod_data = telemetry()
             pod_data.ParseFromString(data)
             json_pod_data = json_format.MessageToJson(pod_data)
             sio.emit('telemetry', json_pod_data)
-
             pod_data = MessageToDict(pod_data)
             logging.debug("Recv {}".format(pod_data))
 
-    pod.close()
-
+    udp_socket.close()
+    sio.emit('telemetry_connection', '0')
 
 if __name__ == "__main__":
     try:

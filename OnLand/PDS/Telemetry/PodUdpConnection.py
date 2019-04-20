@@ -38,7 +38,7 @@ class PodUdpConnection:
             if ready[0]:
                 data = self.sock.recvfrom(MAX_MESSAGE_SIZE)
                 if data is not None:
-                    return data
+                    return data[0]
             else:
                 return None
 
