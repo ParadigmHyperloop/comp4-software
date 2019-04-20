@@ -646,7 +646,7 @@ environment/project/io.sloeber.core.toolChain.release.1891581881/JANTJE.BOARD_NA
 environment/project/io.sloeber.core.toolChain.release.1891581881/JANTJE.BOARD_NAME/value=Arduino/Genuino MKR1000
 environment/project/io.sloeber.core.toolChain.release.1891581881/JANTJE.COM_PORT/delimiter=;
 environment/project/io.sloeber.core.toolChain.release.1891581881/JANTJE.COM_PORT/operation=replace
-environment/project/io.sloeber.core.toolChain.release.1891581881/JANTJE.COM_PORT/value=COM10
+environment/project/io.sloeber.core.toolChain.release.1891581881/JANTJE.COM_PORT/value=COM9
 environment/project/io.sloeber.core.toolChain.release.1891581881/JANTJE.ECLIPSE_LOCATION/delimiter=;
 environment/project/io.sloeber.core.toolChain.release.1891581881/JANTJE.ECLIPSE_LOCATION/operation=replace
 environment/project/io.sloeber.core.toolChain.release.1891581881/JANTJE.ECLIPSE_LOCATION/value=C\:\\eclipse\\

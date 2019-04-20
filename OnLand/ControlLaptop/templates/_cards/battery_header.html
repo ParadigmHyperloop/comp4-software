@@ -1,0 +1,43 @@
+<div class="card">
+    <div class="header">
+        <h4 class="title">Battery Configuration</h4>
+        <div align="right">
+            <h2 style="display: inline"><small>Charge Current: </small></h2>
+            <h2 style="display: inline;" id="value0">38.4</h2>
+            <h2 style="display: inline"><small>A</small></h2>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="content">
+        <form action="" method="post" id="battery-config">
+            <div class="row">
+                <div class="form-group col-md-2">
+                    <label for="minV">Min Voltage</label>
+                    <input class="form-control" id="minV">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="maxV">Max Voltage</label>
+                    <input class="form-control" id="maxV">
+                </div>
+                <div class="form-group col-md-1"></div>
+                <div class="form-group col-md-2">
+                    <label for="minT">Min Temp</label>
+                    <input class="form-control" id="minT">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="maxT">Max Temp</label>
+                    <input class="form-control" id="maxT">
+                </div>
+                <div class="form-group col-md-1"></div>
+                <div class="form-group col-md-2">
+                    <label for="maxD">Max Differential</label>
+                    <input class="form-control" id="maxD">
+                </div>
+            </div>
+            <div class="text-right">
+                <button type="submit" class='btn btn-primary btn-fill btn-md'>Apply</button>
+            </div>
+        </form>
+    </div>
+</div>

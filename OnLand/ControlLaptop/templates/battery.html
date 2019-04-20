@@ -1,1 +1,23 @@
 {% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+    {% include '_cards/battery_header.html' %}
+</div>
+<div class="row">
+    <div class="col-md-3">
+        {% include '_cards/cells1.html' %}
+    </div>
+    <div class="col-md-3">
+        {% include '_cards/cells2.html' %}
+    </div>
+    <div class="col-md-3">
+        {% include '_cards/cells3.html' %}
+    </div>
+    <div class="col-md-3">
+        {% include '_cards/cells4.html' %}
+    </div>
+</div>
+
+{% endblock %}

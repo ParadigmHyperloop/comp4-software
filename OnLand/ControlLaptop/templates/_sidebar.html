@@ -1,4 +1,4 @@
-<div class="sidebar" data-color="blue" data-image="{{ url_for('static', filename='./assets/img/sidebar-5.jpg') }}">
+<div class="sidebar" data-color="blue" data-image="{{ url_for('static', filename='assets/img/pod.jpg') }}">
    <!--
       Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
       Tip 2: you can also add an image using data-image tag
@@ -13,7 +13,7 @@
         {% for data in navigation_bar %}
             <li{% if data.id == active_page %} class="active"{% endif
             %}>
-              <a href="{{ data.href|e }}">
+              <a href="/{{ data.href|e }}">
                 <i class="{{ data.icon|e }}"></i>
                 <p>{{ data.title|e }}</p>
               </a>

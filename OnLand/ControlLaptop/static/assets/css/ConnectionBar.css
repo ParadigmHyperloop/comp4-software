@@ -1,0 +1,50 @@
+:root {
+  --black-bg-color: #252A2D ;
+  --grey-bg-color:  #42474C ;
+  --white-font-color: white;
+
+  --lightGreen:#88E177;
+  --darkGreen:#288E30;
+
+  --lightRed:#F79499;
+  --darkRed:#FF0028;
+  --darkYellow:#F36124;
+  --lightYellow:#FFB484;
+}
+
+
+
+
+.ball-scale-ripple{
+  display: none;
+}
+
+.ball-scale-ripple > div {
+ background-color: var(--lightGreen) !important;
+ border-color: var(--lightGreen) !important;
+ margin: auto;
+}
+
+.line-scale-party{
+    display: none;
+}
+
+.line-scale-party > div {
+ background-color: var(--lightGreen) !important;
+ border-color: var(--lightGreen) !important;
+
+}
+
+.ball-pulse{
+        padding-top: 20px !important;
+
+}
+
+.ball-pulse > div {
+    background-color: #FF4A55;
+    margin: auto;
+}
+
+.connection-card{
+    height: 160px;
+}
