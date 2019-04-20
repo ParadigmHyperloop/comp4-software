@@ -1,39 +1,86 @@
 #include <Arduino.h>
 
-#include "dts.h"
-#include "solenoid.h"
-#include "ethernet.h"
-#include "adc.h"
-#include "ir_temp.h"
+#include "node/drivers/adc.h"
+#include "node/sensors/ir_temp.h"
+#include "node/sensors/thermocouple.h"
+#include "node/sensors/hp_transducer.h"
+#include "node/sensors/lp_transducer.h"
+
+#include "node/drivers/solenoid_driver.h"
+#include "node/drivers/solenoid.h"
 
 #include "Paradigm.pb.h"
+#include "ethernet.h"
 
+// instantiate adc and all sensors with which it interfaces
 ADS7953 adc;
 OS101E rotorTempSensor (&adc, 15);
+THERMO_NAME pneumaticTempSensor (&adc, 0);
+HP_NAME tankTransducer (&adc, 8);
+LP_NAME brakeTransducer (&adc, 10);
 
+// instantiate solenoid driver and all solenoids
 DRV8806 solenoidDriver;
 Solenoid brakeSolenoid (&solenoidDriver, 3);
 Solenoid ventSolenoid (&solenoidDriver, 4);
 
-UDPClass udp (IPAddress(192,168,2,78), 777, 0);
+// instantiate a UDP class and protobuf message objects
+UDPClass udp (IPAddress(192,168,0,3), 777, 0);
 FcToBrakeNode pFcCommand = FcToBrakeNode_init_zero;
 DtsNodeToFc pBrakeNodeTelemetry = DtsNodeToFc_init_zero;
 
-DTS dts;
+// the dts brake node state
+BrakeNodeStates dtsState = BrakeNodeStates_bnsFlight;
 
 void setup() {
-    while (!Serial) {}
+    while (!Serial) {}  // wait for a serial connection to begin
+
+    // initialize drivers / classes
     adc.init();
     solenoidDriver.init();
+    udp.init();
 }
 
 void loop() {
-    // pBrakeNodeTelemetry.rotorTemperature = 13;
-    // bool status = pb_encode(&udp.outStream, DtsNodeToFc_fields, &pBrakeNodeTelemetry);
-    // Serial.println(status);
-    udp.cSendBuffer[0] = 0x0F;
-    Serial.println(udp.cSendBuffer[0], BIN);
-    udp.sendPacket(IPAddress(192, 168, 2, 18), 55019);
-    delay(500);
-    Serial.println("abc");
+    // update sensor values and hold them in the pBrakeNodeTelemetry message object
+    pBrakeNodeTelemetry.rotorTemperature = rotorTempSensor.read();
+    pBrakeNodeTelemetry.pneumaticTemperature = pneumaticTempSensor.read();
+    pBrakeNodeTelemetry.brakeSolenoidState = brakeSolenoid.bState;
+    pBrakeNodeTelemetry.ventSolenoidState = ventSolenoid.bState;
+    pBrakeNodeTelemetry.brakePressure = brakeTransducer.read();
+    pBrakeNodeTelemetry.tankPressure = tankTransducer.read();
+
+    // perform state-specific operations
+    switch (dtsState) {
+        case BrakeNodeStates_bnsFlight:
+            brakeSolenoid.disable();
+            ventSolenoid.disable();
+            break;
+        case BrakeNodeStates_bnsBraking:
+            brakeSolenoid.enable();
+            ventSolenoid.disable();
+            if (pBrakeNodeTelemtry > 500) {
+                dtsState = BrakeNodeStates_bnsFlight;
+            }
+            break;
+        case BrakeNodeStates_bnsVenting:
+            brakeSolenoid.disable();
+            ventSolenoid.enable();
+            break;
+        case BrakeNodeStates_bnsError:
+            // uhhhh
+            break;
+    }
+
+    // check for incoming telemetry and set the state accordingly
+    if (udp.readPacket()) {
+        pb_decode(&udp.inStream, FcToBrakeNode_fields, &pFcCommand);
+        if (pFcCommand.has_manualNodeState) {
+            dtsState = pFcCommand.manualNodeState;
+        }
+    }
+
+    // send the latest values to the flight computer
+    pb_encode(&udp.outStream, DtsNodeToFc_fields, &pBrakeNodeTelemetry);
+    udp.sendPacket(IPAddress(192, 168, 0, 2), 55019);
 }
