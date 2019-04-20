@@ -14,11 +14,11 @@
             </thead>
             <tbody>
             {% for key, value in sensors.items() %}
-                <tr class="d-flex">
-                    <th class="text-center col-5" scope="row">{{ key }}</th>
-                    <td class="col-2"></td>
-                    <td class="col-3"></td>
-                    <td class="col-2"></td>
+                <tr class="d-flex sensor-row" id="{{ key }}">
+                    <th class="text-center col-5" scope="row">{{ value['name_pretty'] }}</th>
+                    <td id="{{ key }}-min" class="col-2"></td>
+                    <td id="{{ key }}-actual" class="col-3"></td>
+                    <td id="{{ key }}-max" class="col-2"></td>
                 </tr>
             {% endfor %}
 
@@ -26,3 +26,5 @@
         </table>
     </div>
 </div>
+
+<script src="{{ url_for('static',filename='assets/js/SensorTable.js') }}"></script>

@@ -3,7 +3,7 @@ from flask import *
 
 from LocalStorage.ConfigurationSotrage import LocalStorage
 from SocketController import PodCommunicator
-from config import *
+from ControlLaptop.config import *
 from forms import FlightConfigurationForm, validate_configuration_values
 
 
@@ -104,5 +104,10 @@ def get_flight_profile_template():
     )
 
 
+@app.route('/sensor_ranges')
+def add_numbers():
+    with open('LocalStorage/DtsSensors.json') as json_file:
+        data = json_file.read().replace('\n', '')
+    return data
 
 
