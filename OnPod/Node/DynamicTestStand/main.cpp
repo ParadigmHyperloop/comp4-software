@@ -59,7 +59,11 @@ void loop() {
         case BrakeNodeStates_bnsBraking:
             brakeSolenoid.enable();
             ventSolenoid.disable();
+<<<<<<< HEAD
             if (pBrakeNodeTelemetry.rotorTemperature > 500) {
+=======
+            if (pBrakeNodeTelemtry > 500) {
+>>>>>>> d0c1338d218722e8f5e55dd0b1d90dddb3781c3e
                 dtsState = BrakeNodeStates_bnsFlight;
             }
             break;
