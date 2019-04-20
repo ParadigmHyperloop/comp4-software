@@ -1,7 +1,7 @@
 #ifndef SOLENOID_H
 #define SOLENOID_H
 
-#include "solenoid_driver.h"
+#include "drivers/solenoid_driver.h"
 
 class Solenoid {
 private:

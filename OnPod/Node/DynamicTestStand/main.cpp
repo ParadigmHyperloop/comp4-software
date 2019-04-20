@@ -7,7 +7,7 @@
 #include "node/sensors/lp_transducer.h"
 
 #include "node/drivers/solenoid_driver.h"
-#include "node/drivers/solenoid.h"
+#include "node/solenoid.h"
 
 #include "Paradigm.pb.h"
 #include "ethernet.h"

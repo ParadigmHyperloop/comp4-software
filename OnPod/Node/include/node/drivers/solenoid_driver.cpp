@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "solenoid.h"
+#include "solenoid_driver.h"
 
 void DRV8806::init() {
     pinMode(PIN_SCLK, OUTPUT);
