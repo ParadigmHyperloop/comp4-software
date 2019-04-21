@@ -7,19 +7,18 @@
 #include "NodeStructs.h"
 #include "adc.h"
 
-/////// Node User Configurable //////////
+///////// Node User Configurable //////////
 const NodeType	NODE_TYPE   = REAR;
 const NodeNum	NODE_NUM    = PRIMARY;
 
 // UDP TX Parameters
-const uint8_t	UDP_TX_IP[] = {192, 168, 0, 1};
-const uint16_t	UDP_TX_Port = 8888;
+UDPParams IPPara;
 
 // UDP RX Parameters
-UDPClass 		udp(PIN_SPI_SS, IPAddress(192, 168, 2, 50), 777, NODE_TYPE, NODE_NUM);
+UDPClass 		udp(PIN_SPI_SS, IPAddress(IPPara.REAR_NODE_IP), IPPara.NODE_RX_UDP_PORT, NODE_TYPE, NODE_NUM);
 
 // ADC Parameters
-uint8_t adcsEnabled[] = {5}; //we may want all dflt on, setting only 5 for starters
+uint8_t adcsEnabled[] = {5}; // we may want all dflt on, setting only 5 for starters
 uint8_t numAdcsEnabled = 1;
 
 /////// End User Configurable ///////////
@@ -44,25 +43,21 @@ void setup() {
 void loop() {
 	// Check for incoming packet from BBB
 	if (udp.readPacket()) {
-		// the data can be accessed at udp.iPacketRecvBuffer
 		udp.parseRearPacket();
 	}
 
-	// Read adc's
 	adc.readActiveChannels();
+	// dac.read();
+	buildRearTxPacket();
 
-
-	NodeValues.packetNum = udp.getTxPacketNum();
-	NodeValues.adcValues = adc.iADCData;
-	NodeValues.errCode = udp.getRxPacketNum();
-
-	memcpy(udp.iPacketSendBuffer, &NodeValues, sizeof(NodeValues));
-	if (udp.sendPacket(IPAddress(UDP_TX_IP), UDP_TX_Port)) {
-		// the data in the buffer has been sent successfully
-	}
-	else {
-		// there was an error in sending the packet
+	if (!udp.sendPacket(IPAddress(IPPara.BBB_IP), IPPara.BBB_UDP_PORT)) {
+		Serial.println("eror on UDP tx num : " + udp.getTxPacketNum());
 	}
 }
 
-void buildValuesPacket()
+void buildRearTxPacket(){
+	NodeValues.packetNum = udp.getTxPacketNum();
+	NodeValues.adcValues[0] = *adc.getiADCData();
+	NodeValues.errCode = udp.getRxPacketNum();
+	memcpy(udp.iPacketSendBuffer, &NodeValues, sizeof(NodeValues));
+}
