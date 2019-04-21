@@ -1,11 +1,11 @@
 from datetime import datetime
+
 from flask import *
 
-from LocalStorage.ConfigurationSotrage import LocalStorage
-from SocketController import PodCommunicator
-from config import *
-from forms import FlightConfigurationForm, validate_configuration_values
-
+from ControlLaptop.LocalStorage.ConfigurationSotrage import LocalStorage
+from ControlLaptop.SocketController import PodCommunicator
+from ControlLaptop.config import get_page_title, NAV_BAR
+from ControlLaptop.forms import FlightConfigurationForm, validate_configuration_values
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secrete-key'  # change later.
@@ -81,7 +81,7 @@ def ui(path):
 def dts():
     page = 'dts'
     title = get_page_title(page)
-    with open('LocalStorage/DtsSensors.json') as json_file:
+    with open('ControlLaptop/LocalStorage/DtsSensors.json') as json_file:
         sensors = json.load(json_file)
     return render_template(
         page+".html",
