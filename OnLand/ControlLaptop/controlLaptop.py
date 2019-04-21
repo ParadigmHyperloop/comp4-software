@@ -1,4 +1,3 @@
-#!/home/lwaghorn/Development/comp4-software/OnLand/venv/bin/python3
 
 from sockets import socket_io, app
 
