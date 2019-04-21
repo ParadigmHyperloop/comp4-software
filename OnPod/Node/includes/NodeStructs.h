@@ -16,9 +16,20 @@ enum NodeNum {
 	TERTIARY   = 2
 };
 
+
+
 enum TxIntervalMS {
 	SHORTEST_DELAY = 40,
 	LONGEST_DELAY  = 100
+};
+
+struct UDPParams {
+	uint8_t  BBB_IP	[4]	= {192, 168, 0, 1};
+	uint16_t BBB_UDP_PORT = 8888;
+	uint8_t  BRAKE_NODE_IP [4] = {192, 168, 2, 51};
+	uint8_t  LVDC_NODE_IP  [4] = {192, 168, 2, 52};
+	uint8_t  REAR_NODE_IP  [4] = {192, 168, 2, 53};
+	uint16_t NODE_RX_UDP_PORT = 777;
 };
 
 struct NodeRxPkg {
@@ -34,7 +45,7 @@ struct BrakePkg {
 	uint16_t bbbState;
 	uint16_t nodeState;
 	uint32_t valueValidFlags;
-	uint32_t adcValues[16];
+	uint16_t adcValues[16];
 	uint32_t solenoidValues[8];
 	uint32_t dacValues[2];
 	uint32_t gpioValues[4];
@@ -43,7 +54,7 @@ struct BrakePkg {
 
 struct RearNodeTxPkg {
 	uint32_t packetNum;
-	uint32_t adcValues[16];
+	uint16_t adcValues[16];
 	uint32_t dacValues[2];
 	uint32_t errCode;
 };

@@ -13,10 +13,10 @@ private:
     const uint16_t AUTO_READ_NEXT = 0x2000;
     uint16_t iActiveChannels; // each bit represents a channel; 1=used, 0=unused
     uint16_t iNumChannels = 0; // number of channels being used;
-
+    uint16_t iADCData[16] = {0};
     uint16_t transfer(uint16_t iData);
 public:
-    uint16_t iADCData[16] {}; //array of the latest data; 0 for channels not being used
+     //array of the latest data; 0 for channels not being used
 
     ADS7953(SPIClass spi, SPISettings spiSettings, uint16_t activeChannelMask = 0);
     void init();
@@ -24,6 +24,7 @@ public:
     void readActiveChannels();
     void enableChannel(uint8_t);
     void disableChannel(uint8_t);
+    uint16_t* getiADCData(){return iADCData;};
 };
 
 #endif
