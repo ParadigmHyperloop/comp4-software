@@ -3,12 +3,12 @@
 
 #include "node/drivers/adc.h"
 
-class HP_NAME {
+class MLH03KPSL01G {
 private:
     ADS7953 *adc;
     uint8_t uAdcChannel;
 public:
-    HP_NAME(ADS7953 *adc, uint8_t uAdcChannel);
+    MLH03KPSL01G(ADS7953 *adc, uint8_t uAdcChannel);
     float read();
 };
 

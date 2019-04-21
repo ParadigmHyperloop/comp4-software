@@ -1,10 +1,9 @@
 #include "hp_transducer.h"
 
-HP_NAME::HP_NAME (ADS7953 *adc, uint8_t uAdcChannel) :
+MLH03KPSL01G::MLH03KPSL01G (ADS7953 *adc, uint8_t uAdcChannel) :
     adc(adc), uAdcChannel(uAdcChannel)
     {}
 
-float HP_NAME::read() {
+float MLH03KPSL01G::read() {
     uint16_t uAdcConversion = adc->readSingleChannel(uAdcChannel);
-    return (uAdcConversion/4096)*556 - 18; // TODO: fix conversion for transducer
-}
+    return (uAdcConversion/4096*5-1)*750;

@@ -16,8 +16,8 @@
 ADS7953 adc;
 OS101E rotorTempSensor (&adc, 15);
 THERMO_NAME pneumaticTempSensor (&adc, 0);
-HP_NAME tankTransducer (&adc, 8);
-LP_NAME brakeTransducer (&adc, 10);
+MLH03KPSL01G tankTransducer (&adc, 8);
+U5200 brakeTransducer (&adc, 10);
 
 // instantiate solenoid driver and all solenoids
 DRV8806 solenoidDriver;

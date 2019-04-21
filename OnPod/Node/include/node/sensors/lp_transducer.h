@@ -3,12 +3,12 @@
 
 #include "node/drivers/adc.h"
 
-class LP_NAME {
+class U5200 {
 private:
     ADS7953 *adc;
     uint8_t uAdcChannel;
 public:
-    LP_NAME(ADS7953 *adc, uint8_t uAdcChannel);
+    U5200(ADS7953 *adc, uint8_t uAdcChannel);
     float read();
 };
 
