@@ -1,4 +1,3 @@
-from PDS.config import *
 import logging
 import threading
 import socket
@@ -10,11 +9,12 @@ class PodUdpConnection:
     All PDS Pod Telemetry
     1-way UDP-Socket listening + some helper methods
     """
-    def __init__(self, ip, port):
+    def __init__(self, ip, port, MAX_MESSAGE_SIZE):
         self.sock = None
         self.ip = ip
         self.port = port
         self.lock = threading.Lock()
+        self.max = MAX_MESSAGE_SIZE
 
     def run(self, timeout=None):
         if not self.is_connected():
@@ -36,7 +36,7 @@ class PodUdpConnection:
         try:
             ready = select.select([self.sock], [], [], timeout.total_seconds())
             if ready[0]:
-                data = self.sock.recvfrom(MAX_MESSAGE_SIZE)
+                data = self.sock.recvfrom(self.max)
                 if data is not None:
                     return data[0]
             else:

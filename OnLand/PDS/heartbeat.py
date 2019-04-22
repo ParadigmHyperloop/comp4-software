@@ -1,9 +1,9 @@
 import socketio
-from Paradigm_pb2 import *
 import time
-from Commander.HeartbeatTimer import HeartbeatTimer
-from Commander.PodTcpConnection import PodTcpConnection
-from PDS.config import *
+from UDP.Paradigm_pb2 import *
+from TCP.heartbeat_timer import HeartbeatTimer
+from TCP.PodTcpConnection import PodTcpConnection
+from config import *
 
 # Create socket to connect to server
 sio = socketio.Client()
@@ -33,7 +33,7 @@ podMessage.controlsInterfaceState = ciFlight
 
 
 def main():
-    pod = PodTcpConnection(ip=POD_IP, port=POD_COMMANDER_PORT)
+    pod = PodTcpConnection(ip=POD_IP, port=POD_COMMANDER_PORT, MAX_MESSAGE_SIZE=MAX_MESSAGE_SIZE)
     timer = HeartbeatTimer()
 
     while not pod.is_connected():
