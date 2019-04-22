@@ -3,7 +3,6 @@ import os
 import errno
 
 
-# TODO: add db stuff in future?
 class FlaskConfig:
 
     def __init__(self, data=None, json_name='flask_config', db=None):

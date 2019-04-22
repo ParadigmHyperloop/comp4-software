@@ -13,10 +13,15 @@ function showSuccessConfigurationUpdate(from, align){
 	});
 }
 
+function validateConfigFormValues() {
+
+}
+
 function setupConfigurationFormSubmit() {
   $('#configuration-form').on('submit' , function handleConfigurationFormSubmission(e) {
     console.log("SUBMISSION");
     e.preventDefault();
+    validateConfigFormValues();
     $.ajax({
       type: "POST",
       beforeSend: function(xhr, settings) {
@@ -37,6 +42,16 @@ function setupConfigurationFormSubmit() {
   });
 }
 
+function setupConfigurationForm()
+{
+  $('#pod-driver').bootstrapToggle({
+    on: 'Motor',
+    off: 'Disabled'
+  })
+
+}
+
 $(document).ready(function() {
+  setupConfigurationForm();
   setupConfigurationFormSubmit();
 });

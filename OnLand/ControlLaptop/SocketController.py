@@ -1,7 +1,7 @@
 import json
 import socket
 
-from LocalStorage.ConfigurationSotrage import DEFAULT_CONFIGURATION
+from ControlLaptop.LocalStorage.ConfigurationSotrage import DEFAULT_CONFIGURATION
 
 
 class PodConnectionConstants:

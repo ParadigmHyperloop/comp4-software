@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, BooleanField
 from wtforms.validators import DataRequired
 
 
@@ -20,6 +20,7 @@ class FlightConfigurationForm(FlaskForm):
                                    validators=[DataRequired("HeartBeat Timeout")])
     pod_ip = StringField('Pod Address (IP)',
                          validators=[DataRequired("Pod Address")])
+    pod_driver = BooleanField('Pod Driver: ')
     submit = SubmitField('Send Configuration')
 
 

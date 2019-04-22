@@ -102,7 +102,3 @@ def get_flight_profile_template():
         configuration_form=FlightConfigurationForm(),
         saved_configuration=LocalStorage.get_default_configuration()
     )
-
-
-
-
