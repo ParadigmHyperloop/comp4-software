@@ -8,7 +8,7 @@ class FlightConfigurationForm(FlaskForm):
                                     validators=[DataRequired("Air Resistance")])
     max_flight_time = StringField('Max Flight Time (s)',
                                   validators=[DataRequired("Motor Speed")])
-    motor_speed = StringField('Max Flight Time(units)',
+    motor_speed = StringField('Motor Speed (units)',
                               validators=[DataRequired("Motor Speed")])
     telemetry_port = StringField('PDS Telemetry Port',
                                  validators=[DataRequired("PDS Port")])
