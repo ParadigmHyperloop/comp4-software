@@ -8,50 +8,48 @@
       <div class="row">
         <div class="form-group col-md-6">
         {{ configuration_form.retrieval_timeout.label }}
-        {{ configuration_form.retrieval_timeout (class="form-control", value=saved_configuration['air_resistance'])}}
+        {{ configuration_form.retrieval_timeout (class="form-control", id="retrieval-timout",value=saved_configuration['air_resistance'])}}
         </div>
         <div class="form-group col-md-6">
           {{ configuration_form.max_flight_time.label }}
-          {{ configuration_form.max_flight_time (class="form-control", value=saved_configuration['motor_speed'])}}
+          {{ configuration_form.max_flight_time (class="form-control", id="max-flight-time", value=saved_configuration['motor_speed'])}}
         </div>
       </div>
       <div class="row">
         <div class="form-group col-md-6">
           {{ configuration_form.motor_speed.label }}
-          {{ configuration_form.motor_speed (class="form-control", value=saved_configuration['motor_speed'])}}
+          {{ configuration_form.motor_speed (class="form-control", id="motor-speed",value=saved_configuration['motor_speed'])}}
         </div>
         <div class="form-group col-md-6">
           {{ configuration_form.telemetry_port.label }}
-          {{ configuration_form.telemetry_port (class="form-control", value=saved_configuration['motor_speed'])}}
+          {{ configuration_form.telemetry_port (class="form-control", id="telemetry-port",value=saved_configuration['motor_speed'])}}
         </div>
       </div>
 
       <div class="row">
         <div class="form-group col-md-6">
           {{ configuration_form.command_port.label }}
-          {{ configuration_form.command_port (class="form-control", value=saved_configuration['motor_speed'])}}
+          {{ configuration_form.command_port (class="form-control", id="command-port",value=saved_configuration['motor_speed'])}}
         </div>
         <div class="form-group col-md-6">
           {{ configuration_form.flight_Length.label }}
-          {{ configuration_form.flight_Length (class="form-control", value=saved_configuration['motor_speed'])}}
+          {{ configuration_form.flight_Length (class="form-control", id="flight-length", value=saved_configuration['motor_speed'])}}
         </div>
       </div>
       <div class="row">
         <div class="form-group col-md-6">
           {{ configuration_form.heartbeat_timout.label }}
-          {{ configuration_form.heartbeat_timout (class="form-control", value=saved_configuration['motor_speed'])}}
+          {{ configuration_form.heartbeat_timout (class="form-control", id="heartbeat-timeout",value=saved_configuration['motor_speed'])}}
         </div>
         <div class="form-group col-md-6">
           {{ configuration_form.pod_ip.label }}
-          {{ configuration_form.pod_ip (class="form-control", value=saved_configuration['pod_address']) }}
+          {{ configuration_form.pod_ip (class="form-control", id="pod-ip",value=saved_configuration['pod_address']) }}
         </div>
       </div>
       <div class="row">
         <div class="text-center">
           {{ configuration_form.pod_driver.label }}
-{#          {{ configuration_form.pod_driver (id="pod-driver", type="checkbox", data-on="Motor", data-off="Simulation", checked="true", data-toggle="toggle", data-onstyle="primary") }}#}
           {{ configuration_form.pod_driver (id="pod-driver") }}
-{#          Pod Driver:  <input id="pod-driver" type="checkbox" data-on="Motor" data-off="Simulation" checked data-toggle="toggle" data-onstyle="primary">#}
         </div>
       </div>
       <div class="text-center">
