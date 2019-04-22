@@ -1,5 +1,6 @@
 import json
 import socket
+from ControlLaptop import FlightConfig_pb2
 
 from ControlLaptop.LocalStorage.ConfigurationSotrage import DEFAULT_CONFIGURATION
 
@@ -50,9 +51,24 @@ class PodCommunicator:
             self.shutdown()
             self._connect_to_pod()
 
+    @staticmethod
+    def get_config_proto(config):
+        flight_config = FlightConfig_pb2.flightConfig()
+        flight_config.retrieval_timeout = int(config['retrieval_timeout'])
+        flight_config.max_flight_time = int(config['max_flight_time'])
+        flight_config.motor_speed = int(config['motor_speed'])
+        flight_config.telemetry_port = int(config['telemetry_port'])
+        flight_config.command_port = int(config['command_port'])
+        flight_config.flight_length = int(config['flight_length'])
+        flight_config.heartbeat_timeout = int(config['heartbeat_timeout'])
+        flight_config.pod_driver = config['pod_driver']
+
+        return flight_config.SerializeToString()
+
     def send_configuration(self, configuration=DEFAULT_CONFIGURATION):
+        serialized_config = self.get_config_proto(configuration)
         try:
-            self._pod_socket.sendall(json.dumps(configuration).encode())
+            self._pod_socket.sendall(serialized_config)
         except socket.error as e:
             print("Failed to send config")
             self.shutdown()

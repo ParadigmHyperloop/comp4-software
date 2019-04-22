@@ -66,7 +66,7 @@ DEFAULT_FLIGHT_CONFIGURATION = {
     'flight_length': 60,
     'heartbeat_timeout': 2000,
     'pod_address': '192.168.5.4',
-    'pod_driver': False,
+    'pod_driver': 'Simulation',
 }
 
 if __name__ == '__main__':
