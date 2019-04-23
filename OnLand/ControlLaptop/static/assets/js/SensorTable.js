@@ -19,6 +19,7 @@ function ParsePodState(state) {
         return
     }
     if (state !== podState) {
+        podState = state
         $(".sensor-row").each(function (index) {
             sensor_name = $(this).attr('id');
             new_min = sensor_ranges[sensor_name][state][0];
@@ -41,7 +42,6 @@ socket.on('telemetry', function (data) {
 });
 
 
-// Once the doc loads run this function
-$(function () {
-    getSensorRanges()
-});
+//Run on load
+getSensorRanges();
+
