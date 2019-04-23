@@ -1,7 +1,6 @@
-import json
 import socket
-from ControlLaptop import FlightConfig_pb2
 
+from ControlLaptop import Paradigm_pb2
 from ControlLaptop.LocalStorage.ConfigurationSotrage import DEFAULT_CONFIGURATION
 
 
@@ -53,7 +52,7 @@ class PodCommunicator:
 
     @staticmethod
     def get_config_proto(config):
-        flight_config = FlightConfig_pb2.flightConfig()
+        flight_config = Paradigm_pb2.flightConfig()
         flight_config.retrieval_timeout = int(config['retrieval_timeout'])
         flight_config.max_flight_time = int(config['max_flight_time'])
         flight_config.motor_speed = int(config['motor_speed'])

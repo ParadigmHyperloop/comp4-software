@@ -3,10 +3,10 @@ from datetime import datetime
 from flask import *
 
 from ControlLaptop.LocalStorage.ConfigurationSotrage import LocalStorage
+from ControlLaptop.LocalStorage.FlightConfig import FlightConfig
 from ControlLaptop.SocketController import PodCommunicator
 from ControlLaptop.config import get_page_title, NAV_BAR
 from ControlLaptop.forms import FlightConfigurationForm
-from ControlLaptop.LocalStorage.FlightConfig import FlightConfig
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secrete-key'  # change later.
@@ -42,8 +42,7 @@ def inject_now():
 def submit_configuration():
     configuration_form = FlightConfigurationForm()
     if configuration_form.validate_on_submit():
-        configsss = FlightConfig.get_flight_config_instance()
-        configsss.update_config(
+        FlightConfig.get_flight_config_instance().update_config(
             {
                 'retrieval_timeout': int(configuration_form.retrieval_timeout.data),
                 'max_flight_time': int(configuration_form.max_flight_time.data),
@@ -53,10 +52,11 @@ def submit_configuration():
                 'flight_length': int(configuration_form.flight_Length.data),
                 'heartbeat_timeout': int(configuration_form.heartbeat_timout.data),
                 'pod_address': configuration_form.pod_ip.data,
-                'pod_driver': 'Motor' if (configuration_form.pod_driver.data) is True else 'Simulation',
+                'pod_driver': 'Motor' if configuration_form.pod_driver.data is True else 'Simulation',
             }
         )
-        PodCommunicator.get_pod_communicator().send_configuration(configuration=FlightConfig.get_flight_config_instance().read_config())
+        PodCommunicator.get_pod_communicator().send_configuration(
+            configuration=FlightConfig.get_flight_config_instance().read_config())
         return jsonify({'status': 'ok'})
     else:
         return jsonify({'error': configuration_form.errors})
