@@ -1,10 +1,40 @@
 #include <FlightComputer/Network.h>
 #include "EasyLogger/easylogging++.h"
+#include <cerrno>
 
 using namespace std;
 
 
-/**initializeClientSocket
+
+clientSocketConfig createUdpClientSocket(int32_t iPort)
+{
+  LOG(INFO)<<"Creating Client Socket";
+  int32_t iSocket = socket(PF_INET, SOCK_DGRAM, 0);
+  if (iSocket < 0){
+	  LOG(INFO)<<"Could not create Node Client socket :" + std::strerror(errno);
+	  throw std::runtime_error();
+  }
+  return iSocket;
+}
+
+
+
+sockaddr_in createGenericNodeAddr()
+{
+  //int iNodePort = iPort; // Node Port
+  struct sockaddr_in SocketAddrStruct;
+  memset(&SocketAddrStruct, '\0', sizeof(SocketAddrStruct));
+  SocketAddrStruct.sin_family = AF_INET;
+  //SocketAddrStruct.sin_port = htons(iNodePort);
+
+  return SocketAddrStruct;
+}
+
+
+
+
+
+/**createUdpClientSocket
  *
  * Create the socket that outbound UDP packets will be transmitted over. Create
  * a sockarrd_inn struct and populate it with common fields. Group into a
@@ -12,15 +42,21 @@ using namespace std;
  *
  * Param:None
  * Returns : SocketConfig struct
+ *
+ * Throws: Runtime error if the socket cant be created.
  */
-clientSocketConfig initializeClientSocket(Pod Pod)
+clientSocketConfig createUdpClientSocketConfig(int32_t iPort)
 {
   LOG(INFO)<<"Creating Client Socket";
-  int iNodePort = Pod.sPodNetworkValues->iNodePort; // Node Port
+  int iNodePort = iPort; // Node Port
   int iSocket;
   struct sockaddr_in SocketAddrStruct;
   memset(&SocketAddrStruct, '\0', sizeof(SocketAddrStruct));
   iSocket = socket(PF_INET, SOCK_DGRAM, 0);
+  if (iSocket < 0){
+	  LOG(INFO)<<"Could not create Node Client socket :" + std::strerror(errno);
+	  throw std::runtime_error();
+  }
   SocketAddrStruct.sin_family = AF_INET;
   SocketAddrStruct.sin_port = htons(iNodePort);
   clientSocketConfig cscSocketInfo;
