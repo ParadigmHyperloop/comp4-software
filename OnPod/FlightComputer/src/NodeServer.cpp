@@ -107,6 +107,28 @@ const char* getPodUpdateMessage(Pod* Pod)
 	}
 }
 
+/**
+ *Wait on socket, parse the recieved message into a protobuf and hand it off.
+ */
+ int32_t nodeNetworkThread(Pod Pod)
+{
+	 // create outbound socket
+
+	 // Create array of nodes
+
+	 // for each node
+	 	 // give update
+	 	 // get update
+
+
+	 return 1;
+}
+
+
+
+
+
+
 
 /**
  *Wait on socket, parse the recieved message into a protobuf and hand it off.

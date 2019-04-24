@@ -58,7 +58,7 @@ class NodeConnection
 			return true;
 		}
 
-		bool getUpdate(){
+		void getUpdate(){
 			char cBuffer[30] = {0};
 			bzero(&cBuffer, sizeof cBuffer);
 			int32_t iRecievedPacketSize = recvfrom(this->iInboundSocket, cBuffer, 300, 0, nullptr, nullptr);
@@ -66,16 +66,24 @@ class NodeConnection
 			{
 				LOG(DEBUG)<<"Packet Recieved on socket:" << iRecievedPacketSize;
 				try{
-					this->parseUpdate(Pod, cBuffer);
+					this->parseUpdate(cBuffer);
 				}
-				catch(){}
+				catch(const std::invalid_argument &e){
+					return;
+				}
 				this->pulse.feed();
+				this->setConnectionStatus(true);
 			}
 			else
 			{
-				LOG(DEBUG)<<"No Packet Recieved on socket:" << iNodeServerSocket;
+				if(this->pulse.expired())
+				{
+					this->setConnectionStatus(false);
+				}
+
+				LOG(DEBUG)<<"No Packet Recieved on " << this->strNodeName;
 			}
-			return true;
+			return;
 		}
 
 		bool createServerSocket(){
@@ -103,12 +111,9 @@ class NodeConnection
 			return true;
 		}
 
-		virtual bool parseUpdate(){
+		virtual bool parseUpdate(char*);
 
-
-
-
-		}
+		virtual void setConnectionStatus(bool);
 
 		Pod* pod;
 		int32_t iOutboundSocket;

@@ -37,6 +37,7 @@ int main( int32_t argc, char** argv)
 		el::Loggers::reconfigureAllLoggers(conf);
 	}
 	LOG(INFO)<<"Main Thread Started";
+	LOG(INFO)<< std::thread::hardware_concurrency();
 
 
 	// Create Shared Memory
