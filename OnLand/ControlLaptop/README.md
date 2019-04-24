@@ -40,11 +40,12 @@ Licensed under MIT (https://github.com/creativetimofficial/light-bootstrap-dashb
     - Install python 3.7.1 and set is as global: 
         1) `pyenv install 3.7.1`
         2) `pyenv global 3.7.1`
-    - create virtualenv: 
-        - `pyenv activate controlLaptop`
+    - create virtualenv and activate virtualenv: 
+        - `pyenv virtualenv onLand`
+        - `pyenv activate onLand`
     - Configure folder to automatically activate environment (Note: Make sure 
-    you inside the `/Controllaptop` directory first):
-        - `pyenv local controlLaptop`
+    you inside the `/onLand` directory first):
+        - `pyenv local onLand`
     
 - Install requirements:
     `pip install -r requirements`

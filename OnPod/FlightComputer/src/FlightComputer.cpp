@@ -52,7 +52,6 @@ int main( int32_t argc, char** argv)
 	sPodNetworkValues.iCommaderTimeoutMili = 30000; // Timeout for heartbeat to Control Interace
 
 
-
 	//Pod Internal Network Thread
 	Pod pPodInternalNetwork = Pod(&sPodValues, &sPodNetworkValues);
 	pPodInternalNetwork.bWriteBreakNodeState = true;
