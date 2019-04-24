@@ -70,8 +70,8 @@ class PodCommunicator:
             self._pod_socket.sendall(serialized_config)
         except socket.error as e:
             print("Failed to send config")
-            self.shutdown()
-            self._connect_to_pod()
+            return False
+        return True
 
     # Disconnect from Pod/Socket
     def shutdown(self):

@@ -55,9 +55,12 @@ def submit_configuration():
                 'pod_driver': 'Motor' if configuration_form.pod_driver.data is True else 'Simulation',
             }
         )
-        PodCommunicator.get_pod_communicator().send_configuration(
+        command_sent = PodCommunicator.get_pod_communicator().send_configuration(
             configuration=FlightConfig.get_flight_config_instance().read_config())
-        return jsonify({'status': 'ok'})
+        if command_sent is True:
+            return jsonify({'status': 'ok'})
+        else:
+            return jsonify({'status': 'error', 'message': 'Failed to Connect'}), 418
     else:
         return jsonify({'error': configuration_form.errors})
 

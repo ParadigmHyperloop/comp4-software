@@ -1,10 +1,10 @@
-function showSuccessConfigurationUpdate(from, align){
+function showConfigurationUpdateStatus(from, align, message, status){
 	$.notify({
 		icon: "pe-7s-gift",
-		message: "Configuration <b>Updated Successfully</b>"
+		message: `Flight Config - <b>${message}</b>`
 
 	},{
-	  type: 'success',
+	  type: status,
 		timer: 4000,
 		placement: {
 			from: from,
@@ -54,7 +54,6 @@ function validConfigFormValues() {
 
 function setupConfigurationFormSubmit() {
   $('#configuration-form').on('submit' , function handleConfigurationFormSubmission(e) {
-    console.log("SUBMISSION");
     e.preventDefault();
     if (validConfigFormValues())
     {
@@ -68,11 +67,11 @@ function setupConfigurationFormSubmit() {
       url: '/submit_configuration',
       data: $('#configuration-form').serialize(),
       success: function handleSucceessFormSubmission(data) {
-        showSuccessConfigurationUpdate('top','right');
+        showConfigurationUpdateStatus('top','right', 'Configuration Sent To POD', 'Success');
         console.log('Submission, Success')
       },
       error: function handleErrorFormSubmission(data) {
-        console.log("FAILED");
+        showConfigurationUpdateStatus('top','right', 'Failed to Connect to Pod', 'Danger');
       }
     });
     }
