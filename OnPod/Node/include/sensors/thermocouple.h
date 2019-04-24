@@ -1,7 +1,7 @@
 #ifndef THERMOCOUPLE_H
 #define THERMOCOUPLE_H
 
-#include "node/drivers/adc.h"
+#include "drivers/adc.h"
 
 class THERMO_NAME {
 private:

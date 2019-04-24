@@ -1,7 +1,7 @@
 #ifndef IRTEMP_H
 #define IRTEMP_H
 
-#include "node/drivers/adc.h"
+#include "drivers/adc.h"
 
 class OS101E {
 private:
