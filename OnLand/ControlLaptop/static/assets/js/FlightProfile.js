@@ -14,42 +14,42 @@ function showSuccessConfigurationUpdate(from, align){
 }
 
 function validConfigFormValues() {
-  let formHasError = true;
+  let formHasNoError = true;
   // Ip Address Validation
   if (!(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test($('#pod-ip').val())))
   {
-    formHasError = false;
+    formHasNoError = false;
     $('#pod-ip').parent().addClass('has-error');
   }
-  if (isNaN($('#retrieval-timout').val())) { // Validated Retrieval timeout
-    formHasError = false;
+  if (isNaN($('#retrieval-timout').val()) && $('#retrieval-timout').val() > 0) { // Validated Retrieval timeout
+    formHasNoError = false;
     $('#retrieval-timout').parent().addClass('has-error');
   }
-  if (isNaN($('#max-flight-time').val())) { // Validated max-flight time
-    formHasError = false;
+  if (isNaN($('#max-flight-time').val()) && $('#max-flight-time').val() > 0) { // Validated max-flight time
+    formHasNoError = false;
     $('#max-flight-time').parent().addClass('has-error');
   }
-  if (isNaN($('#motor-speed').val())) { // Validated motor speed
-    formHasError = false;
+  if (isNaN($('#motor-speed').val()) && $('#motor-speed').val() > 0) { // Validated motor speed
+    formHasNoError = false;
     $('#motor-speed').parent().addClass('has-error');
   }
   if (isNaN($('#telemetry-port').val()) || $('#telemetry-port').val().length !== 4) { // Validated Telemetry port
-    formHasError = false;
+    formHasNoError = false;
     $('#telemetry-port').parent().addClass('has-error');
   }
   if (isNaN($('#command-port').val()) || $('#command-port').val().length !== 4) { // Validated command port
-    formHasError = false;
+    formHasNoError = false;
     $('#command-port').parent().addClass('has-error');
   }
-  if (isNaN($('#flight-length').val())) { // Validated flight Length
-    formHasError = false;
+  if (isNaN($('#flight-length').val()) && $('#flight-length').val() > 0) { // Validated flight Length
+    formHasNoError = false;
     $('#flight-length').parent().addClass('has-error');
   }
-  if (isNaN($('#heartbeat-timeout').val())) { // Validated flight Length
-    formHasError = false;
+  if (isNaN($('#heartbeat-timeout').val()) && $('#heartbeat-timeout').val() > 0) { // Validated flight Length
+    formHasNoError = false;
     $('#heartbeat-timeout').parent().addClass('has-error');
   }
-  return formHasError;
+  return formHasNoError;
 }
 
 function setupConfigurationFormSubmit() {
