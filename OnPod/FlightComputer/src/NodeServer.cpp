@@ -59,113 +59,25 @@ void parseBrakeNodeUpdate(Pod* Pod, char cUpdate[])
 }
 
 
-void retrieveNodeUpdate(Pod* Pod, int32_t iNodeServerSocket)
-{
-		char cBuffer[30] = {0};
-		bzero(&cBuffer, sizeof cBuffer);
-		int32_t iRecievedPacketSize = recvfrom(iNodeServerSocket, cBuffer, 300, 0, nullptr, nullptr);
-		if(iRecievedPacketSize != -1)
-		{
-			LOG(DEBUG)<<"Packet Recieved on socket:" << iRecievedPacketSize;
-			parseBrakeNodeUpdate(Pod, cBuffer);
-		}
-		else
-		{
-			LOG(DEBUG)<<"No Packet Recieved on socket:" << iNodeServerSocket;
-		}
-}
-
-
-const char* getPodUpdateMessage(Pod* Pod)
-{
-	// A temporary plain text message for easy debugging on the node sim side
-	PodStates PodState = Pod->getPodState();
-	switch(PodState)
-	{
-	case psBooting:
-		return "Booting";
-	case psStandby:
-		return "StandBy";
-	case psArming:
-		return "Arming";
-	case psArmed:
-		return "Armed";
-	case psPreFlight:
-		return "PreFlight";
-	case psAcceleration:
-		return "Acceleration";
-	case psCoasting:
-		return "Coasting";
-	case psBraking:
-		return "Braking";
-	case psDisarming:
-		return "Disarming";
-	case psRetrieval:
-		return "Retrieval";
-	default:
-		return "Emergency";
-	}
-}
 
 /**
- *Wait on socket, parse the recieved message into a protobuf and hand it off.
+ *Wait on socket, parse the received message into a protobuf and hand it off.
  */
- int32_t nodeNetworkThread(Pod Pod)
+ int32_t podInternalNetworkThread(Pod Pod)
 {
 	 // create outbound socket
 
 	 // Create array of nodes
 
-	 // for each node
-	 	 // give update
-	 	 // get update
+	 //while true
 
+		 // for each node
+			 // give update
+			 // get update
+
+	 //close sockets
 
 	 return 1;
-}
-
-
-
-
-
-
-
-/**
- *Wait on socket, parse the recieved message into a protobuf and hand it off.
- */
- int32_t podInternalNetworkThread(Pod Pod)
-{
-	// Network setup
-	int32_t iNodeServerSocket = createNodeServerSocket(Pod.sPodNetworkValues->iNodeServerPortNumber);
-	std::vector<std::string> cNodeIpAddrs = Pod.sPodNetworkValues->cNodeIpAddrs;
-
-	if(iNodeServerSocket < 1)
-	{
-		LOG(INFO)<<"ERROR Making Node Server Socket";
-		return iNodeServerSocket;
-	}
-
-	clientSocketConfig cscNodeClientSocket = initializeClientSocket(Pod);
-	LOG(INFO)<<"Starting Node Server Thread";
-	// While mode isnt shutdown
-	while(1){
-		// Serve all nodes with an update
-		// Create Update Packet
-		const char* cMesssage = getPodUpdateMessage(&Pod);
-		//Serve Update to all Nodes
-
-		for(std::size_t i=0; i<cNodeIpAddrs.size(); ++i)
-		{
-			sendDataUdp(&cscNodeClientSocket, cMesssage, strlen(cMesssage), cNodeIpAddrs[i]);
-		}
-
-		// Check all sockets for an update and parse
-		retrieveNodeUpdate(&Pod, iNodeServerSocket);
-
-	}
-	close(cscNodeClientSocket.sckt);
-	close(iNodeServerSocket);
-	return 0;
 }
 
 

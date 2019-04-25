@@ -10,12 +10,26 @@ class NodeConnection
 
 		NodeConnection(std::string strIp, int32_t iNodeAddrPort,int32_t iNodeServerPort, int32_t timeoutMilis, Pod pod, int32_t iSocket):iServerPort(iNodeServerPort), iOutboundSocket(iSocket), pod(pod), iAddrPort(iNodeAddrPort), strNodeIp(strIp){
 			iInboundSocket = -1;
+
 			this->pulse = Heartbeat(timeoutMilis);
-			this->sNodeAddr = sockaddr_in;
+
+			struct sockaddr_in addr;
+			this->sNodeAddr = addr;
 			memset(&this->sNodeAddr, '\0', sizeof(this->sNodeAddr));
 			this->sNodeAddr = createGenericNodeAddr();
 			this->sNodeAddr.sin_port = htons(iAddrPort);
 			this->sNodeAddr.sin_addr.s_addr = inet_addr(strIp.c_str());
+		}
+
+		bool initiate()
+		{
+			try{
+				this->iInboundSocket = this->createServerSocket();
+			}
+			catch(std::runtime_error &e){
+				return false;
+			}
+			return true;
 		}
 
 		const char* getPodUpdateFormat(){
@@ -64,7 +78,7 @@ class NodeConnection
 			int32_t iRecievedPacketSize = recvfrom(this->iInboundSocket, cBuffer, 300, 0, nullptr, nullptr);
 			if(iRecievedPacketSize != -1)
 			{
-				LOG(DEBUG)<<"Packet Recieved on socket:" << iRecievedPacketSize;
+				LOG(DEBUG)<<"Packet Received on socket:" << iRecievedPacketSize;
 				try{
 					this->parseUpdate(cBuffer);
 				}
@@ -81,12 +95,12 @@ class NodeConnection
 					this->setConnectionStatus(false);
 				}
 
-				LOG(DEBUG)<<"No Packet Recieved on " << this->strNodeName;
+				LOG(DEBUG)<<"No Packet Received on " << this->strNodeName;
 			}
 			return;
 		}
 
-		bool createServerSocket(){
+		static bool createServerSocket(){
 			int32_t iSocket;
 			struct sockaddr_in SocketAddrStruct;
 			iSocket = socket(AF_INET, SOCK_DGRAM, 0);
@@ -115,6 +129,7 @@ class NodeConnection
 
 		virtual void setConnectionStatus(bool);
 
+	private:
 		Pod* pod;
 		int32_t iOutboundSocket;
 		int32_t iInboundSocket;
@@ -127,9 +142,14 @@ class NodeConnection
 };
 
 
-void sendDataUdp(clientSocketConfig* cscSocketInfo, const void* vPayload,  int32_t iPayloadSize, std::string sAddress)
+class BrakeNodeConnection : NodeConnection
 {
-  cscSocketInfo->addr.sin_addr.s_addr = inet_addr(sAddress.c_str());
-  sendto(cscSocketInfo->sckt, vPayload, iPayloadSize, 0,
-         (struct sockaddr*)&cscSocketInfo->addr, sizeof(cscSocketInfo->addr));
+	~BrakeNodeConnection(){};
+	void setConnectionStatus(){
+
+
+	}
+
+
 }
+

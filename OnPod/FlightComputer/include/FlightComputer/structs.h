@@ -33,6 +33,10 @@ struct PodValues
 	LvdcNodeStates eManualLvdcNodeState;
 	bool bAutomaticTransitions;
 
+	//ConnectionsArray
+	unsigned char cConnectionsArray[5] = {0};
+	int32_t iConnectionsArraySize = 5;
+
 	// Navigation
 	float fDistance;
 	float fVelocity;
