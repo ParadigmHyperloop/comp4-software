@@ -3,12 +3,12 @@
 
 #include "drivers/adc.h"
 
-class THERMO_NAME {
+class typeKThermo {
 private:
     ADS7953 *adc;
     uint8_t uAdcChannel;
 public:
-    THERMO_NAME(ADS7953 *adc, uint8_t uAdcChannel);
+    typeKThermo(ADS7953 *adc, uint8_t uAdcChannel);
     float read();
 };
 

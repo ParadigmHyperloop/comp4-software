@@ -47,7 +47,7 @@ void ADS7953::readActiveChannels() {
         // ADC channel is the 4 leftmost bits
         uint8_t uChannelNumber = (uConversionData & 0xF000) >> 12;
         // conversion is the 12 rightmost bits
-        uADCData[uChannelNumber] = uConversionData & 0x0FFF;
+        uAdcData[uChannelNumber] = uConversionData & 0x0FFF;
     }
 }
 

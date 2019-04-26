@@ -20,7 +20,7 @@ private:
 
     uint16_t transfer(uint16_t uData);
 public:
-    uint16_t uADCData[16] {}; //array of the latest data; 0 for channels not being used
+    uint16_t uAdcData[16] {}; //array of the latest data; 0 for channels not being used
     void init();
     uint16_t readSingleChannel(uint8_t);
     void readActiveChannels();
