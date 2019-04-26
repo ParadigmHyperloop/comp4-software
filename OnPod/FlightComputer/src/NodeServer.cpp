@@ -2,6 +2,7 @@
 #include "ProtoBuffer/Paradigm.pb.h"
 #include "EasyLogger/easylogging++.h"
 #include <FlightComputer/Network.h>
+#include <FlightComputer/NodeConnection.h>
 
 
 #include <iostream>
@@ -65,8 +66,20 @@ void parseBrakeNodeUpdate(Pod* Pod, char cUpdate[])
  */
  int32_t podInternalNetworkThread(Pod Pod)
 {
-	 // create outbound socket
+	 int32_t iClientSocket = -1;
+	 iClientSocket = createUdpClientSocket();
+	 if(iClientSocket < 0 )
+	 {
+		 LOG(INFO)<< std::string("Error creating client socket for Node Server: ") + std::strerror(errno);
+		 return -1;
+	 }
 
+	 BrakeNodeConnection BrakeNode = BrakeNodeConnection();
+
+
+	 if(!BrakeNode.initiate()){
+		 LOG(INFO)<< " Failed to initiate : "
+	 }
 	 // Create array of nodes
 
 	 //while true

@@ -27,7 +27,7 @@ class NodeConnection
 				this->iInboundSocket = this->createServerSocket();
 			}
 			catch(std::runtime_error &e){
-				return false;
+				throw e;
 			}
 			return true;
 		}
@@ -106,8 +106,8 @@ class NodeConnection
 			iSocket = socket(AF_INET, SOCK_DGRAM, 0);
 		    if (iSocket < 0)
 		    {
-		    	LOG(INFO)<<"ERROR Creating Node Server Socket: " <<  + std::strerror(errno);
-		    	throw std::runtime_error();
+		    	std::string sError = " Creating Server socket: " + std::strerror(errno);
+		    	throw std::runtime_error(sError);
 		    }
 			int flags = fcntl(iSocket, F_GETFL);
 			flags |= O_NONBLOCK;
@@ -118,11 +118,15 @@ class NodeConnection
 			int32_t iBind = bind(iSocket, (struct sockaddr*)&SocketAddrStruct, sizeof(SocketAddrStruct));
 			if(iBind < 0)
 			{
-		    	LOG(INFO)<<"ERROR Binding Node Server Socket: " <<  + std::strerror(errno);
-		    	throw std::runtime_error();
+				std::string sError = "Binding Server Socket: " <<  + std::strerror(errno);
+		    	throw std::runtime_error(sError);
 			}
 			this->iInboundSocket = iSocket;
 			return true;
+		}
+
+		std::string getName(){
+			return this->strNodeName;
 		}
 
 		virtual bool parseUpdate(char*);
