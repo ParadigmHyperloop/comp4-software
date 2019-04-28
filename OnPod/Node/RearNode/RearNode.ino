@@ -3,6 +3,8 @@
 #include <Ethernet.h>
 #include <EthernetUdp.h>
 #include <SPI.h>
+#include <Sodaq_wdt.h>
+#include "Timer.h"
 #include "NodeEthernet.h"
 #include "NodeStructs.h"
 #include "adc.h"
@@ -14,11 +16,12 @@ const NodeNum	NODE_NUM    = PRIMARY;
 uint8_t numAdcsToEnable = 1;
 uint8_t adcsToEnable[] = {5};
 
-bool serialDebug = true;
+uint32_t txIntervalMs = 50;
 
 ///////// Globals ///////////
 // UDP TX Parameters
 UDPParams IPPara;
+Timer txTimer;
 
 // UDP RX Parameters
 UDPClass udp(PIN_SPI_SS, IPAddress(IPPara.REAR_NODE_IP), IPPara.NODE_RX_UDP_PORT, NODE_TYPE, NODE_NUM);
@@ -37,16 +40,26 @@ void buildRearTxPacket(){
 	memcpy(udp.iPacketSendBuffer, &nodeValues, min(UDP_TX_PACKET_MAX_SIZE, sizeof(nodeValues)));
 }
 
+void sendToFlightComputer(void *){
+	if (!udp.sendPacket(IPAddress(IPPara.BBB_IP), IPPara.BBB_UDP_PORT)) {
+		Serial.println("error on UDP tx num : " + udp.getTxPacketNum());
+	}
+}
+
 ///////// Program Start //////////
 void setup() {
 	Serial.begin(9600); // Keeping serial included for plug and debug
 
 	// Initialize udp/adc channels
 	udp.init();
+	// TCP send timer
+	txTimer.every(txIntervalMs, sendToFlightComputer, (void*)0);
     adc.init();
     for (uint8_t adcNum = 0; adcNum < numAdcsToEnable; adcNum++) {
     	adc.enableChannel(adcsToEnable[adcNum]);
     }
+
+    Serial.println("Setup complete");
 }
 
 void loop() {
@@ -54,6 +67,7 @@ void loop() {
 	if (udp.readPacket()) {
 		if (!udp.parseRxPacket(lastRecvdPkg)){
 			nodeValues.errCode |= RX_PARSE_ERR;
+			Serial.println("Error with parsing Rx packet num: " + udp.getRxPacketNum());
 		}
 		else {
 			// Add handling of overrideCodes here, to turn on/off Adc's,
@@ -62,11 +76,6 @@ void loop() {
 	}
 
 	adc.readActiveChannels();
-
 	buildRearTxPacket();
-
-	if (!udp.sendPacket(IPAddress(IPPara.BBB_IP), IPPara.BBB_UDP_PORT)) {
-		Serial.println("error on UDP tx num : " + udp.getTxPacketNum());
-	}
 }
 
