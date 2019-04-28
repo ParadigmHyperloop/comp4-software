@@ -48,12 +48,17 @@ void sendToFlightComputer(void *){
 
 ///////// Program Start //////////
 void setup() {
+	// Watchdog timer init, 8x = 8s set flag, if not cleared by feeding function
+	// and triggered again will reset node. so 16s if 8X if not fed.
+	sodaq_wdt_enable(WDT_PERIOD_8X);
+
 	Serial.begin(9600); // Keeping serial included for plug and debug
 
 	// Initialize udp/adc channels
 	udp.init();
 	// TCP send timer
 	txTimer.every(txIntervalMs, sendToFlightComputer, (void*)0);
+
     adc.init();
     for (uint8_t adcNum = 0; adcNum < numAdcsToEnable; adcNum++) {
     	adc.enableChannel(adcsToEnable[adcNum]);
@@ -70,6 +75,8 @@ void loop() {
 			Serial.println("Error with parsing Rx packet num: " + udp.getRxPacketNum());
 		}
 		else {
+			// Feed watchdogTimer on reception of FlightCOmputer heartbeat
+			sodaq_wdt_reset();
 			// Add handling of overrideCodes here, to turn on/off Adc's,
 			// change Tx intervals, reboot, etc.
 		}
