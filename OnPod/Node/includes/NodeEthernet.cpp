@@ -51,12 +51,13 @@ bool UDPClass::sendPacket(IPAddress iDestinationIP, uint16_t iDestinationPort) {
     return true;
 }
 
-void UDPClass::parseRearPacket(){
-	NodeType type = (NodeType)iPacketRecvBuffer[0];
-	uint32_t packet = iPacketRecvBuffer[sizeof(NodeType)];
-	if (type == REAR && packet > rxPacketNum){ // check if recent packet
-		rxPacketNum = packet;
-
-		// can memcopy packet to a struct here but not needed for rear node at this time
+bool UDPClass::parseRxPacket(NodeRxPkg &pkg){
+	// check if packet type matches this objects type and is most current
+	if (((NodeType)iPacketRecvBuffer[0] == NODE_TYPE) &&
+			(iPacketRecvBuffer[sizeof(pkg.nodeType)] > rxPacketNum)){
+		// copy data, create switch case here if different behavior required
+		memcpy(&pkg, iPacketRecvBuffer, sizeof(NodeRxPkg));
 	}
+	return true;
 }
+

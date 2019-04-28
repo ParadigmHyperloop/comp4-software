@@ -16,11 +16,14 @@ enum NodeNum {
 	TERTIARY   = 2
 };
 
-
-
 enum TxIntervalMS {
 	SHORTEST_DELAY = 40,
 	LONGEST_DELAY  = 100
+};
+
+enum ErrorCodes {
+	NONE	= 0,
+	RX_PARSE_ERR = 1
 };
 
 struct UDPParams {
@@ -60,3 +63,4 @@ struct RearNodeTxPkg {
 };
 
 #endif
+
