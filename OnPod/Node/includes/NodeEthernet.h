@@ -21,7 +21,7 @@ public:
     void init();
     bool readPacket();
     bool sendPacket(IPAddress iDestinationIP, uint16_t iDestinationPort);
-    void parseRearPacket();
+    bool parseRxPacket(NodeRxPkg &pkg);
     // UDP_TX_PACKET_MAX_SIZE is 24B - this can be made much larger
     char iPacketRecvBuffer[UDP_TX_PACKET_MAX_SIZE];
     char iPacketSendBuffer[UDP_TX_PACKET_MAX_SIZE];
