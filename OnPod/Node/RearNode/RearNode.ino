@@ -56,6 +56,7 @@ void setup() {
 
 	// Initialize udp/adc channels
 	udp.init();
+
 	// TCP send timer
 	txTimer.every(txIntervalMs, sendToFlightComputer, (void*)0);
 
@@ -75,10 +76,8 @@ void loop() {
 			Serial.println("Error with parsing Rx packet num: " + udp.getRxPacketNum());
 		}
 		else {
-			// Feed watchdogTimer on reception of FlightCOmputer heartbeat
+			// Feed watchdogTimer on reception of FlightComputer heartbeat
 			sodaq_wdt_reset();
-			// Add handling of overrideCodes here, to turn on/off Adc's,
-			// change Tx intervals, reboot, etc.
 		}
 	}
 
