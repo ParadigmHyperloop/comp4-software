@@ -1,9 +1,9 @@
 import socketio
 import logging
 from datetime import timedelta
-from config import *
-from UDP.PodUdpConnection import PodUdpConnection
-from UDP.Paradigm_pb2 import *
+from PDS.config import *
+from PDS.UDP.PodUdpConnection import PodUdpConnection
+from PDS.UDP.Paradigm_pb2 import *
 from google.protobuf import json_format
 from google.protobuf.json_format import MessageToDict
 

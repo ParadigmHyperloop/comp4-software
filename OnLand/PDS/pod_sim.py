@@ -2,7 +2,7 @@ import socket
 import socketio
 import time
 import random
-from UDP.Paradigm_pb2 import *
+from PDS.UDP.Paradigm_pb2 import *
 
 
 def create_telem(packet):
@@ -29,7 +29,7 @@ def main():
     while(1):
         create_telem(pod_data)
         s.sendto(pod_data.SerializeToString(), ("127.0.0.1", 6000))
-        s.sendto(pod_data.SerializeToString(), ("127.0.0.1", 5005))
+        s.sendto(b'1', ("127.0.0.1", 5005))
         time.sleep(2)
 
 if __name__ == "__main__":

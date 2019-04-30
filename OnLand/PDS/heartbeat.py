@@ -1,9 +1,9 @@
 import socketio
 import time
-from UDP.Paradigm_pb2 import *
-from TCP.heartbeat_timer import HeartbeatTimer
-from TCP.PodTcpConnection import PodTcpConnection
-from config import *
+from PDS.UDP.Paradigm_pb2 import *
+from PDS.TCP.heartbeat_timer import HeartbeatTimer
+from PDS.TCP.PodTcpConnection import PodTcpConnection
+from PDS.config import *
 
 # Create socket to connect to server
 sio = socketio.Client()
@@ -41,6 +41,7 @@ def main():
         pod.connect()
 
         while pod.is_connected():
+            print('connected!')
             # Send Packet, non blocking sockets require a little extra magic to make sure the whole
             # packet gets sent.
             # Send a packets every PULSE_SPEED milliseconds.
@@ -50,6 +51,7 @@ def main():
                 # Receive Packet
                 while timer.time_since_pulse() > COMMANDER_PULSE_SPEED and pod.is_connected():
                     msg = pod.receive()
+                    print(msg)
                     if not msg:
                         if timer.time_since_pulse() > COMMANDER_TIMEOUT_TIME:
                             pod.close()
