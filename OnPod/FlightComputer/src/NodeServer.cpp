@@ -3,42 +3,14 @@
 #include "EasyLogger/easylogging++.h"
 #include <FlightComputer/Network.h>
 #include <FlightComputer/NodeConnection.h>
+#include <thread>
+#include <chrono>
+
 
 
 #include <iostream>
 
 
-/**
- * createNodeServerSocket
- *
- * returns: The socket discriptor number that is associated with the created socket
- * params: None
- *
- * Create the UDP socket that Pod Internal Work Node telemetry will be recieved on.
- */
- int32_t createNodeServerSocket(int32_t iPortNumber) {
-	int32_t iSocket;
-	struct sockaddr_in SocketAddrStruct;
-	iSocket = socket(AF_INET, SOCK_DGRAM, 0);
-    if (iSocket < 0)
-    {
-    	LOG(INFO)<<"ERROR Making Node Server Socket";
-    	return iSocket;
-    }
-	int flags = fcntl(iSocket, F_GETFL);
-	flags |= O_NONBLOCK;
-	fcntl(iSocket, F_SETFL, flags);
-	SocketAddrStruct.sin_family = AF_INET;
-	SocketAddrStruct.sin_port = htons(iPortNumber);
-	SocketAddrStruct.sin_addr.s_addr = INADDR_ANY;
-	int32_t iBind = bind(iSocket, (struct sockaddr*)&SocketAddrStruct, sizeof(SocketAddrStruct));
-	if(iBind < 0)
-	{
-    	LOG(INFO)<<"ERROR Binding Node Server Socket";
-    	return iBind;
-	}
-	return iSocket;
-}
 
 
 void parseBrakeNodeUpdate(Pod* Pod, char cUpdate[])
@@ -68,18 +40,30 @@ void parseBrakeNodeUpdate(Pod* Pod, char cUpdate[])
 {
 	 int32_t iClientSocket = -1;
 	 iClientSocket = createUdpClientSocket();
+
 	 if(iClientSocket < 0 )
 	 {
 		 LOG(INFO)<< std::string("Error creating client socket for Node Server: ") + std::strerror(errno);
 		 return -1;
 	 }
 
-	 BrakeNodeConnection BrakeNode = BrakeNodeConnection();
+	 std::string sNodeIp = "127.0.0.1";
+	 BrakeNodeConnection BrakeNode = BrakeNodeConnection(Pod);
 
-
-	 if(!BrakeNode.initiate()){
-		 LOG(INFO)<< " Failed to initiate : "
+	 try
+	 {
+		 BrakeNode.configure(sNodeIp, 5000, 5001, 3000, iClientSocket);
 	 }
+	 catch(std::runtime_error &e){
+		 LOG(INFO)<< e.what();
+	 }
+
+	 while(1){
+		 BrakeNode.giveUpdate();
+		 BrakeNode.getUpdate();
+		// std::this_thread::sleep_for (std::chrono::seconds(1));
+	 }
+
 	 // Create array of nodes
 
 	 //while true

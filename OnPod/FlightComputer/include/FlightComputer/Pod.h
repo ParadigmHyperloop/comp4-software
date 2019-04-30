@@ -6,8 +6,11 @@
 class Pod
 {
 	public:
+
 		PodValues* sPodValues;
 		PodNetwork* sPodNetworkValues;
+
+		Pod(){};
 
 		Pod(PodValues*, PodNetwork*);
 		// Pod States

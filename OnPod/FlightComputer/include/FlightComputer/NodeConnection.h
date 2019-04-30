@@ -6,35 +6,38 @@ class NodeConnection
 {
 	public:
 
-		virtual ~NodeConnection();
+		virtual ~NodeConnection() = default;
 
-		NodeConnection(std::string strIp, int32_t iNodeAddrPort,int32_t iNodeServerPort, int32_t timeoutMilis, Pod pod, int32_t iSocket):iServerPort(iNodeServerPort), iOutboundSocket(iSocket), pod(pod), iAddrPort(iNodeAddrPort), strNodeIp(strIp){
+		NodeConnection(Pod pod){
+			this->pod = pod;
+		};
+
+		bool configure(std::string strIp, int32_t iDestPort, int32_t iNodeServerPort, int32_t timeoutMilis ,int32_t iOutboundSocket){
+			strNodeIp = strIp;
+			iServerPort = iNodeServerPort;
+			this->iOutboundSocket = iOutboundSocket;
+			this->iDestPort = iDestPort;
 			iInboundSocket = -1;
-
-			this->pulse = Heartbeat(timeoutMilis);
-
-			struct sockaddr_in addr;
-			this->sNodeAddr = addr;
-			memset(&this->sNodeAddr, '\0', sizeof(this->sNodeAddr));
-			this->sNodeAddr = createGenericNodeAddr();
-			this->sNodeAddr.sin_port = htons(iAddrPort);
-			this->sNodeAddr.sin_addr.s_addr = inet_addr(strIp.c_str());
-		}
-
-		bool initiate()
-		{
 			try{
 				this->iInboundSocket = this->createServerSocket();
 			}
 			catch(std::runtime_error &e){
 				throw e;
 			}
+			struct sockaddr_in addr;
+			this->sNodeAddr = addr;
+			memset(&this->sNodeAddr, '\0', sizeof(this->sNodeAddr));
+			this->sNodeAddr = createGenericNodeAddr();
+			this->sNodeAddr.sin_port = htons(iDestPort);
+			this->sNodeAddr.sin_addr.s_addr = inet_addr(strIp.c_str());
+
 			return true;
 		}
 
+
 		const char* getPodUpdateFormat(){
 			// A temporary plain text message for easy debugging on the node sim side
-			PodStates PodState = this->pod->getPodState();
+			PodStates PodState = this->pod.getPodState();
 			switch(PodState)
 			{
 			case psBooting:
@@ -67,7 +70,8 @@ class NodeConnection
 			int32_t sent = sendto(this->iOutboundSocket, cPayload, strlen(cPayload), 0, (struct sockaddr*)&this->sNodeAddr, sizeof(this->sNodeAddr));
 			if(sent == -1)
 			{
-				throw std::runtime_error();
+				std::string sError = std::string("Sending node data: ") + std::strerror(errno);
+				throw std::runtime_error(sError);
 			}
 			return true;
 		}
@@ -75,15 +79,19 @@ class NodeConnection
 		void getUpdate(){
 			char cBuffer[30] = {0};
 			bzero(&cBuffer, sizeof cBuffer);
-			int32_t iRecievedPacketSize = recvfrom(this->iInboundSocket, cBuffer, 300, 0, nullptr, nullptr);
+			int32_t iRecievedPacketSize = recvfrom(this->iInboundSocket, cBuffer, 30, 0, nullptr, nullptr);
 			if(iRecievedPacketSize != -1)
 			{
-				LOG(DEBUG)<<"Packet Received on socket:" << iRecievedPacketSize;
-				try{
+				LOG(INFO)<<"Packet Received on socket:" << iRecievedPacketSize;
+				try
+				{
 					this->parseUpdate(cBuffer);
 				}
-				catch(const std::invalid_argument &e){
-					return;
+				catch(const std::invalid_argument &e)
+				{
+					std::string sError = "getUpdate " + this->strNodeName +": " + e.what();
+					throw std::runtime_error(sError);
+					return ;
 				}
 				this->pulse.feed();
 				this->setConnectionStatus(true);
@@ -100,13 +108,13 @@ class NodeConnection
 			return;
 		}
 
-		static bool createServerSocket(){
+		bool createServerSocket(){
 			int32_t iSocket;
 			struct sockaddr_in SocketAddrStruct;
 			iSocket = socket(AF_INET, SOCK_DGRAM, 0);
 		    if (iSocket < 0)
 		    {
-		    	std::string sError = " Creating Server socket: " + std::strerror(errno);
+		    	std::string sError = std::string(" Creating Server socket: ") + std::strerror(errno);
 		    	throw std::runtime_error(sError);
 		    }
 			int flags = fcntl(iSocket, F_GETFL);
@@ -116,9 +124,10 @@ class NodeConnection
 			SocketAddrStruct.sin_port = htons(iServerPort);
 			SocketAddrStruct.sin_addr.s_addr = INADDR_ANY;
 			int32_t iBind = bind(iSocket, (struct sockaddr*)&SocketAddrStruct, sizeof(SocketAddrStruct));
+			LOG(INFO)<<iBind;
 			if(iBind < 0)
 			{
-				std::string sError = "Binding Server Socket: " <<  + std::strerror(errno);
+				std::string sError = std::string("Binding Server Socket: ") + std::strerror(errno);
 		    	throw std::runtime_error(sError);
 			}
 			this->iInboundSocket = iSocket;
@@ -129,31 +138,39 @@ class NodeConnection
 			return this->strNodeName;
 		}
 
-		virtual bool parseUpdate(char*);
+		virtual bool parseUpdate(char*){return false;};
 
-		virtual void setConnectionStatus(bool);
+		virtual void setConnectionStatus(bool){};
 
 	private:
-		Pod* pod;
-		int32_t iOutboundSocket;
-		int32_t iInboundSocket;
-		int32_t iAddrPort;
-		int32_t iServerPort;
+		Pod pod;
+		int32_t iOutboundSocket = -1;
+		int32_t iInboundSocket = -1;
+		int32_t iDestPort = -1;
+		int32_t iServerPort = -1;
 		std::string strNodeIp;
-		Heartbeat pulse;
+		Heartbeat pulse = Heartbeat(0);
 		std::string strNodeName;
 		struct sockaddr_in sNodeAddr;
 };
 
 
-class BrakeNodeConnection : NodeConnection
+class BrakeNodeConnection : public NodeConnection
 {
-	~BrakeNodeConnection(){};
-	void setConnectionStatus(){
+	public:
 
+		~BrakeNodeConnection();
 
-	}
+		BrakeNodeConnection(Pod pod):NodeConnection(pod){};
 
+		void setConnectionStatus(bool a){
+		}
 
-}
+		bool parseUpdate(char*){return true;}
+
+	private:
+
+};
+
+BrakeNodeConnection::~BrakeNodeConnection(){};
 

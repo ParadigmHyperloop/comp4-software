@@ -21,12 +21,9 @@ int32_t createUdpClientSocket()
 
 sockaddr_in createGenericNodeAddr()
 {
-  //int iNodePort = iPort; // Node Port
   struct sockaddr_in SocketAddrStruct;
   memset(&SocketAddrStruct, '\0', sizeof(SocketAddrStruct));
   SocketAddrStruct.sin_family = AF_INET;
-  //SocketAddrStruct.sin_port = htons(iNodePort);
-
   return SocketAddrStruct;
 }
 
