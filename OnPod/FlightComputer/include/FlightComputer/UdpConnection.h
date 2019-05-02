@@ -12,6 +12,10 @@ class UdpConnection {
             this->sDestAddr = sAddr;
         };
 
+        void setRecvBufferSize(int32_t iSize){
+            int32_t s = setsockopt(this->iInboundSocket, SOL_SOCKET, SO_RCVBUF, &iSize, sizeof(iSize));
+        }
+
         bool configure(const std::string &strIp, int32_t iDestPort, int32_t iServerPort, int32_t timeoutMilis,
                        int32_t iOutboundSocket) {
 
@@ -48,9 +52,6 @@ class UdpConnection {
             int flags = fcntl(iSocketfd, F_GETFL);
             flags |= O_NONBLOCK;
             fcntl(iSocketfd, F_SETFL, flags);
-            //TODO move to own function
-            int32_t iRecvBufSize = 20; // Keep buffer size small so we dont queue up old telemetry
-            int32_t s = setsockopt(iSocketfd, SOL_SOCKET, SO_RCVBUF, &iRecvBufSize, sizeof(iRecvBufSize));
 
             SocketAddrStruct.sin_family = AF_INET;
             SocketAddrStruct.sin_port = htons(this->iServerPort);
@@ -93,6 +94,8 @@ class UdpConnection {
         struct sockaddr_in sDestAddr;
 
 };
+
+
 
 
 class NodeConnection : public UdpConnection {
