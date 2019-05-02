@@ -9,10 +9,10 @@ include_directories(include/ProtoBuffer)
 include_directories(include)
 
 file(GLOB_RECURSE HEADERS "include/*.h")
-file(GLOB SOURCES "src/*.cpp")
+file(GLOB SOURCES "src/*.c*")
 
 
-add_executable(FlightComputer ${SOURCES})
+
 
 
 find_package(Threads REQUIRED)
@@ -27,4 +27,10 @@ endif ()
 find_package(Protobuf REQUIRED)
 include_directories(${Protobuf_INCLUDE_DIRS})
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
+
+
+
+add_executable(FlightComputer ${SOURCES}  ${PROTO_HDRS})
+
+
 target_link_libraries(FlightComputer ${Protobuf_LIBRARIES})

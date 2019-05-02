@@ -19,7 +19,7 @@ class NodeConnection
 			this->iDestPort = iDestPort;
 			iInboundSocket = -1;
 			try{
-				this->iInboundSocket = this->createServerSocket();
+				this->createServerSocket();
 			}
 			catch(std::runtime_error &e){
 				throw e;
@@ -109,27 +109,30 @@ class NodeConnection
 		}
 
 		bool createServerSocket(){
-			int32_t iSocket;
+			int32_t iSocketfd;
 			struct sockaddr_in SocketAddrStruct;
-			iSocket = socket(AF_INET, SOCK_DGRAM, 0);
-		    if (iSocket < 0)
+
+			iSocketfd = socket(AF_INET, SOCK_DGRAM, 0);
+		    if (iSocketfd < 0)
 		    {
 		    	std::string sError = std::string(" Creating Server socket: ") + std::strerror(errno);
 		    	throw std::runtime_error(sError);
 		    }
-			int flags = fcntl(iSocket, F_GETFL);
-			flags |= O_NONBLOCK;
-			fcntl(iSocket, F_SETFL, flags);
+			//int flags = fcntl(iSocket, F_GETFL);
+			//flags |= O_NONBLOCK;
+			//fcntl(iSocket, F_SETFL, flags);
+
+			memset(&SocketAddrStruct, 0, sizeof(SocketAddrStruct));
 			SocketAddrStruct.sin_family = AF_INET;
-			SocketAddrStruct.sin_port = htons(iServerPort);
+			SocketAddrStruct.sin_port = htons(this->iServerPort);
 			SocketAddrStruct.sin_addr.s_addr = INADDR_ANY;
-			int32_t iBind = bind(iSocket, (struct sockaddr*)&SocketAddrStruct, sizeof(SocketAddrStruct));
+			int32_t iBind = bind(iSocketfd, (struct sockaddr*)&SocketAddrStruct, sizeof(SocketAddrStruct));
 			if(iBind < 0)
 			{
 				std::string sError = std::string("Binding Server Socket: ") + std::strerror(errno);
 		    	throw std::runtime_error(sError);
 			}
-			this->iInboundSocket = iSocket;
+			this->iInboundSocket = iSocketfd;
 			return true;
 		}
 
@@ -171,5 +174,4 @@ class BrakeNodeConnection : public NodeConnection
 
 };
 
-BrakeNodeConnection::~BrakeNodeConnection(){};
 

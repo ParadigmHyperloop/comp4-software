@@ -74,6 +74,8 @@ int32_t unserializeProtoMessage(Pod* Pod,char cBuffer[], int32_t iMessageSize)
 }
 
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmissing-noreturn"
 int32_t commanderThread(Pod Pod)
  {
 	//Logging
@@ -163,6 +165,7 @@ int32_t commanderThread(Pod Pod)
 	 }
      close(iSockfd);
  }
+#pragma clang diagnostic pop
 
 
 
