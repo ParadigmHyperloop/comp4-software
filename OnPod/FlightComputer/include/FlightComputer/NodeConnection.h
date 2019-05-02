@@ -79,7 +79,7 @@ class NodeConnection
 		void getUpdate(){
 			char cBuffer[30] = {0};
 			bzero(&cBuffer, sizeof cBuffer);
-			int32_t iRecievedPacketSize = recvfrom(this->iInboundSocket, cBuffer, 30, 0, nullptr, nullptr);
+			int32_t iRecievedPacketSize = recvfrom(this->iInboundSocket, cBuffer, 300, 0, nullptr, nullptr);
 			if(iRecievedPacketSize != -1)
 			{
 				LOG(INFO)<<"Packet Received on socket:" << iRecievedPacketSize;
@@ -124,7 +124,6 @@ class NodeConnection
 			SocketAddrStruct.sin_port = htons(iServerPort);
 			SocketAddrStruct.sin_addr.s_addr = INADDR_ANY;
 			int32_t iBind = bind(iSocket, (struct sockaddr*)&SocketAddrStruct, sizeof(SocketAddrStruct));
-			LOG(INFO)<<iBind;
 			if(iBind < 0)
 			{
 				std::string sError = std::string("Binding Server Socket: ") + std::strerror(errno);
@@ -138,9 +137,9 @@ class NodeConnection
 			return this->strNodeName;
 		}
 
-		virtual bool parseUpdate(char*){return false;};
+		bool parseUpdate(char*){return false;};
 
-		virtual void setConnectionStatus(bool){};
+		void setConnectionStatus(bool){};
 
 	private:
 		Pod pod;
@@ -159,7 +158,7 @@ class BrakeNodeConnection : public NodeConnection
 {
 	public:
 
-		~BrakeNodeConnection();
+		~BrakeNodeConnection() = default;
 
 		BrakeNodeConnection(Pod pod):NodeConnection(pod){};
 

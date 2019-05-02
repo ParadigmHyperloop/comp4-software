@@ -36,7 +36,7 @@ int main( int32_t argc, char** argv)
 		el::Configurations conf("/Users/liamwaghorn/Development/comp4-software/OnPod/FlightComputer/include/EasyLogger/logging.conf");
 		el::Loggers::reconfigureAllLoggers(conf);
 	}
-	LOG(INFO)<<"Main Thread Started";
+	LOG(INFO)<<"Main Thread is Started";
 	LOG(INFO)<< std::thread::hardware_concurrency();
 
 

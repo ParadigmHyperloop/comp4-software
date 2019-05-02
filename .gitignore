@@ -53,3 +53,5 @@ OnPod/FlightComputer/BeagleBone/
 OnPod/FlightComputer/Host/src/
 
 OnPod/FlightComputer/myeasylog\.log
+
+OnPod/FlightComputer/build/host/
