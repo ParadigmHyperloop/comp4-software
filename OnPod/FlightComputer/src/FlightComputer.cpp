@@ -8,8 +8,10 @@
 #include <iostream>
 //Logging System
 
+
 #include "EasyLogger/easylogging++.h"
 INITIALIZE_EASYLOGGINGPP
+
 
 
 #include <FlightComputer/Network.h>
@@ -47,14 +49,18 @@ int main( int32_t argc, char** argv)
 	// Network Configs
 	string cNodeIpAddrs[] =  {"127.0.0.1"};
 	sPodNetworkValues.cNodeIpAddrs.assign(begin(cNodeIpAddrs), end(cNodeIpAddrs)); // Node IPs
-	sPodNetworkValues.iCommanderPortNumber = 5005; //Port # for TCP Commander
+
 	sPodNetworkValues.iBrakeNodePort = 5000; // Port # that Nodes are listening on
 	sPodNetworkValues.iNodeTimeoutMili = 3000;
-	sPodNetworkValues.iBrakeNodeServerPortNumber = 5001; // Port # to recieve UDP from Nodes
-	sPodNetworkValues.iCommaderTimeoutMili = 30000; // Timeout for heartbeat to Control Interace
+	sPodNetworkValues.iBrakeNodeServerPortNumber = 5001; // Port # to receive UDP from Nodes
+
+	sPodNetworkValues.iCommaderTimeoutMili = 30000; // Timeout for heartbeat to Control Interface
+    sPodNetworkValues.iCommanderPortNumber = 5005; //Port # for TCP Commander
+
+    sPodNetworkValues.iActiveNodes[0] = 1; // Set brake node active
 
 
-	//Pod Internal Network Thread
+    //Pod Internal Network Thread
 	Pod pPodInternalNetwork = Pod(&sPodValues, &sPodNetworkValues);
 	pPodInternalNetwork.bWriteBreakNodeState = true;
 	std::thread tServer(podInternalNetworkThread, pPodInternalNetwork);

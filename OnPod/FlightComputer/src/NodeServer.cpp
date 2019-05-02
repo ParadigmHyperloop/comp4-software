@@ -4,22 +4,29 @@
 #include <FlightComputer/NodeConnection.h>
 
 
-void parseBrakeNodeUpdate(Pod *Pod, char cUpdate[]) {
-    BrakeNodeStates bnsBrakeNodeStates[9] = {bnsBooting,
-                                             bnsStandby,
-                                             bnsArming,
-                                             bnsArmed,
-                                             bnsFlight,
-                                             bnsBraking,
-                                             bnsVenting,
-                                             bnsRetrieval,
-                                             bnsError};
-    std::string sNodeState(cUpdate);
-    int32_t iStateNumber = std::stoi(sNodeState);
-    BrakeNodeStates eBrakeNodeState = bnsBrakeNodeStates[iStateNumber];
-    Pod->setBrakeNodeState(eBrakeNodeState);
-    return;
+
+NodeConnection getBrakeNodeConnection(Pod Pod)
+{
+    BrakeNodeConnection BrakeNode = BrakeNodeConnection(Pod);
+
+    try {
+        BrakeNode.configure(Pod.sPodNetworkValues->cNodeIpAddrs[0], Pod.sPodNetworkValues->iBrakeNodePort,
+                            Pod.sPodNetworkValues->iBrakeNodeServerPortNumber, Pod.sPodNetworkValues->iNodeTimeoutMili,
+                            Pod.sPodNetworkValues->iNodeClientSocket);
+    }
+    catch (std::runtime_error &e) {
+        throw e;
+    }
+
+    return  BrakeNode;
 }
+
+NodeConnection getRearNodeConnection(Pod Pod)
+{
+    BrakeNodeConnection BrakeNode = BrakeNodeConnection(Pod);
+    return  BrakeNode;
+}
+
 
 
 #pragma clang diagnostic push
@@ -29,34 +36,49 @@ void parseBrakeNodeUpdate(Pod *Pod, char cUpdate[]) {
  *Wait on socket, parse the received message into a protobuf and hand it off.
  */
 int32_t podInternalNetworkThread(Pod Pod) {
-    int32_t iClientSocket = -1;
-    iClientSocket = createUdpClientSocket();
-
-    if (iClientSocket < 0) {
-        LOG(INFO) << std::string("Error creating client socket for Node Server: ") + std::strerror(errno);
-        return -1;
-    }
-
-    std::string sNodeIp = "127.0.0.1";
-    BrakeNodeConnection BrakeNode = BrakeNodeConnection(Pod);
 
     try {
-        BrakeNode.configure(Pod.sPodNetworkValues->cNodeIpAddrs[0], Pod.sPodNetworkValues->iBrakeNodePort,
-                            Pod.sPodNetworkValues->iBrakeNodeServerPortNumber, Pod.sPodNetworkValues->iNodeTimeoutMili,
-                            iClientSocket);
+        Pod.sPodNetworkValues->iNodeClientSocket = createUdpClientSocket();
     }
     catch (std::runtime_error &e) {
         LOG(INFO) << e.what();
+        return -1;
     }
 
-    while (1) {
-        BrakeNode.giveUpdate();
-        BrakeNode.getUpdate();
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+    std::vector<NodeConnection> nodes;
+    if(Pod.sPodNetworkValues->iActiveNodes[0])
+    {
+        try {
+            nodes.push_back(getBrakeNodeConnection(Pod));
+        }
+        catch (std::runtime_error &e) {
+            LOG(INFO)<< e.what();
+        }
     }
 
-    //close sockets
+    if(Pod.sPodNetworkValues->iActiveNodes[1])
+    {
 
+    }
+
+
+    while (Pod.sPodValues->ePodState != psShutdown ) {
+        // Give and get update for each node
+        for(auto&& node: nodes )
+        {
+            node.giveUpdate();
+            node.getUpdate();
+        }
+
+    }
+
+    for(auto&& node: nodes )
+    {
+        node.closeConnection();
+    }
+    close(Pod.sPodNetworkValues->iNodeClientSocket);
+
+    return 1;
 }
 
 #pragma clang diagnostic pop

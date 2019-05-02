@@ -36,6 +36,10 @@ class dtsNodeToFcDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<dtsNodeToFc> _instance;
 } _dtsNodeToFc_default_instance_;
+class flightConfigDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<flightConfig> _instance;
+} _flightConfig_default_instance_;
 static void InitDefaultsbrakeNodeData_Paradigm_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -106,15 +110,30 @@ static void InitDefaultsdtsNodeToFc_Paradigm_2eproto() {
 ::google::protobuf::internal::SCCInfo<0> scc_info_dtsNodeToFc_Paradigm_2eproto =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsdtsNodeToFc_Paradigm_2eproto}, {}};
 
+static void InitDefaultsflightConfig_Paradigm_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::_flightConfig_default_instance_;
+    new (ptr) ::flightConfig();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::flightConfig::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_flightConfig_Paradigm_2eproto =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsflightConfig_Paradigm_2eproto}, {}};
+
 void InitDefaults_Paradigm_2eproto() {
   ::google::protobuf::internal::InitSCC(&scc_info_brakeNodeData_Paradigm_2eproto.base);
   ::google::protobuf::internal::InitSCC(&scc_info_podCommand_Paradigm_2eproto.base);
   ::google::protobuf::internal::InitSCC(&scc_info_telemetry_Paradigm_2eproto.base);
   ::google::protobuf::internal::InitSCC(&scc_info_fcToBrakeNode_Paradigm_2eproto.base);
   ::google::protobuf::internal::InitSCC(&scc_info_dtsNodeToFc_Paradigm_2eproto.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_flightConfig_Paradigm_2eproto.base);
 }
 
-::google::protobuf::Metadata file_level_metadata_Paradigm_2eproto[5];
+::google::protobuf::Metadata file_level_metadata_Paradigm_2eproto[6];
 const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors_Paradigm_2eproto[8];
 constexpr ::google::protobuf::ServiceDescriptor const** file_level_service_descriptors_Paradigm_2eproto = nullptr;
 
@@ -344,6 +363,27 @@ const ::google::protobuf::uint32 TableStruct_Paradigm_2eproto::offsets[] PROTOBU
   3,
   4,
   5,
+  PROTOBUF_FIELD_OFFSET(::flightConfig, _has_bits_),
+  PROTOBUF_FIELD_OFFSET(::flightConfig, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::flightConfig, retrieval_timeout_),
+  PROTOBUF_FIELD_OFFSET(::flightConfig, max_flight_time_),
+  PROTOBUF_FIELD_OFFSET(::flightConfig, motor_speed_),
+  PROTOBUF_FIELD_OFFSET(::flightConfig, telemetry_port_),
+  PROTOBUF_FIELD_OFFSET(::flightConfig, command_port_),
+  PROTOBUF_FIELD_OFFSET(::flightConfig, flight_length_),
+  PROTOBUF_FIELD_OFFSET(::flightConfig, heartbeat_timeout_),
+  PROTOBUF_FIELD_OFFSET(::flightConfig, pod_driver_),
+  2,
+  1,
+  4,
+  3,
+  6,
+  5,
+  7,
+  0,
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, 19, sizeof(::brakeNodeData)},
@@ -351,6 +391,7 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] PROTOBUF_SE
   { 50, 127, sizeof(::telemetry)},
   { 199, 206, sizeof(::fcToBrakeNode)},
   { 208, 219, sizeof(::dtsNodeToFc)},
+  { 225, 238, sizeof(::flightConfig)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -359,12 +400,13 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::_telemetry_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::_fcToBrakeNode_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::_dtsNodeToFc_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::_flightConfig_default_instance_),
 };
 
 ::google::protobuf::internal::AssignDescriptorsTable assign_descriptors_table_Paradigm_2eproto = {
   {}, AddDescriptors_Paradigm_2eproto, "Paradigm.proto", schemas,
   file_default_instances, TableStruct_Paradigm_2eproto::offsets,
-  file_level_metadata_Paradigm_2eproto, 5, file_level_enum_descriptors_Paradigm_2eproto, file_level_service_descriptors_Paradigm_2eproto,
+  file_level_metadata_Paradigm_2eproto, 6, file_level_enum_descriptors_Paradigm_2eproto, file_level_service_descriptors_Paradigm_2eproto,
 };
 
 const char descriptor_table_protodef_Paradigm_2eproto[] =
@@ -435,28 +477,34 @@ const char descriptor_table_protodef_Paradigm_2eproto[] =
   "entSolenoidState\030\002 \001(\010:\005false\022\030\n\020rotorTe"
   "mperature\030\003 \001(\002\022\033\n\023pressureTemperature\030\004"
   " \001(\005\022\024\n\014highPressure\030\005 \001(\005\022\023\n\013lowPressur"
-  "e\030\006 \001(\005*\235\001\n\017BrakeNodeStates\022\016\n\nbnsBootin"
-  "g\020\000\022\016\n\nbnsStandby\020\001\022\r\n\tbnsArming\020\002\022\014\n\010bn"
-  "sArmed\020\003\022\r\n\tbnsFlight\020\004\022\016\n\nbnsBraking\020\005\022"
-  "\016\n\nbnsVenting\020\006\022\020\n\014bnsRetrieval\020\007\022\014\n\010bns"
-  "Error\020\010*\273\001\n\tPodStates\022\r\n\tpsBooting\020\000\022\r\n\t"
-  "psStandby\020\001\022\014\n\010psArming\020\002\022\013\n\007psArmed\020\003\022\017"
-  "\n\013psPreFlight\020\004\022\022\n\016psAcceleration\020\005\022\016\n\np"
-  "sCoasting\020\006\022\r\n\tpsBraking\020\007\022\017\n\013psDisarmin"
-  "g\020\010\022\017\n\013psRetrieval\020\t\022\017\n\013psEmergency\020\n*C\n"
-  "\013MotorStates\022\t\n\005msOff\020\000\022\016\n\nmsCharging\020\001\022"
-  "\n\n\006msIdle\020\002\022\r\n\tmsEngaged\020\003*G\n\027ControlsIn"
-  "terfaceStates\022\t\n\005ciArm\020\000\022\014\n\010ciFlight\020\001\022\023"
-  "\n\017ciEmergencyStop\020\002* \n\016InverterStates\022\016\n"
-  "\niConnected\020\000*)\n\027BatteryManagementStates"
-  "\022\016\n\nbmsNominal\020\000*.\n\016RearNodeStates\022\r\n\trn"
-  "Booting\020\000\022\r\n\trnNominal\020\001*!\n\016LvdcNodeStat"
-  "es\022\017\n\013lvdcBooting\020\000"
+  "e\030\006 \001(\005\"\313\001\n\014flightConfig\022\031\n\021retrieval_ti"
+  "meout\030\001 \002(\r\022\027\n\017max_flight_time\030\002 \002(\004\022\023\n\013"
+  "motor_speed\030\003 \002(\004\022\026\n\016telemetry_port\030\004 \002("
+  "\005\022\024\n\014command_port\030\005 \002(\005\022\025\n\rflight_length"
+  "\030\006 \002(\004\022\031\n\021heartbeat_timeout\030\007 \002(\005\022\022\n\npod"
+  "_driver\030\010 \002(\t*\235\001\n\017BrakeNodeStates\022\016\n\nbns"
+  "Booting\020\000\022\016\n\nbnsStandby\020\001\022\r\n\tbnsArming\020\002"
+  "\022\014\n\010bnsArmed\020\003\022\r\n\tbnsFlight\020\004\022\016\n\nbnsBrak"
+  "ing\020\005\022\016\n\nbnsVenting\020\006\022\020\n\014bnsRetrieval\020\007\022"
+  "\014\n\010bnsError\020\010*\313\001\n\tPodStates\022\r\n\tpsBooting"
+  "\020\000\022\r\n\tpsStandby\020\001\022\014\n\010psArming\020\002\022\013\n\007psArm"
+  "ed\020\003\022\017\n\013psPreFlight\020\004\022\022\n\016psAcceleration\020"
+  "\005\022\016\n\npsCoasting\020\006\022\r\n\tpsBraking\020\007\022\017\n\013psDi"
+  "sarming\020\010\022\017\n\013psRetrieval\020\t\022\017\n\013psEmergenc"
+  "y\020\n\022\016\n\npsShutdown\020\013*C\n\013MotorStates\022\t\n\005ms"
+  "Off\020\000\022\016\n\nmsCharging\020\001\022\n\n\006msIdle\020\002\022\r\n\tmsE"
+  "ngaged\020\003*G\n\027ControlsInterfaceStates\022\t\n\005c"
+  "iArm\020\000\022\014\n\010ciFlight\020\001\022\023\n\017ciEmergencyStop\020"
+  "\002* \n\016InverterStates\022\016\n\niConnected\020\000*)\n\027B"
+  "atteryManagementStates\022\016\n\nbmsNominal\020\000*."
+  "\n\016RearNodeStates\022\r\n\trnBooting\020\000\022\r\n\trnNom"
+  "inal\020\001*!\n\016LvdcNodeStates\022\017\n\013lvdcBooting\020"
+  "\000"
   ;
 ::google::protobuf::internal::DescriptorTable descriptor_table_Paradigm_2eproto = {
   false, InitDefaults_Paradigm_2eproto, 
   descriptor_table_protodef_Paradigm_2eproto,
-  "Paradigm.proto", &assign_descriptors_table_Paradigm_2eproto, 3339,
+  "Paradigm.proto", &assign_descriptors_table_Paradigm_2eproto, 3561,
 };
 
 void AddDescriptors_Paradigm_2eproto() {
@@ -506,6 +554,7 @@ bool PodStates_IsValid(int value) {
     case 8:
     case 9:
     case 10:
+    case 11:
       return true;
     default:
       return false;
@@ -6632,6 +6681,695 @@ void dtsNodeToFc::InternalSwap(dtsNodeToFc* other) {
 }
 
 
+// ===================================================================
+
+void flightConfig::InitAsDefaultInstance() {
+}
+class flightConfig::HasBitSetters {
+ public:
+  static void set_has_retrieval_timeout(flightConfig* msg) {
+    msg->_has_bits_[0] |= 0x00000004u;
+  }
+  static void set_has_max_flight_time(flightConfig* msg) {
+    msg->_has_bits_[0] |= 0x00000002u;
+  }
+  static void set_has_motor_speed(flightConfig* msg) {
+    msg->_has_bits_[0] |= 0x00000010u;
+  }
+  static void set_has_telemetry_port(flightConfig* msg) {
+    msg->_has_bits_[0] |= 0x00000008u;
+  }
+  static void set_has_command_port(flightConfig* msg) {
+    msg->_has_bits_[0] |= 0x00000040u;
+  }
+  static void set_has_flight_length(flightConfig* msg) {
+    msg->_has_bits_[0] |= 0x00000020u;
+  }
+  static void set_has_heartbeat_timeout(flightConfig* msg) {
+    msg->_has_bits_[0] |= 0x00000080u;
+  }
+  static void set_has_pod_driver(flightConfig* msg) {
+    msg->_has_bits_[0] |= 0x00000001u;
+  }
+};
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int flightConfig::kRetrievalTimeoutFieldNumber;
+const int flightConfig::kMaxFlightTimeFieldNumber;
+const int flightConfig::kMotorSpeedFieldNumber;
+const int flightConfig::kTelemetryPortFieldNumber;
+const int flightConfig::kCommandPortFieldNumber;
+const int flightConfig::kFlightLengthFieldNumber;
+const int flightConfig::kHeartbeatTimeoutFieldNumber;
+const int flightConfig::kPodDriverFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+flightConfig::flightConfig()
+  : ::google::protobuf::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:flightConfig)
+}
+flightConfig::flightConfig(const flightConfig& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(nullptr),
+      _has_bits_(from._has_bits_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  pod_driver_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.has_pod_driver()) {
+    pod_driver_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.pod_driver_);
+  }
+  ::memcpy(&max_flight_time_, &from.max_flight_time_,
+    static_cast<size_t>(reinterpret_cast<char*>(&heartbeat_timeout_) -
+    reinterpret_cast<char*>(&max_flight_time_)) + sizeof(heartbeat_timeout_));
+  // @@protoc_insertion_point(copy_constructor:flightConfig)
+}
+
+void flightConfig::SharedCtor() {
+  ::google::protobuf::internal::InitSCC(
+      &scc_info_flightConfig_Paradigm_2eproto.base);
+  pod_driver_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&max_flight_time_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&heartbeat_timeout_) -
+      reinterpret_cast<char*>(&max_flight_time_)) + sizeof(heartbeat_timeout_));
+}
+
+flightConfig::~flightConfig() {
+  // @@protoc_insertion_point(destructor:flightConfig)
+  SharedDtor();
+}
+
+void flightConfig::SharedDtor() {
+  pod_driver_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+void flightConfig::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const flightConfig& flightConfig::default_instance() {
+  ::google::protobuf::internal::InitSCC(&::scc_info_flightConfig_Paradigm_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void flightConfig::Clear() {
+// @@protoc_insertion_point(message_clear_start:flightConfig)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    pod_driver_.ClearNonDefaultToEmptyNoArena();
+  }
+  if (cached_has_bits & 0x000000feu) {
+    ::memset(&max_flight_time_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&heartbeat_timeout_) -
+        reinterpret_cast<char*>(&max_flight_time_)) + sizeof(heartbeat_timeout_));
+  }
+  _has_bits_.Clear();
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* flightConfig::_InternalParse(const char* begin, const char* end, void* object,
+                  ::google::protobuf::internal::ParseContext* ctx) {
+  auto msg = static_cast<flightConfig*>(object);
+  ::google::protobuf::int32 size; (void)size;
+  int depth; (void)depth;
+  ::google::protobuf::uint32 tag;
+  ::google::protobuf::internal::ParseFunc parser_till_end; (void)parser_till_end;
+  auto ptr = begin;
+  while (ptr < end) {
+    ptr = ::google::protobuf::io::Parse32(ptr, &tag);
+    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+    switch (tag >> 3) {
+      // required uint32 retrieval_timeout = 1;
+      case 1: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 8) goto handle_unusual;
+        msg->set_retrieval_timeout(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // required uint64 max_flight_time = 2;
+      case 2: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 16) goto handle_unusual;
+        msg->set_max_flight_time(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // required uint64 motor_speed = 3;
+      case 3: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 24) goto handle_unusual;
+        msg->set_motor_speed(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // required int32 telemetry_port = 4;
+      case 4: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 32) goto handle_unusual;
+        msg->set_telemetry_port(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // required int32 command_port = 5;
+      case 5: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 40) goto handle_unusual;
+        msg->set_command_port(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // required uint64 flight_length = 6;
+      case 6: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 48) goto handle_unusual;
+        msg->set_flight_length(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // required int32 heartbeat_timeout = 7;
+      case 7: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 56) goto handle_unusual;
+        msg->set_heartbeat_timeout(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // required string pod_driver = 8;
+      case 8: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 66) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        ctx->extra_parse_data().SetFieldName("flightConfig.pod_driver");
+        object = msg->mutable_pod_driver();
+        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8Verify;
+          goto string_till_end;
+        }
+        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8Verify(ptr, size, ctx));
+        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+        ptr += size;
+        break;
+      }
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->EndGroup(tag);
+          return ptr;
+        }
+        auto res = UnknownFieldParse(tag, {_InternalParse, msg},
+          ptr, end, msg->_internal_metadata_.mutable_unknown_fields(), ctx);
+        ptr = res.first;
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr != nullptr);
+        if (res.second) return ptr;
+      }
+    }  // switch
+  }  // while
+  return ptr;
+string_till_end:
+  static_cast<::std::string*>(object)->clear();
+  static_cast<::std::string*>(object)->reserve(size);
+  goto len_delim_till_end;
+len_delim_till_end:
+  return ctx->StoreAndTailCall(ptr, end, {_InternalParse, msg},
+                               {parser_till_end, object}, size);
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool flightConfig::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:flightConfig)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required uint32 retrieval_timeout = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (8 & 0xFF)) {
+          HasBitSetters::set_has_retrieval_timeout(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &retrieval_timeout_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required uint64 max_flight_time = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (16 & 0xFF)) {
+          HasBitSetters::set_has_max_flight_time(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &max_flight_time_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required uint64 motor_speed = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (24 & 0xFF)) {
+          HasBitSetters::set_has_motor_speed(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &motor_speed_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required int32 telemetry_port = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (32 & 0xFF)) {
+          HasBitSetters::set_has_telemetry_port(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &telemetry_port_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required int32 command_port = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (40 & 0xFF)) {
+          HasBitSetters::set_has_command_port(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &command_port_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required uint64 flight_length = 6;
+      case 6: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (48 & 0xFF)) {
+          HasBitSetters::set_has_flight_length(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &flight_length_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required int32 heartbeat_timeout = 7;
+      case 7: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (56 & 0xFF)) {
+          HasBitSetters::set_has_heartbeat_timeout(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &heartbeat_timeout_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required string pod_driver = 8;
+      case 8: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (66 & 0xFF)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_pod_driver()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->pod_driver().data(), static_cast<int>(this->pod_driver().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "flightConfig.pod_driver");
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:flightConfig)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:flightConfig)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void flightConfig::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:flightConfig)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // required uint32 retrieval_timeout = 1;
+  if (cached_has_bits & 0x00000004u) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->retrieval_timeout(), output);
+  }
+
+  // required uint64 max_flight_time = 2;
+  if (cached_has_bits & 0x00000002u) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(2, this->max_flight_time(), output);
+  }
+
+  // required uint64 motor_speed = 3;
+  if (cached_has_bits & 0x00000010u) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(3, this->motor_speed(), output);
+  }
+
+  // required int32 telemetry_port = 4;
+  if (cached_has_bits & 0x00000008u) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->telemetry_port(), output);
+  }
+
+  // required int32 command_port = 5;
+  if (cached_has_bits & 0x00000040u) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->command_port(), output);
+  }
+
+  // required uint64 flight_length = 6;
+  if (cached_has_bits & 0x00000020u) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(6, this->flight_length(), output);
+  }
+
+  // required int32 heartbeat_timeout = 7;
+  if (cached_has_bits & 0x00000080u) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(7, this->heartbeat_timeout(), output);
+  }
+
+  // required string pod_driver = 8;
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->pod_driver().data(), static_cast<int>(this->pod_driver().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "flightConfig.pod_driver");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      8, this->pod_driver(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:flightConfig)
+}
+
+::google::protobuf::uint8* flightConfig::InternalSerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:flightConfig)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // required uint32 retrieval_timeout = 1;
+  if (cached_has_bits & 0x00000004u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->retrieval_timeout(), target);
+  }
+
+  // required uint64 max_flight_time = 2;
+  if (cached_has_bits & 0x00000002u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(2, this->max_flight_time(), target);
+  }
+
+  // required uint64 motor_speed = 3;
+  if (cached_has_bits & 0x00000010u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(3, this->motor_speed(), target);
+  }
+
+  // required int32 telemetry_port = 4;
+  if (cached_has_bits & 0x00000008u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->telemetry_port(), target);
+  }
+
+  // required int32 command_port = 5;
+  if (cached_has_bits & 0x00000040u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->command_port(), target);
+  }
+
+  // required uint64 flight_length = 6;
+  if (cached_has_bits & 0x00000020u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(6, this->flight_length(), target);
+  }
+
+  // required int32 heartbeat_timeout = 7;
+  if (cached_has_bits & 0x00000080u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(7, this->heartbeat_timeout(), target);
+  }
+
+  // required string pod_driver = 8;
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->pod_driver().data(), static_cast<int>(this->pod_driver().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "flightConfig.pod_driver");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        8, this->pod_driver(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:flightConfig)
+  return target;
+}
+
+size_t flightConfig::RequiredFieldsByteSizeFallback() const {
+// @@protoc_insertion_point(required_fields_byte_size_fallback_start:flightConfig)
+  size_t total_size = 0;
+
+  if (has_pod_driver()) {
+    // required string pod_driver = 8;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->pod_driver());
+  }
+
+  if (has_max_flight_time()) {
+    // required uint64 max_flight_time = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt64Size(
+        this->max_flight_time());
+  }
+
+  if (has_retrieval_timeout()) {
+    // required uint32 retrieval_timeout = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->retrieval_timeout());
+  }
+
+  if (has_telemetry_port()) {
+    // required int32 telemetry_port = 4;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->telemetry_port());
+  }
+
+  if (has_motor_speed()) {
+    // required uint64 motor_speed = 3;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt64Size(
+        this->motor_speed());
+  }
+
+  if (has_flight_length()) {
+    // required uint64 flight_length = 6;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt64Size(
+        this->flight_length());
+  }
+
+  if (has_command_port()) {
+    // required int32 command_port = 5;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->command_port());
+  }
+
+  if (has_heartbeat_timeout()) {
+    // required int32 heartbeat_timeout = 7;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->heartbeat_timeout());
+  }
+
+  return total_size;
+}
+size_t flightConfig::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:flightConfig)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  if (((_has_bits_[0] & 0x000000ff) ^ 0x000000ff) == 0) {  // All required fields are present.
+    // required string pod_driver = 8;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->pod_driver());
+
+    // required uint64 max_flight_time = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt64Size(
+        this->max_flight_time());
+
+    // required uint32 retrieval_timeout = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->retrieval_timeout());
+
+    // required int32 telemetry_port = 4;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->telemetry_port());
+
+    // required uint64 motor_speed = 3;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt64Size(
+        this->motor_speed());
+
+    // required uint64 flight_length = 6;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt64Size(
+        this->flight_length());
+
+    // required int32 command_port = 5;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->command_port());
+
+    // required int32 heartbeat_timeout = 7;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->heartbeat_timeout());
+
+  } else {
+    total_size += RequiredFieldsByteSizeFallback();
+  }
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void flightConfig::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:flightConfig)
+  GOOGLE_DCHECK_NE(&from, this);
+  const flightConfig* source =
+      ::google::protobuf::DynamicCastToGenerated<flightConfig>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:flightConfig)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:flightConfig)
+    MergeFrom(*source);
+  }
+}
+
+void flightConfig::MergeFrom(const flightConfig& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:flightConfig)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._has_bits_[0];
+  if (cached_has_bits & 0x000000ffu) {
+    if (cached_has_bits & 0x00000001u) {
+      _has_bits_[0] |= 0x00000001u;
+      pod_driver_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.pod_driver_);
+    }
+    if (cached_has_bits & 0x00000002u) {
+      max_flight_time_ = from.max_flight_time_;
+    }
+    if (cached_has_bits & 0x00000004u) {
+      retrieval_timeout_ = from.retrieval_timeout_;
+    }
+    if (cached_has_bits & 0x00000008u) {
+      telemetry_port_ = from.telemetry_port_;
+    }
+    if (cached_has_bits & 0x00000010u) {
+      motor_speed_ = from.motor_speed_;
+    }
+    if (cached_has_bits & 0x00000020u) {
+      flight_length_ = from.flight_length_;
+    }
+    if (cached_has_bits & 0x00000040u) {
+      command_port_ = from.command_port_;
+    }
+    if (cached_has_bits & 0x00000080u) {
+      heartbeat_timeout_ = from.heartbeat_timeout_;
+    }
+    _has_bits_[0] |= cached_has_bits;
+  }
+}
+
+void flightConfig::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:flightConfig)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void flightConfig::CopyFrom(const flightConfig& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:flightConfig)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool flightConfig::IsInitialized() const {
+  if ((_has_bits_[0] & 0x000000ff) != 0x000000ff) return false;
+  return true;
+}
+
+void flightConfig::Swap(flightConfig* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void flightConfig::InternalSwap(flightConfig* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
+  pod_driver_.Swap(&other->pod_driver_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  swap(max_flight_time_, other->max_flight_time_);
+  swap(retrieval_timeout_, other->retrieval_timeout_);
+  swap(telemetry_port_, other->telemetry_port_);
+  swap(motor_speed_, other->motor_speed_);
+  swap(flight_length_, other->flight_length_);
+  swap(command_port_, other->command_port_);
+  swap(heartbeat_timeout_, other->heartbeat_timeout_);
+}
+
+::google::protobuf::Metadata flightConfig::GetMetadata() const {
+  ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_Paradigm_2eproto);
+  return ::file_level_metadata_Paradigm_2eproto[kIndexInFileMessages];
+}
+
+
 // @@protoc_insertion_point(namespace_scope)
 namespace google {
 namespace protobuf {
@@ -6649,6 +7387,9 @@ template<> PROTOBUF_NOINLINE ::fcToBrakeNode* Arena::CreateMaybeMessage< ::fcToB
 }
 template<> PROTOBUF_NOINLINE ::dtsNodeToFc* Arena::CreateMaybeMessage< ::dtsNodeToFc >(Arena* arena) {
   return Arena::CreateInternal< ::dtsNodeToFc >(arena);
+}
+template<> PROTOBUF_NOINLINE ::flightConfig* Arena::CreateMaybeMessage< ::flightConfig >(Arena* arena) {
+  return Arena::CreateInternal< ::flightConfig >(arena);
 }
 }  // namespace protobuf
 }  // namespace google

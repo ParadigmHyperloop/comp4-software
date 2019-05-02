@@ -6,6 +6,7 @@
 
 
 
+
 //enum PodStates { psStandby, psArming, psArmed, psAcceleration, psCoasting, psBraking, psDisarm, psRetrieval, psEmergency, psBooting };
 
 //enum eBreakNodeStates { bnsBooting, bnsStandby, bnsArming, bnsArmed, bnsFlight, bnsBraking, bnsVenting, bnsRetrieval, bnsError};
@@ -34,14 +35,14 @@ struct PodValues
 	bool bAutomaticTransitions;
 
 	//ConnectionsArray
-	unsigned char cConnectionsArray[5] = {0};
-	int32_t iConnectionsArraySize = 5;
+	std::vector<bool> cConnectionsArray = {false,false,false,false,false}; // [brake , rear, lvdc, bms, inverter]
 
 	// Navigation
 	float fDistance;
 	float fVelocity;
 	// Rear Node
 	float fGpioValues;
+
 	//FlagsV2
 	unsigned char cFlagsArray[3] = {0};
 	int32_t iFlagsArraySize = 3;
@@ -66,10 +67,15 @@ struct PodValues
 
 struct PodNetwork
 {
+
+ std::vector<int32_t> iActiveNodes = {0,0,0};
+
  std::vector<std::string> cNodeIpAddrs; //IP addrs of all nodes order: Brake, Rear, LVDC, Enclosure
  int32_t iBrakeNodeServerPortNumber;
  int32_t iBrakeNodePort; //Port # used by nodes to recieve UDP updates
  int32_t iNodeTimeoutMili;
+
+ int32_t iNodeClientSocket; //Port used to send data to nodes
 
  int32_t iCommanderPortNumber; //Port # used by TCP Commander socket
  int32_t iCommaderTimeoutMili; //Timeout

@@ -24,6 +24,7 @@ enum PodStates {
     psDisarming     = 8;
     psRetrieval     = 9;
     psEmergency     = 10;
+    psShutdown      = 11;
 }
 
 enum MotorStates {

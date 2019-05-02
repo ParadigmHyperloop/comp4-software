@@ -42,7 +42,7 @@ struct TableStruct_Paradigm_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::google::protobuf::internal::ParseTable schema[5]
+  static const ::google::protobuf::internal::ParseTable schema[6]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
@@ -58,6 +58,9 @@ extern dtsNodeToFcDefaultTypeInternal _dtsNodeToFc_default_instance_;
 class fcToBrakeNode;
 class fcToBrakeNodeDefaultTypeInternal;
 extern fcToBrakeNodeDefaultTypeInternal _fcToBrakeNode_default_instance_;
+class flightConfig;
+class flightConfigDefaultTypeInternal;
+extern flightConfigDefaultTypeInternal _flightConfig_default_instance_;
 class podCommand;
 class podCommandDefaultTypeInternal;
 extern podCommandDefaultTypeInternal _podCommand_default_instance_;
@@ -69,6 +72,7 @@ namespace protobuf {
 template<> ::brakeNodeData* Arena::CreateMaybeMessage<::brakeNodeData>(Arena*);
 template<> ::dtsNodeToFc* Arena::CreateMaybeMessage<::dtsNodeToFc>(Arena*);
 template<> ::fcToBrakeNode* Arena::CreateMaybeMessage<::fcToBrakeNode>(Arena*);
+template<> ::flightConfig* Arena::CreateMaybeMessage<::flightConfig>(Arena*);
 template<> ::podCommand* Arena::CreateMaybeMessage<::podCommand>(Arena*);
 template<> ::telemetry* Arena::CreateMaybeMessage<::telemetry>(Arena*);
 }  // namespace protobuf
@@ -111,11 +115,12 @@ enum PodStates {
   psBraking = 7,
   psDisarming = 8,
   psRetrieval = 9,
-  psEmergency = 10
+  psEmergency = 10,
+  psShutdown = 11
 };
 bool PodStates_IsValid(int value);
 const PodStates PodStates_MIN = psBooting;
-const PodStates PodStates_MAX = psEmergency;
+const PodStates PodStates_MAX = psShutdown;
 const int PodStates_ARRAYSIZE = PodStates_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* PodStates_descriptor();
@@ -1630,6 +1635,194 @@ class dtsNodeToFc :
   ::google::protobuf::int32 pressuretemperature_;
   ::google::protobuf::int32 highpressure_;
   ::google::protobuf::int32 lowpressure_;
+  friend struct ::TableStruct_Paradigm_2eproto;
+};
+// -------------------------------------------------------------------
+
+class flightConfig :
+    public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:flightConfig) */ {
+ public:
+  flightConfig();
+  virtual ~flightConfig();
+
+  flightConfig(const flightConfig& from);
+
+  inline flightConfig& operator=(const flightConfig& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  flightConfig(flightConfig&& from) noexcept
+    : flightConfig() {
+    *this = ::std::move(from);
+  }
+
+  inline flightConfig& operator=(flightConfig&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return default_instance().GetDescriptor();
+  }
+  static const flightConfig& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const flightConfig* internal_default_instance() {
+    return reinterpret_cast<const flightConfig*>(
+               &_flightConfig_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    5;
+
+  void Swap(flightConfig* other);
+  friend void swap(flightConfig& a, flightConfig& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline flightConfig* New() const final {
+    return CreateMaybeMessage<flightConfig>(nullptr);
+  }
+
+  flightConfig* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<flightConfig>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const flightConfig& from);
+  void MergeFrom(const flightConfig& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  static const char* _InternalParse(const char* begin, const char* end, void* object, ::google::protobuf::internal::ParseContext* ctx);
+  ::google::protobuf::internal::ParseFunc _ParseFunc() const final { return _InternalParse; }
+  #else
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(flightConfig* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string pod_driver = 8;
+  bool has_pod_driver() const;
+  void clear_pod_driver();
+  static const int kPodDriverFieldNumber = 8;
+  const ::std::string& pod_driver() const;
+  void set_pod_driver(const ::std::string& value);
+  #if LANG_CXX11
+  void set_pod_driver(::std::string&& value);
+  #endif
+  void set_pod_driver(const char* value);
+  void set_pod_driver(const char* value, size_t size);
+  ::std::string* mutable_pod_driver();
+  ::std::string* release_pod_driver();
+  void set_allocated_pod_driver(::std::string* pod_driver);
+
+  // required uint64 max_flight_time = 2;
+  bool has_max_flight_time() const;
+  void clear_max_flight_time();
+  static const int kMaxFlightTimeFieldNumber = 2;
+  ::google::protobuf::uint64 max_flight_time() const;
+  void set_max_flight_time(::google::protobuf::uint64 value);
+
+  // required uint32 retrieval_timeout = 1;
+  bool has_retrieval_timeout() const;
+  void clear_retrieval_timeout();
+  static const int kRetrievalTimeoutFieldNumber = 1;
+  ::google::protobuf::uint32 retrieval_timeout() const;
+  void set_retrieval_timeout(::google::protobuf::uint32 value);
+
+  // required int32 telemetry_port = 4;
+  bool has_telemetry_port() const;
+  void clear_telemetry_port();
+  static const int kTelemetryPortFieldNumber = 4;
+  ::google::protobuf::int32 telemetry_port() const;
+  void set_telemetry_port(::google::protobuf::int32 value);
+
+  // required uint64 motor_speed = 3;
+  bool has_motor_speed() const;
+  void clear_motor_speed();
+  static const int kMotorSpeedFieldNumber = 3;
+  ::google::protobuf::uint64 motor_speed() const;
+  void set_motor_speed(::google::protobuf::uint64 value);
+
+  // required uint64 flight_length = 6;
+  bool has_flight_length() const;
+  void clear_flight_length();
+  static const int kFlightLengthFieldNumber = 6;
+  ::google::protobuf::uint64 flight_length() const;
+  void set_flight_length(::google::protobuf::uint64 value);
+
+  // required int32 command_port = 5;
+  bool has_command_port() const;
+  void clear_command_port();
+  static const int kCommandPortFieldNumber = 5;
+  ::google::protobuf::int32 command_port() const;
+  void set_command_port(::google::protobuf::int32 value);
+
+  // required int32 heartbeat_timeout = 7;
+  bool has_heartbeat_timeout() const;
+  void clear_heartbeat_timeout();
+  static const int kHeartbeatTimeoutFieldNumber = 7;
+  ::google::protobuf::int32 heartbeat_timeout() const;
+  void set_heartbeat_timeout(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:flightConfig)
+ private:
+  class HasBitSetters;
+
+  // helper for ByteSizeLong()
+  size_t RequiredFieldsByteSizeFallback() const;
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  ::google::protobuf::internal::ArenaStringPtr pod_driver_;
+  ::google::protobuf::uint64 max_flight_time_;
+  ::google::protobuf::uint32 retrieval_timeout_;
+  ::google::protobuf::int32 telemetry_port_;
+  ::google::protobuf::uint64 motor_speed_;
+  ::google::protobuf::uint64 flight_length_;
+  ::google::protobuf::int32 command_port_;
+  ::google::protobuf::int32 heartbeat_timeout_;
   friend struct ::TableStruct_Paradigm_2eproto;
 };
 // ===================================================================
@@ -3535,9 +3728,201 @@ inline void dtsNodeToFc::set_lowpressure(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:dtsNodeToFc.lowPressure)
 }
 
+// -------------------------------------------------------------------
+
+// flightConfig
+
+// required uint32 retrieval_timeout = 1;
+inline bool flightConfig::has_retrieval_timeout() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void flightConfig::clear_retrieval_timeout() {
+  retrieval_timeout_ = 0u;
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline ::google::protobuf::uint32 flightConfig::retrieval_timeout() const {
+  // @@protoc_insertion_point(field_get:flightConfig.retrieval_timeout)
+  return retrieval_timeout_;
+}
+inline void flightConfig::set_retrieval_timeout(::google::protobuf::uint32 value) {
+  _has_bits_[0] |= 0x00000004u;
+  retrieval_timeout_ = value;
+  // @@protoc_insertion_point(field_set:flightConfig.retrieval_timeout)
+}
+
+// required uint64 max_flight_time = 2;
+inline bool flightConfig::has_max_flight_time() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void flightConfig::clear_max_flight_time() {
+  max_flight_time_ = PROTOBUF_ULONGLONG(0);
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline ::google::protobuf::uint64 flightConfig::max_flight_time() const {
+  // @@protoc_insertion_point(field_get:flightConfig.max_flight_time)
+  return max_flight_time_;
+}
+inline void flightConfig::set_max_flight_time(::google::protobuf::uint64 value) {
+  _has_bits_[0] |= 0x00000002u;
+  max_flight_time_ = value;
+  // @@protoc_insertion_point(field_set:flightConfig.max_flight_time)
+}
+
+// required uint64 motor_speed = 3;
+inline bool flightConfig::has_motor_speed() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void flightConfig::clear_motor_speed() {
+  motor_speed_ = PROTOBUF_ULONGLONG(0);
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline ::google::protobuf::uint64 flightConfig::motor_speed() const {
+  // @@protoc_insertion_point(field_get:flightConfig.motor_speed)
+  return motor_speed_;
+}
+inline void flightConfig::set_motor_speed(::google::protobuf::uint64 value) {
+  _has_bits_[0] |= 0x00000010u;
+  motor_speed_ = value;
+  // @@protoc_insertion_point(field_set:flightConfig.motor_speed)
+}
+
+// required int32 telemetry_port = 4;
+inline bool flightConfig::has_telemetry_port() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void flightConfig::clear_telemetry_port() {
+  telemetry_port_ = 0;
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline ::google::protobuf::int32 flightConfig::telemetry_port() const {
+  // @@protoc_insertion_point(field_get:flightConfig.telemetry_port)
+  return telemetry_port_;
+}
+inline void flightConfig::set_telemetry_port(::google::protobuf::int32 value) {
+  _has_bits_[0] |= 0x00000008u;
+  telemetry_port_ = value;
+  // @@protoc_insertion_point(field_set:flightConfig.telemetry_port)
+}
+
+// required int32 command_port = 5;
+inline bool flightConfig::has_command_port() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void flightConfig::clear_command_port() {
+  command_port_ = 0;
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline ::google::protobuf::int32 flightConfig::command_port() const {
+  // @@protoc_insertion_point(field_get:flightConfig.command_port)
+  return command_port_;
+}
+inline void flightConfig::set_command_port(::google::protobuf::int32 value) {
+  _has_bits_[0] |= 0x00000040u;
+  command_port_ = value;
+  // @@protoc_insertion_point(field_set:flightConfig.command_port)
+}
+
+// required uint64 flight_length = 6;
+inline bool flightConfig::has_flight_length() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void flightConfig::clear_flight_length() {
+  flight_length_ = PROTOBUF_ULONGLONG(0);
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline ::google::protobuf::uint64 flightConfig::flight_length() const {
+  // @@protoc_insertion_point(field_get:flightConfig.flight_length)
+  return flight_length_;
+}
+inline void flightConfig::set_flight_length(::google::protobuf::uint64 value) {
+  _has_bits_[0] |= 0x00000020u;
+  flight_length_ = value;
+  // @@protoc_insertion_point(field_set:flightConfig.flight_length)
+}
+
+// required int32 heartbeat_timeout = 7;
+inline bool flightConfig::has_heartbeat_timeout() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+inline void flightConfig::clear_heartbeat_timeout() {
+  heartbeat_timeout_ = 0;
+  _has_bits_[0] &= ~0x00000080u;
+}
+inline ::google::protobuf::int32 flightConfig::heartbeat_timeout() const {
+  // @@protoc_insertion_point(field_get:flightConfig.heartbeat_timeout)
+  return heartbeat_timeout_;
+}
+inline void flightConfig::set_heartbeat_timeout(::google::protobuf::int32 value) {
+  _has_bits_[0] |= 0x00000080u;
+  heartbeat_timeout_ = value;
+  // @@protoc_insertion_point(field_set:flightConfig.heartbeat_timeout)
+}
+
+// required string pod_driver = 8;
+inline bool flightConfig::has_pod_driver() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void flightConfig::clear_pod_driver() {
+  pod_driver_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline const ::std::string& flightConfig::pod_driver() const {
+  // @@protoc_insertion_point(field_get:flightConfig.pod_driver)
+  return pod_driver_.GetNoArena();
+}
+inline void flightConfig::set_pod_driver(const ::std::string& value) {
+  _has_bits_[0] |= 0x00000001u;
+  pod_driver_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:flightConfig.pod_driver)
+}
+#if LANG_CXX11
+inline void flightConfig::set_pod_driver(::std::string&& value) {
+  _has_bits_[0] |= 0x00000001u;
+  pod_driver_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:flightConfig.pod_driver)
+}
+#endif
+inline void flightConfig::set_pod_driver(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  _has_bits_[0] |= 0x00000001u;
+  pod_driver_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:flightConfig.pod_driver)
+}
+inline void flightConfig::set_pod_driver(const char* value, size_t size) {
+  _has_bits_[0] |= 0x00000001u;
+  pod_driver_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:flightConfig.pod_driver)
+}
+inline ::std::string* flightConfig::mutable_pod_driver() {
+  _has_bits_[0] |= 0x00000001u;
+  // @@protoc_insertion_point(field_mutable:flightConfig.pod_driver)
+  return pod_driver_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* flightConfig::release_pod_driver() {
+  // @@protoc_insertion_point(field_release:flightConfig.pod_driver)
+  if (!has_pod_driver()) {
+    return nullptr;
+  }
+  _has_bits_[0] &= ~0x00000001u;
+  return pod_driver_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void flightConfig::set_allocated_pod_driver(::std::string* pod_driver) {
+  if (pod_driver != nullptr) {
+    _has_bits_[0] |= 0x00000001u;
+  } else {
+    _has_bits_[0] &= ~0x00000001u;
+  }
+  pod_driver_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), pod_driver);
+  // @@protoc_insertion_point(field_set_allocated:flightConfig.pod_driver)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

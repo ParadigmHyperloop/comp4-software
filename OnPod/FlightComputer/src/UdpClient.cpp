@@ -11,8 +11,8 @@ int32_t createUdpClientSocket()
   LOG(INFO)<<"Creating Client Socket";
   int32_t iSocket = socket(PF_INET, SOCK_DGRAM, 0);
   if (iSocket < 0){
-	  LOG(INFO)<< std::string("Could not create Node Client socket: ") + std::strerror(errno);
-	  throw std::runtime_error("Failed to create Socket");
+    std::string sError = std::string("Could not create Node Client socket: ") + std::strerror(errno);
+    throw std::runtime_error(sError);
   }
   return iSocket;
 }
