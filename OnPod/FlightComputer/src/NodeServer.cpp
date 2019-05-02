@@ -41,7 +41,9 @@ int32_t podInternalNetworkThread(Pod Pod) {
     BrakeNodeConnection BrakeNode = BrakeNodeConnection(Pod);
 
     try {
-        BrakeNode.configure(sNodeIp, 5000, 5001, 3000, iClientSocket);
+        BrakeNode.configure(Pod.sPodNetworkValues->cNodeIpAddrs[0], Pod.sPodNetworkValues->iBrakeNodePort,
+                            Pod.sPodNetworkValues->iBrakeNodeServerPortNumber, Pod.sPodNetworkValues->iNodeTimeoutMili,
+                            iClientSocket);
     }
     catch (std::runtime_error &e) {
         LOG(INFO) << e.what();
@@ -54,7 +56,7 @@ int32_t podInternalNetworkThread(Pod Pod) {
     }
 
     //close sockets
-    
+
 }
 
 #pragma clang diagnostic pop

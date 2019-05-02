@@ -45,11 +45,12 @@ int main( int32_t argc, char** argv)
 	PodValues sPodValues;
 
 	// Network Configs
-	string cNodeIpAddrs[] =  {"192.168.7.1","127.0.0.1"};
+	string cNodeIpAddrs[] =  {"127.0.0.1"};
 	sPodNetworkValues.cNodeIpAddrs.assign(begin(cNodeIpAddrs), end(cNodeIpAddrs)); // Node IPs
 	sPodNetworkValues.iCommanderPortNumber = 5005; //Port # for TCP Commander
-	sPodNetworkValues.iNodePort = 5000; // Port # that Nodes are listening on
-	sPodNetworkValues.iNodeServerPortNumber = 5010; // Port # to recieve UDP from Nodes
+	sPodNetworkValues.iBrakeNodePort = 5000; // Port # that Nodes are listening on
+	sPodNetworkValues.iNodeTimeoutMili = 3000;
+	sPodNetworkValues.iBrakeNodeServerPortNumber = 5001; // Port # to recieve UDP from Nodes
 	sPodNetworkValues.iCommaderTimeoutMili = 30000; // Timeout for heartbeat to Control Interace
 
 

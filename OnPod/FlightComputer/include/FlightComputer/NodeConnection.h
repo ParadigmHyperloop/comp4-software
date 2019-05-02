@@ -118,9 +118,9 @@ class NodeConnection
 		    	std::string sError = std::string(" Creating Server socket: ") + std::strerror(errno);
 		    	throw std::runtime_error(sError);
 		    }
-			//int flags = fcntl(iSocket, F_GETFL);
-			//flags |= O_NONBLOCK;
-			//fcntl(iSocket, F_SETFL, flags);
+			int flags = fcntl(iSocketfd, F_GETFL);
+			flags |= O_NONBLOCK;
+			fcntl(iSocketfd, F_SETFL, flags);
 
 			memset(&SocketAddrStruct, 0, sizeof(SocketAddrStruct));
 			SocketAddrStruct.sin_family = AF_INET;
