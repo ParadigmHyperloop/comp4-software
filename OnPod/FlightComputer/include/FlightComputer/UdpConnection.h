@@ -176,7 +176,7 @@ public:
 
     bool parseUpdate(char cBuffer[], int32_t iMessageSize) override {
         dtsNodeToFc protoMessage = dtsNodeToFc();
-        if(! protoMessage.ParseFromArray(&cBuffer, iMessageSize))
+        if(! protoMessage.ParseFromArray(cBuffer, iMessageSize))
         {
             std::string strError = "Failed to parse Update from Brake Node";
             throw std::invalid_argument(strError);

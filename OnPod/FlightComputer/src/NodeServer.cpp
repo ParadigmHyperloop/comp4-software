@@ -13,7 +13,7 @@ UdpConnection* getBrakeNodeConnection(Pod Pod)
         BrakeNode->configureClient(Pod.sPodNetworkValues->cNodeIpAddrs[0], Pod.sPodNetworkValues->iBrakeNodePort, Pod.sPodNetworkValues->iNodeClientSocket);
         //TODO throw error if this isnt set
         BrakeNode->configureServer(Pod.sPodNetworkValues->iBrakeNodeServerPortNumber, Pod.sPodNetworkValues->iNodeTimeoutMili);
-        BrakeNode->setRecvBufferSize(20); // Small recv buffer keeps parsed data fresh.
+        BrakeNode->setRecvBufferSize(50); // Small recv buffer keeps parsed data fresh.
     }
     catch (std::runtime_error &e) {
         throw e;

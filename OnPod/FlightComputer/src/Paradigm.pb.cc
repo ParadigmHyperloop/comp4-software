@@ -370,12 +370,14 @@ const ::google::protobuf::uint32 TableStruct_Paradigm_2eproto::offsets[] PROTOBU
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::dtsNodeToFc, brakenodestate_),
   PROTOBUF_FIELD_OFFSET(::dtsNodeToFc, brakesolenoidstate_),
   PROTOBUF_FIELD_OFFSET(::dtsNodeToFc, ventsolenoidstate_),
   PROTOBUF_FIELD_OFFSET(::dtsNodeToFc, rotortemperature_),
   PROTOBUF_FIELD_OFFSET(::dtsNodeToFc, pressuretemperature_),
   PROTOBUF_FIELD_OFFSET(::dtsNodeToFc, highpressure_),
   PROTOBUF_FIELD_OFFSET(::dtsNodeToFc, lowpressure_),
+  6,
   0,
   1,
   2,
@@ -416,9 +418,9 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] PROTOBUF_SE
   { 33, 44, sizeof(::podCommand)},
   { 50, 127, sizeof(::telemetry)},
   { 199, 206, sizeof(::fcToBrakeNode)},
-  { 208, 219, sizeof(::dtsNodeToFc)},
-  { 225, 238, sizeof(::flightConfig)},
-  { 246, 252, sizeof(::defaultFcToNode)},
+  { 208, 220, sizeof(::dtsNodeToFc)},
+  { 227, 240, sizeof(::flightConfig)},
+  { 248, 254, sizeof(::defaultFcToNode)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -502,40 +504,41 @@ const char descriptor_table_protodef_Paradigm_2eproto[] =
   "r7\030E \001(\005\022\032\n\022railCurrentSensor8\030F \001(\005\022\027\n\017"
   "railCurrentFlag\030I \001(\005\"X\n\rfcToBrakeNode\022\034"
   "\n\010podState\030\001 \001(\0162\n.PodStates\022)\n\017manualNo"
-  "deState\030\002 \001(\0162\020.BrakeNodeStates\"\264\001\n\013dtsN"
-  "odeToFc\022!\n\022brakeSolenoidState\030\001 \001(\010:\005fal"
-  "se\022 \n\021ventSolenoidState\030\002 \001(\010:\005false\022\030\n\020"
-  "rotorTemperature\030\003 \001(\002\022\033\n\023pressureTemper"
-  "ature\030\004 \001(\005\022\024\n\014highPressure\030\005 \001(\005\022\023\n\013low"
-  "Pressure\030\006 \001(\005\"\313\001\n\014flightConfig\022\031\n\021retri"
-  "eval_timeout\030\001 \002(\r\022\027\n\017max_flight_time\030\002 "
-  "\002(\004\022\023\n\013motor_speed\030\003 \002(\004\022\026\n\016telemetry_po"
-  "rt\030\004 \002(\005\022\024\n\014command_port\030\005 \002(\005\022\025\n\rflight"
-  "_length\030\006 \002(\004\022\031\n\021heartbeat_timeout\030\007 \002(\005"
-  "\022\022\n\npod_driver\030\010 \002(\t\"/\n\017defaultFcToNode\022"
-  "\034\n\010podState\030\001 \001(\0162\n.PodStates*\235\001\n\017BrakeN"
-  "odeStates\022\016\n\nbnsBooting\020\000\022\016\n\nbnsStandby\020"
-  "\001\022\r\n\tbnsArming\020\002\022\014\n\010bnsArmed\020\003\022\r\n\tbnsFli"
-  "ght\020\004\022\016\n\nbnsBraking\020\005\022\016\n\nbnsVenting\020\006\022\020\n"
-  "\014bnsRetrieval\020\007\022\014\n\010bnsError\020\010*\313\001\n\tPodSta"
-  "tes\022\r\n\tpsBooting\020\000\022\r\n\tpsStandby\020\001\022\014\n\010psA"
-  "rming\020\002\022\013\n\007psArmed\020\003\022\017\n\013psPreFlight\020\004\022\022\n"
-  "\016psAcceleration\020\005\022\016\n\npsCoasting\020\006\022\r\n\tpsB"
-  "raking\020\007\022\017\n\013psDisarming\020\010\022\017\n\013psRetrieval"
-  "\020\t\022\017\n\013psEmergency\020\n\022\016\n\npsShutdown\020\013*C\n\013M"
-  "otorStates\022\t\n\005msOff\020\000\022\016\n\nmsCharging\020\001\022\n\n"
-  "\006msIdle\020\002\022\r\n\tmsEngaged\020\003*G\n\027ControlsInte"
-  "rfaceStates\022\t\n\005ciArm\020\000\022\014\n\010ciFlight\020\001\022\023\n\017"
-  "ciEmergencyStop\020\002* \n\016InverterStates\022\016\n\ni"
-  "Connected\020\000*)\n\027BatteryManagementStates\022\016"
-  "\n\nbmsNominal\020\000*.\n\016RearNodeStates\022\r\n\trnBo"
-  "oting\020\000\022\r\n\trnNominal\020\001*!\n\016LvdcNodeStates"
-  "\022\017\n\013lvdcBooting\020\000"
+  "deState\030\002 \001(\0162\020.BrakeNodeStates\"\336\001\n\013dtsN"
+  "odeToFc\022(\n\016brakeNodeState\030\007 \001(\0162\020.BrakeN"
+  "odeStates\022!\n\022brakeSolenoidState\030\001 \001(\010:\005f"
+  "alse\022 \n\021ventSolenoidState\030\002 \001(\010:\005false\022\030"
+  "\n\020rotorTemperature\030\003 \001(\002\022\033\n\023pressureTemp"
+  "erature\030\004 \001(\005\022\024\n\014highPressure\030\005 \001(\005\022\023\n\013l"
+  "owPressure\030\006 \001(\005\"\313\001\n\014flightConfig\022\031\n\021ret"
+  "rieval_timeout\030\001 \002(\r\022\027\n\017max_flight_time\030"
+  "\002 \002(\004\022\023\n\013motor_speed\030\003 \002(\004\022\026\n\016telemetry_"
+  "port\030\004 \002(\005\022\024\n\014command_port\030\005 \002(\005\022\025\n\rflig"
+  "ht_length\030\006 \002(\004\022\031\n\021heartbeat_timeout\030\007 \002"
+  "(\005\022\022\n\npod_driver\030\010 \002(\t\"/\n\017defaultFcToNod"
+  "e\022\034\n\010podState\030\001 \001(\0162\n.PodStates*\235\001\n\017Brak"
+  "eNodeStates\022\016\n\nbnsBooting\020\000\022\016\n\nbnsStandb"
+  "y\020\001\022\r\n\tbnsArming\020\002\022\014\n\010bnsArmed\020\003\022\r\n\tbnsF"
+  "light\020\004\022\016\n\nbnsBraking\020\005\022\016\n\nbnsVenting\020\006\022"
+  "\020\n\014bnsRetrieval\020\007\022\014\n\010bnsError\020\010*\313\001\n\tPodS"
+  "tates\022\r\n\tpsBooting\020\000\022\r\n\tpsStandby\020\001\022\014\n\010p"
+  "sArming\020\002\022\013\n\007psArmed\020\003\022\017\n\013psPreFlight\020\004\022"
+  "\022\n\016psAcceleration\020\005\022\016\n\npsCoasting\020\006\022\r\n\tp"
+  "sBraking\020\007\022\017\n\013psDisarming\020\010\022\017\n\013psRetriev"
+  "al\020\t\022\017\n\013psEmergency\020\n\022\016\n\npsShutdown\020\013*C\n"
+  "\013MotorStates\022\t\n\005msOff\020\000\022\016\n\nmsCharging\020\001\022"
+  "\n\n\006msIdle\020\002\022\r\n\tmsEngaged\020\003*G\n\027ControlsIn"
+  "terfaceStates\022\t\n\005ciArm\020\000\022\014\n\010ciFlight\020\001\022\023"
+  "\n\017ciEmergencyStop\020\002* \n\016InverterStates\022\016\n"
+  "\niConnected\020\000*)\n\027BatteryManagementStates"
+  "\022\016\n\nbmsNominal\020\000*.\n\016RearNodeStates\022\r\n\trn"
+  "Booting\020\000\022\r\n\trnNominal\020\001*!\n\016LvdcNodeStat"
+  "es\022\017\n\013lvdcBooting\020\000"
   ;
 ::google::protobuf::internal::DescriptorTable descriptor_table_Paradigm_2eproto = {
   false, InitDefaults_Paradigm_2eproto, 
   descriptor_table_protodef_Paradigm_2eproto,
-  "Paradigm.proto", &assign_descriptors_table_Paradigm_2eproto, 3697,
+  "Paradigm.proto", &assign_descriptors_table_Paradigm_2eproto, 3739,
 };
 
 void AddDescriptors_Paradigm_2eproto() {
@@ -6213,6 +6216,9 @@ void dtsNodeToFc::InitAsDefaultInstance() {
 }
 class dtsNodeToFc::HasBitSetters {
  public:
+  static void set_has_brakenodestate(dtsNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00000040u;
+  }
   static void set_has_brakesolenoidstate(dtsNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00000001u;
   }
@@ -6234,6 +6240,7 @@ class dtsNodeToFc::HasBitSetters {
 };
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int dtsNodeToFc::kBrakeNodeStateFieldNumber;
 const int dtsNodeToFc::kBrakeSolenoidStateFieldNumber;
 const int dtsNodeToFc::kVentSolenoidStateFieldNumber;
 const int dtsNodeToFc::kRotorTemperatureFieldNumber;
@@ -6253,15 +6260,15 @@ dtsNodeToFc::dtsNodeToFc(const dtsNodeToFc& from)
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&brakesolenoidstate_, &from.brakesolenoidstate_,
-    static_cast<size_t>(reinterpret_cast<char*>(&lowpressure_) -
-    reinterpret_cast<char*>(&brakesolenoidstate_)) + sizeof(lowpressure_));
+    static_cast<size_t>(reinterpret_cast<char*>(&brakenodestate_) -
+    reinterpret_cast<char*>(&brakesolenoidstate_)) + sizeof(brakenodestate_));
   // @@protoc_insertion_point(copy_constructor:dtsNodeToFc)
 }
 
 void dtsNodeToFc::SharedCtor() {
   ::memset(&brakesolenoidstate_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&lowpressure_) -
-      reinterpret_cast<char*>(&brakesolenoidstate_)) + sizeof(lowpressure_));
+      reinterpret_cast<char*>(&brakenodestate_) -
+      reinterpret_cast<char*>(&brakesolenoidstate_)) + sizeof(brakenodestate_));
 }
 
 dtsNodeToFc::~dtsNodeToFc() {
@@ -6288,10 +6295,10 @@ void dtsNodeToFc::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x0000003fu) {
+  if (cached_has_bits & 0x0000007fu) {
     ::memset(&brakesolenoidstate_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&lowpressure_) -
-        reinterpret_cast<char*>(&brakesolenoidstate_)) + sizeof(lowpressure_));
+        reinterpret_cast<char*>(&brakenodestate_) -
+        reinterpret_cast<char*>(&brakesolenoidstate_)) + sizeof(brakenodestate_));
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -6349,6 +6356,18 @@ const char* dtsNodeToFc::_InternalParse(const char* begin, const char* end, void
       case 6: {
         if (static_cast<::google::protobuf::uint8>(tag) != 48) goto handle_unusual;
         msg->set_lowpressure(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // optional .BrakeNodeStates brakeNodeState = 7;
+      case 7: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 56) goto handle_unusual;
+        ::google::protobuf::uint64 val = ::google::protobuf::internal::ReadVarint(&ptr);
+        if (!::BrakeNodeStates_IsValid(val)) {
+          ::google::protobuf::internal::WriteVarint(7, val, msg->mutable_unknown_fields());
+          break;
+        }
+        msg->set_brakenodestate(static_cast<::BrakeNodeStates>(val));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
@@ -6457,6 +6476,25 @@ bool dtsNodeToFc::MergePartialFromCodedStream(
         break;
       }
 
+      // optional .BrakeNodeStates brakeNodeState = 7;
+      case 7: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (56 & 0xFF)) {
+          int value = 0;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::BrakeNodeStates_IsValid(value)) {
+            set_brakenodestate(static_cast< ::BrakeNodeStates >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(
+                7, static_cast<::google::protobuf::uint64>(value));
+          }
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -6515,6 +6553,12 @@ void dtsNodeToFc::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(6, this->lowpressure(), output);
   }
 
+  // optional .BrakeNodeStates brakeNodeState = 7;
+  if (cached_has_bits & 0x00000040u) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      7, this->brakenodestate(), output);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
@@ -6559,6 +6603,12 @@ void dtsNodeToFc::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(6, this->lowpressure(), target);
   }
 
+  // optional .BrakeNodeStates brakeNodeState = 7;
+  if (cached_has_bits & 0x00000040u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      7, this->brakenodestate(), target);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target);
@@ -6581,7 +6631,7 @@ size_t dtsNodeToFc::ByteSizeLong() const {
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x0000003fu) {
+  if (cached_has_bits & 0x0000007fu) {
     // optional bool brakeSolenoidState = 1 [default = false];
     if (cached_has_bits & 0x00000001u) {
       total_size += 1 + 1;
@@ -6618,6 +6668,12 @@ size_t dtsNodeToFc::ByteSizeLong() const {
           this->lowpressure());
     }
 
+    // optional .BrakeNodeStates brakeNodeState = 7;
+    if (cached_has_bits & 0x00000040u) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->brakenodestate());
+    }
+
   }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
@@ -6647,7 +6703,7 @@ void dtsNodeToFc::MergeFrom(const dtsNodeToFc& from) {
   (void) cached_has_bits;
 
   cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 0x0000003fu) {
+  if (cached_has_bits & 0x0000007fu) {
     if (cached_has_bits & 0x00000001u) {
       brakesolenoidstate_ = from.brakesolenoidstate_;
     }
@@ -6665,6 +6721,9 @@ void dtsNodeToFc::MergeFrom(const dtsNodeToFc& from) {
     }
     if (cached_has_bits & 0x00000020u) {
       lowpressure_ = from.lowpressure_;
+    }
+    if (cached_has_bits & 0x00000040u) {
+      brakenodestate_ = from.brakenodestate_;
     }
     _has_bits_[0] |= cached_has_bits;
   }
@@ -6702,6 +6761,7 @@ void dtsNodeToFc::InternalSwap(dtsNodeToFc* other) {
   swap(pressuretemperature_, other->pressuretemperature_);
   swap(highpressure_, other->highpressure_);
   swap(lowpressure_, other->lowpressure_);
+  swap(brakenodestate_, other->brakenodestate_);
 }
 
 ::google::protobuf::Metadata dtsNodeToFc::GetMetadata() const {

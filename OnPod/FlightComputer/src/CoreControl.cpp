@@ -184,6 +184,10 @@ void coreControlLoop(Pod podValues){
 		{
 			break;
 		}
+		case psShutdown:
+		{
+			break;
+		}
 	}
 	}
 }

@@ -17,11 +17,12 @@ logger = TerminalLogger({'FlightComputer': None, 'Node': None})
 
 fc_state = None
 node_state = None
-
+i = 0
 while True:
 
     fc_update_message = udp_connection.get_data()
     if fc_update_message:
+        print(fc_update_message)
         fc_state = messageHandler.parse_flight_computer_message(fc_update_message)
 
     node.parse_neighbor_update(fc_state)
@@ -32,5 +33,8 @@ while True:
     logger.log_states(states)
 
     node_message = messageHandler.prepare_brake_node_message(node_state)
-    udp_connection.send_data(node_message)
+    udp_connection.send_data(str(i).encode())
+    i = i + 1
+    print(i)
+
 

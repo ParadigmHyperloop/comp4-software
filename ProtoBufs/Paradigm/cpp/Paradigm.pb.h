@@ -1626,6 +1626,13 @@ class dtsNodeToFc :
   ::google::protobuf::int32 lowpressure() const;
   void set_lowpressure(::google::protobuf::int32 value);
 
+  // optional .BrakeNodeStates brakeNodeState = 7;
+  bool has_brakenodestate() const;
+  void clear_brakenodestate();
+  static const int kBrakeNodeStateFieldNumber = 7;
+  ::BrakeNodeStates brakenodestate() const;
+  void set_brakenodestate(::BrakeNodeStates value);
+
   // @@protoc_insertion_point(class_scope:dtsNodeToFc)
  private:
   class HasBitSetters;
@@ -1639,6 +1646,7 @@ class dtsNodeToFc :
   ::google::protobuf::int32 pressuretemperature_;
   ::google::protobuf::int32 highpressure_;
   ::google::protobuf::int32 lowpressure_;
+  int brakenodestate_;
   friend struct ::TableStruct_Paradigm_2eproto;
 };
 // -------------------------------------------------------------------
@@ -3744,6 +3752,25 @@ inline void fcToBrakeNode::set_manualnodestate(::BrakeNodeStates value) {
 // -------------------------------------------------------------------
 
 // dtsNodeToFc
+
+// optional .BrakeNodeStates brakeNodeState = 7;
+inline bool dtsNodeToFc::has_brakenodestate() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void dtsNodeToFc::clear_brakenodestate() {
+  brakenodestate_ = 0;
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline ::BrakeNodeStates dtsNodeToFc::brakenodestate() const {
+  // @@protoc_insertion_point(field_get:dtsNodeToFc.brakeNodeState)
+  return static_cast< ::BrakeNodeStates >(brakenodestate_);
+}
+inline void dtsNodeToFc::set_brakenodestate(::BrakeNodeStates value) {
+  assert(::BrakeNodeStates_IsValid(value));
+  _has_bits_[0] |= 0x00000040u;
+  brakenodestate_ = value;
+  // @@protoc_insertion_point(field_set:dtsNodeToFc.brakeNodeState)
+}
 
 // optional bool brakeSolenoidState = 1 [default = false];
 inline bool dtsNodeToFc::has_brakesolenoidstate() const {
