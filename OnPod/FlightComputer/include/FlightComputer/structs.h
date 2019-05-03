@@ -72,7 +72,7 @@ struct PodNetwork
 
  std::vector<std::string> cNodeIpAddrs; //IP addrs of all nodes order: Brake, Rear, LVDC, Enclosure
  int32_t iBrakeNodeServerPortNumber;
- int32_t iBrakeNodePort; //Port # used by nodes to recieve UDP updates
+ int32_t iBrakeNodePort; //Port # used by nodes to receive UDP updates
  int32_t iNodeTimeoutMili;
 
  int32_t iNodeClientSocket; //Port used to send data to nodes

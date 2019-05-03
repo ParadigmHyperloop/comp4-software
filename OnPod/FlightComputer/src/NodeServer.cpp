@@ -1,18 +1,19 @@
 #include "FlightComputer/Pod.h"
 #include "EasyLogger/easylogging++.h"
 #include <FlightComputer/Network.h>
-#include <FlightComputer/NodeConnection.h>
+#include <FlightComputer/UdpConnection.h>
 
 
 
-NodeConnection getBrakeNodeConnection(Pod Pod)
+UdpConnection* getBrakeNodeConnection(Pod Pod)
 {
-    BrakeNodeConnection BrakeNode = BrakeNodeConnection(Pod);
+    auto BrakeNode = new BrakeNodeConnection(Pod);
 
     try {
-        BrakeNode.configure(Pod.sPodNetworkValues->cNodeIpAddrs[0], Pod.sPodNetworkValues->iBrakeNodePort,
-                            Pod.sPodNetworkValues->iBrakeNodeServerPortNumber, Pod.sPodNetworkValues->iNodeTimeoutMili,
-                            Pod.sPodNetworkValues->iNodeClientSocket);
+        BrakeNode->configureClient(Pod.sPodNetworkValues->cNodeIpAddrs[0], Pod.sPodNetworkValues->iBrakeNodePort, Pod.sPodNetworkValues->iNodeClientSocket);
+        //TODO throw error if this isnt set
+        BrakeNode->configureServer(Pod.sPodNetworkValues->iBrakeNodeServerPortNumber, Pod.sPodNetworkValues->iNodeTimeoutMili);
+        BrakeNode->setRecvBufferSize(20); // Small recv buffer keeps parsed data fresh.
     }
     catch (std::runtime_error &e) {
         throw e;
@@ -21,9 +22,9 @@ NodeConnection getBrakeNodeConnection(Pod Pod)
     return  BrakeNode;
 }
 
-NodeConnection getRearNodeConnection(Pod Pod)
+UdpConnection* getRearNodeConnection(Pod Pod)
 {
-    BrakeNodeConnection BrakeNode = BrakeNodeConnection(Pod);
+    auto BrakeNode = new BrakeNodeConnection(Pod);
     return  BrakeNode;
 }
 
@@ -45,11 +46,12 @@ int32_t podInternalNetworkThread(Pod Pod) {
         return -1;
     }
 
-    std::vector<NodeConnection> nodes;
+    std::vector<UdpConnection*> nodes;
     if(Pod.sPodNetworkValues->iActiveNodes[0])
     {
         try {
-            nodes.push_back(getBrakeNodeConnection(Pod));
+            UdpConnection* brakeNode = getBrakeNodeConnection(Pod);
+            nodes.push_back(brakeNode);
         }
         catch (std::runtime_error &e) {
             LOG(INFO)<< e.what();
@@ -66,15 +68,21 @@ int32_t podInternalNetworkThread(Pod Pod) {
         // Give and get update for each node
         for(auto&& node: nodes )
         {
-            node.giveUpdate();
-            node.getUpdate();
+            try {
+                node->giveUpdate();
+                node->getUpdate();
+            }
+            catch (std::runtime_error &e) {
+                LOG(INFO)<< e.what();
+            }
         }
 
     }
 
     for(auto&& node: nodes )
     {
-        node.closeConnection();
+        node->closeConnection();
+        delete node;
     }
     close(Pod.sPodNetworkValues->iNodeClientSocket);
 
