@@ -45,7 +45,7 @@ class UdpConnection {
                     this->parseUpdate(cBuffer, (int32_t)iReceivedPacketSize);
                 }
                 catch (const std::invalid_argument &e) {
-                    std::string strError = "getUpdate " + this->strConnectionName + ": " + e.what();
+                    std::string strError = "getUpdate() : " + std::string(e.what());
                     throw std::runtime_error(strError);
                 }
                 this->pulse.feed();
@@ -59,13 +59,25 @@ class UdpConnection {
         }
 
         void giveUpdate() {
-            const char *cPayload = this->getUpdateMessage();
-            ssize_t sent = sendto(this->iOutboundSocket, cPayload, strlen(cPayload), 0,
+            google::protobuf::Message* pPacket;
+            ssize_t iPayloadSize;
+            pPacket = this->getProtoUpdateMessage();
+            iPayloadSize = pPacket->ByteSizeLong();
+            unsigned char cPayload[iPayloadSize];
+
+            if (!pPacket->SerializeToArray(cPayload, static_cast<int>(iPayloadSize))) {
+                std::string strError = std::string("Error Creating Proto packet on  ") + this->strConnectionName;
+                delete pPacket;
+                throw std::runtime_error(strError);
+            }
+            ssize_t sent = sendto(this->iOutboundSocket, cPayload, iPayloadSize, 0,
                                   (struct sockaddr *) &this->sDestAddr, sizeof(this->sDestAddr));
             if (sent == -1) {
                 std::string strError = std::string("Error Sending ") + this->strConnectionName + std::strerror(errno);
+                delete pPacket;
                 throw std::runtime_error(strError);
             }
+            delete pPacket;
         }
 
         void closeConnection() {
@@ -75,12 +87,15 @@ class UdpConnection {
 
         virtual bool parseUpdate(char cBuffer[], int32_t iMessageSize) { return false; };
 
-        virtual const char *getUpdateMessage(){return "";};
+        virtual google::protobuf::Message* getProtoUpdateMessage(){
+            auto protoMessage = new defaultFcToNode();
+            protoMessage->set_podstate(psArmed);
+            return protoMessage;
+        };
 
         virtual void setConnectionStatus(bool) {};
 
     protected:
-
             bool createServerSocket() {
                 int32_t iSocketfd;
                 struct sockaddr_in SocketAddrStruct = {0};
@@ -106,7 +121,6 @@ class UdpConnection {
                 this->iInboundSocket = iSocketfd;
                 return true;
             }
-
             Pod pod;
             int32_t iOutboundSocket = -1;
             int32_t iInboundSocket = -1;
@@ -114,7 +128,6 @@ class UdpConnection {
             Heartbeat pulse = Heartbeat(0);
             std::string strConnectionName = "";
             struct sockaddr_in sDestAddr{};
-
 };
 
 class PdsConnection : UdpConnection {
@@ -125,15 +138,17 @@ class PdsConnection : UdpConnection {
             this->strConnectionName = "Controls Interface Data : ";
         };
 
-        const char *getUpdateMessage() override {
-
-            // Big Fuckin jesus proto message with all the values
-
-            //TODO So when we call getUpdateMessage it returns a pointer to an array that holds our update message.
-            // this memory is locally allocted so the memory that pointer points to is basicly hanging. We either need
-            // but this on the heap and delete it once we're done. Or just return a copy instead of a pointer.
-
-            return "";};
+        //TODO can we do this without putting the proto on the heap?
+        google::protobuf::Message* getProtoUpdateMessage() override {
+                auto protoMessage = new telemetry();
+                protoMessage->set_ilowpressure1(pod.sPodValues->iLowPressure1);
+                protoMessage->set_ihighpressure(pod.sPodValues->iHighPressure);
+                protoMessage->set_bsolenoid1(pod.sPodValues->bSolenoid1);
+                protoMessage->set_bsolenoid2(pod.sPodValues->bSolenoid2);
+                protoMessage->set_pressurevesseltemperature(pod.sPodValues->iPressureVesselTemperature);
+                protoMessage->set_railtemperature(pod.sPodValues->iRailTemperature);
+                return protoMessage;
+        }
 };
 
 
@@ -144,35 +159,6 @@ public:
 
     ~BrakeNodeConnection() override = default;
 
-    const char *getUpdateMessage() override {
-        // A temporary plain text message for easy debugging on the node sim side
-        PodStates PodState = this->pod.getPodState();
-        switch (PodState) {
-            case psBooting:
-                return "Booting";
-            case psStandby:
-                return "StandBy";
-            case psArming:
-                return "Arming";
-            case psArmed:
-                return "Armed";
-            case psPreFlight:
-                return "PreFlight";
-            case psAcceleration:
-                return "Acceleration";
-            case psCoasting:
-                return "Coasting";
-            case psBraking:
-                return "Braking";
-            case psDisarming:
-                return "Disarming";
-            case psRetrieval:
-                return "Retrieval";
-            default:
-                return "Emergency";
-        }
-    }
-
     explicit BrakeNodeConnection(Pod pod) : UdpConnection(pod) {
         this->strConnectionName = "Brake Node Data : ";
     };
@@ -181,7 +167,28 @@ public:
         this->pod.sPodValues->cConnectionsArray[0] = bStatus;
     }
 
-    bool parseUpdate(char cBuffer[], int32_t iMessageSize) override { return true; }
+    google::protobuf::Message* getProtoUpdateMessage() override {
+        auto protoMessage = new fcToBrakeNode();
+        protoMessage->set_podstate(psArmed);
+        protoMessage->set_manualnodestate(bnsArmed);
+        return protoMessage;
+    }
+
+    bool parseUpdate(char cBuffer[], int32_t iMessageSize) override {
+        dtsNodeToFc protoMessage = dtsNodeToFc();
+        if(! protoMessage.ParseFromArray(&cBuffer, iMessageSize))
+        {
+            std::string strError = "Failed to parse Update from Brake Node";
+            throw std::invalid_argument(strError);
+        }
+        this->pod.sPodValues->bSolenoid1 = protoMessage.brakesolenoidstate();
+        this->pod.sPodValues->bSolenoid2 = protoMessage.ventsolenoidstate();
+        this->pod.sPodValues->iRailTemperature = protoMessage.rotortemperature();
+        this->pod.sPodValues->iPressureVesselTemperature = protoMessage.pressuretemperature();
+        this->pod.sPodValues->iHighPressure = protoMessage.highpressure();
+        this->pod.sPodValues->iLowPressure1 = protoMessage.lowpressure();
+        return true;
+    }
 
 };
 

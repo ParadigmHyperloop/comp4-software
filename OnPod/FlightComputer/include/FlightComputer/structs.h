@@ -63,6 +63,7 @@ struct PodValues
 	int32_t iLowPressure4;
 	int32_t iHighPressure;
 	int32_t iPressureVesselTemperature;
+	float iRailTemperature;
 };
 
 struct PodNetwork

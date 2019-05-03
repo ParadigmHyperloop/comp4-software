@@ -141,17 +141,17 @@ message telemetry {
     optional int32 batteryPackMaxVoltage = 30;
 
 // Brake Node
-    optional bool sol1 = 32;
-    optional bool sol2 = 33;
-    optional bool sol3 = 34;
-    optional bool sol4 = 35;
-    optional bool sol5 = 36;
-    optional bool sol6 = 37;
-    optional int32 hp  = 38;
-    optional int32 lp1 = 39;
-    optional int32 lp2 = 40;
-    optional int32 lp3 = 41;
-    optional int32 lp4 = 42;
+    optional bool bSolenoid1 = 32;
+    optional bool bSolenoid2 = 33;
+    optional bool bSolenoid3 = 34;
+    optional bool bSolenoid4 = 35;
+    optional bool bSolenoid5 = 36;
+    optional bool bSolenoid6 = 37;
+    optional int32 iHighPressure  = 38;
+    optional int32 iLowPressure1 = 39;
+    optional int32 iLowPressure2 = 40;
+    optional int32 iLowPressure3 = 41;
+    optional int32 iLowPressure4 = 42;
     optional int32 pressureVesselTemperature = 43;
 
     optional int32 electronicsEnclosurePressure = 44;
@@ -164,7 +164,7 @@ message telemetry {
     optional int32 coolantPressure2 = 50;
     optional int32 coolantPressure3 = 51;
     optional int32 coolantTemperature = 52;
-    optional int32 railTemperature = 53;
+    optional float railTemperature = 53;
 
 // Ghost Train
     optional int32 pack1Voltage = 55;
@@ -213,4 +213,8 @@ message flightConfig {
     required uint64 flight_length = 6;
     required int32 heartbeat_timeout = 7;
     required string pod_driver = 8;
+}
+
+message defaultFcToNode {
+    optional PodStates podState = 1;
 }
