@@ -2,6 +2,10 @@
 #include "EasyLogger/easylogging++.h"
 #include <FlightComputer/Network.h>
 
+/**
+ *
+ *
+ */
 class UdpConnection {
     public:
         virtual ~UdpConnection() = default;
@@ -12,10 +16,24 @@ class UdpConnection {
             this->sDestAddr = sAddr;
         };
 
+        /** Set the buffer size for the receiving buffer.
+         *
+         * @param iSize : Size of buffer
+         */
         void setRecvBufferSize(int32_t iSize){
             int32_t s = setsockopt(this->iInboundSocket, SOL_SOCKET, SO_RCVBUF, &iSize, sizeof(iSize));
         }
 
+        /**
+         * Since UDP clients can share an outbound socket, it is
+         * passed as a paramater.
+         *
+         * This simply pre configures the sockaddr_in struct required by sendto()
+         *
+         * @param strIp : IP of the destination address
+         * @param iDestPort : Port of the destination address
+         * @param iOutboundSocket : Socket to use when sending data
+         */
         void configureClient(const std::string &strIp, int32_t iDestPort, int32_t iOutboundSocket) {
             struct sockaddr_in sAddr = {0};
             this->iOutboundSocket = iOutboundSocket;
@@ -25,7 +43,17 @@ class UdpConnection {
             this->sDestAddr.sin_addr.s_addr = inet_addr(strIp.c_str());
         }
 
-        void configureServer(int32_t iServerPort, int32_t timeoutMilis ) {
+
+        /**
+         *
+         * @param iServerPort : Port to listen for UDP on
+         * @param timeoutMilis : How long to wait for incoming data before
+         * announcing the connection inactive
+         *
+         * @throws : Any runtime error from createServerSocket
+         */
+        void configureServer(int32_t iServerPort, int32_t iTimeoutMilis ) {
+            this->pulse = Heartbeat(iTimeoutMilis);
             this->iServerPort = iServerPort;
             try {
                 this->createServerSocket();
@@ -35,12 +63,21 @@ class UdpConnection {
             }
         }
 
+        /**
+         * Checks the buffer for data, and prases it if present.
+         *
+         * @requires: ConfigServer() has been called
+         *
+         * @throws: Runtime error if parsing the proto message fails.
+         *
+         * //TODO throw error if config server hasnt been set
+         */
         void getUpdate() {
             char cBuffer[100] = {0};
             bzero(&cBuffer, sizeof cBuffer);
             ssize_t iReceivedPacketSize = recvfrom(this->iInboundSocket, cBuffer, 100, 0, nullptr, nullptr);
             if (iReceivedPacketSize != -1) {
-                LOG(INFO) << iReceivedPacketSize << "Bytes received on socket:" << this->strConnectionName << ": " << cBuffer;
+                LOG(DEBUG) << iReceivedPacketSize << "Bytes received on socket:" << this->strConnectionName << ": " << cBuffer;
                 try {
                     this->parseUpdate(cBuffer, (int32_t)iReceivedPacketSize);
                 }
@@ -58,6 +95,13 @@ class UdpConnection {
             }
         }
 
+        /**
+         * Send update
+         *
+         * @requires: configClient has been filled
+         *
+         * @throws: runtime errors if protobuf fails to serialize or the socket is invalid
+         */
         void giveUpdate() {
             google::protobuf::Message* pPacket;
             ssize_t iPayloadSize;
@@ -85,6 +129,14 @@ class UdpConnection {
             close(this->iOutboundSocket);
         }
 
+        /**
+         * Each derived class will implement its own function to parse the proto
+         * packet it receives
+         *
+         * @param cBuffer : Contains serialized proto message
+         * @param iMessageSize : Size of the message in bytes
+         * @return If it successfully parsed
+         */
         virtual bool parseUpdate(char cBuffer[], int32_t iMessageSize) { return false; };
 
         virtual google::protobuf::Message* getProtoUpdateMessage(){
@@ -93,6 +145,10 @@ class UdpConnection {
             return protoMessage;
         };
 
+        /**
+         * Each derived class will be responsible for implementing how it notifies the shared memeory
+         * the status of its connection.
+         */
         virtual void setConnectionStatus(bool) {};
 
     protected:

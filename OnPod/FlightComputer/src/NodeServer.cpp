@@ -4,7 +4,12 @@
 #include <FlightComputer/UdpConnection.h>
 
 
-
+/**
+ * Creates and configures the brake node connection
+ *
+ * @param Pod
+ * @return A pointer to a BrakeNodeConnection
+ */
 UdpConnection* getBrakeNodeConnection(Pod Pod)
 {
     auto BrakeNode = new BrakeNodeConnection(Pod);
@@ -46,8 +51,9 @@ int32_t podInternalNetworkThread(Pod Pod) {
         return -1;
     }
 
-    std::vector<UdpConnection*> nodes;
-    if(Pod.sPodNetworkValues->iActiveNodes[0])
+    std::vector<UdpConnection*> nodes; // Vector containing all Node Connections
+
+    if(Pod.sPodNetworkValues->iActiveNodes[0]) //Check if brake node is active
     {
         try {
             UdpConnection* brakeNode = getBrakeNodeConnection(Pod);
@@ -77,6 +83,7 @@ int32_t podInternalNetworkThread(Pod Pod) {
             }
         }
 
+        //TODO Send telemetry update
     }
 
     for(auto&& node: nodes )
@@ -84,8 +91,10 @@ int32_t podInternalNetworkThread(Pod Pod) {
         node->closeConnection();
         delete node;
     }
-    close(Pod.sPodNetworkValues->iNodeClientSocket);
 
+    //TODO delete telemetry connection
+
+    close(Pod.sPodNetworkValues->iNodeClientSocket);
     return 1;
 }
 
