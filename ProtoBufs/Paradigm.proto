@@ -196,6 +196,7 @@ message fcToBrakeNode {
 
 // DTS node to flight computer
 message dtsNodeToFc {
+    optional BrakeNodeStates brakeNodeState = 7;
     optional bool brakeSolenoidState = 1 [default = false];
     optional bool ventSolenoidState = 2 [default = false];
     optional float rotorTemperature = 3;
