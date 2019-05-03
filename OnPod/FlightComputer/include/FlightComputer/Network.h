@@ -16,8 +16,6 @@
 #include "FlightComputer/structs.h"
 #include "FlightComputer/Pod.h"
 
-void sendDataUdp(clientSocketConfig*, const void*,  int32_t,  std::string);
-
 int32_t podInternalNetworkThread(Pod);
 
 int32_t createCommanderServerSocket(int32_t);
