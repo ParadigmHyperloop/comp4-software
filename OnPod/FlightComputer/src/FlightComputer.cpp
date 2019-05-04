@@ -19,27 +19,16 @@ INITIALIZE_EASYLOGGINGPP
 #include "Pod.h"
 #include "CoreControl.h"
 #include "Helpers/FileHelper.h"
+#include "FlightComputerInitializer.h"
 
 using namespace std;
 
 int main( int32_t argc, char** argv)
 {
-	// Logger
-	el::Helpers::setThreadName("main");
-	std::ifstream infile("/home/debian/logging.conf");
-	if(infile.good())
-	{
-		el::Configurations conf("/home/debian/logging.conf");
-		el::Loggers::reconfigureAllLoggers(conf);
+	// Initalize Logger Logger;
+	FlightComputerInitializer* initializer = FlightComputerInitializer::GetInstance();
+	initializer->importLoggerLibrary();
 
-	}
-	else
-	{
-		std::string currentDir = FileHelper::GetCurrentDirectory() +"../../";
-		//el::Configurations conf("/home/lwaghorn/Development/comp4-software/OnPod/FlightComputer/libs/EasyLogger/logging.conf");
-		el::Configurations conf("/Users/liamwaghorn/Development/comp4-software/OnPod/FlightComputer/libs/EasyLogger/logging.conf");
-		el::Loggers::reconfigureAllLoggers(conf);
-	}
 	LOG(INFO)<<"Main Thread is Started";
 	LOG(INFO)<< std::thread::hardware_concurrency();
 

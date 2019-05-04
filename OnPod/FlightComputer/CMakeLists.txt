@@ -30,7 +30,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 
 
-add_executable(FlightComputer ${SOURCES}  ${PROTO_HDRS} src/Helpers/FileHelper.cpp src/Helpers/FileHelper.h)
+add_executable(FlightComputer ${SOURCES}  ${PROTO_HDRS} src/Helpers/FileHelper.cpp src/Helpers/FileHelper.h src/FlightComputerInitializer.cpp src/FlightComputerInitializer.h)
 
 
 target_link_libraries(FlightComputer ${Protobuf_LIBRARIES})
