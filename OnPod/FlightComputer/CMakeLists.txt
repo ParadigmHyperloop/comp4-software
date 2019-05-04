@@ -13,36 +13,32 @@ file(GLOB SOURCES "src/*.c*")
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
-    # Compiling on host: Link local libraries dynamicly
+message(${CMAKE_CXX_COMPILER})
 
-
-    find_package(Protobuf REQUIRED)
-
+if (${CMAKE_CXX_COMPILER} MATCHES ".arm")
+    # Staticly link libs built for ARM
+    set(Protobuf_INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include/ProtoBuffer/src")
     include_directories(${Protobuf_INCLUDE_DIRS})
 
-
-else ()
-    # Staticly link libs built for ARM
-
-    set(Protobuf_INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include/ProtoBuffer/src")
     set(Protobuf_LIBRARIES ${Protobuf_INCLUDE_DIRS}/.libs/libprotobuf.a)
-
+else ()
+    # Compiling on host: Link local libraries dynamicly
+    find_package(Protobuf REQUIRED)
+    include_directories(${Protobuf_INCLUDE_DIRS})
 endif ()
-
 
 find_package(Threads REQUIRED)
 if (THREADS_HAVE_PTHREAD_ARG)
     message("have")
     target_compile_options(FlightComputer PUBLIC "-pthread")
 endif ()
-if (CMAKE_THREAD_LIBS_INIT)
-    message("have2")
-    target_link_libraries(FlightComputer "${CMAKE_THREAD_LIBS_INIT}")
-
-endif ()
-
 
 add_executable(FlightComputer ${SOURCES} ${PROTO_HDRS})
 
 target_link_libraries(FlightComputer ${Protobuf_LIBRARIES})
+
+if (CMAKE_THREAD_LIBS_INIT)
+    SET (MYLIB -Wl,--whole-archive ${CMAKE_THREAD_LIBS_INIT} -Wl,--no-whole-archive)
+    target_link_libraries(FlightComputer ${MYLIB})
+endif ()
+
