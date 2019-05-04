@@ -1,6 +1,7 @@
 from abc import ABCMeta, abstractmethod
 from states import *
-
+from Paradigm_pb2 import BrakeNodeStates as protoStates
+import random
 
 class HardwareStateSimulation(metaclass=ABCMeta):
 
@@ -15,7 +16,8 @@ class HardwareStateSimulation(metaclass=ABCMeta):
         pass
 
     def parse_neighbor_update(self, neighbor_state):
-        self.neighbor_state = neighbor_state
+        if neighbor_state is not None:
+            self.neighbor_state = neighbor_state
 
 
 class BrakeNode(HardwareStateSimulation):
@@ -33,6 +35,42 @@ class BrakeNode(HardwareStateSimulation):
         update['Temperatures'] = self.temperatures
         update['State'] = self.state
         return update
+
+
+class DtsNode(HardwareStateSimulation):
+
+    def __init__(self, behaviour):
+        super().__init__(behaviour)
+        self.sol1 = False
+        self.sol2 = False
+        self.hp = 0
+        self.lp = 0
+        self.rail_temp = 0
+        self.pressure_vessel_temp = 0
+        a = protoStates.keys()
+        self.state = protoStates.Value('bnsVenting')
+
+    def give_update(self):
+        self.state = self.behaviour.behave(self.state, self.neighbor_state)
+        self.update_sensors()
+        update = dict()
+        update['State'] = self.state
+        update['sol1'] = self.sol1
+        update['sol2'] = self.sol2
+        update['hp'] = self.hp
+        update['lp'] = self.lp
+        update['rail_temp'] = self.rail_temp
+        update['pressure_vessel_temp'] = self.pressure_vessel_temp
+        return update
+
+    def update_sensors(self):
+        self.sol1 = random.randint(0, 1)
+        self.sol2 = random.randint(0, 1)
+        self.hp = random.randint(1, 101)
+        self.lp = random.randint(1, 101)
+        self.rail_temp = random.randint(1, 101)
+        self.pressure_vessel_temp = random.randint(1, 101)
+
 
 
 class FlightComputer(HardwareStateSimulation):

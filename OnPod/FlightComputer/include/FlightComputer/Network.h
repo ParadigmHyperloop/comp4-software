@@ -16,22 +16,14 @@
 #include "FlightComputer/structs.h"
 #include "FlightComputer/Pod.h"
 
-void sendDataUdp(clientSocketConfig*, const void*,  int32_t,  std::string);
-
-clientSocketConfig initializeClientSocket(Pod);
-
-int32_t createNodeServerSocket(int32_t);
-
-int32_t nodeServerThread(Pod Pod);
-
-void parseBreakNodePacket(brakeNodeData, Pod);
-
 int32_t podInternalNetworkThread(Pod);
-
-const char* getPodUpdateMessage(Pod*);
 
 int32_t createCommanderServerSocket(int32_t);
 
 int32_t commanderThread(Pod);
+
+sockaddr_in createGenericNodeAddr();
+
+int32_t createUdpClientSocket();
 
 #endif

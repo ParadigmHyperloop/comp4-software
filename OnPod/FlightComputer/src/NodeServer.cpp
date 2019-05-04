@@ -1,149 +1,92 @@
 #include "FlightComputer/Pod.h"
-#include "ProtoBuffer/Paradigm.pb.h"
 #include "EasyLogger/easylogging++.h"
 #include <FlightComputer/Network.h>
-
-
-#include <iostream>
+#include <FlightComputer/UdpConnection.h>
 
 
 /**
- * createNodeServerSocket
+ * Creates and configures the brake node connection
  *
- * returns: The socket discriptor number that is associated with the created socket
- * params: None
- *
- * Create the UDP socket that Pod Internal Work Node telemetry will be recieved on.
+ * @param Pod
+ * @return A pointer to a BrakeNodeConnection
  */
- int32_t createNodeServerSocket(int32_t iPortNumber) {
-	int32_t iSocket;
-	struct sockaddr_in SocketAddrStruct;
-	iSocket = socket(AF_INET, SOCK_DGRAM, 0);
-    if (iSocket < 0)
-    {
-    	LOG(INFO)<<"ERROR Making Node Server Socket";
-    	return iSocket;
+UdpConnection *getBrakeNodeConnection(Pod Pod) {
+    auto BrakeNode = new BrakeNodeConnection(Pod);
+    try {
+        BrakeNode->configureClient(Pod.sPodNetworkValues->cNodeIpAddrs[0], Pod.sPodNetworkValues->iBrakeNodePort,
+                                   Pod.sPodNetworkValues->iNodeClientSocket);
+        BrakeNode->configureServer(Pod.sPodNetworkValues->iBrakeNodeServerPortNumber,
+                                   Pod.sPodNetworkValues->iNodeTimeoutMili);
+        BrakeNode->setRecvBufferSize(50); // Small recv buffer keeps parsed data fresh.
     }
-	int flags = fcntl(iSocket, F_GETFL);
-	flags |= O_NONBLOCK;
-	fcntl(iSocket, F_SETFL, flags);
-	SocketAddrStruct.sin_family = AF_INET;
-	SocketAddrStruct.sin_port = htons(iPortNumber);
-	SocketAddrStruct.sin_addr.s_addr = INADDR_ANY;
-	int32_t iBind = bind(iSocket, (struct sockaddr*)&SocketAddrStruct, sizeof(SocketAddrStruct));
-	if(iBind < 0)
-	{
-    	LOG(INFO)<<"ERROR Binding Node Server Socket";
-    	return iBind;
-	}
-	return iSocket;
+    catch (std::runtime_error &e) {
+        throw e;
+    }
+
+    return BrakeNode;
+}
+
+UdpConnection *getRearNodeConnection(Pod Pod) {
+    auto BrakeNode = new BrakeNodeConnection(Pod);
+    return BrakeNode;
 }
 
 
-void parseBrakeNodeUpdate(Pod* Pod, char cUpdate[])
-{
-	 BrakeNodeStates bnsBrakeNodeStates[9] = {bnsBooting,
-			 	 	 	 					  bnsStandby,
-											  bnsArming,
-											  bnsArmed,
-											  bnsFlight,
-											  bnsBraking,
-											  bnsVenting,
-											  bnsRetrieval,
-											  bnsError};
-	 std::string sNodeState(cUpdate);
-	 int32_t iStateNumber = std::stoi(sNodeState);
-	 BrakeNodeStates eBrakeNodeState = bnsBrakeNodeStates[iStateNumber];
-	 Pod->setBrakeNodeState(eBrakeNodeState);
-	 return;
-}
-
-
-void retrieveNodeUpdate(Pod* Pod, int32_t iNodeServerSocket)
-{
-		char cBuffer[30] = {0};
-		bzero(&cBuffer, sizeof cBuffer);
-		int32_t iRecievedPacketSize = recvfrom(iNodeServerSocket, cBuffer, 300, 0, nullptr, nullptr);
-		if(iRecievedPacketSize != -1)
-		{
-			LOG(DEBUG)<<"Packet Recieved on socket:" << iRecievedPacketSize;
-			parseBrakeNodeUpdate(Pod, cBuffer);
-		}
-		else
-		{
-			LOG(DEBUG)<<"No Packet Recieved on socket:" << iNodeServerSocket;
-		}
-}
-
-
-const char* getPodUpdateMessage(Pod* Pod)
-{
-	// A temporary plain text message for easy debugging on the node sim side
-	PodStates PodState = Pod->getPodState();
-	switch(PodState)
-	{
-	case psBooting:
-		return "Booting";
-	case psStandby:
-		return "StandBy";
-	case psArming:
-		return "Arming";
-	case psArmed:
-		return "Armed";
-	case psPreFlight:
-		return "PreFlight";
-	case psAcceleration:
-		return "Acceleration";
-	case psCoasting:
-		return "Coasting";
-	case psBraking:
-		return "Braking";
-	case psDisarming:
-		return "Disarming";
-	case psRetrieval:
-		return "Retrieval";
-	default:
-		return "Emergency";
-	}
-}
-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmissing-noreturn"
 
 /**
- *Wait on socket, parse the recieved message into a protobuf and hand it off.
+ *Wait on socket, parse the received message into a protobuf and hand it off.
  */
- int32_t podInternalNetworkThread(Pod Pod)
-{
-	// Network setup
-	int32_t iNodeServerSocket = createNodeServerSocket(Pod.sPodNetworkValues->iNodeServerPortNumber);
-	std::vector<std::string> cNodeIpAddrs = Pod.sPodNetworkValues->cNodeIpAddrs;
+int32_t podInternalNetworkThread(Pod Pod) {
 
-	if(iNodeServerSocket < 1)
-	{
-		LOG(INFO)<<"ERROR Making Node Server Socket";
-		return iNodeServerSocket;
-	}
+    try {
+        Pod.sPodNetworkValues->iNodeClientSocket = createUdpClientSocket();
+    }
+    catch (std::runtime_error &e) {
+        LOG(INFO) << e.what();
+        return -1;
+    }
 
-	clientSocketConfig cscNodeClientSocket = initializeClientSocket(Pod);
-	LOG(INFO)<<"Starting Node Server Thread";
-	// While mode isnt shutdown
-	while(1){
-		// Serve all nodes with an update
-		// Create Update Packet
-		const char* cMesssage = getPodUpdateMessage(&Pod);
-		//Serve Update to all Nodes
+    PdsConnection Pds = PdsConnection(Pod);
+    Pds.configureClient(Pod.sPodNetworkValues->strPdsIpAddr, Pod.sPodNetworkValues->iPdsTelemeteryPort,
+                        Pod.sPodNetworkValues->iNodeClientSocket);
 
-		for(std::size_t i=0; i<cNodeIpAddrs.size(); ++i)
-		{
-			sendDataUdp(&cscNodeClientSocket, cMesssage, strlen(cMesssage), cNodeIpAddrs[i]);
-		}
+    std::vector<UdpConnection *> nodes; // Vector containing all Node Connections
+    if (Pod.sPodNetworkValues->iActiveNodes[0]) //Check if brake node is active
+    {
+        try {
+            UdpConnection *brakeNode = getBrakeNodeConnection(Pod);
+            nodes.push_back(brakeNode);
+        }
+        catch (std::runtime_error &e) {
+            LOG(INFO) << e.what();
+        }
+    }
+    if (Pod.sPodNetworkValues->iActiveNodes[1]) {
 
-		// Check all sockets for an update and parse
-		retrieveNodeUpdate(&Pod, iNodeServerSocket);
-
-	}
-	close(cscNodeClientSocket.sckt);
-	close(iNodeServerSocket);
-	return 0;
+    }
+    while (Pod.sPodValues->ePodState != psShutdown) {
+        // Give and get update for each node
+        for (auto &&node: nodes) {
+            try {
+                node->giveUpdate();
+                node->getUpdate();
+            }
+            catch (std::runtime_error &e) {
+                LOG(INFO) << e.what();
+            }
+        }
+        Pds.giveUpdate(); //Send telemetry packet to PDS
+    }
+    for (auto &&node: nodes) {
+        node->closeConnection();
+        delete node;
+    }
+    close(Pod.sPodNetworkValues->iNodeClientSocket);
+    return 1;
 }
+
+#pragma clang diagnostic pop
 
 
