@@ -14,10 +14,11 @@ INITIALIZE_EASYLOGGINGPP
 
 
 
-#include <FlightComputer/Network.h>
-#include "FlightComputer/nodeSim.h"
-#include "FlightComputer/Pod.h"
-#include "FlightComputer/CoreControl.h"
+#include "Network.h"
+#include "nodeSim.h"
+#include "Pod.h"
+#include "CoreControl.h"
+#include "Helpers/FileHelper.h"
 
 using namespace std;
 
@@ -34,8 +35,9 @@ int main( int32_t argc, char** argv)
 	}
 	else
 	{
-		//el::Configurations conf("/home/lwaghorn/Development/comp4-software/OnPod/FlightComputer/include/EasyLogger/logging.conf");
-		el::Configurations conf("/Users/liamwaghorn/Development/comp4-software/OnPod/FlightComputer/include/EasyLogger/logging.conf");
+		std::string currentDir = FileHelper::GetCurrentDirectory() +"../../";
+		//el::Configurations conf("/home/lwaghorn/Development/comp4-software/OnPod/FlightComputer/libs/EasyLogger/logging.conf");
+		el::Configurations conf("/Users/liamwaghorn/Development/comp4-software/OnPod/FlightComputer/libs/EasyLogger/logging.conf");
 		el::Loggers::reconfigureAllLoggers(conf);
 	}
 	LOG(INFO)<<"Main Thread is Started";
@@ -60,6 +62,7 @@ int main( int32_t argc, char** argv)
     sPodNetworkValues.iActiveNodes[0] = 1; // Set brake node active
 
 
+    /*
     //Pod Internal Network Thread
 	Pod pPodInternalNetwork = Pod(&sPodValues, &sPodNetworkValues);
 	pPodInternalNetwork.bWriteBreakNodeState = true;
@@ -70,18 +73,19 @@ int main( int32_t argc, char** argv)
 	Pod pCoreControlLoop = Pod(&sPodValues, &sPodNetworkValues);
 	pCoreControlLoop.bWritePodState = true;
 	std::thread tControlLoop(coreControlLoop, pCoreControlLoop);
-/*
+
 	// Controls Interface Connection Thread
 	Pod pCommanderThread = Pod(&sPodValues, &sPodNetworkValues);
 	pCommanderThread.bWriteManualStates = 1;
 	pCommanderThread.bWriteControlsInterfaceState = 1;
 	std::thread tControlsInterfaceConnection(commanderThread, pCommanderThread);
-*/
+
 //	tControlsInterfaceConnection.join();
 
-	tControlLoop.join();
+*/
+	//tControlLoop.join();
 
-	tServer.join();
+	//tServer.join();
 
 	return 0;
 }

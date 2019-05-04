@@ -1,9 +1,9 @@
 #include <cerrno>
 
-#include "FlightComputer/Network.h"
+#include "Network.h"
 #include "EasyLogger/easylogging++.h"
 #include "ProtoBuffer/Paradigm.pb.h"
-#include "FlightComputer/Heartbeat.h"
+#include "Heartbeat.h"
 
 // Get manual state change commands. Get Estop command
 

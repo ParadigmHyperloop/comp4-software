@@ -3,12 +3,12 @@ project(FlightComputer)
 
 set(CMAKE_CXX_STANDARD 14)
 
-include_directories(include/EasyLogger)
-include_directories(include/FlightComputer)
-include_directories(include/ProtoBuffer)
-include_directories(include)
+include_directories(libs/EasyLogger)
+include_directories(libs/FlightComputer)
+include_directories(libs/ProtoBuffer)
+include_directories(libs)
 
-file(GLOB_RECURSE HEADERS "include/*.h")
+file(GLOB_RECURSE HEADERS "libs/*.h")
 file(GLOB SOURCES "src/*.c*")
 
 
@@ -30,7 +30,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 
 
-add_executable(FlightComputer ${SOURCES}  ${PROTO_HDRS})
+add_executable(FlightComputer ${SOURCES}  ${PROTO_HDRS} src/Helpers/FileHelper.cpp src/Helpers/FileHelper.h)
 
 
 target_link_libraries(FlightComputer ${Protobuf_LIBRARIES})

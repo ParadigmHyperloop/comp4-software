@@ -1,7 +1,7 @@
-#include "Network.h"
+#include "../src/Network.h"
 #include "catch.hpp"
-#include "structs.h"
-#include "FlightComputer/Pod.h"
+#include "../src/structs.h"
+#include "../src/Pod.h"
 #include <string>
 
 

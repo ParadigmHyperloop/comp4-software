@@ -287,7 +287,7 @@ unsigned int rngSeed();
 // work around clang bug with libstdc++
 // https://bugs.llvm.org/show_bug.cgi?id=31852
 // fix should be in clang 8, workaround in libstdc++ 8.2
-#include <ciso646>
+#libs <ciso646>
 #if defined(__GLIBCXX__) && defined(_GLIBCXX_RELEASE) && (_GLIBCXX_RELEASE < 9)
 #define CATCH_CONFIG_NO_CPP17_VARIANT
 #else
@@ -1129,7 +1129,7 @@ class ReusableStringStream {
 // end catch_stream.h
 
 #ifdef CATCH_CONFIG_CPP17_STRING_VIEW
-#include <string_view>
+#libs <string_view>
 #endif
 
 #ifdef __OBJC__
@@ -1506,7 +1506,7 @@ inline std::string stringify(NSString* nsstring) {
 
 // Separate std::pair specialization
 #if defined(CATCH_CONFIG_ENABLE_PAIR_STRINGMAKER)
-#include <utility>
+#libs <utility>
 namespace Catch {
 template <typename T1, typename T2>
 struct StringMaker<std::pair<T1, T2>> {
@@ -1522,7 +1522,7 @@ struct StringMaker<std::pair<T1, T2>> {
 
 // Separate std::tuple specialization
 #if defined(CATCH_CONFIG_ENABLE_TUPLE_STRINGMAKER)
-#include <tuple>
+#libs <tuple>
 namespace Catch {
 namespace Detail {
 template <typename Tuple, std::size_t N = 0,
@@ -1555,7 +1555,7 @@ struct StringMaker<std::tuple<Types...>> {
 
 #if defined(CATCH_CONFIG_ENABLE_VARIANT_STRINGMAKER) && \
     defined(CATCH_CONFIG_CPP17_VARIANT)
-#include <variant>
+#libs <variant>
 namespace Catch {
 template <>
 struct StringMaker<std::monostate> {
@@ -1642,9 +1642,9 @@ struct StringMaker<T[SZ]> {
 
 // Separate std::chrono::duration specialization
 #if defined(CATCH_CONFIG_ENABLE_CHRONO_STRINGMAKER)
-#include <chrono>
-#include <ctime>
-#include <ratio>
+#libs <chrono>
+#libs <ctime>
+#libs <ratio>
 
 namespace Catch {
 
@@ -3230,7 +3230,7 @@ struct UnorderedEqualsMatcher : MatcherBase<std::vector<T>> {
   UnorderedEqualsMatcher(std::vector<T> const& target) : m_target(target) {}
   bool match(std::vector<T> const& vec) const override {
     // Note: This is a reimplementation of std::is_permutation,
-    //       because I don't want to include <algorithm> inside the common path
+    //       because I don't want to libs <algorithm> inside the common path
     if (m_target.size() != vec.size()) {
       return false;
     }
@@ -3788,7 +3788,7 @@ struct IRunner {
 
 #import <objc/runtime.h>
 
-#include <string>
+#libs <string>
 
 // NB. Any general catch headers included here must be included
 // in catch.hpp first to make sure they are included by the single
@@ -4038,9 +4038,9 @@ class WildcardPattern {
 }
 
 // end catch_wildcard_pattern.h
-#include <memory>
-#include <string>
-#include <vector>
+#libs <memory>
+#libs <string>
+#libs <vector>
 
 namespace Catch {
 
@@ -4105,7 +4105,7 @@ class TestSpec {
 // end catch_test_spec.h
 // start catch_interfaces_tag_alias_registry.h
 
-#include <string>
+#libs <string>
 
 namespace Catch {
 
@@ -4183,10 +4183,10 @@ TestSpec parseTestSpec(std::string const& arg);
 // end catch_test_spec_parser.h
 // start catch_interfaces_config.h
 
-#include <iosfwd>
-#include <memory>
-#include <string>
-#include <vector>
+#libs <iosfwd>
+#libs <memory>
+#libs <string>
+#libs <vector>
 
 namespace Catch {
 
@@ -4249,9 +4249,9 @@ using IConfigPtr = std::shared_ptr<IConfig const>;
 // end catch_interfaces_config.h
 // Libstdc++ doesn't like incomplete classes for unique_ptr
 
-#include <memory>
-#include <string>
-#include <vector>
+#libs <memory>
+#libs <string>
+#libs <vector>
 
 #ifndef CATCH_CONFIG_CONSOLE_WIDTH
 #define CATCH_CONFIG_CONSOLE_WIDTH 80
@@ -4354,7 +4354,7 @@ class Config : public IConfig {
 // end catch_config.hpp
 // start catch_assertionresult.h
 
-#include <string>
+#libs <string>
 
 namespace Catch {
 
@@ -4454,11 +4454,11 @@ class Option {
 }  // end namespace Catch
 
 // end catch_option.hpp
-#include <iosfwd>
-#include <map>
-#include <memory>
-#include <set>
-#include <string>
+#libs <iosfwd>
+#libs <map>
+#libs <memory>
+#libs <set>
+#libs <string>
 
 namespace Catch {
 
@@ -4659,13 +4659,13 @@ struct IReporterRegistry {
 }  // end namespace Catch
 
 // end catch_interfaces_reporter.h
-#include <algorithm>
-#include <cassert>
-#include <cfloat>
-#include <cstdio>
-#include <cstring>
-#include <memory>
-#include <ostream>
+#libs <algorithm>
+#libs <cassert>
+#libs <cfloat>
+#libs <cstdio>
+#libs <cstring>
+#libs <memory>
+#libs <ostream>
 
 namespace Catch {
 void prepareExpandedExpression(AssertionResult& result);
@@ -5145,7 +5145,7 @@ struct ConsoleReporter : StreamingReporterBase<ConsoleReporter> {
 
 // start catch_xmlwriter.h
 
-#include <vector>
+#libs <vector>
 
 namespace Catch {
 
@@ -5345,9 +5345,9 @@ class XmlReporter : public StreamingReporterBase<XmlReporter> {
 // Keep these here for external reporters
 // start catch_test_case_tracker.h
 
-#include <memory>
-#include <string>
-#include <vector>
+#libs <memory>
+#libs <string>
+#libs <vector>
 
 namespace Catch {
 namespace TestCaseTracking {
@@ -5523,8 +5523,8 @@ struct LeakDetector {
 // Cpp files will be included in the single-header file here
 // start catch_approx.cpp
 
-#include <cmath>
-#include <limits>
+#libs <cmath>
+#libs <limits>
 
 namespace {
 
@@ -5602,7 +5602,7 @@ std::string StringMaker<Catch::Detail::Approx>::convert(
 
 // start catch_context.h
 
-#include <memory>
+#libs <memory>
 
 namespace Catch {
 
@@ -5662,7 +5662,7 @@ bool isDebuggerActive();
 #if defined(__GNUC__) && (defined(__i386) || defined(__x86_64))
 #define CATCH_TRAP() asm volatile("int $3") /* NOLINT */
 #else                                       // Fall back to the generic way.
-#include <signal.h>
+#libs <signal.h>
 
 #define CATCH_TRAP() raise(SIGTRAP)
 #endif
@@ -5705,9 +5705,9 @@ inline void doNothing() {}
 #endif
 
 #ifdef __AFXDLL
-#include <AfxWin.h>
+#libs <AfxWin.h>
 #else
-#include <windows.h>
+#libs <windows.h>
 #endif
 
 #ifdef CATCH_DEFINED_NOMINMAX
@@ -5741,7 +5741,7 @@ struct FatalConditionHandler {
 
 #elif defined(CATCH_CONFIG_POSIX_SIGNALS)
 
-#include <signal.h>
+#libs <signal.h>
 
 namespace Catch {
 
@@ -5771,7 +5771,7 @@ struct FatalConditionHandler {
 #endif
 
 // end catch_fatal_condition.h
-#include <string>
+#libs <string>
 
 namespace Catch {
 
@@ -6169,7 +6169,7 @@ void handleExceptionMatchExpr(AssertionHandler& handler,
 #ifndef CLARA_CONFIG_OPTIONAL_TYPE
 #ifdef __has_include
 #if __has_include(<optional>) && __cplusplus >= 201703L
-#include <optional>
+#libs <optional>
 #define CLARA_CONFIG_OPTIONAL_TYPE std::optional
 #endif
 #endif
@@ -6186,10 +6186,10 @@ void handleExceptionMatchExpr(AssertionHandler& handler,
 //
 // This project is hosted at https://github.com/philsquared/textflowcpp
 
-#include <cassert>
-#include <ostream>
-#include <sstream>
-#include <vector>
+#libs <cassert>
+#libs <ostream>
+#libs <sstream>
+#libs <vector>
 
 #ifndef CATCH_CLARA_TEXTFLOW_CONFIG_CONSOLE_WIDTH
 #define CATCH_CLARA_TEXTFLOW_CONFIG_CONSOLE_WIDTH 80
@@ -6493,13 +6493,13 @@ inline auto Column::operator+(Column const& other) -> Columns {
 }
 }
 
-// ----------- end of #include from clara_textflow.hpp -----------
+// ----------- end of #libs from clara_textflow.hpp -----------
 // ........... back in clara.hpp
 
-#include <algorithm>
-#include <memory>
-#include <set>
-#include <string>
+#libs <algorithm>
+#libs <memory>
+#libs <set>
+#libs <string>
 
 #if !defined(CATCH_PLATFORM_WINDOWS) &&                         \
     (defined(WIN32) || defined(__WIN32__) || defined(_WIN32) || \
@@ -7420,8 +7420,8 @@ clara::Parser makeCommandLineParser(ConfigData& config);
 }  // end namespace Catch
 
 // end catch_commandline.h
-#include <ctime>
-#include <fstream>
+#libs <ctime>
+#libs <fstream>
 
 namespace Catch {
 
@@ -7541,7 +7541,7 @@ clara::Parser makeCommandLineParser(ConfigData& config) {
                            ["--list-tests"]("list all/matching test cases") |
       Opt(config.listTags)["-t"]["--list-tags"]("list all/matching tags") |
       Opt(config.showSuccessfulTests)["-s"]["--success"](
-          "include successful tests in output") |
+          "libs successful tests in output") |
       Opt(config.shouldDebugBreak)["-b"]["--break"](
           "break into debugger on failure") |
       Opt(config.noThrow)["-e"]["--nothrow"]("skip exception tests") |
@@ -7597,8 +7597,8 @@ clara::Parser makeCommandLineParser(ConfigData& config) {
 // end catch_commandline.cpp
 // start catch_common.cpp
 
-#include <cstring>
-#include <ostream>
+#libs <cstring>
+#libs <ostream>
 
 namespace Catch {
 
@@ -7725,7 +7725,7 @@ class ErrnoGuard {
 }
 
 // end catch_errno_guard.h
-#include <sstream>
+#libs <sstream>
 
 namespace Catch {
 namespace {
@@ -7842,7 +7842,7 @@ IColourImpl* platformColourInstance() {
 
 #elif defined(CATCH_CONFIG_COLOUR_ANSI)  //////////////////////////////////////
 
-#include <unistd.h>
+#libs <unistd.h>
 
 namespace Catch {
 namespace {
@@ -8017,7 +8017,7 @@ Context::~Context() = default;
 
 // start catch_debug_console.h
 
-#include <string>
+#libs <string>
 
 namespace Catch {
 void writeToDebugConsole(std::string const& text);
@@ -8047,13 +8047,13 @@ void writeToDebugConsole(std::string const& text) {
 
 #ifdef CATCH_PLATFORM_MAC
 
-#include <assert.h>
-#include <stdbool.h>
-#include <sys/sysctl.h>
-#include <sys/types.h>
-#include <unistd.h>
-#include <cstddef>
-#include <ostream>
+#libs <assert.h>
+#libs <stdbool.h>
+#libs <sys/sysctl.h>
+#libs <sys/types.h>
+#libs <unistd.h>
+#libs <cstddef>
+#libs <ostream>
 
 namespace Catch {
 
@@ -8097,8 +8097,8 @@ bool isDebuggerActive() {
 }  // namespace Catch
 
 #elif defined(CATCH_PLATFORM_LINUX)
-#include <fstream>
-#include <string>
+#libs <fstream>
+#libs <string>
 
 namespace Catch {
 // The standard POSIX way of detecting a debugger is to attempt to
@@ -8174,7 +8174,7 @@ namespace Catch {
 // end catch_enforce.cpp
 // start catch_errno_guard.cpp
 
-#include <cerrno>
+#libs <cerrno>
 
 namespace Catch {
 ErrnoGuard::ErrnoGuard() : m_oldErrno(errno) {}
@@ -8185,9 +8185,9 @@ ErrnoGuard::~ErrnoGuard() { errno = m_oldErrno; }
 
 // start catch_exception_translator_registry.h
 
-#include <memory>
-#include <string>
-#include <vector>
+#libs <memory>
+#libs <string>
+#libs <vector>
 
 namespace Catch {
 
@@ -8441,8 +8441,8 @@ void FatalConditionHandler::reset() {}
 
 // start catch_random_number_generator.h
 
-#include <algorithm>
-#include <random>
+#libs <algorithm>
+#libs <random>
 
 namespace Catch {
 
@@ -8454,8 +8454,8 @@ unsigned int rngSeed();
 }
 
 // end catch_random_number_generator.h
-#include <limits>
-#include <set>
+#libs <limits>
+#libs <set>
 
 namespace Catch {
 
@@ -8670,7 +8670,7 @@ ITestCaseRegistry::~ITestCaseRegistry() = default;
 // start catch_leak_detector.cpp
 
 #ifdef CATCH_CONFIG_WINDOWS_CRTDBG
-#include <crtdbg.h>
+#libs <crtdbg.h>
 
 namespace Catch {
 
@@ -8698,7 +8698,7 @@ Catch::LeakDetector::~LeakDetector() { Catch::cleanUp(); }
 
 // start catch_list.h
 
-#include <set>
+#libs <set>
 
 namespace Catch {
 
@@ -8730,9 +8730,9 @@ using namespace clara::TextFlow;
 }
 
 // end catch_text.h
-#include <algorithm>
-#include <iomanip>
-#include <limits>
+#libs <algorithm>
+#libs <iomanip>
+#libs <limits>
 
 namespace Catch {
 
@@ -8910,7 +8910,7 @@ bool isnan(double d);
 // end catch_polyfills.hpp
 // start catch_to_string.hpp
 
-#include <string>
+#libs <string>
 
 namespace Catch {
 template <typename T>
@@ -8926,9 +8926,9 @@ std::string to_string(T const& t) {
 }  // end namespace Catch
 
 // end catch_to_string.hpp
-#include <cstdint>
-#include <cstdlib>
-#include <cstring>
+#libs <cstdint>
+#libs <cstdlib>
+#libs <cstring>
 
 namespace Catch {
 namespace Matchers {
@@ -9075,7 +9075,7 @@ std::string Catch::Matchers::Generic::Detail::finalizeDescription(
 // end catch_matchers_generic.cpp
 // start catch_matchers_string.cpp
 
-#include <regex>
+#libs <regex>
 
 namespace Catch {
 namespace Matchers {
@@ -9197,8 +9197,8 @@ bool uncaught_exceptions();
 }  // end namespace Catch
 
 // end catch_uncaught_exceptions.h
-#include <cassert>
-#include <stack>
+#libs <cassert>
+#libs <stack>
 
 namespace Catch {
 
@@ -9310,9 +9310,9 @@ void Capturer::captureValue(size_t index, std::string const& value) {
 #ifndef TWOBLUECUBES_CATCH_OUTPUT_REDIRECT_H
 #define TWOBLUECUBES_CATCH_OUTPUT_REDIRECT_H
 
-#include <cstdio>
-#include <iosfwd>
-#include <string>
+#libs <cstdio>
+#libs <iosfwd>
+#libs <string>
 
 namespace Catch {
 
@@ -9400,20 +9400,20 @@ class OutputRedirect {
 
 #endif  // TWOBLUECUBES_CATCH_OUTPUT_REDIRECT_H
 // end catch_output_redirect.h
-#include <cstdio>
-#include <cstring>
-#include <fstream>
-#include <sstream>
-#include <stdexcept>
+#libs <cstdio>
+#libs <cstring>
+#libs <fstream>
+#libs <sstream>
+#libs <stdexcept>
 
 #if defined(CATCH_CONFIG_NEW_CAPTURE)
 #if defined(_MSC_VER)
-#include <io.h>  //_dup and _dup2
+#libs <io.h>  //_dup and _dup2
 #define dup _dup
 #define dup2 _dup2
 #define fileno _fileno
 #else
-#include <unistd.h>  // dup and dup2
+#libs <unistd.h>  // dup and dup2
 #endif
 #endif
 
@@ -9524,7 +9524,7 @@ OutputRedirect::~OutputRedirect() {
 // end catch_output_redirect.cpp
 // start catch_polyfills.cpp
 
-#include <cmath>
+#libs <cmath>
 
 namespace Catch {
 
@@ -9562,10 +9562,10 @@ unsigned int rngSeed() { return getCurrentContext().getConfig()->rngSeed(); }
 
 // start catch_test_case_registry_impl.h
 
-#include <algorithm>
-#include <ios>
-#include <set>
-#include <vector>
+#libs <algorithm>
+#libs <ios>
+#libs <set>
+#libs <vector>
 
 namespace Catch {
 
@@ -9623,7 +9623,7 @@ std::string extractClassName(StringRef const& classOrQualifiedMethodName);
 // end catch_test_case_registry_impl.h
 // start catch_reporter_registry.h
 
-#include <map>
+#libs <map>
 
 namespace Catch {
 
@@ -9652,7 +9652,7 @@ class ReporterRegistry : public IReporterRegistry {
 
 // start catch_tag_alias.h
 
-#include <string>
+#libs <string>
 
 namespace Catch {
 
@@ -9666,7 +9666,7 @@ struct TagAlias {
 }  // end namespace Catch
 
 // end catch_tag_alias.h
-#include <map>
+#libs <map>
 
 namespace Catch {
 
@@ -9688,8 +9688,8 @@ class TagAliasRegistry : public ITagAliasRegistry {
 // end catch_tag_alias_registry.h
 // start catch_startup_exception_registry.h
 
-#include <exception>
-#include <vector>
+#libs <exception>
+#libs <vector>
 
 namespace Catch {
 
@@ -9867,9 +9867,9 @@ bool shouldSuppressFailure(int flags) {
 // end catch_result_type.cpp
 // start catch_run_context.cpp
 
-#include <algorithm>
-#include <cassert>
-#include <sstream>
+#libs <algorithm>
+#libs <cassert>
+#libs <sstream>
 
 namespace Catch {
 
@@ -10394,7 +10394,7 @@ SectionInfo::SectionInfo(SourceLineInfo const& _lineInfo,
 
 // start catch_session.h
 
-#include <memory>
+#libs <memory>
 
 namespace Catch {
 
@@ -10442,7 +10442,7 @@ class Session : NonCopyable {
 // end catch_session.h
 // start catch_version.h
 
-#include <iosfwd>
+#libs <iosfwd>
 
 namespace Catch {
 
@@ -10469,8 +10469,8 @@ Version const& libraryVersion();
 }
 
 // end catch_version.h
-#include <cstdlib>
-#include <iomanip>
+#libs <cstdlib>
+#libs <iomanip>
 
 namespace Catch {
 
@@ -10725,7 +10725,7 @@ int Session::runInternal() {
 // end catch_session.cpp
 // start catch_singletons.cpp
 
-#include <vector>
+#libs <vector>
 
 namespace Catch {
 
@@ -10773,12 +10773,12 @@ std::vector<std::exception_ptr> const& StartupExceptionRegistry::getExceptions()
 // end catch_startup_exception_registry.cpp
 // start catch_stream.cpp
 
-#include <cstdio>
-#include <fstream>
-#include <iostream>
-#include <memory>
-#include <sstream>
-#include <vector>
+#libs <cstdio>
+#libs <fstream>
+#libs <iostream>
+#libs <memory>
+#libs <sstream>
+#libs <vector>
 
 namespace Catch {
 
@@ -10941,10 +10941,10 @@ std::ostream& clog() { return std::clog; }
 // end catch_stream.cpp
 // start catch_string_manip.cpp
 
-#include <algorithm>
-#include <cctype>
-#include <cstring>
-#include <ostream>
+#libs <algorithm>
+#libs <cctype>
+#libs <cstring>
+#libs <ostream>
 
 namespace Catch {
 
@@ -11018,9 +11018,9 @@ std::ostream& operator<<(std::ostream& os, pluralise const& pluraliser) {
 #pragma clang diagnostic ignored "-Wexit-time-destructors"
 #endif
 
-#include <cstdint>
-#include <cstring>
-#include <ostream>
+#libs <cstdint>
+#libs <cstring>
+#libs <ostream>
 
 namespace {
 const uint32_t byte_2_lead = 0xC0;
@@ -11147,7 +11147,7 @@ RegistrarForTagAliases::RegistrarForTagAliases(char const* alias,
 // end catch_tag_alias_autoregistrar.cpp
 // start catch_tag_alias_registry.cpp
 
-#include <sstream>
+#libs <sstream>
 
 namespace Catch {
 
@@ -11200,10 +11200,10 @@ ITagAliasRegistry const& ITagAliasRegistry::get() {
 // end catch_tag_alias_registry.cpp
 // start catch_test_case_info.cpp
 
-#include <algorithm>
-#include <cctype>
-#include <exception>
-#include <sstream>
+#libs <algorithm>
+#libs <cctype>
+#libs <exception>
+#libs <sstream>
 
 namespace Catch {
 
@@ -11357,7 +11357,7 @@ TestCaseInfo const& TestCase::getTestCaseInfo() const { return *this; }
 // end catch_test_case_info.cpp
 // start catch_test_case_registry_impl.cpp
 
-#include <sstream>
+#libs <sstream>
 
 namespace Catch {
 
@@ -11458,11 +11458,11 @@ std::string extractClassName(StringRef const& classOrQualifiedMethodName) {
 // end catch_test_case_registry_impl.cpp
 // start catch_test_case_tracker.cpp
 
-#include <algorithm>
-#include <cassert>
-#include <memory>
-#include <sstream>
-#include <stdexcept>
+#libs <algorithm>
+#libs <cassert>
+#libs <memory>
+#libs <sstream>
+#libs <stdexcept>
 
 #if defined(__clang__)
 #pragma clang diagnostic push
@@ -11744,10 +11744,10 @@ AutoReg::~AutoReg() = default;
 // end catch_test_registry.cpp
 // start catch_test_spec.cpp
 
-#include <algorithm>
-#include <memory>
-#include <string>
-#include <vector>
+#libs <algorithm>
+#libs <memory>
+#libs <string>
+#libs <vector>
 
 namespace Catch {
 
@@ -11880,7 +11880,7 @@ TestSpec parseTestSpec(std::string const& arg) {
 // end catch_test_spec_parser.cpp
 // start catch_timer.cpp
 
-#include <chrono>
+#libs <chrono>
 
 static const uint64_t nanosecondsInSecond = 1000000000;
 
@@ -11957,8 +11957,8 @@ auto Timer::getElapsedSeconds() const -> double {
 #define CATCH_CONFIG_ENABLE_CHRONO_STRINGMAKER
 #endif
 
-#include <cmath>
-#include <iomanip>
+#libs <cmath>
+#libs <iomanip>
 
 namespace Catch {
 
@@ -12231,7 +12231,7 @@ Totals Totals::delta(Totals const& prevTotals) const {
 // end catch_totals.cpp
 // start catch_uncaught_exceptions.cpp
 
-#include <exception>
+#libs <exception>
 
 namespace Catch {
 bool uncaught_exceptions() {
@@ -12245,7 +12245,7 @@ bool uncaught_exceptions() {
 // end catch_uncaught_exceptions.cpp
 // start catch_version.cpp
 
-#include <ostream>
+#libs <ostream>
 
 namespace Catch {
 
@@ -12276,7 +12276,7 @@ Version const& libraryVersion() {
 // end catch_version.cpp
 // start catch_wildcard_pattern.cpp
 
-#include <sstream>
+#libs <sstream>
 
 namespace Catch {
 
@@ -12315,7 +12315,7 @@ std::string WildcardPattern::adjustCase(std::string const& str) const {
 // end catch_wildcard_pattern.cpp
 // start catch_xmlwriter.cpp
 
-#include <iomanip>
+#libs <iomanip>
 
 using uchar = unsigned char;
 
@@ -12587,11 +12587,11 @@ void XmlWriter::newlineIfNecessary() {
 // end catch_xmlwriter.cpp
 // start catch_reporter_bases.cpp
 
-#include <cassert>
-#include <cfloat>
-#include <cstdio>
-#include <cstring>
-#include <memory>
+#libs <cassert>
+#libs <cfloat>
+#libs <cstdio>
+#libs <cstring>
+#libs <memory>
 
 namespace Catch {
 void prepareExpandedExpression(AssertionResult& result) {
@@ -12917,8 +12917,8 @@ CATCH_REGISTER_REPORTER("compact", CompactReporter)
 // end catch_reporter_compact.cpp
 // start catch_reporter_console.cpp
 
-#include <cfloat>
-#include <cstdio>
+#libs <cfloat>
+#libs <cstdio>
 
 #if defined(_MSC_VER)
 #pragma warning(push)
@@ -13526,10 +13526,10 @@ CATCH_REGISTER_REPORTER("console", ConsoleReporter)
 // end catch_reporter_console.cpp
 // start catch_reporter_junit.cpp
 
-#include <algorithm>
-#include <cassert>
-#include <ctime>
-#include <sstream>
+#libs <algorithm>
+#libs <cassert>
+#libs <ctime>
+#libs <sstream>
 
 namespace Catch {
 
@@ -13757,7 +13757,7 @@ CATCH_REGISTER_REPORTER("junit", JunitReporter)
 // end catch_reporter_junit.cpp
 // start catch_reporter_listening.cpp
 
-#include <cassert>
+#libs <cassert>
 
 namespace Catch {
 

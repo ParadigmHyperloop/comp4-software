@@ -1,7 +1,7 @@
-#include "FlightComputer/Pod.h"
+#include "Pod.h"
 #include "EasyLogger/easylogging++.h"
-#include <FlightComputer/Network.h>
-#include <FlightComputer/NodeConnection.h>
+#include "Network.h"
+#include "UdpConnection.h"
 
 
 

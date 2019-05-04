@@ -2,7 +2,7 @@
 
 
 #include <Client.h>
-#include "FlightComputer/nodeSim.h"
+#include "../src/nodeSim.h"
 #include "ProtoBuffer/NodeTelem.pb.h"
 #include "EasyLogger/easylogging++.h"
 
