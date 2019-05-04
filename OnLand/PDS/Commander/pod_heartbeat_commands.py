@@ -41,8 +41,6 @@ def main():
         pod.connect()
 
         while pod.is_connected():
-            # Send Packet, non blocking sockets require a little extra magic to make sure the whole
-            # packet gets sent.
             # Send a packets every PULSE_SPEED milliseconds.
             if timer.time_since_pulse() > COMMANDER_PULSE_SPEED:
                 pod.send_packet(podMessage.SerializeToString())
@@ -59,7 +57,7 @@ def main():
                         sio.emit('ping', 1)
                         timer.pulse()
         # Connection lost, tell GUI
-        sio.emit('ping', '0')
+        sio.emit('ping', 0)
 
 if __name__ == "__main__":
     try:
