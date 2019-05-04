@@ -26,17 +26,14 @@ int main(int32_t argc, char **argv) {
         el::Loggers::reconfigureAllLoggers(conf);
 
     } else {
-        //el::Configurations conf("/home/lwaghorn/Development/comp4-software/OnPod/FlightComputer/include/EasyLogger/logging.conf");
-        el::Configurations conf(
-                "/Users/liamwaghorn/Development/comp4-software/OnPod/FlightComputer/include/EasyLogger/logging.conf");
+        el::Configurations conf("/home/liam/Development/comp4-software/OnPod/FlightComputer/include/EasyLogger/logging.conf");
+        //el::Configurations conf("/Users/liamwaghorn/Development/comp4-software/OnPod/FlightComputer/include/EasyLogger/logging.conf");
         el::Loggers::reconfigureAllLoggers(conf);
     }
     LOG(INFO) << "Main Thread is Started";
-    LOG(INFO) << std::thread::hardware_concurrency();
-
 
     // Create Shared Memory
-    PodNetwork sPodNetworkValues;
+    PodNetwork sPodNetworkValues = {};
     PodValues sPodValues;
 
     // Network Configs
