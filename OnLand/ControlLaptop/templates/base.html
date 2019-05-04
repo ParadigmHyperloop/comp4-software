@@ -32,7 +32,10 @@
 {% block pageStyles %}
 {% endblock %}
 
-
+<!-- For Ajax Requests -->
+<script type=text/javascript>
+  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
 
 {% block scripts %}
 <!--   Core JS Files   -->
