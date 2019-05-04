@@ -1,11 +1,10 @@
 from datetime import datetime
 from flask import *
-
-from LocalStorage.ConfigurationSotrage import LocalStorage
-from SocketController import PodCommunicator
-from ControlLaptop.config import *
-from forms import FlightConfigurationForm, validate_configuration_values
-
+from ControlLaptop.LocalStorage.ConfigurationSotrage import LocalStorage
+from ControlLaptop.LocalStorage.FlightConfig import FlightConfig
+from ControlLaptop.SocketController import PodCommunicator
+from ControlLaptop.config import get_page_title, NAV_BAR
+from ControlLaptop.forms import FlightConfigurationForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secrete-key'  # change later.
@@ -41,11 +40,25 @@ def inject_now():
 def submit_configuration():
     configuration_form = FlightConfigurationForm()
     if configuration_form.validate_on_submit():
-        configuration = validate_configuration_values(configuration_form)
-        if configuration['all_values_valid'] is True:
-            pod_communicator.send_configuration()
+        FlightConfig.get_flight_config_instance().update_config(
+            {
+                'retrieval_timeout': int(configuration_form.retrieval_timeout.data),
+                'max_flight_time': int(configuration_form.max_flight_time.data),
+                'motor_speed': int(configuration_form.motor_speed.data),
+                'telemetry_port': int(configuration_form.telemetry_port.data),
+                'command_port': int(configuration_form.command_port.data),
+                'flight_length': int(configuration_form.flight_Length.data),
+                'heartbeat_timeout': int(configuration_form.heartbeat_timout.data),
+                'pod_address': configuration_form.pod_ip.data,
+                'pod_driver': 'Motor' if configuration_form.pod_driver.data is True else 'Simulation',
+            }
+        )
+        command_sent = PodCommunicator.get_pod_communicator().send_configuration(
+            configuration=FlightConfig.get_flight_config_instance().read_config())
+        if command_sent is True:
             return jsonify({'status': 'ok'})
-        return jsonify({'error': configuration['error']})
+        else:
+            return jsonify({'status': 'error', 'message': 'Failed to Connect'}), 418
     else:
         return jsonify({'error': configuration_form.errors})
 
@@ -100,8 +113,9 @@ def get_flight_profile_template():
         active_page=page,
         title=title,
         configuration_form=FlightConfigurationForm(),
-        saved_configuration=LocalStorage.get_default_configuration()
+        saved_configuration=FlightConfig.get_flight_config_instance().read_config()
     )
+
 
 
 @app.route('/sensor_ranges')

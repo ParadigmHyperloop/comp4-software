@@ -7,33 +7,53 @@
       {{ configuration_form.csrf_token }}
       <div class="row">
         <div class="form-group col-md-6">
-        {{ configuration_form.air_resistance.label }}
-        {{ configuration_form.air_resistance (class="form-control", value=saved_configuration['air_resistance'])}}
+        {{ configuration_form.retrieval_timeout.label }}
+        {{ configuration_form.retrieval_timeout (class="form-control js-config-form-input", id="retrieval-timout",value=saved_configuration['retrieval_timeout'])}}
         </div>
         <div class="form-group col-md-6">
+          {{ configuration_form.max_flight_time.label }}
+          {{ configuration_form.max_flight_time (class="form-control js-config-form-input", id="max-flight-time", value=saved_configuration['max_flight_time'])}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6">
           {{ configuration_form.motor_speed.label }}
-          {{ configuration_form.motor_speed (class="form-control", value=saved_configuration['motor_speed'])}}
+          {{ configuration_form.motor_speed (class="form-control js-config-form-input", id="motor-speed",value=saved_configuration['motor_speed'])}}
+        </div>
+        <div class="form-group col-md-6">
+          {{ configuration_form.telemetry_port.label }}
+          {{ configuration_form.telemetry_port (class="form-control js-config-form-input", id="telemetry-port",value=saved_configuration['telemetry_port'])}}
         </div>
       </div>
 
       <div class="row">
         <div class="form-group col-md-6">
-          {{ configuration_form.tube_pressure.label }}
-          {{ configuration_form.tube_pressure (class="form-control", value=saved_configuration['tube_pressure'])}}
+          {{ configuration_form.command_port.label }}
+          {{ configuration_form.command_port (class="form-control js-config-form-input", id="command-port",value=saved_configuration['command_port'])}}
         </div>
         <div class="form-group col-md-6">
-          {{ configuration_form.watchdog_timeout.label }}
-          {{ configuration_form.watchdog_timeout (class="form-control", value=saved_configuration['watchdog_timeout']) }}
+          {{ configuration_form.flight_Length.label }}
+          {{ configuration_form.flight_Length (class="form-control js-config-form-input", id="flight-length", value=saved_configuration['flight_length'])}}
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-6">
+          {{ configuration_form.heartbeat_timout.label }}
+          {{ configuration_form.heartbeat_timout (class="form-control js-config-form-input", id="heartbeat-timeout",value=saved_configuration['heartbeat_timeout'])}}
+        </div>
+        <div class="form-group col-md-6">
           {{ configuration_form.pod_ip.label }}
-          {{ configuration_form.pod_ip (class="form-control", value=saved_configuration['pod_address']) }}
+          {{ configuration_form.pod_ip (class="form-control js-config-form-input", id="pod-ip",value=saved_configuration['pod_address']) }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="text-center">
+          {{ configuration_form.pod_driver.label }}
+          {{ configuration_form.pod_driver (id="pod-driver",value=True if saved_configuration['pod_driver']=='Motor' else 'False') }}
         </div>
       </div>
       <div class="text-center">
-        <p id="configration-error-container"></p>
+        <p id="configuration-error-container"></p>
         {{ configuration_form.submit(class='btn btn-primary btn-fill btn-md') }}
       </div>
     </form>
@@ -90,7 +110,7 @@
                <td>Brake Set A - Max PSI</td>
                <td id="brakeAMaxValue" >500</td>
                <td>PSI</td>
-               <td>Maximium Allowable Pressure in Brake set A</td>
+               <td>Maximum Allowable Pressure in Brake set A</td>
             </tr>
             <tr>
                <td><i id="brakeBStatus" class="fa fa-circle text-success"></i></td>

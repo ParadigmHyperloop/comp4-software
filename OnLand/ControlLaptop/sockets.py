@@ -1,5 +1,5 @@
 from flask_socketio import SocketIO
-from views import app
+from ControlLaptop.views import app
 
 socket_io = SocketIO(app)
 
