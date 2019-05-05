@@ -3,8 +3,6 @@
 
 #include <Ethernet.h>
 #include <EthernetUdp.h>
-#include <pb_decode.h>
-#include <pb_encode.h>
 
 #define BUFFER_SIZE 100
 
@@ -21,12 +19,9 @@ public:
     bool readPacket();
     bool sendPacket(IPAddress ipDestinationIP, uint16_t uDestinationPort);
 
-    // create recv and send buffers, then create NanoPB streams over them
-    // this allows PB messages to be sent with Arduino's Ethernet library
+    // create recv and send buffers
     char cRecvBuffer[BUFFER_SIZE];
-    pb_istream_t inStream = pb_istream_from_buffer((uint8_t*)cRecvBuffer, sizeof(cRecvBuffer));
     char cSendBuffer[BUFFER_SIZE];
-    pb_ostream_t outStream = pb_ostream_from_buffer((uint8_t*)cSendBuffer, sizeof(cSendBuffer));
 };
 
 #endif
