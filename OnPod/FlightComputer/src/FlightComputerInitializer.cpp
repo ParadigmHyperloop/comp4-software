@@ -1,8 +1,13 @@
 #include "FlightComputerInitializer.h"
 #include "EasyLogger/easylogging++.h"
 #include "Helpers/FileHelper.h"
+
 INITIALIZE_EASYLOGGINGPP
 
+
+FlightComputerInitializer* FlightComputerInitializer::_flightComputerInitializer = NULL;
+
+FlightComputerInitializer::FlightComputerInitializer() = default;
 
 FlightComputerInitializer* FlightComputerInitializer::GetInstance()
 {
@@ -10,6 +15,7 @@ FlightComputerInitializer* FlightComputerInitializer::GetInstance()
         _flightComputerInitializer = new FlightComputerInitializer();
     return _flightComputerInitializer;
 }
+
 
 void FlightComputerInitializer::importLoggerLibrary()
 {
@@ -22,7 +28,7 @@ void FlightComputerInitializer::importLoggerLibrary()
         el::Loggers::reconfigureAllLoggers(conf);
     } else
     {
-        std::string loggerLibraryImportPath = FileHelper::GetCurrentDirectory() +"../../libs/EasyLogger/logging.conf";
+        std::string loggerLibraryImportPath = FileHelper::GetCurrentDirectory() +"/../../libs/EasyLogger/logging.conf";
         el::Configurations conf(loggerLibraryImportPath);
         el::Loggers::reconfigureAllLoggers(conf);
     }

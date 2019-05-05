@@ -10,7 +10,6 @@
 
 
 #include "EasyLogger/easylogging++.h"
-INITIALIZE_EASYLOGGINGPP
 
 
 
@@ -25,7 +24,7 @@ using namespace std;
 
 int main( int32_t argc, char** argv)
 {
-	// Initalize Logger Logger;
+	// Initialize Logger Logger;
 	FlightComputerInitializer* initializer = FlightComputerInitializer::GetInstance();
 	initializer->importLoggerLibrary();
 

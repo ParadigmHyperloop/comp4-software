@@ -2,12 +2,16 @@
 #define FLIGHTCOMPUTER_FLIGHTCOMPUTERINITIALIZER_H
 
 
+
 // TODO: Make thread safe
 class FlightComputerInitializer {
 
 private:
-    static FlightComputerInitializer* _flightComputerInitializer;
+    static FlightComputerInitializer *_flightComputerInitializer;
+    FlightComputerInitializer operator=(const FlightComputerInitializer&);
+public:
     FlightComputerInitializer();
+
 
 public:
     static FlightComputerInitializer* GetInstance();
@@ -18,4 +22,4 @@ public:
 };
 
 
-#endif //FLIGHTCOMPUTER_FLIGHTCOMPUTERINITIALIZER_H
+#endif
