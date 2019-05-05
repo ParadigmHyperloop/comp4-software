@@ -13,7 +13,7 @@ private:
     const uint16_t SET_CHANNEL_REG = 0x8000;
     const uint16_t CONFIG_PROGRAM_REG = 0x2840;
     const uint16_t MANUAL_READ = 0x1000;
-    const uint16_t AUTO_READ_RESET = 0x2C00;
+    const uint16_t AUTO_READ_RESET = 0x2C40;
     const uint16_t AUTO_READ_NEXT = 0x2000;
     uint16_t uActiveChannels = 0; // each bit represents a channel; 1=used, 0=unused
     uint16_t uNumChannels = 0; // number of channels being used;

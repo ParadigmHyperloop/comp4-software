@@ -52,13 +52,13 @@ void ADS7953::readActiveChannels() {
 }
 
 void ADS7953::enableChannel(uint8_t uChannel) {
-    uActiveChannels |= (1 << uChannel); // the the uChannel'th bit to 1
+    uActiveChannels |= (1 << uChannel); // set the uChannel'th bit to 1
     transfer(SET_CHANNEL_REG); // enables programming of active channels
     transfer(uActiveChannels); // programs the active channels
 }
 
 void ADS7953::disableChannel(uint8_t uChannel) {
-    uActiveChannels &= ~(1 << uChannel); // the the uChannel'th bit to 0
+    uActiveChannels &= ~(1 << uChannel); // aet the uChannel'th bit to 0
     transfer(SET_CHANNEL_REG); // enables programming of active channels
     transfer(uActiveChannels); // programs the active channels
 }
