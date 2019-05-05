@@ -69,7 +69,6 @@ int32_t podInternalNetworkThread(Pod Pod) {
             node.giveUpdate();
             node.getUpdate();
         }
-
     }
 
     for(auto&& node: nodes )
