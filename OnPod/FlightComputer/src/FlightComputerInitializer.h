@@ -9,9 +9,7 @@ class FlightComputerInitializer {
 private:
     static FlightComputerInitializer *_flightComputerInitializer;
     FlightComputerInitializer operator=(const FlightComputerInitializer&);
-public:
     FlightComputerInitializer();
-
 
 public:
     static FlightComputerInitializer* GetInstance();
