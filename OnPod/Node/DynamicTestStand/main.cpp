@@ -18,7 +18,7 @@
 ADS7953 adc;
 OS101E rotorTempSensor (&adc, 15);
 typeKThermo pneumaticTempSensor (&adc, 1);
-MLH03K tankTransducer (&adc, 8);
+U5374 tankTransducer (&adc, 7);
 U5244 brakeTransducer (&adc, 10);
 
 // instantiate solenoid driver and all solenoids
@@ -27,9 +27,9 @@ Solenoid brakeSolenoid (&solenoidDriver, 3);
 Solenoid ventSolenoid (&solenoidDriver, 4);
 
 // instantiate a UDP class and protobuf message objects
-UDPClass udp (IPAddress(192,168,2,50), 777, 0);
-FcToBrakeNode pFcCommand = FcToBrakeNode_init_zero;
-DtsNodeToFc pBrakeNodeTelemetry = DtsNodeToFc_init_zero;
+UDPClass udp (IPAddress(192, 168, 2, 50), 5555, 0);
+FcToBrakeNode pFcCommand = FcToBrakeNode_init_default;
+DtsNodeToFc pBrakeNodeTelemetry = DtsNodeToFc_init_default;
 
 // the dts brake node state
 BrakeNodeStates dtsState;
@@ -44,7 +44,6 @@ void setup() {
 
     solenoidDriver.init();
     udp.init();
-
 }
 
 void loop() {
@@ -85,15 +84,15 @@ void loop() {
     adc.readActiveChannels();
     pBrakeNodeTelemetry.rotorTemperature = rotorTempSensor.read();
     pBrakeNodeTelemetry.pneumaticTemperature = pneumaticTempSensor.read();
-    Serial.println(pneumaticTempSensor.read());
     pBrakeNodeTelemetry.brakeSolenoidState = brakeSolenoid.bState;
     pBrakeNodeTelemetry.ventSolenoidState = ventSolenoid.bState;
     pBrakeNodeTelemetry.brakePressure = brakeTransducer.read();
     pBrakeNodeTelemetry.tankPressure = tankTransducer.read();
 
     // send the latest values to the flight computer
-    pb_ostream_t outStream = pb_ostream_from_buffer((uint8_t*)udp.cSendBuffer, sizeof(udp.cSendBuffer));
+    pb_ostream_t outStream = pb_ostream_from_buffer(udp.cSendBuffer, sizeof(udp.cSendBuffer));
     pb_encode(&outStream, DtsNodeToFc_fields, &pBrakeNodeTelemetry);
-    udp.sendPacket(IPAddress(192, 168, 2, 27), 64254);
-    delay(200);
+    udp.sendPacket(IPAddress(192, 168, 2, 27), 5555, outStream.bytes_written);
+
+    //delay(500);
 }
