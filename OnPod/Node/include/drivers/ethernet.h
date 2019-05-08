@@ -17,11 +17,11 @@ public:
     UDPClass(IPAddress NODE_IP, uint16_t NODE_PORT, uint8_t NODE_TYPE);
     void init();
     bool readPacket();
-    bool sendPacket(IPAddress ipDestinationIP, uint16_t uDestinationPort);
+    bool sendPacket(IPAddress ipDestinationIP, uint16_t uDestinationPort, uint16_t uMessageLength);
 
     // create recv and send buffers
-    char cRecvBuffer[BUFFER_SIZE];
-    char cSendBuffer[BUFFER_SIZE];
+    uint8_t cRecvBuffer[BUFFER_SIZE];
+    uint8_t cSendBuffer[BUFFER_SIZE];
 };
 
 #endif
