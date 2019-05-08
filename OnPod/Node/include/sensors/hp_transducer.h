@@ -3,12 +3,12 @@
 
 #include "drivers/adc.h"
 
-class MLH03K {
+class U5374 {
 private:
     ADS7953 *adc;
     uint8_t uAdcChannel;
 public:
-    MLH03K(ADS7953 *adc, uint8_t uAdcChannel);
+    U5374(ADS7953 *adc, uint8_t uAdcChannel);
     void init();
     float read();
 };
