@@ -94,5 +94,5 @@ void loop() {
     pb_encode(&outStream, DtsNodeToFc_fields, &pBrakeNodeTelemetry);
     udp.sendPacket(IPAddress(192, 168, 2, 27), 5555, outStream.bytes_written);
 
-    //delay(500);
+    delay(500);
 }

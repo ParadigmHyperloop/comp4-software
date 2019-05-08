@@ -187,13 +187,6 @@ message telemetry {
     optional int32 railCurrentFlag = 73;
 }
 
-message SimpleMessage {
-    required int32 lucky_number = 1;
-    required float lucky_float = 2;
-    required bool lucky_bool = 3;
-    required float lucky_float2 = 4;
-}
-
 // flight computer to DTS node
 message FcToBrakeNode {
     optional PodStates podState = 1;
