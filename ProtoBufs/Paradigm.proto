@@ -187,6 +187,13 @@ message telemetry {
     optional int32 railCurrentFlag = 73;
 }
 
+message SimpleMessage {
+    required int32 lucky_number = 1;
+    required float lucky_float = 2;
+    required bool lucky_bool = 3;
+    required float lucky_float2 = 4;
+}
+
 // flight computer to DTS node
 message FcToBrakeNode {
     optional PodStates podState = 1;
@@ -200,11 +207,11 @@ message FcToBrakeNode {
 
 // DTS node to flight computer
 message DtsNodeToFc {
-    optional BrakeNodeStates brakeNodeState = 1;
-    optional bool brakeSolenoidState = 2 [default = false];
-    optional bool ventSolenoidState = 3 [default = false];
-    optional float rotorTemperature = 4;
-    optional float pneumaticTemperature = 5;
-    optional float tankPressure = 6;
-    optional float brakePressure = 7;
+    required BrakeNodeStates brakeNodeState = 1 [default = bnsStandby];
+    required bool brakeSolenoidState = 2 [default = false];
+    required bool ventSolenoidState = 3 [default = false];
+    required float rotorTemperature = 4 [default = 0];
+    required float pneumaticTemperature = 5 [default = 0];
+    required float tankPressure = 6 [default = 0];
+    required float brakePressure = 7 [default = 0];
 }
