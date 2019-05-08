@@ -1,15 +1,16 @@
 syntax = "proto2";
 
 enum BrakeNodeStates {
-    bnsBooting   = 0;
-    bnsStandby   = 1;
-    bnsArming    = 2;
-    bnsArmed     = 3;
-    bnsFlight    = 4;
-    bnsBraking   = 5;
-    bnsVenting   = 6;
-    bnsRetrieval = 7;
-    bnsError     = 8;
+    bnsBooting         = 0;
+    bnsStandby         = 1;
+    bnsArming          = 2;
+    bnsArmed           = 3;
+    bnsFlight          = 4;
+    bnsBraking         = 5;
+    bnsVenting         = 6;
+    bnsRetrieval       = 7;
+    bnsError           = 8;
+    bnsSolenoidControl = 9;
 }
 
 enum PodStates {
@@ -195,14 +196,14 @@ message fcToBrakeNode {
 }
 
 // DTS node to flight computer
-message dtsNodeToFc {
-    optional BrakeNodeStates brakeNodeState = 7;
-    optional bool brakeSolenoidState = 1 [default = false];
-    optional bool ventSolenoidState = 2 [default = false];
-    optional float rotorTemperature = 3;
-    optional int32 pressureTemperature = 4;
-    optional int32 highPressure = 5;
-    optional int32 lowPressure = 6;
+message DtsNodeToFc {
+    required BrakeNodeStates brakeNodeState = 1 [default = bnsStandby];
+    required bool brakeSolenoidState = 2 [default = false];
+    required bool ventSolenoidState = 3 [default = false];
+    required float rotorTemperature = 4 [default = 0];
+    required float pneumaticTemperature = 5 [default = 0];
+    required float tankPressure = 6 [default = 0];
+    required float brakePressure = 7 [default = 0];
 }
 
 message flightConfig {
