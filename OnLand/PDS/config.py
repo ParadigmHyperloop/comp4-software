@@ -17,7 +17,7 @@ POD_IP = '127.0.0.1'
 
 
 # Udp Telemetry Stream
-UDP_TELEM_TIMEOUT = 1
+UDP_TELEM_TIMEOUT = 3
 UDP_TELEM_PORT = 6000
 
 # SocketIO

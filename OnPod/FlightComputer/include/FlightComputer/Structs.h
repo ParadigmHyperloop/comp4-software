@@ -38,8 +38,8 @@ struct PodValues {
     std::vector<bool> cConnectionsArray = {false, false, false, false, false}; // [brake , rear, lvdc, bms, inverter]
 
     // Navigation
-    float fDistance;
-    float fVelocity;
+    float fDistance = 0;
+    float fVelocity = 0;
     // Rear Node
     float fGpioValues;
 
@@ -64,12 +64,12 @@ struct PodValues {
     bool bSolenoid4;
     bool bSolenoid5;
     bool bSolenoid6;
-    int32_t iLowPressure1;
+    float iLowPressure1;
     int32_t iLowPressure2;
     int32_t iLowPressure3;
     int32_t iLowPressure4;
-    int32_t iHighPressure;
-    int32_t iPressureVesselTemperature;
+    float iHighPressure;
+    float iPressureVesselTemperature;
     float iRailTemperature;
 };
 

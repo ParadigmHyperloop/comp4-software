@@ -17,7 +17,7 @@ UdpConnection *getBrakeNodeConnection(Pod Pod) {
                                    Pod.sPodNetworkValues->iNodeClientSocket);
         BrakeNode->configureServer(Pod.sPodNetworkValues->iBrakeNodeServerPortNumber,
                                    Pod.sPodNetworkValues->iNodeTimeoutMili);
-        BrakeNode->setRecvBufferSize(50); // Small recv buffer keeps parsed data fresh.
+        BrakeNode->setRecvBufferSize(100); // Small recv buffer keeps parsed data fresh.
     }
     catch (std::runtime_error &e) {
         throw e;
@@ -76,6 +76,7 @@ int32_t podInternalNetworkThread(Pod Pod) {
             try {
                 node->giveUpdate();
                 node->getUpdate();
+                std::this_thread::sleep_for(std::chrono::milliseconds(50));
             }
             catch (std::runtime_error &e) {
                 LOG(INFO) << e.what();

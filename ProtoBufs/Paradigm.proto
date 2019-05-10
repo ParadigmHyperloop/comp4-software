@@ -1,15 +1,16 @@
 syntax = "proto2";
 
 enum BrakeNodeStates {
-    bnsBooting   = 0;
-    bnsStandby   = 1;
-    bnsArming    = 2;
-    bnsArmed     = 3;
-    bnsFlight    = 4;
-    bnsBraking   = 5;
-    bnsVenting   = 6;
-    bnsRetrieval = 7;
-    bnsError     = 8;
+    bnsBooting         = 0;
+    bnsStandby         = 1;
+    bnsArming          = 2;
+    bnsArmed           = 3;
+    bnsFlight          = 4;
+    bnsBraking         = 5;
+    bnsVenting         = 6;
+    bnsRetrieval       = 7;
+    bnsError           = 8;
+    bnsSolenoidControl = 9;
 }
 
 enum PodStates {
@@ -152,7 +153,7 @@ message telemetry {
     optional int32 iLowPressure2 = 40;
     optional int32 iLowPressure3 = 41;
     optional int32 iLowPressure4 = 42;
-    optional int32 pressureVesselTemperature = 43;
+    optional float pressureVesselTemperature = 43;
 
     optional int32 electronicsEnclosurePressure = 44;
     optional int32 railDisplacementX = 45;
@@ -189,20 +190,25 @@ message telemetry {
 }
 
 // flight computer to DTS node
-message fcToBrakeNode {
+message FcToBrakeNode {
     optional PodStates podState = 1;
     optional BrakeNodeStates manualNodeState = 2;
+    optional bool hpSolenoidState = 3;
+    optional bool ventSolenoidState = 4;
+    optional bool lpSolenoid1State = 5;
+    optional bool lpSolenoid2State = 6;
+    optional bool lpSolenoid3State = 7;
 }
 
 // DTS node to flight computer
-message dtsNodeToFc {
-    optional BrakeNodeStates brakeNodeState = 7;
-    optional bool brakeSolenoidState = 1 [default = false];
-    optional bool ventSolenoidState = 2 [default = false];
-    optional float rotorTemperature = 3;
-    optional int32 pressureTemperature = 4;
-    optional int32 highPressure = 5;
-    optional int32 lowPressure = 6;
+message DtsNodeToFc {
+    optional BrakeNodeStates brakeNodeState = 1;
+    optional bool brakeSolenoidState = 2 [default = false];
+    optional bool ventSolenoidState = 3 [default = false];
+    optional float rotorTemperature = 4;
+    optional float pneumaticTemperature = 5;
+    optional float tankPressure = 6;
+    optional float brakePressure = 7;
 }
 
 message flightConfig {

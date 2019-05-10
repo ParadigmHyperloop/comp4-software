@@ -77,12 +77,11 @@ public:
             std::string strError = "getUpdate() : Server socket invalid";
             throw std::runtime_error(strError);
         }
-        char cBuffer[100] = {0};
+        char cBuffer[200] = {0};
         bzero(&cBuffer, sizeof cBuffer);
-        ssize_t iReceivedPacketSize = recvfrom(this->iInboundSocket, cBuffer, 100, 0, nullptr, nullptr);
+        ssize_t iReceivedPacketSize = recvfrom(this->iInboundSocket, cBuffer, 200, 0, nullptr, nullptr);
         if (iReceivedPacketSize != -1) {
-            LOG(DEBUG) << iReceivedPacketSize << "Bytes received on socket:" << this->strConnectionName << ": "
-                       << cBuffer;
+            LOG(INFO) << iReceivedPacketSize << " Bytes received on " << this->strConnectionName << cBuffer;
             try {
                 this->parseUpdate(cBuffer, (int32_t) iReceivedPacketSize);
             }
@@ -224,7 +223,7 @@ public:
     ~BrakeNodeConnection() override = default;
 
     explicit BrakeNodeConnection(Pod pod) : UdpConnection(pod) {
-        this->strConnectionName = "Brake Node Data : ";
+        this->strConnectionName = "Brake Node : ";
     };
 
     void setConnectionStatus(bool bStatus) override {
@@ -232,14 +231,14 @@ public:
     }
 
     google::protobuf::Message *getProtoUpdateMessage() override {
-        auto protoMessage = new fcToBrakeNode();
+        auto protoMessage = new FcToBrakeNode();
         protoMessage->set_podstate(psArmed);
         protoMessage->set_manualnodestate(bnsArmed);
         return protoMessage;
     }
 
     bool parseUpdate(char cBuffer[], int32_t iMessageSize) override {
-        dtsNodeToFc protoMessage = dtsNodeToFc();
+        DtsNodeToFc protoMessage = DtsNodeToFc();
         if (!protoMessage.ParseFromArray(cBuffer, iMessageSize)) {
             std::string strError = "Failed to parse Update from Brake Node";
             throw std::invalid_argument(strError);
@@ -247,9 +246,9 @@ public:
         this->pod.sPodValues->bSolenoid1 = protoMessage.brakesolenoidstate();
         this->pod.sPodValues->bSolenoid2 = protoMessage.ventsolenoidstate();
         this->pod.sPodValues->iRailTemperature = protoMessage.rotortemperature();
-        this->pod.sPodValues->iPressureVesselTemperature = protoMessage.pressuretemperature();
-        this->pod.sPodValues->iHighPressure = protoMessage.highpressure();
-        this->pod.sPodValues->iLowPressure1 = protoMessage.lowpressure();
+        this->pod.sPodValues->iPressureVesselTemperature = protoMessage.pneumatictemperature();
+        this->pod.sPodValues->iHighPressure = protoMessage.tankpressure();
+        this->pod.sPodValues->iLowPressure1 = protoMessage.brakepressure();
         return true;
     }
 
