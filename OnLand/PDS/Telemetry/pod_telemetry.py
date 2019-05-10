@@ -1,5 +1,6 @@
 import socketio
 import logging
+import time
 from datetime import timedelta
 from Telemetry.PodUdpConnection import PodUdpConnection
 from PDS.config import *
@@ -30,12 +31,15 @@ def main():
     while udp_socket.is_connected():
         data = udp_socket.recv(timedelta(seconds=UDP_TELEM_TIMEOUT))
         if data is not None:
+            print('recvd')
             pod_data = telemetry()
             pod_data.ParseFromString(data)
             json_pod_data = json_format.MessageToJson(pod_data)
+            print(pod_data.__str__())
             sio.emit('telemetry', json_pod_data)
             pod_data = MessageToDict(pod_data)
             logging.debug("Recv {}".format(pod_data))
+
 
     udp_socket.close()
     sio.emit('telemetry_connection', '0')

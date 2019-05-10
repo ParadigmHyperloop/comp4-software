@@ -1,35 +1,35 @@
 {
-  "sol1": {
+  "bSolenoid1": {
     "name_pretty": "Solenoid One",
     "psAcceleration": [0,0],
     "psBraking": [1,1],
     "psDisarming": [1,1]
   },
-  "sol2": {
+  "bSolenoid2": {
     "name_pretty": "Solenoid Two",
     "psAcceleration": [0,0],
     "psBraking": [0,0],
     "psDisarming": [1,1]
   },
   "railTemperature": {
-    "name_pretty": "Rail Temperature",
+    "name_pretty": "Rotor Temperature",
     "psAcceleration": [0,20],
     "psBraking": [0,450],
     "psDisarming": [0,20]
   },
   "pressureVesselTemperature": {
-    "name_pretty": "Tank Temperature",
+    "name_pretty": "Pneumatic Temperature",
     "psAcceleration": [-25,35],
     "psBraking": [-25,35],
     "psDisarming": [-25,35]
   },
-    "hp": {
+    "iHighPressure": {
     "name_pretty": "Tank Pressure",
     "psAcceleration": [13,1750],
     "psBraking": [13,1750],
     "psDisarming": [13,1750]
   },
-    "lp1": {
+    "iLowPressure1": {
     "name_pretty": "Line Pressure",
     "psAcceleration": [13,17],
     "psBraking": [270,280],

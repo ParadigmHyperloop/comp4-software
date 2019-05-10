@@ -153,7 +153,7 @@ message telemetry {
     optional int32 iLowPressure2 = 40;
     optional int32 iLowPressure3 = 41;
     optional int32 iLowPressure4 = 42;
-    optional int32 pressureVesselTemperature = 43;
+    optional float pressureVesselTemperature = 43;
 
     optional int32 electronicsEnclosurePressure = 44;
     optional int32 railDisplacementX = 45;

@@ -26,23 +26,23 @@ int main(int32_t argc, char **argv) {
         el::Loggers::reconfigureAllLoggers(conf);
 
     } else {
-        el::Configurations conf("/home/liam/Development/comp4-software/OnPod/FlightComputer/include/EasyLogger/logging.conf");
-        //el::Configurations conf("/Users/liamwaghorn/Development/comp4-software/OnPod/FlightComputer/include/EasyLogger/logging.conf");
+        //el::Configurations conf("/home/liam/Development/comp4-software/OnPod/FlightComputer/include/EasyLogger/logging.conf");
+        el::Configurations conf("/Users/liamwaghorn/Development/comp4-software/OnPod/FlightComputer/include/EasyLogger/logging.conf");
         el::Loggers::reconfigureAllLoggers(conf);
     }
     LOG(INFO) << "Main Thread is Started";
 
     // Create Shared Memory
     PodNetwork sPodNetworkValues = {};
-    PodValues sPodValues;
+    PodValues sPodValues = {};
 
     // Network Configs
-    string cNodeIpAddrs[] = {"127.0.0.1"};
+    string cNodeIpAddrs[] = {"192.168.0.50"};
     sPodNetworkValues.cNodeIpAddrs.assign(begin(cNodeIpAddrs), end(cNodeIpAddrs)); // Node IPs
 
-    sPodNetworkValues.iBrakeNodePort = 5000; // Port # that Nodes are listening on
+    sPodNetworkValues.iBrakeNodePort = 5555; // Port # that Nodes are listening on
     sPodNetworkValues.iNodeTimeoutMili = 3000;
-    sPodNetworkValues.iBrakeNodeServerPortNumber = 5001; // Port # to receive UDP from Nodes
+    sPodNetworkValues.iBrakeNodeServerPortNumber = 5555; // Port # to receive UDP from Nodes
 
     sPodNetworkValues.iCommaderTimeoutMili = 30000; // Timeout for heartbeat to Control Interface
     sPodNetworkValues.iCommanderPortNumber = 5005; //Port # for TCP Commander
