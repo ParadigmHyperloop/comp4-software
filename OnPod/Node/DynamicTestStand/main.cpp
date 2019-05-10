@@ -49,7 +49,7 @@ void setup() {
 void loop() {
     // check for incoming telemetry and set the state accordingly (unless error)
     if (udp.readPacket() && (dtsState != BrakeNodeStates_bnsError)) {
-        pb_istream_t inStream = pb_istream_from_buffer((uint8_t*)udp.cRecvBuffer, sizeof(udp.cRecvBuffer));
+        pb_istream_t inStream = pb_istream_from_buffer(udp.cRecvBuffer, sizeof(udp.cRecvBuffer));
         pb_decode(&inStream, FcToBrakeNode_fields, &pFcCommand);
         if (pFcCommand.has_manualNodeState) {
             dtsState = pFcCommand.manualNodeState;
@@ -94,5 +94,8 @@ void loop() {
     pb_encode(&outStream, DtsNodeToFc_fields, &pBrakeNodeTelemetry);
     udp.sendPacket(IPAddress(192, 168, 2, 27), 5555, outStream.bytes_written);
 
+    Serial.println(pBrakeNodeTelemetry.pneumaticTemperature);
+
     delay(500);
+
 }
