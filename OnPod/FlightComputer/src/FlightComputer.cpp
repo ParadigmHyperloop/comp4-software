@@ -19,6 +19,8 @@
 #include "CoreControl.h"
 #include "Helpers/FileHelper.h"
 #include "FlightComputerInitializer.h"
+#include "Communication/FlightConfigServer.h"
+#include "Constants/Constants.h"
 
 using namespace std;
 
@@ -40,12 +42,16 @@ int main( int32_t argc, char** argv)
 	string cNodeIpAddrs[] =  {"127.0.0.1"};
 	sPodNetworkValues.cNodeIpAddrs.assign(begin(cNodeIpAddrs), end(cNodeIpAddrs)); // Node IPs
 
+	// TODO: Move these to static port values to Constants {Communicaiton/Netwrok}
 	sPodNetworkValues.iBrakeNodePort = 5000; // Port # that Nodes are listening on
 	sPodNetworkValues.iNodeTimeoutMili = 3000;
 	sPodNetworkValues.iBrakeNodeServerPortNumber = 5001; // Port # to receive UDP from Nodes
 
 	sPodNetworkValues.iCommaderTimeoutMili = 30000; // Timeout for heartbeat to Control Interface
     sPodNetworkValues.iCommanderPortNumber = 5005; //Port # for TCP Commander
+
+    auto configServer = FlightConfigServer::getServer(NetworkConstants::CONFIG_SERVER_PORT);
+    configServer();
 
     sPodNetworkValues.iActiveNodes[0] = 1; // Set brake node active
 

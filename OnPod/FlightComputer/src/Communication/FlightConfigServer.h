@@ -19,9 +19,11 @@
 class FlightConfigServer {
 
 private:
-    int _listener;
+    int _listenerSocketID;
+    int32_t _socketAddress;
     int _port;
     static FlightConfigServer* _configServer;
+    struct sockaddr_in address;
 
 
     FlightConfigServer operator=(const FlightConfigServer&);
