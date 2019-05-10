@@ -5,28 +5,32 @@
 
 
 
-NodeConnection getBrakeNodeConnection(Pod Pod)
-{
-    BrakeNodeConnection BrakeNode = BrakeNodeConnection(Pod);
-
+/**
+ * Creates and configures the brake node connection
+ *
+ * @param Pod
+ * @return A pointer to a BrakeNodeConnection
+ */
+UdpConnection *getBrakeNodeConnection(Pod Pod) {
+    auto BrakeNode = new BrakeNodeConnection(Pod);
     try {
-        BrakeNode.configure(Pod.sPodNetworkValues->cNodeIpAddrs[0], Pod.sPodNetworkValues->iBrakeNodePort,
-                            Pod.sPodNetworkValues->iBrakeNodeServerPortNumber, Pod.sPodNetworkValues->iNodeTimeoutMili,
-                            Pod.sPodNetworkValues->iNodeClientSocket);
+        BrakeNode->configureClient(Pod.sPodNetworkValues->cNodeIpAddrs[0], Pod.sPodNetworkValues->iBrakeNodePort,
+                                   Pod.sPodNetworkValues->iNodeClientSocket);
+        BrakeNode->configureServer(Pod.sPodNetworkValues->iBrakeNodeServerPortNumber,
+                                   Pod.sPodNetworkValues->iNodeTimeoutMili);
+        BrakeNode->setRecvBufferSize(50); // Small recv buffer keeps parsed data fresh.
     }
     catch (std::runtime_error &e) {
         throw e;
     }
 
-    return  BrakeNode;
+    return BrakeNode;
 }
 
-NodeConnection getRearNodeConnection(Pod Pod)
-{
-    BrakeNodeConnection BrakeNode = BrakeNodeConnection(Pod);
-    return  BrakeNode;
+UdpConnection *getRearNodeConnection(Pod Pod) {
+    auto BrakeNode = new BrakeNodeConnection(Pod);
+    return BrakeNode;
 }
-
 
 
 #pragma clang diagnostic push
@@ -45,38 +49,42 @@ int32_t podInternalNetworkThread(Pod Pod) {
         return -1;
     }
 
-    std::vector<NodeConnection> nodes;
-    if(Pod.sPodNetworkValues->iActiveNodes[0])
+    PdsConnection Pds = PdsConnection(Pod);
+    Pds.configureClient(Pod.sPodNetworkValues->strPdsIpAddr, Pod.sPodNetworkValues->iPdsTelemeteryPort,
+                        Pod.sPodNetworkValues->iNodeClientSocket);
+
+    std::vector<UdpConnection *> nodes; // Vector containing all Node Connections
+    if (Pod.sPodNetworkValues->iActiveNodes[0]) //Check if brake node is active
     {
         try {
-            nodes.push_back(getBrakeNodeConnection(Pod));
+            UdpConnection *brakeNode = getBrakeNodeConnection(Pod);
+            nodes.push_back(brakeNode);
         }
         catch (std::runtime_error &e) {
-            LOG(INFO)<< e.what();
+            LOG(INFO) << e.what();
         }
     }
-
-    if(Pod.sPodNetworkValues->iActiveNodes[1])
-    {
+    if (Pod.sPodNetworkValues->iActiveNodes[1]) {
 
     }
-
-
-    while (Pod.sPodValues->ePodState != psShutdown ) {
+    while (Pod.sPodValues->ePodState != psShutdown) {
         // Give and get update for each node
-        for(auto&& node: nodes )
-        {
-            node.giveUpdate();
-            node.getUpdate();
+        for (auto &&node: nodes) {
+            try {
+                node->giveUpdate();
+                node->getUpdate();
+            }
+            catch (std::runtime_error &e) {
+                LOG(INFO) << e.what();
+            }
         }
+        Pds.giveUpdate(); //Send telemetry packet to PDS
     }
-
-    for(auto&& node: nodes )
-    {
-        node.closeConnection();
+    for (auto &&node: nodes) {
+        node->closeConnection();
+        delete node;
     }
     close(Pod.sPodNetworkValues->iNodeClientSocket);
-
     return 1;
 }
 

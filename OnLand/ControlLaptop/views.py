@@ -1,7 +1,5 @@
 from datetime import datetime
-
 from flask import *
-
 from ControlLaptop.LocalStorage.ConfigurationSotrage import LocalStorage
 from ControlLaptop.LocalStorage.FlightConfig import FlightConfig
 from ControlLaptop.SocketController import PodCommunicator
@@ -117,3 +115,13 @@ def get_flight_profile_template():
         configuration_form=FlightConfigurationForm(),
         saved_configuration=FlightConfig.get_flight_config_instance().read_config()
     )
+
+
+
+@app.route('/sensor_ranges')
+def add_numbers():
+    with open('ControlLaptop/LocalStorage/DtsSensors.json') as json_file:
+        data = json_file.read().replace('\n', '')
+    return data
+
+

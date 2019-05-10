@@ -3,7 +3,7 @@ $( document ).ready(function() {
     noConnectionLoader = $("#no-connection-loader");
     telemetryLoader = $("#telemetry-loader");
     noTelemetryLoader = $("#no-telemetry-loader");
-    telemetryCount = $("#telem-received-num").get()[0];
+    telemetryCount = $("#telem-received-num");
 });
 
 function toggleTelemetryLoader(ping){
@@ -33,7 +33,7 @@ socket.on('ping', function (ping) {
 
 socket.on('telemetry', function (data) {
     toggleTelemetryLoader(1);
-    count = telemetryCount.innerText;
+    count = telemetryCount.text();
     count++;
-    telemetryCount.innerText = count;
+    telemetryCount.text(count);
 });

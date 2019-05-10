@@ -68,10 +68,22 @@ class StringHandler(MessageHandler):
             return "8".encode()
 
 
-class BrakeNodeProtoHandler(MessageHandler):
-
+class DtsNodeProtoHandler(MessageHandler):
     def parse_flight_computer_message(self, serialized_message):
-        data = PodTelem_pb2.telemetry()
-        data.parseFromString(serialized_message)
-        return data
+        proto_message = fcToBrakeNode()
+        proto_message.ParseFromString(serialized_message)
+        return proto_message.manualNodeState
+
+    def prepare_brake_node_message(self, node_update):
+        proto_message = dtsNodeToFc()
+        proto_message.brakeNodeState = node_update['State']
+        proto_message.brakeSolenoidState = node_update['sol1']
+        proto_message.ventSolenoidState = node_update['sol2']
+        proto_message.rotorTemperature = node_update['rail_temp']
+        proto_message.pressureTemperature = node_update['pressure_vessel_temp']
+        proto_message.highPressure = node_update['hp']
+        proto_message.lowPressure = node_update['lp']
+        encoded = proto_message.SerializeToString()
+        return encoded
+
 
