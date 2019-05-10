@@ -150,3 +150,18 @@ void Pod::setManualPodState(PodStates ePodState)
 		LOG(INFO)<<"ERROR: Permission Denied for writing Manual State";
 	}
 }
+
+void Pod::setHvBatteryPackVoltage(float fValue){
+	if(!this->bWriteHighVoltage){
+		//todo throw error with message
+	}
+	this->sPodValues->
+
+
+
+    float iHvBatteryPackVoltage;
+	float iHvBatteryPackCurrent;
+	float iHvBatteryPackMinimumCellVoltage;
+	float iHvBatteryPackMaxCellVoltage;
+
+}

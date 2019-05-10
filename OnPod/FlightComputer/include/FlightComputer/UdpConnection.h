@@ -208,7 +208,7 @@ public:
         protoMessage->set_bsolenoid2(pod.sPodValues->bSolenoid2);
         protoMessage->set_pressurevesseltemperature(pod.sPodValues->iPressureVesselTemperature);
         protoMessage->set_railtemperature(pod.sPodValues->iRailTemperature);
-        protoMessage->set_ihvbatterypackvoltage(pod.sPodValues->iHvBatteryPackVoltage);
+        protoMessage->set_ihvbatterypackvoltage(pod.sPodValues->fHvBatteryPackVoltage);
         protoMessage->set_ihvbatterypackcurrent(pod.sPodValues->iHvBatteryPackCurrent);
         protoMessage->set_ihvbatterypackmaxcellvoltage(pod.sPodValues->iHvBatteryPackMaxCellVoltage);
         protoMessage->set_ihvbatterypackminimumcellvoltage(pod.sPodValues->iHvBatteryPackMinimumCellVoltage);

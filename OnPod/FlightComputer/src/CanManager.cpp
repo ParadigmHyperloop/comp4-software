@@ -7,10 +7,12 @@
 void processFrame(const struct canfd_frame &frame, Pod pod) {
     switch (frame.can_id) {
         case 0x6b2: {
-            pod.sPodValues->iHvBatteryPackVoltage = convertBytesToInt(frame.data[0], frame.data[1])/10;
-            pod.sPodValues->iHvBatteryPackCurrent = convertBytesToInt(frame.data[2], frame.data[3])/10;
-            pod.sPodValues->iHvBatteryPackMaxCellVoltage = convertBytesToInt(frame.data[4], frame.data[5])/10000.0;
-            pod.sPodValues->iHvBatteryPackMinimumCellVoltage = convertBytesToInt(frame.data[6], frame.data[7])/10000.0;
+            float iHvBatteryPackVoltage = extractCanValue <float> (&frame.data, [0,1], 2, 10.0);
+            float iHvBatteryPackCurrent = extractCanValue <float>(&frame.data, [2,3], 2, 10.0);
+            float iHvBatteryPackMaxCellVoltage = extractCanValue <float>(&frame.data, [4,5], 2, 10000.0);
+            float iHvBatteryPackMinimumCellVoltage = extractCanValue <float>(&frame.data, [6,7], 2, 10000.0);
+
+                    //setters
 
         }
             break;
@@ -29,7 +31,7 @@ unsigned int convertBytesToInt(int iByteMostSig, int iByteLeastSig) {
 }
 
 
-int CanThread(Pod Pod) {
+int CanThread(Pod Pod){
     //Logging
     el::Helpers::setThreadName("CAN Thread");
     LOG(INFO) << "Starting CAN Thread";

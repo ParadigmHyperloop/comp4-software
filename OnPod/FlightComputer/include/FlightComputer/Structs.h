@@ -44,7 +44,7 @@ struct PodValues {
     float fGpioValues;
 
     // HV-BMS
-    float iHvBatteryPackVoltage;
+    float fHvBatteryPackVoltage;
     float iHvBatteryPackCurrent;
     float iHvBatteryPackMinimumCellVoltage;
     float iHvBatteryPackMaxCellVoltage;

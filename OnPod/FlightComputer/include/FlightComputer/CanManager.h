@@ -26,17 +26,16 @@ unsigned int convertBytesToInt(int, int);
 
 
 template <class T>
-void extractCanValue(__uint8 data[], int iByteIndex[], int iNumberOfBytes ,T* tStoreLocation, T tConversion){
+T extractCanValue(__uint8 data[], int iByteIndex[], int iNumberOfBytes , T tConversion){
     unsigned int uiValue;
     T tConverted;
     std::stringstream strStream;
     strStream << std::hex;
-
     for(int i = 0 ; i< iNumberOfBytes ; i++){
         strStream << data[iByteIndex[i]];
     }
     strStream >> uiValue;
     tConverted = uiValue/tConversion;
-    *tStoreLocation = tConverted;
+    return tConverted;
 }
 
