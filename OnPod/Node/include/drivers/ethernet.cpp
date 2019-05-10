@@ -29,12 +29,14 @@ bool UDPClass::readPacket() {
 
 bool UDPClass::sendPacket(IPAddress ipDestinationIP, uint16_t uDestinationPort,
     uint16_t uMessageLength) {
-
-    if (!Udp.beginPacket(ipDestinationIP, uDestinationPort))
+    if (!Udp.beginPacket(ipDestinationIP, uDestinationPort)) {
         return false; // return false if there was an error resolving the IP or port
+    }
     Udp.write(cSendBuffer, uMessageLength);
-    if (Udp.endPacket())
-        return false; // return false if there was an error sending the packet
     memset(cSendBuffer, 0, BUFFER_SIZE);
+    if (!Udp.endPacket()) {
+        return false; // return false if there was an error sending the packet
+    }
+
     return true;
 }
