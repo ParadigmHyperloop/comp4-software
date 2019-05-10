@@ -51,7 +51,7 @@ int main( int32_t argc, char** argv)
     sPodNetworkValues.iCommanderPortNumber = 5005; //Port # for TCP Commander
 
     auto configServer = FlightConfigServer::getServer(NetworkConstants::CONFIG_SERVER_PORT);
-    configServer();
+	(*configServer)();
 
     sPodNetworkValues.iActiveNodes[0] = 1; // Set brake node active
 
