@@ -1,6 +1,6 @@
 #include "Network.h"
 #include "catch.hpp"
-#include "structs.h"
+#include "Structs.h"
 #include "FlightComputer/Pod.h"
 #include <string>
 

@@ -43,6 +43,13 @@ struct PodValues {
     // Rear Node
     float fGpioValues;
 
+    // HV-BMS
+    float iHvBatteryPackVoltage;
+    float iHvBatteryPackCurrent;
+    float iHvBatteryPackMinimumCellVoltage;
+    float iHvBatteryPackMaxCellVoltage;
+
+
     //FlagsV2
     unsigned char cFlagsArray[3] = {0};
     int32_t iFlagsArraySize = 3;

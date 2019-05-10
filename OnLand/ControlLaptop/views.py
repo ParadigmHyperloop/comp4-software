@@ -96,11 +96,15 @@ def dts():
     title = get_page_title(page)
     with open('ControlLaptop/LocalStorage/DtsSensors.json') as json_file:
         sensors = json.load(json_file)
+    with open('ControlLaptop/LocalStorage/ElectricalValues.json') as json_file:
+        electrical_senesors = json.load(json_file)
+
     return render_template(
         page+".html",
         active_page=page,
         title=title,
         sensors=sensors,
+        electrical_senesors=electrical_senesors
     )
 
 
@@ -120,7 +124,7 @@ def get_flight_profile_template():
 
 @app.route('/sensor_ranges')
 def add_numbers():
-    with open('ControlLaptop/LocalStorage/DtsSensors.json') as json_file:
+    with open('ControlLaptop/LocalStorage/SensorRanges.json') as json_file:
         data = json_file.read().replace('\n', '')
     return data
 

@@ -1,7 +1,7 @@
 #ifndef POD_H
 #define POD_H
 
-#include "FlightComputer/structs.h"
+#include "FlightComputer/Structs.h"
 
 class Pod
 {

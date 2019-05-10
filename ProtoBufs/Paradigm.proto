@@ -134,11 +134,11 @@ message telemetry {
     //optional int32 inverterInternalStates = 30;
 
 // HV-BMS
-    repeated int32 batteryPackVoltages = 26;
-    repeated int32 batteryPackCurrent = 27;
-    repeated int32 batteryCellTemperatures = 28;
-    optional int32 batteryPackMinimumVoltage = 29;
-    optional int32 batteryPackMaxVoltage = 30;
+    optional float iHvBatteryPackVoltage = 26;
+    optional float iHvBatteryPackCurrent = 27;
+    repeated int32 iHvBatteryCellTemperatures = 28;
+    optional float iHvBatteryPackMinimumCellVoltage = 29;
+    optional float iHvBatteryPackMaxCellVoltage = 30;
 
 // Brake Node
     optional bool bSolenoid1 = 32;

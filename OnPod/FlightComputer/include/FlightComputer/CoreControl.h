@@ -1,7 +1,7 @@
 #ifndef CORECONTROL_H
 #define CORECONTROL_H
 
-#include "FlightComputer/structs.h"
+#include "FlightComputer/Structs.h"
 
 void commonChecks(Pod podValues);
 

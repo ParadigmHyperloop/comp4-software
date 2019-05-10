@@ -1,4 +1,4 @@
-#include "FlightComputer/structs.h"
+#include "FlightComputer/Structs.h"
 #include "FlightComputer/Pod.h"
 #include "FlightComputer/CoreControl.h"
 

@@ -40,6 +40,10 @@ UdpConnection *getRearNodeConnection(Pod Pod) {
  */
 int32_t podInternalNetworkThread(Pod Pod) {
 
+    //Logging
+    el::Helpers::setThreadName("Pod Internal Network Thread");
+    LOG(INFO) << "Starting Pod Internal Network Thread";
+
     try {
         Pod.sPodNetworkValues->iNodeClientSocket = createUdpClientSocket();
     }

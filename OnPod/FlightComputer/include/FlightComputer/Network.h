@@ -6,14 +6,11 @@
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <sys/types.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
 #include <netinet/tcp.h>
 #include <fcntl.h>
 
-#include "ProtoBuffer/Paradigm.pb.h"
-#include "FlightComputer/structs.h"
+
+#include "FlightComputer/Structs.h"
 #include "FlightComputer/Pod.h"
 
 int32_t podInternalNetworkThread(Pod);

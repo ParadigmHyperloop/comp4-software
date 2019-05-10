@@ -12,14 +12,15 @@
 INITIALIZE_EASYLOGGINGPP
 
 
-#include <FlightComputer/Network.h>
+#include "FlightComputer/Network.h"
 #include "FlightComputer/CoreControl.h"
+#include "FlightComputer/CanManager.h"
 
 using namespace std;
 
 int main(int32_t argc, char **argv) {
     // Logger
-    el::Helpers::setThreadName("main");
+    el::Helpers::setThreadName("Main Thread");
     std::ifstream infile("/home/debian/logging.conf");
     if (infile.good()) {
         el::Configurations conf("/home/debian/logging.conf");
@@ -53,28 +54,36 @@ int main(int32_t argc, char **argv) {
     sPodNetworkValues.iActiveNodes[0] = 1; // Set brake node active
 
 
-    //Pod Internal Network Thread
+
+
+    //CAN Thread
+    Pod pCanManager = Pod(&sPodValues, &sPodNetworkValues);
+    std::thread tCanManager(CanThread, pCanManager);
+
+      //Node & PDS Telemetry Thread
     Pod pPodInternalNetwork = Pod(&sPodValues, &sPodNetworkValues);
     pPodInternalNetwork.bWriteBreakNodeState = true;
     std::thread tServer(podInternalNetworkThread, pPodInternalNetwork);
 
-
+    /*
     // Core Control Loop Thread
     Pod pCoreControlLoop = Pod(&sPodValues, &sPodNetworkValues);
     pCoreControlLoop.bWritePodState = true;
     std::thread tControlLoop(coreControlLoop, pCoreControlLoop);
-/*
+
 	// Controls Interface Connection Thread
 	Pod pCommanderThread = Pod(&sPodValues, &sPodNetworkValues);
 	pCommanderThread.bWriteManualStates = 1;
 	pCommanderThread.bWriteControlsInterfaceState = 1;
 	std::thread tControlsInterfaceConnection(commanderThread, pCommanderThread);
 */
+
+
+
 //	tControlsInterfaceConnection.join();
-
-    tControlLoop.join();
-
-    tServer.join();
+//    tControlLoop.join();
+    tCanManager.join();
+//    tServer.join();
 
     return 0;
 }
