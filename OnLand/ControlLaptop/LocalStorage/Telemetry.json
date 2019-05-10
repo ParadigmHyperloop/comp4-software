@@ -1,18 +1,18 @@
 {
-  "sol1": {
+  "bSolenoid1": {
     "psBooting": [0,0],
     "psAcceleration": [0,0],
     "psBraking": [1,1],
     "psDisarming": [1,1]
   },
-  "sol2": {
+  "bSolenoid2": {
     "psBooting": [0,0],
     "psAcceleration": [0,0],
     "psBraking": [0,0],
     "psDisarming": [1,1]
   },
   "railTemperature": {
-        "psBooting": [0,20],
+    "psBooting": [0,20],
     "psAcceleration": [0,20],
     "psBraking": [0,450],
     "psDisarming": [0,20]
@@ -23,14 +23,14 @@
     "psBraking": [-25,35],
     "psDisarming": [-25,35]
   },
-    "hp": {
-      "psBooting": [13,1750],
+    "iHighPressure": {
+    "psBooting": [13,1750],
     "psAcceleration": [13,1750],
     "psBraking": [13,1750],
     "psDisarming": [13,1750]
   },
-    "lp1": {
-      "psBooting": [13,17],
+  "iLowPressure1": {
+    "psBooting": [13,17],
     "psAcceleration": [13,17],
     "psBraking": [270,280],
     "psDisarming": [13,17]
@@ -42,19 +42,19 @@
     "psDisarming": [0,100]
   },
     "iHvBatteryPackCurrent": {
-      "psBooting": [0,100],
+    "psBooting": [0,100],
     "psAcceleration": [0,100],
     "psBraking": [0,100],
     "psDisarming": [0,100]
   },
     "iHvBatteryPackMinimumCellVoltage": {
-      "psBooting": [0,100],
+    "psBooting": [0,100],
     "psAcceleration": [0,100],
     "psBraking": [0,100],
     "psDisarming": [0,100]
   },
     "iHvBatteryPackMaxCellVoltage": {
-      "psBooting": [0,100],
+    "psBooting": [0,100],
     "psAcceleration": [0,100],
     "psBraking": [0,100],
     "psDisarming": [0,100]
