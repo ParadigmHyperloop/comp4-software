@@ -1,5 +1,4 @@
 import socket
-import socketio
 import time
 import random
 from PDS.UDP.Paradigm_pb2 import *
@@ -13,24 +12,29 @@ def create_telem(packet):
     packet.railTemperature = random.randint(1, 101)
     packet.sol2 = random.randint(0, 1)
     return packet
-
-
-sio = socketio.Client()
-@sio.on('connect')
-def on_connect():
-    print("Connected to Server")
-    sio.emit('connected', "commander thread")
-
+  
 
 def main():
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, 0)
+    #sudp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+    stcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    stcp.bind(("127.0.0.1", 4500))
+    stcp.listen()
+    conn, addr = stcp.accept()
+    print(conn, addr)
+    
     pod_data = telemetry()
 
     while(1):
         create_telem(pod_data)
-        s.sendto(pod_data.SerializeToString(), ("127.0.0.1", 6000))
-        s.sendto(b'1', ("127.0.0.1", 5005))
+        #sudp.sendto(pod_data.SerializeToString(), ("127.0.0.1", 4000))
+        
+        stcp.sendall(pod_data.SerializeToString())
+        data = stcp.recv(1024)
+        print("recved:", data)
+
         time.sleep(2)
+
 
 if __name__ == "__main__":
     try:

@@ -1,5 +1,6 @@
 import socket
 import select
+from PDS.config import *
 
 
 class PodTcpConnection:
@@ -8,12 +9,11 @@ class PodTcpConnection:
     A ping/pong tcp connection
     """
 
-    def __init__(self, ip, port, MAX_MESSAGE_SIZE):
+    def __init__(self, ip, port):
         self._sock = None
         self._pod_ip = ip
         self._pod_port = port
         self._connected = False
-        self.max = MAX_MESSAGE_SIZE
 
     def connect(self):
         try:
@@ -22,7 +22,7 @@ class PodTcpConnection:
             self.close()
             raise e
         try:
-            self._sock.connect((self._pod_ip, self._pod_port))
+            self._sock.connect((self._pod_ip,self._pod_port))
         except ConnectionRefusedError:
             # No connection
             return False
@@ -42,8 +42,7 @@ class PodTcpConnection:
                 total_sent += sent
                 payload = payload[sent:]
             except socket.EAGAIN:
-                # This blocks until the whole message is sent
-                select.select([], [self._sock], [])
+                select.select([], [self._sock], [])  # This blocks until the whole message is sent
             except Exception as e:
                 self.close()
                 raise e
@@ -59,7 +58,7 @@ class PodTcpConnection:
 
     def receive(self):
         try:
-            msg = self._sock.recv()
+            msg = self._sock.recv(MAX_MESSAGE_SIZE)
         except BlockingIOError:
             # When a non block socket doesnt receive anything it throws BlockingIOError
             return False
@@ -67,7 +66,7 @@ class PodTcpConnection:
             self.close()
             raise e
         else:  # No error, msg received
-            if not msg:  # Empty message means connection terminated by pod
+            if not msg:  # Empty message means that the connection was terminated by the pod
                 print('Pod closed connection')
                 self.close()
             else:
