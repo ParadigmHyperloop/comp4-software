@@ -1,5 +1,4 @@
-#include <chrono>
-#include <unistd.h>
+#include "FlightComputer/Common.h"
 
 class Heartbeat{
 public:

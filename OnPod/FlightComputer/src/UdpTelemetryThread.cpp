@@ -1,7 +1,7 @@
-#include "FlightComputer/Pod.h"
-#include "EasyLogger/easylogging++.h"
-#include <FlightComputer/Network.h>
-#include <FlightComputer/UdpConnection.h>
+#include "FlightComputer/Common.h"
+#include "FlightComputer/UdpTelemetryThread.h"
+#include <FlightComputer/NetworkHelpers.h>
+
 
 
 /**
@@ -38,7 +38,7 @@ UdpConnection *getRearNodeConnection(Pod Pod) {
 /**
  *Wait on socket, parse the received message into a protobuf and hand it off.
  */
-int32_t podInternalNetworkThread(Pod Pod) {
+int32_t udpTelemetryThread(Pod Pod) {
 
     //Logging
     el::Helpers::setThreadName("Pod Internal Network Thread");

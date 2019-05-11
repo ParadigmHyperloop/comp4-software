@@ -1,4 +1,3 @@
-
 #include "FlightComputer/CanManager.h"
 
 

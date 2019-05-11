@@ -1,7 +1,7 @@
 #include <cerrno>
 
-#include "FlightComputer/Network.h"
-#include "EasyLogger/easylogging++.h"
+#include "FlightComputer/NetworkHelpers.h"
+#include "FlightComputer/Common.h"
 #include "FlightComputer/Heartbeat.h"
 
 // Get manual state change commands. Get Estop command

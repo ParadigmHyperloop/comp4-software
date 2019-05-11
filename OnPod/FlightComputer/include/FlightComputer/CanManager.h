@@ -16,7 +16,7 @@
 #include <cstdio>
 #include <cstring>
 
-#include "FlightComputer/Network.h"
+#include "FlightComputer/NetworkHelpers.h"
 #include "FlightComputer/Common.h"
 #include "EasyLogger/easylogging++.h"
 

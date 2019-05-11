@@ -9,16 +9,6 @@
 #include <netinet/tcp.h>
 #include <fcntl.h>
 
-
-#include "FlightComputer/Structs.h"
-#include "FlightComputer/Pod.h"
-
-int32_t podInternalNetworkThread(Pod);
-
-int32_t createCommanderServerSocket(int32_t);
-
-int32_t commanderThread(Pod);
-
 sockaddr_in createGenericNodeAddr();
 
 int32_t createUdpClientSocket();

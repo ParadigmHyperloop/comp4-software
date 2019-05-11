@@ -1,5 +1,4 @@
 #include "FlightComputer/Heartbeat.h"
-#include "EasyLogger/easylogging++.h"
 
 Heartbeat::Heartbeat(int iTimeOut)
 {
