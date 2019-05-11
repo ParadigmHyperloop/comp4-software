@@ -135,24 +135,24 @@ message telemetry {
     //optional int32 inverterInternalStates = 30;
 
 // HV-BMS
-    optional float iHvBatteryPackVoltage = 26;
-    optional float iHvBatteryPackCurrent = 27;
-    repeated int32 iHvBatteryCellTemperatures = 28;
-    optional float iHvBatteryPackMinimumCellVoltage = 29;
-    optional float iHvBatteryPackMaxCellVoltage = 30;
+    optional float hvBatteryPackVoltage = 26;
+    optional float hvBatteryPackCurrent = 27;
+    repeated int32 hvBatteryCellTemperatures = 28;
+    optional float hvBatteryPackMinimumCellVoltage = 29;
+    optional float hvBatteryPackMaxCellVoltage = 30;
 
 // Brake Node
-    optional bool bSolenoid1 = 32;
-    optional bool bSolenoid2 = 33;
-    optional bool bSolenoid3 = 34;
-    optional bool bSolenoid4 = 35;
-    optional bool bSolenoid5 = 36;
-    optional bool bSolenoid6 = 37;
-    optional int32 iHighPressure  = 38;
-    optional int32 iLowPressure1 = 39;
-    optional int32 iLowPressure2 = 40;
-    optional int32 iLowPressure3 = 41;
-    optional int32 iLowPressure4 = 42;
+    optional bool solenoid1 = 32;
+    optional bool solenoid2 = 33;
+    optional bool solenoid3 = 34;
+    optional bool solenoid4 = 35;
+    optional bool solenoid5 = 36;
+    optional bool solenoid6 = 37;
+    optional int32 highPressure  = 38;
+    optional int32 lowPressure1 = 39;
+    optional int32 lowPressure2 = 40;
+    optional int32 lowPressure3 = 41;
+    optional int32 lowPressure4 = 42;
     optional float pressureVesselTemperature = 43;
 
     optional int32 electronicsEnclosurePressure = 44;

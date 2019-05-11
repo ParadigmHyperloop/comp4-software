@@ -86,7 +86,7 @@ int32_t commanderThread(Pod Pod) {
     Heartbeat pulse = Heartbeat(Pod.sPodNetworkValues->iCommaderTimeoutMili);
 
     //pod state != shutdown
-    while (Pod.sPodValues->ePodState != psShutdown) {
+    while (Pod.sPodValues->podState != psShutdown) {
 
         /* Accepted connection gets put iNewSockfd,
         * thread will hang here until a connection is recieved.

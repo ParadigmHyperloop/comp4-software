@@ -130,17 +130,17 @@ PdsConnection::PdsConnection(Pod pod) : UdpConnection(pod) {
 //TODO can we do this without putting the proto on the heap?
 google::protobuf::Message* PdsConnection::getProtoUpdateMessage(){
     auto protoMessage = new telemetry();
-    protoMessage->set_podstate(pod.sPodValues->ePodState);
-    protoMessage->set_ilowpressure1(pod.sPodValues->iLowPressure1);
-    protoMessage->set_ihighpressure(pod.sPodValues->iHighPressure);
-    protoMessage->set_bsolenoid1(pod.sPodValues->bSolenoid1);
-    protoMessage->set_bsolenoid2(pod.sPodValues->bSolenoid2);
-    protoMessage->set_pressurevesseltemperature(pod.sPodValues->iPressureVesselTemperature);
-    protoMessage->set_railtemperature(pod.sPodValues->iRailTemperature);
-    protoMessage->set_ihvbatterypackvoltage(pod.sPodValues->fHvBatteryPackVoltage);
-    protoMessage->set_ihvbatterypackcurrent(pod.sPodValues->iHvBatteryPackCurrent);
-    protoMessage->set_ihvbatterypackmaxcellvoltage(pod.sPodValues->iHvBatteryPackMaxCellVoltage);
-    protoMessage->set_ihvbatterypackminimumcellvoltage(pod.sPodValues->iHvBatteryPackMinimumCellVoltage);
+    protoMessage->set_podstate(pod.sPodValues->podState);
+    protoMessage->set_lowpressure1(pod.sPodValues->lowPressure1);
+    protoMessage->set_highpressure(pod.sPodValues->highPressure);
+    protoMessage->set_solenoid1(pod.sPodValues->solenoid1);
+    protoMessage->set_solenoid2(pod.sPodValues->solenoid2);
+    protoMessage->set_pressurevesseltemperature(pod.sPodValues->pressureVesselTemperature);
+    protoMessage->set_railtemperature(pod.sPodValues->railTemperature);
+    protoMessage->set_hvbatterypackvoltage(pod.sPodValues->hvBatteryPackVoltage);
+    protoMessage->set_hvbatterypackcurrent(pod.sPodValues->hvBatteryPackCurrent);
+    protoMessage->set_hvbatterypackmaxcellvoltage(pod.sPodValues->hvBatteryPackMaxCellVoltage);
+    protoMessage->set_hvbatterypackminimumcellvoltage(pod.sPodValues->hvBatteryPackMinimumCellVoltage);
     return protoMessage;
 }
 
@@ -152,7 +152,7 @@ BrakeNodeConnection::BrakeNodeConnection(Pod pod) : UdpConnection(pod) {
 };
 
 void BrakeNodeConnection::setConnectionStatus(bool status){
-    this->pod.sPodValues->cConnectionsArray[0] = status;
+    this->pod.sPodValues->connectionsArray[0] = status;
 }
 
 google::protobuf::Message* BrakeNodeConnection::getProtoUpdateMessage() {
@@ -168,12 +168,12 @@ bool BrakeNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
         std::string strError = "Failed to parse Update from Brake Node";
         throw std::invalid_argument(strError);
     }
-    this->pod.sPodValues->bSolenoid1 = protoMessage.brakesolenoidstate();
-    this->pod.sPodValues->bSolenoid2 = protoMessage.ventsolenoidstate();
-    this->pod.sPodValues->iRailTemperature = protoMessage.rotortemperature();
-    this->pod.sPodValues->iPressureVesselTemperature = protoMessage.pneumatictemperature();
-    this->pod.sPodValues->iHighPressure = protoMessage.tankpressure();
-    this->pod.sPodValues->iLowPressure1 = protoMessage.brakepressure();
+    this->pod.sPodValues->solenoid1 = protoMessage.brakesolenoidstate();
+    this->pod.sPodValues->solenoid2 = protoMessage.ventsolenoidstate();
+    this->pod.sPodValues->railTemperature = protoMessage.rotortemperature();
+    this->pod.sPodValues->pressureVesselTemperature = protoMessage.pneumatictemperature();
+    this->pod.sPodValues->highPressure = protoMessage.tankpressure();
+    this->pod.sPodValues->lowPressure1 = protoMessage.brakepressure();
     return true;
 }
 

@@ -20,57 +20,57 @@
 
 struct PodValues {
     // States
-    PodStates ePodState = psBooting;
-    ControlsInterfaceStates eTerminalState;
-    MotorStates eMotorState;
-    BrakeNodeStates eBrakeNodeState;
-    LvdcNodeStates eLvdcNodeState;
+    PodStates podState = psBooting;
+    ControlsInterfaceStates terminalState;
+    MotorStates motorState;
+    BrakeNodeStates brakeNodeState;
+    LvdcNodeStates lvdcNodeState;
 
     //Manual States
-    PodStates eManualPodState;
-    ControlsInterfaceStates eManualTerminalState;
-    MotorStates eManualMotorState;
-    BrakeNodeStates eManualBrakeNodeState;
-    LvdcNodeStates eManualLvdcNodeState;
-    bool bAutomaticTransitions;
+    PodStates manualPodState;
+    ControlsInterfaceStates manualTerminalState;
+    MotorStates manualMotorState;
+    BrakeNodeStates manualBrakeNodeState;
+    LvdcNodeStates manualLvdcNodeState;
+    bool automaticTransitions;
 
     //ConnectionsArray
-    std::vector<bool> cConnectionsArray = {false, false, false, false, false}; // [brake , rear, lvdc, bms, inverter]
+    std::vector<bool> connectionsArray = {false, false, false, false, false}; // [brake , rear, lvdc, bms, inverter]
 
     // Navigation
-    float fDistance = 0;
-    float fVelocity = 0;
+    float distance = 0;
+    float velocity = 0;
     // Rear Node
-    float fGpioValues;
+    float gpioValues;
 
     // HV-BMS
-    float fHvBatteryPackVoltage;
-    float iHvBatteryPackCurrent;
-    float iHvBatteryPackMinimumCellVoltage;
-    float iHvBatteryPackMaxCellVoltage;
+    float hvBatteryPackVoltage;
+    float hvBatteryPackCurrent;
+    float hvBatteryPackMinimumCellVoltage;
+    float hvBatteryPackMaxCellVoltage;
 
 
     //FlagsV2
-    unsigned char cFlagsArray[3] = {0};
+    unsigned char flagsArray[3] = {0};
     int32_t iFlagsArraySize = 3;
     // Atmosphere
-    double dTubePressure;
+    double tubePressure;
     // Terminal
     ControlsInterfaceStates eTerminalCommand;
     // Brake Node
-    bool bSolenoid1;
-    bool bSolenoid2;
-    bool bSolenoid3;
-    bool bSolenoid4;
-    bool bSolenoid5;
-    bool bSolenoid6;
-    float iLowPressure1;
-    int32_t iLowPressure2;
-    int32_t iLowPressure3;
-    int32_t iLowPressure4;
-    float iHighPressure;
-    float iPressureVesselTemperature;
-    float iRailTemperature;
+    bool solenoid1;
+    bool solenoid2;
+    bool solenoid3;
+    bool solenoid4;
+    bool solenoid5;
+    bool solenoid6;
+    float lowPressure1;
+    int32_t lowPressure2;
+    int32_t lowPressure3;
+    int32_t lowPressure4;
+    float highPressure;
+    float pressureVesselTemperature;
+    float railTemperature;
 };
 
 struct PodNetwork {

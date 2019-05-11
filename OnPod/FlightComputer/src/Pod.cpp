@@ -15,7 +15,7 @@ Pod::Pod(PodValues *sPodValues, PodNetwork *sNetworkVals) {
 int32_t Pod::setPodState(PodStates state, const char *reason) {
     if (this->bWritePodState) {
         LOG(INFO) << reason;
-        this->sPodValues->ePodState = state;
+        this->sPodValues->podState = state;
         return 1;
     } else {
         return 0;
@@ -23,14 +23,14 @@ int32_t Pod::setPodState(PodStates state, const char *reason) {
 };
 
 PodStates Pod::getPodState() {
-    return this->sPodValues->ePodState;
+    return this->sPodValues->podState;
 }
 
 
 
 void Pod::setControlsInterfaceState(ControlsInterfaceStates eTerminalState) {
     if (this->bWriteControlsInterfaceState) {
-        this->sPodValues->eTerminalState = eTerminalState;
+        this->sPodValues->terminalState = eTerminalState;
     } else {
         LOG(INFO) << "ERROR: Permission Denied for writing Controls Interface State";
     }
@@ -44,7 +44,7 @@ ControlsInterfaceStates Pod::getControlsInterfaceState() {
 
 int32_t Pod::setBrakeNodeState(BrakeNodeStates eState) {
     if (this->bWriteBreakNodeState) {
-        this->sPodValues->eBrakeNodeState = eState;
+        this->sPodValues->brakeNodeState = eState;
         return 1;
     } else {
         return 0;
@@ -52,18 +52,18 @@ int32_t Pod::setBrakeNodeState(BrakeNodeStates eState) {
 };
 
 BrakeNodeStates Pod::getBrakeNodeState() {
-    return this->sPodValues->eBrakeNodeState;
+    return this->sPodValues->brakeNodeState;
 };
 
 
 
 MotorStates Pod::getMotorState() {
-    return this->sPodValues->eMotorState;
+    return this->sPodValues->motorState;
 };
 
 int32_t Pod::setMotorState(MotorStates eMotorState) {
     if (this->bWriteMotorState) {
-        this->sPodValues->eMotorState = eMotorState;
+        this->sPodValues->motorState = eMotorState;
         return 1;
     } else {
         return 0;
@@ -72,7 +72,7 @@ int32_t Pod::setMotorState(MotorStates eMotorState) {
 
 
 unsigned char *Pod::getFlagsArray() {
-    return this->sPodValues->cFlagsArray;
+    return this->sPodValues->flagsArray;
 };
 
 int32_t Pod::getFlagsArraySize() {
@@ -83,7 +83,7 @@ int32_t Pod::getFlagsArraySize() {
 
 void Pod::setAutomaticTransitions(bool val) {
     if (this->bWriteManualStates) {
-        this->sPodValues->bAutomaticTransitions = val;
+        this->sPodValues->automaticTransitions = val;
     } else {
         LOG(INFO) << "ERROR: Permission Denied for writing Automatic Transition";
     }
@@ -91,7 +91,7 @@ void Pod::setAutomaticTransitions(bool val) {
 
 void Pod::setManualBrakeNodeState(BrakeNodeStates eBrakeNodeState) {
     if (this->bWriteManualStates) {
-        this->sPodValues->eManualBrakeNodeState = eBrakeNodeState;
+        this->sPodValues->manualBrakeNodeState = eBrakeNodeState;
     } else {
         LOG(INFO) << "ERROR: Permission Denied for writing Manual State";
     }
@@ -99,7 +99,7 @@ void Pod::setManualBrakeNodeState(BrakeNodeStates eBrakeNodeState) {
 
 void Pod::setManualLvdcNodeState(LvdcNodeStates eLvdcNodeState) {
     if (this->bWriteManualStates) {
-        this->sPodValues->eManualLvdcNodeState = eLvdcNodeState;
+        this->sPodValues->manualLvdcNodeState = eLvdcNodeState;
     } else {
         LOG(INFO) << "ERROR: Permission Denied for writing Manual State";
     }
@@ -107,7 +107,7 @@ void Pod::setManualLvdcNodeState(LvdcNodeStates eLvdcNodeState) {
 
 void Pod::setManualPodState(PodStates ePodState) {
     if (this->bWriteManualStates) {
-        this->sPodValues->eManualPodState = ePodState;
+        this->sPodValues->manualPodState = ePodState;
     } else {
         LOG(INFO) << "ERROR: Permission Denied for writing Manual State";
     }
@@ -119,11 +119,7 @@ void Pod::setHvBatteryPackVoltage(float fValue) {
     if (!this->bWriteHighVoltage) {
         //todo throw error with message
     }
-
 }
-
-
-
 
 
 
