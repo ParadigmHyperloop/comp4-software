@@ -90,7 +90,6 @@ flightConfig FlightConfigServer::operator()(char* controlLaptopAddr)
         LOG(INFO) << controlLaptopAddr << "connected on port" << ntohs(client.sin_port);
     }
 
-    close(this->_listenerSocketID);
 
     // While receiving config
     char buf [4096];
