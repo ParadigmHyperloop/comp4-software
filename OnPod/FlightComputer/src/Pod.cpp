@@ -1,5 +1,5 @@
-#include "FlightComputer/Structs.h"
-#include "FlightComputer/Pod.h"
+#include "structs.h"
+#include "Pod.h"
 #include "ProtoBuffer/Paradigm.pb.h"
 #include "EasyLogger/easylogging++.h"
 

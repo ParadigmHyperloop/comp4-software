@@ -1,4 +1,6 @@
-#include "FlightComputer/CoreControl.h"
+#include "structs.h"
+#include "Pod.h"
+#include "CoreControl.h"
 
 
 //template allowableStates

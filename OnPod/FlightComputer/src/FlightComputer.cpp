@@ -12,57 +12,46 @@
 INITIALIZE_EASYLOGGINGPP
 
 
-#include "FlightComputer/NetworkHelpers.h"
-#include "FlightComputer/CommanderThread.h"
-#include "FlightComputer/CoreControl.h"
-#include "FlightComputer/CanManager.h"
-#include "FlightComputer/UdpTelemetryThread.h"
+
+#include "Network.h"
+#include "nodeSim.h"
+#include "Pod.h"
+#include "CoreControl.h"
+#include "Helpers/FileHelper.h"
+#include "FlightComputerInitializer.h"
+#include "Communication/FlightConfigServer.h"
+#include "Constants/Constants.h"
 
 using namespace std;
 
-int main(int32_t argc, char **argv) {
-    // Logger
-    el::Helpers::setThreadName("Main Thread");
-    std::ifstream infile("/home/debian/logging.conf");
-    if (infile.good()) {
-        el::Configurations conf("/home/debian/logging.conf");
-        el::Loggers::reconfigureAllLoggers(conf);
+int main( int32_t argc, char** argv)
+{
+	// Initialize Logger Logger;
+	FlightComputerInitializer* initializer = FlightComputerInitializer::GetInstance();
+	initializer->importLoggerLibrary();
 
-    } else {
-        //el::Configurations conf("/home/liam/Development/comp4-software/OnPod/FlightComputer/include/EasyLogger/logging.conf");
-        el::Configurations conf("/Users/liamwaghorn/Development/comp4-software/OnPod/FlightComputer/include/EasyLogger/logging.conf");
-        el::Loggers::reconfigureAllLoggers(conf);
+	LOG(INFO)<<"Main Thread is Started";
+	LOG(INFO)<< std::thread::hardware_concurrency();
+
+	FlightConfigServer* configServer = FlightConfigServer::getServer(NetworkConstants::iCONFIG_SERVER_PORT);
+	flightConfig flightConfig;
+    char controlLaptopAddr[NI_MAXHOST];
+    try {
+        flightConfig = (*configServer)(controlLaptopAddr);
+    } catch (...)
+    {
+        LOG(ERROR) << "Error Receiving Config: " << errno;
     }
-    LOG(INFO) << "Main Thread is Started";
 
     // Create Shared Memory
     PodNetwork sPodNetworkValues = {};
     PodValues sPodValues = {};
 
+
     // Network Configs
-    string cNodeIpAddrs[] = {"192.168.0.50"};
-    sPodNetworkValues.cNodeIpAddrs.assign(begin(cNodeIpAddrs), end(cNodeIpAddrs)); // Node IPs
+    initializer->updatePodNetworkValues(sPodNetworkValues, flightConfig, controlLaptopAddr);
 
-    sPodNetworkValues.iBrakeNodePort = 5555; // Port # that Nodes are listening on
-    sPodNetworkValues.iNodeTimeoutMili = 3000;
-    sPodNetworkValues.iBrakeNodeServerPortNumber = 5555; // Port # to receive UDP from Nodes
-
-    sPodNetworkValues.iCommaderTimeoutMili = 30000; // Timeout for heartbeat to Control Interface
-    sPodNetworkValues.iCommanderPortNumber = 5005; //Port # for TCP Commander
-
-    sPodNetworkValues.iPdsTelemeteryPort = 6000; // Port # to send telemetry
-    sPodNetworkValues.strPdsIpAddr = "127.0.0.1"; // Ip Addr of PDS.
-
-    sPodNetworkValues.iActiveNodes[0] = 1; // Set brake node active
-
-
-
-/*
-    //CAN Thread
-    Pod pCanManager = Pod(&sPodValues, &sPodNetworkValues);
-    std::thread tCanManager(CanThread, pCanManager);
-*/
-      //Node & PDS Telemetry Thread
+    //Pod Internal Network Thread
     Pod pPodInternalNetwork = Pod(&sPodValues, &sPodNetworkValues);
     pPodInternalNetwork.bWriteBreakNodeState = true;
     std::thread tServer(udpTelemetryThread, pPodInternalNetwork);
@@ -78,8 +67,10 @@ int main(int32_t argc, char **argv) {
 	pCommanderThread.bWriteManualStates = 1;
 	pCommanderThread.bWriteControlsInterfaceState = 1;
 	std::thread tControlsInterfaceConnection(commanderThread, pCommanderThread);
-*/
 
+	tControlsInterfaceConnection.join();
+
+    tControlLoop.join();
 
 
 //	tControlsInterfaceConnection.join();
