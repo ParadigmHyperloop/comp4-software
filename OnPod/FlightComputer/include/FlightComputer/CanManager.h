@@ -38,5 +38,7 @@ T extractCanValue(__uint8_t data[], int byteIndexs[], int numberOfBytes , T conv
     return tConverted;
 }
 
+int CanThread(Pod Pod);
+
 
 #endif //FLIGHTCOMPUTER_CANMANAGER_H
