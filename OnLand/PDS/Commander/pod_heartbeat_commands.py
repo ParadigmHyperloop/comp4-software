@@ -47,8 +47,6 @@ def main():
                 pod.send_packet(podMessage.SerializeToString())
 
                 # Receive Packet
-                times = timer.time_since_pulse()
-                connected = pod.is_connected()
                 while timer.time_since_pulse() > COMMANDER_PULSE_SPEED and pod.is_connected():
                     msg = pod.receive()
                     if not msg:
@@ -62,7 +60,6 @@ def main():
                         break
         # Connection lost, tell GUI
         sio.emit('ping', 0)
-        print("lost")
 
 if __name__ == "__main__":
     try:
