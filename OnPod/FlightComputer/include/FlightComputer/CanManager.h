@@ -21,8 +21,7 @@
 
 int CanThread(Pod);
 
-unsigned int convertBytesToInt(int, int);
-
+void processFrame(const struct canfd_frame &frame, Pod &pod);
 
 template <class T>
 T extractCanValue(const __u8 data[], const std::vector<int> &byteIndices, T conversionFactor){

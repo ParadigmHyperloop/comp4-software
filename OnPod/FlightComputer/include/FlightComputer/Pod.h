@@ -43,6 +43,14 @@ class Pod
 
 		// High Voltage
 		void setHvBatteryPackVoltage(float fValue);
+        float getHvBatteryPackVoltage();
+        void setHvBatteryPackCurrent(float fValue);
+        float getHvBatteryPackCurrent();
+        void setHvBatteryPackMinimumCellVoltage(float value);
+        float getHvBatteryPackMinimumCellVoltage();
+        void setHvBatteryPackMaxCellVoltage(float);
+        float getHvBatteryPackMaxCellVoltage();
+
 
 
 		// Permissions

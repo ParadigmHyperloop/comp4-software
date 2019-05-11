@@ -113,20 +113,52 @@ void Pod::setManualPodState(PodStates ePodState) {
     }
 }
 
-
-
-void Pod::setHvBatteryPackVoltage(float fValue) {
+void Pod::setHvBatteryPackVoltage(float value) {
     if (!this->bWriteHighVoltage) {
         //todo throw error with message
     }
+    this->sPodValues->hvBatteryPackVoltage = value;
+}
+
+float Pod::getHvBatteryPackVoltage(){
+    return this->sPodValues->hvBatteryPackVoltage;
 }
 
 
+void Pod::setHvBatteryPackCurrent(float value) {
+    if (!this->bWriteHighVoltage) {
+        //todo throw error with message
+    }
+    this->sPodValues->hvBatteryPackCurrent = value;
+}
 
-/*
-    float iHvBatteryPackVoltage;
-	float iHvBatteryPackCurrent;
-	float iHvBatteryPackMinimumCellVoltage;
-	float iHvBatteryPackMaxCellVoltage;*/
+float Pod::getHvBatteryPackCurrent(){
+    if (!this->bWriteHighVoltage) {
+        //todo throw error with message
+    }
+    return this->sPodValues->hvBatteryPackCurrent;
+}
+
+void Pod::setHvBatteryPackMinimumCellVoltage(float value){
+    if (!this->bWriteHighVoltage) {
+        //todo throw error with message
+    }
+    this->sPodValues->hvBatteryPackMinimumCellVoltage = value;
+}
+
+float Pod::getHvBatteryPackMinimumCellVoltage(){
+    return this->sPodValues->hvBatteryPackMinimumCellVoltage;
+}
+
+void Pod::setHvBatteryPackMaxCellVoltage(float value){
+    if (!this->bWriteHighVoltage) {
+        //todo throw error with message
+    }
+    this->sPodValues->hvBatteryPackMaxCellVoltage = value;
+}
+
+float Pod::getHvBatteryPackMaxCellVoltage(){
+    return this->sPodValues->hvBatteryPackMaxCellVoltage;
+}
 
 
