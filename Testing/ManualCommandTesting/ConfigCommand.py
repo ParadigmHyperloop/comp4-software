@@ -1,7 +1,8 @@
 import socket
 import Paradigm_pb2
 
-HOST = '127.0.0.1'
+# HOST = '127.0.0.1'
+HOST = '192.168.0.24'
 PORT = 3001
 
 flight_config = Paradigm_pb2.flightConfig()
@@ -12,11 +13,11 @@ flight_config.telemetry_port = 4
 flight_config.command_port = 5
 flight_config.flight_length = 6
 flight_config.heartbeat_timeout = 7
-flight_config.pod_driver = Simulation
+flight_config.pod_driver ='Simulation'
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))
-    s.sendall(flight_config)
+    s.sendall(flight_config.SerializeToString())
     data = s.recv(1024)
 
 print('Received', repr(data))

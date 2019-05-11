@@ -21,14 +21,14 @@ FlightConfigServer::FlightConfigServer(int listeningPort)
 
 }
 
-FlightConfigServer* FlightConfigServer::getServer(int port)
+FlightConfigServer* FlightConfigServer::getServer(int32_t port)
 {
     if (_configServer == NULL)
         _configServer = new FlightConfigServer(port);
     return _configServer;
 }
 
-int FlightConfigServer::operator()()
+flightConfig FlightConfigServer::operator()(char* controlLaptopAddr)
 {
     LOG(INFO) << "Creating socket";
     this->_listenerSocketID = socket(AF_INET, SOCK_STREAM, 0);
@@ -44,7 +44,7 @@ int FlightConfigServer::operator()()
     // Configure IP Address
     inet_pton(AF_INET, "0.0.0.0", &hint.sin_addr); //127.0.0.1
 
-    if ( bind(this->_listenerSocketID, (struct sockaddr *) &hint, sizeof(hint)) == -1)
+    if (bind(this->_listenerSocketID, (struct sockaddr *) &hint, sizeof(hint)) == -1)
     {
         LOG(ERROR) << "Cant Bind to IP/PORT";
         //return;
@@ -60,39 +60,58 @@ int FlightConfigServer::operator()()
     // Accept connections:
     sockaddr_in client;
     socklen_t clientSize = sizeof(client);
+
     // Buffers to put host and service in
-    char host[NI_MAXHOST];
-    char svc[NI_MAXSERV];
+    char service[NI_MAXSERV];
 
     int clientSocket = accept(this->_listenerSocketID, (struct sockaddr *) &client, &clientSize);
-
     if (clientSocket == -1 )
     {
         LOG(ERROR) << "Problem Occurred with Client Socket";
-        return -4;
+        // throw runetime::error()
     }
+
     // If Read successful, then
     close(this->_listenerSocketID);
-    memset(host, 0, NI_MAXHOST);
-    memset(svc, 0, NI_MAXSERV);
+    memset(controlLaptopAddr, 0, NI_MAXHOST);
+    memset(service, 0, NI_MAXSERV);
 
-    // While receiving display message
+    int32_t iResult = getnameinfo((sockaddr*) &client, clientSize, controlLaptopAddr, NI_MAXHOST, service, NI_MAXSERV, 0);
+
+    if (iResult)
+    {
+        LOG(INFO) << "Host connected on port" << service;
+    } else {
+        inet_ntop(AF_INET, &client.sin_addr, controlLaptopAddr, NI_MAXHOST);
+        LOG(INFO) << controlLaptopAddr << "connected on port" << ntohs(client.sin_port);
+    }
+
+    close(this->_listenerSocketID);
+
+    // While receiving config
     char buf [4096];
+    flightConfig config;
+
     while (true)
     {
         std::memset(buf, 0, 4096);
-        int bytesReceived = recv(clientSocket, buf, 4096, 0);
-        if (bytesReceived == -1)
+        int32_t iBytesReceived = recv(clientSocket, buf, 4096, MSG_DONTWAIT);
+        if (iBytesReceived == -1)
             break;
-        else if (bytesReceived == 0)
+        else if (iBytesReceived == 0)
         {
             LOG(INFO)<<"The client disconnected";
             break;
         }
-        flightConfig config;
-        config.ParseFromString(std::string(buf));
-
+        std::string receivedConfig =  buf;
+        config.ParseFromString(receivedConfig);
+        // TODO: Send back response
     }
-
+    char *SUCCESS_RECEIVE_CONFIG_RESPONSE = "OK";
+    send(clientSocket,
+            SUCCESS_RECEIVE_CONFIG_RESPONSE,
+            strlen(SUCCESS_RECEIVE_CONFIG_RESPONSE),
+            0);
+    return config;
 }
 

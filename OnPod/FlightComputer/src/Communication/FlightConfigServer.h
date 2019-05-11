@@ -30,8 +30,8 @@ private:
     explicit FlightConfigServer(int listeningPort);
 
 public:
-    static FlightConfigServer* getServer(int port = NetworkConstants::CONFIG_SERVER_PORT);
-    int operator()();
+    static FlightConfigServer* getServer(int port = NetworkConstants::iCONFIG_SERVER_PORT);
+    flightConfig operator()(char* controlLaptopAddr);
 
 
 };

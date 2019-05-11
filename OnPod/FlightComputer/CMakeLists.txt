@@ -33,7 +33,7 @@ if (THREADS_HAVE_PTHREAD_ARG)
     target_compile_options(FlightComputer PUBLIC "-pthread")
 endif ()
 
-add_executable(FlightComputer ${SOURCES}  ${PROTO_HDRS} src/Helpers/FileHelper.cpp src/Helpers/FileHelper.h src/FlightComputerInitializer.cpp src/FlightComputerInitializer.h src/Communication/FlightConfigServer.cpp src/Communication/FlightConfigServer.h src/Constants/Constants.h src/Models/FlightConfig.cpp src/Models/FlightConfig.h)
+add_executable(FlightComputer ${SOURCES}  ${PROTO_HDRS} src/Helpers/FileHelper.cpp src/Helpers/FileHelper.h src/FlightComputerInitializer.cpp src/FlightComputerInitializer.h src/Communication/FlightConfigServer.cpp src/Communication/FlightConfigServer.h src/Constants/Constants.h)
 
 target_link_libraries(FlightComputer ${Protobuf_LIBRARIES})
 

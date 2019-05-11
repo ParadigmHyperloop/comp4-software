@@ -2,7 +2,6 @@
 #include "EasyLogger/easylogging++.h"
 #include "Helpers/FileHelper.h"
 
-INITIALIZE_EASYLOGGINGPP
 
 
 FlightComputerInitializer* FlightComputerInitializer::_flightComputerInitializer = NULL;

@@ -33,6 +33,10 @@ int main( int32_t argc, char** argv)
 	LOG(INFO)<<"Main Thread is Started";
 	LOG(INFO)<< std::thread::hardware_concurrency();
 
+	FlightConfigServer* configServer = FlightConfigServer::getServer(NetworkConstants::iCONFIG_SERVER_PORT);
+	flightConfig flightConfig;
+    char controlLaptopAddr[NI_MAXHOST];
+    flightConfig = (*configServer)(controlLaptopAddr);
 
     // Create Shared Memory
     PodNetwork sPodNetworkValues = {};

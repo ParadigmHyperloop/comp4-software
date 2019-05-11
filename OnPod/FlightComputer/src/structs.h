@@ -81,7 +81,7 @@ struct PodNetwork {
     int32_t iCommaderTimeoutMili; //Timeout
 
     int32_t iPdsTelemeteryPort; // Port # to send telemetry
-    std::string strPdsIpAddr;
+    std::string strPdsIpAddr; 
 
 };
 
