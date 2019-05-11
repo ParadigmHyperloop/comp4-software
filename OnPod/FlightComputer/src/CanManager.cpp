@@ -3,16 +3,17 @@
 
 
 
-void processFrame(const struct canfd_frame &frame, Pod pod) {
+void processFrame(const struct canfd_frame &frame, Pod &pod) {
     switch (frame.can_id) {
         case 0x6b2: {
-            float iHvBatteryPackVoltage = extractCanValue <float> (&frame.data, [0,1], 2, 10.0);
-            float iHvBatteryPackCurrent = extractCanValue <float>(&frame.data, [2,3], 2, 10.0);
-            float iHvBatteryPackMaxCellVoltage = extractCanValue <float>(&frame.data, [4,5], 2, 10000.0);
-            float iHvBatteryPackMinimumCellVoltage = extractCanValue <float>(&frame.data, [6,7], 2, 10000.0);
-
-                    //setters
-
+            std::vector<int> indices = {0,1};
+            auto iHvBatteryPackVoltage = extractCanValue <float> (frame.data, indices, (float)10.0);
+            indices = {2,3};
+            auto iHvBatteryPackCurrent = extractCanValue <float>(frame.data, indices, (float)10.0);
+            indices = {4,5};
+            auto iHvBatteryPackMaxCellVoltage = extractCanValue <float>(frame.data, indices, (float)10000.0);
+            indices = {6,7};
+            auto iHvBatteryPackMinimumCellVoltage = extractCanValue <float>(frame.data, indices, (float)10000.0);
         }
             break;
         default:

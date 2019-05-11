@@ -25,13 +25,13 @@ unsigned int convertBytesToInt(int, int);
 
 
 template <class T>
-T extractCanValue(__uint8_t data[], int byteIndexs[], int numberOfBytes , T conversionFactor){
+T extractCanValue(const __u8 data[], const std::vector<int> &byteIndices, T conversionFactor){
     unsigned int value;
     T tConverted;
     std::stringstream strStream;
     strStream << std::hex;
-    for(int i = 0 ; i< numberOfBytes ; i++){
-        strStream << data[byteIndexs[i]];
+    for(auto const& index: byteIndices){
+        strStream << data[index];
     }
     strStream >> value;
     tConverted = value/conversionFactor;

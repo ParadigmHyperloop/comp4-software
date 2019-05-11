@@ -1,7 +1,7 @@
 #include "FlightComputer/UdpConnection.h"
 
 
-UdpConnection::UdpConnection(Pod){
+UdpConnection::UdpConnection(Pod pod){
     this->pod = pod;
     struct sockaddr_in socketAddress = {0};
     this->_destSockAddr = socketAddress;

@@ -20,7 +20,7 @@ public:
      *
      * @param iSize : Size of buffer
      */
-    void setRecvBufferSize(int32_t);
+    void setRecvBufferSize(int32_t bufferSize);
 
     /**
      * Since UDP clients can share an outbound socket, it is
@@ -44,7 +44,7 @@ public:
      *
      * @throws : Any runtime error from createServerSocket
      */
-    void configureServer(int32_t serverPort, int32_t connectionTimeoutMilis);
+    void configureServer( int32_t serverPort, int32_t connectionTimeoutMilis);
 
 
     /**

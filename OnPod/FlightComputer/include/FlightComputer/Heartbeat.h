@@ -7,7 +7,7 @@
 
 class Heartbeat{
 public:
-	Heartbeat(int timeoutMilis);
+	explicit Heartbeat(int32_t timeoutMilis);
 	void feed();
 	bool expired();
 

@@ -15,6 +15,7 @@ INITIALIZE_EASYLOGGINGPP
 #include "FlightComputer/NetworkHelpers.h"
 #include "FlightComputer/CoreControl.h"
 #include "FlightComputer/CanManager.h"
+#include "FlightComputer/UdpTelemetryThread.h"
 
 using namespace std;
 
@@ -63,7 +64,7 @@ int main(int32_t argc, char **argv) {
       //Node & PDS Telemetry Thread
     Pod pPodInternalNetwork = Pod(&sPodValues, &sPodNetworkValues);
     pPodInternalNetwork.bWriteBreakNodeState = true;
-    std::thread tServer(podInternalNetworkThread, pPodInternalNetwork);
+    std::thread tServer(udpTelemetryThread, pPodInternalNetwork);
 
     /*
     // Core Control Loop Thread

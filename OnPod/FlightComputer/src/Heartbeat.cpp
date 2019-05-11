@@ -1,6 +1,6 @@
 #include "FlightComputer/Heartbeat.h"
 
-Heartbeat::Heartbeat(int timeoutMilis)
+Heartbeat::Heartbeat(int32_t timeoutMilis)
 {
 	this->_timeOutMilis = timeoutMilis;
 }
