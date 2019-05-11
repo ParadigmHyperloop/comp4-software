@@ -27,7 +27,7 @@ def on_command(command):
         podMessage.manualBrakeNodeState = bnsStandby
 
 
-sio.connect('http://localhost:5000')
+#sio.connect('http://localhost:5000')
 podMessage = podCommand()
 podMessage.controlsInterfaceState = ciFlight
 
@@ -38,7 +38,8 @@ def main():
 
     while not pod.is_connected():
         time.sleep(1)
-        pod.connect()
+        if pod.connect():
+            timer.pulse()
 
         while pod.is_connected():
             # Send a packets every PULSE_SPEED milliseconds.
@@ -46,6 +47,8 @@ def main():
                 pod.send_packet(podMessage.SerializeToString())
 
                 # Receive Packet
+                times = timer.time_since_pulse()
+                connected = pod.is_connected()
                 while timer.time_since_pulse() > COMMANDER_PULSE_SPEED and pod.is_connected():
                     msg = pod.receive()
                     if not msg:
@@ -56,8 +59,10 @@ def main():
                     else:  # Msg received
                         sio.emit('ping', 1)
                         timer.pulse()
+                        break
         # Connection lost, tell GUI
         sio.emit('ping', 0)
+        print("lost")
 
 if __name__ == "__main__":
     try:

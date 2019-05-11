@@ -44,8 +44,8 @@ class PodTcpConnection:
             except socket.EAGAIN:
                 select.select([], [self._sock], [])  # This blocks until the whole message is sent
             except Exception as e:
+                #todo log this or send to front end
                 self.close()
-                raise e
 
     def is_connected(self):
         return self._connected
