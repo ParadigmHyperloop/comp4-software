@@ -57,11 +57,11 @@ int main(int32_t argc, char **argv) {
 
 
 
-
+/*
     //CAN Thread
     Pod pCanManager = Pod(&sPodValues, &sPodNetworkValues);
     std::thread tCanManager(CanThread, pCanManager);
-
+*/
       //Node & PDS Telemetry Thread
     Pod pPodInternalNetwork = Pod(&sPodValues, &sPodNetworkValues);
     pPodInternalNetwork.bWriteBreakNodeState = true;
