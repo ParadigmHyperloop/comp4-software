@@ -1,5 +1,5 @@
-#ifndef POD_H
-#define POD_H
+#ifndef FLIGHTCOMPUTER_POD_H
+#define FLIGHTCOMPUTER_POD_H
 
 #include "FlightComputer/Structs.h"
 
@@ -59,4 +59,4 @@ class Pod
 
 };
 
-#endif
+#endif //FLIGHTCOMPUTER_POD_H

@@ -3,30 +3,31 @@
 
 UdpConnection::UdpConnection(Pod){
     this->pod = pod;
-    struct sockaddr_in sAddr = {0};
-    this->sDestAddr = sAddr;
+    struct sockaddr_in socketAddress = {0};
+    this->_destSockAddr = socketAddress;
 };
 
-void UdpConnection::setRecvBufferSize(int32_t iSize) {
-    int32_t s = setsockopt(this->iInboundSocket, SOL_SOCKET, SO_RCVBUF, &iSize, sizeof(iSize));
+void UdpConnection::setRecvBufferSize(int32_t bufferSize) {
+    //todo log failure
+    int32_t s = setsockopt(this->_inboundSocket, SOL_SOCKET, SO_RCVBUF, &bufferSize, sizeof(bufferSize));
 }
 
 
-void UdpConnection::configureClient(const std::string &strIp, int32_t iDestPort, int32_t iOutboundSocket) {
+void UdpConnection::configureClient(const std::string &destIp, int32_t destPortNum, int32_t outboundSocket) {
     struct sockaddr_in sAddr = {0};
-    this->iOutboundSocket = iOutboundSocket;
-    this->sDestAddr = sAddr;
-    this->sDestAddr = createGenericNodeAddr();
-    this->sDestAddr.sin_port = htons(iDestPort);
-    this->sDestAddr.sin_addr.s_addr = inet_addr(strIp.c_str());
+    this->_outboundSocket = outboundSocket;
+    this->_destSockAddr = sAddr;
+    this->_destSockAddr = createGenericNodeAddr();
+    this->_destSockAddr.sin_port = htons(destPortNum);
+    this->_destSockAddr.sin_addr.s_addr = inet_addr(destIp.c_str());
 }
 
 
-void UdpConnection::configureServer(int32_t iServerPort, int32_t iTimeoutMilis) {
-    this->pulse = Heartbeat(iTimeoutMilis);
-    this->iServerPort = iServerPort;
+void UdpConnection::configureServer(int32_t serverPort, int32_t connectionTimeoutMilis) {
+    this->_pulse = Heartbeat(connectionTimeoutMilis);
+    this->_serverPort = serverPort;
     try {
-        this->createServerSocket();
+        this->_createServerSocket();
     }
     catch (std::runtime_error &e) {
         throw e;
@@ -35,26 +36,26 @@ void UdpConnection::configureServer(int32_t iServerPort, int32_t iTimeoutMilis) 
 
 
 void UdpConnection::getUpdate() {
-    if (this->iInboundSocket == -1) {
-        std::string strError = "getUpdate() : Server socket invalid";
-        throw std::runtime_error(strError);
+    if (this->_inboundSocket == -1) {
+        std::string error = "getUpdate() : Server socket invalid";
+        throw std::runtime_error(error);
     }
-    char cBuffer[200] = {0};
-    bzero(&cBuffer, sizeof cBuffer);
-    ssize_t iReceivedPacketSize = recvfrom(this->iInboundSocket, cBuffer, 200, 0, nullptr, nullptr);
-    if (iReceivedPacketSize != -1) {
-        LOG(INFO) << iReceivedPacketSize << " Bytes received on " << this->strConnectionName << cBuffer;
+    char buffer[200] = {0};
+    bzero(&buffer, sizeof buffer);
+    ssize_t receivedPacketSize = recvfrom(this->_inboundSocket, buffer, 200, 0, nullptr, nullptr);
+    if (receivedPacketSize != -1) {
+        LOG(INFO) << receivedPacketSize << " Bytes received on " << this->_connectionName << buffer;
         try {
-            this->parseUpdate(cBuffer, (int32_t) iReceivedPacketSize);
+            this->parseUpdate(buffer, (int32_t) receivedPacketSize);
         }
         catch (const std::invalid_argument &e) {
-            std::string strError = "getUpdate() : " + std::string(e.what());
-            throw std::runtime_error(strError);
+            std::string error = "getUpdate() : " + std::string(e.what());
+            throw std::runtime_error(error);
         }
-        this->pulse.feed();
+        this->_pulse.feed();
         this->setConnectionStatus(true);
     } else {
-        if (this->pulse.expired()) {
+        if (this->_pulse.expired()) {
             this->setConnectionStatus(false);
         }
     }
@@ -62,68 +63,68 @@ void UdpConnection::getUpdate() {
 
 
 void UdpConnection::giveUpdate() {
-    google::protobuf::Message *pPacket;
-    ssize_t iPayloadSize;
-    pPacket = this->getProtoUpdateMessage();
-    iPayloadSize = pPacket->ByteSizeLong();
-    unsigned char cPayload[iPayloadSize];
+    google::protobuf::Message *protoPacket;
+    ssize_t payloadSize;
+    protoPacket = this->getProtoUpdateMessage();
+    payloadSize = protoPacket->ByteSizeLong();
+    unsigned char payload[payloadSize];
 
-    if (!pPacket->SerializeToArray(cPayload, static_cast<int>(iPayloadSize))) {
-        std::string strError = std::string("Error Creating Proto packet on  ") + this->strConnectionName;
-        delete pPacket;
-        throw std::runtime_error(strError);
+    if (!protoPacket->SerializeToArray(payload, static_cast<int>(payloadSize))) {
+        std::string error = std::string("Error Creating Proto packet on  ") + this->_connectionName;
+        delete protoPacket;
+        throw std::runtime_error(error);
     }
-    ssize_t sent = sendto(this->iOutboundSocket, cPayload, iPayloadSize, 0,
-                          (struct sockaddr *) &this->sDestAddr, sizeof(this->sDestAddr));
+    ssize_t sent = sendto(this->_outboundSocket, payload, payloadSize, 0,
+                          (struct sockaddr *) &this->_destSockAddr, sizeof(this->_destSockAddr));
     if (sent == -1) {
-        std::string strError = std::string("Error Sending ") + this->strConnectionName + std::strerror(errno);
-        delete pPacket;
+        std::string strError = std::string("Error Sending ") + this->_connectionName + std::strerror(errno);
+        delete protoPacket;
         throw std::runtime_error(strError);
     }
-    delete pPacket;
+    delete protoPacket;
 }
 
 void UdpConnection::closeConnection() {
-    close(this->iInboundSocket);
-    close(this->iOutboundSocket);
+    close(this->_inboundSocket);
+    close(this->_outboundSocket);
 }
 
 
-virtual google::protobuf::Message* UdpConnection::getProtoUpdateMessage() {
+google::protobuf::Message* UdpConnection::getProtoUpdateMessage() {
     auto protoMessage = new defaultFcToNode();
     protoMessage->set_podstate(psArmed);
     return protoMessage;
 };
 
-bool UdpConnection::createServerSocket() {
-    int32_t iSocketfd;
-    struct sockaddr_in SocketAddrStruct = {0};
+bool UdpConnection::_createServerSocket() {
+    int32_t serverSocket;
+    struct sockaddr_in SocketAddr = {0};
 
-    iSocketfd = socket(AF_INET, SOCK_DGRAM, 0);
-    if (iSocketfd < 0) {
-        std::string sError = std::string(" Creating Server socket: ") + std::strerror(errno);
-        throw std::runtime_error(sError);
+    serverSocket = socket(AF_INET, SOCK_DGRAM, 0);
+    if (serverSocket < 0) {
+        std::string error = std::string(" Creating Server socket: ") + std::strerror(errno);
+        throw std::runtime_error(error);
     }
 
-    int flags = fcntl(iSocketfd, F_GETFL);
+    int flags = fcntl(serverSocket, F_GETFL);
     flags |= O_NONBLOCK;
-    fcntl(iSocketfd, F_SETFL, flags);
+    fcntl(serverSocket, F_SETFL, flags);
 
-    SocketAddrStruct.sin_family = AF_INET;
-    SocketAddrStruct.sin_port = htons(this->iServerPort);
-    SocketAddrStruct.sin_addr.s_addr = INADDR_ANY;
-    int32_t iBind = bind(iSocketfd, (struct sockaddr *) &SocketAddrStruct, sizeof(SocketAddrStruct));
-    if (iBind < 0) {
+    SocketAddr.sin_family = AF_INET;
+    SocketAddr.sin_port = htons(this->_serverPort);
+    SocketAddr.sin_addr.s_addr = INADDR_ANY;
+    int32_t status = bind(serverSocket, (struct sockaddr *) &SocketAddr, sizeof(SocketAddr));
+    if (status < 0) {
         std::string sError = std::string("Binding Server Socket: ") + std::strerror(errno);
         throw std::runtime_error(sError);
     }
-    this->iInboundSocket = iSocketfd;
+    this->_inboundSocket = serverSocket;
     return true;
 }
 
 
 PdsConnection::PdsConnection(Pod pod) : UdpConnection(pod) {
-    this->strConnectionName = "Controls Interface Data : ";
+    this->_connectionName = "Controls Interface Data : ";
 };
 
 //TODO can we do this without putting the proto on the heap?
@@ -147,11 +148,11 @@ google::protobuf::Message* PdsConnection::getProtoUpdateMessage(){
 
 
 BrakeNodeConnection::BrakeNodeConnection(Pod pod) : UdpConnection(pod) {
-    this->strConnectionName = "Brake Node : ";
+    this->_connectionName = "Brake Node : ";
 };
 
-void BrakeNodeConnection::setConnectionStatus(bool bStatus){
-    this->pod.sPodValues->cConnectionsArray[0] = bStatus;
+void BrakeNodeConnection::setConnectionStatus(bool status){
+    this->pod.sPodValues->cConnectionsArray[0] = status;
 }
 
 google::protobuf::Message* BrakeNodeConnection::getProtoUpdateMessage() {
@@ -161,9 +162,9 @@ google::protobuf::Message* BrakeNodeConnection::getProtoUpdateMessage() {
     return protoMessage;
 }
 
-bool BrakeNodeConnection::parseUpdate(char cBuffer[], int32_t iMessageSize){
+bool BrakeNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
     DtsNodeToFc protoMessage = DtsNodeToFc();
-    if (!protoMessage.ParseFromArray(cBuffer, iMessageSize)) {
+    if (!protoMessage.ParseFromArray(buffer, messageSize)) {
         std::string strError = "Failed to parse Update from Brake Node";
         throw std::invalid_argument(strError);
     }

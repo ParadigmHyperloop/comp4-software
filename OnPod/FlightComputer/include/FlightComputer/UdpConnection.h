@@ -1,3 +1,7 @@
+#ifndef FLIGHTCOMPUTER_UDPCONNECTION_H
+#define FLIGHTCOMPUTER_UDPCONNECTION_H
+
+
 #include "FlightComputer/Heartbeat.h"
 #include "EasyLogger/easylogging++.h"
 #include <FlightComputer/NetworkHelpers.h>
@@ -24,11 +28,11 @@ public:
      *
      * This simply pre configures the sockaddr_in struct required by sendto()
      *
-     * @param strIp : IP of the destination address
-     * @param iDestPort : Port of the destination address
-     * @param iOutboundSocket : Socket to use when sending data
+     * @param destIp : IP of the destination address
+     * @param destPortNum : Port of the destination address
+     * @param outboundSocket : Socket to use when sending data
      */
-    void configureClient(const std::string &strIp, int32_t iDestPort, int32_t iOutboundSocket);
+    void configureClient(const std::string &destIp, int32_t destPortNum, int32_t outboundSocket);
 
 
 
@@ -40,7 +44,7 @@ public:
      *
      * @throws : Any runtime error from createServerSocket
      */
-    void configureServer(int32_t iServerPort, int32_t iTimeoutMilis);
+    void configureServer(int32_t serverPort, int32_t connectionTimeoutMilis);
 
 
     /**
@@ -84,14 +88,14 @@ public:
     virtual void setConnectionStatus(bool) {};
 
 protected:
-    bool createServerSocket();
+    bool _createServerSocket();
     Pod pod;
-    int32_t iOutboundSocket = -1;
-    int32_t iInboundSocket = -1;
-    int32_t iServerPort = -1;
-    Heartbeat pulse = Heartbeat(0);
-    std::string strConnectionName = "";
-    struct sockaddr_in sDestAddr{};
+    int32_t _outboundSocket = -1;
+    int32_t _inboundSocket = -1;
+    int32_t _serverPort = -1;
+    Heartbeat _pulse = Heartbeat(0);
+    std::string _connectionName = "";
+    struct sockaddr_in _destSockAddr{};
 };
 
 class PdsConnection : public UdpConnection {
@@ -116,7 +120,8 @@ public:
 
     google::protobuf::Message* getProtoUpdateMessage() override;
 
-    bool parseUpdate(char cBuffer[], int32_t iMessageSize) override;
+    bool parseUpdate(char buffer[], int32_t messageSize) override;
 
 };
 
+#endif //FLIGHTCOMPUTER_UDPCONNECTION_H

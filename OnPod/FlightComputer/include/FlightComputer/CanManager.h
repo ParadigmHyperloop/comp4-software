@@ -1,7 +1,6 @@
 #ifndef FLIGHTCOMPUTER_CANMANAGER_H
 #define FLIGHTCOMPUTER_CANMANAGER_H
 
-#endif //FLIGHTCOMPUTER_CANMANAGER_H
 
 #include <linux/can.h>
 #include <linux/can/raw.h>
@@ -26,16 +25,18 @@ unsigned int convertBytesToInt(int, int);
 
 
 template <class T>
-T extractCanValue(__uint8 data[], int iByteIndex[], int iNumberOfBytes , T tConversion){
-    unsigned int uiValue;
+T extractCanValue(__uint8_t data[], int byteIndexs[], int numberOfBytes , T conversionFactor){
+    unsigned int value;
     T tConverted;
     std::stringstream strStream;
     strStream << std::hex;
-    for(int i = 0 ; i< iNumberOfBytes ; i++){
-        strStream << data[iByteIndex[i]];
+    for(int i = 0 ; i< numberOfBytes ; i++){
+        strStream << data[byteIndexs[i]];
     }
-    strStream >> uiValue;
-    tConverted = uiValue/tConversion;
+    strStream >> value;
+    tConverted = value/conversionFactor;
     return tConverted;
 }
 
+
+#endif //FLIGHTCOMPUTER_CANMANAGER_H
