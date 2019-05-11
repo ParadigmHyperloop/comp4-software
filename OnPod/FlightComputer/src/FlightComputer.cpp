@@ -36,7 +36,12 @@ int main( int32_t argc, char** argv)
 	FlightConfigServer* configServer = FlightConfigServer::getServer(NetworkConstants::iCONFIG_SERVER_PORT);
 	flightConfig flightConfig;
     char controlLaptopAddr[NI_MAXHOST];
-    flightConfig = (*configServer)(controlLaptopAddr);
+    try {
+        flightConfig = (*configServer)(controlLaptopAddr);
+    } catch (...)
+    {
+        LOG(ERROR) << "Error Receiving Config: " << errno;
+    }
 
     // Create Shared Memory
     PodNetwork sPodNetworkValues = {};
@@ -45,23 +50,6 @@ int main( int32_t argc, char** argv)
 
     // Network Configs
     initializer->updatePodNetworkValues(sPodNetworkValues, flightConfig, controlLaptopAddr);
-    /*
-    string cNodeIpAddrs[] = {"127.0.0.1"};
-    sPodNetworkValues.cNodeIpAddrs.assign(begin(cNodeIpAddrs), end(cNodeIpAddrs)); // Node IPs
-
-    sPodNetworkValues.iBrakeNodePort = 5000; // Port # that Nodes are listening on
-    sPodNetworkValues.iNodeTimeoutMili = 3000;
-    sPodNetworkValues.iBrakeNodeServerPortNumber = 5001; // Port # to receive UDP from Nodes
-
-    sPodNetworkValues.iCommaderTimeoutMili = 30000; // Timeout for heartbeat to Control Interface
-    sPodNetworkValues.iCommanderPortNumber = 5005; //Port # for TCP Commander
-
-    sPodNetworkValues.iPdsTelemeteryPort = 6000; // Port # to send telemetry
-    sPodNetworkValues.strPdsIpAddr = "127.0.0.1"; // Ip Addr of PDS.
-
-    sPodNetworkValues.iActiveNodes[0] = 1; // Set brake node active
-     */
-
 
     //Pod Internal Network Thread
     Pod pPodInternalNetwork = Pod(&sPodValues, &sPodNetworkValues);
