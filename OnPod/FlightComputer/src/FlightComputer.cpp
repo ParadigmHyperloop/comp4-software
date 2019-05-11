@@ -13,6 +13,7 @@ INITIALIZE_EASYLOGGINGPP
 
 
 #include "FlightComputer/NetworkHelpers.h"
+#include "FlightComputer/CommanderThread.h"
 #include "FlightComputer/CoreControl.h"
 #include "FlightComputer/CanManager.h"
 #include "FlightComputer/UdpTelemetryThread.h"

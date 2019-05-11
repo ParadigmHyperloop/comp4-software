@@ -14,7 +14,7 @@ void processFrame(const struct canfd_frame &frame, Pod &pod) {
             auto hvBatteryPackMaxCellVoltage = extractCanValue <float>(frame.data, indices, (float)10000.0);
             indices = {6,7};
             auto hvBatteryPackMinimumCellVoltage = extractCanValue <float>(frame.data, indices, (float)10000.0);
-            
+
             pod.setHvBatteryPackCurrent(hvBatteryPackCurrent);
             pod.setHvBatteryPackVoltage(hvBatteryPackVoltage);
             pod.setHvBatteryPackMaxCellVoltage(hvBatteryPackMaxCellVoltage);
