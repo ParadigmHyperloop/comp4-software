@@ -42,7 +42,10 @@ int main( int32_t argc, char** argv)
     PodNetwork sPodNetworkValues = {};
     PodValues sPodValues;
 
+
     // Network Configs
+    initializer->updatePodNetworkValues(sPodNetworkValues, flightConfig, controlLaptopAddr);
+    /*
     string cNodeIpAddrs[] = {"127.0.0.1"};
     sPodNetworkValues.cNodeIpAddrs.assign(begin(cNodeIpAddrs), end(cNodeIpAddrs)); // Node IPs
 
@@ -57,6 +60,7 @@ int main( int32_t argc, char** argv)
     sPodNetworkValues.strPdsIpAddr = "127.0.0.1"; // Ip Addr of PDS.
 
     sPodNetworkValues.iActiveNodes[0] = 1; // Set brake node active
+     */
 
 
     //Pod Internal Network Thread
@@ -69,14 +73,14 @@ int main( int32_t argc, char** argv)
     Pod pCoreControlLoop = Pod(&sPodValues, &sPodNetworkValues);
     pCoreControlLoop.bWritePodState = true;
     std::thread tControlLoop(coreControlLoop, pCoreControlLoop);
-/*
+
 	// Controls Interface Connection Thread
 	Pod pCommanderThread = Pod(&sPodValues, &sPodNetworkValues);
 	pCommanderThread.bWriteManualStates = 1;
 	pCommanderThread.bWriteControlsInterfaceState = 1;
 	std::thread tControlsInterfaceConnection(commanderThread, pCommanderThread);
-*/
-//	tControlsInterfaceConnection.join();
+
+	tControlsInterfaceConnection.join();
 
     tControlLoop.join();
 
