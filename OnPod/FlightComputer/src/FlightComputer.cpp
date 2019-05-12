@@ -47,8 +47,10 @@ int main(int32_t argc, char **argv) {
     sPodNetworkValues.iNodeTimeoutMili = 3000;
     sPodNetworkValues.iBrakeNodeServerPortNumber = 5555; // Port # to receive UDP from Nodes
 
-    sPodNetworkValues.iCommaderTimeoutMili = 30000; // Timeout for heartbeat to Control Interface
-    sPodNetworkValues.iCommanderPortNumber = 5005; //Port # for TCP Commander
+    sPodNetworkValues.iCommaderTimeoutMili = 400000; // Timeout for heartbeat to Control Interface
+
+
+    sPodNetworkValues.iCommanderPortNumber = 5007; //Port # for TCP Commander
 
     sPodNetworkValues.iPdsTelemeteryPort = 6000; // Port # to send telemetry
     sPodNetworkValues.strPdsIpAddr = "127.0.0.1"; // Ip Addr of PDS.
