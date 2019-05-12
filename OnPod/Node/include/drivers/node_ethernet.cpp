@@ -1,14 +1,16 @@
-#include "ethernet.h"
+#include "node_ethernet.h"
 
-UDPClass::UDPClass(IPAddress NODE_IP, uint16_t NODE_PORT, uint8_t NODE_TYPE):
-    NODE_IP(NODE_IP),
-    NODE_PORT(NODE_PORT),
-    NODE_TYPE(NODE_TYPE)
+UDPClass::UDPClass(uint8_t uSSPin, IPAddress nodeIP, uint16_t uNodePort,
+                    uint8_t eNodeType) :
+    SS_PIN(uSSPin),
+    NODE_IP(nodeIP),
+    NODE_PORT(uNodePort),
+    NODE_TYPE(eNodeType)
     {}
 
 void UDPClass::init() {
-    uint8_t uMac[] = {NODE_TYPE, 0xFF, 0xFF, 0xFF, 0xFF};
-    Ethernet.init(ETHERNET_SS_PIN);
+    uint8_t uMac[] = {0xDE, 0xFF, 0xFF, 0xFF, NODE_TYPE};
+    Ethernet.init(SS_PIN);
     Ethernet.begin(uMac, NODE_IP);
     // blocks until W5500 responds and an ethernet cable is connected
     while (Ethernet.linkStatus() == LinkOFF ||
@@ -23,7 +25,8 @@ bool UDPClass::readPacket() {
     if (!Udp.available()) {
         return false;  // return false if no data is available
     }
-    Udp.read(cRecvBuffer, BUFFER_SIZE);  // read a packet into the receive buffer
+    memset(uRecvBuffer, 0, RX_BUFFER_SIZE); // zero the receive buffer
+    Udp.read(uRecvBuffer, RX_BUFFER_SIZE);  // read a packet into the receive buffer
     return true;
 }
 
@@ -32,11 +35,10 @@ bool UDPClass::sendPacket(IPAddress ipDestinationIP, uint16_t uDestinationPort,
     if (!Udp.beginPacket(ipDestinationIP, uDestinationPort)) {
         return false; // return false if there was an error resolving the IP or port
     }
-    Udp.write(cSendBuffer, uMessageLength);
-    memset(cSendBuffer, 0, BUFFER_SIZE);
+    Udp.write(uSendBuffer, uMessageLength);
+    memset(uSendBuffer, 0, TX_BUFFER_SIZE);
     if (!Udp.endPacket()) {
         return false; // return false if there was an error sending the packet
     }
-
     return true;
 }
