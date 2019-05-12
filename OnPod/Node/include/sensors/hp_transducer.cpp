@@ -9,6 +9,6 @@ void U5374::init() {
 }
 
 float U5374::read() {
-    uint16_t uAdcConversion = adc->uAdcData[uAdcChannel];
+    uint16_t uAdcConversion = adc->getuAdcData()[uAdcChannel];
     return (uAdcConversion);
 }

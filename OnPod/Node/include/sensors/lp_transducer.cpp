@@ -9,6 +9,6 @@ void U5244::init() {
 }
 
 float U5244::read() {
-    uint16_t uAdcConversion = adc->uAdcData[uAdcChannel];
+    uint16_t uAdcConversion = adc->getuAdcData()[uAdcChannel];
     return (uAdcConversion/4096*5-1)*50;
 }
