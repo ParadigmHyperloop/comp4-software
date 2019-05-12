@@ -35,9 +35,6 @@ Testing/NodeSimulator/__pycache__/
 *.gcc-flags.json
 
 
-*.pb.h
-*.pb.cc
-*_pb2.py
 OnPod/FlightComputer/Host/src/
 
 OnPod/FlightComputer/BeagleBone/src/
@@ -54,4 +51,6 @@ OnPod/FlightComputer/myeasylog\.log
 OnPod/FlightComputer/build/
 
 OnPod/Node/DynamicTestStand/include
+OnPod/Node/RearNode/include
+
 ProtoBufs/UpdateNanoPbProtos.sh
