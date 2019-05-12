@@ -190,7 +190,7 @@ message telemetry {
 }
 
 // flight computer to DTS node
-message fcToBrakeNode {
+message FcToBrakeNode {
     optional PodStates podState = 1;
     optional BrakeNodeStates manualNodeState = 2;
 }
@@ -204,6 +204,14 @@ message DtsNodeToFc {
     required float pneumaticTemperature = 5 [default = 0];
     required float tankPressure = 6 [default = 0];
     required float brakePressure = 7 [default = 0];
+}
+
+message RearNodeToFc {
+    required float tubePressure = 1 [default = 0];
+    required float coolantPressure1 = 2 [default = 0];
+    required float coolantPressure2 = 3 [default = 0];
+    required float coolantPressure3 = 4 [default = 0];
+    required float coolantTemperature = 5 [default = 0];
 }
 
 message flightConfig {
