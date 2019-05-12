@@ -12,10 +12,11 @@
 #include "drivers/solenoid.h"
 
 #include "Paradigm.pb.h"
-#include "drivers/ethernet.h"
+#include "drivers/node_ethernet.h"
 
 // instantiate adc and all sensors with which it interfaces
-ADS7953 adc;
+SPIClass adcSPI (&PERIPH_SPI1, MISO1, SCK1, MOSI1, PAD_SPI1_TX, PAD_SPI1_RX);
+ADS7953 adc(adcSPI);
 OS101E rotorTempSensor (&adc, 15);
 typeKThermo pneumaticTempSensor (&adc, 1);
 U5374 tankTransducer (&adc, 7);
@@ -27,7 +28,7 @@ Solenoid brakeSolenoid (&solenoidDriver, 3);
 Solenoid ventSolenoid (&solenoidDriver, 4);
 
 // instantiate a UDP class and protobuf message objects
-UDPClass udp (IPAddress(192, 168, 2, 50), 5555, 0);
+UDPClass udp (PIN_SPI_SS, IPAddress(192, 168, 2, 50), 5555, 0);
 FcToBrakeNode pFcCommand = FcToBrakeNode_init_default;
 DtsNodeToFc pBrakeNodeTelemetry = DtsNodeToFc_init_default;
 
@@ -49,7 +50,7 @@ void setup() {
 void loop() {
     // check for incoming telemetry and set the state accordingly (unless error)
     if (udp.readPacket() && (dtsState != BrakeNodeStates_bnsError)) {
-        pb_istream_t inStream = pb_istream_from_buffer(udp.cRecvBuffer, sizeof(udp.cRecvBuffer));
+        pb_istream_t inStream = pb_istream_from_buffer(udp.uRecvBuffer, sizeof(udp.uRecvBuffer));
         pb_decode(&inStream, FcToBrakeNode_fields, &pFcCommand);
         if (pFcCommand.has_manualNodeState) {
             dtsState = pFcCommand.manualNodeState;
@@ -90,7 +91,7 @@ void loop() {
     pBrakeNodeTelemetry.tankPressure = tankTransducer.read();
 
     // send the latest values to the flight computer
-    pb_ostream_t outStream = pb_ostream_from_buffer(udp.cSendBuffer, sizeof(udp.cSendBuffer));
+    pb_ostream_t outStream = pb_ostream_from_buffer(udp.uSendBuffer, sizeof(udp.uSendBuffer));
     pb_encode(&outStream, DtsNodeToFc_fields, &pBrakeNodeTelemetry);
     udp.sendPacket(IPAddress(192, 168, 2, 27), 5555, outStream.bytes_written);
 
