@@ -52,5 +52,6 @@ OnPod/FlightComputer/build/
 
 OnPod/Node/DynamicTestStand/include
 OnPod/Node/RearNode/include
+Testing/SingleCellTesting/Node/include
 
 ProtoBufs/UpdateNanoPbProtos.sh
