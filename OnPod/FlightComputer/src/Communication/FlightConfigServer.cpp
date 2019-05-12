@@ -9,7 +9,7 @@
 #include <string>
 #include <string.h>
 
-#include "ProtoBuffer/Paradigm.pb.h"
+#include "Paradigm.pb.h"
 #include "FlightConfigServer.h"
 
 FlightConfigServer* FlightConfigServer::_configServer = NULL;

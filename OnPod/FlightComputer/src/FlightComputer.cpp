@@ -1,25 +1,16 @@
 #include <stdio.h>
 #include <thread>
 #include <fstream>
-
-
 #include <iostream>
-//Logging System
-
-
-#include "EasyLogger/easylogging++.h"
-
+#include "Common.h"
 INITIALIZE_EASYLOGGINGPP
 
 
-
-#include "Network.h"
-#include "nodeSim.h"
-#include "Pod.h"
-#include "CoreControl.h"
-#include "Helpers/FileHelper.h"
+#include "CoreControlThread.h" //todo make this a thread file
 #include "FlightComputerInitializer.h"
-#include "Communication/FlightConfigServer.h"
+#include "FlightConfigServer.h"
+#include "CommanderThread.h"
+#include "UdpTelemetryThread.h"
 #include "Constants/Constants.h"
 
 using namespace std;
@@ -31,8 +22,6 @@ int main( int32_t argc, char** argv)
 	initializer->importLoggerLibrary();
 
 	LOG(INFO)<<"Main Thread is Started";
-	LOG(INFO)<< std::thread::hardware_concurrency();
-
 	FlightConfigServer* configServer = FlightConfigServer::getServer(NetworkConstants::iCONFIG_SERVER_PORT);
 	flightConfig flightConfig;
     char controlLaptopAddr[NI_MAXHOST];
@@ -77,6 +66,6 @@ int main( int32_t argc, char** argv)
 //    tControlLoop.join();
     tCanManager.join();
 //    tServer.join();
-
+*/
     return 0;
 }

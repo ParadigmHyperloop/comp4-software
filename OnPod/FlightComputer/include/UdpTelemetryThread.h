@@ -1,8 +1,8 @@
 #ifndef FLIGHTCOMPUTER_UDPTELEMETRYTHREAD_H
 #define FLIGHTCOMPUTER_UDPTELEMETRYTHREAD_H
 
-#include "FlightComputer/Common.h"
-#include "FlightComputer/UdpConnection.h"
+#include "Common.h"
+#include "UdpConnection.h"
 
 UdpConnection *getBrakeNodeConnection(Pod);
 

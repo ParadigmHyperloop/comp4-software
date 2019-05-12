@@ -15,9 +15,9 @@
 #include <cstdio>
 #include <cstring>
 
-#include "FlightComputer/NetworkHelpers.h"
-#include "FlightComputer/Common.h"
-#include "EasyLogger/easylogging++.h"
+#include "NetworkHelpers.h"
+#include "Common.h"
+
 
 int CanThread(Pod);
 

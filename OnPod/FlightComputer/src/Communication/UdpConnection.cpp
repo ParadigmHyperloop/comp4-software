@@ -1,4 +1,5 @@
-#include "FlightComputer/UdpConnection.h"
+#include "UdpConnection.h"
+#include "Common.h"
 
 
 UdpConnection::UdpConnection(Pod pod){

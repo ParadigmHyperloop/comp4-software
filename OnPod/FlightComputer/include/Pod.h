@@ -1,7 +1,7 @@
-#ifndef POD_H
-#define POD_H
+#ifndef FLIGHTCOMPUTER_POD_H
+#define FLIGHTCOMPUTER_POD_H
 
-#include "structs.h"
+#include "Structs.h"
 
 class Pod
 {
@@ -41,19 +41,30 @@ class Pod
 		void setManualLvdcNodeState(LvdcNodeStates);
 		void setManualPodState(PodStates);
 
+		// High Voltage
+		void setHvBatteryPackVoltage(float fValue);
+        float getHvBatteryPackVoltage();
+        void setHvBatteryPackCurrent(float fValue);
+        float getHvBatteryPackCurrent();
+        void setHvBatteryPackMinimumCellVoltage(float value);
+        float getHvBatteryPackMinimumCellVoltage();
+        void setHvBatteryPackMaxCellVoltage(float);
+        float getHvBatteryPackMaxCellVoltage();
+
+
+
 		// Permissions
 		bool bWritePodState = 0;
 		bool bWriteControlsInterfaceState = 0;
 		bool bWriteMotorState = 0;
 		bool bWriteBreakNodeState = 0;
-		bool bWritePosition = 0;
-		bool bWriteDistance = 0;
-		bool bWriteVelocity = 0;
-		bool bWriteFlagsArray = 0;
-		bool bWriteTubePressure = 0;
-		bool bWriteBrakeNode = 0;
 		bool bWriteManualStates = 0;
+		bool bWriteHighVoltage = 0;
+
+
+
+
 
 };
 
-#endif
+#endif //FLIGHTCOMPUTER_POD_H

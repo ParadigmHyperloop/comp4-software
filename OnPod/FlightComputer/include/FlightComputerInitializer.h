@@ -1,7 +1,7 @@
 #ifndef FLIGHTCOMPUTER_FLIGHTCOMPUTERINITIALIZER_H
 #define FLIGHTCOMPUTER_FLIGHTCOMPUTERINITIALIZER_H
 
-#include "structs.h"
+#include "Structs.h"
 class FlightComputerInitializer {
 
 private:

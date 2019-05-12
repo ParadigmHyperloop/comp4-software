@@ -1,7 +1,7 @@
 #include "FlightComputerInitializer.h"
-#include "EasyLogger/easylogging++.h"
-#include "Helpers/FileHelper.h"
+#include "FileHelper.h"
 #include "Constants/Constants.h"
+#include "Common.h"
 
 
 FlightComputerInitializer* FlightComputerInitializer::_flightComputerInitializer = NULL;

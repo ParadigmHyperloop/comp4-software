@@ -1,6 +1,6 @@
-#include "FlightComputer/Common.h"
-#include "FlightComputer/UdpTelemetryThread.h"
-#include <FlightComputer/NetworkHelpers.h>
+#include "Common.h"
+#include "UdpTelemetryThread.h"
+#include <NetworkHelpers.h>
 
 
 

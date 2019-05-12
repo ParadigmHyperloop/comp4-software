@@ -1,8 +1,7 @@
 #include <cerrno>
-
-#include "Network.h"
-#include "EasyLogger/easylogging++.h"
-#include "ProtoBuffer/Paradigm.pb.h"
+#include "NetworkHelpers.h"
+#include "CommanderThread.h"
+#include "Common.h"
 #include "Heartbeat.h"
 
 // Get manual state change commands. Get Estop command

@@ -2,9 +2,9 @@
 #define FLIGHTCOMPUTER_UDPCONNECTION_H
 
 
-#include "FlightComputer/Heartbeat.h"
-#include "EasyLogger/easylogging++.h"
-#include <FlightComputer/NetworkHelpers.h>
+#include "Heartbeat.h"
+#include "Common.h"
+#include <NetworkHelpers.h>
 
 /**
  *

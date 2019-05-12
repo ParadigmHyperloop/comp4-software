@@ -1,6 +1,4 @@
-#include "structs.h"
-#include "Pod.h"
-#include "CoreControl.h"
+#include "CoreControlThread.h"
 
 
 //template allowableStates

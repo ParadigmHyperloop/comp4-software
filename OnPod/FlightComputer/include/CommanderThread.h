@@ -3,7 +3,7 @@
 
 #endif //FLIGHTCOMPUTER_COMMANDER_H
 
-#include "FlightComputer/Common.h"
+#include "Common.h"
 
 int32_t createCommanderServerSocket(int32_t iPortNumber);
 

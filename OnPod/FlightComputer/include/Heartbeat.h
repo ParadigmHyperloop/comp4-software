@@ -1,10 +1,8 @@
-#include "FlightComputer/Common.h"
-
 #ifndef FLIGHTCOMPUTER_HEATBEAT_H
 #define FLIGHTCOMPUTER_HEATBEAT_H
 
 
-
+#include "Common.h"
 class Heartbeat{
 public:
 	explicit Heartbeat(int32_t timeoutMilis);

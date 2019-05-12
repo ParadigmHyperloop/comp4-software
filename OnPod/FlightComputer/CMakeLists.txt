@@ -4,9 +4,10 @@ project(FlightComputer)
 set(CMAKE_CXX_STANDARD 14)
 
 include_directories(libs/EasyLogger)
-include_directories(libs/FlightComputer)
 include_directories(libs/ProtoBuffer)
-include_directories(libs)
+include_directories(include)
+include_directories(include/ProtoBuffer)
+
 
 file(GLOB_RECURSE HEADERS "libs/*.h")
 file(GLOB SOURCES "src/*.c*")
@@ -33,7 +34,7 @@ if (THREADS_HAVE_PTHREAD_ARG)
     target_compile_options(FlightComputer PUBLIC "-pthread")
 endif ()
 
-add_executable(FlightComputer ${SOURCES}  ${PROTO_HDRS} src/Helpers/FileHelper.cpp src/Helpers/FileHelper.h src/FlightComputerInitializer.cpp src/FlightComputerInitializer.h src/Communication/FlightConfigServer.cpp src/Communication/FlightConfigServer.h src/Constants/Constants.h)
+add_executable(FlightComputer ${SOURCES}  ${PROTO_HDRS})
 
 target_link_libraries(FlightComputer ${Protobuf_LIBRARIES})
 

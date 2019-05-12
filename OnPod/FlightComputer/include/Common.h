@@ -2,9 +2,10 @@
 #define FLIGHTCOMPUTER_COMMON_H
 
 
-#include "FlightComputer/Pod.h"
-#include "ProtoBuffer/Paradigm.pb.h"
-#include "EasyLogger/easylogging++.h"
+#include "Pod.h"
+#include "Paradigm.pb.h"
+#include "easylogging++.h"
+#include "Structs.h"
 
 #include <unistd.h>
 #include <stdlib.h>

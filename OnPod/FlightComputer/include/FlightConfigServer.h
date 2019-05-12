@@ -1,7 +1,7 @@
 #ifndef FLIGHTCOMPUTER_FLIGHTCONFIGSERVER_H
 #define FLIGHTCOMPUTER_FLIGHTCONFIGSERVER_H
 
-#include "../Constants/Constants.h"
+#include "../src/Constants/Constants.h"
 
 /*
  * FlightConfigServer:
