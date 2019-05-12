@@ -157,8 +157,8 @@ void BrakeNodeConnection::setConnectionStatus(bool status){
 
 google::protobuf::Message* BrakeNodeConnection::getProtoUpdateMessage() {
     auto protoMessage = new FcToBrakeNode();
-    protoMessage->set_podstate(psArmed);
-    protoMessage->set_manualnodestate(bnsArmed);
+    protoMessage->set_podstate(this->pod.sPodValues->podState);
+    protoMessage->set_manualnodestate(this->pod.sPodValues->manualBrakeNodeState);
     return protoMessage;
 }
 

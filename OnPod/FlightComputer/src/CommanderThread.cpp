@@ -37,8 +37,8 @@ void parseProtoCommand(podCommand podCommand, Pod *Pod) {
         Pod->setAutomaticTransitions(podCommand.automaticstatetransitions());
     }
     if (podCommand.has_manualbrakenodestate()) {
-        Pod->setManualBrakeNodeState(podCommand.manualbrakenodestate());
         LOG(INFO) << podCommand.manualbrakenodestate();
+        Pod->setManualBrakeNodeState(podCommand.manualbrakenodestate());
     }
     if (podCommand.has_manuallvdcnodestate()) {
         Pod->setManualLvdcNodeState(podCommand.manuallvdcnodestate());
