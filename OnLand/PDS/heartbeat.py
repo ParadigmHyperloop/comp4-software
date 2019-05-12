@@ -33,18 +33,15 @@ podMessage.controlsInterfaceState = ciFlight
 
 
 def main():
-    print(POD_IP, POD_COMMANDER_PORT)
     pod = PodTcpConnection(ip=POD_IP, port=POD_COMMANDER_PORT)
     timer = HeartbeatTimer()
 
     while not pod.is_connected():
         time.sleep(1)
-        print("attempting to reconnect...")
-        pod.connect()
+        if pod.connect():
+            timer.pulse()
 
         while pod.is_connected():
-            print('connected!')
-
             # Send a packets every PULSE_SPEED milliseconds.
             if timer.time_since_pulse() > COMMANDER_PULSE_SPEED:
                 pod.send_packet(podMessage.SerializeToString())
@@ -52,16 +49,18 @@ def main():
                 # Receive Packet
                 while timer.time_since_pulse() > COMMANDER_PULSE_SPEED and pod.is_connected():
                     msg = pod.receive()
-                    print("message:", msg)
+                    # print("message:", msg)
                     if not msg:
                         if timer.time_since_pulse() > COMMANDER_TIMEOUT_TIME:
                             pod.close()
                         elif timer.time_since_pulse() > COMMANDER_BACKUP_PULSE:
                             pod.send_packet(podMessage.SerializeToString())
-                            print("Sent packet!")
+                            print("Sent backup packet!")
                     else:  # Msg received
+                        print(msg)
                         sio.emit('ping', 1)
                         timer.pulse()
+                        break
         # Connection lost, tell GUI
         sio.emit('ping', 0)
 

@@ -1,6 +1,7 @@
 import socket
 import time
 import random
+from PDS.config import *
 from PDS.UDP.Paradigm_pb2 import *
 
 
@@ -15,26 +16,31 @@ def create_telem(packet):
   
 
 def main():
-    #sudp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sudp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
     stcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    stcp.bind(("127.0.0.1", 4500))
+    stcp.bind(("127.0.0.1", POD_COMMANDER_PORT))
     stcp.listen()
     conn, addr = stcp.accept()
     print(conn, addr)
     
+    
+    data = bytearray(1)
     pod_data = telemetry()
 
     while(1):
         create_telem(pod_data)
-        #sudp.sendto(pod_data.SerializeToString(), ("127.0.0.1", 4000))
+        sudp.sendto(pod_data.SerializeToString(), ("127.0.0.1", 4000))
         
-        stcp.sendall(pod_data.SerializeToString())
-        data = stcp.recv(1024)
-        print("recved:", data)
+        data = conn.recv(1024)
 
-        time.sleep(2)
-
+        if data:
+          print("recved:", data)
+          conn.send(b'1')
+        
+        time.sleep(1)
+    
+    stcp.close()
 
 if __name__ == "__main__":
     try:

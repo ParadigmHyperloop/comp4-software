@@ -25,6 +25,7 @@ class PodTcpConnection:
             self._sock.connect((self._pod_ip,self._pod_port))
         except ConnectionRefusedError:
             # No connection
+            self.close()
             return False
         except Exception as e:
             self.close()
@@ -44,8 +45,8 @@ class PodTcpConnection:
             except socket.EAGAIN:
                 select.select([], [self._sock], [])  # This blocks until the whole message is sent
             except Exception as e:
+                #todo log this or send to front end
                 self.close()
-                raise e
 
     def is_connected(self):
         return self._connected
