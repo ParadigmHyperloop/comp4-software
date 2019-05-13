@@ -1,8 +1,8 @@
 import socket
 import Paradigm_pb2
 
-# HOST = '127.0.0.1'
-HOST = '192.168.0.24'
+HOST = '127.0.0.1'
+#HOST = '192.168.0.24'
 PORT = 3001
 
 flight_config = Paradigm_pb2.flightConfig()

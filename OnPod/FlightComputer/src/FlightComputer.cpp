@@ -24,7 +24,7 @@ int main( int32_t argc, char** argv)
 	LOG(INFO)<<"Main Thread is Started";
 	FlightConfigServer* configServer = FlightConfigServer::getServer(NetworkConstants::iCONFIG_SERVER_PORT);
 	flightConfig flightConfig;
-    char controlLaptopAddr[NI_MAXHOST];
+    char controlLaptopAddr[NI_MAXHOST] = {0};
     try {
         flightConfig = (*configServer)(controlLaptopAddr);
     } catch (...)
@@ -39,12 +39,12 @@ int main( int32_t argc, char** argv)
 
     // Network Configs
     initializer->updatePodNetworkValues(sPodNetworkValues, flightConfig, controlLaptopAddr);
-
+/*
     //Pod Internal Network Thread
     Pod pPodInternalNetwork = Pod(&sPodValues, &sPodNetworkValues);
     pPodInternalNetwork.bWriteBreakNodeState = true;
     std::thread tServer(udpTelemetryThread, pPodInternalNetwork);
-
+*/
     /*
     // Core Control Loop Thread
     Pod pCoreControlLoop = Pod(&sPodValues, &sPodNetworkValues);
@@ -59,13 +59,13 @@ int main( int32_t argc, char** argv)
 */
 //	tControlsInterfaceConnection.join();
 
-    tControlLoop.join();
+   // tControlLoop.join();
 
 
 //	tControlsInterfaceConnection.join();
 //    tControlLoop.join();
-    tCanManager.join();
+  //  tCanManager.join();
 //    tServer.join();
-*/
+int i;
     return 0;
 }
