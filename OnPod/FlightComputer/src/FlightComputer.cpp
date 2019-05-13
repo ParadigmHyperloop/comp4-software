@@ -62,7 +62,8 @@ int main( int32_t argc, char** argv)
    // tControlLoop.join();
 
 
-//	tControlsInterfaceConnection.join();
+
+	tControlsInterfaceConnection.join();
 //    tControlLoop.join();
   //  tCanManager.join();
 //    tServer.join();
