@@ -5,7 +5,7 @@
 #include <netdb.h>
 #include <arpa/inet.h>
 
-#include "EasyLogger/easylogging++.h"
+#include "easylogging++.h"
 #include <string>
 #include <string.h>
 
@@ -112,7 +112,7 @@ flightConfig FlightConfigServer::operator()(char* controlLaptopAddr)
         config.ParseFromString(receivedConfig);
         // TODO: Send back response
     }
-    char *SUCCESS_RECEIVE_CONFIG_RESPONSE = "OK";
+    const char* SUCCESS_RECEIVE_CONFIG_RESPONSE = "OK";
     send(clientSocket,
             SUCCESS_RECEIVE_CONFIG_RESPONSE,
             strlen(SUCCESS_RECEIVE_CONFIG_RESPONSE),

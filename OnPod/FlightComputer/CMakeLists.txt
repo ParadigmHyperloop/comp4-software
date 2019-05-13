@@ -10,7 +10,7 @@ include_directories(include/ProtoBuffer)
 
 
 file(GLOB_RECURSE HEADERS "libs/*.h")
-file(GLOB SOURCES "src/*.c*")
+file(GLOB_RECURSE SOURCES "src/*.c*")
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 

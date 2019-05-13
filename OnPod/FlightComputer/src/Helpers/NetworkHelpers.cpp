@@ -1,5 +1,5 @@
 #include <NetworkHelpers.h>
-#include "EasyLogger/easylogging++.h"
+#include "easylogging++.h"
 #include <cerrno>
 
 using namespace std;
