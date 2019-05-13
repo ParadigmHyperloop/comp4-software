@@ -37,8 +37,8 @@ void parseProtoCommand(podCommand podCommand, Pod *Pod) {
         Pod->setAutomaticTransitions(podCommand.automaticstatetransitions());
     }
     if (podCommand.has_manualbrakenodestate()) {
-        Pod->setManualBrakeNodeState(podCommand.manualbrakenodestate());
         LOG(INFO) << podCommand.manualbrakenodestate();
+        Pod->setManualBrakeNodeState(podCommand.manualbrakenodestate());
     }
     if (podCommand.has_manuallvdcnodestate()) {
         Pod->setManualLvdcNodeState(podCommand.manuallvdcnodestate());
@@ -53,7 +53,7 @@ int32_t unserializeProtoMessage(Pod *Pod, char buffer[], int32_t messageSize) {
     podCommand pPodCommand;
     bool operationStatus;
 
-   operationStatus = pPodCommand.ParseFromArray(buffer, messageSize);
+    operationStatus = pPodCommand.ParseFromArray(buffer, messageSize);
     if (operationStatus) {
         parseProtoCommand(pPodCommand, Pod);
         LOG(INFO) << "Command/HeartBeat Received";

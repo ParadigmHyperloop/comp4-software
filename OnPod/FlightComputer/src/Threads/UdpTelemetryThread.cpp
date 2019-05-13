@@ -1,6 +1,6 @@
 #include "Common.h"
 #include "UdpTelemetryThread.h"
-#include <NetworkHelpers.h>
+
 
 
 
@@ -76,7 +76,7 @@ int32_t udpTelemetryThread(Pod Pod) {
             try {
                 node->giveUpdate();
                 node->getUpdate();
-                std::this_thread::sleep_for(std::chrono::milliseconds(50));
+                std::this_thread::sleep_for(std::chrono::milliseconds(30));
             }
             catch (std::runtime_error &e) {
                 LOG(INFO) << e.what();

@@ -3,6 +3,7 @@
 
 #include "Common.h"
 #include "UdpConnection.h"
+#include <NetworkHelpers.h>
 
 UdpConnection *getBrakeNodeConnection(Pod);
 
