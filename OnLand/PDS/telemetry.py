@@ -30,7 +30,6 @@ def main():
     while udp_socket.is_connected():
         data = udp_socket.recv(timedelta(seconds=UDP_TELEM_TIMEOUT))
         if data is not None:
-            print("asdf")
             pod_data = telemetry()
             pod_data.ParseFromString(data)
             json_pod_data = json_format.MessageToJson(pod_data)

@@ -27,12 +27,11 @@ def on_command(command):
         podMessage.manualBrakeNodeState = bnsStandby
 
 
-sio.connect('http://localhost:5000')
-podMessage = podCommand()
-podMessage.controlsInterfaceState = ciFlight
-
-
 def main():
+    sio.connect('http://localhost:5000')
+    podMessage = podCommand()
+    podMessage.controlsInterfaceState = ciFlight
+  
     pod = PodTcpConnection(ip=POD_IP, port=POD_COMMANDER_PORT)
     timer = HeartbeatTimer()
 
