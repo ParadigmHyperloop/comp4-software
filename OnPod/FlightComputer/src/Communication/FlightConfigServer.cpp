@@ -17,7 +17,6 @@ FlightConfigServer *FlightConfigServer::_configServer = NULL;
 FlightConfigServer::FlightConfigServer(int listeningPort)
         : _port(listeningPort) {
     LOG(INFO) << "Creating FlightConfigServer Instance";
-
 }
 
 FlightConfigServer *FlightConfigServer::getServer(int32_t port) {
@@ -31,8 +30,8 @@ flightConfig FlightConfigServer::operator()(char *controlLaptopAddr) {
     this->_listenerSocketID = socket(AF_INET, SOCK_STREAM, 0);
     if (this->_listenerSocketID == -1) {
         //todo throw runtime error with string
-        LOG(ERROR) << "Failed to pod initlizer create socket" << std::strerror(errno);
-        throw;
+        std::string error = std::string("Failed to pod initlizer create socket") + std::strerror(errno);
+        throw std::runtime_error(error);
     }
 
     // Bind socket to IP/PORT
@@ -42,31 +41,28 @@ flightConfig FlightConfigServer::operator()(char *controlLaptopAddr) {
     inet_pton(AF_INET, "0.0.0.0", &serverSockAddr.sin_addr);
 
     if (bind(this->_listenerSocketID, (struct sockaddr *) &serverSockAddr, sizeof(serverSockAddr)) == -1) {
-        LOG(ERROR) << "Cant Bind to IP/PORT" << std::strerror(errno);
-        throw;
+        std::string strError = std::string("Error: Binding Config Server Port:  ") + std::strerror(errno);
+        throw std::runtime_error(strError);
     }
 
     // make socket listen
     if (listen(this->_listenerSocketID, SOMAXCONN) == -1) {
-        LOG(ERROR) << "Listen socket cannot listen " << errno;
-        throw;
+        std::string strError = std::string("Error: Config server on listen():  ") + std::strerror(errno);
+        throw std::runtime_error(strError);
     }
 
-    // Accept connections:
     sockaddr_in clientSockAddr;
     socklen_t clientSize = sizeof(clientSockAddr);
 
     // Buffers to put host and clientPort in
     char clientPort[NI_MAXSERV] = {0};
-
     int clientSocket = accept(this->_listenerSocketID, (struct sockaddr *) &clientSockAddr, &clientSize);
     if (clientSocket == -1) {
-        LOG(ERROR) << "Problem Occurred with Client Socket" << errno;
-        throw;
+        std::string strError = std::string("Problem Occurred with Client Socket") + std::strerror(errno);
+        throw std::runtime_error(strError);
     }
+
     close(this->_listenerSocketID);
-
-
     int32_t iResult = getnameinfo((sockaddr *) &clientSockAddr, clientSize, controlLaptopAddr, NI_MAXHOST, clientPort,
                                   NI_MAXSERV, 0);
 
@@ -85,15 +81,16 @@ flightConfig FlightConfigServer::operator()(char *controlLaptopAddr) {
         if (iBytesReceived > 0 ) {
             std::string receivedConfig = buf;
             if(config.ParseFromString(receivedConfig)){
-                LOG(INFO) << "Parsed config";
+                LOG(INFO) << "Flight Configuration Successfully Received";
             }
             else{
-                //todo failed to parse proto throw error and close socket
+                std::string strError = std::string("Failed to Parse Configuration Protobuf");
+                throw std::runtime_error(strError);
             }
             break;
         } else if (iBytesReceived == 0){
-            LOG(INFO) << "The client disconnected";
-            break;
+            std::string strError = std::string("Flight Configuration client disconnected before sending");
+            throw std::runtime_error(strError);
         }
     }
     const char *SUCCESS_RECEIVE_CONFIG_RESPONSE = "OK";

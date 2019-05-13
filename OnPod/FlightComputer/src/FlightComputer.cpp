@@ -39,34 +39,35 @@ int main( int32_t argc, char** argv)
 
     // Network Configs
     initializer->updatePodNetworkValues(sPodNetworkValues, flightConfig, controlLaptopAddr);
-/*
+
     //Pod Internal Network Thread
     Pod pPodInternalNetwork = Pod(&sPodValues, &sPodNetworkValues);
     pPodInternalNetwork.bWriteBreakNodeState = true;
     std::thread tServer(udpTelemetryThread, pPodInternalNetwork);
-*/
-    /*
+
+
     // Core Control Loop Thread
     Pod pCoreControlLoop = Pod(&sPodValues, &sPodNetworkValues);
     pCoreControlLoop.bWritePodState = true;
     std::thread tControlLoop(coreControlLoop, pCoreControlLoop);
-/*
+
 	// Controls Interface Connection Thread
 	Pod pCommanderThread = Pod(&sPodValues, &sPodNetworkValues);
 	pCommanderThread.bWriteManualStates = 1;
 	pCommanderThread.bWriteControlsInterfaceState = 1;
 	std::thread tControlsInterfaceConnection(commanderThread, pCommanderThread);
-*/
-//	tControlsInterfaceConnection.join();
-
-   // tControlLoop.join();
 
 
 
-// 	tControlsInterfaceConnection.join();
-//    tControlLoop.join();
-  //  tCanManager.join();
-//    tServer.join();
-int i;
+
+
+
+	tControlsInterfaceConnection.join();
+    tControlLoop.join();
+ 	tControlsInterfaceConnection.join();
+    tControlLoop.join();
+   // tCanManager.join();
+    tServer.join();
+    int i;
     return 0;
 }

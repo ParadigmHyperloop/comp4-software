@@ -42,10 +42,10 @@ void FlightComputerInitializer::updatePodNetworkValues(PodNetwork& podNetworkVal
     podNetworkValues.iNodeTimeoutMili = NetworkConstants::iNODE_TIMEOUT_MILI;
     podNetworkValues.iBrakeNodeServerPortNumber = NetworkConstants::iBRAKE_NODE_SERVER_PORT_NUMBER; // Port # to receive UDP from Nodes
 
-    podNetworkValues.iCommaderTimeoutMili = config.heartbeat_timeout(); // Timeout for heartbeat to Control Interface
-    podNetworkValues.iCommanderPortNumber = config.command_port(); //Port # for TCP Commander
+    podNetworkValues.iCommaderTimeoutMili = config.heartbeattimeout(); // Timeout for heartbeat to Control Interface
+    podNetworkValues.iCommanderPortNumber = config.commandport(); //Port # for TCP Commander
 
-    podNetworkValues.iPdsTelemeteryPort = config.telemetry_port(); // Port # to send telemetry
+    podNetworkValues.iPdsTelemeteryPort = config.pdstelemetryport(); // Port # to send telemetry
     podNetworkValues.strPdsIpAddr = std::string(controlLaptopAddr); // Ip Addr of PDS.
 
     podNetworkValues.iActiveNodes[0] = 1; // Set brake node active

@@ -212,14 +212,14 @@ message DtsNodeToFc {
 }
 
 message flightConfig {
-    required uint32 retrieval_timeout = 1;
-    required uint64 max_flight_time = 2;
-    required uint64 motor_speed = 3;
-    required int32 telemetry_port = 4;
-    required int32 command_port = 5;
-    required uint64 flight_length = 6;
-    required int32 heartbeat_timeout = 7;
-    required string pod_driver = 8;
+    optional uint32 retrievalTimeout = 1;
+    optional uint64 maxFlightTime = 2;
+    optional uint64 motorSpeed = 3;
+    optional int32 pdsTelemetryPort = 4 [default = 7000];
+    optional int32 commandPort = 5 [default = 6000];
+    optional uint64 flightLength = 6;
+    optional int32 heartbeatTimeout = 7 [default = 10000];
+    optional string podDriver = 8;
 }
 
 message defaultFcToNode {
