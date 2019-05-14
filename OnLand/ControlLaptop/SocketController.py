@@ -1,5 +1,5 @@
 import socket
-
+import logging as log
 from ControlLaptop import Paradigm_pb2
 from ControlLaptop.LocalStorage.ConfigurationSotrage import DEFAULT_CONFIGURATION
 
@@ -35,18 +35,18 @@ class PodCommunicator:
         try:
             self._pod_socket.connect((self._pod_address, PodConnectionConstants.POD_COMMAND_PORT))
         except socket.error as e:
-            print("Failed to Connect to Pod")
+            log.debug("Failed to Connect to Pod")
             raise e
-        print('Connected...')
+        log.debug('Connected...')
 
     def send_command(self, command):
         command_json = '{command: ' + command + '}'
-        print('sending: {command_json}')
+        log.debug('sending: {command_json}')
         try:
             self._pod_socket.sendall(command_json.encode())
             data = self._pod_socket.recv(1024)
         except socket.error as e:
-            print("Failed to send command")
+            log.debug("Failed to send command")
             self.shutdown()
             self._connect_to_pod()
 
@@ -69,7 +69,7 @@ class PodCommunicator:
         try:
             self._pod_socket.sendall(serialized_config)
         except socket.error as e:
-            print("Failed to send config")
+            log.debug("Failed to send config")
             return False
         return True
 

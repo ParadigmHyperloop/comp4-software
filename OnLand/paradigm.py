@@ -2,16 +2,21 @@ from ControlLaptop.controlLaptop import main as app
 from PDS.telemetry import main as telemetry
 from PDS.heartbeat import main as heartbeat
 from threading import Thread
+import logging as log
+
+log.basicConfig(filename='logs\paradigm.log', format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
 
 def main():
-    web_app = Thread(target=app)
-    telem = Thread(target=telemetry)
-    hb = Thread(target=heartbeat)
+    threads = [Thread(target=app), Thread(target=telemetry), Thread(target=heartbeat)]
 
-    web_app.start()
-    telem.start()
-    hb.start()
+    for t in threads:
+        t.start()
+
+    for t in threads:
+        t.join()
+
+    print("All threads haulted")
 
 
 if __name__ == "__main__":

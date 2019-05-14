@@ -1,27 +1,33 @@
 import socketio
-import logging
+import logging as log
 from datetime import timedelta
-from PDS.config import *
+from PDS.config import SOCKET_SERVER, POD_IP, UDP_TELEM_PORT, MAX_MESSAGE_SIZE, UDP_TELEM_TIMEOUT
 from PDS.UDP.PodUdpConnection import PodUdpConnection
-from PDS.UDP.Paradigm_pb2 import *
+from PDS.UDP.Paradigm_pb2 import telemetry
 from google.protobuf import json_format
 from google.protobuf.json_format import MessageToDict
 
+log.basicConfig(filename='logs\telemetry.log', format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+
+
 # Create socket to connect to server
 sio = socketio.Client()
+
+
 @sio.on('connect')
 def on_connect():
-    print("Telemetry Thread Connected to Server")
+    log.warning("Front End: Connected")
     sio.emit('connected', "telemetry")
 
 
 @sio.on('disconnect')
 def on_disconnect():
     sio.emit('telemetry_connection', '0')
-    print('I\'m disconnected!')
+    log.warning("Front End: Disconnected")
 
 
 def main():
+    log.warning("Telemetry Thread Started")
     sio.connect(SOCKET_SERVER)
     udp_socket = PodUdpConnection(POD_IP, UDP_TELEM_PORT, MAX_MESSAGE_SIZE)
     udp_socket.connect()
@@ -35,7 +41,7 @@ def main():
             json_pod_data = json_format.MessageToJson(pod_data)
             sio.emit('telemetry', json_pod_data)
             pod_data = MessageToDict(pod_data)
-            logging.debug("Recv {}".format(pod_data))
+            log.warning("Telemetry: {}".format(pod_data))
 
     udp_socket.close()
     sio.emit('telemetry_connection', '0')

@@ -1,5 +1,8 @@
+import logging as log
+import json
+import requests
 from datetime import datetime
-from flask import *
+from flask import Flask, redirect, render_template, jsonify
 from ControlLaptop.LocalStorage.ConfigurationSotrage import LocalStorage
 from ControlLaptop.LocalStorage.FlightConfig import FlightConfig
 from ControlLaptop.SocketController import PodCommunicator
@@ -14,7 +17,7 @@ with app.app_context():
     try:
         pod_communicator = PodCommunicator.get_pod_communicator()
     except Exception as e:
-        print("COULD NOT CONNECT TO POD")
+        log.info("COULD NOT CONNECT TO POD")
 
 # --------------------------------------------------------------
 # END SETUP
@@ -65,7 +68,7 @@ def submit_configuration():
 
 @app.route('/send_command', methods=["POST"])
 def send_command():
-    command = request.get_json()['command']
+    command = requests.get_json()['command']
     try:
         pod_communicator.send_command(command)
     finally:
@@ -123,5 +126,3 @@ def add_numbers():
     with open('ControlLaptop/LocalStorage/DtsSensors.json') as json_file:
         data = json_file.read().replace('\n', '')
     return data
-
-

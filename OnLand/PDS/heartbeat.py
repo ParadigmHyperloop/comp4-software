@@ -1,22 +1,28 @@
+import logging as log
 import socketio
 import time
-from PDS.UDP.Paradigm_pb2 import *
+from PDS.UDP.Paradigm_pb2 import podCommand, ciFlight, bnsBraking, bnsStandby
 from PDS.TCP.heartbeat_timer import HeartbeatTimer
 from PDS.TCP.PodTcpConnection import PodTcpConnection
-from PDS.config import *
+from PDS.config import COMMANDER_BACKUP_PULSE, COMMANDER_TIMEOUT_TIME, COMMANDER_PULSE_SPEED, POD_IP, POD_COMMANDER_PORT
+
+log.basicConfig(filename='logs\heartbeat.log', format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+
 
 # Create socket to connect to server
 sio = socketio.Client()
+
+
 @sio.on('connect')
 def on_connect():
-    print("Connected to Server")
+    log.warning("Front End: Connected")
     sio.emit('connected', "commander thread")
 
 
 @sio.on('disconnect')
 def on_disconnect():
     # Set the state to disconnected so that the pod knows?
-    print('I\'m disconnected!')
+    log.warning("Front End: Disconnected")
 
 
 @sio.on('command')
@@ -28,10 +34,11 @@ def on_command(command):
 
 
 def main():
+    log.warning("Heartbeat Thread Started")
     sio.connect('http://localhost:5000')
     podMessage = podCommand()
     podMessage.controlsInterfaceState = ciFlight
-  
+
     pod = PodTcpConnection(ip=POD_IP, port=POD_COMMANDER_PORT)
     timer = HeartbeatTimer()
 
@@ -42,26 +49,29 @@ def main():
 
         while pod.is_connected():
             # Send a packets every PULSE_SPEED milliseconds.
+            log.debug("Heartbeat: healthy")
             if timer.time_since_pulse() > COMMANDER_PULSE_SPEED:
                 pod.send_packet(podMessage.SerializeToString())
 
                 # Receive Packet
                 while timer.time_since_pulse() > COMMANDER_PULSE_SPEED and pod.is_connected():
                     msg = pod.receive()
-                    # print("message:", msg)
+                    log.debug("Heartbeat: Received - " + str(msg))
                     if not msg:
                         if timer.time_since_pulse() > COMMANDER_TIMEOUT_TIME:
+                            log.warning("Heartbeat: Timed out, after:" + str(timer.time_since_pulse()))
                             pod.close()
                         elif timer.time_since_pulse() > COMMANDER_BACKUP_PULSE:
+                            log.debug("Heartbeat: Sending backup packet")
                             pod.send_packet(podMessage.SerializeToString())
-                            print("Sent backup packet!")
                     else:  # Msg received
-                        print(msg)
                         sio.emit('ping', 1)
                         timer.pulse()
                         break
         # Connection lost, tell GUI
+        log.warning("Heartbeat: Lost")
         sio.emit('ping', 0)
+
 
 if __name__ == "__main__":
     try:
