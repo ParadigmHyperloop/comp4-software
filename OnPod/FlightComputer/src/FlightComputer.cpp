@@ -1,68 +1,55 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <thread>
 #include <fstream>
-
-
 #include <iostream>
-//Logging System
-
-#include "EasyLogger/easylogging++.h"
+#include "Common.h"
 INITIALIZE_EASYLOGGINGPP
 
 
-#include <FlightComputer/Network.h>
-#include "FlightComputer/nodeSim.h"
-#include "FlightComputer/Pod.h"
-#include "FlightComputer/CoreControl.h"
+#include "CoreControlThread.h" //todo make this a thread file
+#include "FlightComputerInitializer.h"
+#include "FlightConfigServer.h"
+#include "CommanderThread.h"
+#include "UdpTelemetryThread.h"
+#include "Constants/Constants.h"
 
 using namespace std;
 
 int main( int32_t argc, char** argv)
 {
-	// Logger
-	el::Helpers::setThreadName("main");
-	std::ifstream infile("/home/debian/logging.conf");
-	if(infile.good())
-	{
-		el::Configurations conf("/home/debian/logging.conf");
-		el::Loggers::reconfigureAllLoggers(conf);
+	// Initialize Logger Logger;
+	FlightComputerInitializer* initializer = FlightComputerInitializer::GetInstance();
+	initializer->importLoggerLibrary();
 
-	}
-	else
-	{
-		el::Configurations conf("/home/lwaghorn/Development/comp4-software/OnPod/FlightComputer/include/EasyLogger/logging.conf");
-		//el::Configurations conf("/Users/liamwaghorn/Development/comp4-software/OnPod/FlightComputer/include/EasyLogger/logging.conf");
-		el::Loggers::reconfigureAllLoggers(conf);
-	}
-	LOG(INFO)<<"Main Thread Started";
+	LOG(INFO)<<"Main Thread is Started";
+	FlightConfigServer* configServer = FlightConfigServer::getServer(NetworkConstants::iCONFIG_SERVER_PORT);
+	flightConfig flightConfig;
+    char controlLaptopAddr[NI_MAXHOST] = {0};
+    try {
+        flightConfig = (*configServer)(controlLaptopAddr);
+    } catch (...)
+    {
+        LOG(ERROR) << "Error Receiving Config: " << errno;
+    }
 
-
-	// Create Shared Memory
-	PodNetwork sPodNetworkValues;
-	PodValues sPodValues;
-
-	// Network Configs
-	string cNodeIpAddrs[] =  {"192.168.7.1","127.0.0.1"};
-	sPodNetworkValues.cNodeIpAddrs.assign(begin(cNodeIpAddrs), end(cNodeIpAddrs)); // Node IPs
-	sPodNetworkValues.iCommanderPortNumber = 5005; //Port # for TCP Commander
-	sPodNetworkValues.iNodePort = 5000; // Port # that Nodes are listening on
-	sPodNetworkValues.iNodeServerPortNumber = 5010; // Port # to recieve UDP from Nodes
-	sPodNetworkValues.iCommaderTimeoutMili = 30000; // Timeout for heartbeat to Control Interace
+    // Create Shared Memory
+    PodNetwork sPodNetworkValues = {};
+    PodValues sPodValues = {};
 
 
+    // Network Configs
+    initializer->updatePodNetworkValues(sPodNetworkValues, flightConfig, controlLaptopAddr);
 
-	//Pod Internal Network Thread
-	Pod pPodInternalNetwork = Pod(&sPodValues, &sPodNetworkValues);
-	pPodInternalNetwork.bWriteBreakNodeState = true;
-	std::thread tServer(podInternalNetworkThread, pPodInternalNetwork);
+    //Pod Internal Network Thread
+    Pod pPodInternalNetwork = Pod(&sPodValues, &sPodNetworkValues);
+    pPodInternalNetwork.bWriteBreakNodeState = true;
+    std::thread tServer(udpTelemetryThread, pPodInternalNetwork);
 
 
-	// Core Control Loop Thread
-	Pod pCoreControlLoop = Pod(&sPodValues, &sPodNetworkValues);
-	pCoreControlLoop.bWritePodState = true;
-	std::thread tControlLoop(coreControlLoop, pCoreControlLoop);
+    // Core Control Loop Thread
+    Pod pCoreControlLoop = Pod(&sPodValues, &sPodNetworkValues);
+    pCoreControlLoop.bWritePodState = true;
+    std::thread tControlLoop(coreControlLoop, pCoreControlLoop);
 
 	// Controls Interface Connection Thread
 	Pod pCommanderThread = Pod(&sPodValues, &sPodNetworkValues);
@@ -70,11 +57,17 @@ int main( int32_t argc, char** argv)
 	pCommanderThread.bWriteControlsInterfaceState = 1;
 	std::thread tControlsInterfaceConnection(commanderThread, pCommanderThread);
 
+
+
+
+
+
 	tControlsInterfaceConnection.join();
-
-	tControlLoop.join();
-
-	tServer.join();
-
-	return 0;
+    tControlLoop.join();
+ 	tControlsInterfaceConnection.join();
+    tControlLoop.join();
+   // tCanManager.join();
+    tServer.join();
+    int i;
+    return 0;
 }

@@ -1,0 +1,29 @@
+<div class="card ">
+    <div class="header">
+        <h4 class="title">BMS Overview</h4>
+    </div>
+    <div class="content">
+        <table class="table table-hover table-striped table-condensed">
+            <thead>
+            <tr class="d-flex">
+                <th class="col-5" scope="col">Name</th>
+                <th class="col-2" scope="col">Min</th>
+                <th class="col-3" scope="col">Actual</th>
+                <th class="col-2" scope="col">Max</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for key, value in electrical_senesors.items() %}
+                <tr class="d-flex sensor-row" id="{{ key }}">
+                    <th class="text-center col-5" scope="row">{{ value['name_pretty'] }}</th>
+                    <td id="{{ key }}-min" class="col-2"></td>
+                    <td id="{{ key }}-actual" class="col-3"></td>
+                    <td id="{{ key }}-max" class="col-2"></td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+

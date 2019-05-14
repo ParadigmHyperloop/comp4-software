@@ -25,12 +25,13 @@ do
 done
 
 # Move files accordingly
-flightComputer="../OnPod/FlightComputer/include/ProtoBuffer/"
+flightComputer="../OnPod/FlightComputer/libs/ProtoBuffer/"
 flightComputerSrc="../OnPod/FlightComputer/src/"
 
-PDS="../OnLand/PDS/Paradigm/Sources"
+PDS="../OnLand/PDS"
 NODESIM="../Testing/NodeSimulator/Protobuf"
 COMMANDTEST="../Testing/ManualCommandTesting"
+FLASK="../OnLand/ControlLaptop"
 
 # Force copy the files, replacing existing ones
 cp -f Paradigm/cpp/*.pb.h $flightComputer
@@ -39,6 +40,7 @@ cp -f Paradigm/cpp/*.pb.cc $flightComputerSrc
 cp -f Paradigm/py/* $PDS
 cp -f Paradigm/py/* $NODESIM
 cp -f Paradigm/py/* $COMMANDTEST
+cp -f Paradigm/py/* $FLASK
 
 
 echo "Update Complete"

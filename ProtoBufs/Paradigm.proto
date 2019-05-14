@@ -1,15 +1,16 @@
 syntax = "proto2";
 
 enum BrakeNodeStates {
-    bnsBooting   = 0;
-    bnsStandby   = 1;
-    bnsArming    = 2;
-    bnsArmed     = 3;
-    bnsFlight    = 4;
-    bnsBraking   = 5;
-    bnsVenting   = 6;
-    bnsRetrieval = 7;
-    bnsError     = 8;
+    bnsBooting         = 0;
+    bnsStandby         = 1;
+    bnsArming          = 2;
+    bnsArmed           = 3;
+    bnsFlight          = 4;
+    bnsBraking         = 5;
+    bnsVenting         = 6;
+    bnsRetrieval       = 7;
+    bnsError           = 8;
+    bnsSolenoidControl = 9;
 }
 
 enum PodStates {
@@ -24,6 +25,7 @@ enum PodStates {
     psDisarming     = 8;
     psRetrieval     = 9;
     psEmergency     = 10;
+    psShutdown      = 11;
 }
 
 enum MotorStates {
@@ -133,25 +135,25 @@ message telemetry {
     //optional int32 inverterInternalStates = 30;
 
 // HV-BMS
-    repeated int32 batteryPackVoltages = 26;
-    repeated int32 batteryPackCurrent = 27;
-    repeated int32 batteryCellTemperatures = 28;
-    optional int32 batteryPackMinimumVoltage = 29;
-    optional int32 batteryPackMaxVoltage = 30;
+    optional float hvBatteryPackVoltage = 26;
+    optional float hvBatteryPackCurrent = 27;
+    repeated int32 hvBatteryCellTemperatures = 28;
+    optional float hvBatteryPackMinimumCellVoltage = 29;
+    optional float hvBatteryPackMaxCellVoltage = 30;
 
 // Brake Node
-    optional bool sol1 = 32;
-    optional bool sol2 = 33;
-    optional bool sol3 = 34;
-    optional bool sol4 = 35;
-    optional bool sol5 = 36;
-    optional bool sol6 = 37;
-    optional int32 hp  = 38;
-    optional int32 lp1 = 39;
-    optional int32 lp2 = 40;
-    optional int32 lp3 = 41;
-    optional int32 lp4 = 42;
-    optional int32 pressureVesselTemperature = 43;
+    optional bool solenoid1 = 32;
+    optional bool solenoid2 = 33;
+    optional bool solenoid3 = 34;
+    optional bool solenoid4 = 35;
+    optional bool solenoid5 = 36;
+    optional bool solenoid6 = 37;
+    optional int32 highPressure  = 38;
+    optional int32 lowPressure1 = 39;
+    optional int32 lowPressure2 = 40;
+    optional int32 lowPressure3 = 41;
+    optional int32 lowPressure4 = 42;
+    optional float pressureVesselTemperature = 43;
 
     optional int32 electronicsEnclosurePressure = 44;
     optional int32 railDisplacementX = 45;
@@ -163,7 +165,7 @@ message telemetry {
     optional int32 coolantPressure2 = 50;
     optional int32 coolantPressure3 = 51;
     optional int32 coolantTemperature = 52;
-    optional int32 railTemperature = 53;
+    optional float railTemperature = 53;
 
 // Ghost Train
     optional int32 pack1Voltage = 55;
@@ -188,17 +190,38 @@ message telemetry {
 }
 
 // flight computer to DTS node
-message fcToBrakeNode {
+message FcToBrakeNode {
     optional PodStates podState = 1;
     optional BrakeNodeStates manualNodeState = 2;
+    optional bool hpSolenoidState = 3;
+    optional bool ventSolenoidState = 4;
+    optional bool lpSolenoid1State = 5;
+    optional bool lpSolenoid2State = 6;
+    optional bool lpSolenoid3State = 7;
 }
 
 // DTS node to flight computer
-message dtsNodeToFc {
-    optional bool brakeSolenoidState = 1 [default = false];
-    optional bool ventSolenoidState = 2 [default = false];
-    optional float rotorTemperature = 3;
-    optional int32 pressureTemperature = 4;
-    optional int32 highPressure = 5;
-    optional int32 lowPressure = 6;
+message DtsNodeToFc {
+    optional BrakeNodeStates brakeNodeState = 1;
+    optional bool brakeSolenoidState = 2 [default = false];
+    optional bool ventSolenoidState = 3 [default = false];
+    optional float rotorTemperature = 4;
+    optional float pneumaticTemperature = 5;
+    optional float tankPressure = 6;
+    optional float brakePressure = 7;
+}
+
+message flightConfig {
+    optional uint32 retrievalTimeout = 1;
+    optional uint64 maxFlightTime = 2;
+    optional uint64 motorSpeed = 3;
+    optional int32 pdsTelemetryPort = 4 [default = 7000];
+    optional int32 commandPort = 5 [default = 6000];
+    optional uint64 flightLength = 6;
+    optional int32 heartbeatTimeout = 7 [default = 10000];
+    optional string podDriver = 8;
+}
+
+message defaultFcToNode {
+    optional PodStates podState = 1;
 }

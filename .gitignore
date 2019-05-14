@@ -11,14 +11,11 @@
 venv/
 pycache/
 *.out
-<<<<<<< HEAD
 *.pyc
 *.swp
 *org.eclipse.cdt.core.prefs
 
-=======
 *__pycache__
->>>>>>> SOF-102-Single-Actuator-Test-Stand
 
 
 OnPod/FlightComputer/Debug/FlightComputer
@@ -36,6 +33,8 @@ Testing/NodeSimulator/__pycache__/
 *.piolibdeps
 *.clang_complete
 *.gcc-flags.json
+OnPod/Node/DynamicTestStand/include
+ProtoBufs/UpdateNanoPbProtos.sh
 
 
 *.pb.h
@@ -55,3 +54,5 @@ OnPod/FlightComputer/Host/src/
 OnPod/FlightComputer/myeasylog\.log
 OnLand/pyvenv.cfg
 *.log
+
+OnPod/FlightComputer/build/

@@ -24,11 +24,11 @@ class TempSensor:
 
 # Default Sample Configuration
 DEFAULT_CONFIGURATION = {
-    'retrieval_timeout': 98,
-    'max_flight_time': 82,
-    'motor_speed': 123,
-    'telemetry_port': 1234,
-    'command_port': 4321,
+    'retrieval_timeout': 2000,
+    'max_flight_time': 30,
+    'motor_speed': 1,
+    'telemetry_port': 7000,
+    'command_port': 6000,
     'flight_length': 60,
     'heartbeat_timeout': 2000,
     'pod_address': '192.168.5.4',
