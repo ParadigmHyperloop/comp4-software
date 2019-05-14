@@ -22,12 +22,12 @@ def on_disconnect():
 @sio.on('command')
 def on_command(command):
     if command is '1':
-        podMessage.manualBrakeNodeState = bnsBraking
+        podMessage.manualBrakeNodeState = bnsVenting
     else:
-        podMessage.manualBrakeNodeState = bnsStandby
+        podMessage.manualBrakeNodeState = bnsFlight
 
 
-#sio.connect('http://localhost:5000')
+sio.connect('http://localhost:5000')
 podMessage = podCommand()
 podMessage.controlsInterfaceState = ciFlight
 

@@ -6,7 +6,7 @@ from ControlLaptop.LocalStorage.ConfigurationSotrage import DEFAULT_CONFIGURATIO
 
 class PodConnectionConstants:
     """ Pod Connection Constants"""
-    POD_COMMAND_PORT = 65432
+    POD_COMMAND_PORT = 3001
     POD_ADDRESS = '127.0.0.1'
     TEST_JSON_COMMAND_DICTIONARY = {'command': 2, "other_commands": 'test'}
 
@@ -18,6 +18,7 @@ class PodCommunicator:
     _pod_port = None
     _pod_socket = None
     _command_queue = None
+    _connected = False
 
     """DO NOT CALL"""
     def __init__(self, pod_address=PodConnectionConstants.POD_ADDRESS,
@@ -35,36 +36,34 @@ class PodCommunicator:
         try:
             self._pod_socket.connect((self._pod_address, PodConnectionConstants.POD_COMMAND_PORT))
         except socket.error as e:
-            print("Failed to Connect to Pod")
-            raise e
+            print("Failed to Connect to Pod: " + str(e))
+            self._close()
+            return False
+        self._connected = True
         print('Connected...')
 
-    def send_command(self, command):
-        command_json = '{command: ' + command + '}'
-        print('sending: {command_json}')
-        try:
-            self._pod_socket.sendall(command_json.encode())
-            data = self._pod_socket.recv(1024)
-        except socket.error as e:
-            print("Failed to send command")
-            self.shutdown()
-            self._connect_to_pod()
+    def _close(self):
+        if self._pod_socket is not None:
+            self._connected = False
+            self._pod_socket.close()
+            self._pod_socket = None
 
     @staticmethod
     def get_config_proto(config):
         flight_config = Paradigm_pb2.flightConfig()
-        flight_config.retrieval_timeout = int(config['retrieval_timeout'])
-        flight_config.max_flight_time = int(config['max_flight_time'])
-        flight_config.motor_speed = int(config['motor_speed'])
-        flight_config.telemetry_port = int(config['telemetry_port'])
-        flight_config.command_port = int(config['command_port'])
-        flight_config.flight_length = int(config['flight_length'])
-        flight_config.heartbeat_timeout = int(config['heartbeat_timeout'])
-        flight_config.pod_driver = config['pod_driver']
-
+        flight_config.retrievalTimeout = int(config['retrieval_timeout'])
+        flight_config.maxFlightTime = int(config['max_flight_time'])
+        flight_config.motorSpeed = int(config['motor_speed'])
+        flight_config.pdsTelemetryPort = int(config['telemetry_port'])
+        flight_config.commandPort = int(config['command_port'])
+        flight_config.flightLength = int(config['flight_length'])
+        flight_config.heartbeatTimeout = int(config['heartbeat_timeout'])
+        flight_config.podDriver = config['pod_driver']
         return flight_config.SerializeToString()
 
     def send_configuration(self, configuration=DEFAULT_CONFIGURATION):
+        if not self._connected:
+            self._connect_to_pod()
         serialized_config = self.get_config_proto(configuration)
         try:
             self._pod_socket.sendall(serialized_config)
@@ -75,7 +74,7 @@ class PodCommunicator:
 
     # Disconnect from Pod/Socket
     def shutdown(self):
-        self._pod_socket.close()
+        self._close()
 
     @staticmethod
     def get_pod_communicator():
