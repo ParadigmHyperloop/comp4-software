@@ -1,1 +1,1 @@
-{"retrieval_timeout": 123123, "max_flight_time": 123, "motor_speed": 123, "telemetry_port": 1231, "command_port": 1231, "flight_length": 789, "heartbeat_timeout": 123, "pod_address": "192.168.5.4", "pod_driver": "Simulation"}
+{"flight_length": 700, "retrieval_timeout": 60000, "heartbeat_timeout": 2000, "pod_driver": "Simulation", "pod_address": "192.168.5.4", "command_port": 6000, "motor_speed": 1, "max_flight_time": 20000, "telemetry_port": 7000}

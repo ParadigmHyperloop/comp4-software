@@ -1,0 +1,18 @@
+{
+  "iHvBatteryPackVoltage": {
+    "name_pretty": "Pack Voltage"
+  },
+    "iHvBatteryPackCurrent": {
+    "name_pretty": "Pack Current"
+  },
+    "iHvBatteryPackMinimumCellVoltage": {
+    "name_pretty": "Min Cell Voltage"
+  },
+    "iHvBatteryPackMaxCellVoltage": {
+    "name_pretty": "Max Cell Voltage"
+  }
+}
+
+
+
+

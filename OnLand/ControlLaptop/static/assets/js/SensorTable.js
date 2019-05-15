@@ -33,6 +33,7 @@ function ParsePodState(state) {
 }
 
 socket.on('telemetry', function (data) {
+    console.log("asdf");
     data = JSON.parse(data);
     newPodState = data['podState'];
     ParsePodState(newPodState);
