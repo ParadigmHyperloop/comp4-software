@@ -6,17 +6,19 @@ done loading.
  */
 $(document).ready(function () {
     $('#menu-toggle').click(function (e) {
-        e.preventDefault();
+        // e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
     $('.brake-btn').click(function () {
         console.log("Asdf");
-        status = '0';
+        let status = '0';
         btnId = $(this).attr("id");
         console.log(btnId);
         if (btnId === "on-btn") {
-            status = '1'
-        }
+            status = '1';
+            socket.emit('start_logging_session');
+        } else if (btnId = 'off-btn')
+            socket.emit('end_logging_session');
         console.log(status);
         socket.emit('command', status)
     });

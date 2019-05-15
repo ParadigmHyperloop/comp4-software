@@ -54,3 +54,23 @@ def pod_telemetry(data):
     print("Transferring Telemetry")
     socket_io.emit("telemetry", data)
 
+
+@socket_io.on('start_logging_session')
+def emit_start_logging_session():
+    socket_io.emit('start_logging_session')
+
+
+@socket_io.on('end_logging_session')
+def emit_end_logging_session():
+    socket_io.emit('end_logging_session')
+
+
+@socket_io.on('log_telemetry')
+def emit_log_telemetry(data):
+    socket_io.emit('log_telemetry', data)
+
+
+# TODO: define method on JS side and display it.
+@socket_io.on('logging_file_saved')
+def emit_logging_file_saved(data):
+    socket_io.emit('logging_file_saved', data)
