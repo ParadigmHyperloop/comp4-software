@@ -6,7 +6,7 @@ from ControlLaptop.LocalStorage.ConfigurationSotrage import DEFAULT_CONFIGURATIO
 
 class PodConnectionConstants:
     """ Pod Connection Constants"""
-    POD_COMMAND_PORT = 65432
+    POD_COMMAND_PORT = 3001
     POD_ADDRESS = '127.0.0.1'
     TEST_JSON_COMMAND_DICTIONARY = {'command': 2, "other_commands": 'test'}
 
