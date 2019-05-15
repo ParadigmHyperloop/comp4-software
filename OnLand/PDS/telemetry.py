@@ -3,7 +3,7 @@ import logging as log
 from datetime import timedelta
 from PDS.config import SOCKET_SERVER, POD_IP, UDP_TELEM_PORT, MAX_MESSAGE_SIZE, UDP_TELEM_TIMEOUT
 from PDS.UDP.PodUdpConnection import PodUdpConnection
-from PDS.UDP.Paradigm_pb2 import telemetry
+from Paradigm_pb2 import telemetry
 from google.protobuf import json_format
 from google.protobuf.json_format import MessageToDict
 

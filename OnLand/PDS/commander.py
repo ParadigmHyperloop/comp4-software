@@ -7,10 +7,14 @@ from PDS.TCP.PodTcpConnection import PodTcpConnection
 from PDS.config import COMMANDER_BACKUP_PULSE, COMMANDER_TIMEOUT_TIME, COMMANDER_PULSE_SPEED, POD_IP, POD_COMMANDER_PORT
 
 log.basicConfig(filename='logs\heartbeat.log', format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+pod_message = podCommand()
 
 
 # Create socket to connect to server
-sio = socketio.Client()
+connected = False
+while not connected:
+        sio = socketio.Client()
+
 
 
 @sio.on('connect')
@@ -28,16 +32,15 @@ def on_disconnect():
 @sio.on('command')
 def on_command(command):
     if command is '1':
-        podMessage.manualBrakeNodeState = bnsBraking
+        pod_message.manualBrakeNodeState = bnsBraking
     else:
-        podMessage.manualBrakeNodeState = bnsStandby
-
+        pod_message.manualBrakeNodeState = bnsStandby
 
 def main():
     log.warning("Heartbeat Thread Started")
     sio.connect('http://localhost:5000')
-    podMessage = podCommand()
-    podMessage.controlsInterfaceState = ciFlight
+    pod_message = podCommand()
+    pod_message.controlsInterfaceState = ciFlight
 
     pod = PodTcpConnection(ip=POD_IP, port=POD_COMMANDER_PORT)
     timer = HeartbeatTimer()
@@ -51,7 +54,7 @@ def main():
             # Send a packets every PULSE_SPEED milliseconds.
             log.debug("Heartbeat: healthy")
             if timer.time_since_pulse() > COMMANDER_PULSE_SPEED:
-                pod.send_packet(podMessage.SerializeToString())
+                pod.send_packet(pod_message.SerializeToString())
 
                 # Receive Packet
                 while timer.time_since_pulse() > COMMANDER_PULSE_SPEED and pod.is_connected():
@@ -63,7 +66,7 @@ def main():
                             pod.close()
                         elif timer.time_since_pulse() > COMMANDER_BACKUP_PULSE:
                             log.debug("Heartbeat: Sending backup packet")
-                            pod.send_packet(podMessage.SerializeToString())
+                            pod.send_packet(pod_message.SerializeToString())
                     else:  # Msg received
                         sio.emit('ping', 1)
                         timer.pulse()
