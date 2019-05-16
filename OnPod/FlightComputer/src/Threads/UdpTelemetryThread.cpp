@@ -4,12 +4,7 @@
 
 
 
-/**
- * Creates and configures the brake node connection
- *
- * @param Pod
- * @return A pointer to a BrakeNodeConnection
- */
+
 UdpConnection *getBrakeNodeConnection(Pod Pod) {
     auto BrakeNode = new BrakeNodeConnection(Pod);
     try {
@@ -29,6 +24,13 @@ UdpConnection *getBrakeNodeConnection(Pod Pod) {
 UdpConnection *getRearNodeConnection(Pod Pod) {
     auto BrakeNode = new BrakeNodeConnection(Pod);
     return BrakeNode;
+}
+
+UdpConnection *getPdsConnection(Pod Pod){
+    auto connection = new PdsConnection(Pod);
+    connection->configureClient(Pod.sPodNetworkValues->strPdsIpAddr, Pod.sPodNetworkValues->iPdsTelemeteryPort,
+                                    Pod.sPodNetworkValues->iNodeClientSocket);
+    return connection;
 }
 
 
@@ -52,9 +54,7 @@ int32_t udpTelemetryThread(Pod Pod) {
         return -1;
     }
 
-    PdsConnection Pds = PdsConnection(Pod);
-    Pds.configureClient(Pod.sPodNetworkValues->strPdsIpAddr, Pod.sPodNetworkValues->iPdsTelemeteryPort,
-                        Pod.sPodNetworkValues->iNodeClientSocket);
+    UdpConnection* paradigmDataShuffle = getPdsConnection(Pod);
 
     std::vector<UdpConnection *> nodes; // Vector containing all Node Connections
     if (Pod.sPodNetworkValues->iActiveNodes[0]) //Check if brake node is active
@@ -76,19 +76,20 @@ int32_t udpTelemetryThread(Pod Pod) {
             try {
                 node->giveUpdate();
                 node->getUpdate();
-                std::this_thread::sleep_for(std::chrono::milliseconds(30));
             }
             catch (std::runtime_error &e) {
                 LOG(INFO) << e.what();
             }
         }
-        Pds.giveUpdate(); //Send telemetry packet to PDS
+        paradigmDataShuffle->giveUpdate(); //Send telemetry packet to PDS
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
     }
     for (auto &&node: nodes) {
         node->closeConnection();
         delete node;
     }
     close(Pod.sPodNetworkValues->iNodeClientSocket);
+    delete paradigmDataShuffle;
     return 1;
 }
 

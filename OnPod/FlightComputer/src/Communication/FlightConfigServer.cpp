@@ -25,8 +25,10 @@ FlightConfigServer *FlightConfigServer::getServer(int32_t port) {
     return _configServer;
 }
 
-flightConfig FlightConfigServer::operator()(char *controlLaptopAddr) {
+flightConfig FlightConfigServer::operator()() {
+
     LOG(INFO) << "Creating Pod Initilizer socket";
+    char controlLaptopAddr[NI_MAXHOST] = {0};
     this->_listenerSocketID = socket(AF_INET, SOCK_STREAM, 0);
     if (this->_listenerSocketID == -1) {
         //todo throw runtime error with string
@@ -98,6 +100,7 @@ flightConfig FlightConfigServer::operator()(char *controlLaptopAddr) {
          SUCCESS_RECEIVE_CONFIG_RESPONSE,
          strlen(SUCCESS_RECEIVE_CONFIG_RESPONSE),
          0);
+    config.set_controllaptopipaddr(std::string(controlLaptopAddr));
     return config;
 }
 

@@ -65,9 +65,9 @@ struct PodValues {
     bool solenoid5;
     bool solenoid6;
     float lowPressure1;
-    int32_t lowPressure2;
-    int32_t lowPressure3;
-    int32_t lowPressure4;
+    float lowPressure2;
+    float lowPressure3;
+    float lowPressure4;
     float highPressure;
     float pressureVesselTemperature;
     float railTemperature;

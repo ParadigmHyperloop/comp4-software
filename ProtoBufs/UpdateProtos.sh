@@ -29,7 +29,7 @@ flightComputer="../OnPod/FlightComputer/libs/ProtoBuffer/"
 flightComputerSrc="../OnPod/FlightComputer/src/"
 
 PDS="../OnLand"
-NODESIM="../Testing/NodeSimulator/Protobuf"
+NODESIM="../Testing/NodeSimulator"
 COMMANDTEST="../Testing/ManualCommandTesting"
 FLASK="../OnLand/ControlLaptop"
 

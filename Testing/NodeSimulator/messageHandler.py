@@ -77,12 +77,10 @@ class DtsNodeProtoHandler(MessageHandler):
     def prepare_brake_node_message(self, node_update):
         proto_message = DtsNodeToFc()
         proto_message.brakeNodeState = node_update['State']
-        proto_message.brakeSolenoidState = node_update['sol1']
-        proto_message.ventSolenoidState = node_update['sol2']
-        proto_message.rotorTemperature = node_update['rail_temp']
-        proto_message.pneumaticTemperature = node_update['pressure_vessel_temp']
-        proto_message.tankPressure = node_update['hp']
-        proto_message.brakePressure = node_update['lp']
+        proto_message.brakeSolenoidState = node_update['solenoid1']
+        proto_message.pneumaticTemperature = node_update['pressureVesselTemperature']
+        proto_message.tankPressure = node_update['highPressure']
+        proto_message.brakePressure = node_update['lowPressure1']
         encoded = proto_message.SerializeToString()
         return encoded
 
