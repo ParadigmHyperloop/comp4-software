@@ -26,6 +26,10 @@ def main():
     
     sio.connect('http://localhost:5000')
     sio.emit('log_telemetry', getTestPacket())
+    for i in range(0,10):
+        print('Sending...')
+        sio.emit('log_telemetry', getTestPacket())
+
 
 
 if __name__ == '__main__':
