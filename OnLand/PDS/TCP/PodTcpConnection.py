@@ -25,6 +25,7 @@ class PodTcpConnection:
             self._sock.connect((self._pod_ip,self._pod_port))
         except ConnectionRefusedError:
             # No connection
+            self.close()
             return False
         except Exception as e:
             self.close()
