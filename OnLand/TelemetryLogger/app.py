@@ -19,6 +19,7 @@ def start_logging_session(data):
     global csv_logger
     csv_logger = CsvTelemetryLoggerTesting()
     csv_logger.start_log_session()
+    sio.emit('logging_session_started', 'started')
 
 
 @sio.on('end_logging_session')
@@ -26,7 +27,7 @@ def end_logging_session(data):
     print('End Logging')
     global csv_logger
     csv_logger.end_session()
-    sio.emit('logging_file_saved', csv_logger.log_file_name)
+    sio.emit('logging_session_ended', csv_logger.log_file_name)
 
 
 @sio.on('log_telemetry')

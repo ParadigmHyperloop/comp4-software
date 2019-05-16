@@ -70,7 +70,11 @@ def emit_log_telemetry(data):
     socket_io.emit('log_telemetry', data)
 
 
-# TODO: define method on JS side and display it.
-@socket_io.on('logging_file_saved')
+@socket_io.on('logging_session_ended')
 def emit_logging_file_saved(data):
-    socket_io.emit('logging_file_saved', data)
+    socket_io.emit('logging_session_ended', data)
+
+
+@socket_io.on('logging_session_started')
+def emit_logging_session_started(data):
+    socket_io.emit('logging_session_started')

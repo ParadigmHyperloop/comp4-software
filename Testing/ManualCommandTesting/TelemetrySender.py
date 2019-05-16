@@ -28,7 +28,7 @@ def main():
     sio.emit('log_telemetry', getTestPacket())
     for i in range(0,10):
         print('Sending...')
-        sio.emit('log_telemetry', getTestPacket())
+        sio.emit('telemetry', getTestPacket())
 
 
 
