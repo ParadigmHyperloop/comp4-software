@@ -1,6 +1,6 @@
 from ControlLaptop.controlLaptop import main as app
-from PDS.telemetry import main as telemetry
-from PDS.commander import main as heartbeat
+from telemetry import main as telemetry
+from commander import main as heartbeat
 from threading import Thread
 import logging as log
 

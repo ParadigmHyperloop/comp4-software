@@ -1,4 +1,5 @@
 import socketio
+import time
 import logging as log
 from datetime import timedelta
 from PDS.config import SOCKET_SERVER, POD_IP, UDP_TELEM_PORT, MAX_MESSAGE_SIZE, UDP_TELEM_TIMEOUT
@@ -28,7 +29,16 @@ def on_disconnect():
 
 def main():
     log.warning("Telemetry Thread Started")
-    sio.connect(SOCKET_SERVER)
+    connected = False
+    while not connected:
+        try:
+            sio.connect(SOCKET_SERVER)
+        except:
+            log.warning("Telemetry thread cannot connect to SocketIO")
+            time.sleep(2)
+        else:
+            connected = True
+
     udp_socket = PodUdpConnection(POD_IP, UDP_TELEM_PORT, MAX_MESSAGE_SIZE)
     udp_socket.connect()
     if udp_socket.is_connected():

@@ -1,7 +1,8 @@
 import logging as log
 import socketio
 import time
-from PDS.UDP.Paradigm_pb2 import podCommand, ciFlight, bnsBraking, bnsStandby
+from config import *
+from Paradigm_pb2 import podCommand, ciFlight, bnsBraking, bnsStandby
 from PDS.TCP.heartbeat_timer import HeartbeatTimer
 from PDS.TCP.PodTcpConnection import PodTcpConnection
 from PDS.config import COMMANDER_BACKUP_PULSE, COMMANDER_TIMEOUT_TIME, COMMANDER_PULSE_SPEED, POD_IP, POD_COMMANDER_PORT
@@ -11,9 +12,7 @@ pod_message = podCommand()
 
 
 # Create socket to connect to server
-connected = False
-while not connected:
-        sio = socketio.Client()
+sio = socketio.Client()
 
 
 
@@ -38,7 +37,17 @@ def on_command(command):
 
 def main():
     log.warning("Heartbeat Thread Started")
-    sio.connect('http://localhost:5000')
+    connected = False
+    while not connected:
+        try:
+            sio.connect(SOCKET_SERVER)
+        except:
+            log.warning("Commader cannot connect to SocketIO")
+            time.sleep(2)
+        else:
+            connected = True
+
+
     pod_message = podCommand()
     pod_message.controlsInterfaceState = ciFlight
 
