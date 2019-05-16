@@ -1,5 +1,8 @@
+import logging as log
+import json
+import requests
 from datetime import datetime
-from flask import *
+from flask import Flask, redirect, render_template, jsonify
 from ControlLaptop.LocalStorage.ConfigurationSotrage import LocalStorage
 from ControlLaptop.LocalStorage.FlightConfig import FlightConfig
 from ControlLaptop.SocketController import PodCommunicator
@@ -14,7 +17,7 @@ with app.app_context():
     try:
         pod_communicator = PodCommunicator.get_pod_communicator()
     except Exception as e:
-        print("COULD NOT CONNECT TO POD")
+        log.info("COULD NOT CONNECT TO POD")
 
 # --------------------------------------------------------------
 # END SETUP
@@ -61,6 +64,15 @@ def submit_configuration():
             return jsonify({'status': 'error', 'message': 'Failed to Connect'}), 418
     else:
         return jsonify({'error': configuration_form.errors})
+
+
+@app.route('/send_command', methods=["POST"])
+def send_command():
+    command = requests.get_json()['command']
+    try:
+        pod_communicator.send_command(command)
+    finally:
+        return jsonify({'status': 'ok'})
 
 
 @app.route('/disconnect_from_pod', methods=["POST"])
@@ -115,8 +127,6 @@ def get_flight_profile_template():
 
 @app.route('/sensor_ranges')
 def add_numbers():
-    with open('ControlLaptop/LocalStorage/Telemetry.json') as json_file:
+    with open('ControlLaptop/LocalStorage/DtsSensors.json') as json_file:
         data = json_file.read().replace('\n', '')
     return data
-
-

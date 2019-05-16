@@ -52,5 +52,7 @@ OnPod/FlightComputer/BeagleBone/
 OnPod/FlightComputer/Host/src/
 
 OnPod/FlightComputer/myeasylog\.log
+OnLand/pyvenv.cfg
+*.log
 
 OnPod/FlightComputer/build/
