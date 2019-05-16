@@ -2,7 +2,7 @@ import logging as log
 import socketio
 import time
 from config import *
-from Paradigm_pb2 import podCommand, ciFlight, bnsBraking, bnsStandby
+from Paradigm_pb2 import *
 from PDS.TCP.heartbeat_timer import HeartbeatTimer
 from PDS.TCP.PodTcpConnection import PodTcpConnection
 from PDS.config import COMMANDER_BACKUP_PULSE, COMMANDER_TIMEOUT_TIME, COMMANDER_PULSE_SPEED, POD_IP, POD_COMMANDER_PORT
@@ -31,9 +31,10 @@ def on_disconnect():
 @sio.on('command')
 def on_command(command):
     if command is '1':
-        pod_message.manualBrakeNodeState = bnsBraking
+        pod_message.manualBrakeNodeState = bnsVenting
     else:
         pod_message.manualBrakeNodeState = bnsStandby
+
 
 def main():
     log.warning("Heartbeat Thread Started")
@@ -47,9 +48,8 @@ def main():
         else:
             connected = True
 
-
-    pod_message = podCommand()
-    pod_message.controlsInterfaceState = ciFlight
+    pod_command = podCommand()
+    pod_command.controlsInterfaceState = ciFlight
 
     pod = PodTcpConnection(ip=POD_IP, port=POD_COMMANDER_PORT)
     timer = HeartbeatTimer()
@@ -63,7 +63,7 @@ def main():
             # Send a packets every PULSE_SPEED milliseconds.
             log.debug("Heartbeat: healthy")
             if timer.time_since_pulse() > COMMANDER_PULSE_SPEED:
-                pod.send_packet(pod_message.SerializeToString())
+                pod.send_packet(pod_command.SerializeToString())
 
                 # Receive Packet
                 while timer.time_since_pulse() > COMMANDER_PULSE_SPEED and pod.is_connected():
@@ -75,7 +75,7 @@ def main():
                             pod.close()
                         elif timer.time_since_pulse() > COMMANDER_BACKUP_PULSE:
                             log.debug("Heartbeat: Sending backup packet")
-                            pod.send_packet(pod_message.SerializeToString())
+                            pod.send_packet(pod_command.SerializeToString())
                     else:  # Msg received
                         sio.emit('ping', 1)
                         timer.pulse()

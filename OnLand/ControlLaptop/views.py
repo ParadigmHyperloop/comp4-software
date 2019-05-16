@@ -101,13 +101,26 @@ def dts():
         sensors = json.load(json_file)
     with open('ControlLaptop/LocalStorage/ElectricalValues.json') as json_file:
         electrical_sensors = json.load(json_file)
-
     return render_template(
         page+".html",
         active_page=page,
         title=title,
         sensors=sensors,
         electrical_senesors=electrical_sensors
+    )
+
+
+@app.route('/proofTest')
+def proofTest():
+    page = 'proofTest'
+    title = get_page_title(page)
+    with open('ControlLaptop/LocalStorage/ProofTestSensors.json') as json_file:
+        sensors = json.load(json_file)
+    return render_template(
+        page+".html",
+        active_page=page,
+        title=title,
+        sensors=sensors
     )
 
 
@@ -122,7 +135,6 @@ def get_flight_profile_template():
         configuration_form=FlightConfigurationForm(),
         saved_configuration=FlightConfig.get_flight_config_instance().read_config()
     )
-
 
 
 @app.route('/sensor_ranges')

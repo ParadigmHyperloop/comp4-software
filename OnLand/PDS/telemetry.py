@@ -48,6 +48,7 @@ def main():
         if data is not None:
             pod_data = telemetry()
             pod_data.ParseFromString(data)
+            print(pod_data.__str__());
             json_pod_data = json_format.MessageToJson(pod_data)
             sio.emit('telemetry', json_pod_data)
             pod_data = MessageToDict(pod_data)

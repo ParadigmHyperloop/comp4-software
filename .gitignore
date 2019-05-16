@@ -58,3 +58,5 @@ OnLand/pyvenv.cfg
 OnPod/FlightComputer/build/
 
 *.csv
+
+ProtoBufs/Paradigm/cpp/

@@ -10,15 +10,11 @@ $(document).ready(function () {
         $("#wrapper").toggleClass("toggled");
     });
     $('.brake-btn').click(function () {
-        console.log("Asdf");
         let status = '0';
         btnId = $(this).attr("id");
-        console.log(btnId);
         if (btnId === "on-btn") {
             status = '1';
-            socket.emit('start_logging_session');
-        } else if (btnId = 'off-btn')
-            socket.emit('end_logging_session');
+        }
         console.log(status);
         socket.emit('command', status)
     });

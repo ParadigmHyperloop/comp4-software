@@ -51,6 +51,12 @@ NAV_BAR = [
         'icon': 'pe-7s-joy'
     },
     {
+        'id': 'proofTest',
+        'href': 'proofTest',
+        'title': 'High Pressure Proof Test',
+        'icon': 'pe-7s-joy'
+    },
+    {
         'id': 'battery',
         'href': 'ui/battery',
         'title': 'Batteries',

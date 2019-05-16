@@ -1,5 +1,6 @@
 import socketio
 import json
+import time
 from TelemetryLogger.LogToCSV import CsvTelemetryLoggerTesting
 
 
@@ -11,6 +12,13 @@ csv_logger = None
 def on_connect():
     print('Connected to Server')
     sio.emit('connected', 'CSV Telemetry Logger')
+
+
+@sio.on('disconnect')
+def on_disconnect():
+    print('End Logging')
+    global csv_logger
+    csv_logger.end_session()
 
 
 @sio.on('start_logging_session')
@@ -30,16 +38,26 @@ def end_logging_session(data):
     sio.emit('logging_session_ended', csv_logger.log_file_name)
 
 
-@sio.on('log_telemetry')
+@sio.on('telemetry')
 def on_log_telemetry(data):
-    print(f'logging data: {data}')
+    print('logging data: {data}')
     global csv_logger
-    telem = json.loads(data)
-    csv_logger.log_telemetry(telem)
+    telemetry = json.loads(data)
+    try:
+        csv_logger.log_telemetry(telemetry)
+    except AttributeError or ValueError:
+        print("Start logging session to capture telemetry")
 
 
 def main():
-    sio.connect('http://localhost:5000')
+    connected = False
+    while not connected:
+        try:
+            sio.connect('http://localhost:5000')
+        except:
+            time.sleep(2)
+        else:
+            connected = True
     sio.wait()
 
 

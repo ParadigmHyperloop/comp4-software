@@ -148,11 +148,11 @@ message telemetry {
     optional bool solenoid4 = 35;
     optional bool solenoid5 = 36;
     optional bool solenoid6 = 37;
-    optional int32 highPressure  = 38;
-    optional int32 lowPressure1 = 39;
-    optional int32 lowPressure2 = 40;
-    optional int32 lowPressure3 = 41;
-    optional int32 lowPressure4 = 42;
+    optional float highPressure  = 38;
+    optional float lowPressure1 = 39;
+    optional float lowPressure2 = 40;
+    optional float lowPressure3 = 41;
+    optional float lowPressure4 = 42;
     optional float pressureVesselTemperature = 43;
 
     optional int32 electronicsEnclosurePressure = 44;
@@ -220,6 +220,7 @@ message flightConfig {
     optional uint64 flightLength = 6;
     optional int32 heartbeatTimeout = 7 [default = 10000];
     optional string podDriver = 8;
+    optional string controlLaptopIpAddr = 9 [default = "127.0.0.1"];
 }
 
 message defaultFcToNode {

@@ -4,7 +4,7 @@ from messageHandler import StringHandler, DtsNodeProtoHandler
 from hardwareStateSimulation import DtsNode
 from behaviour2 import *
 
-udp_connection = UdpConnection(flight_computer_port=5555, node_sim_port=5000, flight_computer_ip='localhost')
+udp_connection = UdpConnection(flight_computer_port=5000, node_sim_port=5001, flight_computer_ip='localhost')
 
 
 dts_node_behaviour = NominalDtsNodeBehaviour()
