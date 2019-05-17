@@ -1,8 +1,8 @@
 import logging as log
 import socketio
 import time
-from config import *
-from Paradigm_pb2 import podCommand, ciFlight, bnsBraking, bnsStandby
+from PDS.config import SOCKET_SERVER
+from PDS.Paradigm_pb2 import podCommand, ciFlight, bnsBraking, bnsStandby
 from PDS.TCP.heartbeat_timer import HeartbeatTimer
 from PDS.TCP.PodTcpConnection import PodTcpConnection
 from PDS.config import COMMANDER_BACKUP_PULSE, COMMANDER_TIMEOUT_TIME, COMMANDER_PULSE_SPEED, POD_IP, POD_COMMANDER_PORT
@@ -30,7 +30,7 @@ def on_disconnect():
 
 @sio.on('command')
 def on_command(command):
-    if command is '1':
+    if command == '1':
         pod_message.manualBrakeNodeState = bnsBraking
     else:
         pod_message.manualBrakeNodeState = bnsStandby
