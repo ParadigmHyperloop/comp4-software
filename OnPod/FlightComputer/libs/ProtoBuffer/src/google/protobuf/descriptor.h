@@ -58,11 +58,11 @@
 #include <set>
 #include <string>
 #include <vector>
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/mutex.h>
-#include <google/protobuf/stubs/once.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/mutex.h>
+#include <src/google/protobuf/stubs/once.h>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 // TYPE_BOOL is defined in the MacOS's ConditionalMacros.h.
 #ifdef TYPE_BOOL
@@ -2162,6 +2162,6 @@ inline const FieldDescriptor* OneofDescriptor::field(int index) const {
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_DESCRIPTOR_H__

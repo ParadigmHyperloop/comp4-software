@@ -38,31 +38,31 @@
 #include <memory>
 #include <vector>
 
-#include <google/protobuf/compiler/importer.h>
-#include <google/protobuf/compiler/parser.h>
+#include <src/google/protobuf/compiler/importer.h>
+#include <src/google/protobuf/compiler/parser.h>
 #include <google/protobuf/unittest.pb.h>
 #include <google/protobuf/unittest_custom_options.pb.h>
 #include <google/protobuf/unittest_lazy_dependencies.pb.h>
 #include <google/protobuf/unittest_proto3_arena.pb.h>
-#include <google/protobuf/io/tokenizer.h>
-#include <google/protobuf/io/zero_copy_stream_impl.h>
+#include <src/google/protobuf/io/tokenizer.h>
+#include <src/google/protobuf/io/zero_copy_stream_impl.h>
 #include <google/protobuf/descriptor.pb.h>
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/descriptor_database.h>
-#include <google/protobuf/dynamic_message.h>
-#include <google/protobuf/text_format.h>
-#include <google/protobuf/stubs/substitute.h>
+#include <src/google/protobuf/descriptor.h>
+#include <src/google/protobuf/descriptor_database.h>
+#include <src/google/protobuf/dynamic_message.h>
+#include <src/google/protobuf/text_format.h>
+#include <src/google/protobuf/stubs/substitute.h>
 
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/logging.h>
-#include <google/protobuf/stubs/logging.h>
-#include <google/protobuf/stubs/stringprintf.h>
-#include <google/protobuf/stubs/strutil.h>
-#include <google/protobuf/testing/googletest.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/stubs/stringprintf.h>
+#include <src/google/protobuf/stubs/strutil.h>
+#include <src/google/protobuf/testing/googletest.h>
 #include <gtest/gtest.h>
 
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {

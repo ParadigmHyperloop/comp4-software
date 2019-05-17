@@ -34,11 +34,11 @@
 #include <memory>
 #include <string>
 
-#include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/util/internal/structured_objectwriter.h>
-#include <google/protobuf/stubs/bytestream.h>
+#include <src/google/protobuf/io/coded_stream.h>
+#include <src/google/protobuf/util/internal/structured_objectwriter.h>
+#include <src/google/protobuf/stubs/bytestream.h>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {
@@ -226,6 +226,6 @@ class PROTOBUF_EXPORT JsonObjectWriter : public StructuredObjectWriter {
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_UTIL_CONVERTER_JSON_OBJECTWRITER_H__

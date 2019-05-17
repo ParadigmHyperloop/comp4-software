@@ -32,13 +32,13 @@
 // from google3/strings/substitute.h
 
 #include <string>
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/strutil.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/strutil.h>
 
 #ifndef GOOGLE_PROTOBUF_STUBS_SUBSTITUTE_H_
 #define GOOGLE_PROTOBUF_STUBS_SUBSTITUTE_H_
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {
@@ -169,6 +169,6 @@ PROTOBUF_EXPORT void SubstituteAndAppend(
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif // GOOGLE_PROTOBUF_STUBS_SUBSTITUTE_H_

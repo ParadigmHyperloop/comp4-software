@@ -28,10 +28,10 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include <google/protobuf/util/internal/json_objectwriter.h>
+#include <src/google/protobuf/util/internal/json_objectwriter.h>
 
-#include <google/protobuf/io/zero_copy_stream_impl_lite.h>
-#include <google/protobuf/util/internal/utility.h>
+#include <src/google/protobuf/io/zero_copy_stream_impl_lite.h>
+#include <src/google/protobuf/util/internal/utility.h>
 #include <gtest/gtest.h>
 
 namespace google {

@@ -34,7 +34,7 @@
 #ifndef GOOGLE_PROTOBUF_TESTING_FILE_H__
 #define GOOGLE_PROTOBUF_TESTING_FILE_H__
 
-#include <google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/common.h>
 
 namespace google {
 namespace protobuf {

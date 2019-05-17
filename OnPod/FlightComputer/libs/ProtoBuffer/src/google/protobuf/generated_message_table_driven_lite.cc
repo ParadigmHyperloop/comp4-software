@@ -28,15 +28,15 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include <google/protobuf/generated_message_table_driven_lite.h>
+#include <src/google/protobuf/generated_message_table_driven_lite.h>
 
 #include <type_traits>
 
-#include <google/protobuf/io/zero_copy_stream_impl_lite.h>
-#include <google/protobuf/metadata_lite.h>
-#include <google/protobuf/repeated_field.h>
-#include <google/protobuf/wire_format_lite.h>
-#include <google/protobuf/wire_format_lite_inl.h>
+#include <src/google/protobuf/io/zero_copy_stream_impl_lite.h>
+#include <src/google/protobuf/metadata_lite.h>
+#include <src/google/protobuf/repeated_field.h>
+#include <src/google/protobuf/wire_format_lite.h>
+#include <src/google/protobuf/wire_format_lite_inl.h>
 
 namespace google {
 namespace protobuf {

@@ -36,14 +36,14 @@
 #include <atomic>
 #include <limits>
 
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/logging.h>
 
 #ifdef ADDRESS_SANITIZER
 #include <sanitizer/asan_interface.h>
 #endif  // ADDRESS_SANITIZER
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 
 namespace google {
@@ -320,6 +320,6 @@ class PROTOBUF_EXPORT ArenaImpl {
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_ARENA_IMPL_H__

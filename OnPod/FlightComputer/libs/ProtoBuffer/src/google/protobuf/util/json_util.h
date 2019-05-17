@@ -33,12 +33,12 @@
 #ifndef GOOGLE_PROTOBUF_UTIL_JSON_UTIL_H__
 #define GOOGLE_PROTOBUF_UTIL_JSON_UTIL_H__
 
-#include <google/protobuf/message.h>
-#include <google/protobuf/util/type_resolver.h>
-#include <google/protobuf/stubs/bytestream.h>
-#include <google/protobuf/stubs/strutil.h>
+#include <src/google/protobuf/message.h>
+#include <src/google/protobuf/util/type_resolver.h>
+#include <src/google/protobuf/stubs/bytestream.h>
+#include <src/google/protobuf/stubs/strutil.h>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {
@@ -199,6 +199,6 @@ class PROTOBUF_EXPORT ZeroCopyStreamByteSink : public strings::ByteSink {
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_UTIL_JSON_UTIL_H__

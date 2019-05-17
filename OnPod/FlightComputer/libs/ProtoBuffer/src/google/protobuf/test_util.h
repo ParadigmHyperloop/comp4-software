@@ -40,11 +40,11 @@
 #define UNITTEST ::protobuf_unittest
 #define UNITTEST_IMPORT ::protobuf_unittest_import
 // Must be included when the preprocessor symbols above are defined.
-#include <google/protobuf/test_util.inc>
+#include <src/google/protobuf/test_util.inc>
 #undef UNITTEST
 #undef UNITTEST_IMPORT
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {
@@ -1299,6 +1299,6 @@ inline void ExpectAllFieldsAndExtensionsInOrder(
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_TEST_UTIL_H__

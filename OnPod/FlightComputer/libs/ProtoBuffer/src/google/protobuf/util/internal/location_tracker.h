@@ -33,9 +33,9 @@
 
 #include <string>
 
-#include <google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/common.h>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {
@@ -64,6 +64,6 @@ class PROTOBUF_EXPORT LocationTrackerInterface {
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_UTIL_CONVERTER_LOCATION_TRACKER_H__

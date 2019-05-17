@@ -38,14 +38,14 @@
 #ifndef GOOGLE_PROTOBUF_REFLECTION_OPS_H__
 #define GOOGLE_PROTOBUF_REFLECTION_OPS_H__
 
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/message.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/message.h>
 
 #ifdef SWIG
 #error "You cannot SWIG proto headers"
 #endif
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {
@@ -84,6 +84,6 @@ class PROTOBUF_EXPORT ReflectionOps {
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_REFLECTION_OPS_H__

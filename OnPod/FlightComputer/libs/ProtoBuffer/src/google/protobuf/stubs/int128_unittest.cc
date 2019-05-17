@@ -28,16 +28,16 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include <google/protobuf/stubs/int128.h>
+#include <src/google/protobuf/stubs/int128.h>
 
 #include <algorithm>
 #include <sstream>
 #include <utility>
 
-#include <google/protobuf/testing/googletest.h>
+#include <src/google/protobuf/testing/googletest.h>
 #include <gtest/gtest.h>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {

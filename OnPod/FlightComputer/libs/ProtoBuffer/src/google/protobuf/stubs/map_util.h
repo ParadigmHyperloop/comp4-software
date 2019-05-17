@@ -40,7 +40,7 @@
 #include <utility>
 #include <vector>
 
-#include <google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/common.h>
 
 namespace google {
 namespace protobuf {

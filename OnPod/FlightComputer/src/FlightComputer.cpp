@@ -25,10 +25,10 @@ int main( int32_t argc, char** argv)
 	FlightConfigServer* configServer = FlightConfigServer::getServer(NetworkConstants::iCONFIG_SERVER_PORT);
 	flightConfig flightConfig;
     try {
-       // flightConfig = (*configServer)();
-    } catch (...)
+        //flightConfig = (*configServer)();
+    } catch (exception& e)
     {
-        LOG(ERROR) << "Error Receiving Config: " << errno;
+        LOG(ERROR) << "Error Receiving Config: "<< e.what();
     }
 
     // Create Shared Memory
@@ -55,8 +55,6 @@ int main( int32_t argc, char** argv)
 	pCommanderThread.bWriteManualStates = 1;
 	pCommanderThread.bWriteControlsInterfaceState = 1;
 	std::thread tControlsInterfaceConnection(commanderThread, pCommanderThread);
-
-
 
  	tControlsInterfaceConnection.join();
     tServer.join();

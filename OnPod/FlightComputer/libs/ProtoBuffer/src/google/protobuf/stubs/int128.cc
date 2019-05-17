@@ -28,15 +28,15 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include <google/protobuf/stubs/int128.h>
+#include <src/google/protobuf/stubs/int128.h>
 
 #include <iomanip>
 #include <ostream>  // NOLINT(readability/streams)
 #include <sstream>
 
-#include <google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/stubs/logging.h>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {

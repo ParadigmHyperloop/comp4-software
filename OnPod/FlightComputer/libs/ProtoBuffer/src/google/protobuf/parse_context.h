@@ -34,12 +34,12 @@
 #include <cstring>
 #include <string>
 
-#include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/port.h>
-#include <google/protobuf/wire_format_lite.h>
-#include <google/protobuf/stubs/strutil.h>
+#include <src/google/protobuf/io/coded_stream.h>
+#include <src/google/protobuf/port.h>
+#include <src/google/protobuf/wire_format_lite.h>
+#include <src/google/protobuf/stubs/strutil.h>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {
@@ -853,6 +853,6 @@ const char* SlowMapEntryParser(const char* begin, const char* end, void* object,
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_PARSE_CONTEXT_H__

@@ -28,13 +28,13 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include <google/protobuf/util/internal/default_value_objectwriter.h>
+#include <src/google/protobuf/util/internal/default_value_objectwriter.h>
 
 #include <unordered_map>
 
-#include <google/protobuf/util/internal/constants.h>
-#include <google/protobuf/util/internal/utility.h>
-#include <google/protobuf/stubs/map_util.h>
+#include <src/google/protobuf/util/internal/constants.h>
+#include <src/google/protobuf/util/internal/utility.h>
+#include <src/google/protobuf/stubs/map_util.h>
 
 namespace google {
 namespace protobuf {

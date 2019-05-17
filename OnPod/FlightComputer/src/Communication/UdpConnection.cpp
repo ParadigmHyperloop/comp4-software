@@ -145,8 +145,6 @@ google::protobuf::Message* PdsConnection::getProtoUpdateMessage(){
 }
 
 
-
-
 BrakeNodeConnection::BrakeNodeConnection(Pod pod) : UdpConnection(pod) {
     this->_connectionName = "Brake Node : ";
 };

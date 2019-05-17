@@ -82,7 +82,8 @@ int32_t udpTelemetryThread(Pod Pod) {
             }
         }
         paradigmDataShuffle->giveUpdate(); //Send telemetry packet to PDS
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        std::this_thread::sleep_for(std::chrono::milliseconds(20));
+        std::this_thread::sleep_for(std::chrono::milliseconds(20));
     }
     for (auto &&node: nodes) {
         node->closeConnection();

@@ -132,12 +132,12 @@
     #define PROTOBUF_LITTLE_ENDIAN 1
   #endif
 #endif
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/port.h>
-#include <google/protobuf/stubs/port.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/port.h>
+#include <src/google/protobuf/stubs/port.h>
 
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {
@@ -1462,6 +1462,6 @@ inline bool CodedInputStream::Skip(int count) {
   #pragma runtime_checks("c", restore)
 #endif  // _MSC_VER && !defined(__INTEL_COMPILER)
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_IO_CODED_STREAM_H__

@@ -27,7 +27,7 @@
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#include <google/protobuf/stubs/stringpiece.h>
+#include <src/google/protobuf/stubs/stringpiece.h>
 
 #include <string.h>
 #include <algorithm>
@@ -35,7 +35,7 @@
 #include <string>
 #include <ostream>
 
-#include <google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/stubs/logging.h>
 
 namespace google {
 namespace protobuf {

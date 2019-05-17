@@ -33,10 +33,10 @@
 #include <iosfwd>
 #include <string>
 
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/stringpiece.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/stringpiece.h>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {
@@ -122,6 +122,6 @@ PROTOBUF_EXPORT std::ostream& operator<<(std::ostream& os, const Status& x);
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_STUBS_STATUS_H_

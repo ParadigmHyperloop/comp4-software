@@ -29,10 +29,10 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <google/protobuf/unittest_well_known_types.pb.h>
 
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/testing/googletest.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/testing/googletest.h>
 #include <gtest/gtest.h>
-#include <google/protobuf/stubs/stl_util.h>
+#include <src/google/protobuf/stubs/stl_util.h>
 
 namespace google {
 namespace protobuf {

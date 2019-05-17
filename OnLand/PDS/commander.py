@@ -8,7 +8,7 @@ from PDS.TCP.PodTcpConnection import PodTcpConnection
 from PDS.config import COMMANDER_BACKUP_PULSE, COMMANDER_TIMEOUT_TIME, COMMANDER_PULSE_SPEED, POD_IP, POD_COMMANDER_PORT
 
 log.basicConfig(filename='logs\heartbeat.log', format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
-pod_message = podCommand()
+pod_command = podCommand()
 
 
 # Create socket to connect to server
@@ -31,9 +31,11 @@ def on_disconnect():
 @sio.on('command')
 def on_command(command):
     if command is '1':
-        pod_message.manualBrakeNodeState = bnsVenting
+        pod_command.manualBrakeNodeState = bnsVenting
+        print("vent")
     else:
-        pod_message.manualBrakeNodeState = bnsStandby
+        pod_command.manualBrakeNodeState = bnsFlight
+        print("Flight")
 
 
 def main():
@@ -48,7 +50,6 @@ def main():
         else:
             connected = True
 
-    pod_command = podCommand()
     pod_command.controlsInterfaceState = ciFlight
 
     pod = PodTcpConnection(ip=POD_IP, port=POD_COMMANDER_PORT)
