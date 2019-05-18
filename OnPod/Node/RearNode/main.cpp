@@ -22,6 +22,7 @@ const uint32_t TX_INTERVAL_MS = 50;
 // sensors
 SPIClass adcSPI (&PERIPH_SPI1, MISO1, SCK1, MOSI1, PAD_SPI1_TX, PAD_SPI1_RX);
 ADS7953 adc(adcSPI);
+/*
 typeKThermo thermo(&adc, 0);
 
 // comms
@@ -36,15 +37,16 @@ void sendToFlightComputer(void*) {
     pb_encode(&outStream, RearNodeToFc_fields, &pRearNodeTelemetry);
     udp.sendPacket(IPAddress(IPPara.BBB_IP), IPPara.BBB_PORT, outStream.bytes_written);
 }
-
+*/
 void setup() {
-    udp.init();
+    //udp.init();
     adc.init();
 
-    txTimer.every(TX_INTERVAL_MS, &sendToFlightComputer, (void*)0);
+    //txTimer.every(TX_INTERVAL_MS, &sendToFlightComputer, (void*)0);
 }
 
 void loop() {
+    /*
 	adc.readActiveChannels();  // update sensor data
     // store sensor data in the protobuf message object
     pRearNodeTelemetry.coolantTemperature = thermo.read();
@@ -53,4 +55,7 @@ void loop() {
     pRearNodeTelemetry.coolantPressure1 = 0;
     pRearNodeTelemetry.tubePressure = 0;
     txTimer.update();  // check to see if it's time to send another packet
+*/
+Serial.println(adc.readSingleChannel(11));
+delay(200);
 }

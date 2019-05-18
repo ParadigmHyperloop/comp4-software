@@ -13,10 +13,12 @@ void UDPClass::init() {
     Ethernet.init(SS_PIN);
     Ethernet.begin(uMac, NODE_IP);
     // blocks until W5500 responds and an ethernet cable is connected
+    /*
     while (Ethernet.linkStatus() == LinkOFF ||
            Ethernet.hardwareStatus() == EthernetNoHardware) {
         delay(100);
     }
+    */
     Udp.begin(NODE_PORT);
 }
 
