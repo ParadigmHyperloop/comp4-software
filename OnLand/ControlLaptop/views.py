@@ -1,5 +1,8 @@
+import logging as log
+import json
+import requests
 from datetime import datetime
-from flask import *
+from flask import Flask, redirect, render_template, jsonify
 from ControlLaptop.LocalStorage.ConfigurationSotrage import LocalStorage
 from ControlLaptop.LocalStorage.FlightConfig import FlightConfig
 from ControlLaptop.SocketController import PodCommunicator
@@ -14,7 +17,7 @@ with app.app_context():
     try:
         pod_communicator = PodCommunicator.get_pod_communicator()
     except Exception as e:
-        print("COULD NOT CONNECT TO POD")
+        log.info("COULD NOT CONNECT TO POD")
 
 # --------------------------------------------------------------
 # END SETUP
@@ -65,7 +68,7 @@ def submit_configuration():
 
 @app.route('/send_command', methods=["POST"])
 def send_command():
-    command = request.get_json()['command']
+    command = requests.get_json()['command']
     try:
         pod_communicator.send_command(command)
     finally:
@@ -96,11 +99,28 @@ def dts():
     title = get_page_title(page)
     with open('ControlLaptop/LocalStorage/DtsSensors.json') as json_file:
         sensors = json.load(json_file)
+    with open('ControlLaptop/LocalStorage/ElectricalValues.json') as json_file:
+        electrical_sensors = json.load(json_file)
     return render_template(
         page+".html",
         active_page=page,
         title=title,
         sensors=sensors,
+        electrical_senesors=electrical_sensors
+    )
+
+
+@app.route('/proofTest')
+def proofTest():
+    page = 'proofTest'
+    title = get_page_title(page)
+    with open('ControlLaptop/LocalStorage/ProofTestSensors.json') as json_file:
+        sensors = json.load(json_file)
+    return render_template(
+        page+".html",
+        active_page=page,
+        title=title,
+        sensors=sensors
     )
 
 
@@ -117,11 +137,8 @@ def get_flight_profile_template():
     )
 
 
-
 @app.route('/sensor_ranges')
 def add_numbers():
     with open('ControlLaptop/LocalStorage/DtsSensors.json') as json_file:
         data = json_file.read().replace('\n', '')
     return data
-
-

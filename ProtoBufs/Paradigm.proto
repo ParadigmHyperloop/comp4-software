@@ -135,25 +135,25 @@ message Telemetry {
     //optional int32 inverterInternalStates = 30;
 
 // HV-BMS
-    repeated int32 batteryPackVoltages = 26;
-    repeated int32 batteryPackCurrent = 27;
-    repeated int32 batteryCellTemperatures = 28;
-    optional int32 batteryPackMinimumVoltage = 29;
-    optional int32 batteryPackMaxVoltage = 30;
+    optional float hvBatteryPackVoltage = 26;
+    optional float hvBatteryPackCurrent = 27;
+    repeated int32 hvBatteryCellTemperatures = 28;
+    optional float hvBatteryPackMinimumCellVoltage = 29;
+    optional float hvBatteryPackMaxCellVoltage = 30;
 
 // Brake Node
-    optional bool bSolenoid1 = 32;
-    optional bool bSolenoid2 = 33;
-    optional bool bSolenoid3 = 34;
-    optional bool bSolenoid4 = 35;
-    optional bool bSolenoid5 = 36;
-    optional bool bSolenoid6 = 37;
-    optional int32 iHighPressure  = 38;
-    optional int32 iLowPressure1 = 39;
-    optional int32 iLowPressure2 = 40;
-    optional int32 iLowPressure3 = 41;
-    optional int32 iLowPressure4 = 42;
-    optional int32 pressureVesselTemperature = 43;
+    optional bool solenoid1 = 32;
+    optional bool solenoid2 = 33;
+    optional bool solenoid3 = 34;
+    optional bool solenoid4 = 35;
+    optional bool solenoid5 = 36;
+    optional bool solenoid6 = 37;
+    optional float highPressure  = 38;
+    optional float lowPressure1 = 39;
+    optional float lowPressure2 = 40;
+    optional float lowPressure3 = 41;
+    optional float lowPressure4 = 42;
+    optional float pressureVesselTemperature = 43;
 
     optional int32 electronicsEnclosurePressure = 44;
     optional int32 railDisplacementX = 45;
@@ -215,15 +215,16 @@ message RearNodeToFc {
     required float coolantTemperature = 6 [default = 0];
 }
 
-message FlightConfig {
-    required uint32 retrieval_timeout = 1;
-    required uint64 max_flight_time = 2;
-    required uint64 motor_speed = 3;
-    required int32 telemetry_port = 4;
-    required int32 command_port = 5;
-    required uint64 flight_length = 6;
-    required int32 heartbeat_timeout = 7;
-    required string pod_driver = 8;
+message flightConfig {
+    optional uint32 retrievalTimeout = 1;
+    optional uint64 maxFlightTime = 2;
+    optional uint64 motorSpeed = 3;
+    optional int32 pdsTelemetryPort = 4 [default = 7000];
+    optional int32 commandPort = 5 [default = 6000];
+    optional uint64 flightLength = 6;
+    optional int32 heartbeatTimeout = 7 [default = 10000];
+    optional string podDriver = 8;
+    optional string controlLaptopIpAddr = 9 [default = "127.0.0.1"];
 }
 
 message DefaultFcToNode {

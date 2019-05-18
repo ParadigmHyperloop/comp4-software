@@ -55,12 +55,10 @@ class DtsNode(HardwareStateSimulation):
         self.update_sensors()
         update = dict()
         update['State'] = self.state
-        update['sol1'] = self.sol1
-        update['sol2'] = self.sol2
-        update['hp'] = self.hp
-        update['lp'] = self.lp
-        update['rail_temp'] = self.rail_temp
-        update['pressure_vessel_temp'] = self.pressure_vessel_temp
+        update['solenoid1'] = self.sol1
+        update['highPressure'] = self.hp
+        update['lowPressure1'] = self.lp
+        update['pressureVesselTemperature'] = self.pressure_vessel_temp
         return update
 
     def update_sensors(self):

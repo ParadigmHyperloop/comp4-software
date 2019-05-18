@@ -25,11 +25,11 @@ do
 done
 
 # Move files accordingly
-flightComputer="../OnPod/FlightComputer/include/ProtoBuffer/"
+flightComputer="../OnPod/FlightComputer/libs/ProtoBuffer/"
 flightComputerSrc="../OnPod/FlightComputer/src/"
 
-PDS="../OnLand/PDS"
-NODESIM="../Testing/NodeSimulator/Protobuf"
+PDS="../OnLand"
+NODESIM="../Testing/NodeSimulator"
 COMMANDTEST="../Testing/ManualCommandTesting"
 FLASK="../OnLand/ControlLaptop"
 

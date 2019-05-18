@@ -33,6 +33,8 @@ Testing/NodeSimulator/__pycache__/
 *.piolibdeps
 *.clang_complete
 *.gcc-flags.json
+OnPod/Node/DynamicTestStand/include
+ProtoBufs/UpdateNanoPbProtos.sh
 
 
 OnPod/FlightComputer/Host/src/
@@ -47,6 +49,8 @@ OnPod/FlightComputer/BeagleBone/
 OnPod/FlightComputer/Host/src/
 
 OnPod/FlightComputer/myeasylog\.log
+OnLand/pyvenv.cfg
+*.log
 
 OnPod/FlightComputer/build/
 
@@ -56,3 +60,6 @@ Testing/SingleCellTesting/Node/include
 OnPod/Node/HighPressureTesting/include
 
 ProtoBufs/UpdateNanoPbProtos.sh
+*.csv
+
+ProtoBufs/Paradigm/cpp/

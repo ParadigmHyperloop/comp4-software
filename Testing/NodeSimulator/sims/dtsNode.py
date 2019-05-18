@@ -4,7 +4,7 @@ from messageHandler import StringHandler, DtsNodeProtoHandler
 from hardwareStateSimulation import DtsNode
 from behaviour2 import *
 
-udp_connection = UdpConnection(flight_computer_port=5001, node_sim_port=5000, flight_computer_ip='localhost')
+udp_connection = UdpConnection(flight_computer_port=5000, node_sim_port=5001, flight_computer_ip='localhost')
 
 
 dts_node_behaviour = NominalDtsNodeBehaviour()
@@ -28,7 +28,9 @@ while True:
     node_state = node_update['State']
 
     states = {'Manual Command state': manual_command_state, 'NodeState': node_state}
-    logger.log_states(states)
+
+    #logger.log_states(states)
+    time.sleep(1)
 
     node_message = messageHandler.prepare_brake_node_message(node_update)
     udp_connection.send_data(node_message)

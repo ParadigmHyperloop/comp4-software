@@ -15,13 +15,12 @@
     </div>
 
     <div class="row">
-       <div class="col-md-12">
+       <div class="col-md-6">
           {% include '_cards/sensor_values.html' %}
+       </div>
+       <div class="col-md-6">
+          {% include '_cards/electrial_values.html' %}
        </div>
     </div>
 
-{% endblock %}
-
-{% block pageScripts %}
-    <script src="{{ url_for('static',filename='assets/js/DtsControl.js') }}"></script>
 {% endblock %}
