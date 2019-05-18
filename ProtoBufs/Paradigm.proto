@@ -60,7 +60,7 @@ enum LvdcNodeStates {
     lvdcBooting = 0;
 }
 
-message brakeNodeData {
+message BrakeNodeData {
   required int32 id = 1;
 
   optional BrakeNodeStates state = 14;
@@ -83,7 +83,7 @@ message brakeNodeData {
 
 }
 
-message podCommand {
+message PodCommand {
     optional ControlsInterfaceStates controlsInterfaceState = 1;
     optional PodStates manualPodState = 2;
     optional BrakeNodeStates manualBrakeNodeState = 3;
@@ -93,7 +93,7 @@ message podCommand {
 }
 
 
-message telemetry {
+message Telemetry {
 
 // States
     optional PodStates podState = 1;
@@ -189,26 +189,30 @@ message telemetry {
     optional int32 railCurrentFlag = 73;
 }
 
-// flight computer to DTS node
 message FcToBrakeNode {
-    optional PodStates podState = 1;
-    optional BrakeNodeStates manualNodeState = 2;
-    optional bool hpSolenoidState = 3;
-    optional bool ventSolenoidState = 4;
-    optional bool lpSolenoid1State = 5;
-    optional bool lpSolenoid2State = 6;
-    optional bool lpSolenoid3State = 7;
+    optional int32 packetNum = 1;
+    optional PodStates podState = 2;
+    optional BrakeNodeStates manualNodeState = 3;
 }
 
-// DTS node to flight computer
 message DtsNodeToFc {
-    optional BrakeNodeStates brakeNodeState = 1;
-    optional bool brakeSolenoidState = 2 [default = false];
-    optional bool ventSolenoidState = 3 [default = false];
-    optional float rotorTemperature = 4;
-    optional float pneumaticTemperature = 5;
-    optional float tankPressure = 6;
-    optional float brakePressure = 7;
+    required int32 packetNum = 1 [default = 0];
+    required BrakeNodeStates brakeNodeState = 2 [default = bnsStandby];
+    required bool brakeSolenoidState = 3 [default = false];
+    required bool ventSolenoidState = 4 [default = false];
+    required float rotorTemperature = 5 [default = 0];
+    required float pneumaticTemperature = 6 [default = 0];
+    required float tankPressure = 7 [default = 0];
+    required float brakePressure = 8 [default = 0];
+}
+
+message RearNodeToFc {
+    required int32 packetNum = 1 [default = 0];
+    required float tubePressure = 2 [default = 0];
+    required float coolantPressure1 = 3 [default = 0];
+    required float coolantPressure2 = 4 [default = 0];
+    required float coolantPressure3 = 5 [default = 0];
+    required float coolantTemperature = 6 [default = 0];
 }
 
 message flightConfig {
@@ -223,6 +227,6 @@ message flightConfig {
     optional string controlLaptopIpAddr = 9 [default = "127.0.0.1"];
 }
 
-message defaultFcToNode {
+message DefaultFcToNode {
     optional PodStates podState = 1;
 }
