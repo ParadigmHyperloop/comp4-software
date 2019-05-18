@@ -20,7 +20,11 @@ Timer txTimer;
 // sensors
 SPIClass adcSPI (&PERIPH_SPI1, MISO1, SCK1, MOSI1, PAD_SPI1_TX, PAD_SPI1_RX);
 ADS7953 adc(adcSPI);
+<<<<<<< HEAD
 
+=======
+/*
+>>>>>>> a2456829b838471dc614ac9505197677f8f1af36
 typeKThermo thermo(&adc, 0);
 
 // comms
@@ -38,17 +42,22 @@ void sendToFlightComputer(void*) {
         txPacketNum++;
     }
 }
-
+*/
 void setup() {
-    udp.init();
+    //udp.init();
     adc.init();
 
+<<<<<<< HEAD
     thermo.init();
 
     txTimer.every(REAR_NODE_TO_FC_INTERVAL, &sendToFlightComputer, (void*)0);
+=======
+    //txTimer.every(TX_INTERVAL_MS, &sendToFlightComputer, (void*)0);
+>>>>>>> a2456829b838471dc614ac9505197677f8f1af36
 }
 
 void loop() {
+    /*
 	adc.readActiveChannels();  // update sensor data
     // store sensor data in the protobuf message object
     pRearNodeTelemetry.coolantTemperature = thermo.read();
@@ -58,4 +67,7 @@ void loop() {
     pRearNodeTelemetry.tubePressure = 0;
 
     txTimer.update();  // check to see if it's time to send another packet
+*/
+Serial.println(adc.readSingleChannel(11));
+delay(200);
 }
