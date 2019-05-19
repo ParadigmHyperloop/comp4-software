@@ -7,7 +7,7 @@ from PDS.TCP.heartbeat_timer import HeartbeatTimer
 from PDS.TCP.PodTcpConnection import PodTcpConnection
 from PDS.config import COMMANDER_BACKUP_PULSE, COMMANDER_TIMEOUT_TIME, COMMANDER_PULSE_SPEED, POD_IP, POD_COMMANDER_PORT
 
-log.basicConfig(filename='logs\heartbeat.log', format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+#log.basicConfig(filename='logs\heartbeat.log', format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 pod_command = podCommand()
 
 
@@ -45,7 +45,7 @@ def main():
         try:
             sio.connect(SOCKET_SERVER)
         except:
-            log.warning("Commader cannot connect to SocketIO")
+            print("Commader cannot connect to SocketIO")
             time.sleep(2)
         else:
             connected = True
@@ -62,27 +62,23 @@ def main():
 
         while pod.is_connected():
             # Send a packets every PULSE_SPEED milliseconds.
-            log.debug("Heartbeat: healthy")
             if timer.time_since_pulse() > COMMANDER_PULSE_SPEED:
                 pod.send_packet(pod_command.SerializeToString())
-
                 # Receive Packet
                 while timer.time_since_pulse() > COMMANDER_PULSE_SPEED and pod.is_connected():
                     msg = pod.receive()
-                    log.debug("Heartbeat: Received - " + str(msg))
                     if not msg:
                         if timer.time_since_pulse() > COMMANDER_TIMEOUT_TIME:
-                            log.warning("Heartbeat: Timed out, after:" + str(timer.time_since_pulse()))
+                            print("Heartbeat: Timed out, after:" + str(timer.time_since_pulse()))
                             pod.close()
                         elif timer.time_since_pulse() > COMMANDER_BACKUP_PULSE:
-                            log.debug("Heartbeat: Sending backup packet")
+                            print("Heartbeat: Sending backup packet")
                             pod.send_packet(pod_command.SerializeToString())
                     else:  # Msg received
                         sio.emit('ping', 1)
                         timer.pulse()
                         break
         # Connection lost, tell GUI
-        log.warning("Heartbeat: Lost")
         sio.emit('ping', 0)
 
 

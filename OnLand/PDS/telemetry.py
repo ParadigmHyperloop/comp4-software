@@ -46,6 +46,7 @@ def main():
     while udp_socket.is_connected():
         data = udp_socket.recv(timedelta(seconds=UDP_TELEM_TIMEOUT))
         if data is not None:
+            print("pak")
             pod_data = telemetry()
             pod_data.ParseFromString(data)
             print(pod_data.__str__())

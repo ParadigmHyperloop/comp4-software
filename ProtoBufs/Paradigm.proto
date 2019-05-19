@@ -224,7 +224,7 @@ message flightConfig {
     optional uint64 flightLength = 6;
     optional int32 heartbeatTimeout = 7 [default = 10000];
     optional string podDriver = 8;
-    optional string controlLaptopIpAddr = 9 [default = "192.168.0.101"];
+    optional string controlLaptopIpAddr = 9 [default = "127.0.0.1"];
 }
 
 message DefaultFcToNode {

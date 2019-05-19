@@ -29,7 +29,7 @@ int32_t createCommanderServerSocket(int32_t serverPortNumber) {
     return serverSock;
 }
 
-void parseProtoCommand(podCommand podCommand, Pod *Pod) {
+void parseProtoCommand(PodCommand podCommand, Pod *Pod) {
     if (podCommand.has_controlsinterfacestate()) {
         Pod->setControlsInterfaceState(podCommand.controlsinterfacestate());
     }
@@ -37,7 +37,7 @@ void parseProtoCommand(podCommand podCommand, Pod *Pod) {
         Pod->setAutomaticTransitions(podCommand.automaticstatetransitions());
     }
     if (podCommand.has_manualbrakenodestate()) {
-        LOG(INFO) << podCommand.manualbrakenodestate();
+       // LOG(INFO) << podCommand.manualbrakenodestate();
         Pod->setManualBrakeNodeState(podCommand.manualbrakenodestate());
     }
     if (podCommand.has_manuallvdcnodestate()) {
@@ -50,13 +50,13 @@ void parseProtoCommand(podCommand podCommand, Pod *Pod) {
 }
 
 int32_t unserializeProtoMessage(Pod *Pod, char buffer[], int32_t messageSize) {
-    podCommand pPodCommand;
+    PodCommand pPodCommand;
     bool operationStatus;
 
     operationStatus = pPodCommand.ParseFromArray(buffer, messageSize);
     if (operationStatus) {
         parseProtoCommand(pPodCommand, Pod);
-        LOG(INFO) << "Command/HeartBeat Received";
+       // LOG(INFO) << "Command/HeartBeat Received";
         return operationStatus;
     } else {
         LOG(ERROR) << "Error Parsing Command";

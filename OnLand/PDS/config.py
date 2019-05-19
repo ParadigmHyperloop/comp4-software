@@ -13,7 +13,7 @@ MAX_MESSAGE_SIZE = 1024
 
 
 # Pod
-POD_IP = '192.168.0.100'
+POD_IP = '127.0.0.1'
 
 
 # Udp Telemetry Stream

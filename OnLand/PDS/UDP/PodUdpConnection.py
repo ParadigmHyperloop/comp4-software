@@ -50,7 +50,7 @@ class PodUdpConnection:
         try:
             self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-            self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_SNDBUF, 100)
+            self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_SNDBUF, 200)
             self.sock.bind(('', self.port))
         except Exception as e:
             self.close()

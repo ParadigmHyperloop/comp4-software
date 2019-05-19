@@ -44,7 +44,7 @@ void UdpConnection::getUpdate() {
     bzero(&buffer, sizeof buffer);
     ssize_t receivedPacketSize = recvfrom(this->_inboundSocket, buffer, 200, 0, nullptr, nullptr);
     if (receivedPacketSize != -1) {
-        LOG(INFO) << receivedPacketSize << " Bytes received on " << this->_connectionName << buffer;
+        //LOG(INFO) << receivedPacketSize << " Bytes received on " << this->_connectionName << buffer;
         try {
             this->parseUpdate(buffer, (int32_t) receivedPacketSize);
         }
@@ -91,7 +91,7 @@ void UdpConnection::closeConnection() {
 
 
 google::protobuf::Message* UdpConnection::getProtoUpdateMessage() {
-    auto protoMessage = new defaultFcToNode();
+    auto protoMessage = new DefaultFcToNode();
     protoMessage->set_podstate(psArmed);
     return protoMessage;
 };
@@ -129,7 +129,7 @@ PdsConnection::PdsConnection(Pod pod) : UdpConnection(pod) {
 
 //TODO can we do this without putting the proto on the heap?
 google::protobuf::Message* PdsConnection::getProtoUpdateMessage(){
-    auto protoMessage = new telemetry();
+    auto protoMessage = new Telemetry();
     protoMessage->set_podstate(pod.sPodValues->podState);
     protoMessage->set_lowpressure1(pod.sPodValues->lowPressure1);
     protoMessage->set_highpressure(pod.sPodValues->highPressure);
@@ -157,6 +157,7 @@ google::protobuf::Message* BrakeNodeConnection::getProtoUpdateMessage() {
     auto protoMessage = new FcToBrakeNode();
     protoMessage->set_podstate(this->pod.sPodValues->podState);
     protoMessage->set_manualnodestate(this->pod.sPodValues->manualBrakeNodeState);
+    LOG(INFO)<<protoMessage->manualnodestate();
     return protoMessage;
 }
 

@@ -13,11 +13,11 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secrete-key'  # change later.
 
 # Creating Flask Global PodCommunicator and connecting to Pod
-with app.app_context():
-    try:
-        pod_communicator = PodCommunicator.get_pod_communicator()
-    except Exception as e:
-        log.info("COULD NOT CONNECT TO POD")
+# with app.app_context():
+#    try:
+#        pod_communicator = PodCommunicator.get_pod_communicator()
+#    except Exception as e:
+#        log.info("COULD NOT CONNECT TO POD")
 
 # --------------------------------------------------------------
 # END SETUP

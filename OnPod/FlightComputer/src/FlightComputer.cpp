@@ -25,7 +25,7 @@ int main( int32_t argc, char** argv)
 	FlightConfigServer* configServer = FlightConfigServer::getServer(NetworkConstants::iCONFIG_SERVER_PORT);
 	flightConfig flightConfig;
     try {
-        //flightConfig = (*configServer)();
+        //flightConfig = (*configServer)(); //Comment out to use the default network values in the proto obj
     } catch (exception& e)
     {
         LOG(ERROR) << "Error Receiving Config: "<< e.what();
@@ -39,17 +39,13 @@ int main( int32_t argc, char** argv)
     // Network Configs
     initializer->updatePodNetworkValues(sPodNetworkValues, flightConfig);
 
+
     //Pod Internal Network Thread
     Pod pPodInternalNetwork = Pod(&sPodValues, &sPodNetworkValues);
     pPodInternalNetwork.bWriteBreakNodeState = true;
     std::thread tServer(udpTelemetryThread, pPodInternalNetwork);
 
-/*
-    // Core Control Loop Thread
-    Pod pCoreControlLoop = Pod(&sPodValues, &sPodNetworkValues);
-    pCoreControlLoop.bWritePodState = true;
-    std::thread tControlLoop(coreControlLoop, pCoreControlLoop);
-*/
+
 	// Controls Interface Connection Thread
 	Pod pCommanderThread = Pod(&sPodValues, &sPodNetworkValues);
 	pCommanderThread.bWriteManualStates = 1;
