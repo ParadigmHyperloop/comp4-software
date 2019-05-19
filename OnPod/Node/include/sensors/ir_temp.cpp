@@ -9,6 +9,6 @@ void OS101E::init() {
 }
 
 float OS101E::read() {
-    uint16_t uAdcConversion = adc->uAdcData[uAdcChannel];
-    return (uAdcConversion/4096)*556 - 18;
+    uint16_t uAdcConversion = adc->getuAdcData()[uAdcChannel];
+    return ((float)uAdcConversion/4096)*556 - 18;
 }

@@ -6,7 +6,7 @@
 *.project
 *.cproject
 .DS_Store
-*.settings
+*.settings*
 .idea
 venv/
 pycache/
@@ -37,9 +37,6 @@ OnPod/Node/DynamicTestStand/include
 ProtoBufs/UpdateNanoPbProtos.sh
 
 
-*.pb.h
-*.pb.cc
-*_pb2.py
 OnPod/FlightComputer/Host/src/
 
 OnPod/FlightComputer/BeagleBone/src/
@@ -57,6 +54,12 @@ OnLand/pyvenv.cfg
 
 OnPod/FlightComputer/build/
 
+OnPod/Node/DynamicTestStand/include
+OnPod/Node/RearNode/include
+Testing/SingleCellTesting/Node/include
+OnPod/Node/HighPressureTesting/include
+
+ProtoBufs/UpdateNanoPbProtos.sh
 *.csv
 
 ProtoBufs/Paradigm/cpp/

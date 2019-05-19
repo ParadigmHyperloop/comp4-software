@@ -4,7 +4,8 @@
 - Install arduino ide
 - Install samd20 and samd21 packages (Tools -> Boards -> Board Manager)
 - Replace YOUR_PATH\Arduino\portable\packages\arduino\hardware\samd\1.6.15\variants\mkr1000, 
-    variant.cpp and .h with BoardPackageFiles version // custom for the Nodes
+- add includes/ folder from this readme's dir to your arduino project
+- put variant.h, variant.cpp and pins_arduino.h from BoardPinVariants/ to the MKR100/core folder
 
 ## Eclipse + sloeber
 - Install latest c++ eclipse (2018-09 confirmed, neon did not work)
