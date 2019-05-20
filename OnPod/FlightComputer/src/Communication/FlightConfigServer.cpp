@@ -72,7 +72,7 @@ flightConfig FlightConfigServer::operator()() {
         LOG(INFO) << "Host connected using port" << clientPort;
     } else {
         inet_ntop(AF_INET, &clientSockAddr.sin_addr, controlLaptopAddr, NI_MAXHOST);
-        LOG(INFO) << controlLaptopAddr << "Connected on port" << ntohs(clientSockAddr.sin_port);
+        LOG(INFO) << controlLaptopAddr << " Connected on port " << ntohs(clientSockAddr.sin_port);
     }
 
 
@@ -100,7 +100,8 @@ flightConfig FlightConfigServer::operator()() {
          SUCCESS_RECEIVE_CONFIG_RESPONSE,
          strlen(SUCCESS_RECEIVE_CONFIG_RESPONSE),
          0);
-    config.set_controllaptopipaddr(std::string(controlLaptopAddr));
+    std::string laptopAddress(controlLaptopAddr);
+    config.set_controllaptopipaddr(laptopAddress);
     return config;
 }
 

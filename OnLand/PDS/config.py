@@ -14,7 +14,7 @@ UDP_RECV_BUFFER_SIZE = 50
 
 
 # Pod
-POD_IP = '192.168.0.102'
+POD_IP = '127.0.0.1'
 #POD_IP = '192.168.0.100'
 
 

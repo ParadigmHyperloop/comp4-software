@@ -7,7 +7,7 @@ from ControlLaptop.LocalStorage.ConfigurationSotrage import DEFAULT_CONFIGURATIO
 class PodConnectionConstants:
     """ Pod Connection Constants"""
     POD_COMMAND_PORT = 3001
-    POD_ADDRESS = '192.168.0.100'
+    POD_ADDRESS = '127.0.0.1'
     TEST_JSON_COMMAND_DICTIONARY = {'command': 2, "other_commands": 'test'}
 
 
@@ -34,11 +34,12 @@ class PodCommunicator:
     def _connect_to_pod(self):
         self._pod_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
+            self._pod_socket.settimeout(1)
             self._pod_socket.connect((self._pod_address, PodConnectionConstants.POD_COMMAND_PORT))
+            self._pod_socket.settimeout(None)
         except socket.error as e:
-            print("Failed to Connect to Pod")
             raise e
-        print('Connected...')
+
 
     def send_command(self, command):
         command_json = '{command: ' + command + '}'

@@ -1,7 +1,8 @@
-import logging as log
 import json
+import sys
 import requests
 from datetime import datetime
+import logging as log
 from flask import Flask, redirect, render_template, jsonify
 from ControlLaptop.LocalStorage.ConfigurationSotrage import LocalStorage
 from ControlLaptop.LocalStorage.FlightConfig import FlightConfig
@@ -9,15 +10,20 @@ from ControlLaptop.SocketController import PodCommunicator
 from ControlLaptop.config import get_page_title, NAV_BAR
 from ControlLaptop.forms import FlightConfigurationForm
 
+
+log.basicConfig(stream=sys.stdout, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=log.INFO)
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secrete-key'  # change later.
 
 # Creating Flask Global PodCommunicator and connecting to Pod
-# with app.app_context():
-#    try:
-#        pod_communicator = PodCommunicator.get_pod_communicator()
-#    except Exception as e:
-#        log.info("COULD NOT CONNECT TO POD")
+with app.app_context():
+    try:
+        pod_communicator = PodCommunicator.get_pod_communicator()
+    except Exception as e:
+        log.info("Could not connect to pod")
+    else:
+        log.info("Connected to Config")
+
 
 # --------------------------------------------------------------
 # END SETUP

@@ -1,41 +1,4 @@
-from influxdb import InfluxDBClient
-
-
 DEFAULT_TITLE = "Control Interface"
-
-
-# @TODO set db structure
-# gets the name of the sensors from the db, used to generate sensor table
-def db_query_sensor_names():
-    # connect to db to get sensor names
-    client = InfluxDBClient('localhost', 8086)
-    client.switch_database('test')
-
-    a = client.query("select last(*), min(*), max(*) from test.autogen.sensors group by id")
-
-    for item in a.get_points():
-        yield item['last_id_field']
-
-
-def get_sensor_values():
-    # TODO: Move this to ODS. Updated design does not connect to DB
-    # connect to database
-    client = InfluxDBClient('localhost', 8086)
-    client.switch_database('test')
-
-    all_sensors_name = db_query_sensor_names()
-
-    for sensors in all_sensors_name:
-        all_sensors_values = client.query(str(db_query_sensor_values(sensors)))
-
-        for all_sensor_data in all_sensors_values:
-            yield all_sensor_data[0]
-
-
-def db_query_sensor_values(input):
-    return str("select last(*), min(*), max(*) from test.autogen.sensors where id=" + "'" + input + "'")
-
-
 
 NAV_BAR = [
     {
