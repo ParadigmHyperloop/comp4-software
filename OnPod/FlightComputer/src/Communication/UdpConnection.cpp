@@ -44,7 +44,7 @@ void UdpConnection::getUpdate() {
     bzero(&buffer, sizeof buffer);
     ssize_t receivedPacketSize = recvfrom(this->_inboundSocket, buffer, 200, 0, nullptr, nullptr);
     if (receivedPacketSize != -1) {
-        //LOG(INFO) << receivedPacketSize << " Bytes received on " << this->_connectionName << buffer;
+       // LOG(INFO) << receivedPacketSize << " Bytes received on " << this->_connectionName << buffer;
         try {
             this->parseUpdate(buffer, (int32_t) receivedPacketSize);
         }
@@ -157,7 +157,6 @@ google::protobuf::Message* BrakeNodeConnection::getProtoUpdateMessage() {
     auto protoMessage = new FcToBrakeNode();
     protoMessage->set_podstate(this->pod.sPodValues->podState);
     protoMessage->set_manualnodestate(this->pod.sPodValues->manualBrakeNodeState);
-    LOG(INFO)<<protoMessage->manualnodestate();
     return protoMessage;
 }
 

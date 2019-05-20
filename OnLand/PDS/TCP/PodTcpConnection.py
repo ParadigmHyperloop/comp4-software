@@ -37,6 +37,8 @@ class PodTcpConnection:
 
     def send_packet(self, payload):
         total_sent = 0
+        if not self.is_connected():
+            return
         while len(payload):
             try:
                 sent = self._sock.send(payload)

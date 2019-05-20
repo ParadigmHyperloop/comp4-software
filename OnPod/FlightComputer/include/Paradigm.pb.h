@@ -1946,7 +1946,7 @@ class flightConfig :
   ::std::string* release_poddriver();
   void set_allocated_poddriver(::std::string* poddriver);
 
-  // optional string controlLaptopIpAddr = 9 [default = "127.0.0.1"];
+  // optional string controlLaptopIpAddr = 9 [default = "192.168.0.103"];
   bool has_controllaptopipaddr() const;
   void clear_controllaptopipaddr();
   static const int kControlLaptopIpAddrFieldNumber = 9;
@@ -4388,7 +4388,7 @@ inline void flightConfig::set_allocated_poddriver(::std::string* poddriver) {
   // @@protoc_insertion_point(field_set_allocated:flightConfig.podDriver)
 }
 
-// optional string controlLaptopIpAddr = 9 [default = "127.0.0.1"];
+// optional string controlLaptopIpAddr = 9 [default = "192.168.0.103"];
 inline bool flightConfig::has_controllaptopipaddr() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
