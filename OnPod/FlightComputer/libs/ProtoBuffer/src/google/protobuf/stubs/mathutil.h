@@ -33,9 +33,9 @@
 #include <float.h>
 #include <math.h>
 
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/logging.h>
-#include <google/protobuf/stubs/mathlimits.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/stubs/mathlimits.h>
 
 namespace google {
 namespace protobuf {

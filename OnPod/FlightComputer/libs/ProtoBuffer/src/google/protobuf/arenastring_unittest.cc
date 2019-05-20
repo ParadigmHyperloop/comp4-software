@@ -30,7 +30,7 @@
 
 // Based on mvels@'s frankenstring.
 
-#include <google/protobuf/arenastring.h>
+#include <src/google/protobuf/arenastring.h>
 
 #include <algorithm>
 #include <cstdlib>
@@ -38,11 +38,11 @@
 #include <string>
 #include <vector>
 
-#include <google/protobuf/stubs/logging.h>
-#include <google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/stubs/common.h>
 #include <gtest/gtest.h>
-#include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/io/zero_copy_stream_impl.h>
+#include <src/google/protobuf/io/coded_stream.h>
+#include <src/google/protobuf/io/zero_copy_stream_impl.h>
 
 
 

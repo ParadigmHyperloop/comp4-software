@@ -40,17 +40,17 @@
 #define GOOGLE_PROTOBUF_WIRE_FORMAT_H__
 
 #include <string>
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/message.h>
-#include <google/protobuf/wire_format_lite.h>
-#include <google/protobuf/stubs/casts.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/descriptor.h>
+#include <src/google/protobuf/message.h>
+#include <src/google/protobuf/wire_format_lite.h>
+#include <src/google/protobuf/stubs/casts.h>
 
 #ifdef SWIG
 #error "You cannot SWIG proto headers"
 #endif
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {
@@ -342,6 +342,6 @@ inline size_t ComputeUnknownMessageSetItemsSize(
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_WIRE_FORMAT_H__

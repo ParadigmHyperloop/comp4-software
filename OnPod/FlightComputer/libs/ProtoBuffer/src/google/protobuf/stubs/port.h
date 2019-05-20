@@ -44,9 +44,9 @@
 #include <stdint.h>
 #endif
 
-#include <google/protobuf/stubs/platform_macros.h>
+#include <src/google/protobuf/stubs/platform_macros.h>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 #undef PROTOBUF_LITTLE_ENDIAN
 #ifdef _WIN32
@@ -82,7 +82,7 @@
 #elif defined(__APPLE__)
 #include <libkern/OSByteOrder.h>
 #elif defined(__GLIBC__) || defined(__BIONIC__) || defined(__CYGWIN__)
-#libs <byteswap.h>  // IWYU pragma: export
+#include <byteswap.h>  // IWYU pragma: export
 #endif
 
 // Legacy: some users reference these (internal-only) macros even though we
@@ -437,6 +437,6 @@ class BigEndian {
 #define GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER 0
 #endif
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_STUBS_PORT_H_

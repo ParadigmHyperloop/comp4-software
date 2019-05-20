@@ -27,7 +27,7 @@
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#include <google/protobuf/stubs/stringpiece.h>
+#include <src/google/protobuf/stubs/stringpiece.h>
 
 #include <iterator>
 #include <map>
@@ -35,8 +35,8 @@
 #include <utility>
 #include <vector>
 
-#include <google/protobuf/testing/googletest.h>
-#include <google/protobuf/stubs/hash.h>
+#include <src/google/protobuf/testing/googletest.h>
+#include <src/google/protobuf/stubs/hash.h>
 #include <gtest/gtest.h>
 
 namespace google {

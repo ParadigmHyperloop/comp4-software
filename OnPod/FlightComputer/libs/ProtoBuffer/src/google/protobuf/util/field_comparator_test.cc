@@ -30,11 +30,11 @@
 
 // Author: ksroka@google.com (Krzysztof Sroka)
 
-#include <google/protobuf/util/field_comparator.h>
+#include <src/google/protobuf/util/field_comparator.h>
 
 #include <google/protobuf/unittest.pb.h>
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/stubs/mathutil.h>
+#include <src/google/protobuf/descriptor.h>
+#include <src/google/protobuf/stubs/mathutil.h>
 // This gtest header is put after mathutil.h intentionally. We have to do
 // this because mathutil.h includes mathlimits.h which requires cmath not
 // being included to compile on some versions of gcc:

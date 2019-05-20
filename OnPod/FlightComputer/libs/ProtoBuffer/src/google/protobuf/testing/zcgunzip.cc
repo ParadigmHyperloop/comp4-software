@@ -52,8 +52,8 @@
 #endif
 #endif
 
-#include <google/protobuf/io/gzip_stream.h>
-#include <google/protobuf/io/zero_copy_stream_impl.h>
+#include <src/google/protobuf/io/gzip_stream.h>
+#include <src/google/protobuf/io/zero_copy_stream_impl.h>
 
 using google::protobuf::io::FileInputStream;
 using google::protobuf::io::GzipInputStream;

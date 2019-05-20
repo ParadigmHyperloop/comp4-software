@@ -28,8 +28,8 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include <google/protobuf/map_field.h>
-#include <google/protobuf/map_field_inl.h>
+#include <src/google/protobuf/map_field.h>
+#include <src/google/protobuf/map_field_inl.h>
 
 #include <vector>
 

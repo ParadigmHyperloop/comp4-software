@@ -1,13 +1,13 @@
 import socket
 import logging as log
-from ControlLaptop import Paradigm_pb2
+from Paradigm_pb2 import *
 from ControlLaptop.LocalStorage.ConfigurationSotrage import DEFAULT_CONFIGURATION
 
 
 class PodConnectionConstants:
     """ Pod Connection Constants"""
     POD_COMMAND_PORT = 3001
-    POD_ADDRESS = '127.0.0.1'
+    POD_ADDRESS = '192.168.0.100'
     TEST_JSON_COMMAND_DICTIONARY = {'command': 2, "other_commands": 'test'}
 
 
@@ -52,12 +52,28 @@ class PodCommunicator:
             self._connect_to_pod()
 
     def send_configuration(self, configuration=DEFAULT_CONFIGURATION):
+        if not self._connected:
+            self._connect_to_pod()
+        serialized_config = self.get_config_proto(configuration)
         try:
             self._pod_socket.sendall(serialized_config)
         except socket.error as e:
             print("Failed to send config")
             self.shutdown()
             self._connect_to_pod()
+
+    @staticmethod
+    def get_config_proto(config):
+        flight_config = flightConfig()
+        flight_config.retrievalTimeout = int(config['retrieval_timeout'])
+        flight_config.maxFlightTime = int(config['max_flight_time'])
+        flight_config.motorSpeed = int(config['motor_speed'])
+        flight_config.pdsTelemetryPort = int(config['telemetry_port'])
+        flight_config.commandPort = int(config['command_port'])
+        flight_config.flightLength = int(config['flight_length'])
+        flight_config.heartbeatTimeout = int(config['heartbeat_timeout'])
+        flight_config.podDriver = config['pod_driver']
+        return flight_config.SerializeToString()
 
     # Disconnect from Pod/Socket
     def shutdown(self):

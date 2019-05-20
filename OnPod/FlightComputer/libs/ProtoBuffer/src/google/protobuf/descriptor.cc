@@ -43,35 +43,35 @@
 #include <unordered_set>
 #include <vector>
 
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/logging.h>
-#include <google/protobuf/stubs/stringprintf.h>
-#include <google/protobuf/stubs/strutil.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/stubs/stringprintf.h>
+#include <src/google/protobuf/stubs/strutil.h>
 #include <google/protobuf/descriptor.pb.h>
-#include <google/protobuf/io/strtod.h>
-#include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/io/tokenizer.h>
-#include <google/protobuf/io/zero_copy_stream_impl.h>
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/descriptor_database.h>
-#include <google/protobuf/dynamic_message.h>
-#include <google/protobuf/generated_message_util.h>
-#include <google/protobuf/text_format.h>
-#include <google/protobuf/unknown_field_set.h>
-#include <google/protobuf/wire_format.h>
-#include <google/protobuf/stubs/substitute.h>
-#include <google/protobuf/stubs/casts.h>
+#include <src/google/protobuf/io/strtod.h>
+#include <src/google/protobuf/io/coded_stream.h>
+#include <src/google/protobuf/io/tokenizer.h>
+#include <src/google/protobuf/io/zero_copy_stream_impl.h>
+#include <src/google/protobuf/descriptor.h>
+#include <src/google/protobuf/descriptor_database.h>
+#include <src/google/protobuf/dynamic_message.h>
+#include <src/google/protobuf/generated_message_util.h>
+#include <src/google/protobuf/text_format.h>
+#include <src/google/protobuf/unknown_field_set.h>
+#include <src/google/protobuf/wire_format.h>
+#include <src/google/protobuf/stubs/substitute.h>
+#include <src/google/protobuf/stubs/casts.h>
 
 
 
-#include <google/protobuf/stubs/map_util.h>
-#include <google/protobuf/stubs/stl_util.h>
-#include <google/protobuf/stubs/hash.h>
+#include <src/google/protobuf/stubs/map_util.h>
+#include <src/google/protobuf/stubs/stl_util.h>
+#include <src/google/protobuf/stubs/hash.h>
 
 #undef PACKAGE  // autoheader #defines this.  :(
 
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {

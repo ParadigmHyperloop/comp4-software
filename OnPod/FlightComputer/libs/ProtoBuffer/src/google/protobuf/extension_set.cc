@@ -32,24 +32,24 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
-#include <google/protobuf/extension_set.h>
+#include <src/google/protobuf/extension_set.h>
 
 #include <tuple>
 #include <unordered_map>
 #include <utility>
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/extension_set_inl.h>
-#include <google/protobuf/parse_context.h>
-#include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/io/zero_copy_stream_impl_lite.h>
-#include <google/protobuf/message_lite.h>
-#include <google/protobuf/metadata_lite.h>
-#include <google/protobuf/repeated_field.h>
-#include <google/protobuf/wire_format_lite_inl.h>
-#include <google/protobuf/stubs/map_util.h>
-#include <google/protobuf/stubs/hash.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/extension_set_inl.h>
+#include <src/google/protobuf/parse_context.h>
+#include <src/google/protobuf/io/coded_stream.h>
+#include <src/google/protobuf/io/zero_copy_stream_impl_lite.h>
+#include <src/google/protobuf/message_lite.h>
+#include <src/google/protobuf/metadata_lite.h>
+#include <src/google/protobuf/repeated_field.h>
+#include <src/google/protobuf/wire_format_lite_inl.h>
+#include <src/google/protobuf/stubs/map_util.h>
+#include <src/google/protobuf/stubs/hash.h>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {

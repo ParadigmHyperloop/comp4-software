@@ -32,7 +32,7 @@
 
 #include <mutex>
 
-#include <google/protobuf/stubs/macros.h>
+#include <src/google/protobuf/stubs/macros.h>
 
 // Define thread-safety annotations for use below, if we are building with
 // Clang.
@@ -46,7 +46,7 @@
 #define GOOGLE_PROTOBUF_RELEASE(...)
 #endif
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 // ===================================================================
 // emulates google3/base/mutex.h
@@ -143,6 +143,6 @@ using internal::MutexLockMaybe;
 #undef GOOGLE_PROTOBUF_ACQUIRE
 #undef GOOGLE_PROTOBUF_RELEASE
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_STUBS_MUTEX_H_

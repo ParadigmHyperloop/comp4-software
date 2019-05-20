@@ -34,10 +34,10 @@
 #include <string>
 #include <utility>
 
-#include <google/protobuf/port.h>
-#include <google/protobuf/stubs/stringpiece.h>
+#include <src/google/protobuf/port.h>
+#include <src/google/protobuf/stubs/stringpiece.h>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 #ifdef SWIG
 #error "You cannot SWIG proto headers"
@@ -262,6 +262,6 @@ inline void InlinedStringField::UnsafeArenaSetAllocated(
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_INLINED_STRING_FIELD_H__

@@ -53,10 +53,10 @@
 #include <stddef.h>
 #include <string>
 
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/stringpiece.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/stringpiece.h>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 class CordByteSink;
 
@@ -346,6 +346,6 @@ class PROTOBUF_EXPORT LimitByteSource : public ByteSource {
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_STUBS_BYTESTREAM_H_

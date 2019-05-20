@@ -31,10 +31,10 @@
 #ifndef GOOGLE_PROTOBUF_UTIL_CONVERTER_MOCK_ERROR_LISTENER_H__
 #define GOOGLE_PROTOBUF_UTIL_CONVERTER_MOCK_ERROR_LISTENER_H__
 
-#include <google/protobuf/util/internal/error_listener.h>
-#include <google/protobuf/util/internal/location_tracker.h>
+#include <src/google/protobuf/util/internal/error_listener.h>
+#include <src/google/protobuf/util/internal/location_tracker.h>
 #include <gmock/gmock.h>
-#include <google/protobuf/stubs/strutil.h>
+#include <src/google/protobuf/stubs/strutil.h>
 
 namespace google {
 namespace protobuf {

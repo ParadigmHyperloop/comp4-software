@@ -7,53 +7,53 @@ from PDS.TCP.heartbeat_timer import HeartbeatTimer
 from PDS.TCP.PodTcpConnection import PodTcpConnection
 from PDS.config import COMMANDER_BACKUP_PULSE, COMMANDER_TIMEOUT_TIME, COMMANDER_PULSE_SPEED, POD_IP, POD_COMMANDER_PORT
 
-log.basicConfig(filename='logs\heartbeat.log', format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
-pod_message = podCommand()
-
-
-# Create socket to connect to server
+log.basicConfig(stream=sys.stdout, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=log.INFO)
+pod_command = PodCommand()
+pod_command.controlsInterfaceState = ciFlight
+pod = PodTcpConnection(ip=POD_IP, port=POD_COMMANDER_PORT)
 sio = socketio.Client()
-
+broadcast_count = 0
 
 
 @sio.on('connect')
 def on_connect():
-    log.warning("Front End: Connected")
+    log.info("Commander Thread: Connected to SocketIO")
     sio.emit('connected', "commander thread")
 
 
 @sio.on('disconnect')
 def on_disconnect():
     # Set the state to disconnected so that the pod knows?
-    log.warning("Front End: Disconnected")
+    log.info("Commander Thread: Disconnected from SocketIO")
+    sio.emit('ping', 0)
 
 
 @sio.on('command')
 def on_command(command):
     if command is '1':
-        pod_message.manualBrakeNodeState = bnsVenting
+        pod_command.manualBrakeNodeState = bnsVenting
+        print("vent")
     else:
-        pod_message.manualBrakeNodeState = bnsStandby
+        pod_command.manualBrakeNodeState = bnsFlight
+        print("Flight")
+    pod.send_packet(pod_command.SerializeToString())
 
 
 def main():
-    log.warning("Heartbeat Thread Started")
+    global pod_command
+    log.info("Heartbeat Thread Started")
+
     connected = False
     while not connected:
         try:
             sio.connect(SOCKET_SERVER)
         except:
-            log.warning("Commader cannot connect to SocketIO")
+            log.info("Commader cannot connect to SocketIO")
             time.sleep(2)
         else:
             connected = True
 
-    pod_command = podCommand()
-    pod_command.controlsInterfaceState = ciFlight
-
-    pod = PodTcpConnection(ip=POD_IP, port=POD_COMMANDER_PORT)
     timer = HeartbeatTimer()
-
     while not pod.is_connected():
         time.sleep(1)
         if pod.connect():
@@ -71,18 +71,20 @@ def main():
                     log.debug("Heartbeat: Received - " + str(msg))
                     if not msg:
                         if timer.time_since_pulse() > COMMANDER_TIMEOUT_TIME:
-                            log.warning("Heartbeat: Timed out, after:" + str(timer.time_since_pulse()))
+                            log.info("Heartbeat: Timed out, after:" + str(timer.time_since_pulse()))
                             pod.close()
                         elif timer.time_since_pulse() > COMMANDER_BACKUP_PULSE:
-                            log.debug("Heartbeat: Sending backup packet")
+                            log.warning("Heartbeat: Sending backup packet")
                             pod.send_packet(pod_command.SerializeToString())
                     else:  # Msg received
+                        global broadcast_count
                         sio.emit('ping', 1)
+                        broadcast_count = 0
                         timer.pulse()
                         break
         # Connection lost, tell GUI
-        log.warning("Heartbeat: Lost")
         sio.emit('ping', 0)
+        log.info("Heartbeat : Connection Lost")
 
 
 if __name__ == "__main__":

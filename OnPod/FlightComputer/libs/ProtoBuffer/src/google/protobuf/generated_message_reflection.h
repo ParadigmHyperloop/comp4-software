@@ -40,19 +40,19 @@
 
 #include <string>
 #include <vector>
-#include <google/protobuf/stubs/casts.h>
-#include <google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/casts.h>
+#include <src/google/protobuf/stubs/common.h>
 // TODO(jasonh): Remove this once the compiler change to directly libs this
 // is released to components.
-#include <google/protobuf/generated_enum_reflection.h>
-#include <google/protobuf/message.h>
-#include <google/protobuf/metadata.h>
-#include <google/protobuf/stubs/once.h>
-#include <google/protobuf/port.h>
-#include <google/protobuf/unknown_field_set.h>
+#include <src/google/protobuf/generated_enum_reflection.h>
+#include <src/google/protobuf/message.h>
+#include <src/google/protobuf/metadata.h>
+#include <src/google/protobuf/stubs/once.h>
+#include <src/google/protobuf/port.h>
+#include <src/google/protobuf/unknown_field_set.h>
 
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 #ifdef SWIG
 #error "You cannot SWIG proto headers"
@@ -721,6 +721,6 @@ PROTOBUF_EXPORT void UnknownFieldSetSerializer(const uint8* base, uint32 offset,
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_GENERATED_MESSAGE_REFLECTION_H__

@@ -53,8 +53,8 @@ NAV_BAR = [
     {
         'id': 'proofTest',
         'href': 'proofTest',
-        'title': 'High Pressure Proof Test',
-        'icon': 'pe-7s-joy'
+        'title': 'Proof Test',
+        'icon': 'pe-7s-gym'
     },
     {
         'id': 'battery',

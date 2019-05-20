@@ -35,16 +35,16 @@
 #include <stack>
 #include <vector>
 
-#include <google/protobuf/stubs/callback.h>
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/util/internal/type_info.h>
-#include <google/protobuf/util/internal/datapiece.h>
-#include <google/protobuf/util/internal/object_writer.h>
-#include <google/protobuf/util/internal/utility.h>
-#include <google/protobuf/util/type_resolver.h>
-#include <google/protobuf/stubs/stringpiece.h>
+#include <src/google/protobuf/stubs/callback.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/util/internal/type_info.h>
+#include <src/google/protobuf/util/internal/datapiece.h>
+#include <src/google/protobuf/util/internal/object_writer.h>
+#include <src/google/protobuf/util/internal/utility.h>
+#include <src/google/protobuf/util/type_resolver.h>
+#include <src/google/protobuf/stubs/stringpiece.h>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {
@@ -331,6 +331,6 @@ class PROTOBUF_EXPORT DefaultValueObjectWriter : public ObjectWriter {
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_UTIL_CONVERTER_DEFAULT_VALUE_OBJECTWRITER_H__

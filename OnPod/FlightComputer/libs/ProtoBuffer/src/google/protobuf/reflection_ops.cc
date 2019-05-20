@@ -31,19 +31,19 @@
 // Author: kenton@google.com (Kenton Varda)
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
-#include <google/protobuf/reflection_ops.h>
+#include <src/google/protobuf/reflection_ops.h>
 
 #include <string>
 #include <vector>
 
-#include <google/protobuf/stubs/logging.h>
-#include <google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/stubs/common.h>
 #include <google/protobuf/descriptor.pb.h>
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/map_field.h>
-#include <google/protobuf/map_field_inl.h>
-#include <google/protobuf/unknown_field_set.h>
-#include <google/protobuf/stubs/strutil.h>
+#include <src/google/protobuf/descriptor.h>
+#include <src/google/protobuf/map_field.h>
+#include <src/google/protobuf/map_field_inl.h>
+#include <src/google/protobuf/unknown_field_set.h>
+#include <src/google/protobuf/stubs/strutil.h>
 
 
 namespace google {

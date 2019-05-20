@@ -42,16 +42,16 @@
 #include <memory>
 #include <vector>
 
-#include <google/protobuf/message.h>
-#include <google/protobuf/stubs/mutex.h>
-#include <google/protobuf/repeated_field.h>
-#include <google/protobuf/stubs/common.h>
+#include <src/google/protobuf/message.h>
+#include <src/google/protobuf/stubs/mutex.h>
+#include <src/google/protobuf/repeated_field.h>
+#include <src/google/protobuf/stubs/common.h>
 
 #ifdef SWIG
 #error "You cannot SWIG proto headers"
 #endif
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {
@@ -236,6 +236,6 @@ class PROTOBUF_EXPORT DynamicMapSorter {
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_DYNAMIC_MESSAGE_H__
