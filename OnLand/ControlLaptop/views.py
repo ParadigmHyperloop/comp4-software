@@ -7,7 +7,7 @@ from flask import Flask, redirect, render_template, jsonify
 from ControlLaptop.LocalStorage.ConfigurationSotrage import LocalStorage
 from ControlLaptop.LocalStorage.FlightConfig import FlightConfig
 from ControlLaptop.SocketController import PodCommunicator
-from ControlLaptop.config import get_page_title, NAV_BAR
+from templates._sidebar import get_page_title, NAV_BAR
 from ControlLaptop.forms import FlightConfigurationForm
 
 
@@ -70,15 +70,6 @@ def submit_configuration():
             return jsonify({'status': 'error', 'message': 'Failed to Connect'}), 418
     else:
         return jsonify({'error': configuration_form.errors})
-
-
-@app.route('/send_command', methods=["POST"])
-def send_command():
-    command = requests.get_json()['command']
-    try:
-        pod_communicator.send_command(command)
-    finally:
-        return jsonify({'status': 'ok'})
 
 
 @app.route('/disconnect_from_pod', methods=["POST"])

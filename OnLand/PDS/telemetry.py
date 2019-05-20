@@ -2,7 +2,7 @@ import socketio
 import time
 import logging as log
 from datetime import timedelta
-from PDS.config import SOCKET_SERVER, POD_IP, UDP_TELEM_PORT, UDP_RECV_BUFFER_SIZE, UDP_TELEM_TIMEOUT
+from config import SOCKET_SERVER, POD_IP, UDP_TELEM_PORT, UDP_RECV_BUFFER_SIZE, UDP_TELEM_TIMEOUT
 from PDS.UDP.PodUdpConnection import PodUdpConnection
 from Paradigm_pb2 import Telemetry
 from google.protobuf import json_format

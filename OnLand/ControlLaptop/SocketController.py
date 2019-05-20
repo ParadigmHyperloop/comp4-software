@@ -2,27 +2,19 @@ import socket
 import logging as log
 from Paradigm_pb2 import *
 from ControlLaptop.LocalStorage.ConfigurationSotrage import DEFAULT_CONFIGURATION
-
-
-class PodConnectionConstants:
-    """ Pod Connection Constants"""
-    POD_COMMAND_PORT = 3001
-    POD_ADDRESS = '127.0.0.1'
-    TEST_JSON_COMMAND_DICTIONARY = {'command': 2, "other_commands": 'test'}
-
+from config import POD_IP, POD_CONFIG_PORT
 
 class PodCommunicator:
-    """ Pod Communicator - Handles Connection, sending Commands and Configs """
+    """ Pod Communicator - Handles Sending Flight Configuration Configs """
     _pod_communicator_instance = None
     _pod_address = None
     _pod_port = None
     _pod_socket = None
-    _command_queue = None
     _connected = False
 
     """DO NOT CALL"""
-    def __init__(self, pod_address=PodConnectionConstants.POD_ADDRESS,
-                 pod_port=PodConnectionConstants.POD_COMMAND_PORT):
+    def __init__(self, pod_address=POD_IP,
+                 pod_port=POD_CONFIG_PORT):
         if PodCommunicator._pod_communicator_instance is not None:
             raise Exception("Pod-Communicator Instance Already exists")
         else:
@@ -34,23 +26,11 @@ class PodCommunicator:
     def _connect_to_pod(self):
         self._pod_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
-            self._pod_socket.settimeout(1)
-            self._pod_socket.connect((self._pod_address, PodConnectionConstants.POD_COMMAND_PORT))
+            self._pod_socket.settimeout(2)
+            self._pod_socket.connect((self._pod_address, self._pod_port))
             self._pod_socket.settimeout(None)
         except socket.error as e:
-            raise e
-
-
-    def send_command(self, command):
-        command_json = '{command: ' + command + '}'
-        print('sending: {command_json}')
-        try:
-            self._pod_socket.sendall(command_json.encode())
-            data = self._pod_socket.recv(1024)
-        except socket.error as e:
-            print("Failed to send command")
-            self.shutdown()
-            self._connect_to_pod()
+            raise Exception("Error connecting to pod configuration server : " + str(e))
 
     def send_configuration(self, configuration=DEFAULT_CONFIGURATION):
         if not self._connected:
@@ -59,7 +39,7 @@ class PodCommunicator:
         try:
             self._pod_socket.sendall(serialized_config)
         except socket.error as e:
-            print("Failed to send config")
+            log.info("Failed to send config : " + str(e))
             self.shutdown()
             self._connect_to_pod()
 
@@ -78,7 +58,7 @@ class PodCommunicator:
 
     # Disconnect from Pod/Socket
     def shutdown(self):
-        self._close()
+        self._pod_socket.close()
 
     @staticmethod
     def get_pod_communicator():
