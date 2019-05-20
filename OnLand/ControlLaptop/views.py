@@ -48,8 +48,9 @@ def inject_now():
 @app.route('/submit_configuration', methods=['POST'])
 def submit_configuration():
     configuration_form = FlightConfigurationForm()
+    flight_configuration = FlightConfig.get_flight_config_instance()
     if configuration_form.validate_on_submit():
-        FlightConfig.get_flight_config_instance().update_config(
+        flight_configuration.update_config(
             {
                 'retrieval_timeout': int(configuration_form.retrieval_timeout.data),
                 'max_flight_time': int(configuration_form.max_flight_time.data),
@@ -63,7 +64,7 @@ def submit_configuration():
             }
         )
         command_sent = PodCommunicator.get_pod_communicator().send_configuration(
-            configuration=FlightConfig.get_flight_config_instance().read_config())
+            configuration=flight_configuration.read_config())
         if command_sent is True:
             return jsonify({'status': 'ok'})
         else:
