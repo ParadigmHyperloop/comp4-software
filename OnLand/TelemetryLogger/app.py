@@ -4,6 +4,7 @@ import time
 from TelemetryLogger.LogToCSV import CsvTelemetryLoggerTesting
 import logging as log
 import sys
+from config import SOCKET_SERVER
 
 log.basicConfig(stream=sys.stdout, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=log.INFO)
 sio = socketio.Client()
@@ -54,7 +55,7 @@ def main():
     connected = False
     while not connected:
         try:
-            sio.connect('http://localhost:5000')
+            sio.connect(SOCKET_SERVER)
         except:
             time.sleep(2)
         else:
