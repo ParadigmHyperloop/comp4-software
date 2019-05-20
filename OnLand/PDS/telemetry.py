@@ -8,7 +8,7 @@ from PDS.Paradigm_pb2 import telemetry
 from google.protobuf import json_format
 from google.protobuf.json_format import MessageToDict
 
-log.basicConfig(filename='logs\telemetry.log', format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+log.basicConfig(filename='logs\paradigm.log', format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
 
 # Create socket to connect to server
@@ -34,7 +34,7 @@ def main():
         try:
             sio.connect(SOCKET_SERVER)
         except:
-            log.warning("Telemetry thread cannot connect to SocketIO")
+            print("Telemetry thread cannot connect to SocketIO")
             time.sleep(2)
         else:
             connected = True
@@ -51,7 +51,7 @@ def main():
             json_pod_data = json_format.MessageToJson(pod_data)
             sio.emit('telemetry', json_pod_data)
             pod_data = MessageToDict(pod_data)
-            log.warning("Telemetry: {}".format(pod_data))
+            print("Telemetry: {}".format(pod_data))
 
     udp_socket.close()
     sio.emit('telemetry_connection', '0')

@@ -7,7 +7,7 @@ from PDS.TCP.heartbeat_timer import HeartbeatTimer
 from PDS.TCP.PodTcpConnection import PodTcpConnection
 from PDS.config import COMMANDER_BACKUP_PULSE, COMMANDER_TIMEOUT_TIME, COMMANDER_PULSE_SPEED, POD_IP, POD_COMMANDER_PORT
 
-log.basicConfig(filename='logs\heartbeat.log', format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+log.basicConfig(filename='logs\paradigm.log', format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 pod_message = podCommand()
 
 

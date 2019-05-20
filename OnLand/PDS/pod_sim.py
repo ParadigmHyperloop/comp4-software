@@ -2,7 +2,7 @@ import socket
 import time
 import random
 from PDS.config import POD_COMMANDER_PORT
-from PDS.UDP.Paradigm_pb2 import telemetry
+from PDS.Paradigm_pb2 import telemetry
 
 
 def create_telem(packet):
