@@ -30,28 +30,33 @@ class PodCommunicator:
             self._pod_socket.connect((self._pod_address, self._pod_port))
             self._pod_socket.settimeout(None)
         except socket.error as e:
-            log.warning("Failed to Connect to Pod")
-            raise e
-        log.info('Connected...'s)
+            raise Exception("Error connecting to pod configuration server : " + str(e))
 
-    def send_command(self, command):
-        command_json = '{command: ' + command + '}'
-        log.info('sending: {command_json}')
-        try:
-            self._pod_socket.sendall(command_json.encode())
-            data = self._pod_socket.recv(1024)
-        except socket.error as e:
-            log.warning("Failed to send command")
-            self.shutdown()
-            self._connect_to_pod()
 
     def send_configuration(self, configuration=DEFAULT_CONFIGURATION):
+        if not self._connected:
+            self._connect_to_pod()
+        serialized_config = self.get_config_proto(configuration)
         try:
             self._pod_socket.sendall(serialized_config)
         except socket.error as e:
-            log.warning("Failed to send config")
+            log.info("Failed to send config : " + str(e))
             self.shutdown()
             self._connect_to_pod()
+
+
+    @staticmethod
+    def get_config_proto(config):
+        flight_config = flightConfig()
+        flight_config.retrievalTimeout = int(config['retrieval_timeout'])
+        flight_config.maxFlightTime = int(config['max_flight_time'])
+        flight_config.motorSpeed = int(config['motor_speed'])
+        flight_config.pdsTelemetryPort = int(config['telemetry_port'])
+        flight_config.commandPort = int(config['command_port'])
+        flight_config.flightLength = int(config['flight_length'])
+        flight_config.heartbeatTimeout = int(config['heartbeat_timeout'])
+        flight_config.podDriver = config['pod_driver']
+        return flight_config.SerializeToString()
 
     # Disconnect from Pod/Socket
     def shutdown(self):
@@ -68,4 +73,3 @@ class PodCommunicator:
 
     def get_pod_address(self):
         return self._pod_address
-
