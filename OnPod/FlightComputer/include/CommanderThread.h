@@ -7,7 +7,7 @@
 
 int32_t createCommanderServerSocket(int32_t iPortNumber);
 
-void parseProtoCommand(podCommand pPodCommand, Pod *Pod);
+void parseProtoCommand(PodCommand pPodCommand, Pod *Pod);
 
 int32_t unserializeProtoMessage(Pod *Pod, char cBuffer[], int32_t iMessageSize);
 

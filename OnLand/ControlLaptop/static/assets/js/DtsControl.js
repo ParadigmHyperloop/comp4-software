@@ -10,12 +10,10 @@ $(document).ready(function () {
         $("#wrapper").toggleClass("toggled");
     });
     $('.brake-btn').click(function () {
-        console.log("Asdf");
-        status = '0';
+        let status = '0';
         btnId = $(this).attr("id");
-        console.log(btnId);
         if (btnId === "on-btn") {
-            status = '1'
+            status = '1';
         }
         console.log(status);
         socket.emit('command', status)

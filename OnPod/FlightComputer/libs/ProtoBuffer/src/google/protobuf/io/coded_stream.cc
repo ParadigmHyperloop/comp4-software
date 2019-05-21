@@ -38,18 +38,18 @@
 // will not cross the end of the buffer, since we can avoid a lot
 // of branching in this case.
 
-#include <google/protobuf/io/coded_stream_inl.h>
+#include <src/google/protobuf/io/coded_stream_inl.h>
 #include <algorithm>
 #include <utility>
 #include <limits.h>
-#include <google/protobuf/io/zero_copy_stream.h>
-#include <google/protobuf/arena.h>
-#include <google/protobuf/stubs/logging.h>
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/stl_util.h>
+#include <src/google/protobuf/io/zero_copy_stream.h>
+#include <src/google/protobuf/arena.h>
+#include <src/google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/stl_util.h>
 
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {

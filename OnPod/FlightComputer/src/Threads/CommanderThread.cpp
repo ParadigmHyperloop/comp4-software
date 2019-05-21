@@ -12,7 +12,7 @@ int32_t createCommanderServerSocket(int32_t serverPortNumber) {
     struct sockaddr_in serverSockAddr;
     serverSock = socket(AF_INET, SOCK_STREAM, 0);
     if (serverSock < 0) {
-        LOG(INFO) << "ERROR opening commander socket";
+        LOG(INFO) << (std::string)"ERROR opening commander socket" + std::strerror(errno);;
         return -1;
     }
     bzero((char *) &serverSockAddr, sizeof(serverSockAddr));
@@ -21,7 +21,7 @@ int32_t createCommanderServerSocket(int32_t serverPortNumber) {
     serverSockAddr.sin_port = htons(serverPortNumber);
     operationStatus = bind(serverSock, (struct sockaddr *) &serverSockAddr, sizeof(serverSockAddr));
     if (operationStatus < 0) {
-        LOG(INFO) << "ERROR binding commander socket";
+        LOG(INFO) << (std::string)"ERROR binding commander socket : " + std::strerror(errno);
         return -1;
     }
     //Queue 3 requests before rejecting
@@ -29,7 +29,7 @@ int32_t createCommanderServerSocket(int32_t serverPortNumber) {
     return serverSock;
 }
 
-void parseProtoCommand(podCommand podCommand, Pod *Pod) {
+void parseProtoCommand(PodCommand podCommand, Pod *Pod) {
     if (podCommand.has_controlsinterfacestate()) {
         Pod->setControlsInterfaceState(podCommand.controlsinterfacestate());
     }
@@ -37,7 +37,7 @@ void parseProtoCommand(podCommand podCommand, Pod *Pod) {
         Pod->setAutomaticTransitions(podCommand.automaticstatetransitions());
     }
     if (podCommand.has_manualbrakenodestate()) {
-        LOG(INFO) << podCommand.manualbrakenodestate();
+       // LOG(INFO) << podCommand.manualbrakenodestate();
         Pod->setManualBrakeNodeState(podCommand.manualbrakenodestate());
     }
     if (podCommand.has_manuallvdcnodestate()) {
@@ -50,13 +50,13 @@ void parseProtoCommand(podCommand podCommand, Pod *Pod) {
 }
 
 int32_t unserializeProtoMessage(Pod *Pod, char buffer[], int32_t messageSize) {
-    podCommand pPodCommand;
+    PodCommand pPodCommand;
     bool operationStatus;
 
     operationStatus = pPodCommand.ParseFromArray(buffer, messageSize);
     if (operationStatus) {
         parseProtoCommand(pPodCommand, Pod);
-        LOG(INFO) << "Command/HeartBeat Received";
+       // LOG(INFO) << "Command/HeartBeat Received";
         return operationStatus;
     } else {
         LOG(ERROR) << "Error Parsing Command";
@@ -78,7 +78,7 @@ int32_t commanderThread(Pod Pod) {
     char buffer[256] = {0};
     if (serverSock < 0) {
         // Restart thread?
-        LOG(INFO) << "ERROR initializing commader thread";
+        LOG(INFO) << std::string("ERROR initializing commader thread : ") + std::strerror(errno);
         return 0;
     }
 
@@ -93,7 +93,7 @@ int32_t commanderThread(Pod Pod) {
         */
         connectionSock = accept(serverSock, nullptr, nullptr);
         if (connectionSock < 0) {
-            LOG(INFO) << "ERROR on acception Commander connection";
+            LOG(INFO) << (std::string)"ERROR on acception Commander connection" + std::strerror(errno);
         }
         operationStatus = fcntl(connectionSock, F_SETFL, fcntl(connectionSock, F_GETFL, 0) | O_NONBLOCK);
         if(operationStatus == -1){
@@ -102,7 +102,7 @@ int32_t commanderThread(Pod Pod) {
 
         LOG(INFO) << "Controls Interface Connected";
         pulse.feed();
-        while (1) {
+        while (Pod.sPodValues->podState != psShutdown) {
             messageSize = read(connectionSock, buffer, 255);
             if (messageSize < 0) {
                 if (errno == 11) //Erno 11 means no message available on non blocking socket

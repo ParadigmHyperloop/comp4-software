@@ -9,6 +9,6 @@ void typeKThermo::init() {
 }
 
 float typeKThermo::read() {
-    uint16_t uAdcConversion = adc->uAdcData[uAdcChannel];
+    uint16_t uAdcConversion = adc->getuAdcData()[uAdcChannel];
     return uAdcConversion/4.096 - 105;
 }

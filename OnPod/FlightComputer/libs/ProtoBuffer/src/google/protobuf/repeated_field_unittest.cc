@@ -40,17 +40,17 @@
 #include <list>
 #include <vector>
 
-#include <google/protobuf/repeated_field.h>
+#include <src/google/protobuf/repeated_field.h>
 
-#include <google/protobuf/stubs/logging.h>
-#include <google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/stubs/common.h>
 #include <google/protobuf/unittest.pb.h>
-#include <google/protobuf/stubs/strutil.h>
+#include <src/google/protobuf/stubs/strutil.h>
 #include <gmock/gmock.h>
-#include <google/protobuf/testing/googletest.h>
+#include <src/google/protobuf/testing/googletest.h>
 #include <gtest/gtest.h>
 
-#include <google/protobuf/stubs/stl_util.h>
+#include <src/google/protobuf/stubs/stl_util.h>
 
 namespace google {
 namespace protobuf {

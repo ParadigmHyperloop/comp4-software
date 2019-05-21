@@ -148,10 +148,10 @@
 #include <limits>
 #include <string>
 
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/hash.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/hash.h>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {
@@ -489,6 +489,6 @@ template<> struct hash<StringPiece> {
 };
 GOOGLE_PROTOBUF_HASH_NAMESPACE_DECLARATION_END
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // STRINGS_STRINGPIECE_H_

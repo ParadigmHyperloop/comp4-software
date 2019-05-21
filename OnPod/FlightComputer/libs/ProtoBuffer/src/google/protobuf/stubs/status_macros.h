@@ -33,9 +33,9 @@
 #ifndef GOOGLE_PROTOBUF_STUBS_STATUS_MACROS_H_
 #define GOOGLE_PROTOBUF_STUBS_STATUS_MACROS_H_
 
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/status.h>
-#include <google/protobuf/stubs/statusor.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/status.h>
+#include <src/google/protobuf/stubs/statusor.h>
 
 namespace google {
 namespace protobuf {

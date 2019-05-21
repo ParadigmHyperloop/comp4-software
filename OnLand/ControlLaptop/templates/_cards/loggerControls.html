@@ -1,0 +1,18 @@
+<div class="card connection-card">
+    <div class="header">
+       <h4 class="title">Logger</h4>
+    </div>
+    <div class="content text-center">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label id="logging-off-btn" class="btn btn-off btn-lg active">
+                <input type="radio" name="options" autocomplete="off"> Off
+            </label>
+            <label id="logging-on-btn" class="btn btn-on btn-lg">
+                <input type="radio" name="options" autocomplete="off"> On
+            </label>
+        </div>
+    </div>
+ </div>
+
+<script src="{{ url_for('static', filename='assets/js/LoggerControls.js') }}"></script>
+

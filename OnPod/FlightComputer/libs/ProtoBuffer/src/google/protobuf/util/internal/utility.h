@@ -35,17 +35,17 @@
 #include <string>
 #include <utility>
 
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/logging.h>
 #include <google/protobuf/type.pb.h>
-#include <google/protobuf/repeated_field.h>
-#include <google/protobuf/stubs/strutil.h>
-#include <google/protobuf/stubs/stringpiece.h>
+#include <src/google/protobuf/repeated_field.h>
+#include <src/google/protobuf/stubs/strutil.h>
+#include <src/google/protobuf/stubs/stringpiece.h>
 
-#include <google/protobuf/stubs/status.h>
-#include <google/protobuf/stubs/statusor.h>
+#include <src/google/protobuf/stubs/status.h>
+#include <src/google/protobuf/stubs/statusor.h>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {
@@ -210,6 +210,6 @@ PROTOBUF_EXPORT bool SafeStrToFloat(StringPiece str, float* value);
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_UTIL_CONVERTER_UTILITY_H__

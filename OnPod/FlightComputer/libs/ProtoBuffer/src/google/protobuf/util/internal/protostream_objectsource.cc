@@ -28,33 +28,33 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include <google/protobuf/util/internal/protostream_objectsource.h>
+#include <src/google/protobuf/util/internal/protostream_objectsource.h>
 
 #include <unordered_map>
 #include <utility>
 
-#include <google/protobuf/stubs/logging.h>
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/stringprintf.h>
-#include <google/protobuf/stubs/time.h>
-#include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/io/zero_copy_stream_impl.h>
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/stubs/once.h>
-#include <google/protobuf/wire_format.h>
-#include <google/protobuf/wire_format_lite.h>
-#include <google/protobuf/util/internal/field_mask_utility.h>
-#include <google/protobuf/util/internal/constants.h>
-#include <google/protobuf/util/internal/utility.h>
-#include <google/protobuf/stubs/strutil.h>
-#include <google/protobuf/stubs/casts.h>
+#include <src/google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/stringprintf.h>
+#include <src/google/protobuf/stubs/time.h>
+#include <src/google/protobuf/io/coded_stream.h>
+#include <src/google/protobuf/io/zero_copy_stream_impl.h>
+#include <src/google/protobuf/descriptor.h>
+#include <src/google/protobuf/stubs/once.h>
+#include <src/google/protobuf/wire_format.h>
+#include <src/google/protobuf/wire_format_lite.h>
+#include <src/google/protobuf/util/internal/field_mask_utility.h>
+#include <src/google/protobuf/util/internal/constants.h>
+#include <src/google/protobuf/util/internal/utility.h>
+#include <src/google/protobuf/stubs/strutil.h>
+#include <src/google/protobuf/stubs/casts.h>
 
 
-#include <google/protobuf/stubs/map_util.h>
-#include <google/protobuf/stubs/status_macros.h>
+#include <src/google/protobuf/stubs/map_util.h>
+#include <src/google/protobuf/stubs/status_macros.h>
 
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {

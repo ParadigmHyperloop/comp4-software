@@ -33,9 +33,9 @@ void FlightComputerInitializer::importLoggerLibrary()
     }
 }
 
-void FlightComputerInitializer::updatePodNetworkValues(PodNetwork& podNetworkValues, flightConfig& config, char* controlLaptopAddr)
+void FlightComputerInitializer::updatePodNetworkValues(PodNetwork& podNetworkValues, flightConfig& config)
 {
-    std::string cNodeIpAddrs[] = {"127.0.0.1"};
+    std::string cNodeIpAddrs[] = {"192.168.0.50"};
     podNetworkValues.cNodeIpAddrs.assign(begin(cNodeIpAddrs), end(cNodeIpAddrs)); // Node IPs
 
     podNetworkValues.iBrakeNodePort = NetworkConstants::iBRAKE_NODE_PORT; // Port # that Nodes are listening on
@@ -46,7 +46,7 @@ void FlightComputerInitializer::updatePodNetworkValues(PodNetwork& podNetworkVal
     podNetworkValues.iCommanderPortNumber = config.commandport(); //Port # for TCP Commander
 
     podNetworkValues.iPdsTelemeteryPort = config.pdstelemetryport(); // Port # to send telemetry
-    podNetworkValues.strPdsIpAddr = std::string(controlLaptopAddr); // Ip Addr of PDS.
+    podNetworkValues.strPdsIpAddr = config.controllaptopipaddr(); // Ip Addr of PDS.
 
     podNetworkValues.iActiveNodes[0] = 1; // Set brake node active
 }

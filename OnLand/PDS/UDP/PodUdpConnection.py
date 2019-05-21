@@ -9,12 +9,12 @@ class PodUdpConnection:
     All PDS Pod Telemetry
     1-way UDP-Socket listening + some helper methods
     """
-    def __init__(self, ip, port, MAX_MESSAGE_SIZE):
+    def __init__(self, ip, port, UDP_RECV_BUFFER_SIZE):
         self.sock = None
         self.ip = ip
         self.port = port
         self.lock = threading.Lock()
-        self.max = MAX_MESSAGE_SIZE
+        self.max = UDP_RECV_BUFFER_SIZE
 
     def run(self, timeout=None):
         if not self.is_connected():
@@ -50,8 +50,8 @@ class PodUdpConnection:
         try:
             self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-
-            self.sock.bind((self.ip, self.port))
+            self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_SNDBUF, self.max)
+            self.sock.bind(('', self.port))
         except Exception as e:
             self.close()
             raise e

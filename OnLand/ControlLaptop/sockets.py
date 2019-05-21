@@ -55,3 +55,28 @@ def telemetry_setup(status):
 def pod_telemetry(data):
     log.debug("Transferring Telemetry")
     socket_io.emit("telemetry", data)
+
+
+@socket_io.on('start_logging_session')
+def emit_start_logging_session():
+    socket_io.emit('start_logging_session')
+
+
+@socket_io.on('end_logging_session')
+def emit_end_logging_session():
+    socket_io.emit('end_logging_session')
+
+
+@socket_io.on('log_telemetry')
+def emit_log_telemetry(data):
+    socket_io.emit('log_telemetry', data)
+
+
+@socket_io.on('logging_session_ended')
+def emit_logging_file_saved(data):
+    socket_io.emit('logging_session_ended', data)
+
+
+@socket_io.on('logging_session_started')
+def emit_logging_session_started(data):
+    socket_io.emit('logging_session_started')

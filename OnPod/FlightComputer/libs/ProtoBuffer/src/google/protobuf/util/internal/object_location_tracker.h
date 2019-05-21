@@ -33,8 +33,8 @@
 
 #include <string>
 
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/util/internal/location_tracker.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/util/internal/location_tracker.h>
 
 namespace google {
 namespace protobuf {

@@ -1,0 +1,11 @@
+{
+  "solenoid2": {
+    "name_pretty": "Vent Solenoid"
+  },
+  "pressureVesselTemperature": {
+    "name_pretty": "Pneumatic Temperature"
+  },
+    "highPressure": {
+    "name_pretty": "Tank Pressure"
+  }
+}

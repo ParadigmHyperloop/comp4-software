@@ -34,11 +34,11 @@
 
 #include <algorithm>
 
-#include <google/protobuf/repeated_field.h>
-#include <google/protobuf/stubs/logging.h>
-#include <google/protobuf/stubs/common.h>
+#include <src/google/protobuf/repeated_field.h>
+#include <src/google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/stubs/common.h>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {

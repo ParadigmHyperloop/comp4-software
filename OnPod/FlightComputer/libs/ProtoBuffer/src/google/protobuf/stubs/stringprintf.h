@@ -44,9 +44,9 @@
 #include <string>
 #include <vector>
 
-#include <google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/common.h>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {
@@ -78,6 +78,6 @@ PROTOBUF_EXPORT extern string StringPrintfVector(const char* format,
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_STUBS_STRINGPRINTF_H

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block pageStyles %}
+ <link href="{{ url_for('static', filename='assets/css/DtsControl.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-4">
+            {% include '_cards/loggerControls.html' %}
+        </div>
+        <div class="col-md-4">
+            {% include '_cards/proofTestControls.html' %}
+        </div>
+        {% include '_cards/connectionCards.html' %}
+    </div>
+
+
+    <div class="row">
+       <div class="col-md-12">
+          {% include '_cards/sensor_values.html' %}
+       </div>
+    </div>
+
+{% endblock %}

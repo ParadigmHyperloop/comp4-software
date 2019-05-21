@@ -34,10 +34,17 @@ function ParsePodState(state) {
 
 socket.on('telemetry', function (data) {
     data = JSON.parse(data);
+    console.log(data)
     newPodState = data['podState'];
     ParsePodState(newPodState);
     for (sensor_name in data) {
-        $("#" + sensor_name + "-actual").text(data[sensor_name])
+        if(typeof(data[sensor_name]) == "boolean" || isNaN(data[sensor_name])){
+            $("#" + sensor_name + "-actual").text(data[sensor_name])
+        }
+        else{
+            $("#" + sensor_name + "-actual").text(data[sensor_name].toFixed(2))
+        }
+
     }
 });
 

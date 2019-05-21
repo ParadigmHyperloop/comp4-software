@@ -1,14 +1,17 @@
-import logging as log
 import json
+import sys
 import requests
 from datetime import datetime
+import logging as log
 from flask import Flask, redirect, render_template, jsonify
 from ControlLaptop.LocalStorage.ConfigurationSotrage import LocalStorage
 from ControlLaptop.LocalStorage.FlightConfig import FlightConfig
 from ControlLaptop.SocketController import PodCommunicator
-from ControlLaptop.config import get_page_title, NAV_BAR
+from templates._sidebar import get_page_title, NAV_BAR
 from ControlLaptop.forms import FlightConfigurationForm
 
+
+log.basicConfig(stream=sys.stdout, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=log.INFO)
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secrete-key'  # change later.
 
@@ -17,7 +20,10 @@ with app.app_context():
     try:
         pod_communicator = PodCommunicator.get_pod_communicator()
     except Exception as e:
-        log.info("COULD NOT CONNECT TO POD")
+        log.info("Could not connect to pod")
+    else:
+        log.info("Connected to Config")
+
 
 # --------------------------------------------------------------
 # END SETUP
@@ -42,8 +48,9 @@ def inject_now():
 @app.route('/submit_configuration', methods=['POST'])
 def submit_configuration():
     configuration_form = FlightConfigurationForm()
+    flight_configuration = FlightConfig.get_flight_config_instance()
     if configuration_form.validate_on_submit():
-        FlightConfig.get_flight_config_instance().update_config(
+        flight_configuration.update_config(
             {
                 'retrieval_timeout': int(configuration_form.retrieval_timeout.data),
                 'max_flight_time': int(configuration_form.max_flight_time.data),
@@ -57,7 +64,7 @@ def submit_configuration():
             }
         )
         command_sent = PodCommunicator.get_pod_communicator().send_configuration(
-            configuration=FlightConfig.get_flight_config_instance().read_config())
+            configuration=flight_configuration.read_config())
         if command_sent is True:
             return jsonify({'status': 'ok'})
         else:
@@ -101,13 +108,26 @@ def dts():
         sensors = json.load(json_file)
     with open('ControlLaptop/LocalStorage/ElectricalValues.json') as json_file:
         electrical_sensors = json.load(json_file)
-
     return render_template(
         page+".html",
         active_page=page,
         title=title,
         sensors=sensors,
         electrical_senesors=electrical_sensors
+    )
+
+
+@app.route('/proofTest')
+def proofTest():
+    page = 'proofTest'
+    title = get_page_title(page)
+    with open('ControlLaptop/LocalStorage/ProofTestSensors.json') as json_file:
+        sensors = json.load(json_file)
+    return render_template(
+        page+".html",
+        active_page=page,
+        title=title,
+        sensors=sensors
     )
 
 
@@ -122,7 +142,6 @@ def get_flight_profile_template():
         configuration_form=FlightConfigurationForm(),
         saved_configuration=FlightConfig.get_flight_config_instance().read_config()
     )
-
 
 
 @app.route('/sensor_ranges')

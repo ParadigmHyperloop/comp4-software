@@ -35,10 +35,10 @@
 
 #include <stdlib.h>
 #include <vector>
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/stringpiece.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/stringpiece.h>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {
@@ -935,6 +935,6 @@ inline bool EndsWith(StringPiece text, StringPiece suffix) {
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_STUBS_STRUTIL_H__

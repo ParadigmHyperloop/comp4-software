@@ -28,17 +28,17 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include <google/protobuf/util/internal/json_stream_parser.h>
+#include <src/google/protobuf/util/internal/json_stream_parser.h>
 
-#include <google/protobuf/stubs/logging.h>
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/time.h>
-#include <google/protobuf/util/internal/expecting_objectwriter.h>
-#include <google/protobuf/util/internal/object_writer.h>
-#include <google/protobuf/stubs/strutil.h>
+#include <src/google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/time.h>
+#include <src/google/protobuf/util/internal/expecting_objectwriter.h>
+#include <src/google/protobuf/util/internal/object_writer.h>
+#include <src/google/protobuf/stubs/strutil.h>
 #include <gtest/gtest.h>
 
-#include <google/protobuf/stubs/status.h>
+#include <src/google/protobuf/stubs/status.h>
 
 
 namespace google {

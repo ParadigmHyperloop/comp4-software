@@ -31,8 +31,8 @@
 #ifndef GOOGLE_PROTOBUF_UTIL_INTERNAL__JSON_ESCAPING_H__
 #define GOOGLE_PROTOBUF_UTIL_INTERNAL__JSON_ESCAPING_H__
 
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/bytestream.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/bytestream.h>
 
 namespace google {
 namespace protobuf {

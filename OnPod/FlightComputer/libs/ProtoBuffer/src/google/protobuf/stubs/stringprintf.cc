@@ -30,15 +30,15 @@
 
 // from google3/base/stringprintf.cc
 
-#include <google/protobuf/stubs/stringprintf.h>
+#include <src/google/protobuf/stubs/stringprintf.h>
 
 #include <errno.h>
 #include <stdarg.h> // For va_list and related operations
 #include <stdio.h> // MSVC requires this for _vsnprintf
 #include <vector>
 
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/logging.h>
 
 namespace google {
 namespace protobuf {

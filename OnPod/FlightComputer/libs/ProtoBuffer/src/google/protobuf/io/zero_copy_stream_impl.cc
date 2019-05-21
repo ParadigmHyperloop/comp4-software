@@ -41,11 +41,11 @@
 #include <errno.h>
 #include <iostream>
 #include <algorithm>
-#include <google/protobuf/io/zero_copy_stream_impl.h>
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/logging.h>
-#include <google/protobuf/stubs/stl_util.h>
-#include <google/protobuf/stubs/io_win32.h>
+#include <src/google/protobuf/io/zero_copy_stream_impl.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/stubs/stl_util.h>
+#include <src/google/protobuf/stubs/io_win32.h>
 
 
 namespace google {

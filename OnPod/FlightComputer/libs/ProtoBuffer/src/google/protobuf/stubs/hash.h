@@ -34,7 +34,7 @@
 #define GOOGLE_PROTOBUF_STUBS_HASH_H__
 
 #include <string.h>
-#include <google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/common.h>
 
 #include <unordered_map>
 #include <unordered_set>

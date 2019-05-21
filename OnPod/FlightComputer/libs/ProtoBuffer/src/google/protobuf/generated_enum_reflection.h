@@ -41,14 +41,14 @@
 
 #include <string>
 
-#include <google/protobuf/port.h>
-#include <google/protobuf/generated_enum_util.h>
+#include <src/google/protobuf/port.h>
+#include <src/google/protobuf/generated_enum_util.h>
 
 #ifdef SWIG
 #error "You cannot SWIG proto headers"
 #endif
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {
@@ -93,6 +93,6 @@ PROTOBUF_EXPORT const std::string& NameOfEnum(const EnumDescriptor* descriptor,
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_GENERATED_ENUM_REFLECTION_H__

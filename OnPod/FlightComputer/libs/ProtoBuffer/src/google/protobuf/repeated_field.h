@@ -55,17 +55,17 @@
 #include <iterator>
 #include <limits>
 #include <string>
-#include <google/protobuf/stubs/logging.h>
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/arena.h>
-#include <google/protobuf/implicit_weak_message.h>
-#include <google/protobuf/message_lite.h>
-#include <google/protobuf/port.h>
-#include <google/protobuf/stubs/casts.h>
+#include <src/google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/arena.h>
+#include <src/google/protobuf/implicit_weak_message.h>
+#include <src/google/protobuf/message_lite.h>
+#include <src/google/protobuf/port.h>
+#include <src/google/protobuf/stubs/casts.h>
 #include <type_traits>
 
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 #ifdef SWIG
 #error "You cannot SWIG proto headers"
@@ -2643,6 +2643,6 @@ extern template class PROTOBUF_EXPORT RepeatedPtrField<std::string>;
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_REPEATED_FIELD_H__

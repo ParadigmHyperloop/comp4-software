@@ -66,21 +66,21 @@
 #include <memory>
 #include <unordered_map>
 
-#include <google/protobuf/stubs/hash.h>
+#include <src/google/protobuf/stubs/hash.h>
 
 #include <google/protobuf/descriptor.pb.h>
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/dynamic_message.h>
-#include <google/protobuf/generated_message_reflection.h>
-#include <google/protobuf/generated_message_util.h>
-#include <google/protobuf/arenastring.h>
-#include <google/protobuf/extension_set.h>
-#include <google/protobuf/map_field.h>
-#include <google/protobuf/map_field_inl.h>
-#include <google/protobuf/map_type_handler.h>
-#include <google/protobuf/reflection_ops.h>
-#include <google/protobuf/repeated_field.h>
-#include <google/protobuf/wire_format.h>
+#include <src/google/protobuf/descriptor.h>
+#include <src/google/protobuf/dynamic_message.h>
+#include <src/google/protobuf/generated_message_reflection.h>
+#include <src/google/protobuf/generated_message_util.h>
+#include <src/google/protobuf/arenastring.h>
+#include <src/google/protobuf/extension_set.h>
+#include <src/google/protobuf/map_field.h>
+#include <src/google/protobuf/map_field_inl.h>
+#include <src/google/protobuf/map_type_handler.h>
+#include <src/google/protobuf/reflection_ops.h>
+#include <src/google/protobuf/repeated_field.h>
+#include <src/google/protobuf/wire_format.h>
 
 
 namespace google {

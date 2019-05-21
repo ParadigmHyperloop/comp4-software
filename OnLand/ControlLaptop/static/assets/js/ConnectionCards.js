@@ -6,6 +6,21 @@ $( document ).ready(function() {
     telemetryCount = $("#telem-received-num");
 });
 
+function showDtsNotifications(message, status){
+	$.notify({
+		icon: "pe-7s-next-2",
+		message: `<b>${message}</b>`
+
+	},{
+	  type: status,
+		timer: 3500,
+		placement: {
+			from: 'top',
+			align: 'right'
+		}
+	});
+}
+
 function toggleTelemetryLoader(ping){
     if (ping == 1 && telemetryLoader.css('display') == "none") {
         telemetryLoader.css('display', 'block');
@@ -37,3 +52,4 @@ socket.on('telemetry', function (data) {
     count++;
     telemetryCount.text(count);
 });
+

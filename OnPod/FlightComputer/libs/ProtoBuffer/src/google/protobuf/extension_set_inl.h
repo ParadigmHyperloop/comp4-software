@@ -31,7 +31,7 @@
 #ifndef GOOGLE_PROTOBUF_EXTENSION_SET_INL_H__
 #define GOOGLE_PROTOBUF_EXTENSION_SET_INL_H__
 
-#include <google/protobuf/extension_set.h>
+#include <src/google/protobuf/extension_set.h>
 
 namespace google {
 namespace protobuf {

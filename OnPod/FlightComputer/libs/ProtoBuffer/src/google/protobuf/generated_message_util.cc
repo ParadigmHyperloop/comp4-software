@@ -32,7 +32,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
-#include <google/protobuf/generated_message_util.h>
+#include <src/google/protobuf/generated_message_util.h>
 
 #include <limits>
 // We're only using this as a standard way for getting the thread id.
@@ -40,19 +40,19 @@
 #include <thread>  // NOLINT
 #include <vector>
 
-#include <google/protobuf/io/coded_stream_inl.h>
-#include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/arenastring.h>
-#include <google/protobuf/extension_set.h>
-#include <google/protobuf/generated_message_table_driven.h>
-#include <google/protobuf/message_lite.h>
-#include <google/protobuf/metadata_lite.h>
-#include <google/protobuf/stubs/mutex.h>
-#include <google/protobuf/repeated_field.h>
-#include <google/protobuf/wire_format_lite.h>
-#include <google/protobuf/wire_format_lite_inl.h>
+#include <src/google/protobuf/io/coded_stream_inl.h>
+#include <src/google/protobuf/io/coded_stream.h>
+#include <src/google/protobuf/arenastring.h>
+#include <src/google/protobuf/extension_set.h>
+#include <src/google/protobuf/generated_message_table_driven.h>
+#include <src/google/protobuf/message_lite.h>
+#include <src/google/protobuf/metadata_lite.h>
+#include <src/google/protobuf/stubs/mutex.h>
+#include <src/google/protobuf/repeated_field.h>
+#include <src/google/protobuf/wire_format_lite.h>
+#include <src/google/protobuf/wire_format_lite_inl.h>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 
 namespace google {

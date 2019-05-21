@@ -1,14 +1,14 @@
 #include "lp_transducer.h"
 
-U5244::U5244 (ADS7953 *adc, uint8_t uAdcChannel) :
+PX2300P::PX2300P (ADS7953 *adc, uint8_t uAdcChannel) :
     adc(adc), uAdcChannel(uAdcChannel)
     {}
 
-void U5244::init() {
+void PX2300P::init() {
     adc->enableChannel(uAdcChannel);
 }
 
-float U5244::read() {
-    uint16_t uAdcConversion = adc->uAdcData[uAdcChannel];
-    return (uAdcConversion/4096*5-1)*50;
+float PX2300P::read() {
+    uint16_t uAdcConversion = adc->getuAdcData()[uAdcChannel];
+    return (((float)uAdcConversion/4096*5-0.5)/4)*300;
 }

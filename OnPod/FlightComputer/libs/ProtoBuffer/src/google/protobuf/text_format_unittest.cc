@@ -32,36 +32,36 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
-#include <google/protobuf/text_format.h>
+#include <src/google/protobuf/text_format.h>
 
 #include <math.h>
 #include <stdlib.h>
 #include <limits>
 #include <memory>
 
-#include <google/protobuf/stubs/logging.h>
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/logging.h>
-#include <google/protobuf/testing/file.h>
-#include <google/protobuf/testing/file.h>
+#include <src/google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/testing/file.h>
+#include <src/google/protobuf/testing/file.h>
 #include <google/protobuf/map_unittest.pb.h>
-#include <google/protobuf/test_util.h>
-#include <google/protobuf/test_util2.h>
+#include <src/google/protobuf/test_util.h>
+#include <src/google/protobuf/test_util2.h>
 #include <google/protobuf/unittest.pb.h>
 #include <google/protobuf/unittest_mset.pb.h>
 #include <google/protobuf/unittest_mset_wire_format.pb.h>
-#include <google/protobuf/io/tokenizer.h>
-#include <google/protobuf/io/zero_copy_stream_impl.h>
-#include <google/protobuf/stubs/strutil.h>
+#include <src/google/protobuf/io/tokenizer.h>
+#include <src/google/protobuf/io/zero_copy_stream_impl.h>
+#include <src/google/protobuf/stubs/strutil.h>
 
 
-#include <google/protobuf/stubs/substitute.h>
-#include <google/protobuf/testing/googletest.h>
+#include <src/google/protobuf/stubs/substitute.h>
+#include <src/google/protobuf/testing/googletest.h>
 #include <gtest/gtest.h>
-#include <google/protobuf/stubs/mathlimits.h>
+#include <src/google/protobuf/stubs/mathlimits.h>
 
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {

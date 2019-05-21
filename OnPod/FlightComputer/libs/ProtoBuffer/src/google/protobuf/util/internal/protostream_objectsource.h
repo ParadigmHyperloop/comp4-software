@@ -35,19 +35,19 @@
 #include <string>
 #include <unordered_map>
 
-#include <google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/common.h>
 #include <google/protobuf/type.pb.h>
-#include <google/protobuf/util/internal/object_source.h>
-#include <google/protobuf/util/internal/object_writer.h>
-#include <google/protobuf/util/internal/type_info.h>
-#include <google/protobuf/util/type_resolver.h>
-#include <google/protobuf/stubs/stringpiece.h>
-#include <google/protobuf/stubs/hash.h>
-#include <google/protobuf/stubs/status.h>
-#include <google/protobuf/stubs/statusor.h>
+#include <src/google/protobuf/util/internal/object_source.h>
+#include <src/google/protobuf/util/internal/object_writer.h>
+#include <src/google/protobuf/util/internal/type_info.h>
+#include <src/google/protobuf/util/type_resolver.h>
+#include <src/google/protobuf/stubs/stringpiece.h>
+#include <src/google/protobuf/stubs/hash.h>
+#include <src/google/protobuf/stubs/status.h>
+#include <src/google/protobuf/stubs/statusor.h>
 
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {
@@ -341,6 +341,6 @@ class PROTOBUF_EXPORT ProtoStreamObjectSource : public ObjectSource {
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_UTIL_CONVERTER_PROTOSTREAM_OBJECTSOURCE_H__
