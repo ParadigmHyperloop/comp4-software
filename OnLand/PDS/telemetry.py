@@ -51,7 +51,7 @@ def main():
             json_pod_data = json_format.MessageToJson(pod_data)
             sio.emit('telemetry', json_pod_data)
             pod_data = MessageToDict(pod_data)
-            print("Telemetry: {}".format(pod_data))
+            log.info("Telemetry: {}".format(pod_data))
 
     udp_socket.close()
     sio.emit('telemetry_connection', '0')
