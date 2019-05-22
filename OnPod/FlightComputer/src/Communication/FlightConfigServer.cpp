@@ -25,7 +25,7 @@ FlightConfigServer *FlightConfigServer::getServer(int32_t port) {
     return _configServer;
 }
 
-flightConfig FlightConfigServer::operator()() {
+flightConfig FlightConfigServer::runServer() {
 
     LOG(INFO) << "Creating Pod Initilizer socket";
     char controlLaptopAddr[NI_MAXHOST] = {0};
@@ -37,7 +37,7 @@ flightConfig FlightConfigServer::operator()() {
     }
 
     // Bind socket to IP/PORT
-    sockaddr_in serverSockAddr;
+    sockaddr_in serverSockAddr{};
     serverSockAddr.sin_family = AF_INET;
     serverSockAddr.sin_port = htons(this->_port);
     inet_pton(AF_INET, "0.0.0.0", &serverSockAddr.sin_addr);
@@ -102,6 +102,7 @@ flightConfig FlightConfigServer::operator()() {
          0);
     std::string laptopAddress(controlLaptopAddr);
     config.set_controllaptopipaddr(laptopAddress);
+    close(clientSocket);
     return config;
 }
 
