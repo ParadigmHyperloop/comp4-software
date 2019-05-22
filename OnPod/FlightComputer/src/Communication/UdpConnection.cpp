@@ -72,7 +72,6 @@ void UdpConnection::giveUpdate() {
 
     if (!protoPacket->SerializeToArray(payload, static_cast<int>(payloadSize))) {
         std::string error = std::string("Error Creating Proto packet on  ") + this->_connectionName;
-        delete protoPacket;
         throw std::runtime_error(error);
     }
     ssize_t sent = sendto(this->_outboundSocket, payload, payloadSize, 0,
