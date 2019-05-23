@@ -15,16 +15,17 @@ MAX_MESSAGE_SIZE = 1024
 UDP_RECV_BUFFER_SIZE = 50
 
 
-
 # Udp Telemetry Stream
 UDP_TELEM_TIMEOUT = 3  # How long to wait without receiving telemetry before deciding connection is lost
 UDP_TELEM_PORT = 7000  # Control Server Port to receive telemetry over
+TELEMETRY_BROADCAST_FREQUENCY = 1000  # Minimum time between telemetry broadcasts
+
 
 # SocketIO
 SOCKET_SERVER = 'http://localhost:5000'
 
-# Pod
 
+# Pod
 POD_IP = '127.0.0.1'
 #POD_IP = '192.168.0.100'
 POD_CONFIG_PORT = 3001

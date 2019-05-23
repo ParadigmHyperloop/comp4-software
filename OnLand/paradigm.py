@@ -3,7 +3,6 @@ from PDS.telemetry import main as telemetry
 from PDS.commander import main as heartbeat
 from multiprocessing import Process
 import logging as log
-import time
 import sys
 
 log.basicConfig(stream=sys.stdout, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
@@ -14,7 +13,6 @@ def main():
 
     for p in processes:
         p.start()
-        time.sleep(10)
 
     for p in processes:
         p.join()
