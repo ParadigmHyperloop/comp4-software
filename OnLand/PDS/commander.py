@@ -1,7 +1,6 @@
 import logging as log
 import socketio
 import time
-from config import *
 from Paradigm_pb2 import *
 from PDS.TCP.PodTcpConnection import PodTcpConnection
 from helpers.heartbeat_timer import HeartbeatTimer
