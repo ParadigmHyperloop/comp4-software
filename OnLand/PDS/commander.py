@@ -7,6 +7,7 @@ from PDS.TCP.PodTcpConnection import PodTcpConnection
 from helpers.heartbeat_timer import HeartbeatTimer
 from config import COMMANDER_BACKUP_PULSE, COMMANDER_TIMEOUT_TIME, COMMANDER_PULSE_SPEED, POD_IP, POD_COMMANDER_PORT
 
+
 log.basicConfig(stream=sys.stdout, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=log.INFO)
 pod_command = PodCommand()
 pod = PodTcpConnection(ip=POD_IP, port=POD_COMMANDER_PORT)
@@ -31,10 +32,10 @@ def on_disconnect():
 def on_command(command):
     if command is '1':
         pod_command.manualBrakeNodeState = bnsVenting
-        print("vent")
+        log.info("vent")
     else:
         pod_command.manualBrakeNodeState = bnsFlight
-        print("Flight")
+        log.info("Flight")
     pod.send_packet(pod_command.SerializeToString())
 
 
