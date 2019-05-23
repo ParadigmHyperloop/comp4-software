@@ -1,24 +1,22 @@
 import logging as log
 import socketio
 import time
-from PDS.config import SOCKET_SERVER
-from PDS.Paradigm_pb2 import podCommand, ciFlight, bnsBraking, bnsStandby
-from PDS.TCP.heartbeat_timer import HeartbeatTimer
+from config import *
+from Paradigm_pb2 import *
 from PDS.TCP.PodTcpConnection import PodTcpConnection
-from PDS.config import COMMANDER_BACKUP_PULSE, COMMANDER_TIMEOUT_TIME, COMMANDER_PULSE_SPEED, POD_IP, POD_COMMANDER_PORT
+from helpers.heartbeat_timer import HeartbeatTimer
+from config import COMMANDER_BACKUP_PULSE, COMMANDER_TIMEOUT_TIME, COMMANDER_PULSE_SPEED, POD_IP, POD_COMMANDER_PORT
 
-log.basicConfig(filename='logs\paradigm.log', format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
-pod_message = podCommand()
-
-
-# Create socket to connect to server
+log.basicConfig(stream=sys.stdout, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=log.INFO)
+pod_command = PodCommand()
+pod = PodTcpConnection(ip=POD_IP, port=POD_COMMANDER_PORT)
 sio = socketio.Client()
-
-
+broadcast_timer = HeartbeatTimer()
+interface_state = ciStandby
 
 @sio.on('connect')
 def on_connect():
-    log.warning("Front End: Connected")
+    log.info("Commander Thread: Connected to SocketIO")
     sio.emit('connected', "commander thread")
 
 

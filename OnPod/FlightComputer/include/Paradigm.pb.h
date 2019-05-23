@@ -164,12 +164,15 @@ inline bool MotorStates_Parse(
     MotorStates_descriptor(), name, value);
 }
 enum ControlsInterfaceStates {
-  ciArm = 0,
-  ciFlight = 1,
-  ciEmergencyStop = 2
+  ciStandby = 0,
+  ciArm = 1,
+  ciFlight = 2,
+  ciDisarm = 3,
+  ciTaxi = 4,
+  ciEmergencyStop = 5
 };
 bool ControlsInterfaceStates_IsValid(int value);
-const ControlsInterfaceStates ControlsInterfaceStates_MIN = ciArm;
+const ControlsInterfaceStates ControlsInterfaceStates_MIN = ciStandby;
 const ControlsInterfaceStates ControlsInterfaceStates_MAX = ciEmergencyStop;
 const int ControlsInterfaceStates_ARRAYSIZE = ControlsInterfaceStates_MAX + 1;
 

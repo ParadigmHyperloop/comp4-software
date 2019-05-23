@@ -4,8 +4,9 @@ from PDS.commander import main as heartbeat
 from multiprocessing import Process
 import logging as log
 import time
+import sys
 
-log.basicConfig(filename='logs\paradigm.log', format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+log.basicConfig(stream=sys.stdout, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
 
 def main():
