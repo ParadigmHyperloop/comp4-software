@@ -30,7 +30,7 @@
 
 // Author: kenton@google.com (Kenton Varda)
 
-#include <google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/common.h>
 
 #include <atomic>
 #include <errno.h>
@@ -51,16 +51,16 @@
 #include <android/log.h>
 #endif
 
-#include <google/protobuf/stubs/callback.h>
-#include <google/protobuf/stubs/logging.h>
-#include <google/protobuf/stubs/mutex.h>
-#include <google/protobuf/stubs/once.h>
-#include <google/protobuf/stubs/status.h>
-#include <google/protobuf/stubs/stringpiece.h>
-#include <google/protobuf/stubs/strutil.h>
-#include <google/protobuf/stubs/int128.h>
+#include <src/google/protobuf/stubs/callback.h>
+#include <src/google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/stubs/mutex.h>
+#include <src/google/protobuf/stubs/once.h>
+#include <src/google/protobuf/stubs/status.h>
+#include <src/google/protobuf/stubs/stringpiece.h>
+#include <src/google/protobuf/stubs/strutil.h>
+#include <src/google/protobuf/stubs/int128.h>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {

@@ -49,9 +49,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/common.h>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {
@@ -152,6 +152,6 @@ inline void memcpy_inlined(char *dst, const char *src, size_t size) {
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_STUBS_FASTMEM_H_

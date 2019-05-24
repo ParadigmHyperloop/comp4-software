@@ -43,17 +43,17 @@
 #include <set>
 #include <utility>
 
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/arena.h>
-#include <google/protobuf/generated_enum_util.h>
-#include <google/protobuf/map_type_handler.h>
-#include <google/protobuf/stubs/hash.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/arena.h>
+#include <src/google/protobuf/generated_enum_util.h>
+#include <src/google/protobuf/map_type_handler.h>
+#include <src/google/protobuf/stubs/hash.h>
 
 #ifdef SWIG
 #error "You cannot SWIG proto headers"
 #endif
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {
@@ -1223,6 +1223,6 @@ class Map {
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_MAP_H__

@@ -64,9 +64,9 @@
 
 #include <cfloat>
 
-#include <google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/common.h>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 // ========================================================================= //
 
@@ -302,6 +302,6 @@ DECL_FP_LIMITS(long double, LDBL)
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // UTIL_MATH_MATHLIMITS_H__

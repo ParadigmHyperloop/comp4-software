@@ -1,22 +1,24 @@
-from ControlLaptop.controlLaptop import main as app
-from telemetry import main as telemetry
-from commander import main as heartbeat
-from threading import Thread
+from ControlLaptop.controlLaptop import main as web_app
+from PDS.telemetry import main as telemetry
+from PDS.commander import main as heartbeat
+from multiprocessing import Process
 import logging as log
+import sys
 
-log.basicConfig(filename='logs\paradigm.log', format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+log.basicConfig(stream=sys.stdout, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
 
 def main():
-    threads = [Thread(target=app), Thread(target=telemetry), Thread(target=heartbeat)]
+    processes = [Process(target=web_app), Process(target=telemetry), Process(target=heartbeat)]
 
-    for t in threads:
-        t.start()
+    for p in processes:
+        p.start()
 
-    for t in threads:
-        t.join()
+    for p in processes:
+        p.join()
 
     print("All threads haulted")
+
 
 
 if __name__ == "__main__":

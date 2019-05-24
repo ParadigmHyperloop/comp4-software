@@ -35,9 +35,9 @@
 // you will not see any evaluations, merely that
 // value is assigned true or false sequentially.
 
-#include <google/protobuf/stubs/template_util.h>
+#include <src/google/protobuf/stubs/template_util.h>
 
-#include <google/protobuf/testing/googletest.h>
+#include <src/google/protobuf/testing/googletest.h>
 #include <gtest/gtest.h>
 
 namespace GOOGLE_NAMESPACE = google::protobuf::internal;

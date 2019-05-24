@@ -31,10 +31,10 @@
 // Author: kenton@google.com (Kenton Varda)
 // emulates google3/testing/base/public/googletest.cc
 
-#include <google/protobuf/testing/googletest.h>
-#include <google/protobuf/testing/file.h>
-#include <google/protobuf/stubs/io_win32.h>
-#include <google/protobuf/stubs/strutil.h>
+#include <src/google/protobuf/testing/googletest.h>
+#include <src/google/protobuf/testing/file.h>
+#include <src/google/protobuf/stubs/io_win32.h>
+#include <src/google/protobuf/stubs/strutil.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <errno.h>

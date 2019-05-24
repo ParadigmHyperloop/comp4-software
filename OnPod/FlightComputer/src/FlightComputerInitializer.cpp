@@ -35,7 +35,7 @@ void FlightComputerInitializer::importLoggerLibrary()
 
 void FlightComputerInitializer::updatePodNetworkValues(PodNetwork& podNetworkValues, flightConfig& config)
 {
-    std::string cNodeIpAddrs[] = {"127.0.0.1"};
+    std::string cNodeIpAddrs[] = {"192.168.0.50"};
     podNetworkValues.cNodeIpAddrs.assign(begin(cNodeIpAddrs), end(cNodeIpAddrs)); // Node IPs
 
     podNetworkValues.iBrakeNodePort = NetworkConstants::iBRAKE_NODE_PORT; // Port # that Nodes are listening on

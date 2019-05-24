@@ -41,15 +41,15 @@
 
 #include <climits>
 #include <string>
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/logging.h>
-#include <google/protobuf/arena.h>
-#include <google/protobuf/stubs/once.h>
-#include <google/protobuf/port.h>
-#include <google/protobuf/stubs/strutil.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/arena.h>
+#include <src/google/protobuf/stubs/once.h>
+#include <src/google/protobuf/port.h>
+#include <src/google/protobuf/stubs/strutil.h>
 
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 #ifdef SWIG
 #error "You cannot SWIG proto headers"
@@ -518,6 +518,6 @@ bool MessageLite::ParseFrom(const T& input) {
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_MESSAGE_LITE_H__

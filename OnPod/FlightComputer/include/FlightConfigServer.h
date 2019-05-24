@@ -29,7 +29,7 @@ private:
 
 public:
     static FlightConfigServer* getServer(int port = NetworkConstants::iCONFIG_SERVER_PORT);
-    flightConfig operator()();
+    flightConfig runServer();
 
 
 };

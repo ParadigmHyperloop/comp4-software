@@ -36,20 +36,20 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/io/zero_copy_stream_impl.h>
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/util/internal/type_info.h>
-#include <google/protobuf/util/internal/datapiece.h>
-#include <google/protobuf/util/internal/error_listener.h>
-#include <google/protobuf/util/internal/proto_writer.h>
-#include <google/protobuf/util/internal/structured_objectwriter.h>
-#include <google/protobuf/util/type_resolver.h>
-#include <google/protobuf/stubs/bytestream.h>
-#include <google/protobuf/stubs/hash.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/io/coded_stream.h>
+#include <src/google/protobuf/io/zero_copy_stream_impl.h>
+#include <src/google/protobuf/descriptor.h>
+#include <src/google/protobuf/util/internal/type_info.h>
+#include <src/google/protobuf/util/internal/datapiece.h>
+#include <src/google/protobuf/util/internal/error_listener.h>
+#include <src/google/protobuf/util/internal/proto_writer.h>
+#include <src/google/protobuf/util/internal/structured_objectwriter.h>
+#include <src/google/protobuf/util/type_resolver.h>
+#include <src/google/protobuf/stubs/bytestream.h>
+#include <src/google/protobuf/stubs/hash.h>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {
@@ -429,6 +429,6 @@ class PROTOBUF_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_UTIL_CONVERTER_PROTOSTREAM_OBJECTWRITER_H__

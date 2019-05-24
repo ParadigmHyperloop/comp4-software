@@ -63,3 +63,10 @@ ProtoBufs/UpdateNanoPbProtos.sh
 *.csv
 
 ProtoBufs/Paradigm/cpp/
+
+*/Paradigm_pb2\.py
+
+*/Paradigm\.pb\.cc
+
+
+OnLand/ControlLaptop/Paradigm_pb2\.py

@@ -7,7 +7,6 @@ $( document ).ready(function() {
 });
 
 function showDtsNotifications(message, status){
-    debugger;
 	$.notify({
 		icon: "pe-7s-next-2",
 		message: `<b>${message}</b>`
@@ -54,13 +53,3 @@ socket.on('telemetry', function (data) {
     telemetryCount.text(count);
 });
 
-socket.on ('logging_session_ended', function (data) {
-    console.log(data);
-    showDtsNotifications('Session Ended - FileName: '+ data, 'Success');
-});
-
-socket.on ('logging_session_started', function (data) {
-    debugger;
-    console.log(data);
-    showDtsNotifications('Logging Session Started', 'Success');
-});

@@ -38,20 +38,20 @@
 
 #include <algorithm>
 #include <string>
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/logging.h>
-#include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/arenastring.h>
-#include <google/protobuf/message_lite.h>
-#include <google/protobuf/repeated_field.h>
-#include <google/protobuf/wire_format_lite.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/io/coded_stream.h>
+#include <src/google/protobuf/arenastring.h>
+#include <src/google/protobuf/message_lite.h>
+#include <src/google/protobuf/repeated_field.h>
+#include <src/google/protobuf/wire_format_lite.h>
 
 
 #ifdef SWIG
 #error "You cannot SWIG proto headers"
 #endif
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {
@@ -1067,6 +1067,6 @@ bool ParseMessageSetItemImpl(io::CodedInputStream* input, MS ms) {
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_WIRE_FORMAT_LITE_INL_H__

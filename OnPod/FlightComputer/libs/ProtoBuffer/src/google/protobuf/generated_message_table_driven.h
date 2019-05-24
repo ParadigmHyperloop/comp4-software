@@ -31,12 +31,12 @@
 #ifndef GOOGLE_PROTOBUF_GENERATED_MESSAGE_TABLE_DRIVEN_H__
 #define GOOGLE_PROTOBUF_GENERATED_MESSAGE_TABLE_DRIVEN_H__
 
-#include <google/protobuf/map.h>
-#include <google/protobuf/map_entry_lite.h>
-#include <google/protobuf/map_field_lite.h>
-#include <google/protobuf/message_lite.h>
-#include <google/protobuf/wire_format_lite.h>
-#include <google/protobuf/wire_format_lite_inl.h>
+#include <src/google/protobuf/map.h>
+#include <src/google/protobuf/map_entry_lite.h>
+#include <src/google/protobuf/map_field_lite.h>
+#include <src/google/protobuf/message_lite.h>
+#include <src/google/protobuf/wire_format_lite.h>
+#include <src/google/protobuf/wire_format_lite_inl.h>
 
 // We require C++11 and Clang to use constexpr for variables, as GCC 4.8
 // requires constexpr to be consistent between declarations of variables
@@ -52,7 +52,7 @@
 #error "You cannot SWIG proto headers"
 #endif
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {
@@ -338,6 +338,6 @@ void MapFieldSerializer(const uint8* base, uint32 offset, uint32 tag,
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_GENERATED_MESSAGE_TABLE_DRIVEN_H__

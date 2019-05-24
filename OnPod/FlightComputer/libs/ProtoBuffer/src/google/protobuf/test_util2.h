@@ -31,10 +31,10 @@
 #ifndef GOOGLE_PROTOBUF_TEST_UTIL2_H__
 #define GOOGLE_PROTOBUF_TEST_UTIL2_H__
 
-#include <google/protobuf/stubs/strutil.h>
+#include <src/google/protobuf/stubs/strutil.h>
 
-#include <google/protobuf/util/message_differencer.h>
-#include <google/protobuf/testing/googletest.h>
+#include <src/google/protobuf/util/message_differencer.h>
+#include <src/google/protobuf/testing/googletest.h>
 
 
 namespace google {

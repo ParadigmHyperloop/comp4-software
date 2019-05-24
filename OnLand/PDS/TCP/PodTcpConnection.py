@@ -1,6 +1,7 @@
 import socket
 import select
-from PDS.config import *
+import logging as log
+from config import *
 
 
 class PodTcpConnection:
@@ -22,7 +23,7 @@ class PodTcpConnection:
             self.close()
             raise e
         try:
-            self._sock.connect((self._pod_ip,self._pod_port))
+            self._sock.connect((self._pod_ip, self._pod_port))
         except ConnectionRefusedError:
             # No connection
             self.close()
@@ -37,6 +38,8 @@ class PodTcpConnection:
 
     def send_packet(self, payload):
         total_sent = 0
+        if not self.is_connected():
+            return
         while len(payload):
             try:
                 sent = self._sock.send(payload)
@@ -68,7 +71,7 @@ class PodTcpConnection:
             raise e
         else:  # No error, msg received
             if not msg:  # Empty message means that the connection was terminated by the pod
-                print('Pod closed connection')
+                log.info('Pod closed connection')
                 self.close()
             else:
                 return msg

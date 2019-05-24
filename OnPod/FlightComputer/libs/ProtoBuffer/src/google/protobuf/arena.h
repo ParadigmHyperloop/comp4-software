@@ -48,11 +48,11 @@ using type_info = ::type_info;
 #include <typeinfo>
 #endif
 
-#include <google/protobuf/arena_impl.h>
-#include <google/protobuf/port.h>
+#include <src/google/protobuf/arena_impl.h>
+#include <src/google/protobuf/port.h>
 #include <type_traits>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 #ifdef SWIG
 #error "You cannot SWIG proto headers"
@@ -699,6 +699,6 @@ class PROTOBUF_EXPORT Arena {
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_ARENA_H__

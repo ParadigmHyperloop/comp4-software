@@ -33,7 +33,7 @@
 #ifndef GOOGLE_PROTOBUF_STUBS_STL_UTIL_H__
 #define GOOGLE_PROTOBUF_STUBS_STL_UTIL_H__
 
-#include <google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/common.h>
 
 namespace google {
 namespace protobuf {

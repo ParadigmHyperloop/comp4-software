@@ -31,8 +31,8 @@
 #ifndef GOOGLE_PROTOBUF_TYPE_HANDLER_H__
 #define GOOGLE_PROTOBUF_TYPE_HANDLER_H__
 
-#include <google/protobuf/arena.h>
-#include <google/protobuf/wire_format_lite_inl.h>
+#include <src/google/protobuf/arena.h>
+#include <src/google/protobuf/wire_format_lite_inl.h>
 
 #ifdef SWIG
 #error "You cannot SWIG proto headers"

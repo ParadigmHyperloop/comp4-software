@@ -35,7 +35,7 @@
 // This file needs to be included as .inc as it depends on certain macros being
 // defined prior to its inclusion.
 
-#include <google/protobuf/message.h>
+#include <src/google/protobuf/message.h>
 
 #include <fcntl.h>
 #include <sys/stat.h>
@@ -46,21 +46,21 @@
 #include <fstream>
 #include <sstream>
 
-#include <google/protobuf/test_util2.h>
-#include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/io/zero_copy_stream.h>
-#include <google/protobuf/io/zero_copy_stream_impl.h>
+#include <src/google/protobuf/test_util2.h>
+#include <src/google/protobuf/io/coded_stream.h>
+#include <src/google/protobuf/io/zero_copy_stream.h>
+#include <src/google/protobuf/io/zero_copy_stream_impl.h>
 #include <google/protobuf/descriptor.pb.h>
-#include <google/protobuf/arena.h>
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/generated_message_reflection.h>
+#include <src/google/protobuf/arena.h>
+#include <src/google/protobuf/descriptor.h>
+#include <src/google/protobuf/generated_message_reflection.h>
 
-#include <google/protobuf/stubs/logging.h>
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/logging.h>
-#include <google/protobuf/testing/googletest.h>
+#include <src/google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/testing/googletest.h>
 #include <gtest/gtest.h>
-#include <google/protobuf/stubs/io_win32.h>
+#include <src/google/protobuf/stubs/io_win32.h>
 
 namespace google {
 namespace protobuf {

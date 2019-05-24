@@ -44,7 +44,7 @@ void UdpConnection::getUpdate() {
     bzero(&buffer, sizeof buffer);
     ssize_t receivedPacketSize = recvfrom(this->_inboundSocket, buffer, 200, 0, nullptr, nullptr);
     if (receivedPacketSize != -1) {
-        LOG(INFO) << receivedPacketSize << " Bytes received on " << this->_connectionName << buffer;
+       // LOG(INFO) << receivedPacketSize << " Bytes received on " << this->_connectionName << buffer;
         try {
             this->parseUpdate(buffer, (int32_t) receivedPacketSize);
         }
@@ -63,25 +63,23 @@ void UdpConnection::getUpdate() {
 
 
 void UdpConnection::giveUpdate() {
-    google::protobuf::Message *protoPacket;
+
     ssize_t payloadSize;
-    protoPacket = this->getProtoUpdateMessage();
+    std::unique_ptr<google::protobuf::Message> protoPacket(this->getProtoUpdateMessage());
+
     payloadSize = protoPacket->ByteSizeLong();
     unsigned char payload[payloadSize];
 
     if (!protoPacket->SerializeToArray(payload, static_cast<int>(payloadSize))) {
         std::string error = std::string("Error Creating Proto packet on  ") + this->_connectionName;
-        delete protoPacket;
         throw std::runtime_error(error);
     }
     ssize_t sent = sendto(this->_outboundSocket, payload, payloadSize, 0,
                           (struct sockaddr *) &this->_destSockAddr, sizeof(this->_destSockAddr));
     if (sent == -1) {
         std::string strError = std::string("Error Sending ") + this->_connectionName + std::strerror(errno);
-        delete protoPacket;
         throw std::runtime_error(strError);
     }
-    delete protoPacket;
 }
 
 void UdpConnection::closeConnection() {
@@ -90,10 +88,10 @@ void UdpConnection::closeConnection() {
 }
 
 
-google::protobuf::Message* UdpConnection::getProtoUpdateMessage() {
-    auto protoMessage = new defaultFcToNode();
+std::unique_ptr<google::protobuf::Message> UdpConnection::getProtoUpdateMessage() {
+    std::unique_ptr<DefaultFcToNode> protoMessage (new DefaultFcToNode());
     protoMessage->set_podstate(psArmed);
-    return protoMessage;
+    return protoMessage; //Shift ownership of unique ptr to caller
 };
 
 bool UdpConnection::_createServerSocket() {
@@ -127,9 +125,8 @@ PdsConnection::PdsConnection(Pod pod) : UdpConnection(pod) {
     this->_connectionName = "Controls Interface Data : ";
 };
 
-//TODO can we do this without putting the proto on the heap?
-google::protobuf::Message* PdsConnection::getProtoUpdateMessage(){
-    auto protoMessage = new telemetry();
+std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage() {
+    std::unique_ptr<Telemetry> protoMessage (new Telemetry());
     protoMessage->set_podstate(pod.sPodValues->podState);
     protoMessage->set_lowpressure1(pod.sPodValues->lowPressure1);
     protoMessage->set_highpressure(pod.sPodValues->highPressure);
@@ -145,8 +142,6 @@ google::protobuf::Message* PdsConnection::getProtoUpdateMessage(){
 }
 
 
-
-
 BrakeNodeConnection::BrakeNodeConnection(Pod pod) : UdpConnection(pod) {
     this->_connectionName = "Brake Node : ";
 };
@@ -155,8 +150,8 @@ void BrakeNodeConnection::setConnectionStatus(bool status){
     this->pod.sPodValues->connectionsArray[0] = status;
 }
 
-google::protobuf::Message* BrakeNodeConnection::getProtoUpdateMessage() {
-    auto protoMessage = new FcToBrakeNode();
+std::unique_ptr<google::protobuf::Message> BrakeNodeConnection::getProtoUpdateMessage() {
+    std::unique_ptr<FcToBrakeNode> protoMessage (new FcToBrakeNode());
     protoMessage->set_podstate(this->pod.sPodValues->podState);
     protoMessage->set_manualnodestate(this->pod.sPodValues->manualBrakeNodeState);
     return protoMessage;

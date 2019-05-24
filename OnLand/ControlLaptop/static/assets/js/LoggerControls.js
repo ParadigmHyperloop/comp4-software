@@ -8,3 +8,13 @@ $(document).ready(function () {
         console.log("Logging Started");
     });
 });
+
+socket.on ('logging_session_ended', function (data) {
+    console.log(data);
+    showDtsNotifications('Session Ended - FileName: '+ data, 'Success');
+});
+
+socket.on ('logging_session_started', function (data) {
+    console.log(data);
+    showDtsNotifications('Logging Session Started', 'Success');
+});

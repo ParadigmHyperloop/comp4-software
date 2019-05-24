@@ -52,7 +52,7 @@ class FlightConfig:
         try:
             os.remove(self._path + self._file_name + '.json')
         except Exception as e:
-            print("failed to remove config file")
+            log.warning("failed to remove config file")
             raise e
 
 

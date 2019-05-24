@@ -14,13 +14,12 @@ file(GLOB_RECURSE SOURCES "src/*.c*")
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-message(${CMAKE_CXX_COMPILER})
-
 if (${CMAKE_CXX_COMPILER} MATCHES ".arm")
-    # Staticly link libs built for ARM
-    set(Protobuf_INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include/ProtoBuffer/src")
-    include_directories(${Protobuf_INCLUDE_DIRS})
+    set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc  -static-libstdc++")
 
+    # Staticly link libs built for ARM
+    set(Protobuf_INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/libs/ProtoBuffer/src")
+    include_directories(${Protobuf_INCLUDE_DIRS})
     set(Protobuf_LIBRARIES ${Protobuf_INCLUDE_DIRS}/.libs/libprotobuf.a)
 else ()
     # Compiling on host: Link local libraries dynamicly

@@ -28,7 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include <google/protobuf/util/internal/json_stream_parser.h>
+#include <src/google/protobuf/util/internal/json_stream_parser.h>
 
 #include <algorithm>
 #include <cctype>
@@ -37,13 +37,13 @@
 #include <cstring>
 #include <memory>
 
-#include <google/protobuf/stubs/logging.h>
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/strutil.h>
+#include <src/google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/strutil.h>
 
-#include <google/protobuf/util/internal/object_writer.h>
-#include <google/protobuf/util/internal/json_escaping.h>
-#include <google/protobuf/stubs/mathlimits.h>
+#include <src/google/protobuf/util/internal/object_writer.h>
+#include <src/google/protobuf/util/internal/json_escaping.h>
+#include <src/google/protobuf/stubs/mathlimits.h>
 
 
 namespace google {

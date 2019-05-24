@@ -28,16 +28,16 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include <google/protobuf/parse_context.h>
+#include <src/google/protobuf/parse_context.h>
 
-#include <google/protobuf/stubs/stringprintf.h>
-#include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/message_lite.h>
-#include <google/protobuf/repeated_field.h>
-#include <google/protobuf/wire_format_lite.h>
-#include <google/protobuf/stubs/strutil.h>
+#include <src/google/protobuf/stubs/stringprintf.h>
+#include <src/google/protobuf/io/coded_stream.h>
+#include <src/google/protobuf/message_lite.h>
+#include <src/google/protobuf/repeated_field.h>
+#include <src/google/protobuf/wire_format_lite.h>
+#include <src/google/protobuf/stubs/strutil.h>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {

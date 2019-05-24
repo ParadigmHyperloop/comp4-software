@@ -79,7 +79,7 @@ public:
      */
     virtual bool parseUpdate(char cBuffer[], int32_t iMessageSize) { return false; };
 
-    virtual google::protobuf::Message *getProtoUpdateMessage();
+    virtual std::unique_ptr<google::protobuf::Message> getProtoUpdateMessage();
 
     /**
      * Each derived class will be responsible for implementing how it notifies the shared memeory
@@ -105,7 +105,7 @@ public:
     explicit PdsConnection(Pod pod);
 
     //TODO can we do this without putting the proto on the heap?
-    google::protobuf::Message *getProtoUpdateMessage() override;
+    std::unique_ptr<google::protobuf::Message> getProtoUpdateMessage() override;
 };
 
 
@@ -118,7 +118,7 @@ public:
 
     void setConnectionStatus(bool bStatus);
 
-    google::protobuf::Message* getProtoUpdateMessage() override;
+    std::unique_ptr<google::protobuf::Message> getProtoUpdateMessage() override;
 
     bool parseUpdate(char buffer[], int32_t messageSize) override;
 

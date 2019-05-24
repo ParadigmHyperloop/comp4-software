@@ -41,5 +41,5 @@
 #define UNITTEST_IMPORT ::protobuf_unittest_import
 
 // Must libs after the above macros.
-#include <google/protobuf/test_util.inc>
-#include <google/protobuf/message_unittest.inc>
+#include <src/google/protobuf/test_util.inc>
+#include <src/google/protobuf/message_unittest.inc>

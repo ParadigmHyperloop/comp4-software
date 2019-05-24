@@ -30,11 +30,11 @@
 #ifndef GOOGLE_PROTOBUF_STUBS_INT128_H_
 #define GOOGLE_PROTOBUF_STUBS_INT128_H_
 
-#include <google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/common.h>
 
 #include <iosfwd>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {
@@ -382,6 +382,6 @@ inline uint128& uint128::operator--() {
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_STUBS_INT128_H_

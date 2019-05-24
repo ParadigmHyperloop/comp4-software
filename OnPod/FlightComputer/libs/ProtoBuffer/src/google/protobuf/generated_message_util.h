@@ -44,18 +44,18 @@
 #include <string>
 #include <vector>
 
-#include <google/protobuf/stubs/logging.h>
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/parse_context.h>
-#include <google/protobuf/has_bits.h>
-#include <google/protobuf/implicit_weak_message.h>
-#include <google/protobuf/message_lite.h>
-#include <google/protobuf/stubs/once.h>  // Add direct dep on port for pb.cc
-#include <google/protobuf/port.h>
-#include <google/protobuf/wire_format_lite.h>
-#include <google/protobuf/stubs/strutil.h>
+#include <src/google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/parse_context.h>
+#include <src/google/protobuf/has_bits.h>
+#include <src/google/protobuf/implicit_weak_message.h>
+#include <src/google/protobuf/message_lite.h>
+#include <src/google/protobuf/stubs/once.h>  // Add direct dep on port for pb.cc
+#include <src/google/protobuf/port.h>
+#include <src/google/protobuf/wire_format_lite.h>
+#include <src/google/protobuf/stubs/strutil.h>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 #ifdef SWIG
 #error "You cannot SWIG proto headers"
@@ -248,6 +248,6 @@ inline bool StringCheckUTF8Verify(const char* begin, int size,
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_GENERATED_MESSAGE_UTIL_H__

@@ -41,7 +41,7 @@ class DescriptorPool;
 namespace util {
 class TypeResolver;
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 // Creates a TypeResolver that serves type information in the given descriptor
 // pool. Caller takes ownership of the returned TypeResolver.
@@ -52,6 +52,6 @@ PROTOBUF_EXPORT TypeResolver* NewTypeResolverForDescriptorPool(
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_UTIL_TYPE_RESOLVER_UTIL_H__

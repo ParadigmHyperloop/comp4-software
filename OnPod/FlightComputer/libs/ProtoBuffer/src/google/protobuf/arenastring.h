@@ -33,13 +33,13 @@
 
 #include <string>
 
-#include <google/protobuf/arena.h>
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/fastmem.h>
-#include <google/protobuf/stubs/logging.h>
-#include <google/protobuf/stubs/port.h>
+#include <src/google/protobuf/arena.h>
+#include <src/google/protobuf/stubs/common.h>
+#include <src/google/protobuf/stubs/fastmem.h>
+#include <src/google/protobuf/stubs/logging.h>
+#include <src/google/protobuf/stubs/port.h>
 
-#include <google/protobuf/port_def.inc>
+#include <src/google/protobuf/port_def.inc>
 
 // This is the implementation of arena string fields written for the open-source
 // release. The ArenaStringPtr struct below is an internal implementation class
@@ -403,6 +403,6 @@ inline void ArenaStringPtr::AssignWithDefault(const ::std::string* default_value
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
+#include <src/google/protobuf/port_undef.inc>
 
 #endif  // GOOGLE_PROTOBUF_ARENASTRING_H__

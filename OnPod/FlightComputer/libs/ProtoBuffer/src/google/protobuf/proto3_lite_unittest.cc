@@ -34,7 +34,7 @@
 #define UNITTEST ::proto3_unittest
 
 // Must libs after the above macros.
-#include <google/protobuf/proto3_lite_unittest.inc>
+#include <src/google/protobuf/proto3_lite_unittest.inc>
 
 // Make extract script happy.
 namespace google {
