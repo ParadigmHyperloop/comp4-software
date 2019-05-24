@@ -84,7 +84,7 @@ int CanThread(Pod Pod){
 
 
     LOG(INFO) << "Starting CAN Main Loop";
-    while (Pod.sPodValues->podState != psShutdown) {
+    while (Pod.telemetry->podState->getStateValue() != psShutdown) {
         struct canfd_frame canFrame = {0}; //TODO remove this zero once we dont need it
         // Read in a CAN CanFrame
         ssize_t iReceivedPacketSize = read(canSock, &canFrame, CANFD_MTU);

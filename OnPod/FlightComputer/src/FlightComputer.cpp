@@ -6,7 +6,7 @@
 INITIALIZE_EASYLOGGINGPP
 
 
-#include "CoreControlThread.h" //todo make this a thread file
+#include "CoreControlThread.h"
 #include "FlightComputerInitializer.h"
 #include "FlightConfigServer.h"
 #include "CommanderThread.h"

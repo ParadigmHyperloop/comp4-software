@@ -3,15 +3,26 @@
 
 #include "Common.h"
 
-class State{
+class PodState{
 
 public:
-    virtual void runTransitions(){};
+    PodState() = default;
 
+    PodStates getStateValue(){
+        return this->_stateIdentifier;
+    };
 
-    virtual PodStates getStateValue()=0;
-    ~State() = default;
-    State() = default;
+    bool testTransitions(){
+        return false;
+    };
+
+    PodStates getNewState(){
+        return this->_nextStateIdentifier;
+    };
+
+    bool isTransitioning(){
+        return this->_transitioning;
+    };
 
     BrakeNodeStates getBrakeNodeState(){
         return _brakeNodeState;
@@ -21,25 +32,35 @@ public:
         return _lvdcNodeState;
     }
 
-    unsigned int getTimeInStateMilis(){
-        std::chrono::steady_clock::time_point current = std::chrono::steady_clock::now();
-        return std::chrono::duration_cast<std::chrono::milliseconds>(current - this->_enterStateTime).count();
+    const std::string getTransitionReason(){
+        return _transitionReason;
     }
+    unsigned int getTimeInStateMilis();
+
+    static std::unique_ptr<PodState> createState(PodStates);
+
 
 protected:
     std::chrono::steady_clock::time_point _enterStateTime;
+    bool _transitioning = false;
+    std::string _transitionReason = "";
+    PodStates _stateIdentifier = psBooting;
+    PodStates _nextStateIdentifier = psBooting;
     BrakeNodeStates _brakeNodeState = bnsBooting;
     LvdcNodeStates  _lvdcNodeState = lvdcBooting;
+
 };
 
 
-class Booting: public State{
+
+class Booting: public PodState{
+public:
     Booting(){
         _brakeNodeState = bnsBooting;
         _lvdcNodeState = lvdcBooting;
     }
-    void runTransitions() override;
-    PodStates getStateValue() override { return psBooting;}
+
+    PodStates getStateValue() { return psBooting;};
 };
 
 

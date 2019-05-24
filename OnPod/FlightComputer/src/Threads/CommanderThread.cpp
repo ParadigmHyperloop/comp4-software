@@ -86,7 +86,7 @@ int32_t commanderThread(Pod Pod) {
     Heartbeat pulse = Heartbeat(Pod.sPodNetworkValues->iCommaderTimeoutMili);
 
     //pod state != shutdown
-    while (Pod.sPodValues->podState != psShutdown) {
+    while (Pod.telemetry->podState->getStateValue() != psShutdown) {
 
         /* Accepted connection gets put iNewSockfd,
         * thread will hang here until a connection is recieved.
@@ -102,7 +102,7 @@ int32_t commanderThread(Pod Pod) {
 
         LOG(INFO) << "Controls Interface Connected";
         pulse.feed();
-        while (Pod.sPodValues->podState != psShutdown) {
+        while (Pod.telemetry->podState->getStateValue() != psShutdown) {
             messageSize = read(connectionSock, buffer, 255);
             if (messageSize < 0) {
                 if (errno == 11) //Erno 11 means no message available on non blocking socket

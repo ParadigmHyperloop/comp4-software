@@ -5,22 +5,11 @@
 #include <cstdint>
 #include "Paradigm.pb.h"
 
-
-
-
-//enum PodStates { psStandby, psArming, psArmed, psAcceleration, psCoasting, psBraking, psDisarm, psRetrieval, psEmergency, psBooting };
-
-//enum eBreakNodeStates { bnsBooting, bnsStandby, bnsArming, bnsArmed, bnsFlight, bnsBraking, bnsVenting, bnsRetrieval, bnsError};
-
-//enum TerminalStates { tsConnected, tsDropped, tsTerminalEmergency};
-
-//enum TerminalCommands { tcTerminalArm, tcTerminalFlight, tcTerminalStop, tcTerminalNone};
-
-//enum MotorStates { msIdle, msDrive};
+class PodState; // Fix for circular dependency
 
 struct PodValues {
     // States
-    PodStates podState = psBooting;
+    std::unique_ptr<PodState> podState;
     ControlsInterfaceStates terminalState;
     MotorStates motorState;
     BrakeNodeStates brakeNodeState;

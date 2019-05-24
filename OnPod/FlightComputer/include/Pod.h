@@ -2,24 +2,22 @@
 #define FLIGHTCOMPUTER_POD_H
 
 #include "Structs.h"
+#include "States.h"
 
 class Pod
 {
 	public:
 
-		PodValues* sPodValues;
-		PodNetwork* sPodNetworkValues;
+		struct PodValues* telemetry;
+		struct PodNetwork* sPodNetworkValues;
 
-		Pod(){};
+		Pod() = default;
 
 		Pod(PodValues*, PodNetwork*);
-		// Pod States
-		int32_t setPodState(PodStates, const char*);
-		PodStates getPodState();
 
-		// Brake Node State
-		BrakeNodeStates getBrakeNodeState();
-		int32_t setBrakeNodeState(BrakeNodeStates);
+		// Pod States
+		int32_t setPodState(PodStates, const std::string&);
+
 
 		// Motor State
 		MotorStates getMotorState();
@@ -29,7 +27,6 @@ class Pod
 		unsigned char* getFlagsArray();
 		int32_t getFlagsArraySize();
 
-		int32_t getNodeServerPortNumber();
 
 		// Controls Interface
 		void setControlsInterfaceState(ControlsInterfaceStates);

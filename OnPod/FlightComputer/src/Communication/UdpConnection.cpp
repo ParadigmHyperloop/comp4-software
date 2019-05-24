@@ -127,17 +127,17 @@ PdsConnection::PdsConnection(Pod pod) : UdpConnection(pod) {
 
 std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage() {
     std::unique_ptr<Telemetry> protoMessage (new Telemetry());
-    protoMessage->set_podstate(pod.sPodValues->podState);
-    protoMessage->set_lowpressure1(pod.sPodValues->lowPressure1);
-    protoMessage->set_highpressure(pod.sPodValues->highPressure);
-    protoMessage->set_solenoid1(pod.sPodValues->solenoid1);
-    protoMessage->set_solenoid2(pod.sPodValues->solenoid2);
-    protoMessage->set_pressurevesseltemperature(pod.sPodValues->pressureVesselTemperature);
-    protoMessage->set_railtemperature(pod.sPodValues->railTemperature);
-    protoMessage->set_hvbatterypackvoltage(pod.sPodValues->hvBatteryPackVoltage);
-    protoMessage->set_hvbatterypackcurrent(pod.sPodValues->hvBatteryPackCurrent);
-    protoMessage->set_hvbatterypackmaxcellvoltage(pod.sPodValues->hvBatteryPackMaxCellVoltage);
-    protoMessage->set_hvbatterypackminimumcellvoltage(pod.sPodValues->hvBatteryPackMinimumCellVoltage);
+    protoMessage->set_podstate(pod.telemetry->podState->getStateValue());
+    protoMessage->set_lowpressure1(pod.telemetry->lowPressure1);
+    protoMessage->set_highpressure(pod.telemetry->highPressure);
+    protoMessage->set_solenoid1(pod.telemetry->solenoid1);
+    protoMessage->set_solenoid2(pod.telemetry->solenoid2);
+    protoMessage->set_pressurevesseltemperature(pod.telemetry->pressureVesselTemperature);
+    protoMessage->set_railtemperature(pod.telemetry->railTemperature);
+    protoMessage->set_hvbatterypackvoltage(pod.telemetry->hvBatteryPackVoltage);
+    protoMessage->set_hvbatterypackcurrent(pod.telemetry->hvBatteryPackCurrent);
+    protoMessage->set_hvbatterypackmaxcellvoltage(pod.telemetry->hvBatteryPackMaxCellVoltage);
+    protoMessage->set_hvbatterypackminimumcellvoltage(pod.telemetry->hvBatteryPackMinimumCellVoltage);
     return protoMessage;
 }
 
@@ -147,13 +147,13 @@ BrakeNodeConnection::BrakeNodeConnection(Pod pod) : UdpConnection(pod) {
 };
 
 void BrakeNodeConnection::setConnectionStatus(bool status){
-    this->pod.sPodValues->connectionsArray[0] = status;
+    this->pod.telemetry->connectionsArray[0] = status;
 }
 
 std::unique_ptr<google::protobuf::Message> BrakeNodeConnection::getProtoUpdateMessage() {
     std::unique_ptr<FcToBrakeNode> protoMessage (new FcToBrakeNode());
-    protoMessage->set_podstate(this->pod.sPodValues->podState);
-    protoMessage->set_manualnodestate(this->pod.sPodValues->manualBrakeNodeState);
+    protoMessage->set_podstate(this->pod.telemetry->podState->getStateValue());
+    protoMessage->set_manualnodestate(this->pod.telemetry->manualBrakeNodeState);
     return protoMessage;
 }
 
@@ -163,12 +163,12 @@ bool BrakeNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
         std::string strError = "Failed to parse Update from Brake Node";
         throw std::invalid_argument(strError);
     }
-    this->pod.sPodValues->solenoid1 = protoMessage.brakesolenoidstate();
-    this->pod.sPodValues->solenoid2 = protoMessage.ventsolenoidstate();
-    this->pod.sPodValues->railTemperature = protoMessage.rotortemperature();
-    this->pod.sPodValues->pressureVesselTemperature = protoMessage.pneumatictemperature();
-    this->pod.sPodValues->highPressure = protoMessage.tankpressure();
-    this->pod.sPodValues->lowPressure1 = protoMessage.brakepressure();
+    this->pod.telemetry->solenoid1 = protoMessage.brakesolenoidstate();
+    this->pod.telemetry->solenoid2 = protoMessage.ventsolenoidstate();
+    this->pod.telemetry->railTemperature = protoMessage.rotortemperature();
+    this->pod.telemetry->pressureVesselTemperature = protoMessage.pneumatictemperature();
+    this->pod.telemetry->highPressure = protoMessage.tankpressure();
+    this->pod.telemetry->lowPressure1 = protoMessage.brakepressure();
     return true;
 }
 
