@@ -1,4 +1,4 @@
-#include "adc.h"
+#include "adc_ADS7953.h"
 
 ADS7953::ADS7953(SPIClass spi) : spi(spi) {}
 

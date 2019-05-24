@@ -1,4 +1,4 @@
-#include "lp_transducer.h"
+#include "lp_transducer_PX2300P.h"
 
 PX2300P::PX2300P (ADS7953 *adc, uint8_t uAdcChannel) :
     adc(adc), uAdcChannel(uAdcChannel)

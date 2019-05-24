@@ -1,7 +1,7 @@
 #ifndef HP_TRANSDUCER_H
 #define HP_TRANSDUCER_H
 
-#include "drivers/adc.h"
+#include "drivers/adc_ADS7953.h"
 
 class U5374 {
 private:

@@ -1,7 +1,7 @@
 #ifndef THERMOCOUPLE_H
 #define THERMOCOUPLE_H
 
-#include "drivers/adc.h"
+#include "drivers/adc_ADS7953.h"
 
 class typeKThermo {
 private:
