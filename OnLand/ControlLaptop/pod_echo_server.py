@@ -1,7 +1,7 @@
 import socket
 
 HOST = '127.0.0.1'
-PORT = 65432
+PORT = 3001 
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
@@ -16,7 +16,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 print(f'data: {data}')
                 if not data:
                     break
-                conn.sendall(data)
+                conn.sendall('ok'.encode('utf-8'))
             except ConnectionResetError as e:
                 print("Disconnection...")
                 break
