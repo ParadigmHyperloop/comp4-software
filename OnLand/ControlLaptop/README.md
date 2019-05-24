@@ -1,4 +1,4 @@
-# Hyperloop Pod Terminal 
+# HyperLoop Pod Terminal 
 
 used to communicate with Pod
 
