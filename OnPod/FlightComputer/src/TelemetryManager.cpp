@@ -31,16 +31,7 @@ void TelemetryManager::setControlsInterfaceState(ControlsInterfaceStates eTermin
     }
 }
 
-ControlsInterfaceStates TelemetryManager::getControlsInterfaceState() {
-    return this->telemetry->eTerminalCommand;
-}
 
-
-
-
-MotorStates TelemetryManager::getMotorState() {
-    return this->telemetry->motorState;
-};
 
 int32_t TelemetryManager::setMotorState(MotorStates eMotorState) {
     if (this->bWriteMotorState) {
@@ -50,16 +41,6 @@ int32_t TelemetryManager::setMotorState(MotorStates eMotorState) {
         return 0;
     }
 };
-
-
-unsigned char *TelemetryManager::getFlagsArray() {
-    return this->telemetry->flagsArray;
-};
-
-int32_t TelemetryManager::getFlagsArraySize() {
-    return this->telemetry->iFlagsArraySize;
-};
-
 
 
 void TelemetryManager::setAutomaticTransitions(bool val) {
@@ -142,6 +123,23 @@ float TelemetryManager::getHvBatteryPackMaxCellVoltage(){
     return this->telemetry->hvBatteryPackMaxCellVoltage;
 }
 
+void TelemetryManager::setSolenoid(float value, int32_t identifier){
+    // Set Value in Memory
+    switch(identifier){
+        case SOL1_INDEX:
+            this->telemetry->solenoid1 = value;
+            break;
+        case SOL2_INDEX:
+            this->telemetry->solenoid2 = value;
+            break;
+        case SOL3_INDEX:
+            this->telemetry->solenoid3 = value;
+        case SOL4_INDEX:
+            this->telemetry->solenoid4 = value;
+        default:
+            break;
+    }
+}
 
 void TelemetryManager::setLowPressure(float value, int identifier){
 
@@ -180,9 +178,6 @@ void TelemetryManager::setHighPressure(float value){
     PodStates currentState = this->telemetry->podState->getStateValue();
 
     this->telemetry->highPressure = value;
-
-    // Check if nominal for current state
-
     if(currentState == psStandby){
         status = inRange<float>(value, VACUUM, HIGHPRESSURE_ARMED_MAX);
     } else if(currentState == psArming || currentState == psArmed || currentState == psAcceleration || currentState == psCoasting){
@@ -190,24 +185,26 @@ void TelemetryManager::setHighPressure(float value){
     }else if( currentState == psBraking ){
         status = inRange<float>(value, VACUUM, HIGHPRESSURE_ARMED_MAX); //TODO confirm this
     }
-
-    // Set sensor flag
     this->setSensorFlag(status, HP_INDEX);
 }
 
 
-void TelemetryManager::setPressureVesselTemperature(float){
-
+void TelemetryManager::setPressureVesselTemperature(float value){
+    bool status;
+    this->telemetry->pressureVesselTemperature = value;
+    status = inRange<float>(value, PRESSURE_TEMP_MIN, PRESSURE_TEMP_MAX);
+    this->setSensorFlag(status, HP_TEMP_INDEX);
 }
 
-void TelemetryManager::setSensorFlag(int32_t status, int32_t index){
 
-    int32_t currentStatus = this->telemetry->flagsArray[index];
+void TelemetryManager::setSensorFlag(int32_t status, int32_t index){
+    int32_t currentStatus = this->telemetry->sensorFlags[index];
     if(currentStatus == 2){ // Manual override high
         return;
     }
     if(currentStatus != status){
-        this->telemetry->flagsArray[index] = status;
+        this->telemetry->sensorFlags[index] = status;
+        //ForceControlLoopIteration? TODO
         return;
     }
 }

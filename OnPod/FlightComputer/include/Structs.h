@@ -24,13 +24,8 @@ struct PodValues {
     bool automaticTransitions;
 
     //ConnectionsArray
-    std::vector<bool> connectionsArray = {false, false, false, false, false}; // [brake , rear, lvdc, bms, inverter]
-
-    // Navigation
-    float distance = 0;
-    float velocity = 0;
-    // Rear Node
-    float gpioValues;
+    std::vector<int32_t> connectionFlags = {false, false, false, false, false}; // [brake , rear, lvdc, bms, inverter]
+    std::vector<int32_t> sensorFlags = {};
 
     // HV-BMS
     float hvBatteryPackVoltage;
@@ -38,10 +33,6 @@ struct PodValues {
     float hvBatteryPackMinimumCellVoltage;
     float hvBatteryPackMaxCellVoltage;
 
-
-    //FlagsV2
-    unsigned char flagsArray[3] = {0};
-    int32_t iFlagsArraySize = 3;
     // Atmosphere
     double tubePressure;
     // Terminal
@@ -60,7 +51,9 @@ struct PodValues {
     float lowPressure4;
     float highPressure;
     float pressureVesselTemperature;
-    float railTemperature;
+
+    // DTS
+    float rotorTemperature;
 };
 
 struct PodNetwork {

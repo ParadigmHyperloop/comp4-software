@@ -22,7 +22,7 @@ class TelemetryManager
 		// Flags Array
 		unsigned char* getFlagsArray();
 		int32_t getFlagsArraySize();
-        void setSensorFlag(status, index);
+        void setSensorFlag(int32_t, int32_t);
 
 
 		// Controls Interface
@@ -52,7 +52,7 @@ class TelemetryManager
         // Brake Node
         void setLowPressure(float, int32_t);
         void setHighPressure(float);
-        void setSolenoid1;
+        void setSolenoid(float value, int32_t identifier);
         void setPressureVesselTemperature(float);
 
 

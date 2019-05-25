@@ -133,7 +133,7 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_solenoid1(pod.telemetry->solenoid1);
     protoMessage->set_solenoid2(pod.telemetry->solenoid2);
     protoMessage->set_pressurevesseltemperature(pod.telemetry->pressureVesselTemperature);
-    protoMessage->set_railtemperature(pod.telemetry->railTemperature);
+    protoMessage->set_railtemperature(pod.telemetry->rotorTemperature);
     protoMessage->set_hvbatterypackvoltage(pod.telemetry->hvBatteryPackVoltage);
     protoMessage->set_hvbatterypackcurrent(pod.telemetry->hvBatteryPackCurrent);
     protoMessage->set_hvbatterypackmaxcellvoltage(pod.telemetry->hvBatteryPackMaxCellVoltage);
@@ -144,10 +144,10 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
 
 BrakeNodeConnection::BrakeNodeConnection(TelemetryManager pod) : UdpConnection(pod) {
     this->_connectionName = "Brake Node : ";
-};
+}
 
 void BrakeNodeConnection::setConnectionStatus(bool status){
-    this->pod.telemetry->connectionsArray[0] = status;
+    this->pod.telemetry->connectionFlags[0] = status;
 }
 
 std::unique_ptr<google::protobuf::Message> BrakeNodeConnection::getProtoUpdateMessage() {
@@ -163,12 +163,12 @@ bool BrakeNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
         std::string strError = "Failed to parse Update from Brake Node";
         throw std::invalid_argument(strError);
     }
-    this->pod.telemetry->solenoid1 = protoMessage.brakesolenoidstate();
-    this->pod.telemetry->solenoid2 = protoMessage.ventsolenoidstate();
-    this->pod.telemetry->railTemperature = protoMessage.rotortemperature();
-    this->pod.telemetry->pressureVesselTemperature = protoMessage.pneumatictemperature();
-    this->pod.setHighPressure(protoMessage.tankpressure(), HP_INDEX);
+    this->pod.setSolenoid(protoMessage.brakesolenoidstate(),SOL1_INDEX);
+    this->pod.setSolenoid(protoMessage.ventsolenoidstate(), SOL4_INDEX);
+    this->pod.setPressureVesselTemperature(protoMessage.pneumatictemperature());
+    this->pod.setHighPressure(protoMessage.tankpressure());
     this->pod.setLowPressure(protoMessage.brakepressure(), LP1_INDEX);
+    this->pod.telemetry->rotorTemperature = protoMessage.rotortemperature(); //dts
     return true;
 }
 

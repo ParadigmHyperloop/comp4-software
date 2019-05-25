@@ -3,6 +3,10 @@
 
 #include "TelemetryManager.h"
 
+#define FLAGS_GOOD -1
+#define BRAKE_NODE_INDEX 1
+#define LVDC_NODE_INDEX 2
+
 class TelemetryManager;
 
 class PodState{
@@ -32,6 +36,12 @@ public:
 
     void setupTransition(PodStates, const std::string&);
 
+    int32_t checkSensorFlags();
+
+    int32_t checkCommunicationFlags();
+
+    int32_t checkNodeStates();
+
 
 protected:
     std::chrono::steady_clock::time_point _enterStateTime;
@@ -43,7 +53,6 @@ protected:
     LvdcNodeStates  _lvdcNodeState = lvdcBooting;
     TelemetryManager* pod;
 };
-
 
 class Booting: public PodState{
 public:
