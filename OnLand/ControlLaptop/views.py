@@ -73,6 +73,15 @@ def submit_configuration():
         return jsonify({'error': configuration_form.errors})
 
 
+@app.route('/send_command', methods=["POST"])
+def send_command():
+    command = requests.get_json()['command']
+    try:
+        pod_communicator.send_command(command)
+    finally:
+        return jsonify({'status': 'ok'})
+
+
 @app.route('/disconnect_from_pod', methods=["POST"])
 def disconnect_from_pod():
     pod_communicator.shutdown()
