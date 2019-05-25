@@ -1,5 +1,5 @@
-#ifndef LP_TRANSDUCER_H
-#define LP_TRANSDUCER_H
+#ifndef LP_TRANSDUCER_PX2300P_H
+#define LP_TRANSDUCER_PX2300P_H
 
 #include "drivers/adc_ADS7953.h"
 

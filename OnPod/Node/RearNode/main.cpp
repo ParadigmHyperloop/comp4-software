@@ -10,7 +10,7 @@
 #include "Paradigm.pb.h"
 
 #include "drivers/node_ethernet.h"
-#include "drivers/adc.h"
+#include "drivers/adc_ADS7953.h"
 #include "sensors/thermocouple.h"
 
 const NodeType NODE_TYPE = REAR;

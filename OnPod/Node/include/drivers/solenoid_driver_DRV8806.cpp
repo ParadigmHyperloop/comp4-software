@@ -1,6 +1,14 @@
 #include <Arduino.h>
 #include "solenoid_driver_DRV8806.h"
 
+DRV8806::DRV8806(uint8_t PIN_LATCH, uint8_t PIN_DOUT, uint8_t PIN_DIN, uint8_t PIN_SCLK) :
+PIN_LATCH(PIN_LATCH),
+PIN_DOUT(PIN_DOUT),
+PIN_DIN(PIN_DIN),
+PIN_SCLK(PIN_SCLK)
+{}
+
+
 void DRV8806::init() {
     pinMode(PIN_SCLK, OUTPUT);
     pinMode(PIN_LATCH, OUTPUT);

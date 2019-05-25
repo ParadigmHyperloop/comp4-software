@@ -1,5 +1,5 @@
-#ifndef HP_TRANSDUCER_H
-#define HP_TRANSDUCER_H
+#ifndef HP_TRANSDUCER_U5374_H
+#define HP_TRANSDUCER_U5374_H
 
 #include "drivers/adc_ADS7953.h"
 

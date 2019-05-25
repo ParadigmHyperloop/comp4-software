@@ -1,13 +1,14 @@
-#ifndef ADC_H
-#define ADC_H
+#ifndef ADC_ADS7953_H
+#define ADC_ADS7953_H
 
 #include <SPI.h>
 
 class ADS7953 {
 private:
-    SPIClass spi = SPIClass (&PERIPH_SPI1, MISO1, SCK1, MOSI1, PAD_SPI1_TX, PAD_SPI1_RX);
+    SPIClass spi;
     SPISettings spiSettings = SPISettings (20000000, MSBFIRST, SPI_MODE0);
-
+    uint8_t SS_PIN;
+    uint8_t POWER_SEQ_PIN;
     // 16-bit data words for SPI
     const uint16_t SET_CHANNEL_REG = 0x8000;
     const uint16_t CONFIG_PROGRAM_REG = 0x2840;
@@ -21,7 +22,7 @@ private:
 
     uint16_t transfer(uint16_t uData);
 public:
-    ADS7953(SPIClass spi);
+    ADS7953(SPIClass spi, uint8_t SS_PIN, uint8_t POWER_SEQ_PIN);
     void init();
     uint16_t readSingleChannel(uint8_t);
     void readActiveChannels();

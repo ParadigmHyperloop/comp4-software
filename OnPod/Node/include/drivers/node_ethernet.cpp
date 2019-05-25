@@ -9,14 +9,14 @@ UDPClass::UDPClass(uint8_t uSSPin, IPAddress nodeIP, uint16_t uNodePort,
     {}
 
 void UDPClass::init() {
-    uint8_t uMac[] = {0xDE, 0xFF, 0xFF, 0xFF, NODE_TYPE};
-    Ethernet.init(SS_PIN);
-    Ethernet.begin(uMac, NODE_IP);
     // blocks until W5500 responds and an ethernet cable is connected
     while (Ethernet.linkStatus() == LinkOFF ||
            Ethernet.hardwareStatus() == EthernetNoHardware) {
         delay(100);
     }
+    uint8_t uMac[] = {0xDE, 0xFF, 0xFF, 0xFF, NODE_TYPE};
+    Ethernet.init(SS_PIN);
+    Ethernet.begin(uMac, NODE_IP);
     Udp.begin(NODE_PORT);
 }
 

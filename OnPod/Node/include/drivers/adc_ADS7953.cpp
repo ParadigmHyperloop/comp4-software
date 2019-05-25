@@ -1,22 +1,23 @@
 #include "adc_ADS7953.h"
 
-ADS7953::ADS7953(SPIClass spi) : spi(spi) {}
+ADS7953::ADS7953(SPIClass spi, uint8_t SS_PIN, uint8_t POWER_SEQ_PIN) :
+spi(spi), SS_PIN(SS_PIN), POWER_SEQ_PIN(POWER_SEQ_PIN) {}
 
 void ADS7953::init() {
     spi.begin();
-    pinMode(SS1, OUTPUT);
-    pinMode(POWER_SEQ_ADC, OUTPUT);
-    digitalWrite(SS1, HIGH); // start with SS high
-    digitalWrite(POWER_SEQ_ADC, HIGH); // enable ADC power sequencer
+    pinMode(SS_PIN, OUTPUT);
+    pinMode(POWER_SEQ_PIN, OUTPUT);
+    digitalWrite(SS_PIN, HIGH); // start with SS high
+    digitalWrite(POWER_SEQ_PIN, HIGH); // enable ADC power sequencer
     delay(100);
     transfer(CONFIG_PROGRAM_REG); // configures the ADC to use 0-5V
 }
 
 uint16_t ADS7953::transfer(uint16_t uData) {
     spi.beginTransaction(spiSettings);
-    digitalWrite(SS1, LOW);
+    digitalWrite(SS_PIN, LOW);
     uint16_t uRecievedData = spi.transfer16(uData);
-    digitalWrite(SS1, HIGH);
+    digitalWrite(SS_PIN, HIGH);
     spi.endTransaction();
     return uRecievedData;
 }

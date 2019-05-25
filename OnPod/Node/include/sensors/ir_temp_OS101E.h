@@ -1,5 +1,5 @@
-#ifndef IRTEMP_H
-#define IRTEMP_H
+#ifndef IR_TEMP_OS101E_H
+#define IR_TEMP_OS101E_H
 
 #include "drivers/adc_ADS7953.h"
 
