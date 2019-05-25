@@ -6,8 +6,7 @@ enum BrakeNodeStates {
     bnsStandby         = 1;
     bnsFlight          = 2;
     bnsBraking         = 3;
-    bnsError           = 4;
-    bnsSolenoidControl = 5;
+    bnsSolenoidControl = 4;
 }
 
 enum PodStates {
