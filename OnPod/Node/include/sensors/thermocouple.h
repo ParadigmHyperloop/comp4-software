@@ -3,12 +3,12 @@
 
 #include "drivers/adc_ADS7953.h"
 
-class typeKThermo {
+class TypeKThermo {
 private:
     ADS7953 *adc;
     uint8_t uAdcChannel;
 public:
-    typeKThermo(ADS7953 *adc, uint8_t uAdcChannel);
+    TypeKThermo(ADS7953 *adc, uint8_t uAdcChannel);
     void init();
     float read();
 };
