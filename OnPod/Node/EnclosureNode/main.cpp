@@ -17,7 +17,7 @@ const NodeType NODE_TYPE = ENCLOSURE;
 Timer txTimer;
 
 // comms
-UDPClass udp(PIN_SPI_SS, ENCLOSURE_ARDUINO_IP, ENCLOSURE_ARDUINO_PORT, NODE_TYPE);
+UDPClass udp(PIN_SPI_SS, ENCLOSURE_NODE_IP, ENCLOSURE_NODE_PORT, NODE_TYPE);
 RearNodeToFc pRearNodeTelemetry = RearNodeToFc_init_default;  // protobuf message
 uint32_t txPacketNum = 0;
 
@@ -29,7 +29,7 @@ void sendToFlightComputer(void*) {
     );
     // encode the message object and store it in the UDP buffer
     pb_encode(&outStream, RearNodeToFc_fields, &pRearNodeTelemetry);
-    if (udp.sendPacket(FC_IP, FC_PORT, outStream.bytes_written)) {
+    if (udp.sendPacket(FC_IP, FC_ENCLOSURE_NODE_PORT, outStream.bytes_written)) {
         txPacketNum++;
     }
     Wire.begin();
@@ -39,7 +39,7 @@ void sendToFlightComputer(void*) {
 void setup() {
     Serial.begin(9600);
     udp.init();
-    txTimer.every(ENCLOSURE_ARDUINO_TO_FC_INTERVAL, &sendToFlightComputer, (void*)0);
+    txTimer.every(ENCLOSURE_NODE_TO_FC_INTERVAL, &sendToFlightComputer, (void*)0);
     //Wire.begin();
 }
 
