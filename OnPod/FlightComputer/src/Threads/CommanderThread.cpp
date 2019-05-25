@@ -3,6 +3,7 @@
 #include "NetworkHelpers.h"
 #include "Common.h"
 #include "Heartbeat.h"
+#include "TelemetryManager.h"
 
 // Get manual state change commands. Get Estop command
 
@@ -29,7 +30,7 @@ int32_t createCommanderServerSocket(int32_t serverPortNumber) {
     return serverSock;
 }
 
-void parseProtoCommand(PodCommand podCommand, Pod *Pod) {
+void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
     if (podCommand.has_controlsinterfacestate()) {
         Pod->setControlsInterfaceState(podCommand.controlsinterfacestate());
     }
@@ -49,7 +50,7 @@ void parseProtoCommand(PodCommand podCommand, Pod *Pod) {
     return;
 }
 
-int32_t unserializeProtoMessage(Pod *Pod, char buffer[], int32_t messageSize) {
+int32_t unserializeProtoMessage(TelemetryManager *Pod, char buffer[], int32_t messageSize) {
     PodCommand pPodCommand;
     bool operationStatus;
 
@@ -66,7 +67,7 @@ int32_t unserializeProtoMessage(Pod *Pod, char buffer[], int32_t messageSize) {
 
 
 
-int32_t commanderThread(Pod Pod) {
+int32_t commanderThread(TelemetryManager Pod) {
     //Logging
     el::Helpers::setThreadName("Commander Thread");
     LOG(INFO) << "Starting Commander Thread";
@@ -86,7 +87,7 @@ int32_t commanderThread(Pod Pod) {
     Heartbeat pulse = Heartbeat(Pod.sPodNetworkValues->iCommaderTimeoutMili);
 
     //pod state != shutdown
-    while (Pod.sPodValues->podState != psShutdown) {
+    while (Pod.telemetry->podState->getStateValue() != psShutdown) {
 
         /* Accepted connection gets put iNewSockfd,
         * thread will hang here until a connection is recieved.
@@ -102,7 +103,7 @@ int32_t commanderThread(Pod Pod) {
 
         LOG(INFO) << "Controls Interface Connected";
         pulse.feed();
-        while (Pod.sPodValues->podState != psShutdown) {
+        while (Pod.telemetry->podState->getStateValue() != psShutdown) {
             messageSize = read(connectionSock, buffer, 255);
             if (messageSize < 0) {
                 if (errno == 11) //Erno 11 means no message available on non blocking socket

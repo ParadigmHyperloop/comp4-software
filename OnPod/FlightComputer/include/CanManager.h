@@ -17,11 +17,11 @@
 
 #include "NetworkHelpers.h"
 #include "Common.h"
+#include "TelemetryManager.h"
 
+int CanThread(TelemetryManager);
 
-int CanThread(Pod);
-
-void processFrame(const struct canfd_frame &frame, Pod &pod);
+void processFrame(const struct canfd_frame &frame, TelemetryManager &pod);
 
 template <class T>
 T extractCanValue(const __u8 data[], const std::vector<int> &byteIndices, T conversionFactor){
@@ -37,7 +37,7 @@ T extractCanValue(const __u8 data[], const std::vector<int> &byteIndices, T conv
     return tConverted;
 }
 
-int CanThread(Pod Pod);
+int CanThread(TelemetryManager Pod);
 
 
 #endif //FLIGHTCOMPUTER_CANMANAGER_H

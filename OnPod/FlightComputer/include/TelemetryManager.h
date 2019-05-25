@@ -1,39 +1,25 @@
-#ifndef FLIGHTCOMPUTER_POD_H
-#define FLIGHTCOMPUTER_POD_H
+#ifndef FLIGHTCOMPUTER_TELEMETRYMANAGER_H
+#define FLIGHTCOMPUTER_TELEMETRYMANAGER_H
 
 #include "Structs.h"
+#include "States.h"
 
-class Pod
+class TelemetryManager
 {
 	public:
+		TelemetryManager();
 
-		PodValues* sPodValues;
-		PodNetwork* sPodNetworkValues;
+		TelemetryManager(PodValues*, PodNetwork*);
 
-		Pod(){};
-
-		Pod(PodValues*, PodNetwork*);
-		// Pod States
-		int32_t setPodState(PodStates, const char*);
-		PodStates getPodState();
-
-		// Brake Node State
-		BrakeNodeStates getBrakeNodeState();
-		int32_t setBrakeNodeState(BrakeNodeStates);
-
-		// Motor State
-		MotorStates getMotorState();
-		int32_t setMotorState(MotorStates);
+		// TelemetryManager States
+		int32_t setPodState(PodStates, const std::string&);
 
 		// Flags Array
-		unsigned char* getFlagsArray();
-		int32_t getFlagsArraySize();
-
-		int32_t getNodeServerPortNumber();
+        void setConnectionFlag(int32_t, int32_t);
+        void setSensorFlag(int32_t, int32_t);
 
 		// Controls Interface
 		void setControlsInterfaceState(ControlsInterfaceStates);
-		ControlsInterfaceStates getControlsInterfaceState();
 
 		// Manual State Control
 		void setAutomaticTransitions(bool);
@@ -51,7 +37,15 @@ class Pod
         void setHvBatteryPackMaxCellVoltage(float);
         float getHvBatteryPackMaxCellVoltage();
 
+        //Shared Memory Space
+        struct PodValues* telemetry;
+        struct PodNetwork* sPodNetworkValues;
 
+        // Brake Node
+        void setLowPressure(float, int32_t);
+        void setHighPressure(float);
+        void setSolenoid(float value, int32_t identifier);
+        void setPressureVesselTemperature(float);
 
 		// Permissions
 		bool bWritePodState = 0;
@@ -60,11 +54,6 @@ class Pod
 		bool bWriteBreakNodeState = 0;
 		bool bWriteManualStates = 0;
 		bool bWriteHighVoltage = 0;
-
-
-
-
-
 };
 
-#endif //FLIGHTCOMPUTER_POD_H
+#endif //FLIGHTCOMPUTER_TELEMETRYMANAGER_H

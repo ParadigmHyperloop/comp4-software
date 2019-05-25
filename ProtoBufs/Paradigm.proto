@@ -1,16 +1,12 @@
 syntax = "proto2";
 
+// STATE ENUMS
 enum BrakeNodeStates {
     bnsBooting         = 0;
     bnsStandby         = 1;
-    bnsArming          = 2;
-    bnsArmed           = 3;
-    bnsFlight          = 4;
-    bnsBraking         = 5;
-    bnsVenting         = 6;
-    bnsRetrieval       = 7;
-    bnsError           = 8;
-    bnsSolenoidControl = 9;
+    bnsFlight          = 2;
+    bnsBraking         = 3;
+    bnsSolenoidControl = 4;
 }
 
 enum PodStates {
@@ -22,10 +18,7 @@ enum PodStates {
     psAcceleration  = 5;
     psCoasting      = 6;
     psBraking       = 7;
-    psDisarming     = 8;
-    psRetrieval     = 9;
-    psEmergency     = 10;
-    psShutdown      = 11;
+    psShutdown      = 8;
 }
 
 enum MotorStates {
@@ -44,48 +37,21 @@ enum ControlsInterfaceStates {
     ciEmergencyStop = 5;
 }
 
-
 enum InverterStates {
     iConnected = 0;
-
 }
 
 enum BatteryManagementStates {
     bmsNominal = 0;
 }
 
-enum RearNodeStates {
-    rnBooting = 0;
-    rnNominal = 1;
-}
-
 enum LvdcNodeStates {
     lvdcBooting = 0;
+    lvdcStandby = 1;
+    lvdcFlight = 2;
 }
 
-message BrakeNodeData {
-  required int32 id = 1;
-
-  optional BrakeNodeStates state = 14;
-
-  optional bool sol1 = 2;
-  optional bool sol2 = 3;
-  optional bool sol3 = 4;
-  optional bool sol4 = 5;
-  optional bool sol5 = 6;
-  optional bool sol6 = 7;
-
-
-  optional int32 hp  = 8;
-  optional int32 lp1 = 9;
-  optional int32 lp2 = 10;
-  optional int32 lp3 = 11;
-  optional int32 lp4 = 12;
-
-  optional int32 temp = 13;
-
-}
-
+// CONTROL LAPTOP COMMAND
 message PodCommand {
     optional ControlsInterfaceStates controlsInterfaceState = 1;
     optional PodStates manualPodState = 2;
@@ -95,10 +61,9 @@ message PodCommand {
     optional bool automaticStateTransitions = 6;
 }
 
-
+// POD TELEMETRY
 message Telemetry {
-
-// States
+    // States
     optional PodStates podState = 1;
     optional BrakeNodeStates breakNodeState = 2;
     optional MotorStates motorState = 3;
@@ -108,15 +73,15 @@ message Telemetry {
     optional BatteryManagementStates batteryManagementState = 25;
     optional PodStates breakNodePerceivedPodState = 31;
 
-// Time
+    // Time
     optional int32 missionTime = 6;
     optional int32 flightTime = 7;
 
-// HeatBeats
+    // HeatBeats
     repeated int32 heartbeatFlags = 8;
     repeated int32 heartbeatValues = 71;
 
-// Navigation
+    // Navigation
     optional int32 podPosition = 9;
     optional int32 podVelocity = 10;
     optional int32 podAccelerationX = 11;
@@ -127,7 +92,7 @@ message Telemetry {
     optional int32 tachometerVelocity = 16;
     optional int32 resolverVelocity = 17;
 
-// Inverter
+    // Inverter
     optional int32 inverterTemperature1 = 18;
     optional int32 inverterTemperature2 = 19;
     optional int32 inverterTemperature3 = 20;
@@ -137,20 +102,18 @@ message Telemetry {
     optional int32 inverterCurrents = 24;
     //optional int32 inverterInternalStates = 30;
 
-// HV-BMS
+    // HV-BMS
     optional float hvBatteryPackVoltage = 26;
     optional float hvBatteryPackCurrent = 27;
     repeated int32 hvBatteryCellTemperatures = 28;
     optional float hvBatteryPackMinimumCellVoltage = 29;
     optional float hvBatteryPackMaxCellVoltage = 30;
 
-// Brake Node
+    // Brake Node
     optional bool solenoid1 = 32;
     optional bool solenoid2 = 33;
     optional bool solenoid3 = 34;
     optional bool solenoid4 = 35;
-    optional bool solenoid5 = 36;
-    optional bool solenoid6 = 37;
     optional float highPressure  = 38;
     optional float lowPressure1 = 39;
     optional float lowPressure2 = 40;
@@ -162,7 +125,7 @@ message Telemetry {
     optional int32 railDisplacementX = 45;
     optional int32 railDisplacementY = 46;
 
-// Rear Node
+    // Rear Node
     optional int32 tubePressure = 48;
     optional int32 coolantPressure1 = 49;
     optional int32 coolantPressure2 = 50;
@@ -170,7 +133,7 @@ message Telemetry {
     optional int32 coolantTemperature = 52;
     optional float railTemperature = 53;
 
-// Ghost Train
+    // Ghost Train
     optional int32 pack1Voltage = 55;
     optional int32 pack2Voltage = 56;
     optional int32 pack1Current = 57;
@@ -192,32 +155,78 @@ message Telemetry {
     optional int32 railCurrentFlag = 73;
 }
 
+// FC => NODE COMMANDS
 message FcToBrakeNode {
     optional int32 packetNum = 1;
     optional PodStates podState = 2;
     optional BrakeNodeStates manualNodeState = 3;
+    optional bool solenoid1Config = 4;
+    optional bool solenoid2Config = 5;
+    optional bool solenoid3Config = 6;
+    optional bool solenoid4Config = 7;
 }
 
+message FcToLvdcNode {
+    optional int32 packetNum = 1;
+    optional PodStates podState = 2;
+    optional LvdcNodeStates manualNodeState = 3;
+}
+
+// NODE => FC TELEMETRY
 message DtsNodeToFc {
-    required int32 packetNum = 1 [default = 0];
-    required BrakeNodeStates brakeNodeState = 2 [default = bnsStandby];
-    required bool brakeSolenoidState = 3 [default = false];
-    required bool ventSolenoidState = 4 [default = false];
-    required float rotorTemperature = 5 [default = 0];
-    required float pneumaticTemperature = 6 [default = 0];
-    required float tankPressure = 7 [default = 0];
-    required float brakePressure = 8 [default = 0];
+    required int32 packetNum = 1;
+    required BrakeNodeStates brakeNodeState = 2;
+    required bool brakeSolenoidState = 3;
+    required bool ventSolenoidState = 4;
+    required float rotorTemperature = 5;
+    required float pneumaticTemperature = 6;
+    required float tankPressure = 7;
+    required float brakePressure = 8;
 }
 
-message RearNodeToFc {
-    required int32 packetNum = 1 [default = 0];
-    required float tubePressure = 2 [default = 0];
-    required float coolantPressure1 = 3 [default = 0];
-    required float coolantPressure2 = 4 [default = 0];
-    required float coolantPressure3 = 5 [default = 0];
-    required float coolantTemperature = 6 [default = 0];
+message EnclosureNodeToFc {
+    required int32 packetNum = 1;
+    required float enclosurePressure = 2;
+    required float enclosureTemperature = 3;
+    required float coolantLinePressure = 4;
 }
 
+message LvdcNodeToFc {
+    required float highPowerPackVoltage = 1;
+    required float lowPowerPackVoltage = 2;
+    required float highPowerPackCurrent = 3;
+    required float lowPowerPackCurrent = 4;
+
+    required float rail5Voltage = 5;
+    required float rail12LowPowerVoltage = 6;
+    required float rail12HighPowerVoltage = 7;
+    required float rail24Voltage = 8;
+
+    required float rail5Current = 9;
+    required float rail12LowPowerCurrent = 10;
+    required float rail24Current = 11;
+    required float railInverterCurrent = 12;
+    required float railCooling1Current = 13;
+    required float railCooling2Current = 14;
+}
+
+message BrakeNodeToFc {
+    required int32 packetNum = 1;
+    required BrakeNodeStates state = 2;
+    required bool solenoid1 = 3;
+    required bool solenoid2 = 4;
+    required bool solenoid3 = 5;
+    required bool solenoid4 = 6;
+    required float highPressure = 7;
+    required float lowPressure1 = 8;
+    required float lowPressure2 = 9;
+    required float lowPressure3 = 10;
+    required float lowPressureCommon = 11;
+    required float pneumaticTemperature = 12;
+    required float coolantTankPressure = 13;
+}
+
+// CONFIG
 message flightConfig {
     optional uint32 retrievalTimeout = 1;
     optional uint64 maxFlightTime = 2;

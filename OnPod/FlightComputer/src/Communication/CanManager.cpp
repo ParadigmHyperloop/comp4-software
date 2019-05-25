@@ -3,7 +3,7 @@
 
 
 
-void processFrame(const struct canfd_frame &frame, Pod &pod) {
+void processFrame(const struct canfd_frame &frame, TelemetryManager &pod) {
     switch (frame.can_id) {
         case 0x6b2: {
             std::vector<int> indices = {0,1};
@@ -29,7 +29,7 @@ void processFrame(const struct canfd_frame &frame, Pod &pod) {
 }
 
 
-int CanThread(Pod Pod){
+int CanThread(TelemetryManager Pod){
     //Logging
     el::Helpers::setThreadName("CAN Thread");
     LOG(INFO) << "Starting CAN Thread";
@@ -84,7 +84,7 @@ int CanThread(Pod Pod){
 
 
     LOG(INFO) << "Starting CAN Main Loop";
-    while (Pod.sPodValues->podState != psShutdown) {
+    while (Pod.telemetry->podState->getStateValue() != psShutdown) {
         struct canfd_frame canFrame = {0}; //TODO remove this zero once we dont need it
         // Read in a CAN CanFrame
         ssize_t iReceivedPacketSize = read(canSock, &canFrame, CANFD_MTU);
