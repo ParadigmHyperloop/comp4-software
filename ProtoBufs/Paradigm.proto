@@ -164,7 +164,7 @@ message FcToBrakeNode {
     optional bool solenoid1Config = 4;
     optional bool solenoid2Config = 5;
     optional bool solenoid3Config = 6;
-    optional bool solenoidVentConfig = 7;
+    optional bool solenoid4Config = 7;
 }
 
 message FcToLvdcNode {
