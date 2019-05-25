@@ -173,11 +173,7 @@ message FcToLvdcNode {
     optional LvdcNodeStates manualNodeState = 3;
 }
 
-<<<<<<< HEAD
 // NODE => FC TELEMETRY
-=======
-// FC => NODE TELEMETRY
->>>>>>> 6e7b6e951701cda19973d8c0eff6e46a8b349235
 message DtsNodeToFc {
     required int32 packetNum = 1;
     required BrakeNodeStates brakeNodeState = 2;
