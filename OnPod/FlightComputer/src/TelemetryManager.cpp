@@ -21,8 +21,6 @@ int32_t TelemetryManager::setPodState(PodStates newState, const std::string &rea
     }
 };
 
-
-
 void TelemetryManager::setControlsInterfaceState(ControlsInterfaceStates eTerminalState) {
     if (this->bWriteControlsInterfaceState) {
         this->telemetry->terminalState = eTerminalState;
@@ -30,18 +28,6 @@ void TelemetryManager::setControlsInterfaceState(ControlsInterfaceStates eTermin
         LOG(INFO) << "ERROR: Permission Denied for writing Controls Interface State";
     }
 }
-
-
-
-int32_t TelemetryManager::setMotorState(MotorStates eMotorState) {
-    if (this->bWriteMotorState) {
-        this->telemetry->motorState = eMotorState;
-        return 1;
-    } else {
-        return 0;
-    }
-};
-
 
 void TelemetryManager::setAutomaticTransitions(bool val) {
     if (this->bWriteManualStates) {
@@ -204,6 +190,18 @@ void TelemetryManager::setSensorFlag(int32_t status, int32_t index){
     }
     if(currentStatus != status){
         this->telemetry->sensorFlags[index] = status;
+        //ForceControlLoopIteration? TODO
+        return;
+    }
+}
+
+void TelemetryManager::setConnectionFlag(int32_t status, int32_t index){
+    int32_t currentStatus = this->telemetry->connectionFlags[index];
+    if(currentStatus == 2){ // Manual override high
+        return;
+    }
+    if(currentStatus != status){
+        this->telemetry->connectionFlags[index] = status;
         //ForceControlLoopIteration? TODO
         return;
     }

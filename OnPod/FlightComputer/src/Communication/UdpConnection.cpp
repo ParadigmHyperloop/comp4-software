@@ -53,10 +53,10 @@ void UdpConnection::getUpdate() {
             throw std::runtime_error(error);
         }
         this->_pulse.feed();
-        this->setConnectionStatus(true);
+        this->pod.setConnectionFlag(true, this->getConnectionIndex());
     } else {
         if (this->_pulse.expired()) {
-            this->setConnectionStatus(false);
+            this->pod.setConnectionFlag(false, this->getConnectionIndex());
         }
     }
 }
@@ -86,7 +86,6 @@ void UdpConnection::closeConnection() {
     close(this->_inboundSocket);
     close(this->_outboundSocket);
 }
-
 
 std::unique_ptr<google::protobuf::Message> UdpConnection::getProtoUpdateMessage() {
     std::unique_ptr<DefaultFcToNode> protoMessage (new DefaultFcToNode());
@@ -120,9 +119,18 @@ bool UdpConnection::_createServerSocket() {
     return true;
 }
 
+int32_t UdpConnection::getConnectionIndex(){
+    return this->_connectionStatusIndex;
+}
+
+
+/*
+ *  ***************** PDS Connection *******************
+ */
 
 PdsConnection::PdsConnection(TelemetryManager pod) : UdpConnection(pod) {
     this->_connectionName = "Controls Interface Data : ";
+    this->_connectionStatusIndex = PDS_CONNECTION_INDEX;
 };
 
 std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage() {
@@ -141,13 +149,13 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     return protoMessage;
 }
 
+/*
+ *  ***************** Brake Node Connection *******************
+ */
 
 BrakeNodeConnection::BrakeNodeConnection(TelemetryManager pod) : UdpConnection(pod) {
     this->_connectionName = "Brake Node : ";
-}
-
-void BrakeNodeConnection::setConnectionStatus(bool status){
-    this->pod.telemetry->connectionFlags[0] = status;
+    this->_connectionStatusIndex = BRAKE_NODE_INDEX;
 }
 
 std::unique_ptr<google::protobuf::Message> BrakeNodeConnection::getProtoUpdateMessage() {
@@ -171,6 +179,34 @@ bool BrakeNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
     this->pod.telemetry->rotorTemperature = protoMessage.rotortemperature(); //dts
     return true;
 }
+
+/*
+ *  ***************** Enclosure Node Connection *******************
+ */
+
+EnclosureNodeConnection::EnclosureNodeConnection(TelemetryManager pod) : UdpConnection(pod) {
+    this->_connectionName = "Enclosure Node : ";
+    this->_connectionStatusIndex = ENCLOSURE_CONNECTION_INDEX;
+}
+
+
+bool EnclosureNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
+    EnclosureNodeToFc protoMessage = EnclosureNodeToFc();
+    if (!protoMessage.ParseFromArray(buffer, messageSize)) {
+        std::string strError = "Failed to parse Update from Enclosure";
+        throw std::invalid_argument(strError);
+    }
+
+    //TODO Add parsings
+
+    return true;
+
+}
+
+/*
+ *  ***************** Enclosure Node Connection *******************
+ */
+
 
 
 

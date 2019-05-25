@@ -14,20 +14,12 @@ class TelemetryManager
 		// TelemetryManager States
 		int32_t setPodState(PodStates, const std::string&);
 
-
-		// Motor State
-		MotorStates getMotorState();
-		int32_t setMotorState(MotorStates);
-
 		// Flags Array
-		unsigned char* getFlagsArray();
-		int32_t getFlagsArraySize();
+        void setConnectionFlag(int32_t, int32_t);
         void setSensorFlag(int32_t, int32_t);
-
 
 		// Controls Interface
 		void setControlsInterfaceState(ControlsInterfaceStates);
-		ControlsInterfaceStates getControlsInterfaceState();
 
 		// Manual State Control
 		void setAutomaticTransitions(bool);
@@ -54,7 +46,6 @@ class TelemetryManager
         void setHighPressure(float);
         void setSolenoid(float value, int32_t identifier);
         void setPressureVesselTemperature(float);
-
 
 		// Permissions
 		bool bWritePodState = 0;

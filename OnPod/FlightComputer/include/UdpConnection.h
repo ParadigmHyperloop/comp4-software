@@ -7,6 +7,11 @@
 #include "TelemetryManager.h"
 #include <NetworkHelpers.h>
 
+#define BRAKE_CONNECTION_INDEX 0
+#define LVDC_CONNECTION_INDEX 1
+#define ENCLOSURE_CONNECTION_INDEX 2
+#define PDS_CONNECTION_INDEX 3
+
 /**
  *
  *
@@ -82,11 +87,14 @@ public:
 
     virtual std::unique_ptr<google::protobuf::Message> getProtoUpdateMessage();
 
+
     /**
-     * Each derived class will be responsible for implementing how it notifies the shared memeory
-     * the status of its connection.
+     * Returns the index that represents this connection in the "ConnectionFlags" vector used for the
+     * main control loop
+     *
+     * @return
      */
-    virtual void setConnectionStatus(bool) {};
+    int32_t getConnectionIndex();
 
 protected:
     bool _createServerSocket();
@@ -97,6 +105,7 @@ protected:
     Heartbeat _pulse = Heartbeat(0);
     std::string _connectionName = "";
     struct sockaddr_in _destSockAddr{};
+    int32_t _connectionStatusIndex;
 };
 
 class PdsConnection : public UdpConnection {
@@ -117,9 +126,18 @@ public:
 
     explicit BrakeNodeConnection(TelemetryManager pod);
 
-    void setConnectionStatus(bool bStatus);
-
     std::unique_ptr<google::protobuf::Message> getProtoUpdateMessage() override;
+
+    bool parseUpdate(char buffer[], int32_t messageSize) override;
+
+};
+
+class EnclosureNodeConnection : public UdpConnection{
+
+    public:
+    ~EnclosureNodeConnection() override = default;
+
+    explicit EnclosureNodeConnection(TelemetryManager pod);
 
     bool parseUpdate(char buffer[], int32_t messageSize) override;
 
