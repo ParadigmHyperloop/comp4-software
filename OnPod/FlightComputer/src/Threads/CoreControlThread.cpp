@@ -1,7 +1,7 @@
 #include "CoreControlThread.h"
 #include "States.h"
 
-void coreControlLoop(Pod pod){
+void coreControlLoop(TelemetryManager pod){
     // State will be initialized to booting from the struct factory
 
     while(pod.telemetry->podState->getStateValue() != psShutdown){

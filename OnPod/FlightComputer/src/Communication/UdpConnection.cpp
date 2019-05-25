@@ -1,7 +1,7 @@
 #include "UdpConnection.h"
+#include "SensorConfig.h"
 
-
-UdpConnection::UdpConnection(Pod pod){
+UdpConnection::UdpConnection(TelemetryManager pod){
     this->pod = pod;
     struct sockaddr_in socketAddress = {0};
     this->_destSockAddr = socketAddress;
@@ -121,7 +121,7 @@ bool UdpConnection::_createServerSocket() {
 }
 
 
-PdsConnection::PdsConnection(Pod pod) : UdpConnection(pod) {
+PdsConnection::PdsConnection(TelemetryManager pod) : UdpConnection(pod) {
     this->_connectionName = "Controls Interface Data : ";
 };
 
@@ -142,7 +142,7 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
 }
 
 
-BrakeNodeConnection::BrakeNodeConnection(Pod pod) : UdpConnection(pod) {
+BrakeNodeConnection::BrakeNodeConnection(TelemetryManager pod) : UdpConnection(pod) {
     this->_connectionName = "Brake Node : ";
 };
 
@@ -167,8 +167,8 @@ bool BrakeNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
     this->pod.telemetry->solenoid2 = protoMessage.ventsolenoidstate();
     this->pod.telemetry->railTemperature = protoMessage.rotortemperature();
     this->pod.telemetry->pressureVesselTemperature = protoMessage.pneumatictemperature();
-    this->pod.telemetry->highPressure = protoMessage.tankpressure();
-    this->pod.telemetry->lowPressure1 = protoMessage.brakepressure();
+    this->pod.setHighPressure(protoMessage.tankpressure(), HP_INDEX);
+    this->pod.setLowPressure(protoMessage.brakepressure(), LP1_INDEX);
     return true;
 }
 

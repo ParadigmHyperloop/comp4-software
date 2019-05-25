@@ -5,7 +5,7 @@
 #include <cstdint>
 #include "Paradigm.pb.h"
 
-class PodState; // Fix for circular dependency
+class PodState;
 
 struct PodValues {
     // States
@@ -46,6 +46,7 @@ struct PodValues {
     double tubePressure;
     // Terminal
     ControlsInterfaceStates eTerminalCommand;
+
     // Brake Node
     bool solenoid1;
     bool solenoid2;

@@ -5,7 +5,7 @@
 
 
 
-UdpConnection *getBrakeNodeConnection(Pod Pod) {
+UdpConnection *getBrakeNodeConnection(TelemetryManager Pod) {
     auto BrakeNode = new BrakeNodeConnection(Pod);
     try {
         BrakeNode->configureClient(Pod.sPodNetworkValues->cNodeIpAddrs[0], Pod.sPodNetworkValues->iBrakeNodePort,
@@ -21,12 +21,12 @@ UdpConnection *getBrakeNodeConnection(Pod Pod) {
     return BrakeNode;
 }
 
-UdpConnection *getRearNodeConnection(Pod Pod) {
+UdpConnection *getRearNodeConnection(TelemetryManager Pod) {
     auto BrakeNode = new BrakeNodeConnection(Pod);
     return BrakeNode;
 }
 
-UdpConnection *getPdsConnection(Pod Pod){
+UdpConnection *getPdsConnection(TelemetryManager Pod){
     auto connection = new PdsConnection(Pod);
     connection->configureClient(Pod.sPodNetworkValues->strPdsIpAddr, Pod.sPodNetworkValues->iPdsTelemeteryPort,
                                     Pod.sPodNetworkValues->iNodeClientSocket);
@@ -40,11 +40,11 @@ UdpConnection *getPdsConnection(Pod Pod){
 /**
  *Wait on socket, parse the received message into a protobuf and hand it off.
  */
-int32_t udpTelemetryThread(Pod Pod) {
+int32_t udpTelemetryThread(TelemetryManager Pod) {
 
     //Logging
-    el::Helpers::setThreadName("Pod Internal Network Thread");
-    LOG(INFO) << "Starting Pod Internal Network Thread";
+    el::Helpers::setThreadName("TelemetryManager Internal Network Thread");
+    LOG(INFO) << "Starting TelemetryManager Internal Network Thread";
 
     try {
         Pod.sPodNetworkValues->iNodeClientSocket = createUdpClientSocket();

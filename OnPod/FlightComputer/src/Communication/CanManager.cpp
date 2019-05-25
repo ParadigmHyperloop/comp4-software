@@ -3,7 +3,7 @@
 
 
 
-void processFrame(const struct canfd_frame &frame, Pod &pod) {
+void processFrame(const struct canfd_frame &frame, TelemetryManager &pod) {
     switch (frame.can_id) {
         case 0x6b2: {
             std::vector<int> indices = {0,1};
@@ -29,7 +29,7 @@ void processFrame(const struct canfd_frame &frame, Pod &pod) {
 }
 
 
-int CanThread(Pod Pod){
+int CanThread(TelemetryManager Pod){
     //Logging
     el::Helpers::setThreadName("CAN Thread");
     LOG(INFO) << "Starting CAN Thread";

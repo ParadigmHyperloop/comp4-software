@@ -572,30 +572,28 @@ const char descriptor_table_protodef_Paradigm_2eproto[] =
   "\037\n\020heartbeatTimeout\030\007 \001(\005:\00510000\022\021\n\tpodD"
   "river\030\010 \001(\t\022*\n\023controlLaptopIpAddr\030\t \001(\t"
   ":\r192.168.0.103\"/\n\017DefaultFcToNode\022\034\n\010po"
-  "dState\030\001 \001(\0162\n.PodStates*\265\001\n\017BrakeNodeSt"
-  "ates\022\016\n\nbnsBooting\020\000\022\016\n\nbnsStandby\020\001\022\r\n\t"
-  "bnsArming\020\002\022\014\n\010bnsArmed\020\003\022\r\n\tbnsFlight\020\004"
-  "\022\016\n\nbnsBraking\020\005\022\016\n\nbnsVenting\020\006\022\020\n\014bnsR"
-  "etrieval\020\007\022\014\n\010bnsError\020\010\022\026\n\022bnsSolenoidC"
-  "ontrol\020\t*\313\001\n\tPodStates\022\r\n\tpsBooting\020\000\022\r\n"
-  "\tpsStandby\020\001\022\014\n\010psArming\020\002\022\013\n\007psArmed\020\003\022"
-  "\017\n\013psPreFlight\020\004\022\022\n\016psAcceleration\020\005\022\016\n\n"
-  "psCoasting\020\006\022\r\n\tpsBraking\020\007\022\017\n\013psDisarmi"
-  "ng\020\010\022\017\n\013psRetrieval\020\t\022\017\n\013psEmergency\020\n\022\016"
-  "\n\npsShutdown\020\013*C\n\013MotorStates\022\t\n\005msOff\020\000"
-  "\022\016\n\nmsCharging\020\001\022\n\n\006msIdle\020\002\022\r\n\tmsEngage"
-  "d\020\003*p\n\027ControlsInterfaceStates\022\r\n\tciStan"
-  "dby\020\000\022\t\n\005ciArm\020\001\022\014\n\010ciFlight\020\002\022\014\n\010ciDisa"
-  "rm\020\003\022\n\n\006ciTaxi\020\004\022\023\n\017ciEmergencyStop\020\005* \n"
-  "\016InverterStates\022\016\n\niConnected\020\000*)\n\027Batte"
-  "ryManagementStates\022\016\n\nbmsNominal\020\000*.\n\016Re"
-  "arNodeStates\022\r\n\trnBooting\020\000\022\r\n\trnNominal"
-  "\020\001*!\n\016LvdcNodeStates\022\017\n\013lvdcBooting\020\000"
+  "dState\030\001 \001(\0162\n.PodStates*v\n\017BrakeNodeSta"
+  "tes\022\016\n\nbnsBooting\020\000\022\016\n\nbnsStandby\020\001\022\r\n\tb"
+  "nsFlight\020\002\022\016\n\nbnsBraking\020\003\022\014\n\010bnsError\020\004"
+  "\022\026\n\022bnsSolenoidControl\020\005*\230\001\n\tPodStates\022\r"
+  "\n\tpsBooting\020\000\022\r\n\tpsStandby\020\001\022\014\n\010psArming"
+  "\020\002\022\013\n\007psArmed\020\003\022\017\n\013psPreFlight\020\004\022\022\n\016psAc"
+  "celeration\020\005\022\016\n\npsCoasting\020\006\022\r\n\tpsBrakin"
+  "g\020\007\022\016\n\npsShutdown\020\010*C\n\013MotorStates\022\t\n\005ms"
+  "Off\020\000\022\016\n\nmsCharging\020\001\022\n\n\006msIdle\020\002\022\r\n\tmsE"
+  "ngaged\020\003*p\n\027ControlsInterfaceStates\022\r\n\tc"
+  "iStandby\020\000\022\t\n\005ciArm\020\001\022\014\n\010ciFlight\020\002\022\014\n\010c"
+  "iDisarm\020\003\022\n\n\006ciTaxi\020\004\022\023\n\017ciEmergencyStop"
+  "\020\005* \n\016InverterStates\022\016\n\niConnected\020\000*)\n\027"
+  "BatteryManagementStates\022\016\n\nbmsNominal\020\000*"
+  ".\n\016RearNodeStates\022\r\n\trnBooting\020\000\022\r\n\trnNo"
+  "minal\020\001*B\n\016LvdcNodeStates\022\017\n\013lvdcBooting"
+  "\020\000\022\017\n\013lvdcStandby\020\001\022\016\n\nlvdcFlight\020\002"
   ;
 ::google::protobuf::internal::DescriptorTable descriptor_table_Paradigm_2eproto = {
   false, InitDefaults_Paradigm_2eproto, 
   descriptor_table_protodef_Paradigm_2eproto,
-  "Paradigm.proto", &assign_descriptors_table_Paradigm_2eproto, 4117,
+  "Paradigm.proto", &assign_descriptors_table_Paradigm_2eproto, 4035,
 };
 
 void AddDescriptors_Paradigm_2eproto() {
@@ -619,10 +617,6 @@ bool BrakeNodeStates_IsValid(int value) {
     case 3:
     case 4:
     case 5:
-    case 6:
-    case 7:
-    case 8:
-    case 9:
       return true;
     default:
       return false;
@@ -644,9 +638,6 @@ bool PodStates_IsValid(int value) {
     case 6:
     case 7:
     case 8:
-    case 9:
-    case 10:
-    case 11:
       return true;
     default:
       return false;
@@ -734,6 +725,8 @@ const ::google::protobuf::EnumDescriptor* LvdcNodeStates_descriptor() {
 bool LvdcNodeStates_IsValid(int value) {
   switch (value) {
     case 0:
+    case 1:
+    case 2:
       return true;
     default:
       return false;

@@ -3,14 +3,10 @@ syntax = "proto2";
 enum BrakeNodeStates {
     bnsBooting         = 0;
     bnsStandby         = 1;
-    bnsArming          = 2;
-    bnsArmed           = 3;
-    bnsFlight          = 4;
-    bnsBraking         = 5;
-    bnsVenting         = 6;
-    bnsRetrieval       = 7;
-    bnsError           = 8;
-    bnsSolenoidControl = 9;
+    bnsFlight          = 2;
+    bnsBraking         = 3;
+    bnsError           = 4;
+    bnsSolenoidControl = 5;
 }
 
 enum PodStates {
@@ -22,10 +18,7 @@ enum PodStates {
     psAcceleration  = 5;
     psCoasting      = 6;
     psBraking       = 7;
-    psDisarming     = 8;
-    psRetrieval     = 9;
-    psEmergency     = 10;
-    psShutdown      = 11;
+    psShutdown      = 8;
 }
 
 enum MotorStates {
@@ -61,6 +54,8 @@ enum RearNodeStates {
 
 enum LvdcNodeStates {
     lvdcBooting = 0;
+    lvdcStandby = 1;
+    lvdcFlight =2;
 }
 
 message BrakeNodeData {

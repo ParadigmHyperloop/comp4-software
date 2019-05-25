@@ -7,8 +7,8 @@
 
 int32_t createCommanderServerSocket(int32_t iPortNumber);
 
-void parseProtoCommand(PodCommand pPodCommand, Pod *Pod);
+void parseProtoCommand(PodCommand pPodCommand, TelemetryManager *Pod);
 
-int32_t unserializeProtoMessage(Pod *Pod, char cBuffer[], int32_t iMessageSize);
+int32_t unserializeProtoMessage(TelemetryManager *Pod, char cBuffer[], int32_t iMessageSize);
 
-int32_t commanderThread(Pod Pod);
+int32_t commanderThread(TelemetryManager Pod);

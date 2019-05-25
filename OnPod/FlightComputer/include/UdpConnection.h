@@ -4,6 +4,7 @@
 
 #include "Heartbeat.h"
 #include "Common.h"
+#include "TelemetryManager.h"
 #include <NetworkHelpers.h>
 
 /**
@@ -14,7 +15,7 @@ class UdpConnection {
 public:
     virtual ~UdpConnection() = default;
 
-    explicit UdpConnection(Pod pod);
+    explicit UdpConnection(TelemetryManager pod);
 
     /** Set the buffer size for the receiving buffer.
      *
@@ -89,7 +90,7 @@ public:
 
 protected:
     bool _createServerSocket();
-    Pod pod;
+    TelemetryManager pod;
     int32_t _outboundSocket = -1;
     int32_t _inboundSocket = -1;
     int32_t _serverPort = -1;
@@ -102,7 +103,7 @@ class PdsConnection : public UdpConnection {
 public:
     ~PdsConnection() override = default;
 
-    explicit PdsConnection(Pod pod);
+    explicit PdsConnection(TelemetryManager pod);
 
     //TODO can we do this without putting the proto on the heap?
     std::unique_ptr<google::protobuf::Message> getProtoUpdateMessage() override;
@@ -114,7 +115,7 @@ public:
 
     ~BrakeNodeConnection() override = default;
 
-    explicit BrakeNodeConnection(Pod pod);
+    explicit BrakeNodeConnection(TelemetryManager pod);
 
     void setConnectionStatus(bool bStatus);
 

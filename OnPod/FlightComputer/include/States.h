@@ -1,43 +1,36 @@
 #ifndef FLIGHTCOMPUTER_STATES_H
 #define FLIGHTCOMPUTER_STATES_H
 
-#include "Common.h"
+#include "TelemetryManager.h"
+
+class TelemetryManager;
 
 class PodState{
 
 public:
-    PodState() = default;
+    PodState();
 
-    PodStates getStateValue(){
-        return this->_stateIdentifier;
-    };
+    PodState(TelemetryManager*);
 
-    bool testTransitions(){
-        return false;
-    };
+    PodStates getStateValue();
 
-    PodStates getNewState(){
-        return this->_nextStateIdentifier;
-    };
+    virtual bool testTransitions();
 
-    bool isTransitioning(){
-        return this->_transitioning;
-    };
+    PodStates getNewState();
 
-    BrakeNodeStates getBrakeNodeState(){
-        return _brakeNodeState;
-    }
+    bool isTransitioning();
 
-    LvdcNodeStates getLvdcNodeState(){
-        return _lvdcNodeState;
-    }
+    BrakeNodeStates getBrakeNodeState();
 
-    const std::string getTransitionReason(){
-        return _transitionReason;
-    }
+    LvdcNodeStates getLvdcNodeState();
+
+    const std::string getTransitionReason();
+
     unsigned int getTimeInStateMilis();
 
     static std::unique_ptr<PodState> createState(PodStates);
+
+    void setupTransition(PodStates, const std::string&);
 
 
 protected:
@@ -48,19 +41,27 @@ protected:
     PodStates _nextStateIdentifier = psBooting;
     BrakeNodeStates _brakeNodeState = bnsBooting;
     LvdcNodeStates  _lvdcNodeState = lvdcBooting;
-
+    TelemetryManager* pod;
 };
-
 
 
 class Booting: public PodState{
 public:
     Booting(){
+        _stateIdentifier = psBooting;
         _brakeNodeState = bnsBooting;
         _lvdcNodeState = lvdcBooting;
     }
+    bool testTransitions() override;
+};
 
-    PodStates getStateValue() { return psBooting;};
+class Standby: public PodState{
+    Standby(){
+        _stateIdentifier = psStandby;
+        _brakeNodeState = bnsStandby;
+        _lvdcNodeState = lvdcStandby;
+    }
+    bool testTransitions() override;
 };
 
 

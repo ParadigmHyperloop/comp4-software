@@ -2,7 +2,8 @@
 #define CORECONTROL_H
 
 #include "Common.h"
+#include "TelemetryManager.h"
 
-void coreControlLoop(Pod);
+void coreControlLoop(TelemetryManager);
 
 #endif

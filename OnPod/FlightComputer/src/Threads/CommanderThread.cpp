@@ -3,6 +3,7 @@
 #include "NetworkHelpers.h"
 #include "Common.h"
 #include "Heartbeat.h"
+#include "TelemetryManager.h"
 
 // Get manual state change commands. Get Estop command
 
@@ -29,7 +30,7 @@ int32_t createCommanderServerSocket(int32_t serverPortNumber) {
     return serverSock;
 }
 
-void parseProtoCommand(PodCommand podCommand, Pod *Pod) {
+void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
     if (podCommand.has_controlsinterfacestate()) {
         Pod->setControlsInterfaceState(podCommand.controlsinterfacestate());
     }
@@ -49,7 +50,7 @@ void parseProtoCommand(PodCommand podCommand, Pod *Pod) {
     return;
 }
 
-int32_t unserializeProtoMessage(Pod *Pod, char buffer[], int32_t messageSize) {
+int32_t unserializeProtoMessage(TelemetryManager *Pod, char buffer[], int32_t messageSize) {
     PodCommand pPodCommand;
     bool operationStatus;
 
@@ -66,7 +67,7 @@ int32_t unserializeProtoMessage(Pod *Pod, char buffer[], int32_t messageSize) {
 
 
 
-int32_t commanderThread(Pod Pod) {
+int32_t commanderThread(TelemetryManager Pod) {
     //Logging
     el::Helpers::setThreadName("Commander Thread");
     LOG(INFO) << "Starting Commander Thread";

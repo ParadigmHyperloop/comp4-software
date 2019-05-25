@@ -89,14 +89,10 @@ template<> ::flightConfig* Arena::CreateMaybeMessage<::flightConfig>(Arena*);
 enum BrakeNodeStates {
   bnsBooting = 0,
   bnsStandby = 1,
-  bnsArming = 2,
-  bnsArmed = 3,
-  bnsFlight = 4,
-  bnsBraking = 5,
-  bnsVenting = 6,
-  bnsRetrieval = 7,
-  bnsError = 8,
-  bnsSolenoidControl = 9
+  bnsFlight = 2,
+  bnsBraking = 3,
+  bnsError = 4,
+  bnsSolenoidControl = 5
 };
 bool BrakeNodeStates_IsValid(int value);
 const BrakeNodeStates BrakeNodeStates_MIN = bnsBooting;
@@ -122,10 +118,7 @@ enum PodStates {
   psAcceleration = 5,
   psCoasting = 6,
   psBraking = 7,
-  psDisarming = 8,
-  psRetrieval = 9,
-  psEmergency = 10,
-  psShutdown = 11
+  psShutdown = 8
 };
 bool PodStates_IsValid(int value);
 const PodStates PodStates_MIN = psBooting;
@@ -242,11 +235,13 @@ inline bool RearNodeStates_Parse(
     RearNodeStates_descriptor(), name, value);
 }
 enum LvdcNodeStates {
-  lvdcBooting = 0
+  lvdcBooting = 0,
+  lvdcStandby = 1,
+  lvdcFlight = 2
 };
 bool LvdcNodeStates_IsValid(int value);
 const LvdcNodeStates LvdcNodeStates_MIN = lvdcBooting;
-const LvdcNodeStates LvdcNodeStates_MAX = lvdcBooting;
+const LvdcNodeStates LvdcNodeStates_MAX = lvdcFlight;
 const int LvdcNodeStates_ARRAYSIZE = LvdcNodeStates_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* LvdcNodeStates_descriptor();
