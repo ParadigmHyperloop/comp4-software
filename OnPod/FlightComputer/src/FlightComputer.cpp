@@ -11,6 +11,7 @@ INITIALIZE_EASYLOGGINGPP
 #include "FlightConfigServer.h"
 #include "CommanderThread.h"
 #include "UdpTelemetryThread.h"
+#include "CanBusThread.h"
 #include "Constants/Constants.h"
 
 using namespace std;
@@ -25,7 +26,7 @@ int main( int32_t argc, char** argv)
     std::unique_ptr<FlightConfigServer> configurationServer(FlightConfigServer::getServer(NetworkConstants::iCONFIG_SERVER_PORT));
 	flightConfig flightConfigurationParameters;
     try {
-        flightConfigurationParameters = configurationServer->runServer(); //Comment out to use the default network values in the proto obj
+       // flightConfigurationParameters = configurationServer->runServer(); //Comment out to use the default network values in the proto obj
     } catch (exception& e)
     {
         LOG(ERROR) << "Error Receiving Flight Configuration: "<< e.what(); //TODO Hardware reset?
@@ -37,6 +38,14 @@ int main( int32_t argc, char** argv)
 
     // Network Configs
     initializer->updatePodNetworkValues(sPodNetworkValues, flightConfigurationParameters);
+
+    sPodValues.podState = std::move(PodState::createState(psBooting));
+
+    //TelemetryManager Internal Network Thread
+    TelemetryManager canBusAccessCard = TelemetryManager(&sPodValues, &sPodNetworkValues);
+    std::thread tCan(canThread, canBusAccessCard);
+
+    /*
 
     //TelemetryManager Internal Network Thread
     TelemetryManager pPodInternalNetwork = TelemetryManager(&sPodValues, &sPodNetworkValues);
@@ -51,5 +60,10 @@ int main( int32_t argc, char** argv)
 
  	tControlsInterfaceConnection.join();
     tServer.join();
+
+    */
+    tCan.join();
+
+
     return 0;
 }

@@ -655,40 +655,40 @@ class Telemetry :
   ::google::protobuf::int32 resolvervelocity() const;
   void set_resolvervelocity(::google::protobuf::int32 value);
 
-  // optional int32 inverterTemperature1 = 18;
-  bool has_invertertemperature1() const;
-  void clear_invertertemperature1();
-  static const int kInverterTemperature1FieldNumber = 18;
-  ::google::protobuf::int32 invertertemperature1() const;
-  void set_invertertemperature1(::google::protobuf::int32 value);
+  // optional int32 maxIgbtTemperature = 18;
+  bool has_maxigbttemperature() const;
+  void clear_maxigbttemperature();
+  static const int kMaxIgbtTemperatureFieldNumber = 18;
+  ::google::protobuf::int32 maxigbttemperature() const;
+  void set_maxigbttemperature(::google::protobuf::int32 value);
 
-  // optional int32 inverterTemperature2 = 19;
-  bool has_invertertemperature2() const;
-  void clear_invertertemperature2();
-  static const int kInverterTemperature2FieldNumber = 19;
-  ::google::protobuf::int32 invertertemperature2() const;
-  void set_invertertemperature2(::google::protobuf::int32 value);
+  // optional int32 gateDriverTemperature = 19;
+  bool has_gatedrivertemperature() const;
+  void clear_gatedrivertemperature();
+  static const int kGateDriverTemperatureFieldNumber = 19;
+  ::google::protobuf::int32 gatedrivertemperature() const;
+  void set_gatedrivertemperature(::google::protobuf::int32 value);
 
-  // optional int32 inverterTemperature3 = 20;
-  bool has_invertertemperature3() const;
-  void clear_invertertemperature3();
-  static const int kInverterTemperature3FieldNumber = 20;
-  ::google::protobuf::int32 invertertemperature3() const;
-  void set_invertertemperature3(::google::protobuf::int32 value);
+  // optional int32 inverterControlBoardTemperature = 20;
+  bool has_invertercontrolboardtemperature() const;
+  void clear_invertercontrolboardtemperature();
+  static const int kInverterControlBoardTemperatureFieldNumber = 20;
+  ::google::protobuf::int32 invertercontrolboardtemperature() const;
+  void set_invertercontrolboardtemperature(::google::protobuf::int32 value);
 
-  // optional int32 motorCurrent = 21;
-  bool has_motorcurrent() const;
-  void clear_motorcurrent();
-  static const int kMotorCurrentFieldNumber = 21;
-  ::google::protobuf::int32 motorcurrent() const;
-  void set_motorcurrent(::google::protobuf::int32 value);
+  // optional int32 motorTemperature = 21;
+  bool has_motortemperature() const;
+  void clear_motortemperature();
+  static const int kMotorTemperatureFieldNumber = 21;
+  ::google::protobuf::int32 motortemperature() const;
+  void set_motortemperature(::google::protobuf::int32 value);
 
-  // optional int32 motorVoltage = 22;
-  bool has_motorvoltage() const;
-  void clear_motorvoltage();
-  static const int kMotorVoltageFieldNumber = 22;
-  ::google::protobuf::int32 motorvoltage() const;
-  void set_motorvoltage(::google::protobuf::int32 value);
+  // optional int32 inverterBusVoltage = 22;
+  bool has_inverterbusvoltage() const;
+  void clear_inverterbusvoltage();
+  static const int kInverterBusVoltageFieldNumber = 22;
+  ::google::protobuf::int32 inverterbusvoltage() const;
+  void set_inverterbusvoltage(::google::protobuf::int32 value);
 
   // optional int32 inverterVoltages = 23;
   bool has_invertervoltages() const;
@@ -1038,11 +1038,11 @@ class Telemetry :
   ::google::protobuf::int32 imuaccelerationx_;
   ::google::protobuf::int32 tachometervelocity_;
   ::google::protobuf::int32 resolvervelocity_;
-  ::google::protobuf::int32 invertertemperature1_;
-  ::google::protobuf::int32 invertertemperature2_;
-  ::google::protobuf::int32 invertertemperature3_;
-  ::google::protobuf::int32 motorcurrent_;
-  ::google::protobuf::int32 motorvoltage_;
+  ::google::protobuf::int32 maxigbttemperature_;
+  ::google::protobuf::int32 gatedrivertemperature_;
+  ::google::protobuf::int32 invertercontrolboardtemperature_;
+  ::google::protobuf::int32 motortemperature_;
+  ::google::protobuf::int32 inverterbusvoltage_;
   ::google::protobuf::int32 invertervoltages_;
   ::google::protobuf::int32 invertercurrents_;
   int batterymanagementstate_;
@@ -3036,94 +3036,94 @@ inline void Telemetry::set_resolvervelocity(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:Telemetry.resolverVelocity)
 }
 
-// optional int32 inverterTemperature1 = 18;
-inline bool Telemetry::has_invertertemperature1() const {
+// optional int32 maxIgbtTemperature = 18;
+inline bool Telemetry::has_maxigbttemperature() const {
   return (_has_bits_[0] & 0x00010000u) != 0;
 }
-inline void Telemetry::clear_invertertemperature1() {
-  invertertemperature1_ = 0;
+inline void Telemetry::clear_maxigbttemperature() {
+  maxigbttemperature_ = 0;
   _has_bits_[0] &= ~0x00010000u;
 }
-inline ::google::protobuf::int32 Telemetry::invertertemperature1() const {
-  // @@protoc_insertion_point(field_get:Telemetry.inverterTemperature1)
-  return invertertemperature1_;
+inline ::google::protobuf::int32 Telemetry::maxigbttemperature() const {
+  // @@protoc_insertion_point(field_get:Telemetry.maxIgbtTemperature)
+  return maxigbttemperature_;
 }
-inline void Telemetry::set_invertertemperature1(::google::protobuf::int32 value) {
+inline void Telemetry::set_maxigbttemperature(::google::protobuf::int32 value) {
   _has_bits_[0] |= 0x00010000u;
-  invertertemperature1_ = value;
-  // @@protoc_insertion_point(field_set:Telemetry.inverterTemperature1)
+  maxigbttemperature_ = value;
+  // @@protoc_insertion_point(field_set:Telemetry.maxIgbtTemperature)
 }
 
-// optional int32 inverterTemperature2 = 19;
-inline bool Telemetry::has_invertertemperature2() const {
+// optional int32 gateDriverTemperature = 19;
+inline bool Telemetry::has_gatedrivertemperature() const {
   return (_has_bits_[0] & 0x00020000u) != 0;
 }
-inline void Telemetry::clear_invertertemperature2() {
-  invertertemperature2_ = 0;
+inline void Telemetry::clear_gatedrivertemperature() {
+  gatedrivertemperature_ = 0;
   _has_bits_[0] &= ~0x00020000u;
 }
-inline ::google::protobuf::int32 Telemetry::invertertemperature2() const {
-  // @@protoc_insertion_point(field_get:Telemetry.inverterTemperature2)
-  return invertertemperature2_;
+inline ::google::protobuf::int32 Telemetry::gatedrivertemperature() const {
+  // @@protoc_insertion_point(field_get:Telemetry.gateDriverTemperature)
+  return gatedrivertemperature_;
 }
-inline void Telemetry::set_invertertemperature2(::google::protobuf::int32 value) {
+inline void Telemetry::set_gatedrivertemperature(::google::protobuf::int32 value) {
   _has_bits_[0] |= 0x00020000u;
-  invertertemperature2_ = value;
-  // @@protoc_insertion_point(field_set:Telemetry.inverterTemperature2)
+  gatedrivertemperature_ = value;
+  // @@protoc_insertion_point(field_set:Telemetry.gateDriverTemperature)
 }
 
-// optional int32 inverterTemperature3 = 20;
-inline bool Telemetry::has_invertertemperature3() const {
+// optional int32 inverterControlBoardTemperature = 20;
+inline bool Telemetry::has_invertercontrolboardtemperature() const {
   return (_has_bits_[0] & 0x00040000u) != 0;
 }
-inline void Telemetry::clear_invertertemperature3() {
-  invertertemperature3_ = 0;
+inline void Telemetry::clear_invertercontrolboardtemperature() {
+  invertercontrolboardtemperature_ = 0;
   _has_bits_[0] &= ~0x00040000u;
 }
-inline ::google::protobuf::int32 Telemetry::invertertemperature3() const {
-  // @@protoc_insertion_point(field_get:Telemetry.inverterTemperature3)
-  return invertertemperature3_;
+inline ::google::protobuf::int32 Telemetry::invertercontrolboardtemperature() const {
+  // @@protoc_insertion_point(field_get:Telemetry.inverterControlBoardTemperature)
+  return invertercontrolboardtemperature_;
 }
-inline void Telemetry::set_invertertemperature3(::google::protobuf::int32 value) {
+inline void Telemetry::set_invertercontrolboardtemperature(::google::protobuf::int32 value) {
   _has_bits_[0] |= 0x00040000u;
-  invertertemperature3_ = value;
-  // @@protoc_insertion_point(field_set:Telemetry.inverterTemperature3)
+  invertercontrolboardtemperature_ = value;
+  // @@protoc_insertion_point(field_set:Telemetry.inverterControlBoardTemperature)
 }
 
-// optional int32 motorCurrent = 21;
-inline bool Telemetry::has_motorcurrent() const {
+// optional int32 motorTemperature = 21;
+inline bool Telemetry::has_motortemperature() const {
   return (_has_bits_[0] & 0x00080000u) != 0;
 }
-inline void Telemetry::clear_motorcurrent() {
-  motorcurrent_ = 0;
+inline void Telemetry::clear_motortemperature() {
+  motortemperature_ = 0;
   _has_bits_[0] &= ~0x00080000u;
 }
-inline ::google::protobuf::int32 Telemetry::motorcurrent() const {
-  // @@protoc_insertion_point(field_get:Telemetry.motorCurrent)
-  return motorcurrent_;
+inline ::google::protobuf::int32 Telemetry::motortemperature() const {
+  // @@protoc_insertion_point(field_get:Telemetry.motorTemperature)
+  return motortemperature_;
 }
-inline void Telemetry::set_motorcurrent(::google::protobuf::int32 value) {
+inline void Telemetry::set_motortemperature(::google::protobuf::int32 value) {
   _has_bits_[0] |= 0x00080000u;
-  motorcurrent_ = value;
-  // @@protoc_insertion_point(field_set:Telemetry.motorCurrent)
+  motortemperature_ = value;
+  // @@protoc_insertion_point(field_set:Telemetry.motorTemperature)
 }
 
-// optional int32 motorVoltage = 22;
-inline bool Telemetry::has_motorvoltage() const {
+// optional int32 inverterBusVoltage = 22;
+inline bool Telemetry::has_inverterbusvoltage() const {
   return (_has_bits_[0] & 0x00100000u) != 0;
 }
-inline void Telemetry::clear_motorvoltage() {
-  motorvoltage_ = 0;
+inline void Telemetry::clear_inverterbusvoltage() {
+  inverterbusvoltage_ = 0;
   _has_bits_[0] &= ~0x00100000u;
 }
-inline ::google::protobuf::int32 Telemetry::motorvoltage() const {
-  // @@protoc_insertion_point(field_get:Telemetry.motorVoltage)
-  return motorvoltage_;
+inline ::google::protobuf::int32 Telemetry::inverterbusvoltage() const {
+  // @@protoc_insertion_point(field_get:Telemetry.inverterBusVoltage)
+  return inverterbusvoltage_;
 }
-inline void Telemetry::set_motorvoltage(::google::protobuf::int32 value) {
+inline void Telemetry::set_inverterbusvoltage(::google::protobuf::int32 value) {
   _has_bits_[0] |= 0x00100000u;
-  motorvoltage_ = value;
-  // @@protoc_insertion_point(field_set:Telemetry.motorVoltage)
+  inverterbusvoltage_ = value;
+  // @@protoc_insertion_point(field_set:Telemetry.inverterBusVoltage)
 }
 
 // optional int32 inverterVoltages = 23;

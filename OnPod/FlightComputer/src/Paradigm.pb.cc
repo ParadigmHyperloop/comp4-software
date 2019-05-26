@@ -261,11 +261,11 @@ const ::google::protobuf::uint32 TableStruct_Paradigm_2eproto::offsets[] PROTOBU
   PROTOBUF_FIELD_OFFSET(::Telemetry, imuaccelerationx_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, tachometervelocity_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, resolvervelocity_),
-  PROTOBUF_FIELD_OFFSET(::Telemetry, invertertemperature1_),
-  PROTOBUF_FIELD_OFFSET(::Telemetry, invertertemperature2_),
-  PROTOBUF_FIELD_OFFSET(::Telemetry, invertertemperature3_),
-  PROTOBUF_FIELD_OFFSET(::Telemetry, motorcurrent_),
-  PROTOBUF_FIELD_OFFSET(::Telemetry, motorvoltage_),
+  PROTOBUF_FIELD_OFFSET(::Telemetry, maxigbttemperature_),
+  PROTOBUF_FIELD_OFFSET(::Telemetry, gatedrivertemperature_),
+  PROTOBUF_FIELD_OFFSET(::Telemetry, invertercontrolboardtemperature_),
+  PROTOBUF_FIELD_OFFSET(::Telemetry, motortemperature_),
+  PROTOBUF_FIELD_OFFSET(::Telemetry, inverterbusvoltage_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, invertervoltages_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, invertercurrents_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, hvbatterypackvoltage_),
@@ -579,7 +579,7 @@ const char descriptor_table_protodef_Paradigm_2eproto[] =
   "akeNodeStates\022&\n\020manualMotorState\030\004 \001(\0162"
   "\014.MotorStates\022,\n\023manualLvdcNodeState\030\005 \001"
   "(\0162\017.LvdcNodeStates\022!\n\031automaticStateTra"
-  "nsitions\030\006 \001(\010\"\233\017\n\tTelemetry\022\034\n\010podState"
+  "nsitions\030\006 \001(\010\"\257\017\n\tTelemetry\022\034\n\010podState"
   "\030\001 \001(\0162\n.PodStates\022(\n\016breakNodeState\030\002 \001"
   "(\0162\020.BrakeNodeStates\022 \n\nmotorState\030\003 \001(\016"
   "2\014.MotorStates\0228\n\026controlsInterfaceState"
@@ -596,101 +596,102 @@ const char descriptor_table_protodef_Paradigm_2eproto[] =
   "(\005\022\030\n\020podAccelerationZ\030\r \001(\005\022\023\n\013imuVeloc"
   "ity\030\016 \001(\005\022\030\n\020imuAccelerationX\030\017 \001(\005\022\032\n\022t"
   "achometerVelocity\030\020 \001(\005\022\030\n\020resolverVeloc"
-  "ity\030\021 \001(\005\022\034\n\024inverterTemperature1\030\022 \001(\005\022"
-  "\034\n\024inverterTemperature2\030\023 \001(\005\022\034\n\024inverte"
-  "rTemperature3\030\024 \001(\005\022\024\n\014motorCurrent\030\025 \001("
-  "\005\022\024\n\014motorVoltage\030\026 \001(\005\022\030\n\020inverterVolta"
-  "ges\030\027 \001(\005\022\030\n\020inverterCurrents\030\030 \001(\005\022\034\n\024h"
-  "vBatteryPackVoltage\030\032 \001(\002\022\034\n\024hvBatteryPa"
-  "ckCurrent\030\033 \001(\002\022!\n\031hvBatteryCellTemperat"
-  "ures\030\034 \003(\005\022\'\n\037hvBatteryPackMinimumCellVo"
-  "ltage\030\035 \001(\002\022#\n\033hvBatteryPackMaxCellVolta"
-  "ge\030\036 \001(\002\022\021\n\tsolenoid1\030  \001(\010\022\021\n\tsolenoid2"
-  "\030! \001(\010\022\021\n\tsolenoid3\030\" \001(\010\022\021\n\tsolenoid4\030#"
-  " \001(\010\022\024\n\014highPressure\030& \001(\002\022\024\n\014lowPressur"
-  "e1\030\' \001(\002\022\024\n\014lowPressure2\030( \001(\002\022\024\n\014lowPre"
-  "ssure3\030) \001(\002\022\024\n\014lowPressure4\030* \001(\002\022!\n\031pr"
-  "essureVesselTemperature\030+ \001(\002\022$\n\034electro"
-  "nicsEnclosurePressure\030, \001(\005\022\031\n\021railDispl"
-  "acementX\030- \001(\005\022\031\n\021railDisplacementY\030. \001("
-  "\005\022\024\n\014tubePressure\0300 \001(\005\022\030\n\020coolantPressu"
-  "re1\0301 \001(\005\022\030\n\020coolantPressure2\0302 \001(\005\022\030\n\020c"
-  "oolantPressure3\0303 \001(\005\022\032\n\022coolantTemperat"
-  "ure\0304 \001(\005\022\027\n\017railTemperature\0305 \001(\002\022\024\n\014pa"
-  "ck1Voltage\0307 \001(\005\022\024\n\014pack2Voltage\0308 \001(\005\022\024"
-  "\n\014pack1Current\0309 \001(\005\022\024\n\014pack2Current\030: \001"
-  "(\005\022\024\n\014rail1Voltage\030; \001(\005\022\024\n\014rail2Voltage"
-  "\030< \001(\005\022\024\n\014rail3Voltage\030= \001(\005\022\024\n\014rail4Vol"
-  "tage\030> \001(\005\022\027\n\017railVoltageFlag\030H \001(\005\022\032\n\022r"
-  "ailCurrentSensor1\030\? \001(\005\022\032\n\022railCurrentSe"
-  "nsor2\030@ \001(\005\022\032\n\022railCurrentSensor3\030A \001(\005\022"
-  "\032\n\022railCurrentSensor4\030B \001(\005\022\032\n\022railCurre"
-  "ntSensor5\030C \001(\005\022\032\n\022railCurrentSensor6\030D "
-  "\001(\005\022\032\n\022railCurrentSensor7\030E \001(\005\022\032\n\022railC"
-  "urrentSensor8\030F \001(\005\022\027\n\017railCurrentFlag\030I"
-  " \001(\005\"\317\001\n\rFcToBrakeNode\022\021\n\tpacketNum\030\001 \001("
-  "\005\022\034\n\010podState\030\002 \001(\0162\n.PodStates\022)\n\017manua"
-  "lNodeState\030\003 \001(\0162\020.BrakeNodeStates\022\027\n\017so"
-  "lenoid1Config\030\004 \001(\010\022\027\n\017solenoid2Config\030\005"
-  " \001(\010\022\027\n\017solenoid3Config\030\006 \001(\010\022\027\n\017solenoi"
-  "d4Config\030\007 \001(\010\"i\n\014FcToLvdcNode\022\021\n\tpacket"
-  "Num\030\001 \001(\005\022\034\n\010podState\030\002 \001(\0162\n.PodStates\022"
-  "(\n\017manualNodeState\030\003 \001(\0162\017.LvdcNodeState"
-  "s\"\346\001\n\013DtsNodeToFc\022\021\n\tpacketNum\030\001 \002(\005\022(\n\016"
-  "brakeNodeState\030\002 \002(\0162\020.BrakeNodeStates\022\032"
-  "\n\022brakeSolenoidState\030\003 \002(\010\022\031\n\021ventSoleno"
-  "idState\030\004 \002(\010\022\030\n\020rotorTemperature\030\005 \002(\002\022"
-  "\034\n\024pneumaticTemperature\030\006 \002(\002\022\024\n\014tankPre"
-  "ssure\030\007 \002(\002\022\025\n\rbrakePressure\030\010 \002(\002\"|\n\021En"
-  "closureNodeToFc\022\021\n\tpacketNum\030\001 \002(\005\022\031\n\021en"
-  "closurePressure\030\002 \002(\002\022\034\n\024enclosureTemper"
-  "ature\030\003 \002(\002\022\033\n\023coolantLinePressure\030\004 \002(\002"
-  "\"\223\003\n\014LvdcNodeToFc\022\034\n\024highPowerPackVoltag"
-  "e\030\001 \002(\002\022\033\n\023lowPowerPackVoltage\030\002 \002(\002\022\034\n\024"
-  "highPowerPackCurrent\030\003 \002(\002\022\033\n\023lowPowerPa"
-  "ckCurrent\030\004 \002(\002\022\024\n\014rail5Voltage\030\005 \002(\002\022\035\n"
-  "\025rail12LowPowerVoltage\030\006 \002(\002\022\036\n\026rail12Hi"
-  "ghPowerVoltage\030\007 \002(\002\022\025\n\rrail24Voltage\030\010 "
-  "\002(\002\022\024\n\014rail5Current\030\t \002(\002\022\035\n\025rail12LowPo"
-  "werCurrent\030\n \002(\002\022\025\n\rrail24Current\030\013 \002(\002\022"
-  "\033\n\023railInverterCurrent\030\014 \002(\002\022\033\n\023railCool"
-  "ing1Current\030\r \002(\002\022\033\n\023railCooling2Current"
-  "\030\016 \002(\002\"\275\002\n\rBrakeNodeToFc\022\021\n\tpacketNum\030\001 "
-  "\002(\005\022\037\n\005state\030\002 \002(\0162\020.BrakeNodeStates\022\021\n\t"
-  "solenoid1\030\003 \002(\010\022\021\n\tsolenoid2\030\004 \002(\010\022\021\n\tso"
-  "lenoid3\030\005 \002(\010\022\021\n\tsolenoid4\030\006 \002(\010\022\024\n\014high"
-  "Pressure\030\007 \002(\002\022\024\n\014lowPressure1\030\010 \002(\002\022\024\n\014"
-  "lowPressure2\030\t \002(\002\022\024\n\014lowPressure3\030\n \002(\002"
-  "\022\031\n\021lowPressureCommon\030\013 \002(\002\022\034\n\024pneumatic"
-  "Temperature\030\014 \002(\002\022\033\n\023coolantTankPressure"
-  "\030\r \002(\002\"\204\002\n\014flightConfig\022\030\n\020retrievalTime"
-  "out\030\001 \001(\r\022\025\n\rmaxFlightTime\030\002 \001(\004\022\022\n\nmoto"
-  "rSpeed\030\003 \001(\004\022\036\n\020pdsTelemetryPort\030\004 \001(\005:\004"
-  "7000\022\031\n\013commandPort\030\005 \001(\005:\0046000\022\024\n\014fligh"
-  "tLength\030\006 \001(\004\022\037\n\020heartbeatTimeout\030\007 \001(\005:"
-  "\00510000\022\021\n\tpodDriver\030\010 \001(\t\022*\n\023controlLapt"
-  "opIpAddr\030\t \001(\t:\r192.168.0.103\"/\n\017Default"
-  "FcToNode\022\034\n\010podState\030\001 \001(\0162\n.PodStates*h"
-  "\n\017BrakeNodeStates\022\016\n\nbnsBooting\020\000\022\016\n\nbns"
-  "Standby\020\001\022\r\n\tbnsFlight\020\002\022\016\n\nbnsBraking\020\003"
-  "\022\026\n\022bnsSolenoidControl\020\004*\230\001\n\tPodStates\022\r"
-  "\n\tpsBooting\020\000\022\r\n\tpsStandby\020\001\022\014\n\010psArming"
-  "\020\002\022\013\n\007psArmed\020\003\022\017\n\013psPreFlight\020\004\022\022\n\016psAc"
-  "celeration\020\005\022\016\n\npsCoasting\020\006\022\r\n\tpsBrakin"
-  "g\020\007\022\016\n\npsShutdown\020\010*C\n\013MotorStates\022\t\n\005ms"
-  "Off\020\000\022\016\n\nmsCharging\020\001\022\n\n\006msIdle\020\002\022\r\n\tmsE"
-  "ngaged\020\003*p\n\027ControlsInterfaceStates\022\r\n\tc"
-  "iStandby\020\000\022\t\n\005ciArm\020\001\022\014\n\010ciFlight\020\002\022\014\n\010c"
-  "iDisarm\020\003\022\n\n\006ciTaxi\020\004\022\023\n\017ciEmergencyStop"
-  "\020\005* \n\016InverterStates\022\016\n\niConnected\020\000*)\n\027"
-  "BatteryManagementStates\022\016\n\nbmsNominal\020\000*"
-  "B\n\016LvdcNodeStates\022\017\n\013lvdcBooting\020\000\022\017\n\013lv"
-  "dcStandby\020\001\022\016\n\nlvdcFlight\020\002"
+  "ity\030\021 \001(\005\022\032\n\022maxIgbtTemperature\030\022 \001(\005\022\035\n"
+  "\025gateDriverTemperature\030\023 \001(\005\022\'\n\037inverter"
+  "ControlBoardTemperature\030\024 \001(\005\022\030\n\020motorTe"
+  "mperature\030\025 \001(\005\022\032\n\022inverterBusVoltage\030\026 "
+  "\001(\005\022\030\n\020inverterVoltages\030\027 \001(\005\022\030\n\020inverte"
+  "rCurrents\030\030 \001(\005\022\034\n\024hvBatteryPackVoltage\030"
+  "\032 \001(\002\022\034\n\024hvBatteryPackCurrent\030\033 \001(\002\022!\n\031h"
+  "vBatteryCellTemperatures\030\034 \003(\005\022\'\n\037hvBatt"
+  "eryPackMinimumCellVoltage\030\035 \001(\002\022#\n\033hvBat"
+  "teryPackMaxCellVoltage\030\036 \001(\002\022\021\n\tsolenoid"
+  "1\030  \001(\010\022\021\n\tsolenoid2\030! \001(\010\022\021\n\tsolenoid3\030"
+  "\" \001(\010\022\021\n\tsolenoid4\030# \001(\010\022\024\n\014highPressure"
+  "\030& \001(\002\022\024\n\014lowPressure1\030\' \001(\002\022\024\n\014lowPress"
+  "ure2\030( \001(\002\022\024\n\014lowPressure3\030) \001(\002\022\024\n\014lowP"
+  "ressure4\030* \001(\002\022!\n\031pressureVesselTemperat"
+  "ure\030+ \001(\002\022$\n\034electronicsEnclosurePressur"
+  "e\030, \001(\005\022\031\n\021railDisplacementX\030- \001(\005\022\031\n\021ra"
+  "ilDisplacementY\030. \001(\005\022\024\n\014tubePressure\0300 "
+  "\001(\005\022\030\n\020coolantPressure1\0301 \001(\005\022\030\n\020coolant"
+  "Pressure2\0302 \001(\005\022\030\n\020coolantPressure3\0303 \001("
+  "\005\022\032\n\022coolantTemperature\0304 \001(\005\022\027\n\017railTem"
+  "perature\0305 \001(\002\022\024\n\014pack1Voltage\0307 \001(\005\022\024\n\014"
+  "pack2Voltage\0308 \001(\005\022\024\n\014pack1Current\0309 \001(\005"
+  "\022\024\n\014pack2Current\030: \001(\005\022\024\n\014rail1Voltage\030;"
+  " \001(\005\022\024\n\014rail2Voltage\030< \001(\005\022\024\n\014rail3Volta"
+  "ge\030= \001(\005\022\024\n\014rail4Voltage\030> \001(\005\022\027\n\017railVo"
+  "ltageFlag\030H \001(\005\022\032\n\022railCurrentSensor1\030\? "
+  "\001(\005\022\032\n\022railCurrentSensor2\030@ \001(\005\022\032\n\022railC"
+  "urrentSensor3\030A \001(\005\022\032\n\022railCurrentSensor"
+  "4\030B \001(\005\022\032\n\022railCurrentSensor5\030C \001(\005\022\032\n\022r"
+  "ailCurrentSensor6\030D \001(\005\022\032\n\022railCurrentSe"
+  "nsor7\030E \001(\005\022\032\n\022railCurrentSensor8\030F \001(\005\022"
+  "\027\n\017railCurrentFlag\030I \001(\005\"\317\001\n\rFcToBrakeNo"
+  "de\022\021\n\tpacketNum\030\001 \001(\005\022\034\n\010podState\030\002 \001(\0162"
+  "\n.PodStates\022)\n\017manualNodeState\030\003 \001(\0162\020.B"
+  "rakeNodeStates\022\027\n\017solenoid1Config\030\004 \001(\010\022"
+  "\027\n\017solenoid2Config\030\005 \001(\010\022\027\n\017solenoid3Con"
+  "fig\030\006 \001(\010\022\027\n\017solenoid4Config\030\007 \001(\010\"i\n\014Fc"
+  "ToLvdcNode\022\021\n\tpacketNum\030\001 \001(\005\022\034\n\010podStat"
+  "e\030\002 \001(\0162\n.PodStates\022(\n\017manualNodeState\030\003"
+  " \001(\0162\017.LvdcNodeStates\"\346\001\n\013DtsNodeToFc\022\021\n"
+  "\tpacketNum\030\001 \002(\005\022(\n\016brakeNodeState\030\002 \002(\016"
+  "2\020.BrakeNodeStates\022\032\n\022brakeSolenoidState"
+  "\030\003 \002(\010\022\031\n\021ventSolenoidState\030\004 \002(\010\022\030\n\020rot"
+  "orTemperature\030\005 \002(\002\022\034\n\024pneumaticTemperat"
+  "ure\030\006 \002(\002\022\024\n\014tankPressure\030\007 \002(\002\022\025\n\rbrake"
+  "Pressure\030\010 \002(\002\"|\n\021EnclosureNodeToFc\022\021\n\tp"
+  "acketNum\030\001 \002(\005\022\031\n\021enclosurePressure\030\002 \002("
+  "\002\022\034\n\024enclosureTemperature\030\003 \002(\002\022\033\n\023coola"
+  "ntLinePressure\030\004 \002(\002\"\223\003\n\014LvdcNodeToFc\022\034\n"
+  "\024highPowerPackVoltage\030\001 \002(\002\022\033\n\023lowPowerP"
+  "ackVoltage\030\002 \002(\002\022\034\n\024highPowerPackCurrent"
+  "\030\003 \002(\002\022\033\n\023lowPowerPackCurrent\030\004 \002(\002\022\024\n\014r"
+  "ail5Voltage\030\005 \002(\002\022\035\n\025rail12LowPowerVolta"
+  "ge\030\006 \002(\002\022\036\n\026rail12HighPowerVoltage\030\007 \002(\002"
+  "\022\025\n\rrail24Voltage\030\010 \002(\002\022\024\n\014rail5Current\030"
+  "\t \002(\002\022\035\n\025rail12LowPowerCurrent\030\n \002(\002\022\025\n\r"
+  "rail24Current\030\013 \002(\002\022\033\n\023railInverterCurre"
+  "nt\030\014 \002(\002\022\033\n\023railCooling1Current\030\r \002(\002\022\033\n"
+  "\023railCooling2Current\030\016 \002(\002\"\275\002\n\rBrakeNode"
+  "ToFc\022\021\n\tpacketNum\030\001 \002(\005\022\037\n\005state\030\002 \002(\0162\020"
+  ".BrakeNodeStates\022\021\n\tsolenoid1\030\003 \002(\010\022\021\n\ts"
+  "olenoid2\030\004 \002(\010\022\021\n\tsolenoid3\030\005 \002(\010\022\021\n\tsol"
+  "enoid4\030\006 \002(\010\022\024\n\014highPressure\030\007 \002(\002\022\024\n\014lo"
+  "wPressure1\030\010 \002(\002\022\024\n\014lowPressure2\030\t \002(\002\022\024"
+  "\n\014lowPressure3\030\n \002(\002\022\031\n\021lowPressureCommo"
+  "n\030\013 \002(\002\022\034\n\024pneumaticTemperature\030\014 \002(\002\022\033\n"
+  "\023coolantTankPressure\030\r \002(\002\"\204\002\n\014flightCon"
+  "fig\022\030\n\020retrievalTimeout\030\001 \001(\r\022\025\n\rmaxFlig"
+  "htTime\030\002 \001(\004\022\022\n\nmotorSpeed\030\003 \001(\004\022\036\n\020pdsT"
+  "elemetryPort\030\004 \001(\005:\0047000\022\031\n\013commandPort\030"
+  "\005 \001(\005:\0046000\022\024\n\014flightLength\030\006 \001(\004\022\037\n\020hea"
+  "rtbeatTimeout\030\007 \001(\005:\00510000\022\021\n\tpodDriver\030"
+  "\010 \001(\t\022*\n\023controlLaptopIpAddr\030\t \001(\t:\r192."
+  "168.0.103\"/\n\017DefaultFcToNode\022\034\n\010podState"
+  "\030\001 \001(\0162\n.PodStates*h\n\017BrakeNodeStates\022\016\n"
+  "\nbnsBooting\020\000\022\016\n\nbnsStandby\020\001\022\r\n\tbnsFlig"
+  "ht\020\002\022\016\n\nbnsBraking\020\003\022\026\n\022bnsSolenoidContr"
+  "ol\020\004*\230\001\n\tPodStates\022\r\n\tpsBooting\020\000\022\r\n\tpsS"
+  "tandby\020\001\022\014\n\010psArming\020\002\022\013\n\007psArmed\020\003\022\017\n\013p"
+  "sPreFlight\020\004\022\022\n\016psAcceleration\020\005\022\016\n\npsCo"
+  "asting\020\006\022\r\n\tpsBraking\020\007\022\016\n\npsShutdown\020\010*"
+  "C\n\013MotorStates\022\t\n\005msOff\020\000\022\016\n\nmsCharging\020"
+  "\001\022\n\n\006msIdle\020\002\022\r\n\tmsEngaged\020\003*p\n\027Controls"
+  "InterfaceStates\022\r\n\tciStandby\020\000\022\t\n\005ciArm\020"
+  "\001\022\014\n\010ciFlight\020\002\022\014\n\010ciDisarm\020\003\022\n\n\006ciTaxi\020"
+  "\004\022\023\n\017ciEmergencyStop\020\005* \n\016InverterStates"
+  "\022\016\n\niConnected\020\000*)\n\027BatteryManagementSta"
+  "tes\022\016\n\nbmsNominal\020\000*B\n\016LvdcNodeStates\022\017\n"
+  "\013lvdcBooting\020\000\022\017\n\013lvdcStandby\020\001\022\016\n\nlvdcF"
+  "light\020\002"
   ;
 ::google::protobuf::internal::DescriptorTable descriptor_table_Paradigm_2eproto = {
   false, InitDefaults_Paradigm_2eproto, 
   descriptor_table_protodef_Paradigm_2eproto,
-  "Paradigm.proto", &assign_descriptors_table_Paradigm_2eproto, 4547,
+  "Paradigm.proto", &assign_descriptors_table_Paradigm_2eproto, 4567,
 };
 
 void AddDescriptors_Paradigm_2eproto() {
@@ -1446,19 +1447,19 @@ class Telemetry::HasBitSetters {
   static void set_has_resolvervelocity(Telemetry* msg) {
     msg->_has_bits_[0] |= 0x00008000u;
   }
-  static void set_has_invertertemperature1(Telemetry* msg) {
+  static void set_has_maxigbttemperature(Telemetry* msg) {
     msg->_has_bits_[0] |= 0x00010000u;
   }
-  static void set_has_invertertemperature2(Telemetry* msg) {
+  static void set_has_gatedrivertemperature(Telemetry* msg) {
     msg->_has_bits_[0] |= 0x00020000u;
   }
-  static void set_has_invertertemperature3(Telemetry* msg) {
+  static void set_has_invertercontrolboardtemperature(Telemetry* msg) {
     msg->_has_bits_[0] |= 0x00040000u;
   }
-  static void set_has_motorcurrent(Telemetry* msg) {
+  static void set_has_motortemperature(Telemetry* msg) {
     msg->_has_bits_[0] |= 0x00080000u;
   }
-  static void set_has_motorvoltage(Telemetry* msg) {
+  static void set_has_inverterbusvoltage(Telemetry* msg) {
     msg->_has_bits_[0] |= 0x00100000u;
   }
   static void set_has_invertervoltages(Telemetry* msg) {
@@ -1614,11 +1615,11 @@ const int Telemetry::kImuVelocityFieldNumber;
 const int Telemetry::kImuAccelerationXFieldNumber;
 const int Telemetry::kTachometerVelocityFieldNumber;
 const int Telemetry::kResolverVelocityFieldNumber;
-const int Telemetry::kInverterTemperature1FieldNumber;
-const int Telemetry::kInverterTemperature2FieldNumber;
-const int Telemetry::kInverterTemperature3FieldNumber;
-const int Telemetry::kMotorCurrentFieldNumber;
-const int Telemetry::kMotorVoltageFieldNumber;
+const int Telemetry::kMaxIgbtTemperatureFieldNumber;
+const int Telemetry::kGateDriverTemperatureFieldNumber;
+const int Telemetry::kInverterControlBoardTemperatureFieldNumber;
+const int Telemetry::kMotorTemperatureFieldNumber;
+const int Telemetry::kInverterBusVoltageFieldNumber;
 const int Telemetry::kInverterVoltagesFieldNumber;
 const int Telemetry::kInverterCurrentsFieldNumber;
 const int Telemetry::kHvBatteryPackVoltageFieldNumber;
@@ -1728,9 +1729,9 @@ void Telemetry::Clear() {
         reinterpret_cast<char*>(&podvelocity_)) + sizeof(resolvervelocity_));
   }
   if (cached_has_bits & 0x00ff0000u) {
-    ::memset(&invertertemperature1_, 0, static_cast<size_t>(
+    ::memset(&maxigbttemperature_, 0, static_cast<size_t>(
         reinterpret_cast<char*>(&batterymanagementstate_) -
-        reinterpret_cast<char*>(&invertertemperature1_)) + sizeof(batterymanagementstate_));
+        reinterpret_cast<char*>(&maxigbttemperature_)) + sizeof(batterymanagementstate_));
   }
   if (cached_has_bits & 0xff000000u) {
     ::memset(&hvbatterypackvoltage_, 0, static_cast<size_t>(
@@ -1938,38 +1939,38 @@ const char* Telemetry::_InternalParse(const char* begin, const char* end, void* 
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // optional int32 inverterTemperature1 = 18;
+      // optional int32 maxIgbtTemperature = 18;
       case 18: {
         if (static_cast<::google::protobuf::uint8>(tag) != 144) goto handle_unusual;
-        msg->set_invertertemperature1(::google::protobuf::internal::ReadVarint(&ptr));
+        msg->set_maxigbttemperature(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // optional int32 inverterTemperature2 = 19;
+      // optional int32 gateDriverTemperature = 19;
       case 19: {
         if (static_cast<::google::protobuf::uint8>(tag) != 152) goto handle_unusual;
-        msg->set_invertertemperature2(::google::protobuf::internal::ReadVarint(&ptr));
+        msg->set_gatedrivertemperature(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // optional int32 inverterTemperature3 = 20;
+      // optional int32 inverterControlBoardTemperature = 20;
       case 20: {
         if (static_cast<::google::protobuf::uint8>(tag) != 160) goto handle_unusual;
-        msg->set_invertertemperature3(::google::protobuf::internal::ReadVarint(&ptr));
+        msg->set_invertercontrolboardtemperature(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // optional int32 motorCurrent = 21;
+      // optional int32 motorTemperature = 21;
       case 21: {
         if (static_cast<::google::protobuf::uint8>(tag) != 168) goto handle_unusual;
-        msg->set_motorcurrent(::google::protobuf::internal::ReadVarint(&ptr));
+        msg->set_motortemperature(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // optional int32 motorVoltage = 22;
+      // optional int32 inverterBusVoltage = 22;
       case 22: {
         if (static_cast<::google::protobuf::uint8>(tag) != 176) goto handle_unusual;
-        msg->set_motorvoltage(::google::protobuf::internal::ReadVarint(&ptr));
+        msg->set_inverterbusvoltage(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
@@ -2634,65 +2635,65 @@ bool Telemetry::MergePartialFromCodedStream(
         break;
       }
 
-      // optional int32 inverterTemperature1 = 18;
+      // optional int32 maxIgbtTemperature = 18;
       case 18: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (144 & 0xFF)) {
-          HasBitSetters::set_has_invertertemperature1(this);
+          HasBitSetters::set_has_maxigbttemperature(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &invertertemperature1_)));
+                 input, &maxigbttemperature_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // optional int32 inverterTemperature2 = 19;
+      // optional int32 gateDriverTemperature = 19;
       case 19: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (152 & 0xFF)) {
-          HasBitSetters::set_has_invertertemperature2(this);
+          HasBitSetters::set_has_gatedrivertemperature(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &invertertemperature2_)));
+                 input, &gatedrivertemperature_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // optional int32 inverterTemperature3 = 20;
+      // optional int32 inverterControlBoardTemperature = 20;
       case 20: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (160 & 0xFF)) {
-          HasBitSetters::set_has_invertertemperature3(this);
+          HasBitSetters::set_has_invertercontrolboardtemperature(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &invertertemperature3_)));
+                 input, &invertercontrolboardtemperature_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // optional int32 motorCurrent = 21;
+      // optional int32 motorTemperature = 21;
       case 21: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (168 & 0xFF)) {
-          HasBitSetters::set_has_motorcurrent(this);
+          HasBitSetters::set_has_motortemperature(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &motorcurrent_)));
+                 input, &motortemperature_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // optional int32 motorVoltage = 22;
+      // optional int32 inverterBusVoltage = 22;
       case 22: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (176 & 0xFF)) {
-          HasBitSetters::set_has_motorvoltage(this);
+          HasBitSetters::set_has_inverterbusvoltage(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &motorvoltage_)));
+                 input, &inverterbusvoltage_)));
         } else {
           goto handle_unusual;
         }
@@ -3466,29 +3467,29 @@ void Telemetry::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(17, this->resolvervelocity(), output);
   }
 
-  // optional int32 inverterTemperature1 = 18;
+  // optional int32 maxIgbtTemperature = 18;
   if (cached_has_bits & 0x00010000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(18, this->invertertemperature1(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(18, this->maxigbttemperature(), output);
   }
 
-  // optional int32 inverterTemperature2 = 19;
+  // optional int32 gateDriverTemperature = 19;
   if (cached_has_bits & 0x00020000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(19, this->invertertemperature2(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(19, this->gatedrivertemperature(), output);
   }
 
-  // optional int32 inverterTemperature3 = 20;
+  // optional int32 inverterControlBoardTemperature = 20;
   if (cached_has_bits & 0x00040000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(20, this->invertertemperature3(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(20, this->invertercontrolboardtemperature(), output);
   }
 
-  // optional int32 motorCurrent = 21;
+  // optional int32 motorTemperature = 21;
   if (cached_has_bits & 0x00080000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(21, this->motorcurrent(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(21, this->motortemperature(), output);
   }
 
-  // optional int32 motorVoltage = 22;
+  // optional int32 inverterBusVoltage = 22;
   if (cached_has_bits & 0x00100000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(22, this->motorvoltage(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(22, this->inverterbusvoltage(), output);
   }
 
   // optional int32 inverterVoltages = 23;
@@ -3841,29 +3842,29 @@ void Telemetry::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(17, this->resolvervelocity(), target);
   }
 
-  // optional int32 inverterTemperature1 = 18;
+  // optional int32 maxIgbtTemperature = 18;
   if (cached_has_bits & 0x00010000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(18, this->invertertemperature1(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(18, this->maxigbttemperature(), target);
   }
 
-  // optional int32 inverterTemperature2 = 19;
+  // optional int32 gateDriverTemperature = 19;
   if (cached_has_bits & 0x00020000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(19, this->invertertemperature2(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(19, this->gatedrivertemperature(), target);
   }
 
-  // optional int32 inverterTemperature3 = 20;
+  // optional int32 inverterControlBoardTemperature = 20;
   if (cached_has_bits & 0x00040000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(20, this->invertertemperature3(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(20, this->invertercontrolboardtemperature(), target);
   }
 
-  // optional int32 motorCurrent = 21;
+  // optional int32 motorTemperature = 21;
   if (cached_has_bits & 0x00080000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(21, this->motorcurrent(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(21, this->motortemperature(), target);
   }
 
-  // optional int32 motorVoltage = 22;
+  // optional int32 inverterBusVoltage = 22;
   if (cached_has_bits & 0x00100000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(22, this->motorvoltage(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(22, this->inverterbusvoltage(), target);
   }
 
   // optional int32 inverterVoltages = 23;
@@ -4270,39 +4271,39 @@ size_t Telemetry::ByteSizeLong() const {
 
   }
   if (cached_has_bits & 0x00ff0000u) {
-    // optional int32 inverterTemperature1 = 18;
+    // optional int32 maxIgbtTemperature = 18;
     if (cached_has_bits & 0x00010000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->invertertemperature1());
+          this->maxigbttemperature());
     }
 
-    // optional int32 inverterTemperature2 = 19;
+    // optional int32 gateDriverTemperature = 19;
     if (cached_has_bits & 0x00020000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->invertertemperature2());
+          this->gatedrivertemperature());
     }
 
-    // optional int32 inverterTemperature3 = 20;
+    // optional int32 inverterControlBoardTemperature = 20;
     if (cached_has_bits & 0x00040000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->invertertemperature3());
+          this->invertercontrolboardtemperature());
     }
 
-    // optional int32 motorCurrent = 21;
+    // optional int32 motorTemperature = 21;
     if (cached_has_bits & 0x00080000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->motorcurrent());
+          this->motortemperature());
     }
 
-    // optional int32 motorVoltage = 22;
+    // optional int32 inverterBusVoltage = 22;
     if (cached_has_bits & 0x00100000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->motorvoltage());
+          this->inverterbusvoltage());
     }
 
     // optional int32 inverterVoltages = 23;
@@ -4696,19 +4697,19 @@ void Telemetry::MergeFrom(const Telemetry& from) {
   }
   if (cached_has_bits & 0x00ff0000u) {
     if (cached_has_bits & 0x00010000u) {
-      invertertemperature1_ = from.invertertemperature1_;
+      maxigbttemperature_ = from.maxigbttemperature_;
     }
     if (cached_has_bits & 0x00020000u) {
-      invertertemperature2_ = from.invertertemperature2_;
+      gatedrivertemperature_ = from.gatedrivertemperature_;
     }
     if (cached_has_bits & 0x00040000u) {
-      invertertemperature3_ = from.invertertemperature3_;
+      invertercontrolboardtemperature_ = from.invertercontrolboardtemperature_;
     }
     if (cached_has_bits & 0x00080000u) {
-      motorcurrent_ = from.motorcurrent_;
+      motortemperature_ = from.motortemperature_;
     }
     if (cached_has_bits & 0x00100000u) {
-      motorvoltage_ = from.motorvoltage_;
+      inverterbusvoltage_ = from.inverterbusvoltage_;
     }
     if (cached_has_bits & 0x00200000u) {
       invertervoltages_ = from.invertervoltages_;
@@ -4919,11 +4920,11 @@ void Telemetry::InternalSwap(Telemetry* other) {
   swap(imuaccelerationx_, other->imuaccelerationx_);
   swap(tachometervelocity_, other->tachometervelocity_);
   swap(resolvervelocity_, other->resolvervelocity_);
-  swap(invertertemperature1_, other->invertertemperature1_);
-  swap(invertertemperature2_, other->invertertemperature2_);
-  swap(invertertemperature3_, other->invertertemperature3_);
-  swap(motorcurrent_, other->motorcurrent_);
-  swap(motorvoltage_, other->motorvoltage_);
+  swap(maxigbttemperature_, other->maxigbttemperature_);
+  swap(gatedrivertemperature_, other->gatedrivertemperature_);
+  swap(invertercontrolboardtemperature_, other->invertercontrolboardtemperature_);
+  swap(motortemperature_, other->motortemperature_);
+  swap(inverterbusvoltage_, other->inverterbusvoltage_);
   swap(invertervoltages_, other->invertervoltages_);
   swap(invertercurrents_, other->invertercurrents_);
   swap(batterymanagementstate_, other->batterymanagementstate_);

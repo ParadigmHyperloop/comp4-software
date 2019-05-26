@@ -1,8 +1,8 @@
 {
-  "bSolenoid1": {
+  "solenoid1": {
     "name_pretty": "Solenoid One"
   },
-  "bSolenoid2": {
+  "solenoid2": {
     "name_pretty": "Solenoid Two"
   },
   "railTemperature": {
@@ -11,10 +11,25 @@
   "pressureVesselTemperature": {
     "name_pretty": "Pneumatic Temperature"
   },
-    "iHighPressure": {
+  "highPressure": {
     "name_pretty": "Tank Pressure"
   },
-    "iLowPressure1": {
-    "name_pretty": "Line Pressure"
+  "lowPressure1": {
+    "name_pretty": "Module 1"
+  },
+  "maxIgbtTemperature": {
+   "name_pretty": "Max IGBT Temperature"
+  },
+  "gateDriverTemperature": {
+   "name_pretty": "Inverter Gate Driver Temperature"
+  },
+  "inverterControlBoardTemperature": {
+   "name_pretty": "Inverter Control Board Temperature"
+  },
+  "motorTemperature": {
+   "name_pretty": "Motor Temperature"
+  },
+  "inverterBusVoltage": {
+   "name_pretty": "Inverter Bus Voltage"
   }
 }

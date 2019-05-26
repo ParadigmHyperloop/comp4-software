@@ -33,8 +33,16 @@ struct PodValues {
     float hvBatteryPackMinimumCellVoltage;
     float hvBatteryPackMaxCellVoltage;
 
+    //Inverter
+    int32_t maxIgbtTemperature;
+    int32_t gateDriverTemperature;
+    int32_t inverterControlBoardTemperature;
+    int32_t motorTemperature;
+    int32_t inverterBusVoltage;
+
     // Atmosphere
     double tubePressure;
+
     // Terminal
     ControlsInterfaceStates eTerminalCommand;
 

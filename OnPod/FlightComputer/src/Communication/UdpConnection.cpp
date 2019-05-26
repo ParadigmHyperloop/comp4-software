@@ -146,6 +146,11 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_hvbatterypackcurrent(pod.telemetry->hvBatteryPackCurrent);
     protoMessage->set_hvbatterypackmaxcellvoltage(pod.telemetry->hvBatteryPackMaxCellVoltage);
     protoMessage->set_hvbatterypackminimumcellvoltage(pod.telemetry->hvBatteryPackMinimumCellVoltage);
+    protoMessage->set_maxigbttemperature(pod.telemetry->maxIgbtTemperature);
+    protoMessage->set_gatedrivertemperature(pod.telemetry->gateDriverTemperature);
+    protoMessage->set_invertercontrolboardtemperature(pod.telemetry->inverterControlBoardTemperature);
+    protoMessage->set_motortemperature(pod.telemetry->motorTemperature);
+    protoMessage->set_inverterbusvoltage(pod.telemetry->inverterBusVoltage);
     return protoMessage;
 }
 

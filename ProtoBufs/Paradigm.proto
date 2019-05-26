@@ -93,11 +93,13 @@ message Telemetry {
     optional int32 resolverVelocity = 17;
 
     // Inverter
-    optional int32 inverterTemperature1 = 18;
-    optional int32 inverterTemperature2 = 19;
-    optional int32 inverterTemperature3 = 20;
-    optional int32 motorCurrent = 21;
-    optional int32 motorVoltage = 22;
+    optional int32 maxIgbtTemperature = 18;
+    optional int32 gateDriverTemperature = 19;
+    optional int32 inverterControlBoardTemperature = 20;
+    optional int32 motorTemperature = 21;
+    optional int32 inverterBusVoltage = 22;
+
+
     optional int32 inverterVoltages = 23;
     optional int32 inverterCurrents = 24;
     //optional int32 inverterInternalStates = 30;

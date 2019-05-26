@@ -1,11 +1,11 @@
 {
-  "bSolenoid1": {
+  "solenoid1": {
     "psBooting": [0,0],
     "psAcceleration": [0,0],
     "psBraking": [1,1],
     "psDisarming": [1,1]
   },
-  "bSolenoid2": {
+  "solenoid2": {
     "psBooting": [0,0],
     "psAcceleration": [0,0],
     "psBraking": [0,0],
@@ -23,37 +23,67 @@
     "psBraking": [-25,35],
     "psDisarming": [-25,35]
   },
-    "iHighPressure": {
+  "highPressure": {
     "psBooting": [13,1750],
     "psAcceleration": [13,1750],
     "psBraking": [13,1750],
     "psDisarming": [13,1750]
   },
-  "iLowPressure1": {
+  "lowPressure1": {
     "psBooting": [13,17],
     "psAcceleration": [13,17],
     "psBraking": [270,280],
     "psDisarming": [13,17]
   },
-  "iHvBatteryPackVoltage": {
+  "hvBatteryPackVoltage": {
     "psBooting": [0,100],
     "psAcceleration": [0,100],
     "psBraking": [0,100],
     "psDisarming": [0,100]
   },
-    "iHvBatteryPackCurrent": {
+  "hvBatteryPackCurrent": {
     "psBooting": [0,100],
     "psAcceleration": [0,100],
     "psBraking": [0,100],
     "psDisarming": [0,100]
   },
-    "iHvBatteryPackMinimumCellVoltage": {
+  "hvBatteryPackMinimumCellVoltage": {
     "psBooting": [0,100],
     "psAcceleration": [0,100],
     "psBraking": [0,100],
     "psDisarming": [0,100]
   },
-    "iHvBatteryPackMaxCellVoltage": {
+  "hvBatteryPackMaxCellVoltage": {
+    "psBooting": [0,100],
+    "psAcceleration": [0,100],
+    "psBraking": [0,100],
+    "psDisarming": [0,100]
+  },
+  "maxIgbtTemperature": {
+    "psBooting": [13,17],
+    "psAcceleration": [13,17],
+    "psBraking": [270,280],
+    "psDisarming": [13,17]
+  },
+  "gateDriverTemperature": {
+    "psBooting": [0,100],
+    "psAcceleration": [0,100],
+    "psBraking": [0,100],
+    "psDisarming": [0,100]
+  },
+  "inverterControlBoardTemperature": {
+    "psBooting": [0,100],
+    "psAcceleration": [0,100],
+    "psBraking": [0,100],
+    "psDisarming": [0,100]
+  },
+  "motorTemperature": {
+    "psBooting": [0,100],
+    "psAcceleration": [0,100],
+    "psBraking": [0,100],
+    "psDisarming": [0,100]
+  },
+  "inverterBusVoltage": {
     "psBooting": [0,100],
     "psAcceleration": [0,100],
     "psBraking": [0,100],
