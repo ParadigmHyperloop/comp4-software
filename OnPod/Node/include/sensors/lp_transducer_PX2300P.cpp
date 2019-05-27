@@ -10,5 +10,6 @@ void PX2300P::init() {
 
 float PX2300P::read() {
     uint16_t uAdcConversion = adc->getuAdcData()[uAdcChannel];
-    return (((float)uAdcConversion/4096*5-0.5)/4)*300;
+    float fVoltage = ((float)uAdcConversion/(1<<ADC_BITS)) * ADC_RANGE;
+    return ((fVoltage-MIN_VOLTAGE) / (MAX_VOLTAGE-MIN_VOLTAGE)) * MAX_PRESSURE;
 }

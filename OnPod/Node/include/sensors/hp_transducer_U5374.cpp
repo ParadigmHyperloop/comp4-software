@@ -10,5 +10,5 @@ void U5374::init() {
 
 float U5374::read() {
     uint16_t uAdcConversion = adc->getuAdcData()[uAdcChannel];
-    return ((float)uAdcConversion/4096*3000);
+    return ((float)uAdcConversion/(1<<ADC_BITS))*MAX_PRESSURE;
 }

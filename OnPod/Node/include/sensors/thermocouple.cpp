@@ -10,5 +10,6 @@ void TypeKThermo::init() {
 
 float TypeKThermo::read() {
     uint16_t uAdcConversion = adc->getuAdcData()[uAdcChannel];
-    return uAdcConversion/4.096 - 105;
+    float fVoltage = (float)uAdcConversion/(1<<ADC_BITS) * ADC_RANGE;
+    return (fVoltage - AD8495_VREF) / V_PER_DEGREE;
 }
