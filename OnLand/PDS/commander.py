@@ -3,7 +3,7 @@ import socketio
 import time
 from Paradigm_pb2 import *
 from PDS.TCP.PodTcpConnection import PodTcpConnection
-from helpers.heartbeat_timer import HeartbeatTimer
+from PDS.helpers.heartbeat_timer import HeartbeatTimer
 from config import COMMANDER_BACKUP_PULSE, COMMANDER_TIMEOUT_TIME, COMMANDER_PULSE_SPEED, POD_IP, POD_COMMANDER_PORT
 
 
