@@ -1,16 +1,18 @@
-import socketio
-import time
 import logging as log
+import time
 from datetime import timedelta
-from config import SOCKET_SERVER, POD_IP, UDP_TELEM_PORT, MAX_MESSAGE_SIZE, UDP_TELEM_TIMEOUT
-from PDS.UDP.PodUdpConnection import PodUdpConnection
-from Paradigm_pb2 import Telemetry
-from helpers.heartbeat_timer import HeartbeatTimer
+
+import socketio
 from google.protobuf import json_format
 from google.protobuf.json_format import MessageToDict
-import sys
-broadcast_timer = HeartbeatTimer()
 
+from PDS.UDP.PodUdpConnection import PodUdpConnection
+from PDS.helpers.heartbeat_timer import HeartbeatTimer
+from Paradigm_pb2 import Telemetry
+from config import SOCKET_SERVER, POD_IP, UDP_TELEM_PORT, MAX_MESSAGE_SIZE, UDP_TELEM_TIMEOUT, \
+    TELEMETRY_BROADCAST_FREQUENCY
+
+broadcast_timer = HeartbeatTimer()
 
 
 log.basicConfig(filename='logs\paradigm.log', format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
@@ -38,7 +40,7 @@ def main():
     while not connected:
         try:
             sio.connect(SOCKET_SERVER)
-        except:
+        except ConnectionError as e:
             log.warning("Telemetry thread cannot connect to SocketIO")
             time.sleep(2)
         else:
@@ -62,6 +64,7 @@ def main():
 
     udp_socket.close()
     sio.emit('telemetry_connection', '0')
+
 
 if __name__ == "__main__":
     try:

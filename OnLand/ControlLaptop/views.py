@@ -1,15 +1,16 @@
 import json
-import sys
-import requests
-from datetime import datetime
 import logging as log
+import sys
+from datetime import datetime
+
+import requests
 from flask import Flask, redirect, render_template, jsonify
+
 from ControlLaptop.LocalStorage.ConfigurationSotrage import LocalStorage
 from ControlLaptop.LocalStorage.FlightConfig import FlightConfig
 from ControlLaptop.SocketController import PodCommunicator
-from ControlLaptop.templates._sidebar import get_page_title, NAV_BAR
 from ControlLaptop.forms import FlightConfigurationForm
-
+from ControlLaptop.templates._sidebar import get_page_title, NAV_BAR
 
 log.basicConfig(stream=sys.stdout, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=log.INFO)
 app = Flask(__name__)

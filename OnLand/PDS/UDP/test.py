@@ -18,7 +18,7 @@ def main():
     UDP_IP = '127.0.0.1'
     UDP_PORT = 6000
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, 0)
-    pod_data = telemetry()
+    pod_data = Telemetry()
     create_telem(pod_data)
     while(1):
         s.sendto(pod_data.SerializeToString(), ("127.0.0.1", 6000))

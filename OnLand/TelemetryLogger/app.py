@@ -1,9 +1,11 @@
-import socketio
 import json
-import time
-from TelemetryLogger.LogToCSV import CsvTelemetryLoggerTesting
 import logging as log
 import sys
+import time
+
+import socketio
+
+from TelemetryLogger.LogToCSV import CsvTelemetryLoggerTesting
 from config import SOCKET_SERVER
 
 log.basicConfig(stream=sys.stdout, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=log.INFO)

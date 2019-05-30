@@ -1,7 +1,8 @@
-from flask_socketio import SocketIO
-from ControlLaptop.views import app
 import logging as log
 
+from flask_socketio import SocketIO
+
+from ControlLaptop.views import app
 
 socket_io = SocketIO(app)
 
