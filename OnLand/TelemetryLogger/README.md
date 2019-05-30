@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Telemetry Logger
 
 #### To Run Logger
