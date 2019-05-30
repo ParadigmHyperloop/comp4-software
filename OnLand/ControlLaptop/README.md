@@ -9,49 +9,8 @@ Copyright 2017 Creative Tim (http://www.creative-tim.com)
 Licensed under MIT (https://github.com/creativetimofficial/light-bootstrap-dashboard/blob/master/LICENSE.md)
 
 
-
-### How to:
-- Dependencies
-    - Linux
-        -  Arch based: `sudo pacman -S influxdb protobuf`
-        - Debian based: `sudo apt-get install influxdb protobuf`
-    - MacOS (assuming you have brew installed)
-        - Install influx and protobuf: 
-            - `brew install influxdb protobuf`
-        - Start InfluxDB: 
-            - `brew services start influxdb`
-
-    - To make sure it's all there, try
-      -  `protoc --version`
-      -  `influx --version`
-      - Both Commands should return version installed.
-
-    - Install pyenv, virtualenv, pyenv-virtualenv: 
-        - `brew update`
-        - `brew install pyenv virtualenv pyenv-virtualenv`
-
-    - Paste the following into your ~/.bash_profile (or your terminal environment config file):
-        ```
-        export PYENV_ROOT="$HOME/.pyenv"
-        export PATH="$PYENV_ROOT/bin:$PATH"
-        eval "$(pyenv init -)"
-        eval "$(pyenv virtualenv-init -)"
-        ```
-    - Install python 3.7.1 and set is as global: 
-        1) `pyenv install 3.7.1`
-        2) `pyenv global 3.7.1`
-    - create virtualenv and activate virtualenv: 
-        - `pyenv virtualenv onLand`
-        - `pyenv activate onLand`
-    - Configure folder to automatically activate environment (Note: Make sure 
-    you inside the `/onLand` directory first):
-        - `pyenv local onLand`
-    
-- Install requirements:
-    `pip install -r requirements`
-
 - run App (if using terminal):
-  - `python pod_echo_server`
+  - `python pod_echo_server` - To Connect to 
   - `export FLASK_APP=controlLaptop.py`
   - `flask run` 
 
