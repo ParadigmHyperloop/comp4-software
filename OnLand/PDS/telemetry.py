@@ -2,7 +2,7 @@ import socketio
 import time
 import logging as log
 from datetime import timedelta
-from config import SOCKET_SERVER, POD_IP, UDP_TELEM_PORT, MAX_MESSAGE_SIZE, UDP_TELEM_TIMEOUT
+from config import SOCKET_SERVER, POD_IP, UDP_TELEM_PORT, MAX_MESSAGE_SIZE, UDP_TELEM_TIMEOUT, TELEMETRY_BROADCAST_FREQUENCY
 from PDS.UDP.PodUdpConnection import PodUdpConnection
 from Paradigm_pb2 import Telemetry
 from helpers.heartbeat_timer import HeartbeatTimer
@@ -59,6 +59,7 @@ def main():
                 sio.emit('telemetry', json_pod_data)
                 pod_data = MessageToDict(pod_data)
                 log.debug("Telemetry: {}".format(pod_data))
+                print(pod_data.__str__())
 
     udp_socket.close()
     sio.emit('telemetry_connection', '0')

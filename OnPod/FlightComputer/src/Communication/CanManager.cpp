@@ -9,7 +9,7 @@ void processFrame(const struct canfd_frame &frame, TelemetryManager &pod) {
             indices = {0, 1};
             auto hvBatteryPackVoltage = extractCanValue<float>(frame.data, indices, (float) 10.0);
             indices = {2, 3};
-            auto hvBatteryPackCurrent = extractCanValue<float>(frame.data, indices, (float) 10.0);
+            auto hvBatteryPackCurrent = 0; //extractCanValue<float>(frame.data, indices, (float) 10.0);
             indices = {4, 5};
             auto hvBatteryPackMaxCellVoltage = extractCanValue<float>(frame.data, indices, (float) 10000.0);
             indices = {6, 7};
@@ -29,7 +29,7 @@ void processFrame(const struct canfd_frame &frame, TelemetryManager &pod) {
             auto maxIgbtTemperature = std::max({igbtPhaseA, igbtPhaseB, igbtPhaseC});
             indices = {7,6};
             auto gateDriverBoard = extractCanValue<int>(frame.data, indices, 10);
-
+            
             pod.telemetry->maxIgbtTemperature = maxIgbtTemperature;
             pod.telemetry->gateDriverTemperature = gateDriverBoard;
         }
@@ -41,7 +41,7 @@ void processFrame(const struct canfd_frame &frame, TelemetryManager &pod) {
         case 0x0A2: {
             indices = {5,4};
             auto filteredMotorTemp = extractCanValue<int>(frame.data, indices, 10);
-            pod.telemetry->motorTemperature = filteredMotorTemp;
+            pod.telemetry->motorTemperature = 0;
         }
         case 0x0A7:{
             indices = {1,0};

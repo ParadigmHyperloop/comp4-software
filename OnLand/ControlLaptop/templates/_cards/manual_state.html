@@ -19,25 +19,25 @@
                 </div>
                 <div class="content">
                     <div id="manual-pod-states" class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label  class="btn state-btn btn-lg" disabled="disabled" data-state="psStandby">
+                        <label  class="btn pod-state-btn btn-lg" disabled="disabled" data-state="psStandby">
                             <input type="radio" name="options" autocomplete="off" > Standby
                         </label>
-                        <label class="btn state-btn btn-lg" disabled="disabled" data-state="psArming">
+                        <label class="btn pod-state-btn btn-lg" disabled="disabled" data-state="psArming">
                             <input type="radio" name="options" autocomplete="off"> Arming
                         </label>
-                        <label class="btn state-btn btn-lg" disabled="disabled" data-state="psArmed">
+                        <label class="btn pod-state-btn btn-lg" disabled="disabled" data-state="psArmed">
                             <input type="radio" name="options" autocomplete="off"> Armed
                         </label>
-                        <label class="btn state-btn btn-lg" disabled="disabled" data-state="psPreFlight">
+                        <label class="btn pod-state-btn btn-lg" disabled="disabled" data-state="psPreFlight">
                             <input type="radio" name="options" autocomplete="off"> Pre-Flight
                         </label>
-                        <label class="btn state-btn btn-lg" disabled="disabled" data-state="psAcceleration">
+                        <label class="btn pod-state-btn btn-lg" disabled="disabled" data-state="psAcceleration">
                             <input type="radio" name="options" autocomplete="off"> Acceleration
                         </label>
-                        <label class="btn state-btn btn-lg" disabled="disabled" data-state="psCoasting">
+                        <label class="btn pod-state-btn btn-lg" disabled="disabled" data-state="psCoasting">
                             <input type="radio" name="options" autocomplete="off"> Coasting
                         </label>
-                        <label class="btn state-btn btn-lg" disabled="disabled" data-state="psBraking">
+                        <label class="btn pod-state-btn btn-lg" disabled="disabled" data-state="psBraking">
                             <input type="radio" name="options" autocomplete="off"> Braking
                         </label>
                     </div>
@@ -63,16 +63,16 @@
                 </div>
                 <div class="content">
                     <div id="manual-brake-node-states" class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label  class="btn state-btn btn-lg active" disabled="disabled" data-state="bnsStandby">
+                        <label  class="btn brake-node-state-btn btn-lg active" disabled="disabled" data-state="bnsStandby">
                             <input type="radio" name="options" autocomplete="off" > Standby
                         </label>
-                        <label class="btn state-btn btn-lg" disabled="disabled" data-state="bnsFlight">
+                        <label class="btn brake-node-state-btn btn-lg" disabled="disabled" data-state="bnsFlight">
                             <input type="radio" name="options" autocomplete="off" > Flight
                         </label>
-                        <label class="btn state-btn btn-lg" disabled="disabled"  data-state="bnsBraking">
+                        <label class="btn brake-node-state-btn btn-lg" disabled="disabled"  data-state="bnsBraking">
                             <input type="radio" name="options" autocomplete="off"> Braking
                         </label>
-                        <label class="btn state-btn btn-lg" disabled="disabled" data-toggle="collapse" data-state="bnsSolenoidControl" href="#solenoid-controls" role="button" aria-expanded="false" aria-controls="solenoid-controls">
+                        <label class="btn brake-node-state-btn btn-lg" disabled="disabled" data-toggle="collapse" data-state="bnsSolenoidControl" href="#solenoid-controls" role="button" aria-expanded="false" aria-controls="solenoid-controls">
                             <input type="radio" name="options" autocomplete="off" > Solenoid Control
                         </label>
                     </div>
@@ -81,21 +81,21 @@
                     <hr>
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="btn-group btn-group-vertical" data-toggle="buttons">
-                                    <label  class="btn state-btn btn-lg " data-state="bnsStandby">
+                                <div id="solenoid-states" class="btn-group btn-group-vertical" data-toggle="buttons">
+                                    <label  class="btn solenoid-state-btn btn-lg " data-solenoid-index="0">
                                         <input type="checkbox" name="options" autocomplete="off" > SOL1
                                     </label>
-                                    <label class="btn state-btn btn-lg" data-state="bnsFlight">
+                                    <label class="btn solenoid-state-btn btn-lg" data-solenoid-index="1">
                                         <input type="checkbox" name="options" autocomplete="off" > SOL2
                                     </label>
-                                    <label class="btn state-btn btn-lg" data-state="bnsBraking">
+                                    <label class="btn solenoid-state-btn btn-lg" data-solenoid-index="2">
                                         <input type="checkbox" name="options" autocomplete="off"> SOL3
                                     </label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="btn-group btn-group-vertical" data-toggle="buttons">
-                                    <label  class="btn state-btn btn-lg " data-state="bnsBraking">
+                                    <label class="btn solenoid-state-btn btn-lg" data-solenoid-index="3">
                                         <input type="checkbox" name="options" autocomplete="off"> SOL4
                                     </label>
                                 </div>
@@ -127,13 +127,13 @@
                 </div>
                 <div class="content">
                     <div id="manual-lvdc-node-states" class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label  class="btn state-btn btn-lg active" disabled="disabled" data-state="lvdcStandby">
+                        <label  class="btn lvdc-node-state-btn btn-lg active" disabled="disabled" data-state="lvdcStandby">
                             <input type="radio" name="options" autocomplete="off" > Standby
                         </label>
-                        <label class="btn state-btn btn-lg" disabled="disabled" data-state="lvdcFlight">
+                        <label class="btn lvdc-node-state-btn btn-lg" disabled="disabled" data-state="lvdcFlight">
                             <input type="radio" name="options" autocomplete="off"> Flight
                         </label>
-                        <label class="btn state-btn btn-lg" disabled="disabled" data-state="lvdcPowerControl">
+                        <label class="btn lvdc-node-state-btn btn-lg" disabled="disabled" data-state="lvdcPowerControl">
                             <input type="radio" name="options" autocomplete="off"> Power Rail Control
                         </label>
                     </div>
@@ -142,51 +142,7 @@
         </div>
     </div>
 
-
-<script>
-
-
-$('#enable-manual-pod-states').click(function () {
-    $("#manual-pod-states label").removeAttr('disabled').removeClass('active');;
-    /*todo send command to set automatic transitions to 1*/
-})
-
-$('#disable-manual-pod-states').click(function () {
-    $('#manual-pod-states label').attr('disabled','disabled');
-    //todo send command to set automatic transitions to 0
-})
-
-$('#enable-manual-brake-node-states').click(function () {
-    $('#manual-brake-node-states label').removeAttr('disabled').removeClass('active');
-
-})
-
-$('#disable-manual-brake-node-states').click(function () {
-    $('#manual-brake-node-states label').attr('disabled','disabled');
-    //todo send command to set manual brake node field to none
-})
-
-$('#manual-brake-node-states label').click(function () {
-    if($(this).data('state') != 'bnsSolenoidControl'){
-        $("#solenoid-controls").removeClass("in").css("height","")
-    }
-    //todo send command to set manual brake node field to none
-})
-
-$('#enable-manual-lvdc-node-states').click(function () {
-    $('#manual-lvdc-node-states label').removeAttr('disabled').removeClass('active')
-
-})
-
-$('#disable-manual-lvdc-node-states').click(function () {
-    $('#manual-lvdc-node-states label').attr('disabled','disabled');
-    //todo send command to set manual brake node field to none
-})
-
-
-
-
-</script>
+    <script src="{{ url_for('static', filename='js/ManualStateControl.js') }}" type="text/javascript"></script>
 
 
 

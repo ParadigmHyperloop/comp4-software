@@ -21,28 +21,16 @@ def print_connect():
     log.debug('User Connected')
 
 
-@socket_io.on('pds packet')
-def pds_packet(packet):
-    log.debug('packet')
-    socket_io.emit("pds packet", packet)
-
-
-@socket_io.on('pod pulse')
-def pod_pulse(pulse):
-    log.debug('pulse')
-    socket_io.emit("pod pulse", pulse)
-
-
 @socket_io.on('command')
 def interface_command(command):
     log.debug('command')
     socket_io.emit("command", command)
 
 
-@socket_io.on('ping')
+@socket_io.on('ping', namespace='/commander')
 def pod_ping(ping):
     log.debug(ping)
-    socket_io.emit("ping", ping)
+    socket_io.emit("ping", ping, namespace='/controls-interface')
 
 
 @socket_io.on('telemetry_connection')

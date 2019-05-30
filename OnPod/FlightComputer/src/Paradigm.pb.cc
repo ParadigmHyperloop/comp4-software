@@ -172,7 +172,7 @@ static void InitDefaultsflightConfig_Paradigm_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::flightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.DefaultConstruct();
-  *::flightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get_mutable() = ::std::string("192.168.0.103", 13);
+  *::flightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get_mutable() = ::std::string("192.168.1.101", 13);
   ::google::protobuf::internal::OnShutdownDestroyString(
       ::flightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get_mutable());
   {
@@ -670,7 +670,7 @@ const char descriptor_table_protodef_Paradigm_2eproto[] =
   "\005 \001(\005:\0046000\022\024\n\014flightLength\030\006 \001(\004\022\037\n\020hea"
   "rtbeatTimeout\030\007 \001(\005:\00510000\022\021\n\tpodDriver\030"
   "\010 \001(\t\022*\n\023controlLaptopIpAddr\030\t \001(\t:\r192."
-  "168.0.103\"/\n\017DefaultFcToNode\022\034\n\010podState"
+  "168.1.101\"/\n\017DefaultFcToNode\022\034\n\010podState"
   "\030\001 \001(\0162\n.PodStates*h\n\017BrakeNodeStates\022\016\n"
   "\nbnsBooting\020\000\022\016\n\nbnsStandby\020\001\022\r\n\tbnsFlig"
   "ht\020\002\022\016\n\nbnsBraking\020\003\022\026\n\022bnsSolenoidContr"
@@ -8996,7 +8996,7 @@ const char* flightConfig::_InternalParse(const char* begin, const char* end, voi
         ptr += size;
         break;
       }
-      // optional string controlLaptopIpAddr = 9 [default = "192.168.0.103"];
+      // optional string controlLaptopIpAddr = 9 [default = "192.168.1.101"];
       case 9: {
         if (static_cast<::google::protobuf::uint8>(tag) != 74) goto handle_unusual;
         ptr = ::google::protobuf::io::ReadSize(ptr, &size);
@@ -9152,7 +9152,7 @@ bool flightConfig::MergePartialFromCodedStream(
         break;
       }
 
-      // optional string controlLaptopIpAddr = 9 [default = "192.168.0.103"];
+      // optional string controlLaptopIpAddr = 9 [default = "192.168.1.101"];
       case 9: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (74 & 0xFF)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
@@ -9240,7 +9240,7 @@ void flightConfig::SerializeWithCachedSizes(
       8, this->poddriver(), output);
   }
 
-  // optional string controlLaptopIpAddr = 9 [default = "192.168.0.103"];
+  // optional string controlLaptopIpAddr = 9 [default = "192.168.1.101"];
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->controllaptopipaddr().data(), static_cast<int>(this->controllaptopipaddr().length()),
@@ -9310,7 +9310,7 @@ void flightConfig::SerializeWithCachedSizes(
         8, this->poddriver(), target);
   }
 
-  // optional string controlLaptopIpAddr = 9 [default = "192.168.0.103"];
+  // optional string controlLaptopIpAddr = 9 [default = "192.168.1.101"];
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->controllaptopipaddr().data(), static_cast<int>(this->controllaptopipaddr().length()),
@@ -9351,7 +9351,7 @@ size_t flightConfig::ByteSizeLong() const {
           this->poddriver());
     }
 
-    // optional string controlLaptopIpAddr = 9 [default = "192.168.0.103"];
+    // optional string controlLaptopIpAddr = 9 [default = "192.168.1.101"];
     if (cached_has_bits & 0x00000002u) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(

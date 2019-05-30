@@ -5,7 +5,7 @@ log.basicConfig(filename='logs\paradigm.log', format='%(asctime)s %(message)s', 
 
 def main():
     log.warning("Heartbeat Thread Started")
-    socket_io.run(app)
+    socket_io.run(app, host='0.0.0.0')
 
 
 if __name__ == "__main__":

@@ -45,13 +45,12 @@ int main( int32_t argc, char** argv)
     TelemetryManager canBusAccessCard = TelemetryManager(&sPodValues, &sPodNetworkValues);
     std::thread tCan(canThread, canBusAccessCard);
 
-    /*
 
     //TelemetryManager Internal Network Thread
     TelemetryManager pPodInternalNetwork = TelemetryManager(&sPodValues, &sPodNetworkValues);
     pPodInternalNetwork.bWriteBreakNodeState = true;
     std::thread tServer(udpTelemetryThread, pPodInternalNetwork);
-
+/*
 	// Controls Interface Connection Thread
 	TelemetryManager pCommanderThread = TelemetryManager(&sPodValues, &sPodNetworkValues);
 	pCommanderThread.bWriteManualStates = 1;
@@ -59,10 +58,11 @@ int main( int32_t argc, char** argv)
 	std::thread tControlsInterfaceConnection(commanderThread, pCommanderThread);
 
  	tControlsInterfaceConnection.join();
-    tServer.join();
+
 
     */
     tCan.join();
+    tServer.join();
 
 
     return 0;
