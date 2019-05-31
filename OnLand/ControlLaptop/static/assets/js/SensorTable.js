@@ -32,7 +32,7 @@ function ParsePodState(state) {
     }
 }
 
-socket.on('telemetry', function (data) {
+socket.on('pod_telemetry', function (data) {
     data = JSON.parse(data);
     console.log(data)
     newPodState = data['podState'];

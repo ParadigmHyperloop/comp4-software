@@ -4,12 +4,13 @@ import time
 from Paradigm_pb2 import *
 from PDS.TCP.PodTcpConnection import PodTcpConnection
 from helpers.heartbeat_timer import HeartbeatTimer
-from config import COMMANDER_BACKUP_PULSE, COMMANDER_TIMEOUT_TIME, COMMANDER_PULSE_SPEED, POD_IP, POD_COMMANDER_PORT
-
+from config import COMMANDER_BACKUP_PULSE, COMMANDER_TIMEOUT_TIME, COMMANDER_PULSE_SPEED, POD_IP, POD_COMMANDER_PORT, COMMANDER_BROADCAST_FREQUENCY, SOCKET_SERVER
+import json
 
 log.basicConfig(stream=sys.stdout, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=log.INFO)
 pod_command = PodCommand()
 pod = PodTcpConnection(ip=POD_IP, port=POD_COMMANDER_PORT)
+connection_status = {'name': 'commander', 'status': 0}
 sio = socketio.Client()
 broadcast_timer = HeartbeatTimer()
 interface_state = ciStandby
@@ -40,12 +41,13 @@ def on_command(command):
 
 def main():
     global pod_command
+    global connection_status
     log.info("Heartbeat Thread Started")
 
     connected = False
     while not connected:
         try:
-            sio.connect(SOCKET_SERVER)
+            sio.connect(SOCKET_SERVER, namespaces=['/command-subscribers'])
         except:
             log.info("Commader cannot connect to SocketIO")
             time.sleep(2)
@@ -74,12 +76,15 @@ def main():
                             pod.send_packet(pod_command.SerializeToString())
                     else:  # Msg received
                         if broadcast_timer.time_since_pulse() > COMMANDER_BROADCAST_FREQUENCY:
-                            sio.emit('ping', 1)
+                            connection_status['status'] = 1
+                            sio.emit('connection_updates', json.dumps(connection_status))
                             broadcast_timer.pulse()
                         pod_heartbeat.pulse()
                         break
+
         # Connection lost, tell GUI
-        sio.emit('ping', 0)
+        connection_status['status'] = 0
+        sio.emit('connection_updates', json.dumps(connection_status))
         log.info("Heartbeat : Connection Lost")
 
 

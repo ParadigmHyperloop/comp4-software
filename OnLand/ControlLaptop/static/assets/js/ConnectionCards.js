@@ -6,7 +6,7 @@ $( document ).ready(function() {
     telemetryCount = $("#telem-received-num");
 });
 
-function showDtsNotifications(message, status){
+function showNotification(message, status){
 	$.notify({
 		icon: "pe-7s-next-2",
 		message: `<b>${message}</b>`
@@ -21,35 +21,43 @@ function showDtsNotifications(message, status){
 	});
 }
 
-function toggleTelemetryLoader(ping){
-    if (ping == 1 && telemetryLoader.css('display') == "none") {
+function toggleTelemetryIndicator(ping){
+    if (ping === 1 && telemetryLoader.css('display') === "none") {
         telemetryLoader.css('display', 'block');
         noTelemetryLoader.css('display', 'none');
     }
-    else if (telemetryLoader.css('display') == 'block' && ping == 0) {
+    else if (telemetryLoader.css('display') === 'block' && ping === 0) {
         telemetryLoader.css('display', 'none');
         noTelemetryLoader.css('display', 'block');
     }
 }
 
-socket.on('telemetry_connection', function (ping) {
-    toggleTelemetryLoader(ping);
-});
-
-socket.on('ping', function (ping) {
-    if (ping == 1 && conectionLoader.css('display') == "none") {
+function toggleCommanderIndicator(status){
+    if (status === 1 && conectionLoader.css('display') === "none") {
         conectionLoader.css('display', 'block');
         noConnectionLoader.css('display', 'none');
-    } else if (conectionLoader.css('display') == 'block' && ping == 0) {
+    } else if (conectionLoader.css('display') === 'block' && status === 0) {
         conectionLoader.css('display', 'none');
         noConnectionLoader.css('display', 'block');
     }
+}
+
+socket.on('connection_updates', function (update_json) {
+    update = JSON.parse(update_json);
+    connection = update['name'];
+    status = update['status'];
+
+    if(connection === 'commander'){
+        toggleCommanderIndicator(status);
+    }
+    else if(connection === 'telemetry'){
+        toggleTelemetryIndicator(status);
+    }
 });
 
-socket.on('telemetry', function (data) {
-    toggleTelemetryLoader(1);
+socket.on('pod_telemetry', function (data) {
+    toggleTelemetryIndicator(1);
     count = telemetryCount.text();
     count++;
     telemetryCount.text(count);
 });
-

@@ -24,24 +24,22 @@ def on_disconnect():
     csv_logger.end_session()
 
 
-@sio.on('start_logging_session')
-def start_logging_session(data):
-    log.info('Start Logging')
+@sio.on('logger_control')
+def parse_command(command_json):
     global csv_logger
-    csv_logger = CsvTelemetryLoggerTesting()
-    csv_logger.start_log_session()
-    sio.emit('logging_session_started', 'started')
+    command_object = json.loads(command_json)
+    command = command_object['command']
+
+    if command is 'start':
+        csv_logger = CsvTelemetryLoggerTesting()
+        csv_logger.start_log_session()
+        sio.emit('logger_feedback', {'feedback': 'started'})
+    elif command is 'stop':
+        csv_logger.end_session()
+        sio.emit('logger_feedback', {'feedback': 'stopped', 'filename': csv_logger.log_file_name})
 
 
-@sio.on('end_logging_session')
-def end_logging_session(data):
-    log.info('End Logging')
-    global csv_logger
-    csv_logger.end_session()
-    sio.emit('logging_session_ended', csv_logger.log_file_name)
-
-
-@sio.on('telemetry')
+@sio.on('pod_telemetry')
 def on_log_telemetry(data):
     global csv_logger
     telemetry = json.loads(data)
@@ -55,7 +53,7 @@ def main():
     connected = False
     while not connected:
         try:
-            sio.connect(SOCKET_SERVER)
+            sio.connect(SOCKET_SERVER, namespaces=['/logger_controls', '/telemetry_subscribers'])
         except:
             time.sleep(2)
         else:

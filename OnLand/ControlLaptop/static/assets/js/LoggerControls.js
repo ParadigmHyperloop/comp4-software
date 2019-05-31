@@ -1,20 +1,24 @@
 $(document).ready(function () {
+
     $('#logging-off-btn').click(function () {
-        socket.emit('end_logging_session');
-        console.log("Logging ended");
+        socket.emit('logger_control', JSON.stringify({'command':'stop'}));
     });
+
     $('#logging-on-btn').click(function () {
-        socket.emit('start_logging_session');
-        console.log("Logging Started");
+        socket.emit('logger_control', JSON.stringify({'command':'start'}));
     });
+
 });
 
-socket.on ('logging_session_ended', function (data) {
-    console.log(data);
-    showDtsNotifications('Session Ended - FileName: '+ data, 'Success');
+socket.on ('logger_feedback', function (data) {
+    feedback = JSON.parse(data);
+    status = feedback['feedback'];
+    if(status === 'started'){
+        showNotification('Logging Session Started', 'Success');
+    }
+    else if(status === 'stopped'){
+        filename = feedback['filename'];
+        showNotification('Session Ended - FileName: '+ filename, 'Success');
+    }
 });
 
-socket.on ('logging_session_started', function (data) {
-    console.log(data);
-    showDtsNotifications('Logging Session Started', 'Success');
-});
