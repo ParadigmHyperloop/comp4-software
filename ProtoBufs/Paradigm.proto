@@ -192,22 +192,24 @@ message EnclosureNodeToFc {
 }
 
 message LvdcNodeToFc {
-    required float highPowerPackVoltage = 1;
-    required float lowPowerPackVoltage = 2;
-    required float highPowerPackCurrent = 3;
-    required float lowPowerPackCurrent = 4;
+    required int32 packetNum = 1;
+    required LvdcNodeStates state = 2;
+    required float highPowerPackVoltage = 3;
+    required float lowPowerPackVoltage = 4;
+    required float highPowerPackCurrent = 5;
+    required float lowPowerPackCurrent = 6;
 
-    required float rail5Voltage = 5;
-    required float rail12LowPowerVoltage = 6;
-    required float rail12HighPowerVoltage = 7;
-    required float rail24Voltage = 8;
+    required float rail5Voltage = 7;
+    required float rail12LowPowerVoltage = 8;
+    required float rail12HighPowerVoltage = 9;
+    required float rail24Voltage = 10;
 
-    required float rail5Current = 9;
-    required float rail12LowPowerCurrent = 10;
-    required float rail24Current = 11;
-    required float railInverterCurrent = 12;
-    required float railCooling1Current = 13;
-    required float railCooling2Current = 14;
+    required float rail5Current = 11;
+    required float rail12LowPowerCurrent = 12;
+    required float rail24Current = 13;
+    required float railInverterCurrent = 14;
+    required float railCooling1Current = 15;
+    required float railCooling2Current = 16;
 }
 
 message BrakeNodeToFc {
