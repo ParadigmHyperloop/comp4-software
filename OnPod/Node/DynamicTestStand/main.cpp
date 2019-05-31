@@ -15,26 +15,39 @@
 #include "Paradigm.pb.h"
 #include "../../pod_internal_network.h"
 
+const NodeType NODE_TYPE = BRAKE;
+Timer txTimer;
+
 // instantiate adc and all sensors with which it interfaces
 SPIClass adcSPI (&PERIPH_SPI1, MISO1, SCK1, MOSI1, PAD_SPI1_TX, PAD_SPI1_RX);
-ADS7953 adc(adcSPI);
+ADS7953 adc(adcSPI, SS1, POWER_SEQ_ADC);
 OS101E rotorTempSensor (&adc, 15);
-typeKThermo pneumaticTempSensor (&adc, 1);
+TypeKThermo pneumaticTempSensor (&adc, 1);
 U5374 tankTransducer (&adc, 7);
 PX2300P brakeTransducer (&adc, 10);
 
 // instantiate solenoid driver and all solenoids
-DRV8806 solenoidDriver;
-Solenoid brakeSolenoid (&solenoidDriver, 3);
-Solenoid ventSolenoid (&solenoidDriver, 4);
+DRV8806 solenoidDriver(SOL_CS, SOL_DOUT, SOL_DIN, SOL_CLK);
+Solenoid brakeSolenoid (&solenoidDriver, 3, NATURALLY_OPEN);
+Solenoid ventSolenoid (&solenoidDriver, 4, NATURALLY_CLOSED);
 
 // instantiate a UDP class and protobuf message objects
-UDPClass udp (PIN_SPI_SS, IPAddress(192, 168, 2, 50), 5555, 0);
-FcToBrakeNode pFcCommand = FcToBrakeNode_init_default;
-DtsNodeToFc pBrakeNodeTelemetry = DtsNodeToFc_init_default;
+UDPClass udp (PIN_SPI_SS, BRAKE_NODE_IP, BRAKE_NODE_PORT, NODE_TYPE);
+uint32_t txPacketNum = 0;
+uint32_t rxPacketNum = 0;
 
-// the dts brake node state
+// instantiate protobuf objects
+FcToBrakeNode pFcCommand = FcToBrakeNode_init_default;
+DtsNodeToFc pDtsNodeTelemetry = DtsNodeToFc_init_default;
 BrakeNodeStates dtsState;
+
+void sendToFlightComputer(void*) {
+    // create an output stream that writes to the UDP buffer
+    pb_ostream_t outStream = pb_ostream_from_buffer(udp.uSendBuffer, sizeof(udp.uSendBuffer));
+    // encode the message object and store it in the UDP buffer
+    pb_encode(&outStream, DtsNodeToFc_fields, &pDtsNodeTelemetry);
+    udp.sendPacket(FC_IP, FC_BRAKE_NODE_PORT, outStream.bytes_written);
+}
 
 void setup() {
     // initialize hardware
@@ -58,46 +71,41 @@ void loop() {
         }
     }
 
-    // update sensor values and hold them in the pBrakeNodeTelemetry message object
-    pBrakeNodeTelemetry.brakeNodeState = dtsState;
+    // update sensor values and hold them in the pDtsNodeTelemetry message object
+    pDtsNodeTelemetry.brakeNodeState = dtsState;
     adc.readActiveChannels();
-    pBrakeNodeTelemetry.rotorTemperature = rotorTempSensor.read();
-    pBrakeNodeTelemetry.pneumaticTemperature = pneumaticTempSensor.read();
-    pBrakeNodeTelemetry.brakeSolenoidState = brakeSolenoid.bState;
-    pBrakeNodeTelemetry.ventSolenoidState = ventSolenoid.bState;
-    pBrakeNodeTelemetry.brakePressure = brakeTransducer.read();
-    pBrakeNodeTelemetry.tankPressure = tankTransducer.read();
+    pDtsNodeTelemetry.rotorTemperature = rotorTempSensor.read();
+    pDtsNodeTelemetry.pneumaticTemperature = pneumaticTempSensor.read();
+    pDtsNodeTelemetry.brakePressure = brakeTransducer.read();
+    pDtsNodeTelemetry.tankPressure = tankTransducer.read();
 
     // perform state-specific operations
     switch (dtsState) {
         case BrakeNodeStates_bnsFlight:
-            brakeSolenoid.enable();
-            ventSolenoid.disable();
+            brakeSolenoid.close();
+            ventSolenoid.close();
             break;
         case BrakeNodeStates_bnsBraking:
-            ventSolenoid.disable();
-            brakeSolenoid.disable();
-            if (pBrakeNodeTelemetry.rotorTemperature > 500) {
+            brakeSolenoid.open();
+            ventSolenoid.close();
+            if (pDtsNodeTelemetry.rotorTemperature > 500) {
                 dtsState = BrakeNodeStates_bnsError;
             }
             break;
         case BrakeNodeStates_bnsVenting:
-            brakeSolenoid.enable();
-            ventSolenoid.enable();
+            brakeSolenoid.close();
+            ventSolenoid.open();
             break;
         case BrakeNodeStates_bnsError:
-            brakeSolenoid.enable();
-            ventSolenoid.enable();
+            brakeSolenoid.close();
+            ventSolenoid.open();
             break;
     }
 
-    // send the latest values to the flight computer
-    pb_ostream_t outStream = pb_ostream_from_buffer(udp.uSendBuffer, sizeof(udp.uSendBuffer));
-    pb_encode(&outStream, DtsNodeToFc_fields, &pBrakeNodeTelemetry);
-    udp.sendPacket(IPAddress(192, 168, 2, 27), 5555, outStream.bytes_written);
+    // update solenoid values
+    pDtsNodeTelemetry.brakeSolenoidState = brakeSolenoid.bState;
+    pDtsNodeTelemetry.ventSolenoidState = ventSolenoid.bState;
 
-    Serial.println(pBrakeNodeTelemetry.pneumaticTemperature);
-
-    delay(500);
-
+    // send to FC is interval has expired
+    txTimer.update();
 }
