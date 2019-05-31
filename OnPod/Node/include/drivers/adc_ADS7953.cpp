@@ -1,14 +1,21 @@
 #include "adc_ADS7953.h"
 
 ADS7953::ADS7953(SPIClass spi, uint8_t SS_PIN, uint8_t POWER_SEQ_PIN) :
-spi(spi), SS_PIN(SS_PIN), POWER_SEQ_PIN(POWER_SEQ_PIN) {}
+spi(spi), SS_PIN(SS_PIN), POWER_SEQ_PIN(POWER_SEQ_PIN) {
+    HAS_SEQ_PIN = true;
+}
+
+ADS7953::ADS7953(SPIClass spi, uint8_t SS_PIN) :
+spi(spi), SS_PIN(SS_PIN) {}
 
 void ADS7953::init() {
     spi.begin();
     pinMode(SS_PIN, OUTPUT);
-    pinMode(POWER_SEQ_PIN, OUTPUT);
     digitalWrite(SS_PIN, HIGH); // start with SS high
-    digitalWrite(POWER_SEQ_PIN, HIGH); // enable ADC power sequencer
+    if (HAS_SEQ_PIN) {
+        pinMode(POWER_SEQ_PIN, OUTPUT);
+        digitalWrite(POWER_SEQ_PIN, HIGH); // enable ADC power sequencer
+    }
     delay(100);
     transfer(CONFIG_PROGRAM_REG); // configures the ADC to use 0-5V
 }

@@ -72,3 +72,4 @@ ProtoBufs/Paradigm/cpp/
 OnLand/ControlLaptop/Paradigm_pb2\.py
 OnPod/Node/BrakeNode/include
 OnPod/Node/EnclosureNode/include
+OnPod/Node/NodeTest

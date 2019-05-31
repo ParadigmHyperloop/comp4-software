@@ -1,5 +1,5 @@
-#ifndef NODEETHERNET_H
-#define NODEETHERNET_H
+#ifndef NODE_ETHERNET_H
+#define NODE_ETHERNET_H
 
 #include <Ethernet.h>
 #include <EthernetUdp.h>

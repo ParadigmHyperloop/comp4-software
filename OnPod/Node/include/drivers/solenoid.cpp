@@ -23,6 +23,7 @@ void Solenoid::close() {
     }
     else if (eSolenoidType == NATURALLY_CLOSED) {
         driver->disableSolenoid(uSolenoidChannel);
-    }    driver->updateSolenoids();
+    }
+    driver->updateSolenoids();
     bState = false;
 }

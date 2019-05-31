@@ -1,5 +1,5 @@
-#ifndef HP_TRANSDUCER_U5374_H
-#define HP_TRANSDUCER_U5374_H
+#ifndef ATMO_TRANSDUCER_HSC30P_H
+#define ATMO_TRANSDUCER_HSC30P_H
 
 #include <Wire.h>
 

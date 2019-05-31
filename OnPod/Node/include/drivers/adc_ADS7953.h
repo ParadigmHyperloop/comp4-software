@@ -9,6 +9,7 @@ private:
     SPISettings spiSettings = SPISettings (20000000, MSBFIRST, SPI_MODE0);
     uint8_t SS_PIN;
     uint8_t POWER_SEQ_PIN;
+    bool HAS_SEQ_PIN = false;
     // 16-bit data words for SPI
     const uint16_t SET_CHANNEL_REG = 0x8000;
     const uint16_t CONFIG_PROGRAM_REG = 0x2840;
@@ -23,6 +24,7 @@ private:
     uint16_t transfer(uint16_t uData);
 public:
     ADS7953(SPIClass spi, uint8_t SS_PIN, uint8_t POWER_SEQ_PIN);
+    ADS7953(SPIClass spi, uint8_t SS_PIN);
     void init();
     uint16_t readSingleChannel(uint8_t);
     void readActiveChannels();
