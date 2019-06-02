@@ -2,6 +2,7 @@ import socket
 import select
 import logging as log
 from config import *
+import errno
 
 
 class PodTcpConnection:
@@ -45,8 +46,12 @@ class PodTcpConnection:
                 sent = self._sock.send(payload)
                 total_sent += sent
                 payload = payload[sent:]
-            except socket.EAGAIN:
-                select.select([], [self._sock], [])  # This blocks until the whole message is sent
+            except socket.error as e:
+                if e.errno == errno.EAGAIN:
+                    select.select([], [self._sock], [])
+                    continue
+                else:
+                    self.close()
             except Exception as e:
                 #todo log this or send to front end
                 self.close()

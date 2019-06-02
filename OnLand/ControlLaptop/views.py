@@ -126,7 +126,7 @@ def proofTest():
     page = 'proofTest'
     title = get_page_title(page)
     with open('ControlLaptop/templates/_cards/tables/ProofTestSensors.json') as json_file:
-        sensors = json.load(json_file)
+        sensors = order_sensors(json.load(json_file))
     return render_template(
         page+".html",
         active_page=page,

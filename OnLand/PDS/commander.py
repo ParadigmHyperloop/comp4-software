@@ -7,7 +7,7 @@ from helpers.heartbeat_timer import HeartbeatTimer
 from config import COMMANDER_BACKUP_PULSE, COMMANDER_TIMEOUT_TIME, COMMANDER_PULSE_SPEED, POD_IP, POD_COMMANDER_PORT, COMMANDER_BROADCAST_FREQUENCY, SOCKET_SERVER
 import json
 
-log.basicConfig(stream=sys.stdout, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=log.INFO)
+log.basicConfig(stream=sys.stdout, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 pod_command = PodCommand()
 pod = PodTcpConnection(ip=POD_IP, port=POD_COMMANDER_PORT)
 connection_status = {'name': 'commander', 'status': 0}
@@ -67,13 +67,15 @@ def on_state_command(command):
 
 @sio.on('command')
 def on_command(command):
+    new_pod_command = PodCommand()
+    new_pod_command.hasCommand = True
     if command is '1':
-        pod_command.manualBrakeNodeState = bnsBraking
+        new_pod_command.manualBrakeNodeState = bnsBraking
         log.info("vent")
     else:
-        pod_command.manualBrakeNodeState = bnsFlight
+        new_pod_command.manualBrakeNodeState = bnsFlight
         log.info("Flight")
-    pod.send_packet(pod_command.SerializeToString())
+    pod.send_packet(new_pod_command.SerializeToString())
 
 
 def main():

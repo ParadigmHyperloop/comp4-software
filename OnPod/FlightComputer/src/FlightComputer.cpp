@@ -41,12 +41,13 @@ int main( int32_t argc, char** argv)
     // Network Configs
     initializer->updatePodNetworkValues(sPodNetworkValues, flightConfigurationParameters);
 
-    sPodValues.podState = std::move(PodState::createState(psBooting));
+    sPodValues.podState = std::move(PodState::createState(psStandby));
+
     /*
     //CAN Thread
     TelemetryManager canBusAccessCard = TelemetryManager(&sPodValues, &sPodNetworkValues);
     std::thread tCan(canThread, canBusAccessCard);
-*/
+    */
 
     //TelemetryManager Internal Network Thread
     TelemetryManager pPodInternalNetwork = TelemetryManager(&sPodValues, &sPodNetworkValues);

@@ -22,11 +22,12 @@ function updateRowStatus(row,min,max,actual){
 
 function ParsePodState(state) {
     if (!sensor_ranges) {
+        getSensorRanges();
         console.log("No sensor Ranges yet")
         return
     }
     if (state !== podState) {
-        podState = state
+        podState = state;
         $(".sensor-row").each(function (index) {
             sensor_name = $(this).attr('id');
             success = true;
@@ -49,7 +50,7 @@ function ParsePodState(state) {
 socket.on('pod_telemetry', function (data) {
     data = JSON.parse(data);
     console.log(data)
-    newPodState = data['podState'];
+    newPodState = 'psStandby';
     ParsePodState(newPodState);
     for (sensor_name in data) {
         value_cell = $("#" + sensor_name + "-actual");

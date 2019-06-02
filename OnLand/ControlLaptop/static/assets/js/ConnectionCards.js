@@ -13,21 +13,21 @@ $( document ).ready(function() {
 
 
 function toggleTelemetryIndicator(ping){
-    if (ping === 1 && telemetryLoader.css('display') === "none") {
+    if (ping == 1 && telemetryLoader.css('display') === "none") {
         telemetryLoader.css('display', 'block');
         noTelemetryLoader.css('display', 'none');
     }
-    else if (telemetryLoader.css('display') === 'block' && ping === 0) {
+    else if (telemetryLoader.css('display') === 'block' && ping == 0) {
         telemetryLoader.css('display', 'none');
         noTelemetryLoader.css('display', 'block');
     }
 }
 
 function toggleCommanderIndicator(status){
-    if (status === 1 && conectionLoader.css('display') === "none") {
+    if (status == 1 && conectionLoader.css('display') === "none") {
         conectionLoader.css('display', 'block');
         noConnectionLoader.css('display', 'none');
-    } else if (conectionLoader.css('display') === 'block' && status === 0) {
+    } else if (conectionLoader.css('display') === 'block' && status == 0) {
         conectionLoader.css('display', 'none');
         noConnectionLoader.css('display', 'block');
     }

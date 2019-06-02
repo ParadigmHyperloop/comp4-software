@@ -245,7 +245,10 @@ message flightConfig {
     optional uint64 flightLength = 6;
     optional int32 heartbeatTimeout = 7 [default = 10000];
     optional string podDriver = 8;
-    optional string controlLaptopIpAddr = 9 [default = "192.168.1.101"];
+    optional string controlLaptopIpAddr = 9 [default = "192.168.1.100"];
+    optional uint64 brakeNodePort = 10 [default = 5555];
+    optional uint64 brakeNodeTimeout = 11 [default = 4000];
+    optional uint64 brakeNodeServerPort = 12 [default = 5555];
 }
 
 message DefaultFcToNode {

@@ -2342,7 +2342,7 @@ class flightConfig :
   ::std::string* release_poddriver();
   void set_allocated_poddriver(::std::string* poddriver);
 
-  // optional string controlLaptopIpAddr = 9 [default = "192.168.1.101"];
+  // optional string controlLaptopIpAddr = 9 [default = "192.168.1.100"];
   bool has_controllaptopipaddr() const;
   void clear_controllaptopipaddr();
   static const int kControlLaptopIpAddrFieldNumber = 9;
@@ -2406,6 +2406,27 @@ class flightConfig :
   ::google::protobuf::int32 commandport() const;
   void set_commandport(::google::protobuf::int32 value);
 
+  // optional uint64 brakeNodePort = 10 [default = 5555];
+  bool has_brakenodeport() const;
+  void clear_brakenodeport();
+  static const int kBrakeNodePortFieldNumber = 10;
+  ::google::protobuf::uint64 brakenodeport() const;
+  void set_brakenodeport(::google::protobuf::uint64 value);
+
+  // optional uint64 brakeNodeTimeout = 11 [default = 4000];
+  bool has_brakenodetimeout() const;
+  void clear_brakenodetimeout();
+  static const int kBrakeNodeTimeoutFieldNumber = 11;
+  ::google::protobuf::uint64 brakenodetimeout() const;
+  void set_brakenodetimeout(::google::protobuf::uint64 value);
+
+  // optional uint64 brakeNodeServerPort = 12 [default = 5555];
+  bool has_brakenodeserverport() const;
+  void clear_brakenodeserverport();
+  static const int kBrakeNodeServerPortFieldNumber = 12;
+  ::google::protobuf::uint64 brakenodeserverport() const;
+  void set_brakenodeserverport(::google::protobuf::uint64 value);
+
   // @@protoc_insertion_point(class_scope:flightConfig)
  private:
   class HasBitSetters;
@@ -2425,6 +2446,9 @@ class flightConfig :
   ::google::protobuf::int32 heartbeattimeout_;
   ::google::protobuf::int32 pdstelemetryport_;
   ::google::protobuf::int32 commandport_;
+  ::google::protobuf::uint64 brakenodeport_;
+  ::google::protobuf::uint64 brakenodetimeout_;
+  ::google::protobuf::uint64 brakenodeserverport_;
   friend struct ::TableStruct_Paradigm_2eproto;
 };
 // -------------------------------------------------------------------
@@ -5190,7 +5214,7 @@ inline void flightConfig::set_allocated_poddriver(::std::string* poddriver) {
   // @@protoc_insertion_point(field_set_allocated:flightConfig.podDriver)
 }
 
-// optional string controlLaptopIpAddr = 9 [default = "192.168.1.101"];
+// optional string controlLaptopIpAddr = 9 [default = "192.168.1.100"];
 inline bool flightConfig::has_controllaptopipaddr() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -5248,6 +5272,60 @@ inline void flightConfig::set_allocated_controllaptopipaddr(::std::string* contr
   }
   controllaptopipaddr_.SetAllocatedNoArena(&::flightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get(), controllaptopipaddr);
   // @@protoc_insertion_point(field_set_allocated:flightConfig.controlLaptopIpAddr)
+}
+
+// optional uint64 brakeNodePort = 10 [default = 5555];
+inline bool flightConfig::has_brakenodeport() const {
+  return (_has_bits_[0] & 0x00000200u) != 0;
+}
+inline void flightConfig::clear_brakenodeport() {
+  brakenodeport_ = PROTOBUF_ULONGLONG(5555);
+  _has_bits_[0] &= ~0x00000200u;
+}
+inline ::google::protobuf::uint64 flightConfig::brakenodeport() const {
+  // @@protoc_insertion_point(field_get:flightConfig.brakeNodePort)
+  return brakenodeport_;
+}
+inline void flightConfig::set_brakenodeport(::google::protobuf::uint64 value) {
+  _has_bits_[0] |= 0x00000200u;
+  brakenodeport_ = value;
+  // @@protoc_insertion_point(field_set:flightConfig.brakeNodePort)
+}
+
+// optional uint64 brakeNodeTimeout = 11 [default = 4000];
+inline bool flightConfig::has_brakenodetimeout() const {
+  return (_has_bits_[0] & 0x00000400u) != 0;
+}
+inline void flightConfig::clear_brakenodetimeout() {
+  brakenodetimeout_ = PROTOBUF_ULONGLONG(4000);
+  _has_bits_[0] &= ~0x00000400u;
+}
+inline ::google::protobuf::uint64 flightConfig::brakenodetimeout() const {
+  // @@protoc_insertion_point(field_get:flightConfig.brakeNodeTimeout)
+  return brakenodetimeout_;
+}
+inline void flightConfig::set_brakenodetimeout(::google::protobuf::uint64 value) {
+  _has_bits_[0] |= 0x00000400u;
+  brakenodetimeout_ = value;
+  // @@protoc_insertion_point(field_set:flightConfig.brakeNodeTimeout)
+}
+
+// optional uint64 brakeNodeServerPort = 12 [default = 5555];
+inline bool flightConfig::has_brakenodeserverport() const {
+  return (_has_bits_[0] & 0x00000800u) != 0;
+}
+inline void flightConfig::clear_brakenodeserverport() {
+  brakenodeserverport_ = PROTOBUF_ULONGLONG(5555);
+  _has_bits_[0] &= ~0x00000800u;
+}
+inline ::google::protobuf::uint64 flightConfig::brakenodeserverport() const {
+  // @@protoc_insertion_point(field_get:flightConfig.brakeNodeServerPort)
+  return brakenodeserverport_;
+}
+inline void flightConfig::set_brakenodeserverport(::google::protobuf::uint64 value) {
+  _has_bits_[0] |= 0x00000800u;
+  brakenodeserverport_ = value;
+  // @@protoc_insertion_point(field_set:flightConfig.brakeNodeServerPort)
 }
 
 // -------------------------------------------------------------------

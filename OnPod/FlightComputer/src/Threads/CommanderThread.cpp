@@ -38,7 +38,7 @@ void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
         Pod->setAutomaticTransitions(podCommand.automaticstatetransitions());
     }
     if (podCommand.has_manualbrakenodestate()) {
-       // LOG(INFO) << podCommand.manualbrakenodestate();
+        LOG(INFO) << podCommand.manualbrakenodestate();
         Pod->setManualBrakeNodeState(podCommand.manualbrakenodestate());
     }
     if (podCommand.has_manuallvdcnodestate()) {
