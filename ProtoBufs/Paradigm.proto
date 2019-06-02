@@ -167,12 +167,11 @@ message Telemetry {
 // FC => NODE COMMANDS
 message FcToBrakeNode {
     optional int32 packetNum = 1;
-    optional PodStates podState = 2;
-    optional BrakeNodeStates manualNodeState = 3;
-    optional bool solenoid1Config = 4;
-    optional bool solenoid2Config = 5;
-    optional bool solenoid3Config = 6;
-    optional bool solenoid4Config = 7;
+    optional BrakeNodeStates nodeState = 2;
+    optional bool solenoid1Config = 3;
+    optional bool solenoid2Config = 4;
+    optional bool solenoid3Config = 5;
+    optional bool solenoid4Config = 6;
 }
 
 message FcToLvdcNode {
@@ -245,10 +244,10 @@ message flightConfig {
     optional uint64 flightLength = 6;
     optional int32 heartbeatTimeout = 7 [default = 10000];
     optional string podDriver = 8;
-    optional string controlLaptopIpAddr = 9 [default = "192.168.1.100"];
+    optional string controlLaptopIpAddr = 9 [default = "127.0.0.1"];
     optional uint64 brakeNodePort = 10 [default = 5555];
     optional uint64 brakeNodeTimeout = 11 [default = 4000];
-    optional uint64 brakeNodeServerPort = 12 [default = 5555];
+    optional uint64 brakeNodeServerPort = 12 [default = 5556];
 }
 
 message DefaultFcToNode {
