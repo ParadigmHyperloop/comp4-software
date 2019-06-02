@@ -45,6 +45,8 @@ disableBrakeNodeStates.click(function () {
     let command = {};
     command['target'] = 'brake node';
     command['state'] = 'bnsNone';
+    $("#solenoid-controls").removeClass("in").css("height","")
+
     socket.emit('command', JSON.stringify(command))
 });
 

@@ -99,11 +99,12 @@ enum BrakeNodeStates {
   bnsStandby = 1,
   bnsFlight = 2,
   bnsBraking = 3,
-  bnsSolenoidControl = 4
+  bnsSolenoidControl = 4,
+  bnsNone = 5
 };
 bool BrakeNodeStates_IsValid(int value);
 const BrakeNodeStates BrakeNodeStates_MIN = bnsBooting;
-const BrakeNodeStates BrakeNodeStates_MAX = bnsSolenoidControl;
+const BrakeNodeStates BrakeNodeStates_MAX = bnsNone;
 const int BrakeNodeStates_ARRAYSIZE = BrakeNodeStates_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* BrakeNodeStates_descriptor();
@@ -125,11 +126,12 @@ enum PodStates {
   psAcceleration = 5,
   psCoasting = 6,
   psBraking = 7,
-  psShutdown = 8
+  psShutdown = 8,
+  psNone = 9
 };
 bool PodStates_IsValid(int value);
 const PodStates PodStates_MIN = psBooting;
-const PodStates PodStates_MAX = psShutdown;
+const PodStates PodStates_MAX = psNone;
 const int PodStates_ARRAYSIZE = PodStates_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* PodStates_descriptor();
@@ -225,11 +227,12 @@ inline bool BatteryManagementStates_Parse(
 enum LvdcNodeStates {
   lvdcBooting = 0,
   lvdcStandby = 1,
-  lvdcFlight = 2
+  lvdcFlight = 2,
+  lvdcNone = 3
 };
 bool LvdcNodeStates_IsValid(int value);
 const LvdcNodeStates LvdcNodeStates_MIN = lvdcBooting;
-const LvdcNodeStates LvdcNodeStates_MAX = lvdcFlight;
+const LvdcNodeStates LvdcNodeStates_MAX = lvdcNone;
 const int LvdcNodeStates_ARRAYSIZE = LvdcNodeStates_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* LvdcNodeStates_descriptor();

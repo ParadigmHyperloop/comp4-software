@@ -7,6 +7,7 @@ enum BrakeNodeStates {
     bnsFlight          = 2;
     bnsBraking         = 3;
     bnsSolenoidControl = 4;
+    bnsNone            = 5;
 }
 
 enum PodStates {
@@ -19,6 +20,7 @@ enum PodStates {
     psCoasting      = 6;
     psBraking       = 7;
     psShutdown      = 8;
+    psNone          = 9;
 }
 
 enum MotorStates {
@@ -48,7 +50,8 @@ enum BatteryManagementStates {
 enum LvdcNodeStates {
     lvdcBooting = 0;
     lvdcStandby = 1;
-    lvdcFlight = 2;
+    lvdcFlight  = 2;
+    lvdcNone    = 3;
 }
 
 // CONTROL LAPTOP COMMAND
