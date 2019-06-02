@@ -4,22 +4,13 @@ $( document ).ready(function() {
     telemetryLoader = $("#telemetry-loader");
     noTelemetryLoader = $("#no-telemetry-loader");
     telemetryCount = $("#telem-received-num");
+
+    socket.emit('join_room','connection_updates');
 });
 
-function showNotification(message, status){
-	$.notify({
-		icon: "pe-7s-next-2",
-		message: `<b>${message}</b>`
 
-	},{
-	  type: status,
-		timer: 3500,
-		placement: {
-			from: 'top',
-			align: 'right'
-		}
-	});
-}
+
+
 
 function toggleTelemetryIndicator(ping){
     if (ping === 1 && telemetryLoader.css('display') === "none") {
@@ -42,7 +33,10 @@ function toggleCommanderIndicator(status){
     }
 }
 
-socket.on('connection_updates', function (update_json) {
+socket.on('connection_update', function (update_json) {
+
+    console.log("got it!");
+
     update = JSON.parse(update_json);
     connection = update['name'];
     status = update['status'];

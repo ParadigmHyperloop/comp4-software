@@ -6,7 +6,7 @@ import logging as log
 import sys
 from config import SOCKET_SERVER
 
-log.basicConfig(stream=sys.stdout, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=log.INFO)
+log.basicConfig(stream=sys.stdout, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 sio = socketio.Client()
 csv_logger = None
 
@@ -21,7 +21,8 @@ def on_connect():
 def on_disconnect():
     log.info('End Logging')
     global csv_logger
-    csv_logger.end_session()
+    if csv_logger is not None:
+        csv_logger.end_session()
 
 
 @sio.on('logger_control')
@@ -30,13 +31,17 @@ def parse_command(command_json):
     command_object = json.loads(command_json)
     command = command_object['command']
 
-    if command is 'start':
+    response = dict()
+    if command == "start":
         csv_logger = CsvTelemetryLoggerTesting()
         csv_logger.start_log_session()
-        sio.emit('logger_feedback', {'feedback': 'started'})
-    elif command is 'stop':
-        csv_logger.end_session()
-        sio.emit('logger_feedback', {'feedback': 'stopped', 'filename': csv_logger.log_file_name})
+        response['feedback'] = 'started'
+    elif command == "stop":
+        if csv_logger is not None:
+            csv_logger.end_session()
+            response['feedback'] = 'stopped'
+            response['filename'] = csv_logger.log_file_name
+    sio.emit('logger_feedback', json.dumps(response))
 
 
 @sio.on('pod_telemetry')
@@ -53,11 +58,13 @@ def main():
     connected = False
     while not connected:
         try:
-            sio.connect(SOCKET_SERVER, namespaces=['/logger_controls', '/telemetry_subscribers'])
+            sio.connect(SOCKET_SERVER)
         except:
             time.sleep(2)
         else:
             connected = True
+    sio.emit('join_room', 'logger_control_updates')
+    sio.emit('join_room', 'telemetry_updates')
     sio.wait()
 
 

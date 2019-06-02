@@ -346,6 +346,42 @@ class PodCommand :
 
   // accessors -------------------------------------------------------
 
+  // repeated int32 solenoidConfiguration = 8;
+  int solenoidconfiguration_size() const;
+  void clear_solenoidconfiguration();
+  static const int kSolenoidConfigurationFieldNumber = 8;
+  ::google::protobuf::int32 solenoidconfiguration(int index) const;
+  void set_solenoidconfiguration(int index, ::google::protobuf::int32 value);
+  void add_solenoidconfiguration(::google::protobuf::int32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+      solenoidconfiguration() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+      mutable_solenoidconfiguration();
+
+  // repeated int32 powerRailConfiguration = 9;
+  int powerrailconfiguration_size() const;
+  void clear_powerrailconfiguration();
+  static const int kPowerRailConfigurationFieldNumber = 9;
+  ::google::protobuf::int32 powerrailconfiguration(int index) const;
+  void set_powerrailconfiguration(int index, ::google::protobuf::int32 value);
+  void add_powerrailconfiguration(::google::protobuf::int32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+      powerrailconfiguration() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+      mutable_powerrailconfiguration();
+
+  // repeated int32 sensorOverrideConfiguration = 10;
+  int sensoroverrideconfiguration_size() const;
+  void clear_sensoroverrideconfiguration();
+  static const int kSensorOverrideConfigurationFieldNumber = 10;
+  ::google::protobuf::int32 sensoroverrideconfiguration(int index) const;
+  void set_sensoroverrideconfiguration(int index, ::google::protobuf::int32 value);
+  void add_sensoroverrideconfiguration(::google::protobuf::int32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+      sensoroverrideconfiguration() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+      mutable_sensoroverrideconfiguration();
+
   // optional .ControlsInterfaceStates controlsInterfaceState = 1;
   bool has_controlsinterfacestate() const;
   void clear_controlsinterfacestate();
@@ -381,6 +417,13 @@ class PodCommand :
   ::LvdcNodeStates manuallvdcnodestate() const;
   void set_manuallvdcnodestate(::LvdcNodeStates value);
 
+  // optional bool hasCommand = 7 [default = false];
+  bool has_hascommand() const;
+  void clear_hascommand();
+  static const int kHasCommandFieldNumber = 7;
+  bool hascommand() const;
+  void set_hascommand(bool value);
+
   // optional bool automaticStateTransitions = 6;
   bool has_automaticstatetransitions() const;
   void clear_automaticstatetransitions();
@@ -395,11 +438,15 @@ class PodCommand :
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > solenoidconfiguration_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > powerrailconfiguration_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > sensoroverrideconfiguration_;
   int controlsinterfacestate_;
   int manualpodstate_;
   int manualbrakenodestate_;
   int manualmotorstate_;
   int manuallvdcnodestate_;
+  bool hascommand_;
   bool automaticstatetransitions_;
   friend struct ::TableStruct_Paradigm_2eproto;
 };
@@ -2509,6 +2556,24 @@ class DefaultFcToNode :
 #endif  // __GNUC__
 // PodCommand
 
+// optional bool hasCommand = 7 [default = false];
+inline bool PodCommand::has_hascommand() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void PodCommand::clear_hascommand() {
+  hascommand_ = false;
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline bool PodCommand::hascommand() const {
+  // @@protoc_insertion_point(field_get:PodCommand.hasCommand)
+  return hascommand_;
+}
+inline void PodCommand::set_hascommand(bool value) {
+  _has_bits_[0] |= 0x00000020u;
+  hascommand_ = value;
+  // @@protoc_insertion_point(field_set:PodCommand.hasCommand)
+}
+
 // optional .ControlsInterfaceStates controlsInterfaceState = 1;
 inline bool PodCommand::has_controlsinterfacestate() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
@@ -2606,20 +2671,110 @@ inline void PodCommand::set_manuallvdcnodestate(::LvdcNodeStates value) {
 
 // optional bool automaticStateTransitions = 6;
 inline bool PodCommand::has_automaticstatetransitions() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
+  return (_has_bits_[0] & 0x00000040u) != 0;
 }
 inline void PodCommand::clear_automaticstatetransitions() {
   automaticstatetransitions_ = false;
-  _has_bits_[0] &= ~0x00000020u;
+  _has_bits_[0] &= ~0x00000040u;
 }
 inline bool PodCommand::automaticstatetransitions() const {
   // @@protoc_insertion_point(field_get:PodCommand.automaticStateTransitions)
   return automaticstatetransitions_;
 }
 inline void PodCommand::set_automaticstatetransitions(bool value) {
-  _has_bits_[0] |= 0x00000020u;
+  _has_bits_[0] |= 0x00000040u;
   automaticstatetransitions_ = value;
   // @@protoc_insertion_point(field_set:PodCommand.automaticStateTransitions)
+}
+
+// repeated int32 solenoidConfiguration = 8;
+inline int PodCommand::solenoidconfiguration_size() const {
+  return solenoidconfiguration_.size();
+}
+inline void PodCommand::clear_solenoidconfiguration() {
+  solenoidconfiguration_.Clear();
+}
+inline ::google::protobuf::int32 PodCommand::solenoidconfiguration(int index) const {
+  // @@protoc_insertion_point(field_get:PodCommand.solenoidConfiguration)
+  return solenoidconfiguration_.Get(index);
+}
+inline void PodCommand::set_solenoidconfiguration(int index, ::google::protobuf::int32 value) {
+  solenoidconfiguration_.Set(index, value);
+  // @@protoc_insertion_point(field_set:PodCommand.solenoidConfiguration)
+}
+inline void PodCommand::add_solenoidconfiguration(::google::protobuf::int32 value) {
+  solenoidconfiguration_.Add(value);
+  // @@protoc_insertion_point(field_add:PodCommand.solenoidConfiguration)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+PodCommand::solenoidconfiguration() const {
+  // @@protoc_insertion_point(field_list:PodCommand.solenoidConfiguration)
+  return solenoidconfiguration_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+PodCommand::mutable_solenoidconfiguration() {
+  // @@protoc_insertion_point(field_mutable_list:PodCommand.solenoidConfiguration)
+  return &solenoidconfiguration_;
+}
+
+// repeated int32 powerRailConfiguration = 9;
+inline int PodCommand::powerrailconfiguration_size() const {
+  return powerrailconfiguration_.size();
+}
+inline void PodCommand::clear_powerrailconfiguration() {
+  powerrailconfiguration_.Clear();
+}
+inline ::google::protobuf::int32 PodCommand::powerrailconfiguration(int index) const {
+  // @@protoc_insertion_point(field_get:PodCommand.powerRailConfiguration)
+  return powerrailconfiguration_.Get(index);
+}
+inline void PodCommand::set_powerrailconfiguration(int index, ::google::protobuf::int32 value) {
+  powerrailconfiguration_.Set(index, value);
+  // @@protoc_insertion_point(field_set:PodCommand.powerRailConfiguration)
+}
+inline void PodCommand::add_powerrailconfiguration(::google::protobuf::int32 value) {
+  powerrailconfiguration_.Add(value);
+  // @@protoc_insertion_point(field_add:PodCommand.powerRailConfiguration)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+PodCommand::powerrailconfiguration() const {
+  // @@protoc_insertion_point(field_list:PodCommand.powerRailConfiguration)
+  return powerrailconfiguration_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+PodCommand::mutable_powerrailconfiguration() {
+  // @@protoc_insertion_point(field_mutable_list:PodCommand.powerRailConfiguration)
+  return &powerrailconfiguration_;
+}
+
+// repeated int32 sensorOverrideConfiguration = 10;
+inline int PodCommand::sensoroverrideconfiguration_size() const {
+  return sensoroverrideconfiguration_.size();
+}
+inline void PodCommand::clear_sensoroverrideconfiguration() {
+  sensoroverrideconfiguration_.Clear();
+}
+inline ::google::protobuf::int32 PodCommand::sensoroverrideconfiguration(int index) const {
+  // @@protoc_insertion_point(field_get:PodCommand.sensorOverrideConfiguration)
+  return sensoroverrideconfiguration_.Get(index);
+}
+inline void PodCommand::set_sensoroverrideconfiguration(int index, ::google::protobuf::int32 value) {
+  sensoroverrideconfiguration_.Set(index, value);
+  // @@protoc_insertion_point(field_set:PodCommand.sensorOverrideConfiguration)
+}
+inline void PodCommand::add_sensoroverrideconfiguration(::google::protobuf::int32 value) {
+  sensoroverrideconfiguration_.Add(value);
+  // @@protoc_insertion_point(field_add:PodCommand.sensorOverrideConfiguration)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+PodCommand::sensoroverrideconfiguration() const {
+  // @@protoc_insertion_point(field_list:PodCommand.sensorOverrideConfiguration)
+  return sensoroverrideconfiguration_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+PodCommand::mutable_sensoroverrideconfiguration() {
+  // @@protoc_insertion_point(field_mutable_list:PodCommand.sensorOverrideConfiguration)
+  return &sensoroverrideconfiguration_;
 }
 
 // -------------------------------------------------------------------

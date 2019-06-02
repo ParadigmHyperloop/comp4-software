@@ -1,16 +1,16 @@
 // language=JQuery-CSS
 
-enablePodStates = $('#enable-manual-pod-states')
-disablePodStates = $('#disable-manual-pod-states')
-manualPodStates = $(".pod-state-btn")
+const enablePodStates = $('#enable-manual-pod-states');
+const disablePodStates = $('#disable-manual-pod-states');
+const manualPodStates = $(".pod-state-btn");
 
-enableBrakeNodeStates = $(`#enable-manual-brake-node-states`)
-disableBrakeNodeStates = $('#disable-manual-brake-node-states')
-manualBrakeNodeStates = $('.brake-node-state-btn')
+const enableBrakeNodeStates = $(`#enable-manual-brake-node-states`);
+const disableBrakeNodeStates = $('#disable-manual-brake-node-states');
+const manualBrakeNodeStates = $('.brake-node-state-btn');
 
-enableLvdcNodeStates = $('#enable-manual-lvdc-node-states');
-disableLvdcNodeStates = $('#disable-manual-lvdc-node-states');
-manualLvdcNodeStates = $('.lvdc-node-state-btn');
+const enableLvdcNodeStates = $('#enable-manual-lvdc-node-states');
+const disableLvdcNodeStates = $('#disable-manual-lvdc-node-states');
+const manualLvdcNodeStates = $('.lvdc-node-state-btn');
 
 ///////// POD STATES ////////
 
@@ -25,12 +25,12 @@ disablePodStates.click(function () {
 });
 
 manualPodStates.click(function () {
-    btn = $(this);
+   const btn = $(this);
    if (isDisabled($(this))){
        return null;
    }
-   var state = btn.data('state');
-   socket.emit('manual')
+   const state = btn.data('state');
+   //todo finish
 });
 
 ///////// BRAKE NODE STATES ////////
@@ -42,16 +42,43 @@ enableBrakeNodeStates.click(function () {
 
 disableBrakeNodeStates.click(function () {
     manualBrakeNodeStates.attr('disabled','disabled');
-    //todo send command to set manual brake node field to none
+    let command = {};
+    command['target'] = 'brake node';
+    command['state'] = 'bnsNone';
+    socket.emit('command', JSON.stringify(command))
 });
 
 manualBrakeNodeStates.click(function () {
+    const btn = $(this);
     // Handel leaving solenoid control state
-    if($(this).data('state') != 'bnsSolenoidControl'){
+    if(btn.data('state') !== 'bnsSolenoidControl'){
         $("#solenoid-controls").removeClass("in").css("height","")
     }
-    //todo send command to set manual brake node field to none
+    if (isDisabled($(this))){
+       return null;
+    }
+    const state = btn.data('state')
+    let command = {};
+    command['target'] = 'brake_node';
+    command['state'] = state;
+    socket.emit('manual_state_command', JSON.stringify(command));
 });
+
+$('#send-solenoid-configuration').click(function () {
+    let configuration = [0,0,0,0];
+    const solenoid_btns = $('.solenoid-state-btn.active');
+    solenoid_btns.each(function () {
+        let index = parseInt($(this).data('solenoid-index'), 10);
+        configuration[index]=1;
+    });
+
+    let command = {};
+    command['target'] = 'brake_node';
+    command['configuration'] = configuration
+    socket.emit('manual_configuration_command', JSON.stringify(command))
+});
+
+
 
 
 

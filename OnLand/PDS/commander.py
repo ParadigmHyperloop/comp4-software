@@ -15,6 +15,7 @@ sio = socketio.Client()
 broadcast_timer = HeartbeatTimer()
 interface_state = ciStandby
 
+
 @sio.on('connect')
 def on_connect():
     log.info("Commander Thread: Connected to SocketIO")
@@ -27,11 +28,47 @@ def on_disconnect():
     log.info("Commander Thread: Disconnected from SocketIO")
     sio.emit('ping', 0)
 
+@sio.on('manual_state_command')
+def on_state_command(command):
+    command = json.loads(command)
+    new_pod_command = PodCommand()
+    new_pod_command.hasCommand = True
+
+    target = command['target']
+    state = command['state']
+
+    if target == 'brake_node':
+        new_pod_command.manualBrakeNodeState = BrakeNodeStates.Value(state)
+    elif target == 'pod':
+        new_pod_command.manualPodState = PodStates.Value(state)
+    elif target == 'lvdc_node':
+        new_pod_command.manualLvdcNodeState = LvdcNodeStates.Value(state)
+
+    pod.send_packet(new_pod_command.SerializeToString())
+
+
+@sio.on('manual_configuration_command')
+def on_state_command(command):
+    command = json.loads(command)
+    new_pod_command = PodCommand()
+    new_pod_command.hasCommand = True
+
+    target = command['target']
+    configuration = command['configuration']
+
+    if target == 'brake_node':
+        new_pod_command.solenoidConfiguration.extend(configuration)
+    elif target == 'pod':
+        new_pod_command.sensorOverrideConfiguration.extend(configuration)
+    elif target == 'lvdc_node':
+        new_pod_command.powerRailConfiguration.extend(configuration)
+
+    pod.send_packet(new_pod_command.SerializeToString())
 
 @sio.on('command')
 def on_command(command):
     if command is '1':
-        pod_command.manualBrakeNodeState = bnsVenting
+        pod_command.manualBrakeNodeState = bnsBraking
         log.info("vent")
     else:
         pod_command.manualBrakeNodeState = bnsFlight
@@ -40,21 +77,23 @@ def on_command(command):
 
 
 def main():
-    global pod_command
-    global connection_status
     log.info("Heartbeat Thread Started")
 
+    global pod_command
+    global connection_status
     connected = False
+    pod_heartbeat = HeartbeatTimer()
+
     while not connected:
         try:
-            sio.connect(SOCKET_SERVER, namespaces=['/command-subscribers'])
+            sio.connect(SOCKET_SERVER)
         except:
             log.info("Commader cannot connect to SocketIO")
             time.sleep(2)
         else:
             connected = True
+            sio.emit('join_room', 'command_updates')
 
-    pod_heartbeat = HeartbeatTimer()
     while not pod.is_connected():
         time.sleep(1)
         if pod.connect():

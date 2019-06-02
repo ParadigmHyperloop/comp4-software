@@ -223,18 +223,26 @@ const ::google::protobuf::uint32 TableStruct_Paradigm_2eproto::offsets[] PROTOBU
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::PodCommand, hascommand_),
   PROTOBUF_FIELD_OFFSET(::PodCommand, controlsinterfacestate_),
   PROTOBUF_FIELD_OFFSET(::PodCommand, manualpodstate_),
   PROTOBUF_FIELD_OFFSET(::PodCommand, manualbrakenodestate_),
   PROTOBUF_FIELD_OFFSET(::PodCommand, manualmotorstate_),
   PROTOBUF_FIELD_OFFSET(::PodCommand, manuallvdcnodestate_),
   PROTOBUF_FIELD_OFFSET(::PodCommand, automaticstatetransitions_),
+  PROTOBUF_FIELD_OFFSET(::PodCommand, solenoidconfiguration_),
+  PROTOBUF_FIELD_OFFSET(::PodCommand, powerrailconfiguration_),
+  PROTOBUF_FIELD_OFFSET(::PodCommand, sensoroverrideconfiguration_),
+  5,
   0,
   1,
   2,
   3,
   4,
-  5,
+  6,
+  ~0u,
+  ~0u,
+  ~0u,
   PROTOBUF_FIELD_OFFSET(::Telemetry, _has_bits_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -540,16 +548,16 @@ const ::google::protobuf::uint32 TableStruct_Paradigm_2eproto::offsets[] PROTOBU
   0,
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, 11, sizeof(::PodCommand)},
-  { 17, 92, sizeof(::Telemetry)},
-  { 162, 174, sizeof(::FcToBrakeNode)},
-  { 181, 189, sizeof(::FcToLvdcNode)},
-  { 192, 205, sizeof(::DtsNodeToFc)},
-  { 213, 222, sizeof(::EnclosureNodeToFc)},
-  { 226, 245, sizeof(::LvdcNodeToFc)},
-  { 259, 277, sizeof(::BrakeNodeToFc)},
-  { 290, 304, sizeof(::flightConfig)},
-  { 313, 319, sizeof(::DefaultFcToNode)},
+  { 0, 15, sizeof(::PodCommand)},
+  { 25, 100, sizeof(::Telemetry)},
+  { 170, 182, sizeof(::FcToBrakeNode)},
+  { 189, 197, sizeof(::FcToLvdcNode)},
+  { 200, 213, sizeof(::DtsNodeToFc)},
+  { 221, 230, sizeof(::EnclosureNodeToFc)},
+  { 234, 253, sizeof(::LvdcNodeToFc)},
+  { 267, 285, sizeof(::BrakeNodeToFc)},
+  { 298, 312, sizeof(::flightConfig)},
+  { 321, 327, sizeof(::DefaultFcToNode)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -572,126 +580,129 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
 };
 
 const char descriptor_table_protodef_Paradigm_2eproto[] =
-  "\n\016Paradigm.proto\"\223\002\n\nPodCommand\0228\n\026contr"
-  "olsInterfaceState\030\001 \001(\0162\030.ControlsInterf"
-  "aceStates\022\"\n\016manualPodState\030\002 \001(\0162\n.PodS"
-  "tates\022.\n\024manualBrakeNodeState\030\003 \001(\0162\020.Br"
-  "akeNodeStates\022&\n\020manualMotorState\030\004 \001(\0162"
-  "\014.MotorStates\022,\n\023manualLvdcNodeState\030\005 \001"
-  "(\0162\017.LvdcNodeStates\022!\n\031automaticStateTra"
-  "nsitions\030\006 \001(\010\"\257\017\n\tTelemetry\022\034\n\010podState"
-  "\030\001 \001(\0162\n.PodStates\022(\n\016breakNodeState\030\002 \001"
-  "(\0162\020.BrakeNodeStates\022 \n\nmotorState\030\003 \001(\016"
-  "2\014.MotorStates\0228\n\026controlsInterfaceState"
-  "\030\004 \001(\0162\030.ControlsInterfaceStates\022&\n\rinve"
-  "rterState\030\005 \001(\0162\017.InverterStates\022&\n\rlvdc"
-  "NodeState\0306 \001(\0162\017.LvdcNodeStates\0228\n\026batt"
-  "eryManagementState\030\031 \001(\0162\030.BatteryManage"
-  "mentStates\022.\n\032breakNodePerceivedPodState"
-  "\030\037 \001(\0162\n.PodStates\022\023\n\013missionTime\030\006 \001(\005\022"
-  "\022\n\nflightTime\030\007 \001(\005\022\026\n\016heartbeatFlags\030\010 "
-  "\003(\005\022\027\n\017heartbeatValues\030G \003(\005\022\023\n\013podPosit"
-  "ion\030\t \001(\005\022\023\n\013podVelocity\030\n \001(\005\022\030\n\020podAcc"
-  "elerationX\030\013 \001(\005\022\030\n\020podAccelerationY\030\014 \001"
-  "(\005\022\030\n\020podAccelerationZ\030\r \001(\005\022\023\n\013imuVeloc"
-  "ity\030\016 \001(\005\022\030\n\020imuAccelerationX\030\017 \001(\005\022\032\n\022t"
-  "achometerVelocity\030\020 \001(\005\022\030\n\020resolverVeloc"
-  "ity\030\021 \001(\005\022\032\n\022maxIgbtTemperature\030\022 \001(\005\022\035\n"
-  "\025gateDriverTemperature\030\023 \001(\005\022\'\n\037inverter"
-  "ControlBoardTemperature\030\024 \001(\005\022\030\n\020motorTe"
-  "mperature\030\025 \001(\005\022\032\n\022inverterBusVoltage\030\026 "
-  "\001(\005\022\030\n\020inverterVoltages\030\027 \001(\005\022\030\n\020inverte"
-  "rCurrents\030\030 \001(\005\022\034\n\024hvBatteryPackVoltage\030"
-  "\032 \001(\002\022\034\n\024hvBatteryPackCurrent\030\033 \001(\002\022!\n\031h"
-  "vBatteryCellTemperatures\030\034 \003(\005\022\'\n\037hvBatt"
-  "eryPackMinimumCellVoltage\030\035 \001(\002\022#\n\033hvBat"
-  "teryPackMaxCellVoltage\030\036 \001(\002\022\021\n\tsolenoid"
-  "1\030  \001(\010\022\021\n\tsolenoid2\030! \001(\010\022\021\n\tsolenoid3\030"
-  "\" \001(\010\022\021\n\tsolenoid4\030# \001(\010\022\024\n\014highPressure"
-  "\030& \001(\002\022\024\n\014lowPressure1\030\' \001(\002\022\024\n\014lowPress"
-  "ure2\030( \001(\002\022\024\n\014lowPressure3\030) \001(\002\022\024\n\014lowP"
-  "ressure4\030* \001(\002\022!\n\031pressureVesselTemperat"
-  "ure\030+ \001(\002\022$\n\034electronicsEnclosurePressur"
-  "e\030, \001(\005\022\031\n\021railDisplacementX\030- \001(\005\022\031\n\021ra"
-  "ilDisplacementY\030. \001(\005\022\024\n\014tubePressure\0300 "
-  "\001(\005\022\030\n\020coolantPressure1\0301 \001(\005\022\030\n\020coolant"
-  "Pressure2\0302 \001(\005\022\030\n\020coolantPressure3\0303 \001("
-  "\005\022\032\n\022coolantTemperature\0304 \001(\005\022\027\n\017railTem"
-  "perature\0305 \001(\002\022\024\n\014pack1Voltage\0307 \001(\005\022\024\n\014"
-  "pack2Voltage\0308 \001(\005\022\024\n\014pack1Current\0309 \001(\005"
-  "\022\024\n\014pack2Current\030: \001(\005\022\024\n\014rail1Voltage\030;"
-  " \001(\005\022\024\n\014rail2Voltage\030< \001(\005\022\024\n\014rail3Volta"
-  "ge\030= \001(\005\022\024\n\014rail4Voltage\030> \001(\005\022\027\n\017railVo"
-  "ltageFlag\030H \001(\005\022\032\n\022railCurrentSensor1\030\? "
-  "\001(\005\022\032\n\022railCurrentSensor2\030@ \001(\005\022\032\n\022railC"
-  "urrentSensor3\030A \001(\005\022\032\n\022railCurrentSensor"
-  "4\030B \001(\005\022\032\n\022railCurrentSensor5\030C \001(\005\022\032\n\022r"
-  "ailCurrentSensor6\030D \001(\005\022\032\n\022railCurrentSe"
-  "nsor7\030E \001(\005\022\032\n\022railCurrentSensor8\030F \001(\005\022"
-  "\027\n\017railCurrentFlag\030I \001(\005\"\317\001\n\rFcToBrakeNo"
-  "de\022\021\n\tpacketNum\030\001 \001(\005\022\034\n\010podState\030\002 \001(\0162"
-  "\n.PodStates\022)\n\017manualNodeState\030\003 \001(\0162\020.B"
-  "rakeNodeStates\022\027\n\017solenoid1Config\030\004 \001(\010\022"
-  "\027\n\017solenoid2Config\030\005 \001(\010\022\027\n\017solenoid3Con"
-  "fig\030\006 \001(\010\022\027\n\017solenoid4Config\030\007 \001(\010\"i\n\014Fc"
-  "ToLvdcNode\022\021\n\tpacketNum\030\001 \001(\005\022\034\n\010podStat"
-  "e\030\002 \001(\0162\n.PodStates\022(\n\017manualNodeState\030\003"
-  " \001(\0162\017.LvdcNodeStates\"\346\001\n\013DtsNodeToFc\022\021\n"
-  "\tpacketNum\030\001 \002(\005\022(\n\016brakeNodeState\030\002 \002(\016"
-  "2\020.BrakeNodeStates\022\032\n\022brakeSolenoidState"
-  "\030\003 \002(\010\022\031\n\021ventSolenoidState\030\004 \002(\010\022\030\n\020rot"
-  "orTemperature\030\005 \002(\002\022\034\n\024pneumaticTemperat"
-  "ure\030\006 \002(\002\022\024\n\014tankPressure\030\007 \002(\002\022\025\n\rbrake"
-  "Pressure\030\010 \002(\002\"|\n\021EnclosureNodeToFc\022\021\n\tp"
-  "acketNum\030\001 \002(\005\022\031\n\021enclosurePressure\030\002 \002("
-  "\002\022\034\n\024enclosureTemperature\030\003 \002(\002\022\033\n\023coola"
-  "ntLinePressure\030\004 \002(\002\"\223\003\n\014LvdcNodeToFc\022\034\n"
-  "\024highPowerPackVoltage\030\001 \002(\002\022\033\n\023lowPowerP"
-  "ackVoltage\030\002 \002(\002\022\034\n\024highPowerPackCurrent"
-  "\030\003 \002(\002\022\033\n\023lowPowerPackCurrent\030\004 \002(\002\022\024\n\014r"
-  "ail5Voltage\030\005 \002(\002\022\035\n\025rail12LowPowerVolta"
-  "ge\030\006 \002(\002\022\036\n\026rail12HighPowerVoltage\030\007 \002(\002"
-  "\022\025\n\rrail24Voltage\030\010 \002(\002\022\024\n\014rail5Current\030"
-  "\t \002(\002\022\035\n\025rail12LowPowerCurrent\030\n \002(\002\022\025\n\r"
-  "rail24Current\030\013 \002(\002\022\033\n\023railInverterCurre"
-  "nt\030\014 \002(\002\022\033\n\023railCooling1Current\030\r \002(\002\022\033\n"
-  "\023railCooling2Current\030\016 \002(\002\"\275\002\n\rBrakeNode"
-  "ToFc\022\021\n\tpacketNum\030\001 \002(\005\022\037\n\005state\030\002 \002(\0162\020"
-  ".BrakeNodeStates\022\021\n\tsolenoid1\030\003 \002(\010\022\021\n\ts"
-  "olenoid2\030\004 \002(\010\022\021\n\tsolenoid3\030\005 \002(\010\022\021\n\tsol"
-  "enoid4\030\006 \002(\010\022\024\n\014highPressure\030\007 \002(\002\022\024\n\014lo"
-  "wPressure1\030\010 \002(\002\022\024\n\014lowPressure2\030\t \002(\002\022\024"
-  "\n\014lowPressure3\030\n \002(\002\022\031\n\021lowPressureCommo"
-  "n\030\013 \002(\002\022\034\n\024pneumaticTemperature\030\014 \002(\002\022\033\n"
-  "\023coolantTankPressure\030\r \002(\002\"\204\002\n\014flightCon"
-  "fig\022\030\n\020retrievalTimeout\030\001 \001(\r\022\025\n\rmaxFlig"
-  "htTime\030\002 \001(\004\022\022\n\nmotorSpeed\030\003 \001(\004\022\036\n\020pdsT"
-  "elemetryPort\030\004 \001(\005:\0047000\022\031\n\013commandPort\030"
-  "\005 \001(\005:\0046000\022\024\n\014flightLength\030\006 \001(\004\022\037\n\020hea"
-  "rtbeatTimeout\030\007 \001(\005:\00510000\022\021\n\tpodDriver\030"
-  "\010 \001(\t\022*\n\023controlLaptopIpAddr\030\t \001(\t:\r192."
-  "168.1.101\"/\n\017DefaultFcToNode\022\034\n\010podState"
-  "\030\001 \001(\0162\n.PodStates*h\n\017BrakeNodeStates\022\016\n"
-  "\nbnsBooting\020\000\022\016\n\nbnsStandby\020\001\022\r\n\tbnsFlig"
-  "ht\020\002\022\016\n\nbnsBraking\020\003\022\026\n\022bnsSolenoidContr"
-  "ol\020\004*\230\001\n\tPodStates\022\r\n\tpsBooting\020\000\022\r\n\tpsS"
-  "tandby\020\001\022\014\n\010psArming\020\002\022\013\n\007psArmed\020\003\022\017\n\013p"
-  "sPreFlight\020\004\022\022\n\016psAcceleration\020\005\022\016\n\npsCo"
-  "asting\020\006\022\r\n\tpsBraking\020\007\022\016\n\npsShutdown\020\010*"
-  "C\n\013MotorStates\022\t\n\005msOff\020\000\022\016\n\nmsCharging\020"
-  "\001\022\n\n\006msIdle\020\002\022\r\n\tmsEngaged\020\003*p\n\027Controls"
-  "InterfaceStates\022\r\n\tciStandby\020\000\022\t\n\005ciArm\020"
-  "\001\022\014\n\010ciFlight\020\002\022\014\n\010ciDisarm\020\003\022\n\n\006ciTaxi\020"
-  "\004\022\023\n\017ciEmergencyStop\020\005* \n\016InverterStates"
-  "\022\016\n\niConnected\020\000*)\n\027BatteryManagementSta"
-  "tes\022\016\n\nbmsNominal\020\000*B\n\016LvdcNodeStates\022\017\n"
-  "\013lvdcBooting\020\000\022\017\n\013lvdcStandby\020\001\022\016\n\nlvdcF"
-  "light\020\002"
+  "\n\016Paradigm.proto\"\222\003\n\nPodCommand\022\031\n\nhasCo"
+  "mmand\030\007 \001(\010:\005false\0228\n\026controlsInterfaceS"
+  "tate\030\001 \001(\0162\030.ControlsInterfaceStates\022\"\n\016"
+  "manualPodState\030\002 \001(\0162\n.PodStates\022.\n\024manu"
+  "alBrakeNodeState\030\003 \001(\0162\020.BrakeNodeStates"
+  "\022&\n\020manualMotorState\030\004 \001(\0162\014.MotorStates"
+  "\022,\n\023manualLvdcNodeState\030\005 \001(\0162\017.LvdcNode"
+  "States\022!\n\031automaticStateTransitions\030\006 \001("
+  "\010\022\035\n\025solenoidConfiguration\030\010 \003(\005\022\036\n\026powe"
+  "rRailConfiguration\030\t \003(\005\022#\n\033sensorOverri"
+  "deConfiguration\030\n \003(\005\"\257\017\n\tTelemetry\022\034\n\010p"
+  "odState\030\001 \001(\0162\n.PodStates\022(\n\016breakNodeSt"
+  "ate\030\002 \001(\0162\020.BrakeNodeStates\022 \n\nmotorStat"
+  "e\030\003 \001(\0162\014.MotorStates\0228\n\026controlsInterfa"
+  "ceState\030\004 \001(\0162\030.ControlsInterfaceStates\022"
+  "&\n\rinverterState\030\005 \001(\0162\017.InverterStates\022"
+  "&\n\rlvdcNodeState\0306 \001(\0162\017.LvdcNodeStates\022"
+  "8\n\026batteryManagementState\030\031 \001(\0162\030.Batter"
+  "yManagementStates\022.\n\032breakNodePerceivedP"
+  "odState\030\037 \001(\0162\n.PodStates\022\023\n\013missionTime"
+  "\030\006 \001(\005\022\022\n\nflightTime\030\007 \001(\005\022\026\n\016heartbeatF"
+  "lags\030\010 \003(\005\022\027\n\017heartbeatValues\030G \003(\005\022\023\n\013p"
+  "odPosition\030\t \001(\005\022\023\n\013podVelocity\030\n \001(\005\022\030\n"
+  "\020podAccelerationX\030\013 \001(\005\022\030\n\020podAccelerati"
+  "onY\030\014 \001(\005\022\030\n\020podAccelerationZ\030\r \001(\005\022\023\n\013i"
+  "muVelocity\030\016 \001(\005\022\030\n\020imuAccelerationX\030\017 \001"
+  "(\005\022\032\n\022tachometerVelocity\030\020 \001(\005\022\030\n\020resolv"
+  "erVelocity\030\021 \001(\005\022\032\n\022maxIgbtTemperature\030\022"
+  " \001(\005\022\035\n\025gateDriverTemperature\030\023 \001(\005\022\'\n\037i"
+  "nverterControlBoardTemperature\030\024 \001(\005\022\030\n\020"
+  "motorTemperature\030\025 \001(\005\022\032\n\022inverterBusVol"
+  "tage\030\026 \001(\005\022\030\n\020inverterVoltages\030\027 \001(\005\022\030\n\020"
+  "inverterCurrents\030\030 \001(\005\022\034\n\024hvBatteryPackV"
+  "oltage\030\032 \001(\002\022\034\n\024hvBatteryPackCurrent\030\033 \001"
+  "(\002\022!\n\031hvBatteryCellTemperatures\030\034 \003(\005\022\'\n"
+  "\037hvBatteryPackMinimumCellVoltage\030\035 \001(\002\022#"
+  "\n\033hvBatteryPackMaxCellVoltage\030\036 \001(\002\022\021\n\ts"
+  "olenoid1\030  \001(\010\022\021\n\tsolenoid2\030! \001(\010\022\021\n\tsol"
+  "enoid3\030\" \001(\010\022\021\n\tsolenoid4\030# \001(\010\022\024\n\014highP"
+  "ressure\030& \001(\002\022\024\n\014lowPressure1\030\' \001(\002\022\024\n\014l"
+  "owPressure2\030( \001(\002\022\024\n\014lowPressure3\030) \001(\002\022"
+  "\024\n\014lowPressure4\030* \001(\002\022!\n\031pressureVesselT"
+  "emperature\030+ \001(\002\022$\n\034electronicsEnclosure"
+  "Pressure\030, \001(\005\022\031\n\021railDisplacementX\030- \001("
+  "\005\022\031\n\021railDisplacementY\030. \001(\005\022\024\n\014tubePres"
+  "sure\0300 \001(\005\022\030\n\020coolantPressure1\0301 \001(\005\022\030\n\020"
+  "coolantPressure2\0302 \001(\005\022\030\n\020coolantPressur"
+  "e3\0303 \001(\005\022\032\n\022coolantTemperature\0304 \001(\005\022\027\n\017"
+  "railTemperature\0305 \001(\002\022\024\n\014pack1Voltage\0307 "
+  "\001(\005\022\024\n\014pack2Voltage\0308 \001(\005\022\024\n\014pack1Curren"
+  "t\0309 \001(\005\022\024\n\014pack2Current\030: \001(\005\022\024\n\014rail1Vo"
+  "ltage\030; \001(\005\022\024\n\014rail2Voltage\030< \001(\005\022\024\n\014rai"
+  "l3Voltage\030= \001(\005\022\024\n\014rail4Voltage\030> \001(\005\022\027\n"
+  "\017railVoltageFlag\030H \001(\005\022\032\n\022railCurrentSen"
+  "sor1\030\? \001(\005\022\032\n\022railCurrentSensor2\030@ \001(\005\022\032"
+  "\n\022railCurrentSensor3\030A \001(\005\022\032\n\022railCurren"
+  "tSensor4\030B \001(\005\022\032\n\022railCurrentSensor5\030C \001"
+  "(\005\022\032\n\022railCurrentSensor6\030D \001(\005\022\032\n\022railCu"
+  "rrentSensor7\030E \001(\005\022\032\n\022railCurrentSensor8"
+  "\030F \001(\005\022\027\n\017railCurrentFlag\030I \001(\005\"\317\001\n\rFcTo"
+  "BrakeNode\022\021\n\tpacketNum\030\001 \001(\005\022\034\n\010podState"
+  "\030\002 \001(\0162\n.PodStates\022)\n\017manualNodeState\030\003 "
+  "\001(\0162\020.BrakeNodeStates\022\027\n\017solenoid1Config"
+  "\030\004 \001(\010\022\027\n\017solenoid2Config\030\005 \001(\010\022\027\n\017solen"
+  "oid3Config\030\006 \001(\010\022\027\n\017solenoid4Config\030\007 \001("
+  "\010\"i\n\014FcToLvdcNode\022\021\n\tpacketNum\030\001 \001(\005\022\034\n\010"
+  "podState\030\002 \001(\0162\n.PodStates\022(\n\017manualNode"
+  "State\030\003 \001(\0162\017.LvdcNodeStates\"\346\001\n\013DtsNode"
+  "ToFc\022\021\n\tpacketNum\030\001 \002(\005\022(\n\016brakeNodeStat"
+  "e\030\002 \002(\0162\020.BrakeNodeStates\022\032\n\022brakeSoleno"
+  "idState\030\003 \002(\010\022\031\n\021ventSolenoidState\030\004 \002(\010"
+  "\022\030\n\020rotorTemperature\030\005 \002(\002\022\034\n\024pneumaticT"
+  "emperature\030\006 \002(\002\022\024\n\014tankPressure\030\007 \002(\002\022\025"
+  "\n\rbrakePressure\030\010 \002(\002\"|\n\021EnclosureNodeTo"
+  "Fc\022\021\n\tpacketNum\030\001 \002(\005\022\031\n\021enclosurePressu"
+  "re\030\002 \002(\002\022\034\n\024enclosureTemperature\030\003 \002(\002\022\033"
+  "\n\023coolantLinePressure\030\004 \002(\002\"\223\003\n\014LvdcNode"
+  "ToFc\022\034\n\024highPowerPackVoltage\030\001 \002(\002\022\033\n\023lo"
+  "wPowerPackVoltage\030\002 \002(\002\022\034\n\024highPowerPack"
+  "Current\030\003 \002(\002\022\033\n\023lowPowerPackCurrent\030\004 \002"
+  "(\002\022\024\n\014rail5Voltage\030\005 \002(\002\022\035\n\025rail12LowPow"
+  "erVoltage\030\006 \002(\002\022\036\n\026rail12HighPowerVoltag"
+  "e\030\007 \002(\002\022\025\n\rrail24Voltage\030\010 \002(\002\022\024\n\014rail5C"
+  "urrent\030\t \002(\002\022\035\n\025rail12LowPowerCurrent\030\n "
+  "\002(\002\022\025\n\rrail24Current\030\013 \002(\002\022\033\n\023railInvert"
+  "erCurrent\030\014 \002(\002\022\033\n\023railCooling1Current\030\r"
+  " \002(\002\022\033\n\023railCooling2Current\030\016 \002(\002\"\275\002\n\rBr"
+  "akeNodeToFc\022\021\n\tpacketNum\030\001 \002(\005\022\037\n\005state\030"
+  "\002 \002(\0162\020.BrakeNodeStates\022\021\n\tsolenoid1\030\003 \002"
+  "(\010\022\021\n\tsolenoid2\030\004 \002(\010\022\021\n\tsolenoid3\030\005 \002(\010"
+  "\022\021\n\tsolenoid4\030\006 \002(\010\022\024\n\014highPressure\030\007 \002("
+  "\002\022\024\n\014lowPressure1\030\010 \002(\002\022\024\n\014lowPressure2\030"
+  "\t \002(\002\022\024\n\014lowPressure3\030\n \002(\002\022\031\n\021lowPressu"
+  "reCommon\030\013 \002(\002\022\034\n\024pneumaticTemperature\030\014"
+  " \002(\002\022\033\n\023coolantTankPressure\030\r \002(\002\"\204\002\n\014fl"
+  "ightConfig\022\030\n\020retrievalTimeout\030\001 \001(\r\022\025\n\r"
+  "maxFlightTime\030\002 \001(\004\022\022\n\nmotorSpeed\030\003 \001(\004\022"
+  "\036\n\020pdsTelemetryPort\030\004 \001(\005:\0047000\022\031\n\013comma"
+  "ndPort\030\005 \001(\005:\0046000\022\024\n\014flightLength\030\006 \001(\004"
+  "\022\037\n\020heartbeatTimeout\030\007 \001(\005:\00510000\022\021\n\tpod"
+  "Driver\030\010 \001(\t\022*\n\023controlLaptopIpAddr\030\t \001("
+  "\t:\r192.168.1.101\"/\n\017DefaultFcToNode\022\034\n\010p"
+  "odState\030\001 \001(\0162\n.PodStates*h\n\017BrakeNodeSt"
+  "ates\022\016\n\nbnsBooting\020\000\022\016\n\nbnsStandby\020\001\022\r\n\t"
+  "bnsFlight\020\002\022\016\n\nbnsBraking\020\003\022\026\n\022bnsSoleno"
+  "idControl\020\004*\230\001\n\tPodStates\022\r\n\tpsBooting\020\000"
+  "\022\r\n\tpsStandby\020\001\022\014\n\010psArming\020\002\022\013\n\007psArmed"
+  "\020\003\022\017\n\013psPreFlight\020\004\022\022\n\016psAcceleration\020\005\022"
+  "\016\n\npsCoasting\020\006\022\r\n\tpsBraking\020\007\022\016\n\npsShut"
+  "down\020\010*C\n\013MotorStates\022\t\n\005msOff\020\000\022\016\n\nmsCh"
+  "arging\020\001\022\n\n\006msIdle\020\002\022\r\n\tmsEngaged\020\003*p\n\027C"
+  "ontrolsInterfaceStates\022\r\n\tciStandby\020\000\022\t\n"
+  "\005ciArm\020\001\022\014\n\010ciFlight\020\002\022\014\n\010ciDisarm\020\003\022\n\n\006"
+  "ciTaxi\020\004\022\023\n\017ciEmergencyStop\020\005* \n\016Inverte"
+  "rStates\022\016\n\niConnected\020\000*)\n\027BatteryManage"
+  "mentStates\022\016\n\nbmsNominal\020\000*B\n\016LvdcNodeSt"
+  "ates\022\017\n\013lvdcBooting\020\000\022\017\n\013lvdcStandby\020\001\022\016"
+  "\n\nlvdcFlight\020\002"
   ;
 ::google::protobuf::internal::DescriptorTable descriptor_table_Paradigm_2eproto = {
   false, InitDefaults_Paradigm_2eproto, 
   descriptor_table_protodef_Paradigm_2eproto,
-  "Paradigm.proto", &assign_descriptors_table_Paradigm_2eproto, 4567,
+  "Paradigm.proto", &assign_descriptors_table_Paradigm_2eproto, 4694,
 };
 
 void AddDescriptors_Paradigm_2eproto() {
@@ -823,6 +834,9 @@ void PodCommand::InitAsDefaultInstance() {
 }
 class PodCommand::HasBitSetters {
  public:
+  static void set_has_hascommand(PodCommand* msg) {
+    msg->_has_bits_[0] |= 0x00000020u;
+  }
   static void set_has_controlsinterfacestate(PodCommand* msg) {
     msg->_has_bits_[0] |= 0x00000001u;
   }
@@ -839,17 +853,21 @@ class PodCommand::HasBitSetters {
     msg->_has_bits_[0] |= 0x00000010u;
   }
   static void set_has_automaticstatetransitions(PodCommand* msg) {
-    msg->_has_bits_[0] |= 0x00000020u;
+    msg->_has_bits_[0] |= 0x00000040u;
   }
 };
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int PodCommand::kHasCommandFieldNumber;
 const int PodCommand::kControlsInterfaceStateFieldNumber;
 const int PodCommand::kManualPodStateFieldNumber;
 const int PodCommand::kManualBrakeNodeStateFieldNumber;
 const int PodCommand::kManualMotorStateFieldNumber;
 const int PodCommand::kManualLvdcNodeStateFieldNumber;
 const int PodCommand::kAutomaticStateTransitionsFieldNumber;
+const int PodCommand::kSolenoidConfigurationFieldNumber;
+const int PodCommand::kPowerRailConfigurationFieldNumber;
+const int PodCommand::kSensorOverrideConfigurationFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 PodCommand::PodCommand()
@@ -860,7 +878,10 @@ PodCommand::PodCommand()
 PodCommand::PodCommand(const PodCommand& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(nullptr),
-      _has_bits_(from._has_bits_) {
+      _has_bits_(from._has_bits_),
+      solenoidconfiguration_(from.solenoidconfiguration_),
+      powerrailconfiguration_(from.powerrailconfiguration_),
+      sensoroverrideconfiguration_(from.sensoroverrideconfiguration_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&controlsinterfacestate_, &from.controlsinterfacestate_,
     static_cast<size_t>(reinterpret_cast<char*>(&automaticstatetransitions_) -
@@ -897,8 +918,11 @@ void PodCommand::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  solenoidconfiguration_.Clear();
+  powerrailconfiguration_.Clear();
+  sensoroverrideconfiguration_.Clear();
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x0000003fu) {
+  if (cached_has_bits & 0x0000007fu) {
     ::memset(&controlsinterfacestate_, 0, static_cast<size_t>(
         reinterpret_cast<char*>(&automaticstatetransitions_) -
         reinterpret_cast<char*>(&controlsinterfacestate_)) + sizeof(automaticstatetransitions_));
@@ -987,6 +1011,73 @@ const char* PodCommand::_InternalParse(const char* begin, const char* end, void*
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
+      // optional bool hasCommand = 7 [default = false];
+      case 7: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 56) goto handle_unusual;
+        msg->set_hascommand(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // repeated int32 solenoidConfiguration = 8;
+      case 8: {
+        if (static_cast<::google::protobuf::uint8>(tag) == 64) {
+          do {
+            msg->add_solenoidconfiguration(::google::protobuf::internal::ReadVarint(&ptr));
+            GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+            if (ptr >= end) break;
+          } while ((::google::protobuf::io::UnalignedLoad<::google::protobuf::uint64>(ptr) & 255) == 64 && (ptr += 1));
+          break;
+        } else if (static_cast<::google::protobuf::uint8>(tag) != 66) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        parser_till_end = ::google::protobuf::internal::PackedInt32Parser;
+        object = msg->mutable_solenoidconfiguration();
+        if (size > end - ptr) goto len_delim_till_end;
+        auto newend = ptr + size;
+        if (size) ptr = parser_till_end(ptr, newend, object, ctx);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr == newend);
+        break;
+      }
+      // repeated int32 powerRailConfiguration = 9;
+      case 9: {
+        if (static_cast<::google::protobuf::uint8>(tag) == 72) {
+          do {
+            msg->add_powerrailconfiguration(::google::protobuf::internal::ReadVarint(&ptr));
+            GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+            if (ptr >= end) break;
+          } while ((::google::protobuf::io::UnalignedLoad<::google::protobuf::uint64>(ptr) & 255) == 72 && (ptr += 1));
+          break;
+        } else if (static_cast<::google::protobuf::uint8>(tag) != 74) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        parser_till_end = ::google::protobuf::internal::PackedInt32Parser;
+        object = msg->mutable_powerrailconfiguration();
+        if (size > end - ptr) goto len_delim_till_end;
+        auto newend = ptr + size;
+        if (size) ptr = parser_till_end(ptr, newend, object, ctx);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr == newend);
+        break;
+      }
+      // repeated int32 sensorOverrideConfiguration = 10;
+      case 10: {
+        if (static_cast<::google::protobuf::uint8>(tag) == 80) {
+          do {
+            msg->add_sensoroverrideconfiguration(::google::protobuf::internal::ReadVarint(&ptr));
+            GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+            if (ptr >= end) break;
+          } while ((::google::protobuf::io::UnalignedLoad<::google::protobuf::uint64>(ptr) & 255) == 80 && (ptr += 1));
+          break;
+        } else if (static_cast<::google::protobuf::uint8>(tag) != 82) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        parser_till_end = ::google::protobuf::internal::PackedInt32Parser;
+        object = msg->mutable_sensoroverrideconfiguration();
+        if (size > end - ptr) goto len_delim_till_end;
+        auto newend = ptr + size;
+        if (size) ptr = parser_till_end(ptr, newend, object, ctx);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr == newend);
+        break;
+      }
       default: {
       handle_unusual:
         if ((tag & 7) == 4 || tag == 0) {
@@ -1002,6 +1093,9 @@ const char* PodCommand::_InternalParse(const char* begin, const char* end, void*
     }  // switch
   }  // while
   return ptr;
+len_delim_till_end:
+  return ctx->StoreAndTailCall(ptr, end, {_InternalParse, msg},
+                               {parser_till_end, object}, size);
 }
 #else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 bool PodCommand::MergePartialFromCodedStream(
@@ -1122,6 +1216,67 @@ bool PodCommand::MergePartialFromCodedStream(
         break;
       }
 
+      // optional bool hasCommand = 7 [default = false];
+      case 7: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (56 & 0xFF)) {
+          HasBitSetters::set_has_hascommand(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &hascommand_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated int32 solenoidConfiguration = 8;
+      case 8: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (64 & 0xFF)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 1, 64u, input, this->mutable_solenoidconfiguration())));
+        } else if (static_cast< ::google::protobuf::uint8>(tag) == (66 & 0xFF)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, this->mutable_solenoidconfiguration())));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated int32 powerRailConfiguration = 9;
+      case 9: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (72 & 0xFF)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 1, 72u, input, this->mutable_powerrailconfiguration())));
+        } else if (static_cast< ::google::protobuf::uint8>(tag) == (74 & 0xFF)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, this->mutable_powerrailconfiguration())));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated int32 sensorOverrideConfiguration = 10;
+      case 10: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (80 & 0xFF)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 1, 80u, input, this->mutable_sensoroverrideconfiguration())));
+        } else if (static_cast< ::google::protobuf::uint8>(tag) == (82 & 0xFF)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, this->mutable_sensoroverrideconfiguration())));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -1181,8 +1336,31 @@ void PodCommand::SerializeWithCachedSizes(
   }
 
   // optional bool automaticStateTransitions = 6;
-  if (cached_has_bits & 0x00000020u) {
+  if (cached_has_bits & 0x00000040u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(6, this->automaticstatetransitions(), output);
+  }
+
+  // optional bool hasCommand = 7 [default = false];
+  if (cached_has_bits & 0x00000020u) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(7, this->hascommand(), output);
+  }
+
+  // repeated int32 solenoidConfiguration = 8;
+  for (int i = 0, n = this->solenoidconfiguration_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(
+      8, this->solenoidconfiguration(i), output);
+  }
+
+  // repeated int32 powerRailConfiguration = 9;
+  for (int i = 0, n = this->powerrailconfiguration_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(
+      9, this->powerrailconfiguration(i), output);
+  }
+
+  // repeated int32 sensorOverrideConfiguration = 10;
+  for (int i = 0, n = this->sensoroverrideconfiguration_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(
+      10, this->sensoroverrideconfiguration(i), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -1230,9 +1408,26 @@ void PodCommand::SerializeWithCachedSizes(
   }
 
   // optional bool automaticStateTransitions = 6;
-  if (cached_has_bits & 0x00000020u) {
+  if (cached_has_bits & 0x00000040u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(6, this->automaticstatetransitions(), target);
   }
+
+  // optional bool hasCommand = 7 [default = false];
+  if (cached_has_bits & 0x00000020u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(7, this->hascommand(), target);
+  }
+
+  // repeated int32 solenoidConfiguration = 8;
+  target = ::google::protobuf::internal::WireFormatLite::
+    WriteInt32ToArray(8, this->solenoidconfiguration_, target);
+
+  // repeated int32 powerRailConfiguration = 9;
+  target = ::google::protobuf::internal::WireFormatLite::
+    WriteInt32ToArray(9, this->powerrailconfiguration_, target);
+
+  // repeated int32 sensorOverrideConfiguration = 10;
+  target = ::google::protobuf::internal::WireFormatLite::
+    WriteInt32ToArray(10, this->sensoroverrideconfiguration_, target);
 
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
@@ -1255,8 +1450,35 @@ size_t PodCommand::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  // repeated int32 solenoidConfiguration = 8;
+  {
+    size_t data_size = ::google::protobuf::internal::WireFormatLite::
+      Int32Size(this->solenoidconfiguration_);
+    total_size += 1 *
+                  ::google::protobuf::internal::FromIntSize(this->solenoidconfiguration_size());
+    total_size += data_size;
+  }
+
+  // repeated int32 powerRailConfiguration = 9;
+  {
+    size_t data_size = ::google::protobuf::internal::WireFormatLite::
+      Int32Size(this->powerrailconfiguration_);
+    total_size += 1 *
+                  ::google::protobuf::internal::FromIntSize(this->powerrailconfiguration_size());
+    total_size += data_size;
+  }
+
+  // repeated int32 sensorOverrideConfiguration = 10;
+  {
+    size_t data_size = ::google::protobuf::internal::WireFormatLite::
+      Int32Size(this->sensoroverrideconfiguration_);
+    total_size += 1 *
+                  ::google::protobuf::internal::FromIntSize(this->sensoroverrideconfiguration_size());
+    total_size += data_size;
+  }
+
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x0000003fu) {
+  if (cached_has_bits & 0x0000007fu) {
     // optional .ControlsInterfaceStates controlsInterfaceState = 1;
     if (cached_has_bits & 0x00000001u) {
       total_size += 1 +
@@ -1287,8 +1509,13 @@ size_t PodCommand::ByteSizeLong() const {
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->manuallvdcnodestate());
     }
 
-    // optional bool automaticStateTransitions = 6;
+    // optional bool hasCommand = 7 [default = false];
     if (cached_has_bits & 0x00000020u) {
+      total_size += 1 + 1;
+    }
+
+    // optional bool automaticStateTransitions = 6;
+    if (cached_has_bits & 0x00000040u) {
       total_size += 1 + 1;
     }
 
@@ -1320,8 +1547,11 @@ void PodCommand::MergeFrom(const PodCommand& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
+  solenoidconfiguration_.MergeFrom(from.solenoidconfiguration_);
+  powerrailconfiguration_.MergeFrom(from.powerrailconfiguration_);
+  sensoroverrideconfiguration_.MergeFrom(from.sensoroverrideconfiguration_);
   cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 0x0000003fu) {
+  if (cached_has_bits & 0x0000007fu) {
     if (cached_has_bits & 0x00000001u) {
       controlsinterfacestate_ = from.controlsinterfacestate_;
     }
@@ -1338,6 +1568,9 @@ void PodCommand::MergeFrom(const PodCommand& from) {
       manuallvdcnodestate_ = from.manuallvdcnodestate_;
     }
     if (cached_has_bits & 0x00000020u) {
+      hascommand_ = from.hascommand_;
+    }
+    if (cached_has_bits & 0x00000040u) {
       automaticstatetransitions_ = from.automaticstatetransitions_;
     }
     _has_bits_[0] |= cached_has_bits;
@@ -1370,11 +1603,15 @@ void PodCommand::InternalSwap(PodCommand* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_has_bits_[0], other->_has_bits_[0]);
+  solenoidconfiguration_.InternalSwap(&other->solenoidconfiguration_);
+  powerrailconfiguration_.InternalSwap(&other->powerrailconfiguration_);
+  sensoroverrideconfiguration_.InternalSwap(&other->sensoroverrideconfiguration_);
   swap(controlsinterfacestate_, other->controlsinterfacestate_);
   swap(manualpodstate_, other->manualpodstate_);
   swap(manualbrakenodestate_, other->manualbrakenodestate_);
   swap(manualmotorstate_, other->manualmotorstate_);
   swap(manuallvdcnodestate_, other->manuallvdcnodestate_);
+  swap(hascommand_, other->hascommand_);
   swap(automaticstatetransitions_, other->automaticstatetransitions_);
 }
 

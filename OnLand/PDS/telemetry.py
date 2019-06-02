@@ -57,7 +57,12 @@ def main():
                 json_pod_data = json_format.MessageToJson(pod_data)
                 sio.emit('pod_telemetry', json_pod_data)
                 pod_data = MessageToDict(pod_data)
-                log.debug("Telemetry: {}".format(pod_data))
+                log.warning("Telemetry: {}".format(pod_data))
+        else:
+            connection_status['status'] = 0
+            sio.emit('connection_updates', json.dumps(connection_status))
+            time.sleep(5)
+
 
     udp_socket.close()
     connection_status['status'] = 0

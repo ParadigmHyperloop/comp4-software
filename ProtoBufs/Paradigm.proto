@@ -53,12 +53,16 @@ enum LvdcNodeStates {
 
 // CONTROL LAPTOP COMMAND
 message PodCommand {
+    optional bool hasCommand = 7 [default = false];
     optional ControlsInterfaceStates controlsInterfaceState = 1;
     optional PodStates manualPodState = 2;
     optional BrakeNodeStates manualBrakeNodeState = 3;
     optional MotorStates manualMotorState = 4;
     optional LvdcNodeStates manualLvdcNodeState = 5;
     optional bool automaticStateTransitions = 6;
+    repeated int32 solenoidConfiguration = 8;
+    repeated int32 powerRailConfiguration = 9;
+    repeated int32 sensorOverrideConfiguration = 10;
 }
 
 // POD TELEMETRY

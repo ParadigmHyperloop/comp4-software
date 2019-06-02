@@ -1,6 +1,8 @@
 podState = 'psBooting';
 sensor_ranges = false;
 
+socket.emit('join_room','telemetry_updates');
+
 function getSensorRanges() {
     $.get($SCRIPT_ROOT + '/sensor_ranges', function (data) {
         sensor_ranges = JSON.parse(data)
@@ -9,7 +11,12 @@ function getSensorRanges() {
 
 function updateRowStatus(row,min,max,actual){
     if(actual > max || actual < min){
-        this.addClass()
+        row.addClass('danger');
+        row.removeClass('success');
+    }
+    else{
+        row.addClass('success');
+        row.removeClass('danger');
     }
 }
 
@@ -22,12 +29,19 @@ function ParsePodState(state) {
         podState = state
         $(".sensor-row").each(function (index) {
             sensor_name = $(this).attr('id');
-            new_min = sensor_ranges[sensor_name][state][0];
-            new_max = sensor_ranges[sensor_name][state][1];
-            current = $('#' + sensor_name + '-actual').text()
-            $('#' + sensor_name + '-min').text(new_min);
-            $('#' + sensor_name + '-max').text(new_max);
-            updateRowStatus($(this), new_min, new_max, current)
+            success = true;
+            try {
+              new_min = sensor_ranges[sensor_name][state][0];
+              new_max = sensor_ranges[sensor_name][state][1];
+            }
+            catch(error) {
+              console.error("Error getting max and min values for " + sensor_name + "in state " + podState);
+              success = false;
+            }
+            if(success){
+                $('#' + sensor_name + '-min').text(new_min);
+                $('#' + sensor_name + '-max').text(new_max);
+            }
         });
     }
 }
@@ -38,13 +52,17 @@ socket.on('pod_telemetry', function (data) {
     newPodState = data['podState'];
     ParsePodState(newPodState);
     for (sensor_name in data) {
+        value_cell = $("#" + sensor_name + "-actual");
         if(typeof(data[sensor_name]) == "boolean" || isNaN(data[sensor_name])){
-            $("#" + sensor_name + "-actual").text(data[sensor_name])
+            value_cell.text(data[sensor_name])
         }
         else{
-            $("#" + sensor_name + "-actual").text(data[sensor_name].toFixed(2))
+            min = $("#" + sensor_name + "-min").text();
+            max = $("#" + sensor_name + "-max").text();
+            row = $("#" + sensor_name);
+            value_cell.text(data[sensor_name].toFixed(2));
+            updateRowStatus(row,min,max,data[sensor_name]);
         }
-
     }
 });
 

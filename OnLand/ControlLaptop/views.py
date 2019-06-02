@@ -105,11 +105,11 @@ def ui(path):
 def dts():
     page = 'dts'
     title = get_page_title(page)
-    with open('ControlLaptop/LocalStorage/DtsSensors.json') as json_file:
+    with open('ControlLaptop/templates/_cards/tables/DtsSensors.json') as json_file:
         sensors = order_sensors(json.load(json_file))
-    with open('ControlLaptop/LocalStorage/BmsSensors.json') as json_file:
+    with open('ControlLaptop/templates/_cards/tables/BmsSensors.json') as json_file:
         bms_sensors = order_sensors(json.load(json_file))
-    with open('ControlLaptop/LocalStorage/InverterSensors.json') as json_file:
+    with open('ControlLaptop/templates/_cards/tables/InverterSensors.json') as json_file:
         inverter_sensors = order_sensors(json.load(json_file))
     return render_template(
         page+".html",
@@ -125,7 +125,7 @@ def dts():
 def proofTest():
     page = 'proofTest'
     title = get_page_title(page)
-    with open('ControlLaptop/LocalStorage/ProofTestSensors.json') as json_file:
+    with open('ControlLaptop/templates/_cards/tables/ProofTestSensors.json') as json_file:
         sensors = json.load(json_file)
     return render_template(
         page+".html",
@@ -150,7 +150,7 @@ def get_flight_profile_template():
 
 @app.route('/sensor_ranges')
 def add_numbers():
-    with open('ControlLaptop/LocalStorage/DtsSensors.json') as json_file:
+    with open('ControlLaptop/templates/_cards/tables/SensorRanges.json') as json_file:
         data = json_file.read().replace('\n', '')
     return data
 

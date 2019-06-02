@@ -1,4 +1,4 @@
-from flask_socketio import SocketIO
+from flask_socketio import SocketIO, join_room, leave_room
 from ControlLaptop.views import app
 import logging as log
 
@@ -21,30 +21,42 @@ def print_connect():
     log.debug('User Connected')
 
 
-@socket_io.on('command', namespace='/telemetry-subscribers')
+@socket_io.on('join_room')
+def complete_room_join(room):
+    join_room(room)
+
+
+@socket_io.on('command')
 def interface_command(command):
-    log.debug('command')
-    socket_io.emit("command", command, namespace='/command-subscribers')
+    socket_io.emit("command", command, room="command_updates")
 
 
 @socket_io.on('connection_updates')
 def pod_connection_updates(update):
-    log.debug(update)
-    socket_io.emit("connection_update", update, room='connection_updates', namespace='/controls-interface')
+    socket_io.emit("connection_update", update, room='connection_updates')
 
 
 @socket_io.on('pod_telemetry')
 def pod_telemetry(data):
-    log.debug("Transferring Telemetry")
-    socket_io.emit("pod_telemetry", data, namespace='/telemetry-subscribers')
+    socket_io.emit("pod_telemetry", data, room='telemetry_updates')
+
+
+@socket_io.on('manual_state_command')
+def manual_command(command):
+    socket_io.emit("manual_state_command", command, room='command_updates')
+
+
+@socket_io.on('manual_configuration_command')
+def manual_configuration_command(command):
+    socket_io.emit("manual_configuration_command", command, room='command_updates')
 
 
 @socket_io.on('logger_control')
-def logger_controls():
-    socket_io.emit('logger_control', namespace='/logger_controls')
+def logger_controls(data):
+    socket_io.emit('logger_control', data, room='logger_control_updates')
 
 
 @socket_io.on('logger_feedback')
 def logger_feedback(feedback):
-    socket_io.emit('logger_feedback', feedback, namespace='/telemetry-subscribers')
+    socket_io.emit('logger_feedback', feedback, room='logger_feedback_updates')
 
