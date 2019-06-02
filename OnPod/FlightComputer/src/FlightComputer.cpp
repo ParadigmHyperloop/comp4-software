@@ -35,33 +35,32 @@ int main( int32_t argc, char** argv)
     // Create Shared Memory
     PodNetwork sPodNetworkValues = {};
     PodValues sPodValues = {};
+    sPodValues.sensorFlags = std::vector<int32_t>(10,1);
+    sPodValues.connectionFlags = std::vector<int32_t>(10,1);
 
     // Network Configs
     initializer->updatePodNetworkValues(sPodNetworkValues, flightConfigurationParameters);
 
     sPodValues.podState = std::move(PodState::createState(psBooting));
-
-    //TelemetryManager Internal Network Thread
+    /*
+    //CAN Thread
     TelemetryManager canBusAccessCard = TelemetryManager(&sPodValues, &sPodNetworkValues);
     std::thread tCan(canThread, canBusAccessCard);
-
+*/
 
     //TelemetryManager Internal Network Thread
     TelemetryManager pPodInternalNetwork = TelemetryManager(&sPodValues, &sPodNetworkValues);
     pPodInternalNetwork.bWriteBreakNodeState = true;
     std::thread tServer(udpTelemetryThread, pPodInternalNetwork);
-/*
+
 	// Controls Interface Connection Thread
 	TelemetryManager pCommanderThread = TelemetryManager(&sPodValues, &sPodNetworkValues);
 	pCommanderThread.bWriteManualStates = 1;
 	pCommanderThread.bWriteControlsInterfaceState = 1;
 	std::thread tControlsInterfaceConnection(commanderThread, pCommanderThread);
 
+
  	tControlsInterfaceConnection.join();
-
-
-    */
-    tCan.join();
     tServer.join();
 
 
