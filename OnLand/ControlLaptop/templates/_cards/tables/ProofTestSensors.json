@@ -1,0 +1,14 @@
+{
+  "solenoid2": {
+    "name_pretty": "Vent Solenoid",
+    "order": 2
+  },
+  "pressureVesselTemperature": {
+    "name_pretty": "Pneumatic Temperature",
+    "order": 0
+  },
+    "highPressure": {
+    "name_pretty": "Tank Pressure",
+      "order": 1
+  }
+}

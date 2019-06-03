@@ -31,14 +31,21 @@ int32_t createCommanderServerSocket(int32_t serverPortNumber) {
 }
 
 void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
+    if(!podCommand.has_hascommand()){
+        return;
+    }
     if (podCommand.has_controlsinterfacestate()) {
         Pod->setControlsInterfaceState(podCommand.controlsinterfacestate());
     }
     if (podCommand.has_automaticstatetransitions()) {
         Pod->setAutomaticTransitions(podCommand.automaticstatetransitions());
     }
-    if (podCommand.has_manualbrakenodestate()) {
-       // LOG(INFO) << podCommand.manualbrakenodestate();
+    if (podCommand.has_manualbrakenodestate()){
+        BrakeNodeStates state = podCommand.manualbrakenodestate();
+        if(state == bnsSolenoidControl){
+            std::fill(Pod->telemetry->manualSolenoidConfiguration.begin(), Pod->telemetry->manualSolenoidConfiguration.end(), false);
+        }
+        LOG(INFO) << podCommand.manualbrakenodestate();
         Pod->setManualBrakeNodeState(podCommand.manualbrakenodestate());
     }
     if (podCommand.has_manuallvdcnodestate()) {
@@ -47,7 +54,11 @@ void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
     if (podCommand.has_manualpodstate()) {
         Pod->setManualPodState(podCommand.manualpodstate());
     }
-    return;
+    if (podCommand.solenoidconfiguration_size() >= 4){
+        for(int i = 0 ; i < 4 ; i++){
+            Pod->telemetry->manualSolenoidConfiguration[i] = podCommand.solenoidconfiguration(i);
+        }
+    }
 }
 
 int32_t unserializeProtoMessage(TelemetryManager *Pod, char buffer[], int32_t messageSize) {

@@ -44,7 +44,7 @@ void UdpConnection::getUpdate() {
     bzero(&buffer, sizeof buffer);
     ssize_t receivedPacketSize = recvfrom(this->_inboundSocket, buffer, 200, 0, nullptr, nullptr);
     if (receivedPacketSize != -1) {
-       // LOG(INFO) << receivedPacketSize << " Bytes received on " << this->_connectionName << buffer;
+        LOG(INFO) << receivedPacketSize << " Bytes received on " << this->_connectionName << buffer;
         try {
             this->parseUpdate(buffer, (int32_t) receivedPacketSize);
         }
@@ -146,6 +146,11 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_hvbatterypackcurrent(pod.telemetry->hvBatteryPackCurrent);
     protoMessage->set_hvbatterypackmaxcellvoltage(pod.telemetry->hvBatteryPackMaxCellVoltage);
     protoMessage->set_hvbatterypackminimumcellvoltage(pod.telemetry->hvBatteryPackMinimumCellVoltage);
+    protoMessage->set_maxigbttemperature(pod.telemetry->maxIgbtTemperature);
+    protoMessage->set_gatedrivertemperature(pod.telemetry->gateDriverTemperature);
+    protoMessage->set_invertercontrolboardtemperature(pod.telemetry->inverterControlBoardTemperature);
+    protoMessage->set_motortemperature(pod.telemetry->motorTemperature);
+    protoMessage->set_inverterbusvoltage(pod.telemetry->inverterBusVoltage);
     return protoMessage;
 }
 
@@ -160,8 +165,19 @@ BrakeNodeConnection::BrakeNodeConnection(TelemetryManager pod) : UdpConnection(p
 
 std::unique_ptr<google::protobuf::Message> BrakeNodeConnection::getProtoUpdateMessage() {
     std::unique_ptr<FcToBrakeNode> protoMessage (new FcToBrakeNode());
-    protoMessage->set_podstate(this->pod.telemetry->podState->getStateValue());
-    protoMessage->set_manualnodestate(this->pod.telemetry->manualBrakeNodeState);
+    BrakeNodeStates manualState = this->pod.telemetry->manualBrakeNodeState;
+    if(manualState == bnsNone){
+        protoMessage->set_nodestate(this->pod.telemetry->manualBrakeNodeState);
+        return protoMessage;
+    }
+    if(manualState == bnsSolenoidControl){
+        protoMessage->set_solenoid1config(this->pod.telemetry->manualSolenoidConfiguration[0]);
+        protoMessage->set_solenoid2config(this->pod.telemetry->manualSolenoidConfiguration[1]);
+        protoMessage->set_solenoid3config(this->pod.telemetry->manualSolenoidConfiguration[2]);
+        protoMessage->set_solenoid4config(this->pod.telemetry->manualSolenoidConfiguration[3]);
+    }
+    protoMessage->set_nodestate(this->pod.telemetry->manualBrakeNodeState);
+    //LOG(INFO)<<protoMessage->DebugString();
     return protoMessage;
 }
 
@@ -173,10 +189,10 @@ bool BrakeNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
     }
     this->pod.setSolenoid(protoMessage.brakesolenoidstate(),SOL1_INDEX);
     this->pod.setSolenoid(protoMessage.ventsolenoidstate(), SOL4_INDEX);
-    this->pod.setPressureVesselTemperature(protoMessage.pneumatictemperature());
+   // this->pod.setPressureVesselTemperature(protoMessage.pneumatictemperature());
     this->pod.setHighPressure(protoMessage.tankpressure());
     this->pod.setLowPressure(protoMessage.brakepressure(), LP1_INDEX);
-    this->pod.telemetry->rotorTemperature = protoMessage.rotortemperature(); //dts
+    //this->pod.telemetry->rotorTemperature = protoMessage.rotortemperature(); //dts
     return true;
 }
 

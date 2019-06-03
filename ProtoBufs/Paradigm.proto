@@ -7,6 +7,7 @@ enum BrakeNodeStates {
     bnsFlight          = 2;
     bnsBraking         = 3;
     bnsSolenoidControl = 4;
+    bnsNone            = 5;
 }
 
 enum PodStates {
@@ -19,6 +20,7 @@ enum PodStates {
     psCoasting      = 6;
     psBraking       = 7;
     psShutdown      = 8;
+    psNone          = 9;
 }
 
 enum MotorStates {
@@ -48,17 +50,22 @@ enum BatteryManagementStates {
 enum LvdcNodeStates {
     lvdcBooting = 0;
     lvdcStandby = 1;
-    lvdcFlight = 2;
+    lvdcFlight  = 2;
+    lvdcNone    = 3;
 }
 
 // CONTROL LAPTOP COMMAND
 message PodCommand {
+    optional bool hasCommand = 7 [default = false];
     optional ControlsInterfaceStates controlsInterfaceState = 1;
     optional PodStates manualPodState = 2;
     optional BrakeNodeStates manualBrakeNodeState = 3;
     optional MotorStates manualMotorState = 4;
     optional LvdcNodeStates manualLvdcNodeState = 5;
     optional bool automaticStateTransitions = 6;
+    repeated int32 solenoidConfiguration = 8;
+    repeated int32 powerRailConfiguration = 9;
+    repeated int32 sensorOverrideConfiguration = 10;
 }
 
 // POD TELEMETRY
@@ -93,11 +100,13 @@ message Telemetry {
     optional int32 resolverVelocity = 17;
 
     // Inverter
-    optional int32 inverterTemperature1 = 18;
-    optional int32 inverterTemperature2 = 19;
-    optional int32 inverterTemperature3 = 20;
-    optional int32 motorCurrent = 21;
-    optional int32 motorVoltage = 22;
+    optional int32 maxIgbtTemperature = 18;
+    optional int32 gateDriverTemperature = 19;
+    optional int32 inverterControlBoardTemperature = 20;
+    optional int32 motorTemperature = 21;
+    optional int32 inverterBusVoltage = 22;
+
+
     optional int32 inverterVoltages = 23;
     optional int32 inverterCurrents = 24;
     //optional int32 inverterInternalStates = 30;
@@ -158,12 +167,11 @@ message Telemetry {
 // FC => NODE COMMANDS
 message FcToBrakeNode {
     optional int32 packetNum = 1;
-    optional PodStates podState = 2;
-    optional BrakeNodeStates manualNodeState = 3;
-    optional bool solenoid1Config = 4;
-    optional bool solenoid2Config = 5;
-    optional bool solenoid3Config = 6;
-    optional bool solenoid4Config = 7;
+    optional BrakeNodeStates nodeState = 2;
+    optional bool solenoid1Config = 3;
+    optional bool solenoid2Config = 4;
+    optional bool solenoid3Config = 5;
+    optional bool solenoid4Config = 6;
 }
 
 message FcToLvdcNode {
@@ -236,7 +244,10 @@ message flightConfig {
     optional uint64 flightLength = 6;
     optional int32 heartbeatTimeout = 7 [default = 10000];
     optional string podDriver = 8;
-    optional string controlLaptopIpAddr = 9 [default = "192.168.0.103"];
+    optional string controlLaptopIpAddr = 9 [default = "127.0.0.1"];
+    optional uint64 brakeNodePort = 10 [default = 5555];
+    optional uint64 brakeNodeTimeout = 11 [default = 4000];
+    optional uint64 brakeNodeServerPort = 12 [default = 5555];
 }
 
 message DefaultFcToNode {

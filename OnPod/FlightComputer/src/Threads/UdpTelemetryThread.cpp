@@ -43,7 +43,7 @@ UdpConnection *getPdsConnection(TelemetryManager Pod){
 int32_t udpTelemetryThread(TelemetryManager Pod) {
 
     //Logging
-    el::Helpers::setThreadName("TelemetryManager Internal Network Thread");
+    el::Helpers::setThreadName("UDP");
     LOG(INFO) << "Starting TelemetryManager Internal Network Thread";
 
     try {
@@ -82,7 +82,8 @@ int32_t udpTelemetryThread(TelemetryManager Pod) {
             }
         }
         paradigmDataShuffle->giveUpdate(); //Send telemetry packet to PDS
-        std::this_thread::sleep_for(std::chrono::milliseconds(50));}
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
     for (auto &&node: nodes) {
         node->closeConnection();
         delete node;

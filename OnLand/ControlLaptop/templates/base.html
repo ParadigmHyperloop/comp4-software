@@ -17,8 +17,6 @@
     <!-- Bootstrap Toggle-->
     <link href="{{ url_for('static', filename='assets/vendors/bootstrap-toggle-master/css/bootstrap-toggle.min.css') }}" rel="stylesheet"/>
 
-    <!--  Fonts and icons -->
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="{{ url_for('static', filename='assets/vendors/fonts_icons/pe-icon-7-stroke.css') }}" rel="stylesheet" />
     <!-- Animated Icons -->
     <link href="{{ url_for('static',filename='assets/vendors/loaders/loaders.css') }}" rel="stylesheet">
@@ -50,9 +48,7 @@
     <!-- Animated Icons -->
     <script src="{{ url_for('static', filename='assets/vendors/loaders/loaders.css.js') }}"></script>
 
-
-
-    <script src="../static/assets/js/Dynamic.js"></script>
+    <script src="{{ url_for('static', filename='assets/js/Dynamic.js') }}"></script>
     <script src="{{ url_for('static', filename='assets/js/Base.js') }}"></script>
 
 
@@ -63,7 +59,7 @@
 
 
 {% block body %}
-<div class="wrapper">
+<div class="wrapper" style="width:100.01vw;">
    <!-- #sidebar Template -->
    {% include '_sidebar.html' %}
    <div class="main-panel">
