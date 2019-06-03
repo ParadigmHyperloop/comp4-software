@@ -1252,45 +1252,38 @@ class FcToBrakeNode :
   ::google::protobuf::int32 packetnum() const;
   void set_packetnum(::google::protobuf::int32 value);
 
-  // optional .PodStates podState = 2;
-  bool has_podstate() const;
-  void clear_podstate();
-  static const int kPodStateFieldNumber = 2;
-  ::PodStates podstate() const;
-  void set_podstate(::PodStates value);
+  // optional .BrakeNodeStates nodeState = 2;
+  bool has_nodestate() const;
+  void clear_nodestate();
+  static const int kNodeStateFieldNumber = 2;
+  ::BrakeNodeStates nodestate() const;
+  void set_nodestate(::BrakeNodeStates value);
 
-  // optional .BrakeNodeStates manualNodeState = 3;
-  bool has_manualnodestate() const;
-  void clear_manualnodestate();
-  static const int kManualNodeStateFieldNumber = 3;
-  ::BrakeNodeStates manualnodestate() const;
-  void set_manualnodestate(::BrakeNodeStates value);
-
-  // optional bool solenoid1Config = 4;
+  // optional bool solenoid1Config = 3;
   bool has_solenoid1config() const;
   void clear_solenoid1config();
-  static const int kSolenoid1ConfigFieldNumber = 4;
+  static const int kSolenoid1ConfigFieldNumber = 3;
   bool solenoid1config() const;
   void set_solenoid1config(bool value);
 
-  // optional bool solenoid2Config = 5;
+  // optional bool solenoid2Config = 4;
   bool has_solenoid2config() const;
   void clear_solenoid2config();
-  static const int kSolenoid2ConfigFieldNumber = 5;
+  static const int kSolenoid2ConfigFieldNumber = 4;
   bool solenoid2config() const;
   void set_solenoid2config(bool value);
 
-  // optional bool solenoid3Config = 6;
+  // optional bool solenoid3Config = 5;
   bool has_solenoid3config() const;
   void clear_solenoid3config();
-  static const int kSolenoid3ConfigFieldNumber = 6;
+  static const int kSolenoid3ConfigFieldNumber = 5;
   bool solenoid3config() const;
   void set_solenoid3config(bool value);
 
-  // optional bool solenoid4Config = 7;
+  // optional bool solenoid4Config = 6;
   bool has_solenoid4config() const;
   void clear_solenoid4config();
-  static const int kSolenoid4ConfigFieldNumber = 7;
+  static const int kSolenoid4ConfigFieldNumber = 6;
   bool solenoid4config() const;
   void set_solenoid4config(bool value);
 
@@ -1302,8 +1295,7 @@ class FcToBrakeNode :
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   ::google::protobuf::int32 packetnum_;
-  int podstate_;
-  int manualnodestate_;
+  int nodestate_;
   bool solenoid1config_;
   bool solenoid2config_;
   bool solenoid3config_;
@@ -2342,7 +2334,7 @@ class flightConfig :
   ::std::string* release_poddriver();
   void set_allocated_poddriver(::std::string* poddriver);
 
-  // optional string controlLaptopIpAddr = 9 [default = "192.168.1.100"];
+  // optional string controlLaptopIpAddr = 9 [default = "127.0.0.1"];
   bool has_controllaptopipaddr() const;
   void clear_controllaptopipaddr();
   static const int kControlLaptopIpAddrFieldNumber = 9;
@@ -4134,112 +4126,93 @@ inline void FcToBrakeNode::set_packetnum(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:FcToBrakeNode.packetNum)
 }
 
-// optional .PodStates podState = 2;
-inline bool FcToBrakeNode::has_podstate() const {
+// optional .BrakeNodeStates nodeState = 2;
+inline bool FcToBrakeNode::has_nodestate() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void FcToBrakeNode::clear_podstate() {
-  podstate_ = 0;
+inline void FcToBrakeNode::clear_nodestate() {
+  nodestate_ = 0;
   _has_bits_[0] &= ~0x00000002u;
 }
-inline ::PodStates FcToBrakeNode::podstate() const {
-  // @@protoc_insertion_point(field_get:FcToBrakeNode.podState)
-  return static_cast< ::PodStates >(podstate_);
+inline ::BrakeNodeStates FcToBrakeNode::nodestate() const {
+  // @@protoc_insertion_point(field_get:FcToBrakeNode.nodeState)
+  return static_cast< ::BrakeNodeStates >(nodestate_);
 }
-inline void FcToBrakeNode::set_podstate(::PodStates value) {
-  assert(::PodStates_IsValid(value));
-  _has_bits_[0] |= 0x00000002u;
-  podstate_ = value;
-  // @@protoc_insertion_point(field_set:FcToBrakeNode.podState)
-}
-
-// optional .BrakeNodeStates manualNodeState = 3;
-inline bool FcToBrakeNode::has_manualnodestate() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void FcToBrakeNode::clear_manualnodestate() {
-  manualnodestate_ = 0;
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline ::BrakeNodeStates FcToBrakeNode::manualnodestate() const {
-  // @@protoc_insertion_point(field_get:FcToBrakeNode.manualNodeState)
-  return static_cast< ::BrakeNodeStates >(manualnodestate_);
-}
-inline void FcToBrakeNode::set_manualnodestate(::BrakeNodeStates value) {
+inline void FcToBrakeNode::set_nodestate(::BrakeNodeStates value) {
   assert(::BrakeNodeStates_IsValid(value));
-  _has_bits_[0] |= 0x00000004u;
-  manualnodestate_ = value;
-  // @@protoc_insertion_point(field_set:FcToBrakeNode.manualNodeState)
+  _has_bits_[0] |= 0x00000002u;
+  nodestate_ = value;
+  // @@protoc_insertion_point(field_set:FcToBrakeNode.nodeState)
 }
 
-// optional bool solenoid1Config = 4;
+// optional bool solenoid1Config = 3;
 inline bool FcToBrakeNode::has_solenoid1config() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void FcToBrakeNode::clear_solenoid1config() {
   solenoid1config_ = false;
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline bool FcToBrakeNode::solenoid1config() const {
   // @@protoc_insertion_point(field_get:FcToBrakeNode.solenoid1Config)
   return solenoid1config_;
 }
 inline void FcToBrakeNode::set_solenoid1config(bool value) {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000004u;
   solenoid1config_ = value;
   // @@protoc_insertion_point(field_set:FcToBrakeNode.solenoid1Config)
 }
 
-// optional bool solenoid2Config = 5;
+// optional bool solenoid2Config = 4;
 inline bool FcToBrakeNode::has_solenoid2config() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void FcToBrakeNode::clear_solenoid2config() {
   solenoid2config_ = false;
-  _has_bits_[0] &= ~0x00000010u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline bool FcToBrakeNode::solenoid2config() const {
   // @@protoc_insertion_point(field_get:FcToBrakeNode.solenoid2Config)
   return solenoid2config_;
 }
 inline void FcToBrakeNode::set_solenoid2config(bool value) {
-  _has_bits_[0] |= 0x00000010u;
+  _has_bits_[0] |= 0x00000008u;
   solenoid2config_ = value;
   // @@protoc_insertion_point(field_set:FcToBrakeNode.solenoid2Config)
 }
 
-// optional bool solenoid3Config = 6;
+// optional bool solenoid3Config = 5;
 inline bool FcToBrakeNode::has_solenoid3config() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 inline void FcToBrakeNode::clear_solenoid3config() {
   solenoid3config_ = false;
-  _has_bits_[0] &= ~0x00000020u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline bool FcToBrakeNode::solenoid3config() const {
   // @@protoc_insertion_point(field_get:FcToBrakeNode.solenoid3Config)
   return solenoid3config_;
 }
 inline void FcToBrakeNode::set_solenoid3config(bool value) {
-  _has_bits_[0] |= 0x00000020u;
+  _has_bits_[0] |= 0x00000010u;
   solenoid3config_ = value;
   // @@protoc_insertion_point(field_set:FcToBrakeNode.solenoid3Config)
 }
 
-// optional bool solenoid4Config = 7;
+// optional bool solenoid4Config = 6;
 inline bool FcToBrakeNode::has_solenoid4config() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
 inline void FcToBrakeNode::clear_solenoid4config() {
   solenoid4config_ = false;
-  _has_bits_[0] &= ~0x00000040u;
+  _has_bits_[0] &= ~0x00000020u;
 }
 inline bool FcToBrakeNode::solenoid4config() const {
   // @@protoc_insertion_point(field_get:FcToBrakeNode.solenoid4Config)
   return solenoid4config_;
 }
 inline void FcToBrakeNode::set_solenoid4config(bool value) {
-  _has_bits_[0] |= 0x00000040u;
+  _has_bits_[0] |= 0x00000020u;
   solenoid4config_ = value;
   // @@protoc_insertion_point(field_set:FcToBrakeNode.solenoid4Config)
 }
@@ -5214,7 +5187,7 @@ inline void flightConfig::set_allocated_poddriver(::std::string* poddriver) {
   // @@protoc_insertion_point(field_set_allocated:flightConfig.podDriver)
 }
 
-// optional string controlLaptopIpAddr = 9 [default = "192.168.1.100"];
+// optional string controlLaptopIpAddr = 9 [default = "127.0.0.1"];
 inline bool flightConfig::has_controllaptopipaddr() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }

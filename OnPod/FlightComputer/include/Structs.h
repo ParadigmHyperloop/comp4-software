@@ -59,6 +59,7 @@ struct PodValues {
     float lowPressure4;
     float highPressure;
     float pressureVesselTemperature;
+    std::vector<bool> manualSolenoidConfiguration = {};
 
     // DTS
     float rotorTemperature;

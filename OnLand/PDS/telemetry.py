@@ -62,8 +62,6 @@ def main():
             connection_status['status'] = 0
             sio.emit('connection_updates', json.dumps(connection_status))
             time.sleep(5)
-
-
     udp_socket.close()
     connection_status['status'] = 0
     sio.emit('connection_updates', json.dumps(connection_status))

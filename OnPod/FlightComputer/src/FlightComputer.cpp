@@ -37,6 +37,8 @@ int main( int32_t argc, char** argv)
     PodValues sPodValues = {};
     sPodValues.sensorFlags = std::vector<int32_t>(10,1);
     sPodValues.connectionFlags = std::vector<int32_t>(10,1);
+    sPodValues.manualSolenoidConfiguration = std::vector<bool>(4,false);
+    sPodValues.manualBrakeNodeState = bnsNone;
 
     // Network Configs
     initializer->updatePodNetworkValues(sPodNetworkValues, flightConfigurationParameters);

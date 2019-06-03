@@ -31,7 +31,7 @@ class PodTcpConnection:
             return False
         except Exception as e:
             self.close()
-            raise e
+            return False
 
         self._sock.setblocking(False)
         self._connected = True
