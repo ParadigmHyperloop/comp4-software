@@ -1,6 +1,6 @@
-import logging as log
 import socket
-
+import logging as log
+from ControlLaptop import Paradigm_pb2
 from ControlLaptop.LocalStorage.ConfigurationSotrage import DEFAULT_CONFIGURATION
 from ControlLaptop.Paradigm_pb2 import flightConfig
 from config import POD_IP, POD_CONFIG_PORT
@@ -33,6 +33,7 @@ class PodCommunicator:
             self._pod_socket.settimeout(None)
         except socket.error as e:
             raise Exception("Error connecting to pod configuration server : " + str(e))
+
 
     def send_configuration(self, configuration=DEFAULT_CONFIGURATION):
         if not self._connected:
