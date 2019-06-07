@@ -188,7 +188,7 @@ std::unique_ptr<google::protobuf::Message> BrakeNodeConnection::getProtoUpdateMe
     protoMessage->set_packetnum(this->getNewPacketId());
     BrakeNodeStates manualState = this->pod.telemetry->manualBrakeNodeState;
     if(manualState == bnsNone){
-        protoMessage->set_nodestate(this->pod.telemetry->manualBrakeNodeState);
+        protoMessage->set_nodestate(this->pod.telemetry->brakeNodeState);
         return protoMessage;
     }
     if(manualState == bnsSolenoidControl){

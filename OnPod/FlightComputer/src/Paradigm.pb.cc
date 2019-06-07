@@ -172,7 +172,7 @@ static void InitDefaultsflightConfig_Paradigm_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::flightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.DefaultConstruct();
-  *::flightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get_mutable() = ::std::string("127.0.0.1", 9);
+  *::flightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get_mutable() = ::std::string("192.168.1.101", 13);
   ::google::protobuf::internal::OnShutdownDestroyString(
       ::flightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get_mutable());
   {
@@ -677,38 +677,38 @@ const char descriptor_table_protodef_Paradigm_2eproto[] =
   "\007 \002(\002\022\024\n\014lowPressure1\030\010 \002(\002\022\024\n\014lowPressu"
   "re2\030\t \002(\002\022\024\n\014lowPressure3\030\n \002(\002\022\031\n\021lowPr"
   "essureCommon\030\013 \002(\002\022\034\n\024pneumaticTemperatu"
-  "re\030\014 \002(\002\022\033\n\023coolantTankPressure\030\r \002(\002\"\340\002"
+  "re\030\014 \002(\002\022\033\n\023coolantTankPressure\030\r \002(\002\"\345\002"
   "\n\014flightConfig\022\030\n\020retrievalTimeout\030\001 \001(\r"
   "\022\025\n\rmaxFlightTime\030\002 \001(\004\022\022\n\nmotorSpeed\030\003 "
   "\001(\004\022\036\n\020pdsTelemetryPort\030\004 \001(\005:\0047000\022\031\n\013c"
   "ommandPort\030\005 \001(\005:\0046000\022\024\n\014flightLength\030\006"
   " \001(\004\022\037\n\020heartbeatTimeout\030\007 \001(\005:\00510000\022\021\n"
-  "\tpodDriver\030\010 \001(\t\022&\n\023controlLaptopIpAddr\030"
-  "\t \001(\t:\t127.0.0.1\022\033\n\rbrakeNodePort\030\n \001(\004:"
-  "\0045555\022\036\n\020brakeNodeTimeout\030\013 \001(\004:\0044000\022!\n"
-  "\023brakeNodeServerPort\030\014 \001(\004:\0045555\"/\n\017Defa"
-  "ultFcToNode\022\034\n\010podState\030\001 \001(\0162\n.PodState"
-  "s*u\n\017BrakeNodeStates\022\016\n\nbnsBooting\020\000\022\016\n\n"
-  "bnsStandby\020\001\022\r\n\tbnsFlight\020\002\022\016\n\nbnsBrakin"
-  "g\020\003\022\026\n\022bnsSolenoidControl\020\004\022\013\n\007bnsNone\020\005"
-  "*\244\001\n\tPodStates\022\r\n\tpsBooting\020\000\022\r\n\tpsStand"
-  "by\020\001\022\014\n\010psArming\020\002\022\013\n\007psArmed\020\003\022\017\n\013psPre"
-  "Flight\020\004\022\022\n\016psAcceleration\020\005\022\016\n\npsCoasti"
-  "ng\020\006\022\r\n\tpsBraking\020\007\022\016\n\npsShutdown\020\010\022\n\n\006p"
-  "sNone\020\t*C\n\013MotorStates\022\t\n\005msOff\020\000\022\016\n\nmsC"
-  "harging\020\001\022\n\n\006msIdle\020\002\022\r\n\tmsEngaged\020\003*b\n\027"
-  "ControlsInterfaceStates\022\r\n\tciStandby\020\000\022\t"
-  "\n\005ciArm\020\001\022\014\n\010ciFlight\020\002\022\023\n\017ciEmergencySt"
-  "op\020\003\022\n\n\006ciNone\020\004*-\n\016InverterStates\022\n\n\006is"
-  "None\020\000\022\017\n\013isConnected\020\001*)\n\027BatteryManage"
-  "mentStates\022\016\n\nbmsNominal\020\000*P\n\016LvdcNodeSt"
-  "ates\022\017\n\013lvdcBooting\020\000\022\017\n\013lvdcStandby\020\001\022\016"
-  "\n\nlvdcFlight\020\002\022\014\n\010lvdcNone\020\003"
+  "\tpodDriver\030\010 \001(\t\022*\n\023controlLaptopIpAddr\030"
+  "\t \001(\t:\r192.168.1.101\022\033\n\rbrakeNodePort\030\n "
+  "\001(\004:\0045555\022\036\n\020brakeNodeTimeout\030\013 \001(\004:\004400"
+  "0\022\"\n\023brakeNodeServerPort\030\014 \001(\004:\00556641\"/\n"
+  "\017DefaultFcToNode\022\034\n\010podState\030\001 \001(\0162\n.Pod"
+  "States*u\n\017BrakeNodeStates\022\016\n\nbnsBooting\020"
+  "\000\022\016\n\nbnsStandby\020\001\022\r\n\tbnsFlight\020\002\022\016\n\nbnsB"
+  "raking\020\003\022\026\n\022bnsSolenoidControl\020\004\022\013\n\007bnsN"
+  "one\020\005*\244\001\n\tPodStates\022\r\n\tpsBooting\020\000\022\r\n\tps"
+  "Standby\020\001\022\014\n\010psArming\020\002\022\013\n\007psArmed\020\003\022\017\n\013"
+  "psPreFlight\020\004\022\022\n\016psAcceleration\020\005\022\016\n\npsC"
+  "oasting\020\006\022\r\n\tpsBraking\020\007\022\016\n\npsShutdown\020\010"
+  "\022\n\n\006psNone\020\t*C\n\013MotorStates\022\t\n\005msOff\020\000\022\016"
+  "\n\nmsCharging\020\001\022\n\n\006msIdle\020\002\022\r\n\tmsEngaged\020"
+  "\003*b\n\027ControlsInterfaceStates\022\r\n\tciStandb"
+  "y\020\000\022\t\n\005ciArm\020\001\022\014\n\010ciFlight\020\002\022\023\n\017ciEmerge"
+  "ncyStop\020\003\022\n\n\006ciNone\020\004*-\n\016InverterStates\022"
+  "\n\n\006isNone\020\000\022\017\n\013isConnected\020\001*)\n\027BatteryM"
+  "anagementStates\022\016\n\nbmsNominal\020\000*P\n\016LvdcN"
+  "odeStates\022\017\n\013lvdcBooting\020\000\022\017\n\013lvdcStandb"
+  "y\020\001\022\016\n\nlvdcFlight\020\002\022\014\n\010lvdcNone\020\003"
   ;
 ::google::protobuf::internal::DescriptorTable descriptor_table_Paradigm_2eproto = {
   false, InitDefaults_Paradigm_2eproto, 
   descriptor_table_protodef_Paradigm_2eproto,
-  "Paradigm.proto", &assign_descriptors_table_Paradigm_2eproto, 4788,
+  "Paradigm.proto", &assign_descriptors_table_Paradigm_2eproto, 4793,
 };
 
 void AddDescriptors_Paradigm_2eproto() {
@@ -9073,7 +9073,7 @@ void flightConfig::SharedCtor() {
   commandport_ = 6000;
   brakenodeport_ = PROTOBUF_ULONGLONG(5555);
   brakenodetimeout_ = PROTOBUF_ULONGLONG(4000);
-  brakenodeserverport_ = PROTOBUF_ULONGLONG(5555);
+  brakenodeserverport_ = PROTOBUF_ULONGLONG(56641);
 }
 
 flightConfig::~flightConfig() {
@@ -9121,7 +9121,7 @@ void flightConfig::Clear() {
     commandport_ = 6000;
     brakenodeport_ = PROTOBUF_ULONGLONG(5555);
     brakenodetimeout_ = PROTOBUF_ULONGLONG(4000);
-    brakenodeserverport_ = PROTOBUF_ULONGLONG(5555);
+    brakenodeserverport_ = PROTOBUF_ULONGLONG(56641);
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -9205,7 +9205,7 @@ const char* flightConfig::_InternalParse(const char* begin, const char* end, voi
         ptr += size;
         break;
       }
-      // optional string controlLaptopIpAddr = 9 [default = "127.0.0.1"];
+      // optional string controlLaptopIpAddr = 9 [default = "192.168.1.101"];
       case 9: {
         if (static_cast<::google::protobuf::uint8>(tag) != 74) goto handle_unusual;
         ptr = ::google::protobuf::io::ReadSize(ptr, &size);
@@ -9235,7 +9235,7 @@ const char* flightConfig::_InternalParse(const char* begin, const char* end, voi
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // optional uint64 brakeNodeServerPort = 12 [default = 5555];
+      // optional uint64 brakeNodeServerPort = 12 [default = 56641];
       case 12: {
         if (static_cast<::google::protobuf::uint8>(tag) != 96) goto handle_unusual;
         msg->set_brakenodeserverport(::google::protobuf::internal::ReadVarint(&ptr));
@@ -9382,7 +9382,7 @@ bool flightConfig::MergePartialFromCodedStream(
         break;
       }
 
-      // optional string controlLaptopIpAddr = 9 [default = "127.0.0.1"];
+      // optional string controlLaptopIpAddr = 9 [default = "192.168.1.101"];
       case 9: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (74 & 0xFF)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
@@ -9423,7 +9423,7 @@ bool flightConfig::MergePartialFromCodedStream(
         break;
       }
 
-      // optional uint64 brakeNodeServerPort = 12 [default = 5555];
+      // optional uint64 brakeNodeServerPort = 12 [default = 56641];
       case 12: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (96 & 0xFF)) {
           HasBitSetters::set_has_brakenodeserverport(this);
@@ -9509,7 +9509,7 @@ void flightConfig::SerializeWithCachedSizes(
       8, this->poddriver(), output);
   }
 
-  // optional string controlLaptopIpAddr = 9 [default = "127.0.0.1"];
+  // optional string controlLaptopIpAddr = 9 [default = "192.168.1.101"];
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->controllaptopipaddr().data(), static_cast<int>(this->controllaptopipaddr().length()),
@@ -9529,7 +9529,7 @@ void flightConfig::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt64(11, this->brakenodetimeout(), output);
   }
 
-  // optional uint64 brakeNodeServerPort = 12 [default = 5555];
+  // optional uint64 brakeNodeServerPort = 12 [default = 56641];
   if (cached_has_bits & 0x00000800u) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt64(12, this->brakenodeserverport(), output);
   }
@@ -9594,7 +9594,7 @@ void flightConfig::SerializeWithCachedSizes(
         8, this->poddriver(), target);
   }
 
-  // optional string controlLaptopIpAddr = 9 [default = "127.0.0.1"];
+  // optional string controlLaptopIpAddr = 9 [default = "192.168.1.101"];
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->controllaptopipaddr().data(), static_cast<int>(this->controllaptopipaddr().length()),
@@ -9615,7 +9615,7 @@ void flightConfig::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(11, this->brakenodetimeout(), target);
   }
 
-  // optional uint64 brakeNodeServerPort = 12 [default = 5555];
+  // optional uint64 brakeNodeServerPort = 12 [default = 56641];
   if (cached_has_bits & 0x00000800u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(12, this->brakenodeserverport(), target);
   }
@@ -9650,7 +9650,7 @@ size_t flightConfig::ByteSizeLong() const {
           this->poddriver());
     }
 
-    // optional string controlLaptopIpAddr = 9 [default = "127.0.0.1"];
+    // optional string controlLaptopIpAddr = 9 [default = "192.168.1.101"];
     if (cached_has_bits & 0x00000002u) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -9722,7 +9722,7 @@ size_t flightConfig::ByteSizeLong() const {
           this->brakenodetimeout());
     }
 
-    // optional uint64 brakeNodeServerPort = 12 [default = 5555];
+    // optional uint64 brakeNodeServerPort = 12 [default = 56641];
     if (cached_has_bits & 0x00000800u) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::UInt64Size(

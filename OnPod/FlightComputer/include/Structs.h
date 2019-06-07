@@ -12,7 +12,6 @@ struct PodValues {
     std::unique_ptr<PodState> podState;
     ControlsInterfaceStates controlsInterfaceState;
     MotorStates motorState;
-    MotorStates motorState;
     BrakeNodeStates brakeNodeState;
     LvdcNodeStates lvdcNodeState;
 

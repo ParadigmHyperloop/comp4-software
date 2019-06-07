@@ -2334,7 +2334,7 @@ class flightConfig :
   ::std::string* release_poddriver();
   void set_allocated_poddriver(::std::string* poddriver);
 
-  // optional string controlLaptopIpAddr = 9 [default = "127.0.0.1"];
+  // optional string controlLaptopIpAddr = 9 [default = "192.168.1.101"];
   bool has_controllaptopipaddr() const;
   void clear_controllaptopipaddr();
   static const int kControlLaptopIpAddrFieldNumber = 9;
@@ -2412,7 +2412,7 @@ class flightConfig :
   ::google::protobuf::uint64 brakenodetimeout() const;
   void set_brakenodetimeout(::google::protobuf::uint64 value);
 
-  // optional uint64 brakeNodeServerPort = 12 [default = 5555];
+  // optional uint64 brakeNodeServerPort = 12 [default = 56641];
   bool has_brakenodeserverport() const;
   void clear_brakenodeserverport();
   static const int kBrakeNodeServerPortFieldNumber = 12;
@@ -5187,7 +5187,7 @@ inline void flightConfig::set_allocated_poddriver(::std::string* poddriver) {
   // @@protoc_insertion_point(field_set_allocated:flightConfig.podDriver)
 }
 
-// optional string controlLaptopIpAddr = 9 [default = "127.0.0.1"];
+// optional string controlLaptopIpAddr = 9 [default = "192.168.1.101"];
 inline bool flightConfig::has_controllaptopipaddr() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -5283,12 +5283,12 @@ inline void flightConfig::set_brakenodetimeout(::google::protobuf::uint64 value)
   // @@protoc_insertion_point(field_set:flightConfig.brakeNodeTimeout)
 }
 
-// optional uint64 brakeNodeServerPort = 12 [default = 5555];
+// optional uint64 brakeNodeServerPort = 12 [default = 56641];
 inline bool flightConfig::has_brakenodeserverport() const {
   return (_has_bits_[0] & 0x00000800u) != 0;
 }
 inline void flightConfig::clear_brakenodeserverport() {
-  brakenodeserverport_ = PROTOBUF_ULONGLONG(5555);
+  brakenodeserverport_ = PROTOBUF_ULONGLONG(56641);
   _has_bits_[0] &= ~0x00000800u;
 }
 inline ::google::protobuf::uint64 flightConfig::brakenodeserverport() const {

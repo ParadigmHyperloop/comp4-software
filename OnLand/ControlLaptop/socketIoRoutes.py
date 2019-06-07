@@ -60,3 +60,7 @@ def logger_controls(data):
 def logger_feedback(feedback):
     socket_io.emit('logger_feedback', feedback, room='logger_feedback_updates')
 
+
+@socket_io.on('cycle_process')
+def logger_feedback(feedback):
+    socket_io.emit('cycle_process', feedback, room='process_control')

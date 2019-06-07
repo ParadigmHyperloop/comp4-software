@@ -17,7 +17,6 @@ INITIALIZE_EASYLOGGINGPP
 
 using namespace std;
 
-
 // Factory for initializing the telemetry struct
 PodValues createTelemetryStruct(){
     PodValues sPodValues = {};
@@ -36,6 +35,7 @@ PodValues createTelemetryStruct(){
     sPodValues.manualPodState = psStandby;
     sPodValues.manualLvdcNodeState = lvdcNone;
     sPodValues.automaticTransitions = true;
+    return sPodValues;
 }
 
 

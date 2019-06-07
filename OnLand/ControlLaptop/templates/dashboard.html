@@ -2,18 +2,16 @@
 
 {% block content %}
     <div class="row">
-       <div class="col-md-3">
+       <div class="col-md-2">
           {% include '_cards/tanks.html' %}
        </div>
-       <div class="col-md-3">
+       <div class="col-md-4">
           {% include '_cards/environment.html' %}
        </div>
-       <div class="col-md-3">
+       <div class="col-md-4">
           {% include '_cards/navigation.html' %}
        </div>
-       <div class="col-md-3">
-          {% include '_cards/electrical.html' %}
-       </div>
+        {% include '_cards/connectionCards.html' %}
     </div>
     <div class="row">
        <div class="col-md-6">
