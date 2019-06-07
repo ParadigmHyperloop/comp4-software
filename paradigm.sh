@@ -1,6 +1,7 @@
 #!/bin/bash
 
-:'requirments: 
+:'
+Requirments: 
  	git
 	 	sudo apt-get install git
 	python3
@@ -18,14 +19,16 @@
  		sudo make install
 		sudo ldconfig
 
-you will also likely have to:
+You will also likely have to:
 	chmod u+x paradigm.sh
+
+Search for your systems list of "startup applications" and add this script to it
 '
 
 file="/comp4-software/"
 if [ ! -f "$file"]
 then 
-	cd comp4-software/OnLand
+	continue
 else
 	echo "setting up project"
 	git clone https://github.com/ParadigmHyperloop/comp4-software.git
@@ -36,8 +39,8 @@ fi
 echo "updating project"
 git pull
 source comp4-software/OnLand/bin/activate
-comp4-software/OnLand/bin/pip install -r comp4-software/OnLand/requirements.txt
 ./comp4-software/ProtoBufs/UpdateProtos.sh
+comp4-software/OnLand/bin/pip install -r comp4-software/OnLand/requirements.txt
 
 echo "running project"
 cd comp4-software/OnLand
