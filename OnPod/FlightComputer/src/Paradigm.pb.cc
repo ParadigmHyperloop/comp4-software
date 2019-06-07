@@ -696,19 +696,19 @@ const char descriptor_table_protodef_Paradigm_2eproto[] =
   "Flight\020\004\022\022\n\016psAcceleration\020\005\022\016\n\npsCoasti"
   "ng\020\006\022\r\n\tpsBraking\020\007\022\016\n\npsShutdown\020\010\022\n\n\006p"
   "sNone\020\t*C\n\013MotorStates\022\t\n\005msOff\020\000\022\016\n\nmsC"
-  "harging\020\001\022\n\n\006msIdle\020\002\022\r\n\tmsEngaged\020\003*p\n\027"
+  "harging\020\001\022\n\n\006msIdle\020\002\022\r\n\tmsEngaged\020\003*b\n\027"
   "ControlsInterfaceStates\022\r\n\tciStandby\020\000\022\t"
-  "\n\005ciArm\020\001\022\014\n\010ciFlight\020\002\022\014\n\010ciDisarm\020\003\022\n\n"
-  "\006ciTaxi\020\004\022\023\n\017ciEmergencyStop\020\005* \n\016Invert"
-  "erStates\022\016\n\niConnected\020\000*)\n\027BatteryManag"
-  "ementStates\022\016\n\nbmsNominal\020\000*P\n\016LvdcNodeS"
-  "tates\022\017\n\013lvdcBooting\020\000\022\017\n\013lvdcStandby\020\001\022"
-  "\016\n\nlvdcFlight\020\002\022\014\n\010lvdcNone\020\003"
+  "\n\005ciArm\020\001\022\014\n\010ciFlight\020\002\022\023\n\017ciEmergencySt"
+  "op\020\003\022\n\n\006ciNone\020\004*-\n\016InverterStates\022\n\n\006is"
+  "None\020\000\022\017\n\013isConnected\020\001*)\n\027BatteryManage"
+  "mentStates\022\016\n\nbmsNominal\020\000*P\n\016LvdcNodeSt"
+  "ates\022\017\n\013lvdcBooting\020\000\022\017\n\013lvdcStandby\020\001\022\016"
+  "\n\nlvdcFlight\020\002\022\014\n\010lvdcNone\020\003"
   ;
 ::google::protobuf::internal::DescriptorTable descriptor_table_Paradigm_2eproto = {
   false, InitDefaults_Paradigm_2eproto, 
   descriptor_table_protodef_Paradigm_2eproto,
-  "Paradigm.proto", &assign_descriptors_table_Paradigm_2eproto, 4789,
+  "Paradigm.proto", &assign_descriptors_table_Paradigm_2eproto, 4788,
 };
 
 void AddDescriptors_Paradigm_2eproto() {
@@ -787,7 +787,6 @@ bool ControlsInterfaceStates_IsValid(int value) {
     case 2:
     case 3:
     case 4:
-    case 5:
       return true;
     default:
       return false;
@@ -801,6 +800,7 @@ const ::google::protobuf::EnumDescriptor* InverterStates_descriptor() {
 bool InverterStates_IsValid(int value) {
   switch (value) {
     case 0:
+    case 1:
       return true;
     default:
       return false;

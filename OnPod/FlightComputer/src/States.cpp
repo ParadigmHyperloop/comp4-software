@@ -115,9 +115,14 @@ bool Standby::testTransitions() {
         // Waiting on node status
         return false;
     }
-    if(this->pod->telemetry->terminalState == ciArm){
+    if(this->pod->telemetry->controlsInterfaceState == ciArm){
         this->setupTransition(psArming, (std::string)"Arm Command Received");
         return true;
     }
     return false;
 }
+
+/*
+ *  ******************** ARMING ***********************8
+ */
+

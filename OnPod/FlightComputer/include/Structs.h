@@ -10,7 +10,8 @@ class PodState;
 struct PodValues {
     // States
     std::unique_ptr<PodState> podState;
-    ControlsInterfaceStates terminalState;
+    ControlsInterfaceStates controlsInterfaceState;
+    MotorStates motorState;
     MotorStates motorState;
     BrakeNodeStates brakeNodeState;
     LvdcNodeStates lvdcNodeState;
@@ -23,8 +24,8 @@ struct PodValues {
     bool automaticTransitions;
 
     //ConnectionsArray
-    std::vector<int32_t> connectionFlags = {false, false, false, false, false};
-    std::vector<int32_t> sensorFlags = {};
+    std::vector<int32_t> connectionFlags;
+    std::vector<int32_t> sensorFlags;
 
     // HV-BMS
     float hvBatteryPackVoltage;

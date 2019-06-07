@@ -23,7 +23,7 @@ int32_t TelemetryManager::setPodState(PodStates newState, const std::string &rea
 
 void TelemetryManager::setControlsInterfaceState(ControlsInterfaceStates eTerminalState) {
     if (this->bWriteControlsInterfaceState) {
-        this->telemetry->terminalState = eTerminalState;
+        this->telemetry->controlsInterfaceState = eTerminalState;
     } else {
         LOG(INFO) << "ERROR: Permission Denied for writing Controls Interface State";
     }

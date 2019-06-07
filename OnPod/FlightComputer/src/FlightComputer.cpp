@@ -13,8 +13,31 @@ INITIALIZE_EASYLOGGINGPP
 #include "UdpTelemetryThread.h"
 #include "CanBusThread.h"
 #include "Constants/Constants.h"
+#include "Constants/SensorConfig.h"
 
 using namespace std;
+
+
+// Factory for initializing the telemetry struct
+PodValues createTelemetryStruct(){
+    PodValues sPodValues = {};
+    // Vectors
+    sPodValues.sensorFlags = std::vector<int32_t>(TOTAL_SENSOR_COUNT, 1);
+    sPodValues.connectionFlags = std::vector<int32_t>(TOTAL_CONNECTION_COUNT,1);
+    // States
+    sPodValues.podState = std::move(PodState::createState(psStandby));
+    sPodValues.controlsInterfaceState = ciNone;
+    sPodValues.brakeNodeState = bnsNone;
+    sPodValues.lvdcNodeState = lvdcNone;
+
+    // Manual Control
+    sPodValues.manualSolenoidConfiguration = std::vector<bool>(4,false);
+    sPodValues.manualBrakeNodeState = bnsNone;
+    sPodValues.manualPodState = psStandby;
+    sPodValues.manualLvdcNodeState = lvdcNone;
+    sPodValues.automaticTransitions = true;
+}
+
 
 int main( int32_t argc, char** argv)
 {
@@ -34,16 +57,12 @@ int main( int32_t argc, char** argv)
 
     // Create Shared Memory
     PodNetwork sPodNetworkValues = {};
-    PodValues sPodValues = {};
-    sPodValues.sensorFlags = std::vector<int32_t>(10,1);
-    sPodValues.connectionFlags = std::vector<int32_t>(10,1);
-    sPodValues.manualSolenoidConfiguration = std::vector<bool>(4,false);
-    sPodValues.manualBrakeNodeState = bnsNone;
+    PodValues sPodValues = createTelemetryStruct();
 
     // Network Configs
     initializer->updatePodNetworkValues(sPodNetworkValues, flightConfigurationParameters);
 
-    sPodValues.podState = std::move(PodState::createState(psStandby));
+
 
     /*
     //CAN Thread

@@ -169,13 +169,12 @@ enum ControlsInterfaceStates {
   ciStandby = 0,
   ciArm = 1,
   ciFlight = 2,
-  ciDisarm = 3,
-  ciTaxi = 4,
-  ciEmergencyStop = 5
+  ciEmergencyStop = 3,
+  ciNone = 4
 };
 bool ControlsInterfaceStates_IsValid(int value);
 const ControlsInterfaceStates ControlsInterfaceStates_MIN = ciStandby;
-const ControlsInterfaceStates ControlsInterfaceStates_MAX = ciEmergencyStop;
+const ControlsInterfaceStates ControlsInterfaceStates_MAX = ciNone;
 const int ControlsInterfaceStates_ARRAYSIZE = ControlsInterfaceStates_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ControlsInterfaceStates_descriptor();
@@ -189,11 +188,12 @@ inline bool ControlsInterfaceStates_Parse(
     ControlsInterfaceStates_descriptor(), name, value);
 }
 enum InverterStates {
-  iConnected = 0
+  isNone = 0,
+  isConnected = 1
 };
 bool InverterStates_IsValid(int value);
-const InverterStates InverterStates_MIN = iConnected;
-const InverterStates InverterStates_MAX = iConnected;
+const InverterStates InverterStates_MIN = isNone;
+const InverterStates InverterStates_MAX = isConnected;
 const int InverterStates_ARRAYSIZE = InverterStates_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* InverterStates_descriptor();
