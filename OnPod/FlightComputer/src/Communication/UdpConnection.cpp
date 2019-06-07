@@ -61,7 +61,7 @@ void UdpConnection::getUpdate() {
     bzero(&buffer, sizeof buffer);
     ssize_t receivedPacketSize = recvfrom(this->_inboundSocket, buffer, 200, 0, nullptr, nullptr);
     if (receivedPacketSize != -1) {
-        LOG(INFO) << receivedPacketSize << " Bytes received on " << this->_connectionName << buffer;
+        // LOG(INFO) << receivedPacketSize << " Bytes received on " << this->_connectionName << buffer;
         try {
             opStatus = this->parseUpdate(buffer, (int32_t) receivedPacketSize);
         }
@@ -203,7 +203,7 @@ std::unique_ptr<google::protobuf::Message> BrakeNodeConnection::getProtoUpdateMe
 }
 
 bool BrakeNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
-    DtsNodeToFc protoMessage = DtsNodeToFc();
+    BrakeNodeToFc protoMessage = BrakeNodeToFc();
     if (!protoMessage.ParseFromArray(buffer, messageSize)) {
         std::string strError = "Failed to parse Update from Brake Node";
         throw std::invalid_argument(strError);
@@ -211,11 +211,11 @@ bool BrakeNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
     if(this->checkPacketId(protoMessage.packetnum())){
         return false;
     }
-    this->pod.setSolenoid(protoMessage.brakesolenoidstate(),SOL1_INDEX);
-    this->pod.setSolenoid(protoMessage.ventsolenoidstate(), SOL4_INDEX);
+    this->pod.setSolenoid(protoMessage.solenoid1(),SOL1_INDEX);
+    this->pod.setSolenoid(protoMessage.solenoid2(), SOL4_INDEX);
    // this->pod.setPressureVesselTemperature(protoMessage.pneumatictemperature());
-    this->pod.setHighPressure(protoMessage.tankpressure());
-    this->pod.setLowPressure(protoMessage.brakepressure(), LP1_INDEX);
+    this->pod.setHighPressure(protoMessage.highpressure());
+    this->pod.setLowPressure(protoMessage.lowpressure1(), LP1_INDEX);
     //this->pod.telemetry->rotorTemperature = protoMessage.rotortemperature(); //dts
     return true;
 }
