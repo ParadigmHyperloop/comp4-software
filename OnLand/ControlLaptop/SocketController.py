@@ -1,6 +1,6 @@
 import socket
 import logging as log
-from ControlLaptop import Paradigm_pb2
+import Paradigm_pb2
 from ControlLaptop.LocalStorage.ConfigurationSotrage import DEFAULT_CONFIGURATION
 from config import POD_IP, POD_CONFIG_PORT
 

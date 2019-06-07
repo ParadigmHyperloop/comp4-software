@@ -7,7 +7,7 @@ from flask import Flask, redirect, render_template, jsonify
 from ControlLaptop.LocalStorage.ConfigurationSotrage import LocalStorage
 from ControlLaptop.LocalStorage.FlightConfig import FlightConfig
 from ControlLaptop.SocketController import PodCommunicator
-from templates._sidebar import get_page_title, NAV_BAR
+from ControlLaptop.templates._sidebar import get_page_title, NAV_BAR
 from ControlLaptop.forms import FlightConfigurationForm
 import collections
 
