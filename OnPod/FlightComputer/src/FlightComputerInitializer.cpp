@@ -35,12 +35,12 @@ void FlightComputerInitializer::importLoggerLibrary()
 
 void FlightComputerInitializer::updatePodNetworkValues(PodNetwork& podNetworkValues, flightConfig& config)
 {
-    std::string cNodeIpAddrs[] = {"192.168.0.50"};
+    std::string cNodeIpAddrs[] = {"192.168.1.20"};
     podNetworkValues.cNodeIpAddrs.assign(begin(cNodeIpAddrs), end(cNodeIpAddrs)); // Node IPs
 
-    podNetworkValues.iBrakeNodePort = NetworkConstants::iBRAKE_NODE_PORT; // Port # that Nodes are listening on
-    podNetworkValues.iNodeTimeoutMili = NetworkConstants::iNODE_TIMEOUT_MILI;
-    podNetworkValues.iBrakeNodeServerPortNumber = NetworkConstants::iBRAKE_NODE_SERVER_PORT_NUMBER; // Port # to receive UDP from Nodes
+    podNetworkValues.iBrakeNodePort = config.brakenodeport(); // Port # that Nodes are listening on
+    podNetworkValues.iNodeTimeoutMili = config.brakenodetimeout();
+    podNetworkValues.iBrakeNodeServerPortNumber = config.brakenodeserverport(); // Port # to receive UDP from Nodes
 
     podNetworkValues.iCommaderTimeoutMili = config.heartbeattimeout(); // Timeout for heartbeat to Control Interface
     podNetworkValues.iCommanderPortNumber = config.commandport(); //Port # for TCP Commander

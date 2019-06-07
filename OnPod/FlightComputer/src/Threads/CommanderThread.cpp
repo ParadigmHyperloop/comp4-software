@@ -3,6 +3,7 @@
 #include "NetworkHelpers.h"
 #include "Common.h"
 #include "Heartbeat.h"
+#include "TelemetryManager.h"
 
 // Get manual state change commands. Get Estop command
 
@@ -29,15 +30,22 @@ int32_t createCommanderServerSocket(int32_t serverPortNumber) {
     return serverSock;
 }
 
-void parseProtoCommand(PodCommand podCommand, Pod *Pod) {
+void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
+    if(!podCommand.has_hascommand()){
+        return;
+    }
     if (podCommand.has_controlsinterfacestate()) {
         Pod->setControlsInterfaceState(podCommand.controlsinterfacestate());
     }
     if (podCommand.has_automaticstatetransitions()) {
         Pod->setAutomaticTransitions(podCommand.automaticstatetransitions());
     }
-    if (podCommand.has_manualbrakenodestate()) {
-       // LOG(INFO) << podCommand.manualbrakenodestate();
+    if (podCommand.has_manualbrakenodestate()){
+        BrakeNodeStates state = podCommand.manualbrakenodestate();
+        if(state == bnsSolenoidControl){
+            std::fill(Pod->telemetry->manualSolenoidConfiguration.begin(), Pod->telemetry->manualSolenoidConfiguration.end(), false);
+        }
+        LOG(INFO) << podCommand.manualbrakenodestate();
         Pod->setManualBrakeNodeState(podCommand.manualbrakenodestate());
     }
     if (podCommand.has_manuallvdcnodestate()) {
@@ -46,10 +54,14 @@ void parseProtoCommand(PodCommand podCommand, Pod *Pod) {
     if (podCommand.has_manualpodstate()) {
         Pod->setManualPodState(podCommand.manualpodstate());
     }
-    return;
+    if (podCommand.solenoidconfiguration_size() >= 4){
+        for(int i = 0 ; i < 4 ; i++){
+            Pod->telemetry->manualSolenoidConfiguration[i] = podCommand.solenoidconfiguration(i);
+        }
+    }
 }
 
-int32_t unserializeProtoMessage(Pod *Pod, char buffer[], int32_t messageSize) {
+int32_t unserializeProtoMessage(TelemetryManager *Pod, char buffer[], int32_t messageSize) {
     PodCommand pPodCommand;
     bool operationStatus;
 
@@ -66,7 +78,7 @@ int32_t unserializeProtoMessage(Pod *Pod, char buffer[], int32_t messageSize) {
 
 
 
-int32_t commanderThread(Pod Pod) {
+int32_t commanderThread(TelemetryManager Pod) {
     //Logging
     el::Helpers::setThreadName("Commander Thread");
     LOG(INFO) << "Starting Commander Thread";
@@ -86,7 +98,7 @@ int32_t commanderThread(Pod Pod) {
     Heartbeat pulse = Heartbeat(Pod.sPodNetworkValues->iCommaderTimeoutMili);
 
     //pod state != shutdown
-    while (Pod.sPodValues->podState != psShutdown) {
+    while (Pod.telemetry->podState->getStateValue() != psShutdown) {
 
         /* Accepted connection gets put iNewSockfd,
         * thread will hang here until a connection is recieved.
@@ -102,7 +114,7 @@ int32_t commanderThread(Pod Pod) {
 
         LOG(INFO) << "Controls Interface Connected";
         pulse.feed();
-        while (Pod.sPodValues->podState != psShutdown) {
+        while (Pod.telemetry->podState->getStateValue() != psShutdown) {
             messageSize = read(connectionSock, buffer, 255);
             if (messageSize < 0) {
                 if (errno == 11) //Erno 11 means no message available on non blocking socket

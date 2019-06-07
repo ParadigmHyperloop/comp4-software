@@ -1,3 +1,4 @@
+import collections
 import json
 import logging as log
 import sys
@@ -105,16 +106,19 @@ def ui(path):
 def dts():
     page = 'dts'
     title = get_page_title(page)
-    with open('ControlLaptop/LocalStorage/DtsSensors.json') as json_file:
-        sensors = json.load(json_file)
-    with open('ControlLaptop/LocalStorage/ElectricalValues.json') as json_file:
-        electrical_sensors = json.load(json_file)
+    with open('ControlLaptop/templates/_cards/tables/DtsSensors.json') as json_file:
+        sensors = order_sensors(json.load(json_file))
+    with open('ControlLaptop/templates/_cards/tables/BmsSensors.json') as json_file:
+        bms_sensors = order_sensors(json.load(json_file))
+    with open('ControlLaptop/templates/_cards/tables/InverterSensors.json') as json_file:
+        inverter_sensors = order_sensors(json.load(json_file))
     return render_template(
         page+".html",
         active_page=page,
         title=title,
         sensors=sensors,
-        electrical_senesors=electrical_sensors
+        bms_senesors=bms_sensors,
+        inverter_sensors=inverter_sensors
     )
 
 
@@ -122,8 +126,8 @@ def dts():
 def proofTest():
     page = 'proofTest'
     title = get_page_title(page)
-    with open('ControlLaptop/LocalStorage/ProofTestSensors.json') as json_file:
-        sensors = json.load(json_file)
+    with open('ControlLaptop/templates/_cards/tables/ProofTestSensors.json') as json_file:
+        sensors = order_sensors(json.load(json_file))
     return render_template(
         page+".html",
         active_page=page,
@@ -147,6 +151,18 @@ def get_flight_profile_template():
 
 @app.route('/sensor_ranges')
 def add_numbers():
-    with open('ControlLaptop/LocalStorage/DtsSensors.json') as json_file:
+    with open('ControlLaptop/templates/_cards/tables/SensorRanges.json') as json_file:
         data = json_file.read().replace('\n', '')
     return data
+
+
+#   :(
+def order_sensors(sensors):
+    ordered_dict = collections.OrderedDict()
+    for order in range(0, len(sensors)):
+        for key, value in sensors.items():
+            if value['order'] is order:
+                ordered_dict[key] = value
+                break
+    return ordered_dict
+

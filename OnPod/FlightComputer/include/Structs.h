@@ -5,22 +5,11 @@
 #include <cstdint>
 #include "Paradigm.pb.h"
 
-
-
-
-//enum PodStates { psStandby, psArming, psArmed, psAcceleration, psCoasting, psBraking, psDisarm, psRetrieval, psEmergency, psBooting };
-
-//enum eBreakNodeStates { bnsBooting, bnsStandby, bnsArming, bnsArmed, bnsFlight, bnsBraking, bnsVenting, bnsRetrieval, bnsError};
-
-//enum TerminalStates { tsConnected, tsDropped, tsTerminalEmergency};
-
-//enum TerminalCommands { tcTerminalArm, tcTerminalFlight, tcTerminalStop, tcTerminalNone};
-
-//enum MotorStates { msIdle, msDrive};
+class PodState;
 
 struct PodValues {
     // States
-    PodStates podState = psBooting;
+    std::unique_ptr<PodState> podState;
     ControlsInterfaceStates terminalState;
     MotorStates motorState;
     BrakeNodeStates brakeNodeState;
@@ -35,13 +24,8 @@ struct PodValues {
     bool automaticTransitions;
 
     //ConnectionsArray
-    std::vector<bool> connectionsArray = {false, false, false, false, false}; // [brake , rear, lvdc, bms, inverter]
-
-    // Navigation
-    float distance = 0;
-    float velocity = 0;
-    // Rear Node
-    float gpioValues;
+    std::vector<int32_t> connectionFlags = {false, false, false, false, false}; // [brake , rear, lvdc, bms, inverter]
+    std::vector<int32_t> sensorFlags = {};
 
     // HV-BMS
     float hvBatteryPackVoltage;
@@ -49,14 +33,19 @@ struct PodValues {
     float hvBatteryPackMinimumCellVoltage;
     float hvBatteryPackMaxCellVoltage;
 
+    //Inverter
+    int32_t maxIgbtTemperature;
+    int32_t gateDriverTemperature;
+    int32_t inverterControlBoardTemperature;
+    int32_t motorTemperature;
+    int32_t inverterBusVoltage;
 
-    //FlagsV2
-    unsigned char flagsArray[3] = {0};
-    int32_t iFlagsArraySize = 3;
     // Atmosphere
     double tubePressure;
+
     // Terminal
     ControlsInterfaceStates eTerminalCommand;
+
     // Brake Node
     bool solenoid1;
     bool solenoid2;
@@ -70,7 +59,10 @@ struct PodValues {
     float lowPressure4;
     float highPressure;
     float pressureVesselTemperature;
-    float railTemperature;
+    std::vector<bool> manualSolenoidConfiguration = {};
+
+    // DTS
+    float rotorTemperature;
 };
 
 struct PodNetwork {

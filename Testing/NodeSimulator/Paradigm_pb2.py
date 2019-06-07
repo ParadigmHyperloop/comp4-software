@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=None,
-  serialized_pb=_b('\n\x0eParadigm.proto\"\xde\x01\n\rBrakeNodeData\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x1f\n\x05state\x18\x0e \x01(\x0e\x32\x10.BrakeNodeStates\x12\x0c\n\x04sol1\x18\x02 \x01(\x08\x12\x0c\n\x04sol2\x18\x03 \x01(\x08\x12\x0c\n\x04sol3\x18\x04 \x01(\x08\x12\x0c\n\x04sol4\x18\x05 \x01(\x08\x12\x0c\n\x04sol5\x18\x06 \x01(\x08\x12\x0c\n\x04sol6\x18\x07 \x01(\x08\x12\n\n\x02hp\x18\x08 \x01(\x05\x12\x0b\n\x03lp1\x18\t \x01(\x05\x12\x0b\n\x03lp2\x18\n \x01(\x05\x12\x0b\n\x03lp3\x18\x0b \x01(\x05\x12\x0b\n\x03lp4\x18\x0c \x01(\x05\x12\x0c\n\x04temp\x18\r \x01(\x05\"\x93\x02\n\nPodCommand\x12\x38\n\x16\x63ontrolsInterfaceState\x18\x01 \x01(\x0e\x32\x18.ControlsInterfaceStates\x12\"\n\x0emanualPodState\x18\x02 \x01(\x0e\x32\n.PodStates\x12.\n\x14manualBrakeNodeState\x18\x03 \x01(\x0e\x32\x10.BrakeNodeStates\x12&\n\x10manualMotorState\x18\x04 \x01(\x0e\x32\x0c.MotorStates\x12,\n\x13manualLvdcNodeState\x18\x05 \x01(\x0e\x32\x0f.LvdcNodeStates\x12!\n\x19\x61utomaticStateTransitions\x18\x06 \x01(\x08\"\xc1\x0f\n\tTelemetry\x12\x1c\n\x08podState\x18\x01 \x01(\x0e\x32\n.PodStates\x12(\n\x0e\x62reakNodeState\x18\x02 \x01(\x0e\x32\x10.BrakeNodeStates\x12 \n\nmotorState\x18\x03 \x01(\x0e\x32\x0c.MotorStates\x12\x38\n\x16\x63ontrolsInterfaceState\x18\x04 \x01(\x0e\x32\x18.ControlsInterfaceStates\x12&\n\rinverterState\x18\x05 \x01(\x0e\x32\x0f.InverterStates\x12&\n\rlvdcNodeState\x18\x36 \x01(\x0e\x32\x0f.LvdcNodeStates\x12\x38\n\x16\x62\x61tteryManagementState\x18\x19 \x01(\x0e\x32\x18.BatteryManagementStates\x12.\n\x1a\x62reakNodePerceivedPodState\x18\x1f \x01(\x0e\x32\n.PodStates\x12\x13\n\x0bmissionTime\x18\x06 \x01(\x05\x12\x12\n\nflightTime\x18\x07 \x01(\x05\x12\x16\n\x0eheartbeatFlags\x18\x08 \x03(\x05\x12\x17\n\x0fheartbeatValues\x18G \x03(\x05\x12\x13\n\x0bpodPosition\x18\t \x01(\x05\x12\x13\n\x0bpodVelocity\x18\n \x01(\x05\x12\x18\n\x10podAccelerationX\x18\x0b \x01(\x05\x12\x18\n\x10podAccelerationY\x18\x0c \x01(\x05\x12\x18\n\x10podAccelerationZ\x18\r \x01(\x05\x12\x13\n\x0bimuVelocity\x18\x0e \x01(\x05\x12\x18\n\x10imuAccelerationX\x18\x0f \x01(\x05\x12\x1a\n\x12tachometerVelocity\x18\x10 \x01(\x05\x12\x18\n\x10resolverVelocity\x18\x11 \x01(\x05\x12\x1c\n\x14inverterTemperature1\x18\x12 \x01(\x05\x12\x1c\n\x14inverterTemperature2\x18\x13 \x01(\x05\x12\x1c\n\x14inverterTemperature3\x18\x14 \x01(\x05\x12\x14\n\x0cmotorCurrent\x18\x15 \x01(\x05\x12\x14\n\x0cmotorVoltage\x18\x16 \x01(\x05\x12\x18\n\x10inverterVoltages\x18\x17 \x01(\x05\x12\x18\n\x10inverterCurrents\x18\x18 \x01(\x05\x12\x1c\n\x14hvBatteryPackVoltage\x18\x1a \x01(\x02\x12\x1c\n\x14hvBatteryPackCurrent\x18\x1b \x01(\x02\x12!\n\x19hvBatteryCellTemperatures\x18\x1c \x03(\x05\x12\'\n\x1fhvBatteryPackMinimumCellVoltage\x18\x1d \x01(\x02\x12#\n\x1bhvBatteryPackMaxCellVoltage\x18\x1e \x01(\x02\x12\x11\n\tsolenoid1\x18  \x01(\x08\x12\x11\n\tsolenoid2\x18! \x01(\x08\x12\x11\n\tsolenoid3\x18\" \x01(\x08\x12\x11\n\tsolenoid4\x18# \x01(\x08\x12\x11\n\tsolenoid5\x18$ \x01(\x08\x12\x11\n\tsolenoid6\x18% \x01(\x08\x12\x14\n\x0chighPressure\x18& \x01(\x02\x12\x14\n\x0clowPressure1\x18\' \x01(\x02\x12\x14\n\x0clowPressure2\x18( \x01(\x02\x12\x14\n\x0clowPressure3\x18) \x01(\x02\x12\x14\n\x0clowPressure4\x18* \x01(\x02\x12!\n\x19pressureVesselTemperature\x18+ \x01(\x02\x12$\n\x1c\x65lectronicsEnclosurePressure\x18, \x01(\x05\x12\x19\n\x11railDisplacementX\x18- \x01(\x05\x12\x19\n\x11railDisplacementY\x18. \x01(\x05\x12\x14\n\x0ctubePressure\x18\x30 \x01(\x05\x12\x18\n\x10\x63oolantPressure1\x18\x31 \x01(\x05\x12\x18\n\x10\x63oolantPressure2\x18\x32 \x01(\x05\x12\x18\n\x10\x63oolantPressure3\x18\x33 \x01(\x05\x12\x1a\n\x12\x63oolantTemperature\x18\x34 \x01(\x05\x12\x17\n\x0frailTemperature\x18\x35 \x01(\x02\x12\x14\n\x0cpack1Voltage\x18\x37 \x01(\x05\x12\x14\n\x0cpack2Voltage\x18\x38 \x01(\x05\x12\x14\n\x0cpack1Current\x18\x39 \x01(\x05\x12\x14\n\x0cpack2Current\x18: \x01(\x05\x12\x14\n\x0crail1Voltage\x18; \x01(\x05\x12\x14\n\x0crail2Voltage\x18< \x01(\x05\x12\x14\n\x0crail3Voltage\x18= \x01(\x05\x12\x14\n\x0crail4Voltage\x18> \x01(\x05\x12\x17\n\x0frailVoltageFlag\x18H \x01(\x05\x12\x1a\n\x12railCurrentSensor1\x18? \x01(\x05\x12\x1a\n\x12railCurrentSensor2\x18@ \x01(\x05\x12\x1a\n\x12railCurrentSensor3\x18\x41 \x01(\x05\x12\x1a\n\x12railCurrentSensor4\x18\x42 \x01(\x05\x12\x1a\n\x12railCurrentSensor5\x18\x43 \x01(\x05\x12\x1a\n\x12railCurrentSensor6\x18\x44 \x01(\x05\x12\x1a\n\x12railCurrentSensor7\x18\x45 \x01(\x05\x12\x1a\n\x12railCurrentSensor8\x18\x46 \x01(\x05\x12\x17\n\x0frailCurrentFlag\x18I \x01(\x05\"k\n\rFcToBrakeNode\x12\x11\n\tpacketNum\x18\x01 \x01(\x05\x12\x1c\n\x08podState\x18\x02 \x01(\x0e\x32\n.PodStates\x12)\n\x0fmanualNodeState\x18\x03 \x01(\x0e\x32\x10.BrakeNodeStates\"\x8f\x02\n\x0b\x44tsNodeToFc\x12\x14\n\tpacketNum\x18\x01 \x02(\x05:\x01\x30\x12\x34\n\x0e\x62rakeNodeState\x18\x02 \x02(\x0e\x32\x10.BrakeNodeStates:\nbnsStandby\x12!\n\x12\x62rakeSolenoidState\x18\x03 \x02(\x08:\x05\x66\x61lse\x12 \n\x11ventSolenoidState\x18\x04 \x02(\x08:\x05\x66\x61lse\x12\x1b\n\x10rotorTemperature\x18\x05 \x02(\x02:\x01\x30\x12\x1f\n\x14pneumaticTemperature\x18\x06 \x02(\x02:\x01\x30\x12\x17\n\x0ctankPressure\x18\x07 \x02(\x02:\x01\x30\x12\x18\n\rbrakePressure\x18\x08 \x02(\x02:\x01\x30\"\xb3\x01\n\x0cRearNodeToFc\x12\x14\n\tpacketNum\x18\x01 \x02(\x05:\x01\x30\x12\x17\n\x0ctubePressure\x18\x02 \x02(\x02:\x01\x30\x12\x1b\n\x10\x63oolantPressure1\x18\x03 \x02(\x02:\x01\x30\x12\x1b\n\x10\x63oolantPressure2\x18\x04 \x02(\x02:\x01\x30\x12\x1b\n\x10\x63oolantPressure3\x18\x05 \x02(\x02:\x01\x30\x12\x1d\n\x12\x63oolantTemperature\x18\x06 \x02(\x02:\x01\x30\"\x84\x02\n\x0c\x66lightConfig\x12\x18\n\x10retrievalTimeout\x18\x01 \x01(\r\x12\x15\n\rmaxFlightTime\x18\x02 \x01(\x04\x12\x12\n\nmotorSpeed\x18\x03 \x01(\x04\x12\x1e\n\x10pdsTelemetryPort\x18\x04 \x01(\x05:\x04\x37\x30\x30\x30\x12\x19\n\x0b\x63ommandPort\x18\x05 \x01(\x05:\x04\x36\x30\x30\x30\x12\x14\n\x0c\x66lightLength\x18\x06 \x01(\x04\x12\x1f\n\x10heartbeatTimeout\x18\x07 \x01(\x05:\x05\x31\x30\x30\x30\x30\x12\x11\n\tpodDriver\x18\x08 \x01(\t\x12*\n\x13\x63ontrolLaptopIpAddr\x18\t \x01(\t:\r192.168.0.103\"/\n\x0f\x44\x65\x66\x61ultFcToNode\x12\x1c\n\x08podState\x18\x01 \x01(\x0e\x32\n.PodStates*\xb5\x01\n\x0f\x42rakeNodeStates\x12\x0e\n\nbnsBooting\x10\x00\x12\x0e\n\nbnsStandby\x10\x01\x12\r\n\tbnsArming\x10\x02\x12\x0c\n\x08\x62nsArmed\x10\x03\x12\r\n\tbnsFlight\x10\x04\x12\x0e\n\nbnsBraking\x10\x05\x12\x0e\n\nbnsVenting\x10\x06\x12\x10\n\x0c\x62nsRetrieval\x10\x07\x12\x0c\n\x08\x62nsError\x10\x08\x12\x16\n\x12\x62nsSolenoidControl\x10\t*\xcb\x01\n\tPodStates\x12\r\n\tpsBooting\x10\x00\x12\r\n\tpsStandby\x10\x01\x12\x0c\n\x08psArming\x10\x02\x12\x0b\n\x07psArmed\x10\x03\x12\x0f\n\x0bpsPreFlight\x10\x04\x12\x12\n\x0epsAcceleration\x10\x05\x12\x0e\n\npsCoasting\x10\x06\x12\r\n\tpsBraking\x10\x07\x12\x0f\n\x0bpsDisarming\x10\x08\x12\x0f\n\x0bpsRetrieval\x10\t\x12\x0f\n\x0bpsEmergency\x10\n\x12\x0e\n\npsShutdown\x10\x0b*C\n\x0bMotorStates\x12\t\n\x05msOff\x10\x00\x12\x0e\n\nmsCharging\x10\x01\x12\n\n\x06msIdle\x10\x02\x12\r\n\tmsEngaged\x10\x03*p\n\x17\x43ontrolsInterfaceStates\x12\r\n\tciStandby\x10\x00\x12\t\n\x05\x63iArm\x10\x01\x12\x0c\n\x08\x63iFlight\x10\x02\x12\x0c\n\x08\x63iDisarm\x10\x03\x12\n\n\x06\x63iTaxi\x10\x04\x12\x13\n\x0f\x63iEmergencyStop\x10\x05* \n\x0eInverterStates\x12\x0e\n\niConnected\x10\x00*)\n\x17\x42\x61tteryManagementStates\x12\x0e\n\nbmsNominal\x10\x00*.\n\x0eRearNodeStates\x12\r\n\trnBooting\x10\x00\x12\r\n\trnNominal\x10\x01*!\n\x0eLvdcNodeStates\x12\x0f\n\x0blvdcBooting\x10\x00')
+  serialized_pb=_b('\n\x0eParadigm.proto\"\x92\x03\n\nPodCommand\x12\x19\n\nhasCommand\x18\x07 \x01(\x08:\x05\x66\x61lse\x12\x38\n\x16\x63ontrolsInterfaceState\x18\x01 \x01(\x0e\x32\x18.ControlsInterfaceStates\x12\"\n\x0emanualPodState\x18\x02 \x01(\x0e\x32\n.PodStates\x12.\n\x14manualBrakeNodeState\x18\x03 \x01(\x0e\x32\x10.BrakeNodeStates\x12&\n\x10manualMotorState\x18\x04 \x01(\x0e\x32\x0c.MotorStates\x12,\n\x13manualLvdcNodeState\x18\x05 \x01(\x0e\x32\x0f.LvdcNodeStates\x12!\n\x19\x61utomaticStateTransitions\x18\x06 \x01(\x08\x12\x1d\n\x15solenoidConfiguration\x18\x08 \x03(\x05\x12\x1e\n\x16powerRailConfiguration\x18\t \x03(\x05\x12#\n\x1bsensorOverrideConfiguration\x18\n \x03(\x05\"\xaf\x0f\n\tTelemetry\x12\x1c\n\x08podState\x18\x01 \x01(\x0e\x32\n.PodStates\x12(\n\x0e\x62reakNodeState\x18\x02 \x01(\x0e\x32\x10.BrakeNodeStates\x12 \n\nmotorState\x18\x03 \x01(\x0e\x32\x0c.MotorStates\x12\x38\n\x16\x63ontrolsInterfaceState\x18\x04 \x01(\x0e\x32\x18.ControlsInterfaceStates\x12&\n\rinverterState\x18\x05 \x01(\x0e\x32\x0f.InverterStates\x12&\n\rlvdcNodeState\x18\x36 \x01(\x0e\x32\x0f.LvdcNodeStates\x12\x38\n\x16\x62\x61tteryManagementState\x18\x19 \x01(\x0e\x32\x18.BatteryManagementStates\x12.\n\x1a\x62reakNodePerceivedPodState\x18\x1f \x01(\x0e\x32\n.PodStates\x12\x13\n\x0bmissionTime\x18\x06 \x01(\x05\x12\x12\n\nflightTime\x18\x07 \x01(\x05\x12\x16\n\x0eheartbeatFlags\x18\x08 \x03(\x05\x12\x17\n\x0fheartbeatValues\x18G \x03(\x05\x12\x13\n\x0bpodPosition\x18\t \x01(\x05\x12\x13\n\x0bpodVelocity\x18\n \x01(\x05\x12\x18\n\x10podAccelerationX\x18\x0b \x01(\x05\x12\x18\n\x10podAccelerationY\x18\x0c \x01(\x05\x12\x18\n\x10podAccelerationZ\x18\r \x01(\x05\x12\x13\n\x0bimuVelocity\x18\x0e \x01(\x05\x12\x18\n\x10imuAccelerationX\x18\x0f \x01(\x05\x12\x1a\n\x12tachometerVelocity\x18\x10 \x01(\x05\x12\x18\n\x10resolverVelocity\x18\x11 \x01(\x05\x12\x1a\n\x12maxIgbtTemperature\x18\x12 \x01(\x05\x12\x1d\n\x15gateDriverTemperature\x18\x13 \x01(\x05\x12\'\n\x1finverterControlBoardTemperature\x18\x14 \x01(\x05\x12\x18\n\x10motorTemperature\x18\x15 \x01(\x05\x12\x1a\n\x12inverterBusVoltage\x18\x16 \x01(\x05\x12\x18\n\x10inverterVoltages\x18\x17 \x01(\x05\x12\x18\n\x10inverterCurrents\x18\x18 \x01(\x05\x12\x1c\n\x14hvBatteryPackVoltage\x18\x1a \x01(\x02\x12\x1c\n\x14hvBatteryPackCurrent\x18\x1b \x01(\x02\x12!\n\x19hvBatteryCellTemperatures\x18\x1c \x03(\x05\x12\'\n\x1fhvBatteryPackMinimumCellVoltage\x18\x1d \x01(\x02\x12#\n\x1bhvBatteryPackMaxCellVoltage\x18\x1e \x01(\x02\x12\x11\n\tsolenoid1\x18  \x01(\x08\x12\x11\n\tsolenoid2\x18! \x01(\x08\x12\x11\n\tsolenoid3\x18\" \x01(\x08\x12\x11\n\tsolenoid4\x18# \x01(\x08\x12\x14\n\x0chighPressure\x18& \x01(\x02\x12\x14\n\x0clowPressure1\x18\' \x01(\x02\x12\x14\n\x0clowPressure2\x18( \x01(\x02\x12\x14\n\x0clowPressure3\x18) \x01(\x02\x12\x14\n\x0clowPressure4\x18* \x01(\x02\x12!\n\x19pressureVesselTemperature\x18+ \x01(\x02\x12$\n\x1c\x65lectronicsEnclosurePressure\x18, \x01(\x05\x12\x19\n\x11railDisplacementX\x18- \x01(\x05\x12\x19\n\x11railDisplacementY\x18. \x01(\x05\x12\x14\n\x0ctubePressure\x18\x30 \x01(\x05\x12\x18\n\x10\x63oolantPressure1\x18\x31 \x01(\x05\x12\x18\n\x10\x63oolantPressure2\x18\x32 \x01(\x05\x12\x18\n\x10\x63oolantPressure3\x18\x33 \x01(\x05\x12\x1a\n\x12\x63oolantTemperature\x18\x34 \x01(\x05\x12\x17\n\x0frailTemperature\x18\x35 \x01(\x02\x12\x14\n\x0cpack1Voltage\x18\x37 \x01(\x05\x12\x14\n\x0cpack2Voltage\x18\x38 \x01(\x05\x12\x14\n\x0cpack1Current\x18\x39 \x01(\x05\x12\x14\n\x0cpack2Current\x18: \x01(\x05\x12\x14\n\x0crail1Voltage\x18; \x01(\x05\x12\x14\n\x0crail2Voltage\x18< \x01(\x05\x12\x14\n\x0crail3Voltage\x18= \x01(\x05\x12\x14\n\x0crail4Voltage\x18> \x01(\x05\x12\x17\n\x0frailVoltageFlag\x18H \x01(\x05\x12\x1a\n\x12railCurrentSensor1\x18? \x01(\x05\x12\x1a\n\x12railCurrentSensor2\x18@ \x01(\x05\x12\x1a\n\x12railCurrentSensor3\x18\x41 \x01(\x05\x12\x1a\n\x12railCurrentSensor4\x18\x42 \x01(\x05\x12\x1a\n\x12railCurrentSensor5\x18\x43 \x01(\x05\x12\x1a\n\x12railCurrentSensor6\x18\x44 \x01(\x05\x12\x1a\n\x12railCurrentSensor7\x18\x45 \x01(\x05\x12\x1a\n\x12railCurrentSensor8\x18\x46 \x01(\x05\x12\x17\n\x0frailCurrentFlag\x18I \x01(\x05\"\xab\x01\n\rFcToBrakeNode\x12\x11\n\tpacketNum\x18\x01 \x01(\x05\x12#\n\tnodeState\x18\x02 \x01(\x0e\x32\x10.BrakeNodeStates\x12\x17\n\x0fsolenoid1Config\x18\x03 \x01(\x08\x12\x17\n\x0fsolenoid2Config\x18\x04 \x01(\x08\x12\x17\n\x0fsolenoid3Config\x18\x05 \x01(\x08\x12\x17\n\x0fsolenoid4Config\x18\x06 \x01(\x08\"i\n\x0c\x46\x63ToLvdcNode\x12\x11\n\tpacketNum\x18\x01 \x01(\x05\x12\x1c\n\x08podState\x18\x02 \x01(\x0e\x32\n.PodStates\x12(\n\x0fmanualNodeState\x18\x03 \x01(\x0e\x32\x0f.LvdcNodeStates\"\xe6\x01\n\x0b\x44tsNodeToFc\x12\x11\n\tpacketNum\x18\x01 \x02(\x05\x12(\n\x0e\x62rakeNodeState\x18\x02 \x02(\x0e\x32\x10.BrakeNodeStates\x12\x1a\n\x12\x62rakeSolenoidState\x18\x03 \x02(\x08\x12\x19\n\x11ventSolenoidState\x18\x04 \x02(\x08\x12\x18\n\x10rotorTemperature\x18\x05 \x02(\x02\x12\x1c\n\x14pneumaticTemperature\x18\x06 \x02(\x02\x12\x14\n\x0ctankPressure\x18\x07 \x02(\x02\x12\x15\n\rbrakePressure\x18\x08 \x02(\x02\"|\n\x11\x45nclosureNodeToFc\x12\x11\n\tpacketNum\x18\x01 \x02(\x05\x12\x19\n\x11\x65nclosurePressure\x18\x02 \x02(\x02\x12\x1c\n\x14\x65nclosureTemperature\x18\x03 \x02(\x02\x12\x1b\n\x13\x63oolantLinePressure\x18\x04 \x02(\x02\"\x93\x03\n\x0cLvdcNodeToFc\x12\x1c\n\x14highPowerPackVoltage\x18\x01 \x02(\x02\x12\x1b\n\x13lowPowerPackVoltage\x18\x02 \x02(\x02\x12\x1c\n\x14highPowerPackCurrent\x18\x03 \x02(\x02\x12\x1b\n\x13lowPowerPackCurrent\x18\x04 \x02(\x02\x12\x14\n\x0crail5Voltage\x18\x05 \x02(\x02\x12\x1d\n\x15rail12LowPowerVoltage\x18\x06 \x02(\x02\x12\x1e\n\x16rail12HighPowerVoltage\x18\x07 \x02(\x02\x12\x15\n\rrail24Voltage\x18\x08 \x02(\x02\x12\x14\n\x0crail5Current\x18\t \x02(\x02\x12\x1d\n\x15rail12LowPowerCurrent\x18\n \x02(\x02\x12\x15\n\rrail24Current\x18\x0b \x02(\x02\x12\x1b\n\x13railInverterCurrent\x18\x0c \x02(\x02\x12\x1b\n\x13railCooling1Current\x18\r \x02(\x02\x12\x1b\n\x13railCooling2Current\x18\x0e \x02(\x02\"\xbd\x02\n\rBrakeNodeToFc\x12\x11\n\tpacketNum\x18\x01 \x02(\x05\x12\x1f\n\x05state\x18\x02 \x02(\x0e\x32\x10.BrakeNodeStates\x12\x11\n\tsolenoid1\x18\x03 \x02(\x08\x12\x11\n\tsolenoid2\x18\x04 \x02(\x08\x12\x11\n\tsolenoid3\x18\x05 \x02(\x08\x12\x11\n\tsolenoid4\x18\x06 \x02(\x08\x12\x14\n\x0chighPressure\x18\x07 \x02(\x02\x12\x14\n\x0clowPressure1\x18\x08 \x02(\x02\x12\x14\n\x0clowPressure2\x18\t \x02(\x02\x12\x14\n\x0clowPressure3\x18\n \x02(\x02\x12\x19\n\x11lowPressureCommon\x18\x0b \x02(\x02\x12\x1c\n\x14pneumaticTemperature\x18\x0c \x02(\x02\x12\x1b\n\x13\x63oolantTankPressure\x18\r \x02(\x02\"\xe0\x02\n\x0c\x66lightConfig\x12\x18\n\x10retrievalTimeout\x18\x01 \x01(\r\x12\x15\n\rmaxFlightTime\x18\x02 \x01(\x04\x12\x12\n\nmotorSpeed\x18\x03 \x01(\x04\x12\x1e\n\x10pdsTelemetryPort\x18\x04 \x01(\x05:\x04\x37\x30\x30\x30\x12\x19\n\x0b\x63ommandPort\x18\x05 \x01(\x05:\x04\x36\x30\x30\x30\x12\x14\n\x0c\x66lightLength\x18\x06 \x01(\x04\x12\x1f\n\x10heartbeatTimeout\x18\x07 \x01(\x05:\x05\x31\x30\x30\x30\x30\x12\x11\n\tpodDriver\x18\x08 \x01(\t\x12&\n\x13\x63ontrolLaptopIpAddr\x18\t \x01(\t:\t127.0.0.1\x12\x1b\n\rbrakeNodePort\x18\n \x01(\x04:\x04\x35\x35\x35\x35\x12\x1e\n\x10\x62rakeNodeTimeout\x18\x0b \x01(\x04:\x04\x34\x30\x30\x30\x12!\n\x13\x62rakeNodeServerPort\x18\x0c \x01(\x04:\x04\x35\x35\x35\x35\"/\n\x0f\x44\x65\x66\x61ultFcToNode\x12\x1c\n\x08podState\x18\x01 \x01(\x0e\x32\n.PodStates*u\n\x0f\x42rakeNodeStates\x12\x0e\n\nbnsBooting\x10\x00\x12\x0e\n\nbnsStandby\x10\x01\x12\r\n\tbnsFlight\x10\x02\x12\x0e\n\nbnsBraking\x10\x03\x12\x16\n\x12\x62nsSolenoidControl\x10\x04\x12\x0b\n\x07\x62nsNone\x10\x05*\xa4\x01\n\tPodStates\x12\r\n\tpsBooting\x10\x00\x12\r\n\tpsStandby\x10\x01\x12\x0c\n\x08psArming\x10\x02\x12\x0b\n\x07psArmed\x10\x03\x12\x0f\n\x0bpsPreFlight\x10\x04\x12\x12\n\x0epsAcceleration\x10\x05\x12\x0e\n\npsCoasting\x10\x06\x12\r\n\tpsBraking\x10\x07\x12\x0e\n\npsShutdown\x10\x08\x12\n\n\x06psNone\x10\t*C\n\x0bMotorStates\x12\t\n\x05msOff\x10\x00\x12\x0e\n\nmsCharging\x10\x01\x12\n\n\x06msIdle\x10\x02\x12\r\n\tmsEngaged\x10\x03*p\n\x17\x43ontrolsInterfaceStates\x12\r\n\tciStandby\x10\x00\x12\t\n\x05\x63iArm\x10\x01\x12\x0c\n\x08\x63iFlight\x10\x02\x12\x0c\n\x08\x63iDisarm\x10\x03\x12\n\n\x06\x63iTaxi\x10\x04\x12\x13\n\x0f\x63iEmergencyStop\x10\x05* \n\x0eInverterStates\x12\x0e\n\niConnected\x10\x00*)\n\x17\x42\x61tteryManagementStates\x12\x0e\n\nbmsNominal\x10\x00*P\n\x0eLvdcNodeStates\x12\x0f\n\x0blvdcBooting\x10\x00\x12\x0f\n\x0blvdcStandby\x10\x01\x12\x0e\n\nlvdcFlight\x10\x02\x12\x0c\n\x08lvdcNone\x10\x03')
 )
 
 _BRAKENODESTATES = _descriptor.EnumDescriptor(
@@ -39,42 +39,26 @@ _BRAKENODESTATES = _descriptor.EnumDescriptor(
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='bnsArming', index=2, number=2,
+      name='bnsFlight', index=2, number=2,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='bnsArmed', index=3, number=3,
+      name='bnsBraking', index=3, number=3,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='bnsFlight', index=4, number=4,
+      name='bnsSolenoidControl', index=4, number=4,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='bnsBraking', index=5, number=5,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='bnsVenting', index=6, number=6,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='bnsRetrieval', index=7, number=7,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='bnsError', index=8, number=8,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='bnsSolenoidControl', index=9, number=9,
+      name='bnsNone', index=5, number=5,
       serialized_options=None,
       type=None),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3387,
-  serialized_end=3568,
+  serialized_start=4163,
+  serialized_end=4280,
 )
 _sym_db.RegisterEnumDescriptor(_BRAKENODESTATES)
 
@@ -118,26 +102,18 @@ _PODSTATES = _descriptor.EnumDescriptor(
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='psDisarming', index=8, number=8,
+      name='psShutdown', index=8, number=8,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='psRetrieval', index=9, number=9,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='psEmergency', index=10, number=10,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='psShutdown', index=11, number=11,
+      name='psNone', index=9, number=9,
       serialized_options=None,
       type=None),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3571,
-  serialized_end=3774,
+  serialized_start=4283,
+  serialized_end=4447,
 )
 _sym_db.RegisterEnumDescriptor(_PODSTATES)
 
@@ -167,8 +143,8 @@ _MOTORSTATES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3776,
-  serialized_end=3843,
+  serialized_start=4449,
+  serialized_end=4516,
 )
 _sym_db.RegisterEnumDescriptor(_MOTORSTATES)
 
@@ -206,8 +182,8 @@ _CONTROLSINTERFACESTATES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3845,
-  serialized_end=3957,
+  serialized_start=4518,
+  serialized_end=4630,
 )
 _sym_db.RegisterEnumDescriptor(_CONTROLSINTERFACESTATES)
 
@@ -225,8 +201,8 @@ _INVERTERSTATES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3959,
-  serialized_end=3991,
+  serialized_start=4632,
+  serialized_end=4664,
 )
 _sym_db.RegisterEnumDescriptor(_INVERTERSTATES)
 
@@ -244,35 +220,12 @@ _BATTERYMANAGEMENTSTATES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3993,
-  serialized_end=4034,
+  serialized_start=4666,
+  serialized_end=4707,
 )
 _sym_db.RegisterEnumDescriptor(_BATTERYMANAGEMENTSTATES)
 
 BatteryManagementStates = enum_type_wrapper.EnumTypeWrapper(_BATTERYMANAGEMENTSTATES)
-_REARNODESTATES = _descriptor.EnumDescriptor(
-  name='RearNodeStates',
-  full_name='RearNodeStates',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='rnBooting', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='rnNominal', index=1, number=1,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=4036,
-  serialized_end=4082,
-)
-_sym_db.RegisterEnumDescriptor(_REARNODESTATES)
-
-RearNodeStates = enum_type_wrapper.EnumTypeWrapper(_REARNODESTATES)
 _LVDCNODESTATES = _descriptor.EnumDescriptor(
   name='LvdcNodeStates',
   full_name='LvdcNodeStates',
@@ -283,25 +236,33 @@ _LVDCNODESTATES = _descriptor.EnumDescriptor(
       name='lvdcBooting', index=0, number=0,
       serialized_options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='lvdcStandby', index=1, number=1,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='lvdcFlight', index=2, number=2,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='lvdcNone', index=3, number=3,
+      serialized_options=None,
+      type=None),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=4084,
-  serialized_end=4117,
+  serialized_start=4709,
+  serialized_end=4789,
 )
 _sym_db.RegisterEnumDescriptor(_LVDCNODESTATES)
 
 LvdcNodeStates = enum_type_wrapper.EnumTypeWrapper(_LVDCNODESTATES)
 bnsBooting = 0
 bnsStandby = 1
-bnsArming = 2
-bnsArmed = 3
-bnsFlight = 4
-bnsBraking = 5
-bnsVenting = 6
-bnsRetrieval = 7
-bnsError = 8
-bnsSolenoidControl = 9
+bnsFlight = 2
+bnsBraking = 3
+bnsSolenoidControl = 4
+bnsNone = 5
 psBooting = 0
 psStandby = 1
 psArming = 2
@@ -310,10 +271,8 @@ psPreFlight = 4
 psAcceleration = 5
 psCoasting = 6
 psBraking = 7
-psDisarming = 8
-psRetrieval = 9
-psEmergency = 10
-psShutdown = 11
+psShutdown = 8
+psNone = 9
 msOff = 0
 msCharging = 1
 msIdle = 2
@@ -326,114 +285,87 @@ ciTaxi = 4
 ciEmergencyStop = 5
 iConnected = 0
 bmsNominal = 0
-rnBooting = 0
-rnNominal = 1
 lvdcBooting = 0
+lvdcStandby = 1
+lvdcFlight = 2
+lvdcNone = 3
 
 
 
-_BRAKENODEDATA = _descriptor.Descriptor(
-  name='BrakeNodeData',
-  full_name='BrakeNodeData',
+_PODCOMMAND = _descriptor.Descriptor(
+  name='PodCommand',
+  full_name='PodCommand',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='id', full_name='BrakeNodeData.id', index=0,
-      number=1, type=5, cpp_type=1, label=2,
+      name='hasCommand', full_name='PodCommand.hasCommand', index=0,
+      number=7, type=8, cpp_type=7, label=1,
+      has_default_value=True, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='controlsInterfaceState', full_name='PodCommand.controlsInterfaceState', index=1,
+      number=1, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='state', full_name='BrakeNodeData.state', index=1,
-      number=14, type=14, cpp_type=8, label=1,
+      name='manualPodState', full_name='PodCommand.manualPodState', index=2,
+      number=2, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='sol1', full_name='BrakeNodeData.sol1', index=2,
-      number=2, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
+      name='manualBrakeNodeState', full_name='PodCommand.manualBrakeNodeState', index=3,
+      number=3, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='sol2', full_name='BrakeNodeData.sol2', index=3,
-      number=3, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
+      name='manualMotorState', full_name='PodCommand.manualMotorState', index=4,
+      number=4, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='sol3', full_name='BrakeNodeData.sol3', index=4,
-      number=4, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
+      name='manualLvdcNodeState', full_name='PodCommand.manualLvdcNodeState', index=5,
+      number=5, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='sol4', full_name='BrakeNodeData.sol4', index=5,
-      number=5, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='sol5', full_name='BrakeNodeData.sol5', index=6,
+      name='automaticStateTransitions', full_name='PodCommand.automaticStateTransitions', index=6,
       number=6, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='sol6', full_name='BrakeNodeData.sol6', index=7,
-      number=7, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
+      name='solenoidConfiguration', full_name='PodCommand.solenoidConfiguration', index=7,
+      number=8, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='hp', full_name='BrakeNodeData.hp', index=8,
-      number=8, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
+      name='powerRailConfiguration', full_name='PodCommand.powerRailConfiguration', index=8,
+      number=9, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='lp1', full_name='BrakeNodeData.lp1', index=9,
-      number=9, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='lp2', full_name='BrakeNodeData.lp2', index=10,
-      number=10, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='lp3', full_name='BrakeNodeData.lp3', index=11,
-      number=11, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='lp4', full_name='BrakeNodeData.lp4', index=12,
-      number=12, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='temp', full_name='BrakeNodeData.temp', index=13,
-      number=13, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
+      name='sensorOverrideConfiguration', full_name='PodCommand.sensorOverrideConfiguration', index=9,
+      number=10, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -450,73 +382,7 @@ _BRAKENODEDATA = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=19,
-  serialized_end=241,
-)
-
-
-_PODCOMMAND = _descriptor.Descriptor(
-  name='PodCommand',
-  full_name='PodCommand',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='controlsInterfaceState', full_name='PodCommand.controlsInterfaceState', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='manualPodState', full_name='PodCommand.manualPodState', index=1,
-      number=2, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='manualBrakeNodeState', full_name='PodCommand.manualBrakeNodeState', index=2,
-      number=3, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='manualMotorState', full_name='PodCommand.manualMotorState', index=3,
-      number=4, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='manualLvdcNodeState', full_name='PodCommand.manualLvdcNodeState', index=4,
-      number=5, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='automaticStateTransitions', full_name='PodCommand.automaticStateTransitions', index=5,
-      number=6, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=244,
-  serialized_end=519,
+  serialized_end=421,
 )
 
 
@@ -675,35 +541,35 @@ _TELEMETRY = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='inverterTemperature1', full_name='Telemetry.inverterTemperature1', index=21,
+      name='maxIgbtTemperature', full_name='Telemetry.maxIgbtTemperature', index=21,
       number=18, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='inverterTemperature2', full_name='Telemetry.inverterTemperature2', index=22,
+      name='gateDriverTemperature', full_name='Telemetry.gateDriverTemperature', index=22,
       number=19, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='inverterTemperature3', full_name='Telemetry.inverterTemperature3', index=23,
+      name='inverterControlBoardTemperature', full_name='Telemetry.inverterControlBoardTemperature', index=23,
       number=20, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='motorCurrent', full_name='Telemetry.motorCurrent', index=24,
+      name='motorTemperature', full_name='Telemetry.motorTemperature', index=24,
       number=21, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='motorVoltage', full_name='Telemetry.motorVoltage', index=25,
+      name='inverterBusVoltage', full_name='Telemetry.inverterBusVoltage', index=25,
       number=22, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -787,245 +653,231 @@ _TELEMETRY = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='solenoid5', full_name='Telemetry.solenoid5', index=37,
-      number=36, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='solenoid6', full_name='Telemetry.solenoid6', index=38,
-      number=37, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='highPressure', full_name='Telemetry.highPressure', index=39,
+      name='highPressure', full_name='Telemetry.highPressure', index=37,
       number=38, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='lowPressure1', full_name='Telemetry.lowPressure1', index=40,
+      name='lowPressure1', full_name='Telemetry.lowPressure1', index=38,
       number=39, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='lowPressure2', full_name='Telemetry.lowPressure2', index=41,
+      name='lowPressure2', full_name='Telemetry.lowPressure2', index=39,
       number=40, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='lowPressure3', full_name='Telemetry.lowPressure3', index=42,
+      name='lowPressure3', full_name='Telemetry.lowPressure3', index=40,
       number=41, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='lowPressure4', full_name='Telemetry.lowPressure4', index=43,
+      name='lowPressure4', full_name='Telemetry.lowPressure4', index=41,
       number=42, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='pressureVesselTemperature', full_name='Telemetry.pressureVesselTemperature', index=44,
+      name='pressureVesselTemperature', full_name='Telemetry.pressureVesselTemperature', index=42,
       number=43, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='electronicsEnclosurePressure', full_name='Telemetry.electronicsEnclosurePressure', index=45,
+      name='electronicsEnclosurePressure', full_name='Telemetry.electronicsEnclosurePressure', index=43,
       number=44, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='railDisplacementX', full_name='Telemetry.railDisplacementX', index=46,
+      name='railDisplacementX', full_name='Telemetry.railDisplacementX', index=44,
       number=45, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='railDisplacementY', full_name='Telemetry.railDisplacementY', index=47,
+      name='railDisplacementY', full_name='Telemetry.railDisplacementY', index=45,
       number=46, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='tubePressure', full_name='Telemetry.tubePressure', index=48,
+      name='tubePressure', full_name='Telemetry.tubePressure', index=46,
       number=48, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='coolantPressure1', full_name='Telemetry.coolantPressure1', index=49,
+      name='coolantPressure1', full_name='Telemetry.coolantPressure1', index=47,
       number=49, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='coolantPressure2', full_name='Telemetry.coolantPressure2', index=50,
+      name='coolantPressure2', full_name='Telemetry.coolantPressure2', index=48,
       number=50, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='coolantPressure3', full_name='Telemetry.coolantPressure3', index=51,
+      name='coolantPressure3', full_name='Telemetry.coolantPressure3', index=49,
       number=51, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='coolantTemperature', full_name='Telemetry.coolantTemperature', index=52,
+      name='coolantTemperature', full_name='Telemetry.coolantTemperature', index=50,
       number=52, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='railTemperature', full_name='Telemetry.railTemperature', index=53,
+      name='railTemperature', full_name='Telemetry.railTemperature', index=51,
       number=53, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='pack1Voltage', full_name='Telemetry.pack1Voltage', index=54,
+      name='pack1Voltage', full_name='Telemetry.pack1Voltage', index=52,
       number=55, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='pack2Voltage', full_name='Telemetry.pack2Voltage', index=55,
+      name='pack2Voltage', full_name='Telemetry.pack2Voltage', index=53,
       number=56, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='pack1Current', full_name='Telemetry.pack1Current', index=56,
+      name='pack1Current', full_name='Telemetry.pack1Current', index=54,
       number=57, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='pack2Current', full_name='Telemetry.pack2Current', index=57,
+      name='pack2Current', full_name='Telemetry.pack2Current', index=55,
       number=58, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='rail1Voltage', full_name='Telemetry.rail1Voltage', index=58,
+      name='rail1Voltage', full_name='Telemetry.rail1Voltage', index=56,
       number=59, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='rail2Voltage', full_name='Telemetry.rail2Voltage', index=59,
+      name='rail2Voltage', full_name='Telemetry.rail2Voltage', index=57,
       number=60, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='rail3Voltage', full_name='Telemetry.rail3Voltage', index=60,
+      name='rail3Voltage', full_name='Telemetry.rail3Voltage', index=58,
       number=61, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='rail4Voltage', full_name='Telemetry.rail4Voltage', index=61,
+      name='rail4Voltage', full_name='Telemetry.rail4Voltage', index=59,
       number=62, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='railVoltageFlag', full_name='Telemetry.railVoltageFlag', index=62,
+      name='railVoltageFlag', full_name='Telemetry.railVoltageFlag', index=60,
       number=72, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='railCurrentSensor1', full_name='Telemetry.railCurrentSensor1', index=63,
+      name='railCurrentSensor1', full_name='Telemetry.railCurrentSensor1', index=61,
       number=63, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='railCurrentSensor2', full_name='Telemetry.railCurrentSensor2', index=64,
+      name='railCurrentSensor2', full_name='Telemetry.railCurrentSensor2', index=62,
       number=64, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='railCurrentSensor3', full_name='Telemetry.railCurrentSensor3', index=65,
+      name='railCurrentSensor3', full_name='Telemetry.railCurrentSensor3', index=63,
       number=65, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='railCurrentSensor4', full_name='Telemetry.railCurrentSensor4', index=66,
+      name='railCurrentSensor4', full_name='Telemetry.railCurrentSensor4', index=64,
       number=66, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='railCurrentSensor5', full_name='Telemetry.railCurrentSensor5', index=67,
+      name='railCurrentSensor5', full_name='Telemetry.railCurrentSensor5', index=65,
       number=67, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='railCurrentSensor6', full_name='Telemetry.railCurrentSensor6', index=68,
+      name='railCurrentSensor6', full_name='Telemetry.railCurrentSensor6', index=66,
       number=68, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='railCurrentSensor7', full_name='Telemetry.railCurrentSensor7', index=69,
+      name='railCurrentSensor7', full_name='Telemetry.railCurrentSensor7', index=67,
       number=69, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='railCurrentSensor8', full_name='Telemetry.railCurrentSensor8', index=70,
+      name='railCurrentSensor8', full_name='Telemetry.railCurrentSensor8', index=68,
       number=70, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='railCurrentFlag', full_name='Telemetry.railCurrentFlag', index=71,
+      name='railCurrentFlag', full_name='Telemetry.railCurrentFlag', index=69,
       number=73, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -1043,8 +895,8 @@ _TELEMETRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=522,
-  serialized_end=2507,
+  serialized_start=424,
+  serialized_end=2391,
 )
 
 
@@ -1063,14 +915,80 @@ _FCTOBRAKENODE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='podState', full_name='FcToBrakeNode.podState', index=1,
+      name='nodeState', full_name='FcToBrakeNode.nodeState', index=1,
       number=2, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='manualNodeState', full_name='FcToBrakeNode.manualNodeState', index=2,
+      name='solenoid1Config', full_name='FcToBrakeNode.solenoid1Config', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='solenoid2Config', full_name='FcToBrakeNode.solenoid2Config', index=3,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='solenoid3Config', full_name='FcToBrakeNode.solenoid3Config', index=4,
+      number=5, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='solenoid4Config', full_name='FcToBrakeNode.solenoid4Config', index=5,
+      number=6, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2394,
+  serialized_end=2565,
+)
+
+
+_FCTOLVDCNODE = _descriptor.Descriptor(
+  name='FcToLvdcNode',
+  full_name='FcToLvdcNode',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='packetNum', full_name='FcToLvdcNode.packetNum', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='podState', full_name='FcToLvdcNode.podState', index=1,
+      number=2, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='manualNodeState', full_name='FcToLvdcNode.manualNodeState', index=2,
       number=3, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -1088,8 +1006,8 @@ _FCTOBRAKENODE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2509,
-  serialized_end=2616,
+  serialized_start=2567,
+  serialized_end=2672,
 )
 
 
@@ -1103,56 +1021,56 @@ _DTSNODETOFC = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='packetNum', full_name='DtsNodeToFc.packetNum', index=0,
       number=1, type=5, cpp_type=1, label=2,
-      has_default_value=True, default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='brakeNodeState', full_name='DtsNodeToFc.brakeNodeState', index=1,
       number=2, type=14, cpp_type=8, label=2,
-      has_default_value=True, default_value=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='brakeSolenoidState', full_name='DtsNodeToFc.brakeSolenoidState', index=2,
       number=3, type=8, cpp_type=7, label=2,
-      has_default_value=True, default_value=False,
+      has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='ventSolenoidState', full_name='DtsNodeToFc.ventSolenoidState', index=3,
       number=4, type=8, cpp_type=7, label=2,
-      has_default_value=True, default_value=False,
+      has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='rotorTemperature', full_name='DtsNodeToFc.rotorTemperature', index=4,
       number=5, type=2, cpp_type=6, label=2,
-      has_default_value=True, default_value=float(0),
+      has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='pneumaticTemperature', full_name='DtsNodeToFc.pneumaticTemperature', index=5,
       number=6, type=2, cpp_type=6, label=2,
-      has_default_value=True, default_value=float(0),
+      has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='tankPressure', full_name='DtsNodeToFc.tankPressure', index=6,
       number=7, type=2, cpp_type=6, label=2,
-      has_default_value=True, default_value=float(0),
+      has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='brakePressure', full_name='DtsNodeToFc.brakePressure', index=7,
       number=8, type=2, cpp_type=6, label=2,
-      has_default_value=True, default_value=float(0),
+      has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -1168,57 +1086,43 @@ _DTSNODETOFC = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2619,
-  serialized_end=2890,
+  serialized_start=2675,
+  serialized_end=2905,
 )
 
 
-_REARNODETOFC = _descriptor.Descriptor(
-  name='RearNodeToFc',
-  full_name='RearNodeToFc',
+_ENCLOSURENODETOFC = _descriptor.Descriptor(
+  name='EnclosureNodeToFc',
+  full_name='EnclosureNodeToFc',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='packetNum', full_name='RearNodeToFc.packetNum', index=0,
+      name='packetNum', full_name='EnclosureNodeToFc.packetNum', index=0,
       number=1, type=5, cpp_type=1, label=2,
-      has_default_value=True, default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='tubePressure', full_name='RearNodeToFc.tubePressure', index=1,
+      name='enclosurePressure', full_name='EnclosureNodeToFc.enclosurePressure', index=1,
       number=2, type=2, cpp_type=6, label=2,
-      has_default_value=True, default_value=float(0),
+      has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='coolantPressure1', full_name='RearNodeToFc.coolantPressure1', index=2,
+      name='enclosureTemperature', full_name='EnclosureNodeToFc.enclosureTemperature', index=2,
       number=3, type=2, cpp_type=6, label=2,
-      has_default_value=True, default_value=float(0),
+      has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='coolantPressure2', full_name='RearNodeToFc.coolantPressure2', index=3,
+      name='coolantLinePressure', full_name='EnclosureNodeToFc.coolantLinePressure', index=3,
       number=4, type=2, cpp_type=6, label=2,
-      has_default_value=True, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='coolantPressure3', full_name='RearNodeToFc.coolantPressure3', index=4,
-      number=5, type=2, cpp_type=6, label=2,
-      has_default_value=True, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='coolantTemperature', full_name='RearNodeToFc.coolantTemperature', index=5,
-      number=6, type=2, cpp_type=6, label=2,
-      has_default_value=True, default_value=float(0),
+      has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -1234,8 +1138,245 @@ _REARNODETOFC = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2893,
-  serialized_end=3072,
+  serialized_start=2907,
+  serialized_end=3031,
+)
+
+
+_LVDCNODETOFC = _descriptor.Descriptor(
+  name='LvdcNodeToFc',
+  full_name='LvdcNodeToFc',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='highPowerPackVoltage', full_name='LvdcNodeToFc.highPowerPackVoltage', index=0,
+      number=1, type=2, cpp_type=6, label=2,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='lowPowerPackVoltage', full_name='LvdcNodeToFc.lowPowerPackVoltage', index=1,
+      number=2, type=2, cpp_type=6, label=2,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='highPowerPackCurrent', full_name='LvdcNodeToFc.highPowerPackCurrent', index=2,
+      number=3, type=2, cpp_type=6, label=2,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='lowPowerPackCurrent', full_name='LvdcNodeToFc.lowPowerPackCurrent', index=3,
+      number=4, type=2, cpp_type=6, label=2,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='rail5Voltage', full_name='LvdcNodeToFc.rail5Voltage', index=4,
+      number=5, type=2, cpp_type=6, label=2,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='rail12LowPowerVoltage', full_name='LvdcNodeToFc.rail12LowPowerVoltage', index=5,
+      number=6, type=2, cpp_type=6, label=2,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='rail12HighPowerVoltage', full_name='LvdcNodeToFc.rail12HighPowerVoltage', index=6,
+      number=7, type=2, cpp_type=6, label=2,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='rail24Voltage', full_name='LvdcNodeToFc.rail24Voltage', index=7,
+      number=8, type=2, cpp_type=6, label=2,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='rail5Current', full_name='LvdcNodeToFc.rail5Current', index=8,
+      number=9, type=2, cpp_type=6, label=2,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='rail12LowPowerCurrent', full_name='LvdcNodeToFc.rail12LowPowerCurrent', index=9,
+      number=10, type=2, cpp_type=6, label=2,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='rail24Current', full_name='LvdcNodeToFc.rail24Current', index=10,
+      number=11, type=2, cpp_type=6, label=2,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='railInverterCurrent', full_name='LvdcNodeToFc.railInverterCurrent', index=11,
+      number=12, type=2, cpp_type=6, label=2,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='railCooling1Current', full_name='LvdcNodeToFc.railCooling1Current', index=12,
+      number=13, type=2, cpp_type=6, label=2,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='railCooling2Current', full_name='LvdcNodeToFc.railCooling2Current', index=13,
+      number=14, type=2, cpp_type=6, label=2,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3034,
+  serialized_end=3437,
+)
+
+
+_BRAKENODETOFC = _descriptor.Descriptor(
+  name='BrakeNodeToFc',
+  full_name='BrakeNodeToFc',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='packetNum', full_name='BrakeNodeToFc.packetNum', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='state', full_name='BrakeNodeToFc.state', index=1,
+      number=2, type=14, cpp_type=8, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='solenoid1', full_name='BrakeNodeToFc.solenoid1', index=2,
+      number=3, type=8, cpp_type=7, label=2,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='solenoid2', full_name='BrakeNodeToFc.solenoid2', index=3,
+      number=4, type=8, cpp_type=7, label=2,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='solenoid3', full_name='BrakeNodeToFc.solenoid3', index=4,
+      number=5, type=8, cpp_type=7, label=2,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='solenoid4', full_name='BrakeNodeToFc.solenoid4', index=5,
+      number=6, type=8, cpp_type=7, label=2,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='highPressure', full_name='BrakeNodeToFc.highPressure', index=6,
+      number=7, type=2, cpp_type=6, label=2,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='lowPressure1', full_name='BrakeNodeToFc.lowPressure1', index=7,
+      number=8, type=2, cpp_type=6, label=2,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='lowPressure2', full_name='BrakeNodeToFc.lowPressure2', index=8,
+      number=9, type=2, cpp_type=6, label=2,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='lowPressure3', full_name='BrakeNodeToFc.lowPressure3', index=9,
+      number=10, type=2, cpp_type=6, label=2,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='lowPressureCommon', full_name='BrakeNodeToFc.lowPressureCommon', index=10,
+      number=11, type=2, cpp_type=6, label=2,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='pneumaticTemperature', full_name='BrakeNodeToFc.pneumaticTemperature', index=11,
+      number=12, type=2, cpp_type=6, label=2,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='coolantTankPressure', full_name='BrakeNodeToFc.coolantTankPressure', index=12,
+      number=13, type=2, cpp_type=6, label=2,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3440,
+  serialized_end=3757,
 )
 
 
@@ -1305,7 +1446,28 @@ _FLIGHTCONFIG = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='controlLaptopIpAddr', full_name='flightConfig.controlLaptopIpAddr', index=8,
       number=9, type=9, cpp_type=9, label=1,
-      has_default_value=True, default_value=_b("192.168.0.103").decode('utf-8'),
+      has_default_value=True, default_value=_b("127.0.0.1").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='brakeNodePort', full_name='flightConfig.brakeNodePort', index=9,
+      number=10, type=4, cpp_type=4, label=1,
+      has_default_value=True, default_value=5555,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='brakeNodeTimeout', full_name='flightConfig.brakeNodeTimeout', index=10,
+      number=11, type=4, cpp_type=4, label=1,
+      has_default_value=True, default_value=4000,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='brakeNodeServerPort', full_name='flightConfig.brakeNodeServerPort', index=11,
+      number=12, type=4, cpp_type=4, label=1,
+      has_default_value=True, default_value=5555,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -1321,8 +1483,8 @@ _FLIGHTCONFIG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3075,
-  serialized_end=3335,
+  serialized_start=3760,
+  serialized_end=4112,
 )
 
 
@@ -1352,11 +1514,10 @@ _DEFAULTFCTONODE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3337,
-  serialized_end=3384,
+  serialized_start=4114,
+  serialized_end=4161,
 )
 
-_BRAKENODEDATA.fields_by_name['state'].enum_type = _BRAKENODESTATES
 _PODCOMMAND.fields_by_name['controlsInterfaceState'].enum_type = _CONTROLSINTERFACESTATES
 _PODCOMMAND.fields_by_name['manualPodState'].enum_type = _PODSTATES
 _PODCOMMAND.fields_by_name['manualBrakeNodeState'].enum_type = _BRAKENODESTATES
@@ -1370,16 +1531,20 @@ _TELEMETRY.fields_by_name['inverterState'].enum_type = _INVERTERSTATES
 _TELEMETRY.fields_by_name['lvdcNodeState'].enum_type = _LVDCNODESTATES
 _TELEMETRY.fields_by_name['batteryManagementState'].enum_type = _BATTERYMANAGEMENTSTATES
 _TELEMETRY.fields_by_name['breakNodePerceivedPodState'].enum_type = _PODSTATES
-_FCTOBRAKENODE.fields_by_name['podState'].enum_type = _PODSTATES
-_FCTOBRAKENODE.fields_by_name['manualNodeState'].enum_type = _BRAKENODESTATES
+_FCTOBRAKENODE.fields_by_name['nodeState'].enum_type = _BRAKENODESTATES
+_FCTOLVDCNODE.fields_by_name['podState'].enum_type = _PODSTATES
+_FCTOLVDCNODE.fields_by_name['manualNodeState'].enum_type = _LVDCNODESTATES
 _DTSNODETOFC.fields_by_name['brakeNodeState'].enum_type = _BRAKENODESTATES
+_BRAKENODETOFC.fields_by_name['state'].enum_type = _BRAKENODESTATES
 _DEFAULTFCTONODE.fields_by_name['podState'].enum_type = _PODSTATES
-DESCRIPTOR.message_types_by_name['BrakeNodeData'] = _BRAKENODEDATA
 DESCRIPTOR.message_types_by_name['PodCommand'] = _PODCOMMAND
 DESCRIPTOR.message_types_by_name['Telemetry'] = _TELEMETRY
 DESCRIPTOR.message_types_by_name['FcToBrakeNode'] = _FCTOBRAKENODE
+DESCRIPTOR.message_types_by_name['FcToLvdcNode'] = _FCTOLVDCNODE
 DESCRIPTOR.message_types_by_name['DtsNodeToFc'] = _DTSNODETOFC
-DESCRIPTOR.message_types_by_name['RearNodeToFc'] = _REARNODETOFC
+DESCRIPTOR.message_types_by_name['EnclosureNodeToFc'] = _ENCLOSURENODETOFC
+DESCRIPTOR.message_types_by_name['LvdcNodeToFc'] = _LVDCNODETOFC
+DESCRIPTOR.message_types_by_name['BrakeNodeToFc'] = _BRAKENODETOFC
 DESCRIPTOR.message_types_by_name['flightConfig'] = _FLIGHTCONFIG
 DESCRIPTOR.message_types_by_name['DefaultFcToNode'] = _DEFAULTFCTONODE
 DESCRIPTOR.enum_types_by_name['BrakeNodeStates'] = _BRAKENODESTATES
@@ -1388,16 +1553,8 @@ DESCRIPTOR.enum_types_by_name['MotorStates'] = _MOTORSTATES
 DESCRIPTOR.enum_types_by_name['ControlsInterfaceStates'] = _CONTROLSINTERFACESTATES
 DESCRIPTOR.enum_types_by_name['InverterStates'] = _INVERTERSTATES
 DESCRIPTOR.enum_types_by_name['BatteryManagementStates'] = _BATTERYMANAGEMENTSTATES
-DESCRIPTOR.enum_types_by_name['RearNodeStates'] = _REARNODESTATES
 DESCRIPTOR.enum_types_by_name['LvdcNodeStates'] = _LVDCNODESTATES
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
-BrakeNodeData = _reflection.GeneratedProtocolMessageType('BrakeNodeData', (_message.Message,), dict(
-  DESCRIPTOR = _BRAKENODEDATA,
-  __module__ = 'Paradigm_pb2'
-  # @@protoc_insertion_point(class_scope:BrakeNodeData)
-  ))
-_sym_db.RegisterMessage(BrakeNodeData)
 
 PodCommand = _reflection.GeneratedProtocolMessageType('PodCommand', (_message.Message,), dict(
   DESCRIPTOR = _PODCOMMAND,
@@ -1420,6 +1577,13 @@ FcToBrakeNode = _reflection.GeneratedProtocolMessageType('FcToBrakeNode', (_mess
   ))
 _sym_db.RegisterMessage(FcToBrakeNode)
 
+FcToLvdcNode = _reflection.GeneratedProtocolMessageType('FcToLvdcNode', (_message.Message,), dict(
+  DESCRIPTOR = _FCTOLVDCNODE,
+  __module__ = 'Paradigm_pb2'
+  # @@protoc_insertion_point(class_scope:FcToLvdcNode)
+  ))
+_sym_db.RegisterMessage(FcToLvdcNode)
+
 DtsNodeToFc = _reflection.GeneratedProtocolMessageType('DtsNodeToFc', (_message.Message,), dict(
   DESCRIPTOR = _DTSNODETOFC,
   __module__ = 'Paradigm_pb2'
@@ -1427,12 +1591,26 @@ DtsNodeToFc = _reflection.GeneratedProtocolMessageType('DtsNodeToFc', (_message.
   ))
 _sym_db.RegisterMessage(DtsNodeToFc)
 
-RearNodeToFc = _reflection.GeneratedProtocolMessageType('RearNodeToFc', (_message.Message,), dict(
-  DESCRIPTOR = _REARNODETOFC,
+EnclosureNodeToFc = _reflection.GeneratedProtocolMessageType('EnclosureNodeToFc', (_message.Message,), dict(
+  DESCRIPTOR = _ENCLOSURENODETOFC,
   __module__ = 'Paradigm_pb2'
-  # @@protoc_insertion_point(class_scope:RearNodeToFc)
+  # @@protoc_insertion_point(class_scope:EnclosureNodeToFc)
   ))
-_sym_db.RegisterMessage(RearNodeToFc)
+_sym_db.RegisterMessage(EnclosureNodeToFc)
+
+LvdcNodeToFc = _reflection.GeneratedProtocolMessageType('LvdcNodeToFc', (_message.Message,), dict(
+  DESCRIPTOR = _LVDCNODETOFC,
+  __module__ = 'Paradigm_pb2'
+  # @@protoc_insertion_point(class_scope:LvdcNodeToFc)
+  ))
+_sym_db.RegisterMessage(LvdcNodeToFc)
+
+BrakeNodeToFc = _reflection.GeneratedProtocolMessageType('BrakeNodeToFc', (_message.Message,), dict(
+  DESCRIPTOR = _BRAKENODETOFC,
+  __module__ = 'Paradigm_pb2'
+  # @@protoc_insertion_point(class_scope:BrakeNodeToFc)
+  ))
+_sym_db.RegisterMessage(BrakeNodeToFc)
 
 flightConfig = _reflection.GeneratedProtocolMessageType('flightConfig', (_message.Message,), dict(
   DESCRIPTOR = _FLIGHTCONFIG,

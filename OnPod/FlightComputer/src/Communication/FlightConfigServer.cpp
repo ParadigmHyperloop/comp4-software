@@ -27,7 +27,7 @@ FlightConfigServer *FlightConfigServer::getServer(int32_t port) {
 
 flightConfig FlightConfigServer::runServer() {
 
-    LOG(INFO) << "Creating Pod Initilizer socket";
+    LOG(INFO) << "Creating TelemetryManager Initilizer socket";
     char controlLaptopAddr[NI_MAXHOST] = {0};
     this->_listenerSocketID = socket(AF_INET, SOCK_STREAM, 0);
     if (this->_listenerSocketID == -1) {

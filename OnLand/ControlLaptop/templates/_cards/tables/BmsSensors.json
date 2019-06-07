@@ -1,0 +1,22 @@
+{
+  "hvBatteryPackVoltage": {
+    "name_pretty": "Pack Voltage",
+    "order": 0
+  },
+    "hvBatteryPackCurrent": {
+    "name_pretty": "Pack Current",
+      "order": 1
+  },
+    "hvBatteryPackMinimumCellVoltage": {
+    "name_pretty": "Min Cell Voltage",
+      "order": 2
+  },
+    "hvBatteryPackMaxCellVoltage": {
+    "name_pretty": "Max Cell Voltage",
+      "order": 3
+  }
+}
+
+
+
+

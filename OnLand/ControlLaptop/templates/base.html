@@ -50,9 +50,7 @@
     <!-- Animated Icons -->
     <script src="{{ url_for('static', filename='assets/vendors/loaders/loaders.css.js') }}"></script>
 
-
-
-    <script src="../static/assets/js/Dynamic.js"></script>
+    <script src="{{ url_for('static', filename='assets/js/Dynamic.js') }}"></script>
     <script src="{{ url_for('static', filename='assets/js/Base.js') }}"></script>
 
 
@@ -63,7 +61,7 @@
 
 
 {% block body %}
-<div class="wrapper">
+<div class="wrapper" style="width:100.01vw;">
    <!-- #sidebar Template -->
    {% include '_sidebar.html' %}
    <div class="main-panel">
