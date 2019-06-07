@@ -17,14 +17,13 @@ struct PodValues {
 
     //Manual States
     PodStates manualPodState;
-    ControlsInterfaceStates manualTerminalState;
     MotorStates manualMotorState;
     BrakeNodeStates manualBrakeNodeState;
     LvdcNodeStates manualLvdcNodeState;
     bool automaticTransitions;
 
     //ConnectionsArray
-    std::vector<int32_t> connectionFlags = {false, false, false, false, false}; // [brake , rear, lvdc, bms, inverter]
+    std::vector<int32_t> connectionFlags = {false, false, false, false, false};
     std::vector<int32_t> sensorFlags = {};
 
     // HV-BMS
@@ -51,8 +50,6 @@ struct PodValues {
     bool solenoid2;
     bool solenoid3;
     bool solenoid4;
-    bool solenoid5;
-    bool solenoid6;
     float lowPressure1;
     float lowPressure2;
     float lowPressure3;

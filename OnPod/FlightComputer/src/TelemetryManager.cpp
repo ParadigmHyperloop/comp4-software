@@ -1,7 +1,7 @@
 #include "TelemetryManager.h"
 #include "Common.h"
 #include "comparingHelpers.h"
-#include "SensorConfig.h"
+#include "Constants/SensorConfig.h"
 
 TelemetryManager::TelemetryManager()=default;
 
@@ -109,7 +109,7 @@ float TelemetryManager::getHvBatteryPackMaxCellVoltage(){
     return this->telemetry->hvBatteryPackMaxCellVoltage;
 }
 
-void TelemetryManager::setSolenoid(float value, int32_t identifier){
+void TelemetryManager::setSolenoid(bool value, int32_t identifier){
     // Set Value in Memory
     switch(identifier){
         case SOL1_INDEX:

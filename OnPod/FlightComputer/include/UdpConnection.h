@@ -96,9 +96,15 @@ public:
      */
     int32_t getConnectionIndex();
 
+    int32_t getNewPacketId();
+
+    int32_t checkPacketId(int32_t);
+
 protected:
     bool _createServerSocket();
     TelemetryManager pod;
+    uint32_t _lastPacketSentId = 0;
+    uint32_t _lastPacketReceivedId = 0;
     int32_t _outboundSocket = -1;
     int32_t _inboundSocket = -1;
     int32_t _serverPort = -1;

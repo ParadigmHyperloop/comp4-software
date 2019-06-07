@@ -44,7 +44,7 @@ class TelemetryManager
         // Brake Node
         void setLowPressure(float, int32_t);
         void setHighPressure(float);
-        void setSolenoid(float value, int32_t identifier);
+        void setSolenoid(bool value, int32_t identifier);
         void setPressureVesselTemperature(float);
 
 		// Permissions

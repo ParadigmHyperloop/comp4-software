@@ -1,5 +1,5 @@
 #include "UdpConnection.h"
-#include "SensorConfig.h"
+#include "../Constants/SensorConfig.h"
 
 UdpConnection::UdpConnection(TelemetryManager pod){
     this->pod = pod;
@@ -34,8 +34,25 @@ void UdpConnection::configureServer(int32_t serverPort, int32_t connectionTimeou
     }
 }
 
+int32_t UdpConnection::getNewPacketId() {
+    return this->_lastPacketSentId++;
+}
+
+int32_t UdpConnection::checkPacketId(int32_t id) {
+    if(id < this->_lastPacketReceivedId){
+        return false;
+    }
+    else{
+        this->_lastPacketReceivedId = id;
+        return true;
+    }
+}
+
 
 void UdpConnection::getUpdate() {
+
+    bool opStatus = false;
+
     if (this->_inboundSocket == -1) {
         std::string error = "getUpdate() : Server socket invalid";
         throw std::runtime_error(error);
@@ -46,13 +63,16 @@ void UdpConnection::getUpdate() {
     if (receivedPacketSize != -1) {
         LOG(INFO) << receivedPacketSize << " Bytes received on " << this->_connectionName << buffer;
         try {
-            this->parseUpdate(buffer, (int32_t) receivedPacketSize);
+            opStatus = this->parseUpdate(buffer, (int32_t) receivedPacketSize);
         }
         catch (const std::invalid_argument &e) {
             std::string error = "getUpdate() : " + std::string(e.what());
+            this->pod.setConnectionFlag(false, this->getConnectionIndex());
             throw std::runtime_error(error);
         }
-        this->_pulse.feed();
+        if(opStatus){
+            this->_pulse.feed();
+        }
         this->pod.setConnectionFlag(true, this->getConnectionIndex());
     } else {
         if (this->_pulse.expired()) {
@@ -165,6 +185,7 @@ BrakeNodeConnection::BrakeNodeConnection(TelemetryManager pod) : UdpConnection(p
 
 std::unique_ptr<google::protobuf::Message> BrakeNodeConnection::getProtoUpdateMessage() {
     std::unique_ptr<FcToBrakeNode> protoMessage (new FcToBrakeNode());
+    protoMessage->set_packetnum(this->getNewPacketId());
     BrakeNodeStates manualState = this->pod.telemetry->manualBrakeNodeState;
     if(manualState == bnsNone){
         protoMessage->set_nodestate(this->pod.telemetry->manualBrakeNodeState);
@@ -186,6 +207,9 @@ bool BrakeNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
     if (!protoMessage.ParseFromArray(buffer, messageSize)) {
         std::string strError = "Failed to parse Update from Brake Node";
         throw std::invalid_argument(strError);
+    }
+    if(this->checkPacketId(protoMessage.packetnum())){
+        return false;
     }
     this->pod.setSolenoid(protoMessage.brakesolenoidstate(),SOL1_INDEX);
     this->pod.setSolenoid(protoMessage.ventsolenoidstate(), SOL4_INDEX);
@@ -211,6 +235,9 @@ bool EnclosureNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
     if (!protoMessage.ParseFromArray(buffer, messageSize)) {
         std::string strError = "Failed to parse Update from Enclosure";
         throw std::invalid_argument(strError);
+    }
+    if(this->checkPacketId(protoMessage.packetnum())){
+        return false;
     }
 
     //TODO Add parsings
