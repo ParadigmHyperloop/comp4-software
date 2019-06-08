@@ -33,7 +33,7 @@ void FlightComputerInitializer::importLoggerLibrary()
     }
 }
 
-void FlightComputerInitializer::updatePodNetworkValues(PodNetwork& podNetworkValues, flightConfig& config)
+void FlightComputerInitializer::updatePodNetworkValues(PodNetwork& podNetworkValues, FlightConfig& config)
 {
     std::string cNodeIpAddrs[] = {"192.168.1.20"};
     podNetworkValues.cNodeIpAddrs.assign(begin(cNodeIpAddrs), end(cNodeIpAddrs)); // Node IPs

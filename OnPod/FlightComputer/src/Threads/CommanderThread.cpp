@@ -40,6 +40,11 @@ void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
     if (podCommand.has_automaticstatetransitions()) {
         Pod->setAutomaticTransitions(podCommand.automaticstatetransitions());
     }
+    if(podCommand.has_maxflighttime()){
+        Pod->telemetry->maxFlightTime = podCommand.maxflighttime();
+        Pod->telemetry->motorTorque = podCommand.motortorque();
+        Pod->telemetry->flightDistance = podCommand.flightdistance();
+    }
     if (podCommand.has_manualbrakenodestate()){
         BrakeNodeStates state = podCommand.manualbrakenodestate();
         if(state == bnsSolenoidControl){

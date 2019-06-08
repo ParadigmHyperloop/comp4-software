@@ -50,13 +50,20 @@ int main( int32_t argc, char** argv)
 
 	LOG(INFO)<<"Main Thread is Started";
     std::unique_ptr<FlightConfigServer> configurationServer(FlightConfigServer::getServer(NetworkConstants::iCONFIG_SERVER_PORT));
-	flightConfig flightConfigurationParameters;
-    try {
-       // flightConfigurationParameters = configurationServer->runServer(); //Comment out to use the default network values in the proto obj
-    } catch (exception& e)
-    {
-        LOG(ERROR) << "Error Receiving Flight Configuration: "<< e.what(); //TODO Hardware reset?
-    }
+	FlightConfig flightConfigurationParameters;
+    bool configReceived = false;
+	while(!configReceived){
+	    configReceived = true;
+        try {
+            flightConfigurationParameters = configurationServer->runServer(); //Comment out to use the default network values in the proto obj
+        } catch (exception& e)
+        {
+            LOG(INFO) << "Error Receiving Flight Configuration: "<< e.what(); //TODO Hardware reset?
+            configurationServer->closePorts();
+            configReceived = false;
+        }
+	}
+
 
     // Create Shared Memory
     PodNetwork sPodNetworkValues = {};

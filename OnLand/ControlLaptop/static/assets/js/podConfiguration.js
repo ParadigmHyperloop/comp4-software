@@ -25,14 +25,6 @@ function validConfigFormValues() {
     formHasNoError = false;
     $('#retrieval-timout').parent().addClass('has-error');
   }
-  if (isNaN($('#max-flight-time').val()) && $('#max-flight-time').val() > 0) { // Validated max-flight time
-    formHasNoError = false;
-    $('#max-flight-time').parent().addClass('has-error');
-  }
-  if (isNaN($('#motor-speed').val()) && $('#motor-speed').val() > 0) { // Validated motor speed
-    formHasNoError = false;
-    $('#motor-speed').parent().addClass('has-error');
-  }
   if (isNaN($('#telemetry-port').val()) || $('#telemetry-port').val().length !== 4) { // Validated Telemetry port
     formHasNoError = false;
     $('#telemetry-port').parent().addClass('has-error');
@@ -40,10 +32,6 @@ function validConfigFormValues() {
   if (isNaN($('#command-port').val()) || $('#command-port').val().length !== 4) { // Validated command port
     formHasNoError = false;
     $('#command-port').parent().addClass('has-error');
-  }
-  if (isNaN($('#flight-length').val()) && $('#flight-length').val() > 0) { // Validated flight Length
-    formHasNoError = false;
-    $('#flight-length').parent().addClass('has-error');
   }
   if (isNaN($('#heartbeat-timeout').val()) && $('#heartbeat-timeout').val() > 0) { // Validated flight Length
     formHasNoError = false;

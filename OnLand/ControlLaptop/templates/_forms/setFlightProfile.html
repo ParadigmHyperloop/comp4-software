@@ -1,4 +1,4 @@
-<div class="collapse"  id="armingCommandCollapse">
+<div class="collapse"  id="flightProfileCollapse">
     <div class="card">
        <div class="header">
           <h4 class="title">Set Profile</h4>
@@ -41,7 +41,7 @@
 <script>
     $(document).ready(function() {
         $('form').submit(function (e) {
-            var url = "{{ url_for('parse_arming_command') }}"; // send the form data here.
+            var url = "{{ url_for('parse_flight_profile_command') }}"; // send the form data here.
             $.ajax({
                 type: "POST",
                 url: url,

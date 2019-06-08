@@ -50,17 +50,21 @@ function ParsePodState(state) {
 socket.on('pod_telemetry', function (data) {
     data = JSON.parse(data);
     console.log(data)
-    newPodState = 'psStandby';
+    const newPodState = 'psStandby';
     ParsePodState(newPodState);
-    for (sensor_name in data) {
-        value_cell = $("#" + sensor_name + "-actual");
+    for (let sensor_name in data) {
+        if(!data.hasOwnProperty(sensor_name)){
+            continue;
+        }
+        debugger;
+        let value_cell = $("#" + sensor_name + "-actual");
         if(typeof(data[sensor_name]) == "boolean" || isNaN(data[sensor_name])){
             value_cell.text(data[sensor_name])
         }
         else{
-            min = $("#" + sensor_name + "-min").text();
-            max = $("#" + sensor_name + "-max").text();
-            row = $("#" + sensor_name);
+            let min = $("#" + sensor_name + "-min").text();
+            let max = $("#" + sensor_name + "-max").text();
+            let row = $("#" + sensor_name);
             value_cell.text(data[sensor_name].toFixed(2));
             updateRowStatus(row,min,max,data[sensor_name]);
         }

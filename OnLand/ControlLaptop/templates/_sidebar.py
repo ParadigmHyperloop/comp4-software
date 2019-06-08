@@ -3,7 +3,7 @@ DEFAULT_TITLE = "Control Interface"
 NAV_BAR = [
     {
         'id': 'dashboard',
-        'href': '/dashboard',
+        'href': '',
         'title': 'Vehicle Dashboard',
         'icon': 'pe-7s-rocket'
     },
