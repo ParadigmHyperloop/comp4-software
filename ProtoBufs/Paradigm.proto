@@ -66,6 +66,9 @@ message PodCommand {
     repeated int32 solenoidConfiguration = 8;
     repeated int32 powerRailConfiguration = 9;
     repeated int32 sensorOverrideConfiguration = 10;
+    optional uint32 motorTorque = 11;
+    optional uint32 flightDistance = 12;
+    optional uint32 maxFlightTime = 13;
 }
 
 // POD TELEMETRY

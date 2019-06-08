@@ -28,7 +28,10 @@ PodValues createTelemetryStruct(){
     sPodValues.controlsInterfaceState = ciNone;
     sPodValues.brakeNodeState = bnsNone;
     sPodValues.lvdcNodeState = lvdcNone;
-
+    // Flight Profile
+    sPodValues.motorTorque = 0;
+    sPodValues.flightDistance = 0;
+    sPodValues.maxFlightTime = 0;
     // Manual Control
     sPodValues.manualSolenoidConfiguration = std::vector<bool>(4,false);
     sPodValues.manualBrakeNodeState = bnsNone;

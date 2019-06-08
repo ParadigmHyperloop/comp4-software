@@ -15,6 +15,11 @@ struct PodValues {
     BrakeNodeStates brakeNodeState;
     LvdcNodeStates lvdcNodeState;
 
+    // Flight Profile
+    int32_t motorTorque;
+    int32_t flightDistance;
+    int32_t maxFlightTime;
+
     //Manual States
     PodStates manualPodState;
     MotorStates manualMotorState;

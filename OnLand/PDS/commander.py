@@ -28,6 +28,7 @@ def on_disconnect():
     log.info("Commander Thread: Disconnected from SocketIO")
     sio.emit('ping', 0)
 
+
 @sio.on('manual_state_command')
 def on_state_command(command):
     command = json.loads(command)
@@ -64,6 +65,18 @@ def on_state_command(command):
         new_pod_command.powerRailConfiguration.extend(configuration)
 
     pod.send_packet(new_pod_command.SerializeToString())
+
+
+@sio.on('arm_command')
+def on_arm_command(profile):
+    new_pod_command = PodCommand()
+    new_pod_command.hasCommand = True
+    new_pod_command.controlsInterfaceState = ControlsInterfaceStates.Value('ciArm')
+    new_pod_command.motorTorque = profile['motor_speed']
+    new_pod_command.flightDistance = profile['max_flight_time']
+    new_pod_command.maxFlightTime = profile['flight_distance']
+    pod.send_packet(new_pod_command.SerializeToString())
+
 
 @sio.on('command')
 def on_command(command):

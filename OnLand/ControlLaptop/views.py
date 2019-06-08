@@ -119,6 +119,8 @@ def dashboard():
 def parse_arming_command():
     form = ArmForm()
     if form.validate_on_submit():
+        from ControlLaptop.socketIoRoutes import socket_io as sio
+        sio.emit("arm_command", form.data, room="command_updates")
         return jsonify({'status': 'success'})
     return jsonify({'status': 'error', 'context': form.errors})
 
