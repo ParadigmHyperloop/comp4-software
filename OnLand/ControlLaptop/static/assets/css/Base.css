@@ -13,7 +13,9 @@
 }
 
 
-
+.card-top{
+    height: 350px;
+}
 
 .btn-header{
   color: white;

@@ -1,18 +1,24 @@
 {% extends "base.html" %}
-
+{% block pageStyles %}
+ <link href="{{ url_for('static', filename='assets/css/DtsControl.css') }}" rel="stylesheet" />
+{% endblock %}
 {% block content %}
     <div class="row">
-       <div class="col-md-2">
-          {% include '_cards/tanks.html' %}
+       <div class="col-lg-2">
+          {% include '_cards/flightProfile.html' %}
        </div>
-       <div class="col-md-4">
-          {% include '_cards/environment.html' %}
-       </div>
-       <div class="col-md-4">
+       <div class="col-lg-2">
           {% include '_cards/navigation.html' %}
+       </div>
+        <div class="col-lg-2">
+          {% include '_cards/states.html' %}
+       </div>
+        <div class="col-lg-4">
+          {% include '_cards/commands.html' %}
        </div>
         {% include '_cards/connectionCards.html' %}
     </div>
+    {% include '_cards/manual_state.html' %}
     <div class="row">
        <div class="col-md-6">
           {% include 'archived/sensor_status.html' %}
