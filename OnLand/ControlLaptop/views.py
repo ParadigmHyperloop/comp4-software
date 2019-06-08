@@ -3,14 +3,13 @@ import sys
 import requests
 from datetime import datetime
 import logging as log
-from flask import Flask, redirect, render_template, jsonify
+from flask import Flask, redirect, render_template, jsonify, request
 from ControlLaptop.LocalStorage.ConfigurationSotrage import LocalStorage
 from ControlLaptop.LocalStorage.FlightConfig import FlightConfig
 from ControlLaptop.SocketController import PodCommunicator
 from templates._sidebar import get_page_title, NAV_BAR
-from ControlLaptop.forms import FlightConfigurationForm
+from ControlLaptop.forms import FlightConfigurationForm, ArmForm
 import collections
-
 
 log.basicConfig(stream=sys.stdout, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=log.INFO)
 app = Flask(__name__)
@@ -33,7 +32,7 @@ with app.app_context():
 
 @app.route("/")
 def index():
-    return redirect('/ui/')
+    return redirect('/dashboard')
 
 
 @app.errorhandler(404)
@@ -99,6 +98,30 @@ def ui(path):
         title=title,
         sensors=[LocalStorage.get_sensors()],
     )
+
+
+@app.route("/dashboard")
+def dashboard():
+    path = request.path
+    title = get_page_title(path[1:])
+
+    arm_form = ArmForm()
+    return render_template(
+        path+".html",
+        active_page=path,
+        title=title,
+        armForm=arm_form,
+        sensors=[LocalStorage.get_sensors()],
+    )
+
+
+@app.route('/parseArmingCommand', methods=['post'])
+def parse_arming_command():
+    form = ArmForm()
+    if form.validate_on_submit():
+        return jsonify({'status': 'success'})
+    return jsonify({'status': 'error', 'context': form.errors})
+
 
 
 @app.route('/dts')
