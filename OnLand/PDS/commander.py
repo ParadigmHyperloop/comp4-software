@@ -1,11 +1,14 @@
-import logging as log
-import socketio
-import time
-from Paradigm_pb2 import *
-from PDS.TCP.PodTcpConnection import PodTcpConnection
-from helpers.heartbeat_timer import HeartbeatTimer
-from config import COMMANDER_BACKUP_PULSE, COMMANDER_TIMEOUT_TIME, COMMANDER_PULSE_SPEED, POD_IP, POD_COMMANDER_PORT, COMMANDER_BROADCAST_FREQUENCY, SOCKET_SERVER
 import json
+import logging as log
+import time
+
+import socketio
+
+from PDS.TCP.PodTcpConnection import PodTcpConnection
+from PDS.helpers.heartbeat_timer import HeartbeatTimer
+from Paradigm_pb2 import *
+from config import COMMANDER_BACKUP_PULSE, COMMANDER_TIMEOUT_TIME, COMMANDER_PULSE_SPEED, POD_IP, POD_COMMANDER_PORT, \
+    COMMANDER_BROADCAST_FREQUENCY, SOCKET_SERVER
 
 log.basicConfig(stream=sys.stdout, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 pod_command = PodCommand()
@@ -101,8 +104,8 @@ def main():
     while not connected:
         try:
             sio.connect(SOCKET_SERVER)
-        except:
-            log.info("Commader cannot connect to SocketIO")
+        except ConnectionError as e:
+            log.info("Commander cannot connect to SocketIO")
             time.sleep(2)
         else:
             connected = True
