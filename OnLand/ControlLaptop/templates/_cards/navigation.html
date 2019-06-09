@@ -40,11 +40,14 @@
 
 <script>
 
+$( document ).ready(function() {
+    socket.emit('join_room','telemetry_updates');
+});
+
+
 socket.on('pod_telemetry', function (data) {
     data = JSON.parse(data);
-
-
-
+    console.log(data)
 });
 
 </script>

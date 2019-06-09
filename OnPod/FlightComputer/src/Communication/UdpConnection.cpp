@@ -171,6 +171,9 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_invertercontrolboardtemperature(pod.telemetry->inverterControlBoardTemperature);
     protoMessage->set_motortemperature(pod.telemetry->motorTemperature);
     protoMessage->set_inverterbusvoltage(pod.telemetry->inverterBusVoltage);
+    protoMessage->set_maxflighttime(pod.telemetry->maxFlightTime);
+    protoMessage->set_flightdistance(pod.telemetry->flightDistance);
+    protoMessage->set_motortorque(pod.telemetry->motorTorque);
     return protoMessage;
 }
 

@@ -49,7 +49,7 @@ def inject_now():
 
 @app.route('/submit_configuration', methods=['POST'])
 def submit_configuration():
-    configuration_form = PodConfiguration()
+    configuration_form = PodConfigurationForm()
     flight_configuration = FlightConfig.get_flight_config_instance()
     pod_communicator = PodCommunicator.get_pod_communicator()
 
@@ -174,7 +174,7 @@ def get_flight_profile_template():
 
 @app.route('/sensor_ranges')
 def add_numbers():
-    with open('ControlLaptop/templates/_cards/SensorRanges.json') as json_file:
+    with open('ControlLaptop/templates/tables/SensorRanges.json') as json_file:
         data = json_file.read().replace('\n', '')
     return data
 

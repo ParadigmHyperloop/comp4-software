@@ -6,6 +6,7 @@ $( document ).ready(function() {
     window.telemetryCount = $("#telem-received-num");
 
     socket.emit('join_room','connection_updates');
+    socket.emit('join_room','telemetry_updates');
 });
 
 

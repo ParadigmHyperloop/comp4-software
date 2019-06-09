@@ -25,7 +25,7 @@ do
 done
 
 # Move files accordingly
-flightComputer="../OnPod/FlightComputer/include/"
+flightComputer="../OnPod/FlightComputer/libs/ProtoBuffer"
 flightComputerSrc="../OnPod/FlightComputer/src/"
 
 

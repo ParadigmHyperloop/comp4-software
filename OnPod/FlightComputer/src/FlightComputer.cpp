@@ -25,19 +25,6 @@ PodValues createTelemetryStruct(){
     sPodValues.connectionFlags = std::vector<int32_t>(TOTAL_CONNECTION_COUNT,1);
     // States
     sPodValues.podState = std::move(PodState::createState(psStandby));
-    sPodValues.controlsInterfaceState = ciNone;
-    sPodValues.brakeNodeState = bnsNone;
-    sPodValues.lvdcNodeState = lvdcNone;
-    // Flight Profile
-    sPodValues.motorTorque = 0;
-    sPodValues.flightDistance = 0;
-    sPodValues.maxFlightTime = 0;
-    // Manual Control
-    sPodValues.manualSolenoidConfiguration = std::vector<bool>(4,false);
-    sPodValues.manualBrakeNodeState = bnsNone;
-    sPodValues.manualPodState = psStandby;
-    sPodValues.manualLvdcNodeState = lvdcNone;
-    sPodValues.automaticTransitions = true;
     return sPodValues;
 }
 
