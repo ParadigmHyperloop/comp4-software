@@ -37,7 +37,7 @@ FlightConfig FlightConfigServer::runServer() {
     setsockopt(this->_listenerSocketID, SOL_SOCKET, SO_REUSEADDR, &option, sizeof(option));
     if (this->_listenerSocketID == -1) {
         //todo throw runtime error with string
-        std::string error = std::string("Failed to pod initlizer create socket") + std::strerror(errno);
+        std::string error = std::string("Failed to pod initializer create socket") + std::strerror(errno);
         throw std::runtime_error(error);
     }
 

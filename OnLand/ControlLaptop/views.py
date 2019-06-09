@@ -5,12 +5,12 @@ import sys
 from datetime import datetime
 
 import requests
-from flask import Flask, redirect, render_template, jsonify
+from flask import Flask, redirect, render_template, jsonify, request
 
 from ControlLaptop.LocalStorage.ConfigurationSotrage import LocalStorage
 from ControlLaptop.LocalStorage.FlightConfig import FlightConfig
 from ControlLaptop.SocketController import PodCommunicator
-from ControlLaptop.forms import FlightConfigurationForm
+from ControlLaptop.forms import FlightProfileForm, PodConfigurationForm
 from ControlLaptop.templates._sidebar import get_page_title, NAV_BAR
 
 log.basicConfig(stream=sys.stdout, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=log.INFO)
@@ -167,7 +167,7 @@ def get_flight_profile_template():
         page+".html",
         active_page=page,
         title=title,
-        configuration_form=PodConfiguration(),
+        configuration_form=PodConfigurationForm(),
         saved_configuration=FlightConfig.get_flight_config_instance().read_config()
     )
 

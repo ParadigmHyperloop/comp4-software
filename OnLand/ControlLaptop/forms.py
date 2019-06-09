@@ -3,7 +3,7 @@ from wtforms import StringField, SubmitField, BooleanField, IntegerField
 from wtforms.validators import DataRequired, NumberRange
 
 
-class PodConfiguration(FlaskForm):
+class PodConfigurationForm(FlaskForm):
     retrieval_timeout = StringField('Retrieval Timeout (s)',
                                     validators=[DataRequired("Timeout")])
     telemetry_port = StringField('PDS Telemetry Port',
