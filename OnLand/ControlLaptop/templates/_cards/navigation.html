@@ -4,7 +4,7 @@
       <p class="category">Where she to</p>
    </div>
    <div class="content row0">
-<table class="table">
+<table class="table" id="navigation-values">
   <thead>
     <tr>
     </tr>
@@ -40,14 +40,25 @@
 
 <script>
 
+let navigation_values = [];
 $( document ).ready(function() {
     socket.emit('join_room','telemetry_updates');
+    $("#navigation-values").find("span").each(function(){ navigation_values.push(this.id); });
 });
 
-
 socket.on('pod_telemetry', function (data) {
+    let value, value_cell, value_name;
     data = JSON.parse(data);
-    console.log(data)
+    const length = navigation_values.length;
+    for (let index = 0; index < length; index++) {
+        value_name = navigation_values[index];
+        if(!data.hasOwnProperty(value_name)){
+            continue;
+        }
+        value = data[value_name];
+        value_cell = $("#" + value_name);
+        value_cell.text(value.toFixed(2));
+    }
 });
 
 </script>

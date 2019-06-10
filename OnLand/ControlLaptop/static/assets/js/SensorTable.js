@@ -1,10 +1,10 @@
-let podState = '';
+let pod_state = '';
 let sensor_ranges = false;
-let tableSensors = [];
+let table_sensors = [];
 
 $( document ).ready(function() {
     socket.emit('join_room','telemetry_updates');
-    $("#sensorTable").find("tr").each(function(){ tableSensors.push(this.id); });
+    $("#sensorTable").find("tr").each(function(){ table_sensors.push(this.id); });
     console.log(tableSensors);
 });
 
@@ -35,8 +35,8 @@ function ParsePodState(state) {
         console.log("No sensor Ranges yet")
         return
     }
-    if (state !== podState) {
-        podState = state;
+    if (state !== pod_state) {
+        pod_state = state;
         $(".sensor-row").each(function (index) {
              sensor_name = $(this).attr('id');
              success = true;
@@ -64,9 +64,9 @@ socket.on('pod_telemetry', function (data) {
     const newPodState = data['podState'];
     ParsePodState(newPodState);
 
-    const length = tableSensors.length;
+    const length = table_sensors.length;
     for (let index = 0; index < length; index++) {
-        sensor_name = tableSensors[index];
+        sensor_name = table_sensors[index];
         if(!data.hasOwnProperty(sensor_name)){
             continue;
         }
