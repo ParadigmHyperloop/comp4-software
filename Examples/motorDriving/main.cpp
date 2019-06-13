@@ -35,6 +35,10 @@
 #define OFF 0
 
 
+#define START_DELAY_SECONDS 15
+#define MOTOR_TORQUE_NM 50
+#define DRIVE_TIME_SECONDS 5
+
 struct can_msg_bcm
 {
     struct bcm_msg_head msg_head;
@@ -44,6 +48,9 @@ struct can_msg_bcm
 
 int main()
 {
+
+
+
     int s;
     struct sockaddr_can addr;
     struct ifreq ifr;
@@ -79,9 +86,9 @@ int main()
     {
         std::cout<<"Error"<<std::endl;
     }
-    sleep(10);
+    sleep(START_DELAY_SECONDS);
 
-    msg.frame[0].data[INVERTER_RUN_B] = ON;
+/*    msg.frame[0].data[INVERTER_RUN_B] = ON;
     msg.frame[0].data[DIRECTION_B] = FORWARD;
 
     std::cout<<"Inverter ON"<<std::endl;
@@ -90,17 +97,17 @@ int main()
         std::cout<<"Error on retry"<<std::endl;
     }
 
-    sleep(10);
+    sleep(10);*/
+
+    int scaledTorque = MOTOR_TORQUE_NM * 10;
 
     msg.frame[0].data[INVERTER_RUN_B] = ON;
-
-    msg.frame[0].data[SPEED_HIGH_B] = 4;
-    msg.frame[0].data[SPEED_LOW_B] = 0;
-
-    msg.frame[0].data[TORQUE_HIGH_B] = 9;
-    msg.frame[0].data[TORQUE_LOW_B] = 96;
-
     msg.frame[0].data[DIRECTION_B] = FORWARD;
+
+    msg.frame[0].data[TORQUE_HIGH_B] = scaledTorque/256;
+    msg.frame[0].data[TORQUE_LOW_B] = scaledTorque % 256;
+
+
 
     std::cout<<"DRIVE BITCH DRIVE"<<std::endl;
     if (write(s, &msg, sizeof(msg)) < 0)
@@ -108,32 +115,19 @@ int main()
         std::cout<<"Error on retry"<<std::endl;
     }
 
-    sleep(5);
 
-    msg.frame[0].data[INVERTER_RUN_B] = ON;
+    sleep(DRIVE_TIME_SECONDS);
 
-    msg.frame[0].data[SPEED_HIGH_B] = 0;
-    msg.frame[0].data[SPEED_LOW_B] = 0;
-
+    msg.frame[0].data[INVERTER_RUN_B] = OFF;
     msg.frame[0].data[TORQUE_HIGH_B] = 0;
     msg.frame[0].data[TORQUE_LOW_B] = 0;
-
-    msg.frame[0].data[DIRECTION_B] = FORWARD;
 
     std::cout<<"Torque off inverter on"<<std::endl;
     if (write(s, &msg, sizeof(msg)) < 0)
     {
         std::cout<<"Error on retry"<<std::endl;
     }
-    sleep(30);
+    sleep(10);
 
-    msg.frame[0].data[INVERTER_RUN_B] = OFF;
-    msg.frame[0].data[TORQUE_LOW_B] = 0;
-    std::cout<<"Inverter Off"<<std::endl;
-    if (write(s, &msg, sizeof(msg)) < 0)
-    {
-        std::cout<<"Error on retry"<<std::endl;
-    }
-    sleep(30);
     return 0;
 }
