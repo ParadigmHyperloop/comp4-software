@@ -36,6 +36,7 @@ enum ControlsInterfaceStates {
     ciFlight = 2;
     ciEmergencyStop = 3;
     ciNone = 4;
+    ciRestart = 5;
 }
 
 enum InverterStates {

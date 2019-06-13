@@ -26,11 +26,6 @@ def complete_room_join(room):
     join_room(room)
 
 
-@socket_io.on('command')
-def interface_command(command):
-    socket_io.emit("command", command, room="command_updates")
-
-
 @socket_io.on('frontend_notification')
 def frontend_notification(notification):
     socket_io.emit("frontend_notification", notification, room="notification_updates")
@@ -69,3 +64,4 @@ def logger_feedback(feedback):
 @socket_io.on('cycle_process')
 def logger_feedback(feedback):
     socket_io.emit('cycle_process', feedback, room='process_control')
+

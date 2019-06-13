@@ -42,7 +42,7 @@ int main( int32_t argc, char** argv)
 	while(!configReceived){
 	    configReceived = true;
         try {
-            //flightConfigurationParameters = configurationServer->runServer(); //Comment out to use the default network values in the proto obj
+            flightConfigurationParameters = configurationServer->runServer(); //Comment out to use the default network values in the proto obj
         } catch (exception& e)
         {
             LOG(INFO) << "Error Receiving Flight Configuration: "<< e.what(); //TODO Hardware reset?
@@ -70,18 +70,16 @@ int main( int32_t argc, char** argv)
     TelemetryManager pPodInternalNetwork = TelemetryManager(&sPodValues, &sPodNetworkValues);
     pPodInternalNetwork.bWriteBreakNodeState = true;
     std::thread tServer(udpTelemetryThread, pPodInternalNetwork);
-/*
+
 	// Controls Interface Connection Thread
 	TelemetryManager pCommanderThread = TelemetryManager(&sPodValues, &sPodNetworkValues);
 	pCommanderThread.bWriteManualStates = 1;
 	pCommanderThread.bWriteControlsInterfaceState = 1;
 	std::thread tControlsInterfaceConnection(commanderThread, pCommanderThread);
 
-
- 	tControlsInterfaceConnection.join();
-*/
-    tCan.join();
     tServer.join();
+ 	tControlsInterfaceConnection.join();
+    tCan.join();
 
     return 0;
 }

@@ -170,11 +170,12 @@ enum ControlsInterfaceStates {
   ciArm = 1,
   ciFlight = 2,
   ciEmergencyStop = 3,
-  ciNone = 4
+  ciNone = 4,
+  ciRestart = 5
 };
 bool ControlsInterfaceStates_IsValid(int value);
 const ControlsInterfaceStates ControlsInterfaceStates_MIN = ciStandby;
-const ControlsInterfaceStates ControlsInterfaceStates_MAX = ciNone;
+const ControlsInterfaceStates ControlsInterfaceStates_MAX = ciRestart;
 const int ControlsInterfaceStates_ARRAYSIZE = ControlsInterfaceStates_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ControlsInterfaceStates_descriptor();

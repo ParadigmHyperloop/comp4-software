@@ -5,7 +5,7 @@ let table_sensors = [];
 $( document ).ready(function() {
     socket.emit('join_room','telemetry_updates');
     $("#sensorTable").find("tr").each(function(){ table_sensors.push(this.id); });
-    console.log(tableSensors);
+    console.log(table_sensors);
 });
 
 function getSensorRanges() {

@@ -92,7 +92,7 @@ unsigned int PodState::getTimeInStateMilis(){
 bool Booting::testTransitions(){
     this->setupTransition(psStandby, "Booting Complete");
     return true;
-};
+}
 
 /*
  *  ******************** STANDBY ***********************8

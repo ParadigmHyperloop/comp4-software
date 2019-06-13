@@ -12,11 +12,8 @@ void coreControlLoop(TelemetryManager pod){
                 //TODO lock pod state
 
                 const std::string reason = pod.telemetry->podState->getTransitionReason();
-
                 PodStates newState = pod.telemetry->podState->getNewState();
-
                 pod.setPodState(newState, reason);
-
 
                 //TODO Update All nodes
             }
@@ -32,7 +29,6 @@ void coreControlLoop(TelemetryManager pod){
                 //TODO Update All nodes
             }
         }
-
     }
 
 

@@ -13,17 +13,17 @@
     <tr>
       <th scope="row"></th>
       <td><b>Motor Torque</b></td>
-      <td><span id="motorTorque">500</span></td>
+      <td><span id="motorTorque">-</span></td>
     </tr>
     <tr>
       <th scope="row"></th>
       <td><b>Flight Distance</b></td>
-      <td><span id="flightDistance">800m</span></td>
+      <td><span id="flightDistance">-</span>m</td>
     </tr>
     <tr>
       <th scope="row"></th>
       <td><b>Max Flight Time</b></td>
-      <td><span id="maxFlightTime">15s</span></td>
+      <td><span id="maxFlightTime">-</span>s</td>
     </tr>
   </tbody>
 </table>
@@ -41,28 +41,27 @@
 
 <script>
 
-let flight_profile_values = [];
-$( document ).ready(function() {
-    socket.emit('join_room','telemetry_updates');
-    $("#flight-profile-values").find("span").each(function(){ flight_profile_values.push(this.id); });
-    console.log(flight_profile_values);
-});
+    let flight_profile_values = [];
+    $( document ).ready(function() {
+        socket.emit('join_room','telemetry_updates');
+        $("#flight-profile-values").find("span").each(function(){ flight_profile_values.push(this.id); });
+    });
 
 
-socket.on('pod_telemetry', function (data) {
-    let value, value_cell, value_name;
-    data = JSON.parse(data);
-    const length = flight_profile_values.length;
-    for (let index = 0; index < length; index++) {
-        value_name = flight_profile_values[index];
-        if(!data.hasOwnProperty(value_name)){
-            continue;
+    socket.on('pod_telemetry', function (data) {
+        let value, value_cell, value_name;
+        data = JSON.parse(data);
+        const length = flight_profile_values.length;
+        for (let index = 0; index < length; index++) {
+            value_name = flight_profile_values[index];
+            if(!data.hasOwnProperty(value_name)){
+                continue;
+            }
+            value = data[value_name];
+            value_cell = $("#" + value_name);
+            value_cell.text(value.toFixed(2));
         }
-        value = data[value_name];
-        value_cell = $("#" + value_name);
-        value_cell.text(value.toFixed(2));
-    }
-});
+    });
 
 </script>
 

@@ -169,25 +169,19 @@ int canThread(TelemetryManager Pod){
         return -1;
     }
 
-    Heartbeat torqueTimer = Heartbeat(200);
-    torqueTimer.feed();
-    int32_t torque = 50;
-    setInverterTorque(torque, canSockBcm);
-
+    struct canfd_frame canFrame = {0};
+    int32_t currentTorque, newTorque = 0;
     LOG(INFO) << "Starting CAN Main Loop";
     while ( Pod.telemetry->podState->getStateValue() != psShutdown) {
-        struct canfd_frame canFrame = {0}; //TODO remove this zero once we dont need it
         // Read in a CAN CanFrame
         ssize_t iReceivedPacketSize = read(canSockRaw, &canFrame, CANFD_MTU);
         if (iReceivedPacketSize > 0 ) {
             processFrame(canFrame, Pod);
         }
-        if(torqueTimer.expired()){
-            if(torque != 0 ) {
-                torque -= 1;
-                setInverterTorque(torque, canSockBcm);
-                torqueTimer.feed();
-            }
+        newTorque = Pod.telemetry->motorTorque;
+        if(currentTorque != newTorque) {
+            currentTorque = newTorque;
+            setInverterTorque(currentTorque, canSockBcm);
         }
     }
     close(canSockRaw);

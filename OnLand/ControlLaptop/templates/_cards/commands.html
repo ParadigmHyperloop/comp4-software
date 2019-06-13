@@ -5,18 +5,18 @@
    </div>
    <div class="content">
        <div class="row text-center">
-            <button class="btn btn-success btn-command" > FLIGHT </button>
+            <button class="btn btn-success btn-command btn-send-command" data-state="ciFlight"> FLIGHT </button>
        </div>
        <div class="row">
            <div class="col-md-6">
                <div class="row text-center">
-                   <button class="btn btn-warning btn-command"> ARM </button>
+                   <button class="btn btn-warning btn-command btn-send-command" data-state="ciArm"> ARM </button>
                </div>
                <div class="row text-center">
-                    <button class="btn btn-warning btn-command"> DISARM </button>
+                    <button class="btn btn-warning btn-command btn-send-command"  data-state="ciStandby"> DISARM </button>
                </div>
                <div class="row text-center">
-                    <button class="btn btn-warning btn-command" > RESTART </button>
+                    <button class="btn btn-warning btn-command btn-send-command"  data-state="ciRestart"> RESTART </button>
                 </div>
            </div>
            <div class="col-md-6">
@@ -32,7 +32,7 @@
            </div>
        </div>
        <div class="row text-center">
-            <button class="btn btn-danger btn-command" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2"> ESTOP </button>
+            <button class="btn btn-danger btn-command btn-send-command" data-state="ciEmergencyStop"> ESTOP </button>
        </div>
    </div>
 </div>
@@ -47,3 +47,19 @@
          color: black !important;
      }
  </style>
+
+<script>
+
+let commmnand_buttons = $('.btn-send-command');
+
+commmnand_buttons.click(function () {
+    const btn = $(this);
+    const state = btn.data('state');
+    let command = {};
+    command['target'] = 'interface_state';
+    command['state'] = state;
+    socket.emit('manual_state_command', JSON.stringify(command));
+});
+
+
+</script>

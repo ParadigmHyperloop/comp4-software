@@ -694,19 +694,19 @@ const char descriptor_table_protodef_Paradigm_2eproto[] =
   "ion\020\005\022\016\n\npsCoasting\020\006\022\r\n\tpsBraking\020\007\022\016\n\n"
   "psShutdown\020\010\022\n\n\006psNone\020\t*C\n\013MotorStates\022"
   "\t\n\005msOff\020\000\022\016\n\nmsCharging\020\001\022\n\n\006msIdle\020\002\022\r"
-  "\n\tmsEngaged\020\003*b\n\027ControlsInterfaceStates"
+  "\n\tmsEngaged\020\003*q\n\027ControlsInterfaceStates"
   "\022\r\n\tciStandby\020\000\022\t\n\005ciArm\020\001\022\014\n\010ciFlight\020\002"
-  "\022\023\n\017ciEmergencyStop\020\003\022\n\n\006ciNone\020\004*-\n\016Inv"
-  "erterStates\022\n\n\006isNone\020\000\022\017\n\013isConnected\020\001"
-  "*)\n\027BatteryManagementStates\022\016\n\nbmsNomina"
-  "l\020\000*P\n\016LvdcNodeStates\022\017\n\013lvdcBooting\020\000\022\017"
-  "\n\013lvdcStandby\020\001\022\016\n\nlvdcFlight\020\002\022\014\n\010lvdcN"
-  "one\020\003"
+  "\022\023\n\017ciEmergencyStop\020\003\022\n\n\006ciNone\020\004\022\r\n\tciR"
+  "estart\020\005*-\n\016InverterStates\022\n\n\006isNone\020\000\022\017"
+  "\n\013isConnected\020\001*)\n\027BatteryManagementStat"
+  "es\022\016\n\nbmsNominal\020\000*P\n\016LvdcNodeStates\022\017\n\013"
+  "lvdcBooting\020\000\022\017\n\013lvdcStandby\020\001\022\016\n\nlvdcFl"
+  "ight\020\002\022\014\n\010lvdcNone\020\003"
   ;
 ::google::protobuf::internal::DescriptorTable descriptor_table_Paradigm_2eproto = {
   false, InitDefaults_Paradigm_2eproto, 
   descriptor_table_protodef_Paradigm_2eproto,
-  "Paradigm.proto", &assign_descriptors_table_Paradigm_2eproto, 4765,
+  "Paradigm.proto", &assign_descriptors_table_Paradigm_2eproto, 4780,
 };
 
 void AddDescriptors_Paradigm_2eproto() {
@@ -785,6 +785,7 @@ bool ControlsInterfaceStates_IsValid(int value) {
     case 2:
     case 3:
     case 4:
+    case 5:
       return true;
     default:
       return false;

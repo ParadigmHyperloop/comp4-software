@@ -47,6 +47,9 @@ def on_state_command(command):
         new_pod_command.manualPodState = PodStates.Value(state)
     elif target == 'lvdc_node':
         new_pod_command.manualLvdcNodeState = LvdcNodeStates.Value(state)
+    elif target == 'interface_state':
+        new_pod_command.controlsInterfaceState = ControlsInterfaceStates.Value(state)
+        print(state)
 
     pod.send_packet(new_pod_command.SerializeToString())
 
