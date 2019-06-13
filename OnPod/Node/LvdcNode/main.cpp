@@ -5,6 +5,7 @@
 
 #include "drivers/adc_ADS7953.h"
 #include "sensors/voltage_divider.h"
+#include "sensors/current_sensor_ACS711.h"
 #include "drivers/node_ethernet.h"
 
 #include "Paradigm.pb.h"
@@ -16,12 +17,20 @@ Timer txTimer;
 // instantiate adc and all sensors with which it interfaces
 SPIClass adcSPI(&PERIPH_SPI1, ADC_MISO, ADC_SCK, ADC_MOSI, PAD_SPI1_TX, PAD_SPI1_RX);
 ADS7953 adc(adcSPI, ADC_SS);
-VoltageDivider HPBAT_VSense(&adc, 9, 1, 1);
-VoltageDivider LPBAT_VSense(&adc, 8, 1, 1);
-VoltageDivider LP24V_VSense(&adc, 12, 1, 1);
-VoltageDivider HP12V_VSense(&adc, 13, 1, 1);
-VoltageDivider LP12V_VSense(&adc, 11, 1, 1);
-VoltageDivider LP5V_VSense(&adc, 10, 1, 1);
+VoltageDivider hpBatVSense(&adc, 9, 900, 100);
+VoltageDivider lpBatVSense(&adc, 8, 900, 100);
+VoltageDivider lp24VSense(&adc, 12, 900, 120);
+VoltageDivider hp12VSense(&adc, 13, 900, 250);
+VoltageDivider lp12VSense(&adc, 11, 900, 250);
+VoltageDivider lp5VSense(&adc, 10, 900, 620);
+ACS711 hpBatCurrentSensor(&adc, 15);
+ACS711 lpBatCurrentSensor(&adc, 14);
+ACS711 lp12VCurrentSensor(&adc, 7);
+ACS711 nodeCurrentSensor(&adc, 5);
+ACS711 lp5VCurrentSensor(&adc, 4);
+ACS711 coolingCurrentSensor1(&adc, 3);
+ACS711 coolingCurrentSensor2(&adc, 2);
+ACS711 inverterCurrentSensor(&adc, 6);
 
 // instantiate a UDP class
 UDPClass udp (W5500_SS, LVDC_NODE_IP, BRAKE_NODE_PORT, NODE_TYPE);
@@ -48,6 +57,18 @@ void setup() {
     // initialize hardware
     adc.init();
     udp.init();
+
+    pinMode(LP5V_EN, OUTPUT);
+    pinMode(LP12V_EN, OUTPUT);
+    pinMode(HP12V_EN, OUTPUT);
+    pinMode(LP24V_EN, OUTPUT);
+    digitalWrite(LP5V_EN, true);
+    digitalWrite(LP12V_EN, true);
+    digitalWrite(HP12V_EN, true);
+    digitalWrite(LP24V_EN, true);
+    pinMode(INV_CTRL, OUTPUT);
+    pinMode(PUMP1_CTL, OUTPUT);
+    pinMode(PUMP2_CTL, OUTPUT);
 }
 
 void loop() {
@@ -63,11 +84,41 @@ void loop() {
 
     // update sensor values and hold them in the pBrakeNodeTelemetry message object
     adc.readActiveChannels();
-
+    pLvdcNodeTelemetry.highPowerPackVoltage = hpBatVSense.read();
+    pLvdcNodeTelemetry.lowPowerPackVoltage = lpBatVSense.read();
+    pLvdcNodeTelemetry.highPowerPackCurrent = hpBatCurrentSensor.read();
+    pLvdcNodeTelemetry.lowPowerPackCurrent = lpBatCurrentSensor.read();
+    pLvdcNodeTelemetry.lowPower5Voltage = lp5VSense.read();
+    pLvdcNodeTelemetry.lowPower12Voltage = lp12VSense.read();
+    pLvdcNodeTelemetry.highPower12Voltage = hp12VSense.read();
+    pLvdcNodeTelemetry.lowPower24Voltage = lp24VSense.read();
+    pLvdcNodeTelemetry.lowPower5Current = lp5VCurrentSensor.read();
+    pLvdcNodeTelemetry.lowPower12Current = lp12VCurrentSensor.read();
+    pLvdcNodeTelemetry.nodeCurrent = nodeCurrentSensor.read();
+    pLvdcNodeTelemetry.inverterCurrent = inverterCurrentSensor.read();
+    pLvdcNodeTelemetry.cooling1Current = coolingCurrentSensor1.read();
+    pLvdcNodeTelemetry.cooling2Current = coolingCurrentSensor2.read();
 
     // perform state-specific operations
     switch (pLvdcNodeTelemetry.state) {
-
+        case LvdcNodeStates_lvdcBooting: {
+            digitalWrite(INV_CTRL, false);
+            digitalWrite(PUMP1_CTL, false);
+            digitalWrite(PUMP2_CTL, false);
+            break;
+        }
+        case LvdcNodeStates_lvdcStandby: {
+            digitalWrite(INV_CTRL, false);
+            digitalWrite(PUMP1_CTL, false);
+            digitalWrite(PUMP2_CTL, false);
+            break;
+        }
+        case LvdcNodeStates_lvdcFlight: {
+            digitalWrite(INV_CTRL, true);
+            digitalWrite(PUMP1_CTL, true);
+            digitalWrite(PUMP2_CTL, true);
+            break;
+        }
     }
 
     // send to FC is interval has expired
