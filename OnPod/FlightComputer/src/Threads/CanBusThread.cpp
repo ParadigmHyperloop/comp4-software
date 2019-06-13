@@ -141,7 +141,7 @@ void setInverterTorque(int torque, int bcmSocket){
     }
 }
 
-int canThread(TelemetryManager Pod){
+int canNetworkThread(TelemetryManager Pod){
     //Logging
     el::Helpers::setThreadName("CAN Thread");
     LOG(INFO) << "Starting CAN Thread";

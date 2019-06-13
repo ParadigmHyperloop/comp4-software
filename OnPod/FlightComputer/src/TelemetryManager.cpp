@@ -14,7 +14,7 @@ TelemetryManager::TelemetryManager(PodValues *sPodValues, PodNetwork *sNetworkVa
 int32_t TelemetryManager::setPodState(PodStates newState, const std::string &reason) {
     if (this->bWritePodState){
         LOG(INFO) << reason;
-        this->telemetry->podState = std::move(PodState::createState(newState));
+        this->telemetry->podState = std::move(PodState::createState(newState, this));
         return 1;
     } else {
         return 0;

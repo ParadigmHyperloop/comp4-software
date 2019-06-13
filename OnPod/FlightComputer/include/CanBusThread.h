@@ -3,6 +3,6 @@
 
 #include "TelemetryManager.h"
 
-int canThread(TelemetryManager Pod);
+int canNetworkThread(TelemetryManager Pod);
 
 #endif //FLIGHTCOMPUTER_CANBUSTHREAD_H

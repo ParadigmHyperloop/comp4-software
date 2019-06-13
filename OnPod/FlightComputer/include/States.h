@@ -30,9 +30,9 @@ public:
 
     const std::string getTransitionReason();
 
-    unsigned int getTimeInStateMilis();
+    unsigned int timeInStateMilis();
 
-    static std::unique_ptr<PodState> createState(PodStates);
+    static std::unique_ptr<PodState> createState(PodStates, TelemetryManager* );
 
     void setupTransition(PodStates, const std::string&);
 
@@ -41,6 +41,8 @@ public:
     int32_t checkCommunicationFlags();
 
     int32_t checkNodeStates();
+
+    void commonChecks();
 
 
 protected:
@@ -54,24 +56,47 @@ protected:
     TelemetryManager* pod;
 };
 
-class Booting: public PodState{
+class Booting: public PodState {
 public:
-    Booting(){
-        _stateIdentifier = psBooting;
-        _brakeNodeState = bnsBooting;
-        _lvdcNodeState = lvdcBooting;
-    }
+    Booting(TelemetryManager*);
     bool testTransitions() override;
 };
 
-class Standby: public PodState{
-    Standby(){
-        _stateIdentifier = psStandby;
-        _brakeNodeState = bnsStandby;
-        _lvdcNodeState = lvdcStandby;
-    }
+class Standby: public PodState {
+public:
+    Standby(TelemetryManager*);
     bool testTransitions() override;
 };
 
+class Arming : public PodState {
+public:
+    Arming(TelemetryManager*);
+
+    bool testTransitions() override;
+};
+
+class Armed : public PodState {
+public:
+    Armed(TelemetryManager*);
+    bool testTransitions() override;
+};
+
+class PreFlight : public PodState {
+public:
+    PreFlight(TelemetryManager*);
+    bool testTransitions() override;
+};
+
+class Acceleration : public PodState {
+public:
+    Acceleration(TelemetryManager*);
+    bool testTransitions() override;
+};
+
+class Braking : public PodState {
+public:
+    Braking(TelemetryManager*);
+    bool testTransitions() override;
+};
 
 #endif //FLIGHTCOMPUTER_STATES_H
