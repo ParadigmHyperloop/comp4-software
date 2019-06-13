@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/liam/CLionProjects/motorDriving/main.cpp
+unistd.h
+-
+iostream
+-
+string
+-
+stdio.h
+-
+stdlib.h
+-
+unistd.h
+-
+string.h
+-
+net/if.h
+-
+sys/types.h
+-
+sys/socket.h
+-
+sys/ioctl.h
+-
+linux/can.h
+-
+linux/can/raw.h
+-
+linux/can/bcm.h
+-
+
