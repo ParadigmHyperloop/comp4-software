@@ -3,6 +3,7 @@
 
 #include "Structs.h"
 #include "States.h"
+#include <mutex>
 
 class TelemetryManager
 {
@@ -47,6 +48,9 @@ class TelemetryManager
         void setSolenoid(bool value, int32_t identifier);
         void setPressureVesselTemperature(float);
 
+private:
+        std::mutex stateLock;
+
 		// Permissions
 		bool bWritePodState = 0;
 		bool bWriteControlsInterfaceState = 0;
@@ -54,6 +58,7 @@ class TelemetryManager
 		bool bWriteBreakNodeState = 0;
 		bool bWriteManualStates = 0;
 		bool bWriteHighVoltage = 0;
+
 };
 
 #endif //FLIGHTCOMPUTER_TELEMETRYMANAGER_H

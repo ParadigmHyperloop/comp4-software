@@ -37,7 +37,7 @@ POD_CONFIG_PORT = 3001
 POD_COMMANDER_PORT = 6000
 COMMANDER_PULSE_SPEED = 2000  # Time to wait before sending ping to pod
 COMMANDER_BACKUP_PULSE = 2500  # Time to wait without hearing back before sending another ping to the pod
-COMMANDER_TIMEOUT_TIME = 4000  # How long do we wait to hear back from the pod before we decided its lost
+COMMANDER_TIMEOUT_TIME = 30000  # How long do we wait to hear back from the pod before we decided its lost
 COMMANDER_BROADCAST_FREQUENCY = 4000  # How often it alerts the front end the connection is still good.
 
 

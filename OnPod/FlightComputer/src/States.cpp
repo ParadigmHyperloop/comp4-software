@@ -1,4 +1,7 @@
 #include "States.h"
+#include "easylogging++.h"
+
+#define MIN_BRAKING_TIME 1
 
 PodState::PodState() = default;
 
@@ -9,7 +12,7 @@ PodState::PodState(TelemetryManager* pod){
 
 unsigned int PodState::timeInStateMilis() {
     std::chrono::steady_clock::time_point current = std::chrono::steady_clock::now();
-    return std::chrono::duration_cast<std::chrono::milliseconds>(current - this->_enterStateTime).count();
+    return std::chrono::duration_cast<std::chrono::milliseconds>(current - this->_enterStateTime).count()/1000.0;
 }
 
 int32_t PodState::checkSensorFlags(){
@@ -55,7 +58,7 @@ void PodState::commonChecks() {
         std::string error = "Failed on communication flag : " + std::to_string(status) + " returning to standby.";
         throw std::runtime_error(error);
     }
-    status = this->checkNodeStates();
+    //status = this->checkNodeStates();
     if(status != FLAGS_GOOD && this->timeInStateMilis() > 500){
         std::string error = "Failed on node state agreement : " + std::to_string(status) + " returning to standby.";
         throw std::runtime_error(error);
@@ -155,7 +158,12 @@ bool Standby::testTransitions() {
     }
 
     if(this->pod->telemetry->controlsInterfaceState == ciArm){
-        this->setupTransition(psArming, (std::string)"Arm Command Received : All Nominal");
+        this->pod->telemetry->controlsInterfaceState = ciNone; // Use up command todo this isnt good -- what if you forget. We should do a getter method that auto clears
+        if(this->pod->telemetry->maxFlightTime == 0){
+            this->setupTransition(psStandby, (std::string)"Need flight profile to complete Arming sequence");
+            return true;
+        }
+        this->setupTransition(psArming, (std::string)"Arm Command Received, transition to Arming");
         return true;
     }
     return false;
@@ -181,7 +189,7 @@ bool Arming::testTransitions() {
     }
     //todo validate that we are receiving telemetry from the inverter
     if(true){
-        this->setupTransition(psArmed, (std::string)"All values nominal");
+        this->setupTransition(psArmed, (std::string)"All values nominal, transferring to ARMED");
         return true;
     }
     return false;
@@ -192,7 +200,7 @@ bool Arming::testTransitions() {
  */
 
 Armed::Armed(TelemetryManager * pod) : PodState(pod) {
-    _stateIdentifier = psArming;
+    _stateIdentifier = psArmed;
     _brakeNodeState = bnsStandby;
     _lvdcNodeState = lvdcFlight;
 }
@@ -264,11 +272,19 @@ bool Acceleration::testTransitions() {
     }
     // Navigation checks
     // todo inverter comms and bms
+
     if(this->timeInStateMilis() > this->pod->telemetry->maxFlightTime ){
-        this->setupTransition(psBraking, (std::string)" Flight Timout Reached");
+        this->setupTransition(psBraking, (std::string)" Flight Timout Reached : " + std::to_string(this->timeInStateMilis()));
         return true;
     }
     return false;
+}
+
+Acceleration::~Acceleration() {
+    this->pod->telemetry->motorTorque = 0;
+    this->pod->telemetry->maxFlightTime = 0;
+    this->pod->telemetry->flightDistance = 0;
+    LOG(INFO)<<"DECONSTRUCTOR";
 }
 
 /*
@@ -282,5 +298,15 @@ Braking::Braking(TelemetryManager* pod) : PodState(pod) {
 }
 
 bool Braking::testTransitions() {
+    if(!(this->timeInStateMilis() > MIN_BRAKING_TIME)){
+        return false;
+    }
+    if(this->pod->telemetry->controlsInterfaceState == ciArm){
+        this->pod->telemetry->controlsInterfaceState = ciNone; // Use up command
+        this->setupTransition(psPreFlight, (std::string)"Flight Command Received : All Nominal");
+        return true;
+    }
+
+
     return false;
 }

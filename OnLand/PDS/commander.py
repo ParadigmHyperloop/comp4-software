@@ -78,8 +78,8 @@ def on_arm_command(profile):
     new_pod_command = PodCommand()
     new_pod_command.hasCommand = True
     new_pod_command.motorTorque = profile['motor_speed']
-    new_pod_command.flightDistance = profile['max_flight_time']
-    new_pod_command.maxFlightTime = profile['flight_distance']
+    new_pod_command.flightDistance = profile['flight_distance']
+    new_pod_command.maxFlightTime = profile['max_flight_time']
     pod.send_packet(new_pod_command.SerializeToString())
 
 

@@ -30,6 +30,8 @@ def on_connect():
 
 @sio.on('disconnect')
 def on_disconnect():
+    connection_status['status'] = 0
+    sio.emit('connection_updates', json.dumps(connection_status))
     sio.emit('telemetry_connection', '0')
     log.warning("Front End: Disconnected")
 

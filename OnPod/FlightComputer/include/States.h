@@ -90,6 +90,7 @@ public:
 class Acceleration : public PodState {
 public:
     Acceleration(TelemetryManager*);
+    ~Acceleration();
     bool testTransitions() override;
 };
 

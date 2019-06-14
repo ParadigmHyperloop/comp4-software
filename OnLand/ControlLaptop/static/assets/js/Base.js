@@ -9,8 +9,6 @@ socket.on('disconnect', () => {
     socket.emit('join_room','notification_updates');
 });
 
-toggleCommanderIndicator(0);
-toggleTelemetryIndicator(0);
 
 socket.on ('frontend_notification', function (data) {
     const notification = JSON.parse(data);

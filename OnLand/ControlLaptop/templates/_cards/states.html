@@ -4,7 +4,7 @@
       <p class="category">How she be</p>
    </div>
    <div class="content row0">
-<table class="table">
+<table class="table" id="pod-state-values">
   <thead>
     <tr>
     </tr>
@@ -13,17 +13,17 @@
     <tr>
       <th scope="row"></th>
       <td><b>Flight Computer</b></td>
-      <td><span id="podState">Standby</span></td>
+      <td><span id="podState">--</span></td>
     </tr>
     <tr>
       <th scope="row"></th>
       <td><b>Brake Node</b></td>
-      <td><span id="brakeNodeState">Standby</span></td>
+      <td><span id="brakeNodeState">--</span></td>
     </tr>
     <tr>
       <th scope="row"></th>
       <td><b>LVDC Node</b></td>
-      <td><span id="lvdcNodeState">Standby</span></td>
+      <td><span id="lvdcNodeState">--</span></td>
     </tr>
   </tbody>
 </table>
@@ -36,3 +36,32 @@
       </div>
    </div>
 </div>
+
+
+
+<script>
+
+    let state_values = [];
+    $( document ).ready(function() {
+        socket.emit('join_room','telemetry_updates');
+        $("#pod-state-values").find("span").each(function(){ state_values.push(this.id); });
+    });
+
+
+    socket.on('pod_telemetry', function (data) {
+        let value, value_cell, value_name;
+        data = JSON.parse(data);
+        const length = state_values.length;
+        for (let index = 0; index < length; index++) {
+            value_name = state_values[index];
+            if(!data.hasOwnProperty(value_name)){
+                continue;
+            }
+            value = data[value_name];
+            value_cell = $("#" + value_name);
+            value_cell.text(value);
+        }
+    });
+
+</script>
+

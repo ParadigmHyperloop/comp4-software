@@ -35,6 +35,7 @@ void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
         return;
     }
     if (podCommand.has_controlsinterfacestate()) {
+        //LOG(INFO)<<podCommand.controlsinterfacestate();
         Pod->setControlsInterfaceState(podCommand.controlsinterfacestate());
     }
     if (podCommand.has_automaticstatetransitions()) {
