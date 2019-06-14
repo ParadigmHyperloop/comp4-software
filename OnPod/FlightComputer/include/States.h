@@ -13,6 +13,7 @@ class PodState{
 
 public:
     PodState();
+    virtual ~PodState();
 
     PodState(TelemetryManager*);
 
@@ -59,31 +60,35 @@ protected:
 class Booting: public PodState {
 public:
     Booting(TelemetryManager*);
+    ~Booting();
     bool testTransitions() override;
 };
 
 class Standby: public PodState {
 public:
     Standby(TelemetryManager*);
+    ~Standby();
     bool testTransitions() override;
 };
 
 class Arming : public PodState {
 public:
     Arming(TelemetryManager*);
-
+    ~Arming();
     bool testTransitions() override;
 };
 
 class Armed : public PodState {
 public:
     Armed(TelemetryManager*);
+    ~Armed();
     bool testTransitions() override;
 };
 
 class PreFlight : public PodState {
 public:
     PreFlight(TelemetryManager*);
+    ~PreFlight() override ;
     bool testTransitions() override;
 };
 
@@ -97,6 +102,7 @@ public:
 class Braking : public PodState {
 public:
     Braking(TelemetryManager*);
+    ~Braking();
     bool testTransitions() override;
 };
 

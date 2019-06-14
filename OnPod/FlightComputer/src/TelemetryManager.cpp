@@ -1,3 +1,4 @@
+#include <Paradigm.pb.h>
 #include "TelemetryManager.h"
 #include "Common.h"
 #include "comparingHelpers.h"
@@ -10,10 +11,16 @@ TelemetryManager::TelemetryManager(PodValues *sPodValues, PodNetwork *sNetworkVa
     this->sPodNetworkValues = sNetworkVals;
 };
 
+PodStates TelemetryManager::getPodStateValue() {
+    std::lock_guard<std::mutex> lock(this->telemetry->stateLock);
+    return this->telemetry->podState->getStateValue();
+}
+
 
 int32_t TelemetryManager::setPodState(PodStates newState, const std::string &reason) {
     if (this->bWritePodState){
         LOG(INFO) << reason;
+        std::lock_guard<std::mutex> lock(this->telemetry->stateLock);
         this->telemetry->podState = std::move(PodState::createState(newState, this));
         return 1;
     } else {
@@ -130,7 +137,7 @@ void TelemetryManager::setSolenoid(bool value, int32_t identifier){
 void TelemetryManager::setLowPressure(float value, int identifier){
 
     bool status = true;
-    PodStates currentState = this->telemetry->podState->getStateValue();
+    PodStates currentState = this->getPodStateValue();
 
     // Set Value in Memory
     switch(identifier){
@@ -161,7 +168,7 @@ void TelemetryManager::setLowPressure(float value, int identifier){
 
 void TelemetryManager::setHighPressure(float value){
     bool status = false;
-    PodStates currentState = this->telemetry->podState->getStateValue();
+    PodStates currentState = this->getPodStateValue();
 
     this->telemetry->highPressure = value;
     if(currentState == psStandby){

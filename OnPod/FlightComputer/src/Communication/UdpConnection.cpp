@@ -155,7 +155,7 @@ PdsConnection::PdsConnection(TelemetryManager pod) : UdpConnection(pod) {
 
 std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage() {
     std::unique_ptr<Telemetry> protoMessage (new Telemetry());
-    protoMessage->set_podstate(pod.telemetry->podState->getStateValue());
+    protoMessage->set_podstate(pod.getPodStateValue());
     protoMessage->set_lowpressure1(pod.telemetry->lowPressure1);
     protoMessage->set_highpressure(pod.telemetry->highPressure);
     protoMessage->set_solenoid1(pod.telemetry->solenoid1);

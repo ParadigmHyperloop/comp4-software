@@ -18,12 +18,11 @@ INITIALIZE_EASYLOGGINGPP
 using namespace std;
 
 // Factory for initializing the telemetry struct
-PodValues createTelemetryStruct(){
-    PodValues sPodValues = {};
+void initializeTelemetryStruct(PodValues &telemetry){
     // Vectors
-    sPodValues.sensorFlags = std::vector<int32_t>(TOTAL_SENSOR_COUNT, 2);
-    sPodValues.connectionFlags = std::vector<int32_t>(TOTAL_CONNECTION_COUNT,2);
-    return sPodValues;
+    telemetry.sensorFlags = std::vector<int32_t>(TOTAL_SENSOR_COUNT, 2);
+    telemetry.connectionFlags = std::vector<int32_t>(TOTAL_CONNECTION_COUNT,2);
+    return;
 }
 
 
@@ -52,7 +51,8 @@ int main( int32_t argc, char** argv)
 
     // Create Shared Memory
     PodNetwork sPodNetworkValues = {};
-    PodValues sPodValues = createTelemetryStruct();
+    PodValues sPodValues = {};
+    initializeTelemetryStruct(sPodValues);
 
     // Network Configs
     initializer->updatePodNetworkValues(sPodNetworkValues, flightConfigurationParameters);

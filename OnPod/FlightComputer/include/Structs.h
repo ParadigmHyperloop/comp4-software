@@ -9,6 +9,7 @@ class PodState;
 
 struct PodValues {
     // States
+    std::mutex stateLock;
     std::unique_ptr<PodState> podState;
     ControlsInterfaceStates controlsInterfaceState = ciNone;
     BrakeNodeStates brakeNodeState = bnsNone;

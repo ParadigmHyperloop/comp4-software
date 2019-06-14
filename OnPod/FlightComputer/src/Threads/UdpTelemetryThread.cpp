@@ -70,7 +70,7 @@ int32_t udpTelemetryThread(TelemetryManager Pod) {
     if (Pod.sPodNetworkValues->iActiveNodes[1]) {
 
     }
-    while (Pod.telemetry->podState->getStateValue() != psShutdown) {
+    while (Pod.getPodStateValue() != psShutdown) {
         // Give and get update for each node
         for (auto &&node: nodes) {
             try {

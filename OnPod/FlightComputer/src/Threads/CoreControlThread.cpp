@@ -4,8 +4,8 @@
 void coreControlLoopThread(TelemetryManager pod){
     // State will be initialized to booting from the struct factory
 
-    while(pod.telemetry->podState->getStateValue() != psShutdown){
-        while(pod.telemetry->automaticTransitions && pod.telemetry->podState->getStateValue() != psShutdown) {
+    while(pod.getPodStateValue() != psShutdown){
+        while(pod.telemetry->automaticTransitions && pod.getPodStateValue() != psShutdown) {
 
             pod.telemetry->podState->testTransitions();
             if (pod.telemetry->podState->isTransitioning()) {
@@ -20,8 +20,8 @@ void coreControlLoopThread(TelemetryManager pod){
         }
 
 
-        while(!pod.telemetry->automaticTransitions && pod.telemetry->podState->getStateValue() != psShutdown){
-            if(pod.telemetry->podState->getStateValue() != pod.telemetry->manualPodState){
+        while(!pod.telemetry->automaticTransitions && pod.getPodStateValue() != psShutdown){
+            if(pod.getPodStateValue() != pod.telemetry->manualPodState){
                 //TODO lock pod state
                 const std::string reason = "Manual State Change";
                 PodStates newState = pod.telemetry->manualPodState;

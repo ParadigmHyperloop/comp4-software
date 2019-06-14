@@ -10,6 +10,8 @@ PodState::PodState(TelemetryManager* pod){
     this->_enterStateTime = std::chrono::steady_clock::now();
 }
 
+PodState::~PodState()  = default;
+
 unsigned int PodState::timeInStateMilis() {
     std::chrono::steady_clock::time_point current = std::chrono::steady_clock::now();
     return std::chrono::duration_cast<std::chrono::milliseconds>(current - this->_enterStateTime).count()/1000.0;
@@ -130,6 +132,8 @@ Booting::Booting(TelemetryManager* pod): PodState(pod) {
     _lvdcNodeState = lvdcBooting;
 }
 
+Booting::~Booting() = default;
+
 bool Booting::testTransitions(){
     this->setupTransition(psStandby, "Booting Complete");
     return true;
@@ -146,6 +150,7 @@ Standby::Standby(TelemetryManager * pod): PodState(pod) {
     _lvdcNodeState = lvdcStandby;
 }
 
+Standby::~Standby() = default;
 
 bool Standby::testTransitions() {
     int32_t status;
@@ -179,6 +184,8 @@ Arming::Arming(TelemetryManager * pod ): PodState(pod) {
     _lvdcNodeState = lvdcFlight;
 }
 
+Arming::~Arming() = default;
+
 bool Arming::testTransitions() {
     try {
         this->commonChecks();
@@ -204,6 +211,8 @@ Armed::Armed(TelemetryManager * pod) : PodState(pod) {
     _brakeNodeState = bnsStandby;
     _lvdcNodeState = lvdcFlight;
 }
+
+Armed::~Armed() = default;
 
 bool Armed::testTransitions() {
     try {
@@ -233,6 +242,8 @@ PreFlight::PreFlight(TelemetryManager* pod) : PodState(pod) {
     _lvdcNodeState = lvdcFlight;
 }
 
+PreFlight::~PreFlight() = default;
+
 bool PreFlight::testTransitions() {
     try {
         this->commonChecks();
@@ -261,6 +272,13 @@ Acceleration::Acceleration(TelemetryManager * pod) : PodState(pod) {
     _lvdcNodeState = lvdcFlight;
 }
 
+Acceleration::~Acceleration() {
+    this->pod->telemetry->motorTorque = 0;
+    this->pod->telemetry->maxFlightTime = 0;
+    this->pod->telemetry->flightDistance = 0;
+    LOG(INFO)<<"DECONSTRUCTOR";
+}
+
 bool Acceleration::testTransitions() {
     // todo critical vs non critical changes
     try {
@@ -280,12 +298,6 @@ bool Acceleration::testTransitions() {
     return false;
 }
 
-Acceleration::~Acceleration() {
-    this->pod->telemetry->motorTorque = 0;
-    this->pod->telemetry->maxFlightTime = 0;
-    this->pod->telemetry->flightDistance = 0;
-    LOG(INFO)<<"DECONSTRUCTOR";
-}
 
 /*
  *  ******************** BRAKING ***********************8
@@ -297,6 +309,8 @@ Braking::Braking(TelemetryManager* pod) : PodState(pod) {
     _lvdcNodeState = lvdcFlight;
 }
 
+Braking::~Braking() = default;
+
 bool Braking::testTransitions() {
     if(!(this->timeInStateMilis() > MIN_BRAKING_TIME)){
         return false;
@@ -306,7 +320,5 @@ bool Braking::testTransitions() {
         this->setupTransition(psPreFlight, (std::string)"Flight Command Received : All Nominal");
         return true;
     }
-
-
     return false;
 }

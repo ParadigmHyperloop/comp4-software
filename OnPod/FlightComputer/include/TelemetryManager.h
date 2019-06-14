@@ -1,6 +1,7 @@
 #ifndef FLIGHTCOMPUTER_TELEMETRYMANAGER_H
 #define FLIGHTCOMPUTER_TELEMETRYMANAGER_H
 
+#include <mutex>
 #include "Structs.h"
 #include "States.h"
 #include <mutex>
@@ -14,6 +15,7 @@ class TelemetryManager
 
 		// TelemetryManager States
 		int32_t setPodState(PodStates, const std::string&);
+		PodStates getPodStateValue();
 
 		// Flags Array
         void setConnectionFlag(int32_t, int32_t);
@@ -47,9 +49,6 @@ class TelemetryManager
         void setHighPressure(float);
         void setSolenoid(bool value, int32_t identifier);
         void setPressureVesselTemperature(float);
-
-private:
-        std::mutex stateLock;
 
 		// Permissions
 		bool bWritePodState = 0;

@@ -172,7 +172,9 @@ int canNetworkThread(TelemetryManager Pod){
     struct canfd_frame canFrame = {0};
     int32_t currentTorque, newTorque = 0;
     LOG(INFO) << "Starting CAN Main Loop";
-    while ( Pod.telemetry->podState->getStateValue() != psShutdown) {
+    while ( Pod.getPodStateValue() != psShutdown) {
+
+        struct canfd_frame canFrame = {0}; //TODO remove this zero once we dont need it
         // Read in a CAN CanFrame
         ssize_t iReceivedPacketSize = read(canSockRaw, &canFrame, CANFD_MTU);
         if (iReceivedPacketSize > 0 ) {
