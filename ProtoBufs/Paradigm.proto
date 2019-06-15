@@ -7,6 +7,7 @@ enum BrakeNodeStates {
     bnsFlight          = 2;
     bnsBraking         = 3;
     bnsSolenoidControl = 4;
+    bnsNone            = 5;
 }
 
 enum PodStates {
@@ -158,12 +159,11 @@ message Telemetry {
 // FC => NODE COMMANDS
 message FcToBrakeNode {
     optional int32 packetNum = 1;
-    optional PodStates podState = 2;
-    optional BrakeNodeStates manualNodeState = 3;
-    optional bool solenoid1Config = 4;
-    optional bool solenoid2Config = 5;
-    optional bool solenoid3Config = 6;
-    optional bool solenoid4Config = 7;
+    optional BrakeNodeStates nodeState = 2;
+    optional bool solenoid1Config = 3;
+    optional bool solenoid2Config = 4;
+    optional bool solenoid3Config = 5;
+    optional bool solenoid4Config = 6;
 }
 
 message FcToLvdcNode {
@@ -199,17 +199,17 @@ message LvdcNodeToFc {
     required float highPowerPackCurrent = 5;
     required float lowPowerPackCurrent = 6;
 
-    required float rail5Voltage = 7;
-    required float rail12LowPowerVoltage = 8;
-    required float rail12HighPowerVoltage = 9;
-    required float rail24Voltage = 10;
+    required float lowPower5Voltage = 7;
+    required float lowPower12Voltage = 8;
+    required float highPower12Voltage = 9;
+    required float lowPower24Voltage = 10;
 
-    required float rail5Current = 11;
-    required float rail12LowPowerCurrent = 12;
-    required float rail24Current = 13;
-    required float railInverterCurrent = 14;
-    required float railCooling1Current = 15;
-    required float railCooling2Current = 16;
+    required float lowPower5Current = 11;
+    required float lowPower12Current = 12;
+    required float nodeCurrent = 13;
+    required float inverterCurrent = 14;
+    required float cooling1Current = 15;
+    required float cooling2Current = 16;
 }
 
 message BrakeNodeToFc {
