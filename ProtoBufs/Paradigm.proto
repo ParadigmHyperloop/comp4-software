@@ -167,6 +167,9 @@ message Telemetry {
     optional uint32 motorTorque = 74;
     optional uint32 flightDistance = 75;
     optional uint32 maxFlightTime = 76;
+
+    //Updates
+    repeated string updateMessages = 77;
 }
 
 // FC => NODE COMMANDS

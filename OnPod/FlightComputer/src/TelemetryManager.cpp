@@ -9,13 +9,17 @@ TelemetryManager::TelemetryManager()=default;
 TelemetryManager::TelemetryManager(PodValues *sPodValues, PodNetwork *sNetworkVals) {
     this->telemetry = sPodValues;
     this->sPodNetworkValues = sNetworkVals;
-};
+}
+
+void TelemetryManager::sendUpdate(std::string update) {
+    std::lock_guard<std::mutex> lock(this->telemetry->stateLock);
+    this->telemetry->updates.push_back(update);
+}
 
 PodStates TelemetryManager::getPodStateValue() {
     std::lock_guard<std::mutex> lock(this->telemetry->stateLock);
     return this->telemetry->podState->getStateValue();
 }
-
 
 int32_t TelemetryManager::setPodState(PodStates newState, const std::string &reason) {
     if (this->bWritePodState){

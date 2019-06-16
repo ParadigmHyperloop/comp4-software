@@ -169,7 +169,7 @@ bool Standby::testTransitions() {
             this->setupTransition(psStandby, (std::string)"Need flight profile to complete Arming sequence");
             return true;
         }
-        this->setupTransition(psArming, (std::string)"Arm Command Received, transition to Arming");
+        this->setupTransition(psArming, (std::string)"Arm Command Received. Pod --> Arming");
         return true;
     }
     return false;
@@ -197,7 +197,7 @@ bool Arming::testTransitions() {
     }
     //todo validate that we are receiving telemetry from the inverter
     if(true){
-        this->setupTransition(psArmed, (std::string)"All values nominal, transferring to ARMED");
+        this->setupTransition(psArmed, (std::string)"Arming Passed. Pod --> Armed");
         return true;
     }
     return false;
@@ -229,7 +229,7 @@ bool Armed::testTransitions() {
     // todo inverter comms
     if(this->pod->telemetry->controlsInterfaceState == ciFlight){
         this->pod->telemetry->controlsInterfaceState = ciNone; // Use up command
-        this->setupTransition(psPreFlight, (std::string)"Flight Command Received : All Nominal");
+        this->setupTransition(psPreFlight, (std::string)"Flight Command Received. Pod --> Pre-flight");
         return true;
     }
     return false;
@@ -256,7 +256,7 @@ bool PreFlight::testTransitions() {
     }
 
     // todo inverter comms
-    this->setupTransition(psAcceleration, (std::string)"Node in Flight State : All Nominal");
+    this->setupTransition(psAcceleration, (std::string)"Pre-flight Passed. Pod --> Acceleration");
     return true;
 
     return false;
@@ -296,7 +296,7 @@ bool Acceleration::testTransitions() {
     // todo inverter comms and bms
 
     if(this->timeInStateMilis() > this->pod->telemetry->maxFlightTime ){
-        this->setupTransition(psBraking, (std::string)" Flight Timout Reached : " + std::to_string(this->timeInStateMilis()));
+        this->setupTransition(psBraking, (std::string)" Flight Timout of " + std::to_string(this->timeInStateMilis()) + " reached. Pod --> Braking");
         return true;
     }
     return false;
@@ -319,9 +319,14 @@ bool Braking::testTransitions() {
     if(!(this->timeInStateMilis() > MIN_BRAKING_TIME)){
         return false;
     }
-    if(this->pod->telemetry->controlsInterfaceState == ciArm){
+    else if(this->pod->telemetry->controlsInterfaceState == ciStandby){
         this->pod->telemetry->controlsInterfaceState = ciNone; // Use up command
-        this->setupTransition(psPreFlight, (std::string)"Flight Command Received : All Nominal");
+        this->setupTransition(psStandby, (std::string)"Disarm Command Received. Pod --> Standby");
+        return true;
+    }
+    else if(this->pod->telemetry->controlsInterfaceState == ciArm){
+        this->pod->telemetry->controlsInterfaceState = ciNone; // Use up command
+        this->setupTransition(psArming, (std::string)"Arm Command Received. Pod --> Arming");
         return true;
     }
     return false;

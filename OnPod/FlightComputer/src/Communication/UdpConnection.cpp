@@ -174,6 +174,15 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_maxflighttime(pod.telemetry->maxFlightTime);
     protoMessage->set_flightdistance(pod.telemetry->flightDistance);
     protoMessage->set_motortorque(pod.telemetry->motorTorque);
+
+    // Add Updates todo probably put this in a function with a pointer to the proto as an arguement
+    if(this->pod.telemetry->updates.size() > 0){
+        std::lock_guard<std::mutex> lock(this->pod.telemetry->updatesLock);
+        for(std::string& update : this->pod.telemetry->updates){
+            protoMessage->add_updatemessages(update);
+        }
+        this->pod.telemetry->updates.clear();
+    }
     return protoMessage;
 }
 

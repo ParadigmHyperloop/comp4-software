@@ -1,35 +1,15 @@
 <div class="card ">
    <div class="header">
-      <h4 class="title">Events</h4>
-      <p class="category">Status Alerts, State Transitions, Faults and Errors</p>
+      <h4 class="title">Pod Messages</h4>
+      <p class="category">What shes sayin</p>
    </div>
    <div class="content">
       <div class="table-full-width">
          <table class="table">
-            <tbody>
+            <tbody id="events-table-body">
                <tr>
                   <td><i class="fa fa-info text-info"></i></td>
-                  <td>Positive Fill Rate.</td>
-               </tr>
-               <tr>
-                  <td><i class="fa fa-info text-info"></i></td>
-                  <td>Fill valve reports open.</td>
-               </tr>
-               <tr>
-                  <td><i class="fa fa-info text-info"></i></td>
-                  <td>State Transition: Boot -> Fill.</td>
-               </tr>
-               <tr>
-                  <td><i class="fa fa-info text-info"></i></td>
-                  <td>Remote command request to Fill - Accepted.</td>
-               </tr>
-               <tr>
-                  <td><i class="fa fa-info text-info"></i></td>
-                  <td>Flight Profile Update: <code>enforce-valid-profile</code>: <code>True</code> &rarr; <code>False</code></td>
-               </tr>
-               <tr>
-                  <td><i class="fa fa-info text-info"></i></td>
-                  <td>Remote command request to Fill - Declined: <code>Flight Profile Error</code>.</td>
+                  <td>Pod Update 1</td>
                </tr>
             </tbody>
          </table>
@@ -37,8 +17,34 @@
       <div class="footer">
          <hr>
          <div class="stats">
-            <i class="fa fa-history"></i> Updated 1 second ago
+            <i class="fa fa-history"></i>
          </div>
       </div>
    </div>
 </div>
+
+<script>
+
+
+$( document ).ready(function() {
+    socket.emit('join_room','telemetry_updates');
+    $("#navigation-values").find("span").each(function(){ navigation_values.push(this.id); });
+});
+
+const updatesTable = $('#events-table-body');
+
+socket.on('pod_telemetry', function (data) {
+    data = JSON.parse(data);
+    if (!data.hasOwnProperty('updateMessages')) {
+        return;
+    }
+    for (const update of data.updateMessages) {
+        let row = `<tr>
+                      <td><i class="fa fa-info text-info"></i></td>
+                      <td>${update}</td>
+                    </tr>`;
+        updatesTable.append(row);
+    }
+
+});
+</script>

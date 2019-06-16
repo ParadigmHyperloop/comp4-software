@@ -20,6 +20,10 @@ struct PodValues {
     int32_t flightDistance = 0;
     int32_t maxFlightTime = 0;
 
+    // Updates
+    std::mutex updatesLock;
+    std::vector<std::string> updates;
+
     //Manual States
     PodStates manualPodState = psNone;
     BrakeNodeStates manualBrakeNodeState = bnsNone;

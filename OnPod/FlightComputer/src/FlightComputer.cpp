@@ -22,7 +22,7 @@ void initializeTelemetryStruct(PodValues &telemetry){
     // Vectors
     telemetry.sensorFlags = std::vector<int32_t>(TOTAL_SENSOR_COUNT, 2);
     telemetry.connectionFlags = std::vector<int32_t>(TOTAL_CONNECTION_COUNT,2);
-    return;
+    telemetry.manualSolenoidConfiguration = std::vector<bool>(4,false);
 }
 
 
@@ -67,6 +67,7 @@ int main( int32_t argc, char** argv)
     //CAN Thread
     TelemetryManager canTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
     std::thread canThread(canNetworkThread, canTelemManager);
+
 
     //TelemetryManager Internal Network Thread
     TelemetryManager pinTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);

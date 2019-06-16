@@ -14,7 +14,7 @@ void coreControlLoopThread(TelemetryManager pod){
                 const std::string reason = pod.telemetry->podState->getTransitionReason();
                 PodStates newState = pod.telemetry->podState->getNewState();
                 pod.setPodState(newState, reason);
-
+                pod.sendUpdate(reason);
                 //TODO Update All nodes
             }
         }

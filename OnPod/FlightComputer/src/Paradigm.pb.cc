@@ -323,6 +323,7 @@ const ::google::protobuf::uint32 TableStruct_Paradigm_2eproto::offsets[] PROTOBU
   PROTOBUF_FIELD_OFFSET(::Telemetry, motortorque_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, flightdistance_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, maxflighttime_),
+  PROTOBUF_FIELD_OFFSET(::Telemetry, updatemessages_),
   0,
   1,
   2,
@@ -392,6 +393,7 @@ const ::google::protobuf::uint32 TableStruct_Paradigm_2eproto::offsets[] PROTOBU
   64,
   65,
   61,
+  ~0u,
   PROTOBUF_FIELD_OFFSET(::FcToBrakeNode, _has_bits_),
   PROTOBUF_FIELD_OFFSET(::FcToBrakeNode, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -551,15 +553,15 @@ const ::google::protobuf::uint32 TableStruct_Paradigm_2eproto::offsets[] PROTOBU
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, 18, sizeof(::PodCommand)},
-  { 31, 105, sizeof(::Telemetry)},
-  { 174, 185, sizeof(::FcToBrakeNode)},
-  { 191, 199, sizeof(::FcToLvdcNode)},
-  { 202, 215, sizeof(::DtsNodeToFc)},
-  { 223, 232, sizeof(::EnclosureNodeToFc)},
-  { 236, 255, sizeof(::LvdcNodeToFc)},
-  { 269, 287, sizeof(::BrakeNodeToFc)},
-  { 300, 314, sizeof(::FlightConfig)},
-  { 323, 329, sizeof(::DefaultFcToNode)},
+  { 31, 106, sizeof(::Telemetry)},
+  { 176, 187, sizeof(::FcToBrakeNode)},
+  { 193, 201, sizeof(::FcToLvdcNode)},
+  { 204, 217, sizeof(::DtsNodeToFc)},
+  { 225, 234, sizeof(::EnclosureNodeToFc)},
+  { 238, 257, sizeof(::LvdcNodeToFc)},
+  { 271, 289, sizeof(::BrakeNodeToFc)},
+  { 302, 316, sizeof(::FlightConfig)},
+  { 325, 331, sizeof(::DefaultFcToNode)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -594,7 +596,7 @@ const char descriptor_table_protodef_Paradigm_2eproto[] =
   "rRailConfiguration\030\t \003(\005\022#\n\033sensorOverri"
   "deConfiguration\030\n \003(\005\022\023\n\013motorTorque\030\013 \001"
   "(\r\022\026\n\016flightDistance\030\014 \001(\r\022\025\n\rmaxFlightT"
-  "ime\030\r \001(\r\"\220\017\n\tTelemetry\022\034\n\010podState\030\001 \001("
+  "ime\030\r \001(\r\"\250\017\n\tTelemetry\022\034\n\010podState\030\001 \001("
   "\0162\n.PodStates\022(\n\016brakeNodeState\030\002 \001(\0162\020."
   "BrakeNodeStates\022 \n\nmotorState\030\003 \001(\0162\014.Mo"
   "torStates\0228\n\026controlsInterfaceState\030\004 \001("
@@ -642,71 +644,71 @@ const char descriptor_table_protodef_Paradigm_2eproto[] =
   "\032\n\022railCurrentSensor7\030E \001(\005\022\032\n\022railCurre"
   "ntSensor8\030F \001(\005\022\027\n\017railCurrentFlag\030I \001(\005"
   "\022\023\n\013motorTorque\030J \001(\r\022\026\n\016flightDistance\030"
-  "K \001(\r\022\025\n\rmaxFlightTime\030L \001(\r\"\253\001\n\rFcToBra"
-  "keNode\022\021\n\tpacketNum\030\001 \001(\005\022#\n\tnodeState\030\002"
-  " \001(\0162\020.BrakeNodeStates\022\027\n\017solenoid1Confi"
-  "g\030\003 \001(\010\022\027\n\017solenoid2Config\030\004 \001(\010\022\027\n\017sole"
-  "noid3Config\030\005 \001(\010\022\027\n\017solenoid4Config\030\006 \001"
-  "(\010\"i\n\014FcToLvdcNode\022\021\n\tpacketNum\030\001 \001(\005\022\034\n"
-  "\010podState\030\002 \001(\0162\n.PodStates\022(\n\017manualNod"
-  "eState\030\003 \001(\0162\017.LvdcNodeStates\"\346\001\n\013DtsNod"
-  "eToFc\022\021\n\tpacketNum\030\001 \002(\005\022(\n\016brakeNodeSta"
-  "te\030\002 \002(\0162\020.BrakeNodeStates\022\032\n\022brakeSolen"
-  "oidState\030\003 \002(\010\022\031\n\021ventSolenoidState\030\004 \002("
-  "\010\022\030\n\020rotorTemperature\030\005 \002(\002\022\034\n\024pneumatic"
-  "Temperature\030\006 \002(\002\022\024\n\014tankPressure\030\007 \002(\002\022"
-  "\025\n\rbrakePressure\030\010 \002(\002\"|\n\021EnclosureNodeT"
-  "oFc\022\021\n\tpacketNum\030\001 \002(\005\022\031\n\021enclosurePress"
-  "ure\030\002 \002(\002\022\034\n\024enclosureTemperature\030\003 \002(\002\022"
-  "\033\n\023coolantLinePressure\030\004 \002(\002\"\223\003\n\014LvdcNod"
-  "eToFc\022\034\n\024highPowerPackVoltage\030\001 \002(\002\022\033\n\023l"
-  "owPowerPackVoltage\030\002 \002(\002\022\034\n\024highPowerPac"
-  "kCurrent\030\003 \002(\002\022\033\n\023lowPowerPackCurrent\030\004 "
-  "\002(\002\022\024\n\014rail5Voltage\030\005 \002(\002\022\035\n\025rail12LowPo"
-  "werVoltage\030\006 \002(\002\022\036\n\026rail12HighPowerVolta"
-  "ge\030\007 \002(\002\022\025\n\rrail24Voltage\030\010 \002(\002\022\024\n\014rail5"
-  "Current\030\t \002(\002\022\035\n\025rail12LowPowerCurrent\030\n"
-  " \002(\002\022\025\n\rrail24Current\030\013 \002(\002\022\033\n\023railInver"
-  "terCurrent\030\014 \002(\002\022\033\n\023railCooling1Current\030"
-  "\r \002(\002\022\033\n\023railCooling2Current\030\016 \002(\002\"\275\002\n\rB"
-  "rakeNodeToFc\022\021\n\tpacketNum\030\001 \002(\005\022\037\n\005state"
-  "\030\002 \002(\0162\020.BrakeNodeStates\022\021\n\tsolenoid1\030\003 "
-  "\002(\010\022\021\n\tsolenoid2\030\004 \002(\010\022\021\n\tsolenoid3\030\005 \002("
-  "\010\022\021\n\tsolenoid4\030\006 \002(\010\022\024\n\014highPressure\030\007 \002"
-  "(\002\022\024\n\014lowPressure1\030\010 \002(\002\022\024\n\014lowPressure2"
-  "\030\t \002(\002\022\024\n\014lowPressure3\030\n \002(\002\022\031\n\021lowPress"
-  "ureCommon\030\013 \002(\002\022\034\n\024pneumaticTemperature\030"
-  "\014 \002(\002\022\033\n\023coolantTankPressure\030\r \002(\002\"\240\002\n\014F"
-  "lightConfig\022\030\n\020retrievalTimeout\030\001 \001(\r\022\036\n"
-  "\020pdsTelemetryPort\030\002 \001(\005:\0047000\022\031\n\013command"
-  "Port\030\003 \001(\005:\0046000\022\037\n\020heartbeatTimeout\030\004 \001"
-  "(\005:\00510000\022\021\n\tpodDriver\030\005 \001(\t\022&\n\023controlL"
-  "aptopIpAddr\030\006 \001(\t:\t127.0.0.1\022\033\n\rbrakeNod"
-  "ePort\030\007 \001(\004:\0045555\022\036\n\020brakeNodeTimeout\030\010 "
-  "\001(\004:\0044000\022\"\n\023brakeNodeServerPort\030\t \001(\004:\005"
-  "56641\"/\n\017DefaultFcToNode\022\034\n\010podState\030\001 \001"
-  "(\0162\n.PodStates*u\n\017BrakeNodeStates\022\016\n\nbns"
-  "Booting\020\000\022\016\n\nbnsStandby\020\001\022\r\n\tbnsFlight\020\002"
-  "\022\016\n\nbnsBraking\020\003\022\026\n\022bnsSolenoidControl\020\004"
-  "\022\013\n\007bnsNone\020\005*\244\001\n\tPodStates\022\r\n\tpsBooting"
-  "\020\000\022\r\n\tpsStandby\020\001\022\014\n\010psArming\020\002\022\013\n\007psArm"
-  "ed\020\003\022\017\n\013psPreFlight\020\004\022\022\n\016psAcceleration\020"
-  "\005\022\016\n\npsCoasting\020\006\022\r\n\tpsBraking\020\007\022\016\n\npsSh"
-  "utdown\020\010\022\n\n\006psNone\020\t*C\n\013MotorStates\022\t\n\005m"
-  "sOff\020\000\022\016\n\nmsCharging\020\001\022\n\n\006msIdle\020\002\022\r\n\tms"
-  "Engaged\020\003*q\n\027ControlsInterfaceStates\022\r\n\t"
-  "ciStandby\020\000\022\t\n\005ciArm\020\001\022\014\n\010ciFlight\020\002\022\023\n\017"
-  "ciEmergencyStop\020\003\022\n\n\006ciNone\020\004\022\r\n\tciResta"
-  "rt\020\005*-\n\016InverterStates\022\n\n\006isNone\020\000\022\017\n\013is"
-  "Connected\020\001*)\n\027BatteryManagementStates\022\016"
-  "\n\nbmsNominal\020\000*P\n\016LvdcNodeStates\022\017\n\013lvdc"
-  "Booting\020\000\022\017\n\013lvdcStandby\020\001\022\016\n\nlvdcFlight"
-  "\020\002\022\014\n\010lvdcNone\020\003"
+  "K \001(\r\022\025\n\rmaxFlightTime\030L \001(\r\022\026\n\016updateMe"
+  "ssages\030M \003(\t\"\253\001\n\rFcToBrakeNode\022\021\n\tpacket"
+  "Num\030\001 \001(\005\022#\n\tnodeState\030\002 \001(\0162\020.BrakeNode"
+  "States\022\027\n\017solenoid1Config\030\003 \001(\010\022\027\n\017solen"
+  "oid2Config\030\004 \001(\010\022\027\n\017solenoid3Config\030\005 \001("
+  "\010\022\027\n\017solenoid4Config\030\006 \001(\010\"i\n\014FcToLvdcNo"
+  "de\022\021\n\tpacketNum\030\001 \001(\005\022\034\n\010podState\030\002 \001(\0162"
+  "\n.PodStates\022(\n\017manualNodeState\030\003 \001(\0162\017.L"
+  "vdcNodeStates\"\346\001\n\013DtsNodeToFc\022\021\n\tpacketN"
+  "um\030\001 \002(\005\022(\n\016brakeNodeState\030\002 \002(\0162\020.Brake"
+  "NodeStates\022\032\n\022brakeSolenoidState\030\003 \002(\010\022\031"
+  "\n\021ventSolenoidState\030\004 \002(\010\022\030\n\020rotorTemper"
+  "ature\030\005 \002(\002\022\034\n\024pneumaticTemperature\030\006 \002("
+  "\002\022\024\n\014tankPressure\030\007 \002(\002\022\025\n\rbrakePressure"
+  "\030\010 \002(\002\"|\n\021EnclosureNodeToFc\022\021\n\tpacketNum"
+  "\030\001 \002(\005\022\031\n\021enclosurePressure\030\002 \002(\002\022\034\n\024enc"
+  "losureTemperature\030\003 \002(\002\022\033\n\023coolantLinePr"
+  "essure\030\004 \002(\002\"\223\003\n\014LvdcNodeToFc\022\034\n\024highPow"
+  "erPackVoltage\030\001 \002(\002\022\033\n\023lowPowerPackVolta"
+  "ge\030\002 \002(\002\022\034\n\024highPowerPackCurrent\030\003 \002(\002\022\033"
+  "\n\023lowPowerPackCurrent\030\004 \002(\002\022\024\n\014rail5Volt"
+  "age\030\005 \002(\002\022\035\n\025rail12LowPowerVoltage\030\006 \002(\002"
+  "\022\036\n\026rail12HighPowerVoltage\030\007 \002(\002\022\025\n\rrail"
+  "24Voltage\030\010 \002(\002\022\024\n\014rail5Current\030\t \002(\002\022\035\n"
+  "\025rail12LowPowerCurrent\030\n \002(\002\022\025\n\rrail24Cu"
+  "rrent\030\013 \002(\002\022\033\n\023railInverterCurrent\030\014 \002(\002"
+  "\022\033\n\023railCooling1Current\030\r \002(\002\022\033\n\023railCoo"
+  "ling2Current\030\016 \002(\002\"\275\002\n\rBrakeNodeToFc\022\021\n\t"
+  "packetNum\030\001 \002(\005\022\037\n\005state\030\002 \002(\0162\020.BrakeNo"
+  "deStates\022\021\n\tsolenoid1\030\003 \002(\010\022\021\n\tsolenoid2"
+  "\030\004 \002(\010\022\021\n\tsolenoid3\030\005 \002(\010\022\021\n\tsolenoid4\030\006"
+  " \002(\010\022\024\n\014highPressure\030\007 \002(\002\022\024\n\014lowPressur"
+  "e1\030\010 \002(\002\022\024\n\014lowPressure2\030\t \002(\002\022\024\n\014lowPre"
+  "ssure3\030\n \002(\002\022\031\n\021lowPressureCommon\030\013 \002(\002\022"
+  "\034\n\024pneumaticTemperature\030\014 \002(\002\022\033\n\023coolant"
+  "TankPressure\030\r \002(\002\"\240\002\n\014FlightConfig\022\030\n\020r"
+  "etrievalTimeout\030\001 \001(\r\022\036\n\020pdsTelemetryPor"
+  "t\030\002 \001(\005:\0047000\022\031\n\013commandPort\030\003 \001(\005:\0046000"
+  "\022\037\n\020heartbeatTimeout\030\004 \001(\005:\00510000\022\021\n\tpod"
+  "Driver\030\005 \001(\t\022&\n\023controlLaptopIpAddr\030\006 \001("
+  "\t:\t127.0.0.1\022\033\n\rbrakeNodePort\030\007 \001(\004:\004555"
+  "5\022\036\n\020brakeNodeTimeout\030\010 \001(\004:\0044000\022\"\n\023bra"
+  "keNodeServerPort\030\t \001(\004:\00556641\"/\n\017Default"
+  "FcToNode\022\034\n\010podState\030\001 \001(\0162\n.PodStates*u"
+  "\n\017BrakeNodeStates\022\016\n\nbnsBooting\020\000\022\016\n\nbns"
+  "Standby\020\001\022\r\n\tbnsFlight\020\002\022\016\n\nbnsBraking\020\003"
+  "\022\026\n\022bnsSolenoidControl\020\004\022\013\n\007bnsNone\020\005*\244\001"
+  "\n\tPodStates\022\r\n\tpsBooting\020\000\022\r\n\tpsStandby\020"
+  "\001\022\014\n\010psArming\020\002\022\013\n\007psArmed\020\003\022\017\n\013psPreFli"
+  "ght\020\004\022\022\n\016psAcceleration\020\005\022\016\n\npsCoasting\020"
+  "\006\022\r\n\tpsBraking\020\007\022\016\n\npsShutdown\020\010\022\n\n\006psNo"
+  "ne\020\t*C\n\013MotorStates\022\t\n\005msOff\020\000\022\016\n\nmsChar"
+  "ging\020\001\022\n\n\006msIdle\020\002\022\r\n\tmsEngaged\020\003*q\n\027Con"
+  "trolsInterfaceStates\022\r\n\tciStandby\020\000\022\t\n\005c"
+  "iArm\020\001\022\014\n\010ciFlight\020\002\022\023\n\017ciEmergencyStop\020"
+  "\003\022\n\n\006ciNone\020\004\022\r\n\tciRestart\020\005*-\n\016Inverter"
+  "States\022\n\n\006isNone\020\000\022\017\n\013isConnected\020\001*)\n\027B"
+  "atteryManagementStates\022\016\n\nbmsNominal\020\000*P"
+  "\n\016LvdcNodeStates\022\017\n\013lvdcBooting\020\000\022\017\n\013lvd"
+  "cStandby\020\001\022\016\n\nlvdcFlight\020\002\022\014\n\010lvdcNone\020\003"
   ;
 ::google::protobuf::internal::DescriptorTable descriptor_table_Paradigm_2eproto = {
   false, InitDefaults_Paradigm_2eproto, 
   descriptor_table_protodef_Paradigm_2eproto,
-  "Paradigm.proto", &assign_descriptors_table_Paradigm_2eproto, 4776,
+  "Paradigm.proto", &assign_descriptors_table_Paradigm_2eproto, 4800,
 };
 
 void AddDescriptors_Paradigm_2eproto() {
@@ -2050,6 +2052,7 @@ const int Telemetry::kRailCurrentFlagFieldNumber;
 const int Telemetry::kMotorTorqueFieldNumber;
 const int Telemetry::kFlightDistanceFieldNumber;
 const int Telemetry::kMaxFlightTimeFieldNumber;
+const int Telemetry::kUpdateMessagesFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Telemetry::Telemetry()
@@ -2063,7 +2066,8 @@ Telemetry::Telemetry(const Telemetry& from)
       _has_bits_(from._has_bits_),
       heartbeatflags_(from.heartbeatflags_),
       hvbatterycelltemperatures_(from.hvbatterycelltemperatures_),
-      heartbeatvalues_(from.heartbeatvalues_) {
+      heartbeatvalues_(from.heartbeatvalues_),
+      updatemessages_(from.updatemessages_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&podstate_, &from.podstate_,
     static_cast<size_t>(reinterpret_cast<char*>(&flightdistance_) -
@@ -2072,6 +2076,8 @@ Telemetry::Telemetry(const Telemetry& from)
 }
 
 void Telemetry::SharedCtor() {
+  ::google::protobuf::internal::InitSCC(
+      &scc_info_Telemetry_Paradigm_2eproto.base);
   ::memset(&podstate_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&flightdistance_) -
       reinterpret_cast<char*>(&podstate_)) + sizeof(flightdistance_));
@@ -2103,6 +2109,7 @@ void Telemetry::Clear() {
   heartbeatflags_.Clear();
   hvbatterycelltemperatures_.Clear();
   heartbeatvalues_.Clear();
+  updatemessages_.Clear();
   cached_has_bits = _has_bits_[0];
   if (cached_has_bits & 0x000000ffu) {
     ::memset(&podstate_, 0, static_cast<size_t>(
@@ -2730,6 +2737,25 @@ const char* Telemetry::_InternalParse(const char* begin, const char* end, void* 
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
+      // repeated string updateMessages = 77;
+      case 77: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 106) goto handle_unusual;
+        do {
+          ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+          GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+          ctx->extra_parse_data().SetFieldName("Telemetry.updateMessages");
+          object = msg->add_updatemessages();
+          if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+            parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8Verify;
+            goto string_till_end;
+          }
+          GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8Verify(ptr, size, ctx));
+          ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+          ptr += size;
+          if (ptr >= end) break;
+        } while ((::google::protobuf::io::UnalignedLoad<::google::protobuf::uint64>(ptr) & 65535) == 1258 && (ptr += 2));
+        break;
+      }
       default: {
       handle_unusual:
         if ((tag & 7) == 4 || tag == 0) {
@@ -2745,6 +2771,10 @@ const char* Telemetry::_InternalParse(const char* begin, const char* end, void* 
     }  // switch
   }  // while
   return ptr;
+string_till_end:
+  static_cast<::std::string*>(object)->clear();
+  static_cast<::std::string*>(object)->reserve(size);
+  goto len_delim_till_end;
 len_delim_till_end:
   return ctx->StoreAndTailCall(ptr, end, {_InternalParse, msg},
                                {parser_till_end, object}, size);
@@ -3714,6 +3744,22 @@ bool Telemetry::MergePartialFromCodedStream(
         break;
       }
 
+      // repeated string updateMessages = 77;
+      case 77: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (618 & 0xFF)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->add_updatemessages()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->updatemessages(this->updatemessages_size() - 1).data(),
+            static_cast<int>(this->updatemessages(this->updatemessages_size() - 1).length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "Telemetry.updateMessages");
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -4101,6 +4147,16 @@ void Telemetry::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(76, this->maxflighttime(), output);
   }
 
+  // repeated string updateMessages = 77;
+  for (int i = 0, n = this->updatemessages_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->updatemessages(i).data(), static_cast<int>(this->updatemessages(i).length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "Telemetry.updateMessages");
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      77, this->updatemessages(i), output);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
@@ -4468,6 +4524,16 @@ void Telemetry::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(76, this->maxflighttime(), target);
   }
 
+  // repeated string updateMessages = 77;
+  for (int i = 0, n = this->updatemessages_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->updatemessages(i).data(), static_cast<int>(this->updatemessages(i).length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "Telemetry.updateMessages");
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteStringToArray(77, this->updatemessages(i), target);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target);
@@ -4514,6 +4580,14 @@ size_t Telemetry::ByteSizeLong() const {
     total_size += 2 *
                   ::google::protobuf::internal::FromIntSize(this->heartbeatvalues_size());
     total_size += data_size;
+  }
+
+  // repeated string updateMessages = 77;
+  total_size += 2 *
+      ::google::protobuf::internal::FromIntSize(this->updatemessages_size());
+  for (int i = 0, n = this->updatemessages_size(); i < n; i++) {
+    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+      this->updatemessages(i));
   }
 
   cached_has_bits = _has_bits_[0];
@@ -4991,6 +5065,7 @@ void Telemetry::MergeFrom(const Telemetry& from) {
   heartbeatflags_.MergeFrom(from.heartbeatflags_);
   hvbatterycelltemperatures_.MergeFrom(from.hvbatterycelltemperatures_);
   heartbeatvalues_.MergeFrom(from.heartbeatvalues_);
+  updatemessages_.MergeFrom(from.updatemessages_);
   cached_has_bits = from._has_bits_[0];
   if (cached_has_bits & 0x000000ffu) {
     if (cached_has_bits & 0x00000001u) {
@@ -5252,6 +5327,7 @@ void Telemetry::InternalSwap(Telemetry* other) {
   heartbeatflags_.InternalSwap(&other->heartbeatflags_);
   hvbatterycelltemperatures_.InternalSwap(&other->hvbatterycelltemperatures_);
   heartbeatvalues_.InternalSwap(&other->heartbeatvalues_);
+  updatemessages_.InternalSwap(CastToBase(&other->updatemessages_));
   swap(podstate_, other->podstate_);
   swap(brakenodestate_, other->brakenodestate_);
   swap(motorstate_, other->motorstate_);

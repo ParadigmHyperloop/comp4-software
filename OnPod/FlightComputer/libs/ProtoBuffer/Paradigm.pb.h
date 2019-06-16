@@ -618,6 +618,28 @@ class Telemetry :
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
       mutable_heartbeatvalues();
 
+  // repeated string updateMessages = 77;
+  int updatemessages_size() const;
+  void clear_updatemessages();
+  static const int kUpdateMessagesFieldNumber = 77;
+  const ::std::string& updatemessages(int index) const;
+  ::std::string* mutable_updatemessages(int index);
+  void set_updatemessages(int index, const ::std::string& value);
+  #if LANG_CXX11
+  void set_updatemessages(int index, ::std::string&& value);
+  #endif
+  void set_updatemessages(int index, const char* value);
+  void set_updatemessages(int index, const char* value, size_t size);
+  ::std::string* add_updatemessages();
+  void add_updatemessages(const ::std::string& value);
+  #if LANG_CXX11
+  void add_updatemessages(::std::string&& value);
+  #endif
+  void add_updatemessages(const char* value);
+  void add_updatemessages(const char* value, size_t size);
+  const ::google::protobuf::RepeatedPtrField<::std::string>& updatemessages() const;
+  ::google::protobuf::RepeatedPtrField<::std::string>* mutable_updatemessages();
+
   // optional .PodStates podState = 1;
   bool has_podstate() const;
   void clear_podstate();
@@ -1090,6 +1112,7 @@ class Telemetry :
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > heartbeatflags_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > hvbatterycelltemperatures_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > heartbeatvalues_;
+  ::google::protobuf::RepeatedPtrField<::std::string> updatemessages_;
   int podstate_;
   int brakenodestate_;
   int motorstate_;
@@ -4131,6 +4154,75 @@ inline void Telemetry::set_maxflighttime(::google::protobuf::uint32 value) {
   _has_bits_[1] |= 0x20000000u;
   maxflighttime_ = value;
   // @@protoc_insertion_point(field_set:Telemetry.maxFlightTime)
+}
+
+// repeated string updateMessages = 77;
+inline int Telemetry::updatemessages_size() const {
+  return updatemessages_.size();
+}
+inline void Telemetry::clear_updatemessages() {
+  updatemessages_.Clear();
+}
+inline const ::std::string& Telemetry::updatemessages(int index) const {
+  // @@protoc_insertion_point(field_get:Telemetry.updateMessages)
+  return updatemessages_.Get(index);
+}
+inline ::std::string* Telemetry::mutable_updatemessages(int index) {
+  // @@protoc_insertion_point(field_mutable:Telemetry.updateMessages)
+  return updatemessages_.Mutable(index);
+}
+inline void Telemetry::set_updatemessages(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:Telemetry.updateMessages)
+  updatemessages_.Mutable(index)->assign(value);
+}
+#if LANG_CXX11
+inline void Telemetry::set_updatemessages(int index, ::std::string&& value) {
+  // @@protoc_insertion_point(field_set:Telemetry.updateMessages)
+  updatemessages_.Mutable(index)->assign(std::move(value));
+}
+#endif
+inline void Telemetry::set_updatemessages(int index, const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  updatemessages_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:Telemetry.updateMessages)
+}
+inline void Telemetry::set_updatemessages(int index, const char* value, size_t size) {
+  updatemessages_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:Telemetry.updateMessages)
+}
+inline ::std::string* Telemetry::add_updatemessages() {
+  // @@protoc_insertion_point(field_add_mutable:Telemetry.updateMessages)
+  return updatemessages_.Add();
+}
+inline void Telemetry::add_updatemessages(const ::std::string& value) {
+  updatemessages_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:Telemetry.updateMessages)
+}
+#if LANG_CXX11
+inline void Telemetry::add_updatemessages(::std::string&& value) {
+  updatemessages_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:Telemetry.updateMessages)
+}
+#endif
+inline void Telemetry::add_updatemessages(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  updatemessages_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:Telemetry.updateMessages)
+}
+inline void Telemetry::add_updatemessages(const char* value, size_t size) {
+  updatemessages_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:Telemetry.updateMessages)
+}
+inline const ::google::protobuf::RepeatedPtrField<::std::string>&
+Telemetry::updatemessages() const {
+  // @@protoc_insertion_point(field_list:Telemetry.updateMessages)
+  return updatemessages_;
+}
+inline ::google::protobuf::RepeatedPtrField<::std::string>*
+Telemetry::mutable_updatemessages() {
+  // @@protoc_insertion_point(field_mutable_list:Telemetry.updateMessages)
+  return &updatemessages_;
 }
 
 // -------------------------------------------------------------------

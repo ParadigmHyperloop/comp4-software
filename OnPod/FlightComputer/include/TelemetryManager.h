@@ -12,6 +12,8 @@ class TelemetryManager
 		TelemetryManager();
 
 		TelemetryManager(PodValues*, PodNetwork*);
+        // Send Updates
+        void sendUpdate(std::string);
 
 		// TelemetryManager States
 		int32_t setPodState(PodStates, const std::string&);
