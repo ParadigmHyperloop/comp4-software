@@ -216,10 +216,8 @@ int canNetworkThread(TelemetryManager Pod){
         return -1;
     }
 
-    struct broadcastManagerConfig bcmUpdate = {};
     int32_t currentTorque, newTorque = 0;
     while ( Pod.getPodStateValue() != psShutdown) {
-
         try {
             readRawSocket( canSockRaw, Pod);
             readBcmSocket( canSockBcm, Pod );
@@ -229,7 +227,7 @@ int canNetworkThread(TelemetryManager Pod){
             return -1;
         }
 
-        newTorque = Pod.telemetry->motorTorque;
+        newTorque = Pod.telemetry->commandedTorque;
         if(currentTorque != newTorque) {
             currentTorque = newTorque;
             setInverterTorque(currentTorque, canSockBcm);

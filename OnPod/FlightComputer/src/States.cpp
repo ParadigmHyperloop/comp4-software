@@ -273,12 +273,14 @@ Acceleration::Acceleration(TelemetryManager * pod) : PodState(pod) {
     _stateIdentifier = psAcceleration;
     _brakeNodeState = bnsFlight;
     _lvdcNodeState = lvdcFlight;
+    this->pod->telemetry->commandedTorque = this->pod->telemetry->motorTorque;
 }
 
 Acceleration::~Acceleration() {
     this->pod->telemetry->motorTorque = 0;
     this->pod->telemetry->maxFlightTime = 0;
     this->pod->telemetry->flightDistance = 0;
+    this->pod->telemetry->commandedTorque = 0;
 }
 
 bool Acceleration::testTransitions() {
