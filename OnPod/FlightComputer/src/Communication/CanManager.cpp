@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <initializer_list>
 
-void processFrame(const struct canfd_frame &frame, TelemetryManager &pod) {
+void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
     std::vector<int> indices = {0, 1};
     switch (frame.can_id) {
         case 0x6b2: {

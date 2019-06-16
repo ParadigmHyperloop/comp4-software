@@ -87,6 +87,23 @@ int32_t getCanSocketBrodcastManager() {
     return bcmSocket;
 }
 
+void startInverterHeartbeat(int bcmSocket){
+    struct broadcastManagerConfig bcmMessage = {};
+    bcmMessage.msg_head.opcode  = RX_SETUP;
+    bcmMessage.msg_head.can_id  = 0x0A7; // todo check this is an inverter message
+    bcmMessage.msg_head.flags   = SETTIMER | STARTTIMER;   // We're starting the timer right away. Probably wont want start the
+    bcmMessage.msg_head.nframes = 0;
+    bcmMessage.msg_head.count   = 0;
+    /* Set the time interval value to 1s */
+    bcmMessage.msg_head.ival1.tv_sec = 1;
+    bcmMessage.msg_head.ival1.tv_usec = 0;
+    if (write(bcmSocket, &bcmMessage, sizeof(bcmMessage)) < 0)
+    {
+        std::string error = std::string("Error: Starting Inverter Heartbeat :") + std::strerror(errno);
+        throw std::runtime_error(error);
+    }
+}
+
 void startInverterBroadcast(int bcmSocket){
     struct broadcastManagerConfig bcmMessage = {};
     bcmMessage.msg_head.opcode  = TX_SETUP;
@@ -141,6 +158,36 @@ void setInverterTorque(int torque, int bcmSocket){
     }
 }
 
+
+void readRawSocket(int socket, TelemetryManager& pod){
+    struct can_frame receivedCanFrame = {};
+    ssize_t receivedPacketSize;
+    receivedPacketSize = read(socket, &receivedCanFrame, CAN_MTU);
+    if (receivedPacketSize > 0 ) {
+        processFrame(receivedCanFrame, pod);
+        return;
+    }
+    else if(receivedPacketSize < 0){
+        std::string error = std::string("Error: Reading CAN socket raw :") + std::strerror(errno);
+        throw std::runtime_error(error);
+    }
+}
+
+void readBcmSocket(int socket, TelemetryManager& pod) {
+    struct broadcastManagerConfig bcmUpdate = {};
+    ssize_t receivedPacketSize;
+    receivedPacketSize = read(socket, &bcmUpdate, sizeof(bcmUpdate));
+    if (receivedPacketSize > 0 ) {
+        if(bcmUpdate.msg_head.opcode == RX_TIMEOUT ){
+            std::cout << "TIMEOUT";
+        }
+    }
+    else if(receivedPacketSize < 0){
+        std::string error = std::string("Error: Reading CAN socket BCM :") + std::strerror(errno);
+        throw std::runtime_error(error);
+    }
+}
+
 int canNetworkThread(TelemetryManager Pod){
     //Logging
     el::Helpers::setThreadName("CAN Thread");
@@ -164,22 +211,24 @@ int canNetworkThread(TelemetryManager Pod){
     try{
         startInverterBroadcast(canSockBcm);
     }
-    catch (std::runtime_error &e){
-        LOG(INFO) << e.what();
+    catch (const std::runtime_error &error){
+        LOG(INFO) << error.what();
         return -1;
     }
 
-    struct canfd_frame canFrame = {0};
+    struct broadcastManagerConfig bcmUpdate = {};
     int32_t currentTorque, newTorque = 0;
-    LOG(INFO) << "Starting CAN Main Loop";
     while ( Pod.getPodStateValue() != psShutdown) {
 
-        struct canfd_frame canFrame = {0}; //TODO remove this zero once we dont need it
-        // Read in a CAN CanFrame
-        ssize_t iReceivedPacketSize = read(canSockRaw, &canFrame, CANFD_MTU);
-        if (iReceivedPacketSize > 0 ) {
-            processFrame(canFrame, Pod);
+        try {
+            readRawSocket( canSockRaw, Pod);
+            readBcmSocket( canSockBcm, Pod );
         }
+        catch (const std::runtime_error &error){
+            LOG(INFO) << error.what();
+            return -1;
+        }
+
         newTorque = Pod.telemetry->motorTorque;
         if(currentTorque != newTorque) {
             currentTorque = newTorque;

@@ -26,7 +26,7 @@ struct broadcastManagerConfig
     struct can_frame frame[1];
 };
 
-void processFrame(const struct canfd_frame &frame, TelemetryManager &pod);
+void processFrame(const struct can_frame &frame, TelemetryManager &pod);
 
 template <class T>
 T extractCanValue(const __u8 data[], const std::vector<int> &byteIndices, T conversionFactor){

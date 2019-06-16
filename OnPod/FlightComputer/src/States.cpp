@@ -148,6 +148,7 @@ Standby::Standby(TelemetryManager * pod): PodState(pod) {
     _stateIdentifier = psStandby;
     _brakeNodeState = bnsStandby;
     _lvdcNodeState = lvdcStandby;
+    this->pod->telemetry->controlsInterfaceState = ciNone; // Guard against auto transition
 }
 
 Standby::~Standby() = default;
@@ -212,7 +213,9 @@ Armed::Armed(TelemetryManager * pod) : PodState(pod) {
     _lvdcNodeState = lvdcFlight;
 }
 
-Armed::~Armed() = default;
+Armed::~Armed() {
+    this->pod->telemetry->controlsInterfaceState = ciNone; // Redundant grantee
+}
 
 bool Armed::testTransitions() {
     try {
@@ -276,7 +279,6 @@ Acceleration::~Acceleration() {
     this->pod->telemetry->motorTorque = 0;
     this->pod->telemetry->maxFlightTime = 0;
     this->pod->telemetry->flightDistance = 0;
-    LOG(INFO)<<"DECONSTRUCTOR";
 }
 
 bool Acceleration::testTransitions() {
