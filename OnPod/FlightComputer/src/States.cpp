@@ -10,7 +10,9 @@ PodState::PodState(TelemetryManager* pod){
     this->_enterStateTime = std::chrono::steady_clock::now();
 }
 
-PodState::~PodState()  = default;
+PodState::~PodState(){
+    this->pod->telemetry->controlsInterfaceState = ciNone;
+}
 
 unsigned int PodState::timeInStateMilis() {
     std::chrono::steady_clock::time_point current = std::chrono::steady_clock::now();
@@ -49,7 +51,6 @@ int32_t PodState::checkNodeStates(){
 
 void PodState::commonChecks() {
     int32_t status;
-
     status = this->checkSensorFlags();
     if( status != FLAGS_GOOD ){
         std::string error = "Failed on sensor : " + std::to_string(status) + " returning to standby.";
@@ -60,11 +61,11 @@ void PodState::commonChecks() {
         std::string error = "Failed on communication flag : " + std::to_string(status) + " returning to standby.";
         throw std::runtime_error(error);
     }
-    //status = this->checkNodeStates();
-    if(status != FLAGS_GOOD && this->timeInStateMilis() > 500){
+/*    status = this->checkNodeStates();
+    if( status != FLAGS_GOOD && (this->timeInStateMilis() > 500)){
         std::string error = "Failed on node state agreement : " + std::to_string(status) + " returning to standby.";
         throw std::runtime_error(error);
-    }
+    }*/
 }
 
 void PodState::setupTransition(PodStates nextState, const std::string& reason){
@@ -154,17 +155,13 @@ Standby::Standby(TelemetryManager * pod): PodState(pod) {
 Standby::~Standby() = default;
 
 bool Standby::testTransitions() {
-    int32_t status;
-
     try {
         this->commonChecks();
     }
     catch (const std::runtime_error &e ){
         //failing on e.what()
     }
-
     if(this->pod->telemetry->controlsInterfaceState == ciArm){
-        this->pod->telemetry->controlsInterfaceState = ciNone; // Use up command todo this isnt good -- what if you forget. We should do a getter method that auto clears
         if(this->pod->telemetry->maxFlightTime == 0){
             this->setupTransition(psStandby, (std::string)"Need flight profile to complete Arming sequence");
             return true;
@@ -188,6 +185,10 @@ Arming::Arming(TelemetryManager * pod ): PodState(pod) {
 Arming::~Arming() = default;
 
 bool Arming::testTransitions() {
+    if(this->pod->telemetry->controlsInterfaceState == ciEmergencyStop){
+        this->setupTransition(psStandby, "Emergency Stop. Pod --> Standby");
+        return true;
+    }
     try {
         this->commonChecks();
     }
@@ -218,6 +219,10 @@ Armed::~Armed() {
 }
 
 bool Armed::testTransitions() {
+    if(this->pod->telemetry->controlsInterfaceState == ciEmergencyStop){
+        this->setupTransition(psStandby, "Emergency Stop. Pod --> Standby");
+        return true;
+    }
     try {
         this->commonChecks();
     }
@@ -248,6 +253,10 @@ PreFlight::PreFlight(TelemetryManager* pod) : PodState(pod) {
 PreFlight::~PreFlight() = default;
 
 bool PreFlight::testTransitions() {
+    if(this->pod->telemetry->controlsInterfaceState == ciEmergencyStop){
+        this->setupTransition(psBraking, "Emergency Stop. Pod --> Braking");
+        return true;
+    }
     try {
         this->commonChecks();
     }
@@ -274,6 +283,7 @@ Acceleration::Acceleration(TelemetryManager * pod) : PodState(pod) {
     _brakeNodeState = bnsFlight;
     _lvdcNodeState = lvdcFlight;
     this->pod->telemetry->commandedTorque = this->pod->telemetry->motorTorque;
+    LOG(INFO)<<this->pod->telemetry->commandedTorque;
 }
 
 Acceleration::~Acceleration() {
@@ -284,6 +294,10 @@ Acceleration::~Acceleration() {
 }
 
 bool Acceleration::testTransitions() {
+    if(this->pod->telemetry->controlsInterfaceState == ciEmergencyStop){
+        this->setupTransition(psBraking, "Emergency Stop. Pod --> Braking");
+        return true;
+    }
     // todo critical vs non critical changes
     try {
         this->commonChecks();
@@ -294,7 +308,6 @@ bool Acceleration::testTransitions() {
     }
     // Navigation checks
     // todo inverter comms and bms
-
     if(this->timeInStateMilis() > this->pod->telemetry->maxFlightTime ){
         this->setupTransition(psBraking, (std::string)" Flight Timout of " + std::to_string(this->timeInStateMilis()) + " reached. Pod --> Braking");
         return true;

@@ -23,7 +23,6 @@ PodStates TelemetryManager::getPodStateValue() {
 
 int32_t TelemetryManager::setPodState(PodStates newState, const std::string &reason) {
     if (this->bWritePodState){
-        LOG(INFO) << reason;
         std::lock_guard<std::mutex> lock(this->telemetry->stateLock);
         this->telemetry->podState = std::move(PodState::createState(newState, this));
         return 1;

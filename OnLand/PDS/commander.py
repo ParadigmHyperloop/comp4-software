@@ -107,7 +107,7 @@ def main():
     while not connected:
         try:
             sio.connect(SOCKET_SERVER)
-        except ConnectionError as e:
+        except:
             log.info("Commander cannot connect to SocketIO")
             time.sleep(2)
         else:

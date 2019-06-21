@@ -79,6 +79,10 @@ int32_t getCanSocketBrodcastManager() {
         std::string error = std::string("Error: Creating Broadcast Manager CAN Socket :") + std::strerror(errno);
         throw std::runtime_error(error);
     }
+    int flags = fcntl(bcmSocket, F_GETFL);
+    flags |= O_NONBLOCK;
+    fcntl(bcmSocket, F_SETFL, flags);
+
     strcpy(interfaceRequest.ifr_name, "can0");
     ioctl(bcmSocket, SIOCGIFINDEX, &interfaceRequest);
     socketAddr.can_family = AF_CAN;
@@ -172,8 +176,10 @@ void readRawSocket(int socket, TelemetryManager& pod){
         return;
     }
     else if(receivedPacketSize < 0){
-        std::string error = std::string("Error: Reading CAN socket raw :") + std::strerror(errno);
-        throw std::runtime_error(error);
+        if(errno != EAGAIN){
+            std::string error = std::string("Error: Reading CAN socket raw :") + std::strerror(errno);
+            throw std::runtime_error(error);
+        }
     }
 }
 
@@ -187,8 +193,10 @@ void readBcmSocket(int socket, TelemetryManager& pod) {
         }
     }
     else if(receivedPacketSize < 0){
-        std::string error = std::string("Error: Reading CAN socket BCM :") + std::strerror(errno);
-        throw std::runtime_error(error);
+        if(errno != EAGAIN ) {
+            std::string error = std::string("Error: Reading CAN socket BCM :") + std::strerror(errno);
+            throw std::runtime_error(error);
+        }
     }
 }
 
@@ -227,6 +235,9 @@ int canNetworkThread(TelemetryManager Pod){
             readBcmSocket( canSockBcm, Pod );
         }
         catch (const std::runtime_error &error){
+            LOG(INFO) << error.what();
+        }
+        catch (const std::exception &error){
             LOG(INFO) << error.what();
             return -1;
         }
