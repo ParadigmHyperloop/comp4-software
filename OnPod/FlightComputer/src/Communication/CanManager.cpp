@@ -40,8 +40,13 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
         }
         case 0x0A2: {
             indices = {5,4};
-            auto filteredMotorTemp = extractCanValue<int>(frame.data, indices, 10);
-            pod.telemetry->motorTemperature = 0;
+            auto motorTemp = extractCanValue<int>(frame.data, indices, 10);
+            pod.telemetry->motorTemperature = motorTemp;
+        }
+        case 0x0A5: {
+            indices = {3,2};
+            auto motorSpeed = extractCanValue<int>(frame.data, indices, 1);
+            pod.telemetry->motorSpeed = motorSpeed;
         }
         case 0x0A7:{
             indices = {1,0};
@@ -50,9 +55,8 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
         }
             break;
         default:
-            //todo throw error instead
-            LOG(INFO) << "Unknown CAN ID" << frame.can_id;
-            break;
+            std::string error = "Unknown CAN ID : " + std::to_string(frame.can_id);
+            throw std::runtime_error(error);
     }
 }
 

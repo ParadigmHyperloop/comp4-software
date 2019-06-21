@@ -114,7 +114,7 @@ message Telemetry {
     // HV-BMS
     optional float hvBatteryPackVoltage = 26;
     optional float hvBatteryPackCurrent = 27;
-    repeated int32 hvBatteryCellTemperatures = 28;
+    optional float hvBatteryPackMaxCellTemperature = 28;
     optional float hvBatteryPackMinimumCellVoltage = 29;
     optional float hvBatteryPackMaxCellVoltage = 30;
 

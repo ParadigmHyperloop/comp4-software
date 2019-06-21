@@ -45,6 +45,7 @@ struct PodValues {
     int32_t gateDriverTemperature = 0;
     int32_t inverterControlBoardTemperature = 0;
     int32_t motorTemperature = 0;
+    int32_t motorSpeed = 0;
     int32_t inverterBusVoltage = 0;
     int32_t commandedTorque = 0;
 
