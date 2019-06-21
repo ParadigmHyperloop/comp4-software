@@ -105,6 +105,11 @@ def dashboard():
     path = request.path
     title = get_page_title(path[1:])
 
+    with open('ControlLaptop/templates/tables/BmsSensors.json') as json_file:
+        bms_sensors = order_sensors(json.load(json_file))
+    with open('ControlLaptop/templates/tables/InverterSensors.json') as json_file:
+        inverter_sensors = order_sensors(json.load(json_file))
+
     arm_form = FlightProfileForm()
     return render_template(
         path+".html",
@@ -112,6 +117,8 @@ def dashboard():
         title=title,
         armForm=arm_form,
         sensors=[LocalStorage.get_sensors()],
+        bms_sensors=bms_sensors,
+        inverter_sensors=inverter_sensors
     )
 
 

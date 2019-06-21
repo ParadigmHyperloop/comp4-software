@@ -1,19 +1,27 @@
 {
+  "hvStateofCharge": {
+    "name_pretty": "State of Charge",
+    "order": 0
+  },
   "hvBatteryPackVoltage": {
     "name_pretty": "Pack Voltage",
-    "order": 0
+    "order": 1
   },
     "hvBatteryPackCurrent": {
     "name_pretty": "Pack Current",
-      "order": 1
+      "order": 2
   },
     "hvBatteryPackMinimumCellVoltage": {
     "name_pretty": "Min Cell Voltage",
-      "order": 2
+      "order": 3
   },
     "hvBatteryPackMaxCellVoltage": {
     "name_pretty": "Max Cell Voltage",
-      "order": 3
+      "order": 4
+  },
+  "hvBatteryPackMaxCellTemperature": {
+    "name_pretty": "Max Cell Temp",
+      "order": 5
   }
 }
 

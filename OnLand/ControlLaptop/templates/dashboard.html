@@ -25,7 +25,12 @@
           {% include 'archived/sensor_status.html' %}
        </div>
        <div class="col-md-4">
-          {% include 'archived/battery_header.html' %}
+           <div class="row">
+               {% include '_cards/inverter_values.html' %}
+           </div>
+           <div class="row">
+               {% include '_cards/bms_values.html' %}
+           </div>
        </div>
        <div class="col-md-2">
           {% include '_cards/events.html' %}
