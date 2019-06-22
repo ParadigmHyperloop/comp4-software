@@ -14,7 +14,7 @@ PodState::~PodState(){
     this->pod->telemetry->controlsInterfaceState = ciNone;
 }
 
-unsigned int PodState::timeInStateMilis() {
+unsigned int PodState::timeInStateSeconds() {
     std::chrono::steady_clock::time_point current = std::chrono::steady_clock::now();
     return std::chrono::duration_cast<std::chrono::milliseconds>(current - this->_enterStateTime).count()/1000.0;
 }
@@ -199,10 +199,11 @@ bool Arming::testTransitions() {
         this->setupTransition(psStandby, "Emergency Stop. Pod --> Standby");
         return true;
     }
-    if(this->timeInStateMilis() < 3000 ){ //Allow nodes to update sensors or timeout if not
+    LOG(INFO)<< this->timeInStateSeconds();
+    if(this->timeInStateSeconds() < 3 ){ //Allow nodes to update sensors or timeout if not
         return false;
     }
-    if(this->timeInStateMilis() > 30000 ){
+    if(this->timeInStateSeconds() > 30 ){
         this->setupTransition(psStandby, "Arming Timout. Pod --> Standby");
         return true;
     }
@@ -219,10 +220,6 @@ bool Arming::testTransitions() {
     //todo validate that we are receiving telemetry from the inverter
     if(true){
         this->setupTransition(psArmed, (std::string)"Arming Passed. Pod --> Armed");
-        return true;
-    }
-    if(this->timeInStateMilis() > 30000 ){
-        this->setupTransition(psStandby, "Arming Timout. Pod --> Standby");
         return true;
     }
     return false;
@@ -335,8 +332,8 @@ bool Acceleration::testTransitions() {
     }
     // Navigation checks
     // todo inverter comms and bms
-    if(this->timeInStateMilis() > this->pod->telemetry->maxFlightTime ){
-        this->setupTransition(psBraking, (std::string)" Flight Timout of " + std::to_string(this->timeInStateMilis()) + " reached. Pod --> Braking");
+    if(this->timeInStateSeconds() > this->pod->telemetry->maxFlightTime ){
+        this->setupTransition(psBraking, (std::string)" Flight Timout of " + std::to_string(this->timeInStateSeconds()) + " reached. Pod --> Braking");
         return true;
     }
     return false;
@@ -356,7 +353,7 @@ Braking::Braking(TelemetryManager* pod) : PodState(pod) {
 Braking::~Braking() = default;
 
 bool Braking::testTransitions() {
-    if(!(this->timeInStateMilis() > MIN_BRAKING_TIME)){
+    if(!(this->timeInStateSeconds() > MIN_BRAKING_TIME)){
         return false;
     }
     else if(this->pod->telemetry->controlsInterfaceState == ciStandby){

@@ -62,8 +62,8 @@ def main():
                 broadcast_timer.pulse()
                 json_pod_data = json_format.MessageToJson(pod_data)
                 sio.emit('pod_telemetry', json_pod_data)
-                # pod_data = MessageToDict(pod_data)
-                # log.warning("Telemetry: {}".format(pod_data))
+                pod_data = MessageToDict(pod_data)
+                log.warning("Telemetry: {}".format(pod_data))
         else:
             connection_status['status'] = 0
             sio.emit('connection_updates', json.dumps(connection_status))

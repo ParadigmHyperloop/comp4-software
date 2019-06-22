@@ -105,6 +105,7 @@ message Telemetry {
     optional int32 inverterControlBoardTemperature = 20;
     optional int32 motorTemperature = 21;
     optional int32 inverterBusVoltage = 22;
+    optional int32 inverterHeartbeat = 78;
 
 
     optional int32 inverterVoltages = 23;

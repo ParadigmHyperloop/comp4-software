@@ -31,7 +31,6 @@ const updatesTable = $('#events-table-body');
 
 socket.on('pod_telemetry', function (data) {
     data = JSON.parse(data);
-    console.log(data);
     if (!data.hasOwnProperty('updateMessages')) {
         return;
     }

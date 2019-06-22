@@ -190,10 +190,13 @@ void readBcmSocket(int socket, TelemetryManager& pod) {
         if(bcmUpdate.msg_head.opcode == RX_TIMEOUT ){
             switch(bcmUpdate.msg_head.can_id){
                 case INVERTER_HEARTBEAT_FRAME_ID:
-                    pod.telemetry->inverterHeartbeat = 0;
+                    pod.setInverterHeartbeat(0);
+                    pod.sendUpdate("Inverter Heartbeat Expired");
                     break;
                 case BMS_HEARTBEAT_FRAME_ID:
                     pod.telemetry->connectionFlags[2] = 0;
+                    pod.sendUpdate("BMS Heartbeat Expired");
+                    break;
             }
         }
     }

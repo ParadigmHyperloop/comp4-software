@@ -41,6 +41,7 @@ class TelemetryManager
         float getHvBatteryPackMinimumCellVoltage();
         void setHvBatteryPackMaxCellVoltage(float);
         float getHvBatteryPackMaxCellVoltage();
+        void setInverterHeartbeat(int32_t);
 
         //Shared Memory Space
         struct PodValues* telemetry;

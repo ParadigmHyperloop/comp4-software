@@ -31,7 +31,7 @@ public:
 
     const std::string getTransitionReason();
 
-    unsigned int timeInStateMilis();
+    unsigned int timeInStateSeconds();
 
     static std::unique_ptr<PodState> createState(PodStates, TelemetryManager* );
 

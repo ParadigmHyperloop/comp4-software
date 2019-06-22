@@ -216,3 +216,11 @@ void TelemetryManager::setConnectionFlag(int32_t status, int32_t index){
         return;
     }
 }
+
+void TelemetryManager::setInverterHeartbeat(int32_t value) {
+    if(this->telemetry->inverterHeartbeat != 2){
+        this->telemetry->inverterHeartbeat = value;
+    }
+    return;
+}
+
