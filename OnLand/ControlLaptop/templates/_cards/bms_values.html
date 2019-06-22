@@ -22,31 +22,3 @@
     </div>
 </div>
 
-
-<script>
-
-
-{#$( document ).ready(function() {
-    socket.emit('join_room','telemetry_updates');
-    $("#bms-table-body").find("tr").each(function(){ bmsTableBody.push(this.id); });
-});
-
-const bmsTableBody = $('#bms-table-body');
-
-socket.on('pod_telemetry', function (data) {
-    data = JSON.parse(data);
-    let value, value_cell, value_name;
-    const length = bmsTableBody.length;
-    for (let index = 0; index < length; index++) {
-        value_name = bmsTableBody[index];
-        if(!data.hasOwnProperty(value_name)){
-            continue;
-        }
-        value = data[value_name];
-        value_cell = $("#" + value_name + "-actual");
-        value_cell.text(value.toFixed(2));
-    }
-});#}
-
-
-</script>

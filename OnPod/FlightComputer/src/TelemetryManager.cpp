@@ -12,6 +12,7 @@ TelemetryManager::TelemetryManager(PodValues *sPodValues, PodNetwork *sNetworkVa
 }
 
 void TelemetryManager::sendUpdate(std::string update) {
+    LOG(INFO)<<update;
     std::lock_guard<std::mutex> lock(this->telemetry->stateLock);
     this->telemetry->updates.push_back(update);
 }

@@ -22,15 +22,11 @@
     {% include '_forms/setFlightProfile.html' %}
     <div class="row">
        <div class="col-md-6">
-          {% include 'archived/sensor_status.html' %}
+           {% include '_cards/inverter_values.html' %}
+          {#{% include 'archived/sensor_status.html' %}#}
        </div>
        <div class="col-md-4">
-
-               {% include '_cards/inverter_values.html' %}
-
-
                {% include '_cards/bms_values.html' %}
-
        </div>
        <div class="col-md-2">
           {% include '_cards/events.html' %}

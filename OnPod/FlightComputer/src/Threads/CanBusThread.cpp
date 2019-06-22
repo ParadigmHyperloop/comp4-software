@@ -5,7 +5,7 @@
 #define INVERTER_BROADCAST_ID 0
 #define INVERTER_FRAME_ID 0x0C0
 #define INVERTER_HEARTBEAT_FRAME_ID 0x0A7
-#define BMS_HEARTBEAT_FRAME_ID 0x6b2
+#define BMS_HEARTBEAT_FRAME_ID 0x6b3
 
 int32_t getCanSocketRaw(){
     // Service variables
@@ -97,19 +97,19 @@ int32_t getCanSocketBrodcastManager() {
     return bcmSocket;
 }
 
-void startInverterHeartbeat(int bcmSocket){
+void startCanHeartbeat(int bcmSocket, canid_t address, int32_t timeSeconds){
     struct broadcastManagerConfig bcmMessage = {};
     bcmMessage.msg_head.opcode  = RX_SETUP;
-    bcmMessage.msg_head.can_id  = INVERTER_HEARTBEAT_FRAME_ID;
+    bcmMessage.msg_head.can_id  = address;
     bcmMessage.msg_head.flags   = SETTIMER | STARTTIMER;   // We're starting the timer right away. Probably wont want start the
     bcmMessage.msg_head.nframes = 0;
     bcmMessage.msg_head.count   = 0;
     /* Set the time interval value to 1s */
-    bcmMessage.msg_head.ival1.tv_sec = 1;
+    bcmMessage.msg_head.ival1.tv_sec = timeSeconds;
     bcmMessage.msg_head.ival1.tv_usec = 0;
     if (write(bcmSocket, &bcmMessage, sizeof(bcmMessage)) < 0)
     {
-        std::string error = std::string("Error: Starting Inverter Heartbeat :") + std::strerror(errno);
+        std::string error = std::string("Error: Starting CAN Heartbeat :") + std::strerror(errno);
         throw std::runtime_error(error);
     }
 }
@@ -238,7 +238,8 @@ int canNetworkThread(TelemetryManager Pod){
         return -1;
     }
     try{
-        startInverterHeartbeat(canSockBcm);
+        startCanHeartbeat(canSockBcm, INVERTER_HEARTBEAT_FRAME_ID, 1);
+        startCanHeartbeat(canSockBcm, BMS_HEARTBEAT_FRAME_ID, 1);
     }
     catch (const std::runtime_error &error){
         LOG(INFO) << error.what();

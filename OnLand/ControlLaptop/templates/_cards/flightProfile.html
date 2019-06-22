@@ -38,34 +38,3 @@
 </div>
 
 
-
-<script>
-
-{#
-    let flight_profile_values = [];
-    $( document ).ready(function() {
-        socket.emit('join_room','telemetry_updates');
-        $("#flight-profile-values").find("span").each(function(){ flight_profile_values.push(this.id); });
-    });
-
-
-    socket.on('pod_telemetry', function (data) {
-        let value, value_cell, value_name;
-        data = JSON.parse(data);
-        const length = flight_profile_values.length;
-        for (let index = 0; index < length; index++) {
-            value_name = flight_profile_values[index];
-            if(!data.hasOwnProperty(value_name)){
-                continue;
-            }
-            value = data[value_name];
-            value_cell = $("#" + value_name);
-            value_cell.text(value.toFixed(2));
-        }
-    });
-#}
-
-</script>
-
-
-

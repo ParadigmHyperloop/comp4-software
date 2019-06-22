@@ -5,7 +5,7 @@ let table_sensors = [];
 $( document ).ready(function() {
     socket.emit('join_room','telemetry_updates');
     $("#sensorTable").find("tr").each(function(){ table_sensors.push(this.id); });
-    console.log(table_sensors);
+    getSensorRanges();
 });
 
 function getSensorRanges() {
@@ -56,36 +56,6 @@ function ParsePodState(state) {
     }
 }
 
-/*
-
-socket.on('pod_telemetry', function (data) {
-    let value, sensor_cell, sensor_row, sensor_name, min, max;
-    data = JSON.parse(data);
-
-    const newPodState = data['podState'];
-    ParsePodState(newPodState);
-
-    const length = table_sensors.length;
-    for (let index = 0; index < length; index++) {
-        sensor_name = table_sensors[index];
-        if(!data.hasOwnProperty(sensor_name)){
-            continue;
-        }
-        value = data[sensor_name];
-        sensor_cell = $("#" + sensor_name + "-actual");
-        sensor_row =  $("#" + sensor_name);
-        if(typeof(data[sensor_name]) == "boolean" || isNaN(data[sensor_name])){
-            sensor_cell.text(data[sensor_name])
-        }
-        else{
-            min = $("#" + sensor_name + "-min").text();
-            max = $("#" + sensor_name + "-max").text();
-            sensor_cell.text(value.toFixed(2));
-            updateRowStatus(sensor_row,min,max,data[sensor_name]);
-        }
-    }
-});
-*/
 
 
 $( document ).ready(function() {
@@ -118,7 +88,37 @@ socket.on('pod_telemetry', function (data) {
 
 
 
+/*
 
-//Run on load
-getSensorRanges();
+socket.on('pod_telemetry', function (data) {
+    let value, sensor_cell, sensor_row, sensor_name, min, max;
+    data = JSON.parse(data);
+
+    const newPodState = data['podState'];
+    ParsePodState(newPodState);
+
+    const length = table_sensors.length;
+    for (let index = 0; index < length; index++) {
+        sensor_name = table_sensors[index];
+        if(!data.hasOwnProperty(sensor_name)){
+            continue;
+        }
+        value = data[sensor_name];
+        sensor_cell = $("#" + sensor_name + "-actual");
+        sensor_row =  $("#" + sensor_name);
+        if(typeof(data[sensor_name]) == "boolean" || isNaN(data[sensor_name])){
+            sensor_cell.text(data[sensor_name])
+        }
+        else{
+            min = $("#" + sensor_name + "-min").text();
+            max = $("#" + sensor_name + "-max").text();
+            sensor_cell.text(value.toFixed(2));
+            updateRowStatus(sensor_row,min,max,data[sensor_name]);
+        }
+    }
+});
+*/
+
+
+
 
