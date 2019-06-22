@@ -1,5 +1,5 @@
 {
-  "hvStateofCharge": {
+  "hvBatteryPackStateOfCharge": {
     "name_pretty": "State of Charge",
     "order": 0
   },

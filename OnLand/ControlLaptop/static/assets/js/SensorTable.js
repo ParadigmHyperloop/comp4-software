@@ -56,6 +56,7 @@ function ParsePodState(state) {
     }
 }
 
+/*
 
 socket.on('pod_telemetry', function (data) {
     let value, sensor_cell, sensor_row, sensor_name, min, max;
@@ -84,8 +85,36 @@ socket.on('pod_telemetry', function (data) {
         }
     }
 });
+*/
 
 
+$( document ).ready(function() {
+    socket.emit('join_room','telemetry_updates');
+    $(".telemetry-value").each(function(){ telemetry_value_elements.push(this); });
+});
+
+
+let telemetry_value_elements = [];
+socket.on('pod_telemetry', function (data) {
+    let value, value_cell, value_name;
+    data = JSON.parse(data);
+    const length = telemetry_value_elements.length;
+
+    for (let index = 0; index < length; index++) {
+        value_cell = telemetry_value_elements[index];
+        value_name = value_cell.id;
+        if(!data.hasOwnProperty(value_name)){
+            console.log(value_name + " not found in packet")
+        }
+        value = data[value_name];
+        if(typeof(data[value_name]) == "boolean" || isNaN(data[value_name])){
+            $('#'+value_name).text(data[value_name])
+        }
+        else{
+            $('#'+value_name).text(value.toFixed(2));
+        }
+    }
+});
 
 
 

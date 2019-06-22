@@ -12,9 +12,9 @@
             </thead>
             <tbody id="inverter-table-body">
             {% for key, value in inverter_sensors.items() %}
-                <tr class="d-flex sensor-row" id="{{ key }}">
+                <tr class="d-flex sensor-row">
                     <th class="text-center col-6" scope="row">{{ value['name_pretty'] }}</th>
-                    <td id="{{ key }}-actual" class="col-6"></td>
+                    <td id="{{ key }}" class="col-6 telemetry-value"></td>
                 </tr>
             {% endfor %}
 
@@ -26,7 +26,7 @@
 <script>
 
 
-$( document ).ready(function() {
+{#$( document ).ready(function() {
     socket.emit('join_room','telemetry_updates');
     $("#inverter-table-body").find("tr").each(function(){ inverterTableBody.push(this.id); });
 });
@@ -46,5 +46,5 @@ socket.on('pod_telemetry', function (data) {
         value_cell = $("#" + value_name + "-actual");
         value_cell.text(value.toFixed(2));
     }
-});
+});#}
 </script>

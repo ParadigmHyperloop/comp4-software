@@ -13,17 +13,17 @@
     <tr>
       <th scope="row"></th>
       <td><b>Motor Torque</b></td>
-      <td><span id="motorTorque">-</span></td>
+      <td><span id="motorTorque" class="telemetry-value">-</span></td>
     </tr>
     <tr>
       <th scope="row"></th>
       <td><b>Flight Distance</b></td>
-      <td><span id="flightDistance">-</span>m</td>
+      <td><span id="flightDistance" class="telemetry-value">-</span>m</td>
     </tr>
     <tr>
       <th scope="row"></th>
       <td><b>Max Flight Time</b></td>
-      <td><span id="maxFlightTime">-</span>s</td>
+      <td><span id="maxFlightTime" class="telemetry-value">-</span>s</td>
     </tr>
   </tbody>
 </table>
@@ -41,6 +41,7 @@
 
 <script>
 
+{#
     let flight_profile_values = [];
     $( document ).ready(function() {
         socket.emit('join_room','telemetry_updates');
@@ -62,6 +63,7 @@
             value_cell.text(value.toFixed(2));
         }
     });
+#}
 
 </script>
 

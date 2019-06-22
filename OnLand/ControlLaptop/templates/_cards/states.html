@@ -13,17 +13,17 @@
     <tr>
       <th scope="row"></th>
       <td><b>Flight Computer</b></td>
-      <td><span id="podState">--</span></td>
+      <td><span id="podState" class="telemetry-value">--</span></td>
     </tr>
     <tr>
       <th scope="row"></th>
       <td><b>Brake Node</b></td>
-      <td><span id="brakeNodeState">--</span></td>
+      <td><span id="brakeNodeState" class="telemetry-value">--</span></td>
     </tr>
     <tr>
       <th scope="row"></th>
       <td><b>LVDC Node</b></td>
-      <td><span id="lvdcNodeState">--</span></td>
+      <td><span id="lvdcNodeState" class="telemetry-value">--</span></td>
     </tr>
   </tbody>
 </table>
@@ -41,7 +41,7 @@
 
 <script>
 
-    let state_values = [];
+{#    let state_values = [];
     $( document ).ready(function() {
         socket.emit('join_room','telemetry_updates');
         $("#pod-state-values").find("span").each(function(){ state_values.push(this.id); });
@@ -62,6 +62,8 @@
             value_cell.text(value);
         }
     });
+
+    #}
 
 </script>
 
