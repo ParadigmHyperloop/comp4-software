@@ -77,11 +77,17 @@ socket.on('pod_telemetry', function (data) {
             console.log(value_name + " not found in packet")
         }
         value = data[value_name];
+        let $value_cell = $('#'+value_name);
+
         if(typeof(data[value_name]) == "boolean" || isNaN(data[value_name])){
-            $('#'+value_name).text(data[value_name])
+            $value_cell.text(value)
+        }
+        else if($value_cell.hasClass('boolean')){
+            value = (value === 1) ? 'True' : 'False';
+            $value_cell.text(value)
         }
         else{
-            $('#'+value_name).text(value.toFixed(2));
+            $value_cell.text(value.toFixed(2));
         }
     }
 });
