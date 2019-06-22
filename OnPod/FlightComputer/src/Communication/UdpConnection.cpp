@@ -184,7 +184,6 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_lvdcnodestate(lvdcNone);
     protoMessage->set_brakenodestate(pod.telemetry->receivedBrakeNodeState);
 
-
     // Add Updates todo probably put this in a function with a pointer to the proto as an argument
     if(this->pod.telemetry->updates.size() > 0){
         std::lock_guard<std::mutex> lock(this->pod.telemetry->updatesLock);

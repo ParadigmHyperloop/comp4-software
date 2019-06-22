@@ -156,11 +156,11 @@ void setInverterTorque(int torque, int bcmSocket){
         msg.frame[0].data[i] = 0;
     }
     if(torque != 0){
-        msg.frame[0].data[5] = 1;
-        msg.frame[0].data[4] = 1;
+        msg.frame[0].data[INVERTER_RUN_B] = 1;
+        msg.frame[0].data[DIRECTION_B] = 1;
     }
-    msg.frame[0].data[3] = highByte;
-    msg.frame[0].data[2] = lowByte;
+    msg.frame[0].data[TORQUE_HIGH_B] = highByte;
+    msg.frame[0].data[TORQUE_LOW_B] = lowByte;
     if (write(bcmSocket, &msg, sizeof(msg)) < 0)
     {
         std::string error = std::string("Error: Setting inverter torque :") + std::strerror(errno);
@@ -196,7 +196,7 @@ void readBcmSocket(int socket, TelemetryManager& pod) {
                     pod.sendUpdate("Inverter Heartbeat Expired");
                     break;
                 case BMS_HEARTBEAT_FRAME_ID:
-                    pod.telemetry->connectionFlags[2] = 0;
+                    pod.setConnectionFlag(0,2);
                     pod.sendUpdate("BMS Heartbeat Expired");
                     break;
             }
