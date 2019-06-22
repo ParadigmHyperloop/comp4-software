@@ -1930,103 +1930,117 @@ class LvdcNodeToFc :
 
   // accessors -------------------------------------------------------
 
-  // required float highPowerPackVoltage = 1;
+  // required int32 packetNum = 1;
+  bool has_packetnum() const;
+  void clear_packetnum();
+  static const int kPacketNumFieldNumber = 1;
+  ::google::protobuf::int32 packetnum() const;
+  void set_packetnum(::google::protobuf::int32 value);
+
+  // required .LvdcNodeStates state = 2;
+  bool has_state() const;
+  void clear_state();
+  static const int kStateFieldNumber = 2;
+  ::LvdcNodeStates state() const;
+  void set_state(::LvdcNodeStates value);
+
+  // required float highPowerPackVoltage = 3;
   bool has_highpowerpackvoltage() const;
   void clear_highpowerpackvoltage();
-  static const int kHighPowerPackVoltageFieldNumber = 1;
+  static const int kHighPowerPackVoltageFieldNumber = 3;
   float highpowerpackvoltage() const;
   void set_highpowerpackvoltage(float value);
 
-  // required float lowPowerPackVoltage = 2;
+  // required float lowPowerPackVoltage = 4;
   bool has_lowpowerpackvoltage() const;
   void clear_lowpowerpackvoltage();
-  static const int kLowPowerPackVoltageFieldNumber = 2;
+  static const int kLowPowerPackVoltageFieldNumber = 4;
   float lowpowerpackvoltage() const;
   void set_lowpowerpackvoltage(float value);
 
-  // required float highPowerPackCurrent = 3;
+  // required float highPowerPackCurrent = 5;
   bool has_highpowerpackcurrent() const;
   void clear_highpowerpackcurrent();
-  static const int kHighPowerPackCurrentFieldNumber = 3;
+  static const int kHighPowerPackCurrentFieldNumber = 5;
   float highpowerpackcurrent() const;
   void set_highpowerpackcurrent(float value);
 
-  // required float lowPowerPackCurrent = 4;
+  // required float lowPowerPackCurrent = 6;
   bool has_lowpowerpackcurrent() const;
   void clear_lowpowerpackcurrent();
-  static const int kLowPowerPackCurrentFieldNumber = 4;
+  static const int kLowPowerPackCurrentFieldNumber = 6;
   float lowpowerpackcurrent() const;
   void set_lowpowerpackcurrent(float value);
 
-  // required float rail5Voltage = 5;
-  bool has_rail5voltage() const;
-  void clear_rail5voltage();
-  static const int kRail5VoltageFieldNumber = 5;
-  float rail5voltage() const;
-  void set_rail5voltage(float value);
+  // required float lowPower5Voltage = 7;
+  bool has_lowpower5voltage() const;
+  void clear_lowpower5voltage();
+  static const int kLowPower5VoltageFieldNumber = 7;
+  float lowpower5voltage() const;
+  void set_lowpower5voltage(float value);
 
-  // required float rail12LowPowerVoltage = 6;
-  bool has_rail12lowpowervoltage() const;
-  void clear_rail12lowpowervoltage();
-  static const int kRail12LowPowerVoltageFieldNumber = 6;
-  float rail12lowpowervoltage() const;
-  void set_rail12lowpowervoltage(float value);
+  // required float lowPower12Voltage = 8;
+  bool has_lowpower12voltage() const;
+  void clear_lowpower12voltage();
+  static const int kLowPower12VoltageFieldNumber = 8;
+  float lowpower12voltage() const;
+  void set_lowpower12voltage(float value);
 
-  // required float rail12HighPowerVoltage = 7;
-  bool has_rail12highpowervoltage() const;
-  void clear_rail12highpowervoltage();
-  static const int kRail12HighPowerVoltageFieldNumber = 7;
-  float rail12highpowervoltage() const;
-  void set_rail12highpowervoltage(float value);
+  // required float highPower12Voltage = 9;
+  bool has_highpower12voltage() const;
+  void clear_highpower12voltage();
+  static const int kHighPower12VoltageFieldNumber = 9;
+  float highpower12voltage() const;
+  void set_highpower12voltage(float value);
 
-  // required float rail24Voltage = 8;
-  bool has_rail24voltage() const;
-  void clear_rail24voltage();
-  static const int kRail24VoltageFieldNumber = 8;
-  float rail24voltage() const;
-  void set_rail24voltage(float value);
+  // required float lowPower24Voltage = 10;
+  bool has_lowpower24voltage() const;
+  void clear_lowpower24voltage();
+  static const int kLowPower24VoltageFieldNumber = 10;
+  float lowpower24voltage() const;
+  void set_lowpower24voltage(float value);
 
-  // required float rail5Current = 9;
-  bool has_rail5current() const;
-  void clear_rail5current();
-  static const int kRail5CurrentFieldNumber = 9;
-  float rail5current() const;
-  void set_rail5current(float value);
+  // required float lowPower5Current = 11;
+  bool has_lowpower5current() const;
+  void clear_lowpower5current();
+  static const int kLowPower5CurrentFieldNumber = 11;
+  float lowpower5current() const;
+  void set_lowpower5current(float value);
 
-  // required float rail12LowPowerCurrent = 10;
-  bool has_rail12lowpowercurrent() const;
-  void clear_rail12lowpowercurrent();
-  static const int kRail12LowPowerCurrentFieldNumber = 10;
-  float rail12lowpowercurrent() const;
-  void set_rail12lowpowercurrent(float value);
+  // required float lowPower12Current = 12;
+  bool has_lowpower12current() const;
+  void clear_lowpower12current();
+  static const int kLowPower12CurrentFieldNumber = 12;
+  float lowpower12current() const;
+  void set_lowpower12current(float value);
 
-  // required float rail24Current = 11;
-  bool has_rail24current() const;
-  void clear_rail24current();
-  static const int kRail24CurrentFieldNumber = 11;
-  float rail24current() const;
-  void set_rail24current(float value);
+  // required float nodeCurrent = 13;
+  bool has_nodecurrent() const;
+  void clear_nodecurrent();
+  static const int kNodeCurrentFieldNumber = 13;
+  float nodecurrent() const;
+  void set_nodecurrent(float value);
 
-  // required float railInverterCurrent = 12;
-  bool has_railinvertercurrent() const;
-  void clear_railinvertercurrent();
-  static const int kRailInverterCurrentFieldNumber = 12;
-  float railinvertercurrent() const;
-  void set_railinvertercurrent(float value);
+  // required float inverterCurrent = 14;
+  bool has_invertercurrent() const;
+  void clear_invertercurrent();
+  static const int kInverterCurrentFieldNumber = 14;
+  float invertercurrent() const;
+  void set_invertercurrent(float value);
 
-  // required float railCooling1Current = 13;
-  bool has_railcooling1current() const;
-  void clear_railcooling1current();
-  static const int kRailCooling1CurrentFieldNumber = 13;
-  float railcooling1current() const;
-  void set_railcooling1current(float value);
+  // required float cooling1Current = 15;
+  bool has_cooling1current() const;
+  void clear_cooling1current();
+  static const int kCooling1CurrentFieldNumber = 15;
+  float cooling1current() const;
+  void set_cooling1current(float value);
 
-  // required float railCooling2Current = 14;
-  bool has_railcooling2current() const;
-  void clear_railcooling2current();
-  static const int kRailCooling2CurrentFieldNumber = 14;
-  float railcooling2current() const;
-  void set_railcooling2current(float value);
+  // required float cooling2Current = 16;
+  bool has_cooling2current() const;
+  void clear_cooling2current();
+  static const int kCooling2CurrentFieldNumber = 16;
+  float cooling2current() const;
+  void set_cooling2current(float value);
 
   // @@protoc_insertion_point(class_scope:LvdcNodeToFc)
  private:
@@ -2038,20 +2052,22 @@ class LvdcNodeToFc :
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  ::google::protobuf::int32 packetnum_;
+  int state_;
   float highpowerpackvoltage_;
   float lowpowerpackvoltage_;
   float highpowerpackcurrent_;
   float lowpowerpackcurrent_;
-  float rail5voltage_;
-  float rail12lowpowervoltage_;
-  float rail12highpowervoltage_;
-  float rail24voltage_;
-  float rail5current_;
-  float rail12lowpowercurrent_;
-  float rail24current_;
-  float railinvertercurrent_;
-  float railcooling1current_;
-  float railcooling2current_;
+  float lowpower5voltage_;
+  float lowpower12voltage_;
+  float highpower12voltage_;
+  float lowpower24voltage_;
+  float lowpower5current_;
+  float lowpower12current_;
+  float nodecurrent_;
+  float invertercurrent_;
+  float cooling1current_;
+  float cooling2current_;
   friend struct ::TableStruct_Paradigm_2eproto;
 };
 // -------------------------------------------------------------------
@@ -2450,7 +2466,7 @@ class FlightConfig :
   ::google::protobuf::uint64 brakenodetimeout() const;
   void set_brakenodetimeout(::google::protobuf::uint64 value);
 
-  // optional uint64 brakeNodeServerPort = 9 [default = 56641];
+  // optional uint64 brakeNodeServerPort = 9 [default = 5550];
   bool has_brakenodeserverport() const;
   void clear_brakenodeserverport();
   static const int kBrakeNodeServerPortFieldNumber = 9;
@@ -4688,256 +4704,293 @@ inline void EnclosureNodeToFc::set_coolantlinepressure(float value) {
 
 // LvdcNodeToFc
 
-// required float highPowerPackVoltage = 1;
-inline bool LvdcNodeToFc::has_highpowerpackvoltage() const {
+// required int32 packetNum = 1;
+inline bool LvdcNodeToFc::has_packetnum() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void LvdcNodeToFc::clear_packetnum() {
+  packetnum_ = 0;
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline ::google::protobuf::int32 LvdcNodeToFc::packetnum() const {
+  // @@protoc_insertion_point(field_get:LvdcNodeToFc.packetNum)
+  return packetnum_;
+}
+inline void LvdcNodeToFc::set_packetnum(::google::protobuf::int32 value) {
+  _has_bits_[0] |= 0x00000001u;
+  packetnum_ = value;
+  // @@protoc_insertion_point(field_set:LvdcNodeToFc.packetNum)
+}
+
+// required .LvdcNodeStates state = 2;
+inline bool LvdcNodeToFc::has_state() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void LvdcNodeToFc::clear_state() {
+  state_ = 0;
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline ::LvdcNodeStates LvdcNodeToFc::state() const {
+  // @@protoc_insertion_point(field_get:LvdcNodeToFc.state)
+  return static_cast< ::LvdcNodeStates >(state_);
+}
+inline void LvdcNodeToFc::set_state(::LvdcNodeStates value) {
+  assert(::LvdcNodeStates_IsValid(value));
+  _has_bits_[0] |= 0x00000002u;
+  state_ = value;
+  // @@protoc_insertion_point(field_set:LvdcNodeToFc.state)
+}
+
+// required float highPowerPackVoltage = 3;
+inline bool LvdcNodeToFc::has_highpowerpackvoltage() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void LvdcNodeToFc::clear_highpowerpackvoltage() {
   highpowerpackvoltage_ = 0;
-  _has_bits_[0] &= ~0x00000001u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline float LvdcNodeToFc::highpowerpackvoltage() const {
   // @@protoc_insertion_point(field_get:LvdcNodeToFc.highPowerPackVoltage)
   return highpowerpackvoltage_;
 }
 inline void LvdcNodeToFc::set_highpowerpackvoltage(float value) {
-  _has_bits_[0] |= 0x00000001u;
+  _has_bits_[0] |= 0x00000004u;
   highpowerpackvoltage_ = value;
   // @@protoc_insertion_point(field_set:LvdcNodeToFc.highPowerPackVoltage)
 }
 
-// required float lowPowerPackVoltage = 2;
+// required float lowPowerPackVoltage = 4;
 inline bool LvdcNodeToFc::has_lowpowerpackvoltage() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void LvdcNodeToFc::clear_lowpowerpackvoltage() {
   lowpowerpackvoltage_ = 0;
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline float LvdcNodeToFc::lowpowerpackvoltage() const {
   // @@protoc_insertion_point(field_get:LvdcNodeToFc.lowPowerPackVoltage)
   return lowpowerpackvoltage_;
 }
 inline void LvdcNodeToFc::set_lowpowerpackvoltage(float value) {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000008u;
   lowpowerpackvoltage_ = value;
   // @@protoc_insertion_point(field_set:LvdcNodeToFc.lowPowerPackVoltage)
 }
 
-// required float highPowerPackCurrent = 3;
+// required float highPowerPackCurrent = 5;
 inline bool LvdcNodeToFc::has_highpowerpackcurrent() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 inline void LvdcNodeToFc::clear_highpowerpackcurrent() {
   highpowerpackcurrent_ = 0;
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline float LvdcNodeToFc::highpowerpackcurrent() const {
   // @@protoc_insertion_point(field_get:LvdcNodeToFc.highPowerPackCurrent)
   return highpowerpackcurrent_;
 }
 inline void LvdcNodeToFc::set_highpowerpackcurrent(float value) {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000010u;
   highpowerpackcurrent_ = value;
   // @@protoc_insertion_point(field_set:LvdcNodeToFc.highPowerPackCurrent)
 }
 
-// required float lowPowerPackCurrent = 4;
+// required float lowPowerPackCurrent = 6;
 inline bool LvdcNodeToFc::has_lowpowerpackcurrent() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
 inline void LvdcNodeToFc::clear_lowpowerpackcurrent() {
   lowpowerpackcurrent_ = 0;
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000020u;
 }
 inline float LvdcNodeToFc::lowpowerpackcurrent() const {
   // @@protoc_insertion_point(field_get:LvdcNodeToFc.lowPowerPackCurrent)
   return lowpowerpackcurrent_;
 }
 inline void LvdcNodeToFc::set_lowpowerpackcurrent(float value) {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000020u;
   lowpowerpackcurrent_ = value;
   // @@protoc_insertion_point(field_set:LvdcNodeToFc.lowPowerPackCurrent)
 }
 
-// required float rail5Voltage = 5;
-inline bool LvdcNodeToFc::has_rail5voltage() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void LvdcNodeToFc::clear_rail5voltage() {
-  rail5voltage_ = 0;
-  _has_bits_[0] &= ~0x00000010u;
-}
-inline float LvdcNodeToFc::rail5voltage() const {
-  // @@protoc_insertion_point(field_get:LvdcNodeToFc.rail5Voltage)
-  return rail5voltage_;
-}
-inline void LvdcNodeToFc::set_rail5voltage(float value) {
-  _has_bits_[0] |= 0x00000010u;
-  rail5voltage_ = value;
-  // @@protoc_insertion_point(field_set:LvdcNodeToFc.rail5Voltage)
-}
-
-// required float rail12LowPowerVoltage = 6;
-inline bool LvdcNodeToFc::has_rail12lowpowervoltage() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void LvdcNodeToFc::clear_rail12lowpowervoltage() {
-  rail12lowpowervoltage_ = 0;
-  _has_bits_[0] &= ~0x00000020u;
-}
-inline float LvdcNodeToFc::rail12lowpowervoltage() const {
-  // @@protoc_insertion_point(field_get:LvdcNodeToFc.rail12LowPowerVoltage)
-  return rail12lowpowervoltage_;
-}
-inline void LvdcNodeToFc::set_rail12lowpowervoltage(float value) {
-  _has_bits_[0] |= 0x00000020u;
-  rail12lowpowervoltage_ = value;
-  // @@protoc_insertion_point(field_set:LvdcNodeToFc.rail12LowPowerVoltage)
-}
-
-// required float rail12HighPowerVoltage = 7;
-inline bool LvdcNodeToFc::has_rail12highpowervoltage() const {
+// required float lowPower5Voltage = 7;
+inline bool LvdcNodeToFc::has_lowpower5voltage() const {
   return (_has_bits_[0] & 0x00000040u) != 0;
 }
-inline void LvdcNodeToFc::clear_rail12highpowervoltage() {
-  rail12highpowervoltage_ = 0;
+inline void LvdcNodeToFc::clear_lowpower5voltage() {
+  lowpower5voltage_ = 0;
   _has_bits_[0] &= ~0x00000040u;
 }
-inline float LvdcNodeToFc::rail12highpowervoltage() const {
-  // @@protoc_insertion_point(field_get:LvdcNodeToFc.rail12HighPowerVoltage)
-  return rail12highpowervoltage_;
+inline float LvdcNodeToFc::lowpower5voltage() const {
+  // @@protoc_insertion_point(field_get:LvdcNodeToFc.lowPower5Voltage)
+  return lowpower5voltage_;
 }
-inline void LvdcNodeToFc::set_rail12highpowervoltage(float value) {
+inline void LvdcNodeToFc::set_lowpower5voltage(float value) {
   _has_bits_[0] |= 0x00000040u;
-  rail12highpowervoltage_ = value;
-  // @@protoc_insertion_point(field_set:LvdcNodeToFc.rail12HighPowerVoltage)
+  lowpower5voltage_ = value;
+  // @@protoc_insertion_point(field_set:LvdcNodeToFc.lowPower5Voltage)
 }
 
-// required float rail24Voltage = 8;
-inline bool LvdcNodeToFc::has_rail24voltage() const {
+// required float lowPower12Voltage = 8;
+inline bool LvdcNodeToFc::has_lowpower12voltage() const {
   return (_has_bits_[0] & 0x00000080u) != 0;
 }
-inline void LvdcNodeToFc::clear_rail24voltage() {
-  rail24voltage_ = 0;
+inline void LvdcNodeToFc::clear_lowpower12voltage() {
+  lowpower12voltage_ = 0;
   _has_bits_[0] &= ~0x00000080u;
 }
-inline float LvdcNodeToFc::rail24voltage() const {
-  // @@protoc_insertion_point(field_get:LvdcNodeToFc.rail24Voltage)
-  return rail24voltage_;
+inline float LvdcNodeToFc::lowpower12voltage() const {
+  // @@protoc_insertion_point(field_get:LvdcNodeToFc.lowPower12Voltage)
+  return lowpower12voltage_;
 }
-inline void LvdcNodeToFc::set_rail24voltage(float value) {
+inline void LvdcNodeToFc::set_lowpower12voltage(float value) {
   _has_bits_[0] |= 0x00000080u;
-  rail24voltage_ = value;
-  // @@protoc_insertion_point(field_set:LvdcNodeToFc.rail24Voltage)
+  lowpower12voltage_ = value;
+  // @@protoc_insertion_point(field_set:LvdcNodeToFc.lowPower12Voltage)
 }
 
-// required float rail5Current = 9;
-inline bool LvdcNodeToFc::has_rail5current() const {
+// required float highPower12Voltage = 9;
+inline bool LvdcNodeToFc::has_highpower12voltage() const {
   return (_has_bits_[0] & 0x00000100u) != 0;
 }
-inline void LvdcNodeToFc::clear_rail5current() {
-  rail5current_ = 0;
+inline void LvdcNodeToFc::clear_highpower12voltage() {
+  highpower12voltage_ = 0;
   _has_bits_[0] &= ~0x00000100u;
 }
-inline float LvdcNodeToFc::rail5current() const {
-  // @@protoc_insertion_point(field_get:LvdcNodeToFc.rail5Current)
-  return rail5current_;
+inline float LvdcNodeToFc::highpower12voltage() const {
+  // @@protoc_insertion_point(field_get:LvdcNodeToFc.highPower12Voltage)
+  return highpower12voltage_;
 }
-inline void LvdcNodeToFc::set_rail5current(float value) {
+inline void LvdcNodeToFc::set_highpower12voltage(float value) {
   _has_bits_[0] |= 0x00000100u;
-  rail5current_ = value;
-  // @@protoc_insertion_point(field_set:LvdcNodeToFc.rail5Current)
+  highpower12voltage_ = value;
+  // @@protoc_insertion_point(field_set:LvdcNodeToFc.highPower12Voltage)
 }
 
-// required float rail12LowPowerCurrent = 10;
-inline bool LvdcNodeToFc::has_rail12lowpowercurrent() const {
+// required float lowPower24Voltage = 10;
+inline bool LvdcNodeToFc::has_lowpower24voltage() const {
   return (_has_bits_[0] & 0x00000200u) != 0;
 }
-inline void LvdcNodeToFc::clear_rail12lowpowercurrent() {
-  rail12lowpowercurrent_ = 0;
+inline void LvdcNodeToFc::clear_lowpower24voltage() {
+  lowpower24voltage_ = 0;
   _has_bits_[0] &= ~0x00000200u;
 }
-inline float LvdcNodeToFc::rail12lowpowercurrent() const {
-  // @@protoc_insertion_point(field_get:LvdcNodeToFc.rail12LowPowerCurrent)
-  return rail12lowpowercurrent_;
+inline float LvdcNodeToFc::lowpower24voltage() const {
+  // @@protoc_insertion_point(field_get:LvdcNodeToFc.lowPower24Voltage)
+  return lowpower24voltage_;
 }
-inline void LvdcNodeToFc::set_rail12lowpowercurrent(float value) {
+inline void LvdcNodeToFc::set_lowpower24voltage(float value) {
   _has_bits_[0] |= 0x00000200u;
-  rail12lowpowercurrent_ = value;
-  // @@protoc_insertion_point(field_set:LvdcNodeToFc.rail12LowPowerCurrent)
+  lowpower24voltage_ = value;
+  // @@protoc_insertion_point(field_set:LvdcNodeToFc.lowPower24Voltage)
 }
 
-// required float rail24Current = 11;
-inline bool LvdcNodeToFc::has_rail24current() const {
+// required float lowPower5Current = 11;
+inline bool LvdcNodeToFc::has_lowpower5current() const {
   return (_has_bits_[0] & 0x00000400u) != 0;
 }
-inline void LvdcNodeToFc::clear_rail24current() {
-  rail24current_ = 0;
+inline void LvdcNodeToFc::clear_lowpower5current() {
+  lowpower5current_ = 0;
   _has_bits_[0] &= ~0x00000400u;
 }
-inline float LvdcNodeToFc::rail24current() const {
-  // @@protoc_insertion_point(field_get:LvdcNodeToFc.rail24Current)
-  return rail24current_;
+inline float LvdcNodeToFc::lowpower5current() const {
+  // @@protoc_insertion_point(field_get:LvdcNodeToFc.lowPower5Current)
+  return lowpower5current_;
 }
-inline void LvdcNodeToFc::set_rail24current(float value) {
+inline void LvdcNodeToFc::set_lowpower5current(float value) {
   _has_bits_[0] |= 0x00000400u;
-  rail24current_ = value;
-  // @@protoc_insertion_point(field_set:LvdcNodeToFc.rail24Current)
+  lowpower5current_ = value;
+  // @@protoc_insertion_point(field_set:LvdcNodeToFc.lowPower5Current)
 }
 
-// required float railInverterCurrent = 12;
-inline bool LvdcNodeToFc::has_railinvertercurrent() const {
+// required float lowPower12Current = 12;
+inline bool LvdcNodeToFc::has_lowpower12current() const {
   return (_has_bits_[0] & 0x00000800u) != 0;
 }
-inline void LvdcNodeToFc::clear_railinvertercurrent() {
-  railinvertercurrent_ = 0;
+inline void LvdcNodeToFc::clear_lowpower12current() {
+  lowpower12current_ = 0;
   _has_bits_[0] &= ~0x00000800u;
 }
-inline float LvdcNodeToFc::railinvertercurrent() const {
-  // @@protoc_insertion_point(field_get:LvdcNodeToFc.railInverterCurrent)
-  return railinvertercurrent_;
+inline float LvdcNodeToFc::lowpower12current() const {
+  // @@protoc_insertion_point(field_get:LvdcNodeToFc.lowPower12Current)
+  return lowpower12current_;
 }
-inline void LvdcNodeToFc::set_railinvertercurrent(float value) {
+inline void LvdcNodeToFc::set_lowpower12current(float value) {
   _has_bits_[0] |= 0x00000800u;
-  railinvertercurrent_ = value;
-  // @@protoc_insertion_point(field_set:LvdcNodeToFc.railInverterCurrent)
+  lowpower12current_ = value;
+  // @@protoc_insertion_point(field_set:LvdcNodeToFc.lowPower12Current)
 }
 
-// required float railCooling1Current = 13;
-inline bool LvdcNodeToFc::has_railcooling1current() const {
+// required float nodeCurrent = 13;
+inline bool LvdcNodeToFc::has_nodecurrent() const {
   return (_has_bits_[0] & 0x00001000u) != 0;
 }
-inline void LvdcNodeToFc::clear_railcooling1current() {
-  railcooling1current_ = 0;
+inline void LvdcNodeToFc::clear_nodecurrent() {
+  nodecurrent_ = 0;
   _has_bits_[0] &= ~0x00001000u;
 }
-inline float LvdcNodeToFc::railcooling1current() const {
-  // @@protoc_insertion_point(field_get:LvdcNodeToFc.railCooling1Current)
-  return railcooling1current_;
+inline float LvdcNodeToFc::nodecurrent() const {
+  // @@protoc_insertion_point(field_get:LvdcNodeToFc.nodeCurrent)
+  return nodecurrent_;
 }
-inline void LvdcNodeToFc::set_railcooling1current(float value) {
+inline void LvdcNodeToFc::set_nodecurrent(float value) {
   _has_bits_[0] |= 0x00001000u;
-  railcooling1current_ = value;
-  // @@protoc_insertion_point(field_set:LvdcNodeToFc.railCooling1Current)
+  nodecurrent_ = value;
+  // @@protoc_insertion_point(field_set:LvdcNodeToFc.nodeCurrent)
 }
 
-// required float railCooling2Current = 14;
-inline bool LvdcNodeToFc::has_railcooling2current() const {
+// required float inverterCurrent = 14;
+inline bool LvdcNodeToFc::has_invertercurrent() const {
   return (_has_bits_[0] & 0x00002000u) != 0;
 }
-inline void LvdcNodeToFc::clear_railcooling2current() {
-  railcooling2current_ = 0;
+inline void LvdcNodeToFc::clear_invertercurrent() {
+  invertercurrent_ = 0;
   _has_bits_[0] &= ~0x00002000u;
 }
-inline float LvdcNodeToFc::railcooling2current() const {
-  // @@protoc_insertion_point(field_get:LvdcNodeToFc.railCooling2Current)
-  return railcooling2current_;
+inline float LvdcNodeToFc::invertercurrent() const {
+  // @@protoc_insertion_point(field_get:LvdcNodeToFc.inverterCurrent)
+  return invertercurrent_;
 }
-inline void LvdcNodeToFc::set_railcooling2current(float value) {
+inline void LvdcNodeToFc::set_invertercurrent(float value) {
   _has_bits_[0] |= 0x00002000u;
-  railcooling2current_ = value;
-  // @@protoc_insertion_point(field_set:LvdcNodeToFc.railCooling2Current)
+  invertercurrent_ = value;
+  // @@protoc_insertion_point(field_set:LvdcNodeToFc.inverterCurrent)
+}
+
+// required float cooling1Current = 15;
+inline bool LvdcNodeToFc::has_cooling1current() const {
+  return (_has_bits_[0] & 0x00004000u) != 0;
+}
+inline void LvdcNodeToFc::clear_cooling1current() {
+  cooling1current_ = 0;
+  _has_bits_[0] &= ~0x00004000u;
+}
+inline float LvdcNodeToFc::cooling1current() const {
+  // @@protoc_insertion_point(field_get:LvdcNodeToFc.cooling1Current)
+  return cooling1current_;
+}
+inline void LvdcNodeToFc::set_cooling1current(float value) {
+  _has_bits_[0] |= 0x00004000u;
+  cooling1current_ = value;
+  // @@protoc_insertion_point(field_set:LvdcNodeToFc.cooling1Current)
+}
+
+// required float cooling2Current = 16;
+inline bool LvdcNodeToFc::has_cooling2current() const {
+  return (_has_bits_[0] & 0x00008000u) != 0;
+}
+inline void LvdcNodeToFc::clear_cooling2current() {
+  cooling2current_ = 0;
+  _has_bits_[0] &= ~0x00008000u;
+}
+inline float LvdcNodeToFc::cooling2current() const {
+  // @@protoc_insertion_point(field_get:LvdcNodeToFc.cooling2Current)
+  return cooling2current_;
+}
+inline void LvdcNodeToFc::set_cooling2current(float value) {
+  _has_bits_[0] |= 0x00008000u;
+  cooling2current_ = value;
+  // @@protoc_insertion_point(field_set:LvdcNodeToFc.cooling2Current)
 }
 
 // -------------------------------------------------------------------
@@ -5411,12 +5464,12 @@ inline void FlightConfig::set_brakenodetimeout(::google::protobuf::uint64 value)
   // @@protoc_insertion_point(field_set:FlightConfig.brakeNodeTimeout)
 }
 
-// optional uint64 brakeNodeServerPort = 9 [default = 56641];
+// optional uint64 brakeNodeServerPort = 9 [default = 5550];
 inline bool FlightConfig::has_brakenodeserverport() const {
   return (_has_bits_[0] & 0x00000100u) != 0;
 }
 inline void FlightConfig::clear_brakenodeserverport() {
-  brakenodeserverport_ = PROTOBUF_ULONGLONG(56641);
+  brakenodeserverport_ = PROTOBUF_ULONGLONG(5550);
   _has_bits_[0] &= ~0x00000100u;
 }
 inline ::google::protobuf::uint64 FlightConfig::brakenodeserverport() const {

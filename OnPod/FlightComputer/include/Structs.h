@@ -12,7 +12,8 @@ struct PodValues {
     std::mutex stateLock;
     std::unique_ptr<PodState> podState;
     ControlsInterfaceStates controlsInterfaceState = ciNone;
-    BrakeNodeStates brakeNodeState = bnsNone;
+    BrakeNodeStates receivedBrakeNodeState = bnsNone;
+    BrakeNodeStates commandedBrakeNodeState = bnsNone;
     LvdcNodeStates lvdcNodeState = lvdcNone;
 
     // Flight Profile

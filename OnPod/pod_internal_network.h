@@ -2,8 +2,8 @@
 #define POD_INTERNAL_NETWORK
 
 // IP addresses
-const uint8_t FC_IP[4] = {192, 168, 0, 10};
-const uint8_t BRAKE_NODE_IP[4] = {192, 168, 0, 20};
+const uint8_t FC_IP[4] = {192, 168, 1, 101};
+const uint8_t BRAKE_NODE_IP[4] = {192, 168, 1, 20};
 const uint8_t LVDC_NODE_IP[4] = {192, 168, 0, 21};
 const uint8_t ENCLOSURE_NODE_IP[4] = {192, 168, 0, 22};
 

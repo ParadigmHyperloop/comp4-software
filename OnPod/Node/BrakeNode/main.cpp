@@ -157,6 +157,9 @@ void loop() {
         pb_istream_t inStream = pb_istream_from_buffer(udp.uRecvBuffer, sizeof(udp.uRecvBuffer));
         pb_decode(&inStream, FcToBrakeNode_fields, &pFcCommand);
         if (pFcCommand.has_nodeState) {
+            if (pBrakeNodeTelemetry.state != pFcCommand.nodeState) {
+              Serial.println(pFcCommand.nodeState);
+            }
             pBrakeNodeTelemetry.state = pFcCommand.nodeState;
         }
         fcHeartbeatTimer.after(HEARTBEAT_INTERVAL, expireHeartbeat, (void*)0);

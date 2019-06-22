@@ -257,7 +257,7 @@ message FlightConfig {
     optional string controlLaptopIpAddr = 6 [default = "127.0.0.1"];
     optional uint64 brakeNodePort = 7 [default = 5555];
     optional uint64 brakeNodeTimeout = 8 [default = 4000];
-    optional uint64 brakeNodeServerPort = 9 [default = 56641];
+    optional uint64 brakeNodeServerPort = 9 [default = 5550];
 }
 
 message DefaultFcToNode {

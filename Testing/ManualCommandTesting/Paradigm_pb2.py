@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=None,
-  serialized_pb=_b('\n\x0eParadigm.proto\"\xd6\x03\n\nPodCommand\x12\x19\n\nhasCommand\x18\x07 \x01(\x08:\x05\x66\x61lse\x12\x38\n\x16\x63ontrolsInterfaceState\x18\x01 \x01(\x0e\x32\x18.ControlsInterfaceStates\x12\"\n\x0emanualPodState\x18\x02 \x01(\x0e\x32\n.PodStates\x12.\n\x14manualBrakeNodeState\x18\x03 \x01(\x0e\x32\x10.BrakeNodeStates\x12&\n\x10manualMotorState\x18\x04 \x01(\x0e\x32\x0c.MotorStates\x12,\n\x13manualLvdcNodeState\x18\x05 \x01(\x0e\x32\x0f.LvdcNodeStates\x12!\n\x19\x61utomaticStateTransitions\x18\x06 \x01(\x08\x12\x1d\n\x15solenoidConfiguration\x18\x08 \x03(\x05\x12\x1e\n\x16powerRailConfiguration\x18\t \x03(\x05\x12#\n\x1bsensorOverrideConfiguration\x18\n \x03(\x05\x12\x13\n\x0bmotorTorque\x18\x0b \x01(\r\x12\x16\n\x0e\x66lightDistance\x18\x0c \x01(\r\x12\x15\n\rmaxFlightTime\x18\r \x01(\r\"\x81\x10\n\tTelemetry\x12\x1c\n\x08podState\x18\x01 \x01(\x0e\x32\n.PodStates\x12(\n\x0e\x62rakeNodeState\x18\x02 \x01(\x0e\x32\x10.BrakeNodeStates\x12 \n\nmotorState\x18\x03 \x01(\x0e\x32\x0c.MotorStates\x12\x38\n\x16\x63ontrolsInterfaceState\x18\x04 \x01(\x0e\x32\x18.ControlsInterfaceStates\x12&\n\rinverterState\x18\x05 \x01(\x0e\x32\x0f.InverterStates\x12&\n\rlvdcNodeState\x18\x36 \x01(\x0e\x32\x0f.LvdcNodeStates\x12\x38\n\x16\x62\x61tteryManagementState\x18\x19 \x01(\x0e\x32\x18.BatteryManagementStates\x12.\n\x1a\x62reakNodePerceivedPodState\x18\x1f \x01(\x0e\x32\n.PodStates\x12\x13\n\x0bmissionTime\x18\x06 \x01(\x05\x12\x12\n\nflightTime\x18\x07 \x01(\x05\x12\x16\n\x0eheartbeatFlags\x18\x08 \x03(\x05\x12\x17\n\x0fheartbeatValues\x18G \x03(\x05\x12\x13\n\x0bpodPosition\x18\t \x01(\x05\x12\x13\n\x0bpodVelocity\x18\n \x01(\x05\x12\x18\n\x10podAccelerationX\x18\x0b \x01(\x05\x12\x1a\n\x12tachometerVelocity\x18\x10 \x01(\x05\x12\x18\n\x10resolverVelocity\x18\x11 \x01(\x05\x12\x1a\n\x12maxIgbtTemperature\x18\x12 \x01(\x05\x12\x1d\n\x15gateDriverTemperature\x18\x13 \x01(\x05\x12\'\n\x1finverterControlBoardTemperature\x18\x14 \x01(\x05\x12\x18\n\x10motorTemperature\x18\x15 \x01(\x05\x12\x1a\n\x12inverterBusVoltage\x18\x16 \x01(\x05\x12\x19\n\x11inverterHeartbeat\x18N \x01(\x05\x12\x12\n\nmotorSpeed\x18P \x01(\x05\x12\x18\n\x10inverterVoltages\x18\x17 \x01(\x05\x12\x18\n\x10inverterCurrents\x18\x18 \x01(\x05\x12\x1c\n\x14hvBatteryPackVoltage\x18\x1a \x01(\x02\x12\x1c\n\x14hvBatteryPackCurrent\x18\x1b \x01(\x02\x12\'\n\x1fhvBatteryPackMaxCellTemperature\x18\x1c \x01(\x02\x12#\n\x1bhvBatteryPackMaxCellVoltage\x18\x1e \x01(\x02\x12\'\n\x1fhvBatteryPackMinimumCellVoltage\x18\x1d \x01(\x02\x12\"\n\x1ahvBatteryPackStateOfCharge\x18O \x01(\x05\x12\x11\n\tsolenoid1\x18  \x01(\x08\x12\x11\n\tsolenoid2\x18! \x01(\x08\x12\x11\n\tsolenoid3\x18\" \x01(\x08\x12\x11\n\tsolenoid4\x18# \x01(\x08\x12\x14\n\x0chighPressure\x18& \x01(\x02\x12\x14\n\x0clowPressure1\x18\' \x01(\x02\x12\x14\n\x0clowPressure2\x18( \x01(\x02\x12\x14\n\x0clowPressure3\x18) \x01(\x02\x12\x14\n\x0clowPressure4\x18* \x01(\x02\x12!\n\x19pressureVesselTemperature\x18+ \x01(\x02\x12$\n\x1c\x65lectronicsEnclosurePressure\x18, \x01(\x05\x12\x19\n\x11railDisplacementX\x18- \x01(\x05\x12\x19\n\x11railDisplacementY\x18. \x01(\x05\x12\x14\n\x0ctubePressure\x18\x30 \x01(\x05\x12\x18\n\x10\x63oolantPressure1\x18\x31 \x01(\x05\x12\x18\n\x10\x63oolantPressure2\x18\x32 \x01(\x05\x12\x18\n\x10\x63oolantPressure3\x18\x33 \x01(\x05\x12\x1a\n\x12\x63oolantTemperature\x18\x34 \x01(\x05\x12\x17\n\x0frailTemperature\x18\x35 \x01(\x02\x12\x14\n\x0cpack1Voltage\x18\x37 \x01(\x05\x12\x14\n\x0cpack2Voltage\x18\x38 \x01(\x05\x12\x14\n\x0cpack1Current\x18\x39 \x01(\x05\x12\x14\n\x0cpack2Current\x18: \x01(\x05\x12\x14\n\x0crail1Voltage\x18; \x01(\x05\x12\x14\n\x0crail2Voltage\x18< \x01(\x05\x12\x14\n\x0crail3Voltage\x18= \x01(\x05\x12\x14\n\x0crail4Voltage\x18> \x01(\x05\x12\x17\n\x0frailVoltageFlag\x18H \x01(\x05\x12\x1a\n\x12railCurrentSensor1\x18? \x01(\x05\x12\x1a\n\x12railCurrentSensor2\x18@ \x01(\x05\x12\x1a\n\x12railCurrentSensor3\x18\x41 \x01(\x05\x12\x1a\n\x12railCurrentSensor4\x18\x42 \x01(\x05\x12\x1a\n\x12railCurrentSensor5\x18\x43 \x01(\x05\x12\x1a\n\x12railCurrentSensor6\x18\x44 \x01(\x05\x12\x1a\n\x12railCurrentSensor7\x18\x45 \x01(\x05\x12\x1a\n\x12railCurrentSensor8\x18\x46 \x01(\x05\x12\x17\n\x0frailCurrentFlag\x18I \x01(\x05\x12\x13\n\x0bmotorTorque\x18J \x01(\r\x12\x16\n\x0e\x66lightDistance\x18K \x01(\r\x12\x15\n\rmaxFlightTime\x18L \x01(\r\x12\x16\n\x0eupdateMessages\x18M \x03(\t\"\xab\x01\n\rFcToBrakeNode\x12\x11\n\tpacketNum\x18\x01 \x01(\x05\x12#\n\tnodeState\x18\x02 \x01(\x0e\x32\x10.BrakeNodeStates\x12\x17\n\x0fsolenoid1Config\x18\x03 \x01(\x08\x12\x17\n\x0fsolenoid2Config\x18\x04 \x01(\x08\x12\x17\n\x0fsolenoid3Config\x18\x05 \x01(\x08\x12\x17\n\x0fsolenoid4Config\x18\x06 \x01(\x08\"i\n\x0c\x46\x63ToLvdcNode\x12\x11\n\tpacketNum\x18\x01 \x01(\x05\x12\x1c\n\x08podState\x18\x02 \x01(\x0e\x32\n.PodStates\x12(\n\x0fmanualNodeState\x18\x03 \x01(\x0e\x32\x0f.LvdcNodeStates\"\xe6\x01\n\x0b\x44tsNodeToFc\x12\x11\n\tpacketNum\x18\x01 \x02(\x05\x12(\n\x0e\x62rakeNodeState\x18\x02 \x02(\x0e\x32\x10.BrakeNodeStates\x12\x1a\n\x12\x62rakeSolenoidState\x18\x03 \x02(\x08\x12\x19\n\x11ventSolenoidState\x18\x04 \x02(\x08\x12\x18\n\x10rotorTemperature\x18\x05 \x02(\x02\x12\x1c\n\x14pneumaticTemperature\x18\x06 \x02(\x02\x12\x14\n\x0ctankPressure\x18\x07 \x02(\x02\x12\x15\n\rbrakePressure\x18\x08 \x02(\x02\"|\n\x11\x45nclosureNodeToFc\x12\x11\n\tpacketNum\x18\x01 \x02(\x05\x12\x19\n\x11\x65nclosurePressure\x18\x02 \x02(\x02\x12\x1c\n\x14\x65nclosureTemperature\x18\x03 \x02(\x02\x12\x1b\n\x13\x63oolantLinePressure\x18\x04 \x02(\x02\"\x93\x03\n\x0cLvdcNodeToFc\x12\x1c\n\x14highPowerPackVoltage\x18\x01 \x02(\x02\x12\x1b\n\x13lowPowerPackVoltage\x18\x02 \x02(\x02\x12\x1c\n\x14highPowerPackCurrent\x18\x03 \x02(\x02\x12\x1b\n\x13lowPowerPackCurrent\x18\x04 \x02(\x02\x12\x14\n\x0crail5Voltage\x18\x05 \x02(\x02\x12\x1d\n\x15rail12LowPowerVoltage\x18\x06 \x02(\x02\x12\x1e\n\x16rail12HighPowerVoltage\x18\x07 \x02(\x02\x12\x15\n\rrail24Voltage\x18\x08 \x02(\x02\x12\x14\n\x0crail5Current\x18\t \x02(\x02\x12\x1d\n\x15rail12LowPowerCurrent\x18\n \x02(\x02\x12\x15\n\rrail24Current\x18\x0b \x02(\x02\x12\x1b\n\x13railInverterCurrent\x18\x0c \x02(\x02\x12\x1b\n\x13railCooling1Current\x18\r \x02(\x02\x12\x1b\n\x13railCooling2Current\x18\x0e \x02(\x02\"\xbd\x02\n\rBrakeNodeToFc\x12\x11\n\tpacketNum\x18\x01 \x02(\x05\x12\x1f\n\x05state\x18\x02 \x02(\x0e\x32\x10.BrakeNodeStates\x12\x11\n\tsolenoid1\x18\x03 \x02(\x08\x12\x11\n\tsolenoid2\x18\x04 \x02(\x08\x12\x11\n\tsolenoid3\x18\x05 \x02(\x08\x12\x11\n\tsolenoid4\x18\x06 \x02(\x08\x12\x14\n\x0chighPressure\x18\x07 \x02(\x02\x12\x14\n\x0clowPressure1\x18\x08 \x02(\x02\x12\x14\n\x0clowPressure2\x18\t \x02(\x02\x12\x14\n\x0clowPressure3\x18\n \x02(\x02\x12\x19\n\x11lowPressureCommon\x18\x0b \x02(\x02\x12\x1c\n\x14pneumaticTemperature\x18\x0c \x02(\x02\x12\x1b\n\x13\x63oolantTankPressure\x18\r \x02(\x02\"\xa0\x02\n\x0c\x46lightConfig\x12\x18\n\x10retrievalTimeout\x18\x01 \x01(\r\x12\x1e\n\x10pdsTelemetryPort\x18\x02 \x01(\x05:\x04\x37\x30\x30\x30\x12\x19\n\x0b\x63ommandPort\x18\x03 \x01(\x05:\x04\x36\x30\x30\x30\x12\x1f\n\x10heartbeatTimeout\x18\x04 \x01(\x05:\x05\x31\x30\x30\x30\x30\x12\x11\n\tpodDriver\x18\x05 \x01(\t\x12&\n\x13\x63ontrolLaptopIpAddr\x18\x06 \x01(\t:\t127.0.0.1\x12\x1b\n\rbrakeNodePort\x18\x07 \x01(\x04:\x04\x35\x35\x35\x35\x12\x1e\n\x10\x62rakeNodeTimeout\x18\x08 \x01(\x04:\x04\x34\x30\x30\x30\x12\"\n\x13\x62rakeNodeServerPort\x18\t \x01(\x04:\x05\x35\x36\x36\x34\x31\"/\n\x0f\x44\x65\x66\x61ultFcToNode\x12\x1c\n\x08podState\x18\x01 \x01(\x0e\x32\n.PodStates*u\n\x0f\x42rakeNodeStates\x12\x0e\n\nbnsBooting\x10\x00\x12\x0e\n\nbnsStandby\x10\x01\x12\r\n\tbnsFlight\x10\x02\x12\x0e\n\nbnsBraking\x10\x03\x12\x16\n\x12\x62nsSolenoidControl\x10\x04\x12\x0b\n\x07\x62nsNone\x10\x05*\xa4\x01\n\tPodStates\x12\r\n\tpsBooting\x10\x00\x12\r\n\tpsStandby\x10\x01\x12\x0c\n\x08psArming\x10\x02\x12\x0b\n\x07psArmed\x10\x03\x12\x0f\n\x0bpsPreFlight\x10\x04\x12\x12\n\x0epsAcceleration\x10\x05\x12\x0e\n\npsCoasting\x10\x06\x12\r\n\tpsBraking\x10\x07\x12\x0e\n\npsShutdown\x10\x08\x12\n\n\x06psNone\x10\t*C\n\x0bMotorStates\x12\t\n\x05msOff\x10\x00\x12\x0e\n\nmsCharging\x10\x01\x12\n\n\x06msIdle\x10\x02\x12\r\n\tmsEngaged\x10\x03*q\n\x17\x43ontrolsInterfaceStates\x12\r\n\tciStandby\x10\x00\x12\t\n\x05\x63iArm\x10\x01\x12\x0c\n\x08\x63iFlight\x10\x02\x12\x13\n\x0f\x63iEmergencyStop\x10\x03\x12\n\n\x06\x63iNone\x10\x04\x12\r\n\tciRestart\x10\x05*-\n\x0eInverterStates\x12\n\n\x06isNone\x10\x00\x12\x0f\n\x0bisConnected\x10\x01*)\n\x17\x42\x61tteryManagementStates\x12\x0e\n\nbmsNominal\x10\x00*P\n\x0eLvdcNodeStates\x12\x0f\n\x0blvdcBooting\x10\x00\x12\x0f\n\x0blvdcStandby\x10\x01\x12\x0e\n\nlvdcFlight\x10\x02\x12\x0c\n\x08lvdcNone\x10\x03')
+  serialized_pb=_b('\n\x0eParadigm.proto\"\xd6\x03\n\nPodCommand\x12\x19\n\nhasCommand\x18\x07 \x01(\x08:\x05\x66\x61lse\x12\x38\n\x16\x63ontrolsInterfaceState\x18\x01 \x01(\x0e\x32\x18.ControlsInterfaceStates\x12\"\n\x0emanualPodState\x18\x02 \x01(\x0e\x32\n.PodStates\x12.\n\x14manualBrakeNodeState\x18\x03 \x01(\x0e\x32\x10.BrakeNodeStates\x12&\n\x10manualMotorState\x18\x04 \x01(\x0e\x32\x0c.MotorStates\x12,\n\x13manualLvdcNodeState\x18\x05 \x01(\x0e\x32\x0f.LvdcNodeStates\x12!\n\x19\x61utomaticStateTransitions\x18\x06 \x01(\x08\x12\x1d\n\x15solenoidConfiguration\x18\x08 \x03(\x05\x12\x1e\n\x16powerRailConfiguration\x18\t \x03(\x05\x12#\n\x1bsensorOverrideConfiguration\x18\n \x03(\x05\x12\x13\n\x0bmotorTorque\x18\x0b \x01(\r\x12\x16\n\x0e\x66lightDistance\x18\x0c \x01(\r\x12\x15\n\rmaxFlightTime\x18\r \x01(\r\"\x81\x10\n\tTelemetry\x12\x1c\n\x08podState\x18\x01 \x01(\x0e\x32\n.PodStates\x12(\n\x0e\x62rakeNodeState\x18\x02 \x01(\x0e\x32\x10.BrakeNodeStates\x12 \n\nmotorState\x18\x03 \x01(\x0e\x32\x0c.MotorStates\x12\x38\n\x16\x63ontrolsInterfaceState\x18\x04 \x01(\x0e\x32\x18.ControlsInterfaceStates\x12&\n\rinverterState\x18\x05 \x01(\x0e\x32\x0f.InverterStates\x12&\n\rlvdcNodeState\x18\x36 \x01(\x0e\x32\x0f.LvdcNodeStates\x12\x38\n\x16\x62\x61tteryManagementState\x18\x19 \x01(\x0e\x32\x18.BatteryManagementStates\x12.\n\x1a\x62reakNodePerceivedPodState\x18\x1f \x01(\x0e\x32\n.PodStates\x12\x13\n\x0bmissionTime\x18\x06 \x01(\x05\x12\x12\n\nflightTime\x18\x07 \x01(\x05\x12\x16\n\x0eheartbeatFlags\x18\x08 \x03(\x05\x12\x17\n\x0fheartbeatValues\x18G \x03(\x05\x12\x13\n\x0bpodPosition\x18\t \x01(\x05\x12\x13\n\x0bpodVelocity\x18\n \x01(\x05\x12\x18\n\x10podAccelerationX\x18\x0b \x01(\x05\x12\x1a\n\x12tachometerVelocity\x18\x10 \x01(\x05\x12\x18\n\x10resolverVelocity\x18\x11 \x01(\x05\x12\x1a\n\x12maxIgbtTemperature\x18\x12 \x01(\x05\x12\x1d\n\x15gateDriverTemperature\x18\x13 \x01(\x05\x12\'\n\x1finverterControlBoardTemperature\x18\x14 \x01(\x05\x12\x18\n\x10motorTemperature\x18\x15 \x01(\x05\x12\x1a\n\x12inverterBusVoltage\x18\x16 \x01(\x05\x12\x19\n\x11inverterHeartbeat\x18N \x01(\x05\x12\x12\n\nmotorSpeed\x18P \x01(\x05\x12\x18\n\x10inverterVoltages\x18\x17 \x01(\x05\x12\x18\n\x10inverterCurrents\x18\x18 \x01(\x05\x12\x1c\n\x14hvBatteryPackVoltage\x18\x1a \x01(\x02\x12\x1c\n\x14hvBatteryPackCurrent\x18\x1b \x01(\x02\x12\'\n\x1fhvBatteryPackMaxCellTemperature\x18\x1c \x01(\x02\x12#\n\x1bhvBatteryPackMaxCellVoltage\x18\x1e \x01(\x02\x12\'\n\x1fhvBatteryPackMinimumCellVoltage\x18\x1d \x01(\x02\x12\"\n\x1ahvBatteryPackStateOfCharge\x18O \x01(\x05\x12\x11\n\tsolenoid1\x18  \x01(\x08\x12\x11\n\tsolenoid2\x18! \x01(\x08\x12\x11\n\tsolenoid3\x18\" \x01(\x08\x12\x11\n\tsolenoid4\x18# \x01(\x08\x12\x14\n\x0chighPressure\x18& \x01(\x02\x12\x14\n\x0clowPressure1\x18\' \x01(\x02\x12\x14\n\x0clowPressure2\x18( \x01(\x02\x12\x14\n\x0clowPressure3\x18) \x01(\x02\x12\x14\n\x0clowPressure4\x18* \x01(\x02\x12!\n\x19pressureVesselTemperature\x18+ \x01(\x02\x12$\n\x1c\x65lectronicsEnclosurePressure\x18, \x01(\x05\x12\x19\n\x11railDisplacementX\x18- \x01(\x05\x12\x19\n\x11railDisplacementY\x18. \x01(\x05\x12\x14\n\x0ctubePressure\x18\x30 \x01(\x05\x12\x18\n\x10\x63oolantPressure1\x18\x31 \x01(\x05\x12\x18\n\x10\x63oolantPressure2\x18\x32 \x01(\x05\x12\x18\n\x10\x63oolantPressure3\x18\x33 \x01(\x05\x12\x1a\n\x12\x63oolantTemperature\x18\x34 \x01(\x05\x12\x17\n\x0frailTemperature\x18\x35 \x01(\x02\x12\x14\n\x0cpack1Voltage\x18\x37 \x01(\x05\x12\x14\n\x0cpack2Voltage\x18\x38 \x01(\x05\x12\x14\n\x0cpack1Current\x18\x39 \x01(\x05\x12\x14\n\x0cpack2Current\x18: \x01(\x05\x12\x14\n\x0crail1Voltage\x18; \x01(\x05\x12\x14\n\x0crail2Voltage\x18< \x01(\x05\x12\x14\n\x0crail3Voltage\x18= \x01(\x05\x12\x14\n\x0crail4Voltage\x18> \x01(\x05\x12\x17\n\x0frailVoltageFlag\x18H \x01(\x05\x12\x1a\n\x12railCurrentSensor1\x18? \x01(\x05\x12\x1a\n\x12railCurrentSensor2\x18@ \x01(\x05\x12\x1a\n\x12railCurrentSensor3\x18\x41 \x01(\x05\x12\x1a\n\x12railCurrentSensor4\x18\x42 \x01(\x05\x12\x1a\n\x12railCurrentSensor5\x18\x43 \x01(\x05\x12\x1a\n\x12railCurrentSensor6\x18\x44 \x01(\x05\x12\x1a\n\x12railCurrentSensor7\x18\x45 \x01(\x05\x12\x1a\n\x12railCurrentSensor8\x18\x46 \x01(\x05\x12\x17\n\x0frailCurrentFlag\x18I \x01(\x05\x12\x13\n\x0bmotorTorque\x18J \x01(\r\x12\x16\n\x0e\x66lightDistance\x18K \x01(\r\x12\x15\n\rmaxFlightTime\x18L \x01(\r\x12\x16\n\x0eupdateMessages\x18M \x03(\t\"\xab\x01\n\rFcToBrakeNode\x12\x11\n\tpacketNum\x18\x01 \x01(\x05\x12#\n\tnodeState\x18\x02 \x01(\x0e\x32\x10.BrakeNodeStates\x12\x17\n\x0fsolenoid1Config\x18\x03 \x01(\x08\x12\x17\n\x0fsolenoid2Config\x18\x04 \x01(\x08\x12\x17\n\x0fsolenoid3Config\x18\x05 \x01(\x08\x12\x17\n\x0fsolenoid4Config\x18\x06 \x01(\x08\"i\n\x0c\x46\x63ToLvdcNode\x12\x11\n\tpacketNum\x18\x01 \x01(\x05\x12\x1c\n\x08podState\x18\x02 \x01(\x0e\x32\n.PodStates\x12(\n\x0fmanualNodeState\x18\x03 \x01(\x0e\x32\x0f.LvdcNodeStates\"\xe6\x01\n\x0b\x44tsNodeToFc\x12\x11\n\tpacketNum\x18\x01 \x02(\x05\x12(\n\x0e\x62rakeNodeState\x18\x02 \x02(\x0e\x32\x10.BrakeNodeStates\x12\x1a\n\x12\x62rakeSolenoidState\x18\x03 \x02(\x08\x12\x19\n\x11ventSolenoidState\x18\x04 \x02(\x08\x12\x18\n\x10rotorTemperature\x18\x05 \x02(\x02\x12\x1c\n\x14pneumaticTemperature\x18\x06 \x02(\x02\x12\x14\n\x0ctankPressure\x18\x07 \x02(\x02\x12\x15\n\rbrakePressure\x18\x08 \x02(\x02\"|\n\x11\x45nclosureNodeToFc\x12\x11\n\tpacketNum\x18\x01 \x02(\x05\x12\x19\n\x11\x65nclosurePressure\x18\x02 \x02(\x02\x12\x1c\n\x14\x65nclosureTemperature\x18\x03 \x02(\x02\x12\x1b\n\x13\x63oolantLinePressure\x18\x04 \x02(\x02\"\xb8\x03\n\x0cLvdcNodeToFc\x12\x11\n\tpacketNum\x18\x01 \x02(\x05\x12\x1e\n\x05state\x18\x02 \x02(\x0e\x32\x0f.LvdcNodeStates\x12\x1c\n\x14highPowerPackVoltage\x18\x03 \x02(\x02\x12\x1b\n\x13lowPowerPackVoltage\x18\x04 \x02(\x02\x12\x1c\n\x14highPowerPackCurrent\x18\x05 \x02(\x02\x12\x1b\n\x13lowPowerPackCurrent\x18\x06 \x02(\x02\x12\x18\n\x10lowPower5Voltage\x18\x07 \x02(\x02\x12\x19\n\x11lowPower12Voltage\x18\x08 \x02(\x02\x12\x1a\n\x12highPower12Voltage\x18\t \x02(\x02\x12\x19\n\x11lowPower24Voltage\x18\n \x02(\x02\x12\x18\n\x10lowPower5Current\x18\x0b \x02(\x02\x12\x19\n\x11lowPower12Current\x18\x0c \x02(\x02\x12\x13\n\x0bnodeCurrent\x18\r \x02(\x02\x12\x17\n\x0finverterCurrent\x18\x0e \x02(\x02\x12\x17\n\x0f\x63ooling1Current\x18\x0f \x02(\x02\x12\x17\n\x0f\x63ooling2Current\x18\x10 \x02(\x02\"\xbd\x02\n\rBrakeNodeToFc\x12\x11\n\tpacketNum\x18\x01 \x02(\x05\x12\x1f\n\x05state\x18\x02 \x02(\x0e\x32\x10.BrakeNodeStates\x12\x11\n\tsolenoid1\x18\x03 \x02(\x08\x12\x11\n\tsolenoid2\x18\x04 \x02(\x08\x12\x11\n\tsolenoid3\x18\x05 \x02(\x08\x12\x11\n\tsolenoid4\x18\x06 \x02(\x08\x12\x14\n\x0chighPressure\x18\x07 \x02(\x02\x12\x14\n\x0clowPressure1\x18\x08 \x02(\x02\x12\x14\n\x0clowPressure2\x18\t \x02(\x02\x12\x14\n\x0clowPressure3\x18\n \x02(\x02\x12\x19\n\x11lowPressureCommon\x18\x0b \x02(\x02\x12\x1c\n\x14pneumaticTemperature\x18\x0c \x02(\x02\x12\x1b\n\x13\x63oolantTankPressure\x18\r \x02(\x02\"\x9f\x02\n\x0c\x46lightConfig\x12\x18\n\x10retrievalTimeout\x18\x01 \x01(\r\x12\x1e\n\x10pdsTelemetryPort\x18\x02 \x01(\x05:\x04\x37\x30\x30\x30\x12\x19\n\x0b\x63ommandPort\x18\x03 \x01(\x05:\x04\x36\x30\x30\x30\x12\x1f\n\x10heartbeatTimeout\x18\x04 \x01(\x05:\x05\x31\x30\x30\x30\x30\x12\x11\n\tpodDriver\x18\x05 \x01(\t\x12&\n\x13\x63ontrolLaptopIpAddr\x18\x06 \x01(\t:\t127.0.0.1\x12\x1b\n\rbrakeNodePort\x18\x07 \x01(\x04:\x04\x35\x35\x35\x35\x12\x1e\n\x10\x62rakeNodeTimeout\x18\x08 \x01(\x04:\x04\x34\x30\x30\x30\x12!\n\x13\x62rakeNodeServerPort\x18\t \x01(\x04:\x04\x35\x35\x35\x30\"/\n\x0f\x44\x65\x66\x61ultFcToNode\x12\x1c\n\x08podState\x18\x01 \x01(\x0e\x32\n.PodStates*u\n\x0f\x42rakeNodeStates\x12\x0e\n\nbnsBooting\x10\x00\x12\x0e\n\nbnsStandby\x10\x01\x12\r\n\tbnsFlight\x10\x02\x12\x0e\n\nbnsBraking\x10\x03\x12\x16\n\x12\x62nsSolenoidControl\x10\x04\x12\x0b\n\x07\x62nsNone\x10\x05*\xa4\x01\n\tPodStates\x12\r\n\tpsBooting\x10\x00\x12\r\n\tpsStandby\x10\x01\x12\x0c\n\x08psArming\x10\x02\x12\x0b\n\x07psArmed\x10\x03\x12\x0f\n\x0bpsPreFlight\x10\x04\x12\x12\n\x0epsAcceleration\x10\x05\x12\x0e\n\npsCoasting\x10\x06\x12\r\n\tpsBraking\x10\x07\x12\x0e\n\npsShutdown\x10\x08\x12\n\n\x06psNone\x10\t*C\n\x0bMotorStates\x12\t\n\x05msOff\x10\x00\x12\x0e\n\nmsCharging\x10\x01\x12\n\n\x06msIdle\x10\x02\x12\r\n\tmsEngaged\x10\x03*q\n\x17\x43ontrolsInterfaceStates\x12\r\n\tciStandby\x10\x00\x12\t\n\x05\x63iArm\x10\x01\x12\x0c\n\x08\x63iFlight\x10\x02\x12\x13\n\x0f\x63iEmergencyStop\x10\x03\x12\n\n\x06\x63iNone\x10\x04\x12\r\n\tciRestart\x10\x05*-\n\x0eInverterStates\x12\n\n\x06isNone\x10\x00\x12\x0f\n\x0bisConnected\x10\x01*)\n\x17\x42\x61tteryManagementStates\x12\x0e\n\nbmsNominal\x10\x00*P\n\x0eLvdcNodeStates\x12\x0f\n\x0blvdcBooting\x10\x00\x12\x0f\n\x0blvdcStandby\x10\x01\x12\x0e\n\nlvdcFlight\x10\x02\x12\x0c\n\x08lvdcNone\x10\x03')
 )
 
 _BRAKENODESTATES = _descriptor.EnumDescriptor(
@@ -57,8 +57,8 @@ _BRAKENODESTATES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=4249,
-  serialized_end=4366,
+  serialized_start=4285,
+  serialized_end=4402,
 )
 _sym_db.RegisterEnumDescriptor(_BRAKENODESTATES)
 
@@ -112,8 +112,8 @@ _PODSTATES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=4369,
-  serialized_end=4533,
+  serialized_start=4405,
+  serialized_end=4569,
 )
 _sym_db.RegisterEnumDescriptor(_PODSTATES)
 
@@ -143,8 +143,8 @@ _MOTORSTATES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=4535,
-  serialized_end=4602,
+  serialized_start=4571,
+  serialized_end=4638,
 )
 _sym_db.RegisterEnumDescriptor(_MOTORSTATES)
 
@@ -182,8 +182,8 @@ _CONTROLSINTERFACESTATES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=4604,
-  serialized_end=4717,
+  serialized_start=4640,
+  serialized_end=4753,
 )
 _sym_db.RegisterEnumDescriptor(_CONTROLSINTERFACESTATES)
 
@@ -205,8 +205,8 @@ _INVERTERSTATES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=4719,
-  serialized_end=4764,
+  serialized_start=4755,
+  serialized_end=4800,
 )
 _sym_db.RegisterEnumDescriptor(_INVERTERSTATES)
 
@@ -224,8 +224,8 @@ _BATTERYMANAGEMENTSTATES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=4766,
-  serialized_end=4807,
+  serialized_start=4802,
+  serialized_end=4843,
 )
 _sym_db.RegisterEnumDescriptor(_BATTERYMANAGEMENTSTATES)
 
@@ -255,8 +255,8 @@ _LVDCNODESTATES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=4809,
-  serialized_end=4889,
+  serialized_start=4845,
+  serialized_end=4925,
 )
 _sym_db.RegisterEnumDescriptor(_LVDCNODESTATES)
 
@@ -1198,99 +1198,113 @@ _LVDCNODETOFC = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='highPowerPackVoltage', full_name='LvdcNodeToFc.highPowerPackVoltage', index=0,
-      number=1, type=2, cpp_type=6, label=2,
-      has_default_value=False, default_value=float(0),
+      name='packetNum', full_name='LvdcNodeToFc.packetNum', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='lowPowerPackVoltage', full_name='LvdcNodeToFc.lowPowerPackVoltage', index=1,
-      number=2, type=2, cpp_type=6, label=2,
-      has_default_value=False, default_value=float(0),
+      name='state', full_name='LvdcNodeToFc.state', index=1,
+      number=2, type=14, cpp_type=8, label=2,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='highPowerPackCurrent', full_name='LvdcNodeToFc.highPowerPackCurrent', index=2,
+      name='highPowerPackVoltage', full_name='LvdcNodeToFc.highPowerPackVoltage', index=2,
       number=3, type=2, cpp_type=6, label=2,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='lowPowerPackCurrent', full_name='LvdcNodeToFc.lowPowerPackCurrent', index=3,
+      name='lowPowerPackVoltage', full_name='LvdcNodeToFc.lowPowerPackVoltage', index=3,
       number=4, type=2, cpp_type=6, label=2,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='rail5Voltage', full_name='LvdcNodeToFc.rail5Voltage', index=4,
+      name='highPowerPackCurrent', full_name='LvdcNodeToFc.highPowerPackCurrent', index=4,
       number=5, type=2, cpp_type=6, label=2,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='rail12LowPowerVoltage', full_name='LvdcNodeToFc.rail12LowPowerVoltage', index=5,
+      name='lowPowerPackCurrent', full_name='LvdcNodeToFc.lowPowerPackCurrent', index=5,
       number=6, type=2, cpp_type=6, label=2,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='rail12HighPowerVoltage', full_name='LvdcNodeToFc.rail12HighPowerVoltage', index=6,
+      name='lowPower5Voltage', full_name='LvdcNodeToFc.lowPower5Voltage', index=6,
       number=7, type=2, cpp_type=6, label=2,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='rail24Voltage', full_name='LvdcNodeToFc.rail24Voltage', index=7,
+      name='lowPower12Voltage', full_name='LvdcNodeToFc.lowPower12Voltage', index=7,
       number=8, type=2, cpp_type=6, label=2,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='rail5Current', full_name='LvdcNodeToFc.rail5Current', index=8,
+      name='highPower12Voltage', full_name='LvdcNodeToFc.highPower12Voltage', index=8,
       number=9, type=2, cpp_type=6, label=2,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='rail12LowPowerCurrent', full_name='LvdcNodeToFc.rail12LowPowerCurrent', index=9,
+      name='lowPower24Voltage', full_name='LvdcNodeToFc.lowPower24Voltage', index=9,
       number=10, type=2, cpp_type=6, label=2,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='rail24Current', full_name='LvdcNodeToFc.rail24Current', index=10,
+      name='lowPower5Current', full_name='LvdcNodeToFc.lowPower5Current', index=10,
       number=11, type=2, cpp_type=6, label=2,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='railInverterCurrent', full_name='LvdcNodeToFc.railInverterCurrent', index=11,
+      name='lowPower12Current', full_name='LvdcNodeToFc.lowPower12Current', index=11,
       number=12, type=2, cpp_type=6, label=2,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='railCooling1Current', full_name='LvdcNodeToFc.railCooling1Current', index=12,
+      name='nodeCurrent', full_name='LvdcNodeToFc.nodeCurrent', index=12,
       number=13, type=2, cpp_type=6, label=2,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='railCooling2Current', full_name='LvdcNodeToFc.railCooling2Current', index=13,
+      name='inverterCurrent', full_name='LvdcNodeToFc.inverterCurrent', index=13,
       number=14, type=2, cpp_type=6, label=2,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='cooling1Current', full_name='LvdcNodeToFc.cooling1Current', index=14,
+      number=15, type=2, cpp_type=6, label=2,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='cooling2Current', full_name='LvdcNodeToFc.cooling2Current', index=15,
+      number=16, type=2, cpp_type=6, label=2,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -1308,7 +1322,7 @@ _LVDCNODETOFC = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=3184,
-  serialized_end=3587,
+  serialized_end=3624,
 )
 
 
@@ -1422,8 +1436,8 @@ _BRAKENODETOFC = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3590,
-  serialized_end=3907,
+  serialized_start=3627,
+  serialized_end=3944,
 )
 
 
@@ -1493,7 +1507,7 @@ _FLIGHTCONFIG = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='brakeNodeServerPort', full_name='FlightConfig.brakeNodeServerPort', index=8,
       number=9, type=4, cpp_type=4, label=1,
-      has_default_value=True, default_value=56641,
+      has_default_value=True, default_value=5550,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -1509,8 +1523,8 @@ _FLIGHTCONFIG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3910,
-  serialized_end=4198,
+  serialized_start=3947,
+  serialized_end=4234,
 )
 
 
@@ -1540,8 +1554,8 @@ _DEFAULTFCTONODE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4200,
-  serialized_end=4247,
+  serialized_start=4236,
+  serialized_end=4283,
 )
 
 _PODCOMMAND.fields_by_name['controlsInterfaceState'].enum_type = _CONTROLSINTERFACESTATES
@@ -1561,6 +1575,7 @@ _FCTOBRAKENODE.fields_by_name['nodeState'].enum_type = _BRAKENODESTATES
 _FCTOLVDCNODE.fields_by_name['podState'].enum_type = _PODSTATES
 _FCTOLVDCNODE.fields_by_name['manualNodeState'].enum_type = _LVDCNODESTATES
 _DTSNODETOFC.fields_by_name['brakeNodeState'].enum_type = _BRAKENODESTATES
+_LVDCNODETOFC.fields_by_name['state'].enum_type = _LVDCNODESTATES
 _BRAKENODETOFC.fields_by_name['state'].enum_type = _BRAKENODESTATES
 _DEFAULTFCTONODE.fields_by_name['podState'].enum_type = _PODSTATES
 DESCRIPTOR.message_types_by_name['PodCommand'] = _PODCOMMAND

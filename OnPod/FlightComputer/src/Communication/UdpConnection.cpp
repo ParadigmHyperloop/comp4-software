@@ -64,7 +64,7 @@ void UdpConnection::getUpdate() {
     bzero(&buffer, sizeof buffer);
     ssize_t receivedPacketSize = recvfrom(this->_inboundSocket, buffer, 200, 0, nullptr, nullptr);
     if (receivedPacketSize != -1) {
-        LOG(INFO) << receivedPacketSize << " Bytes received on " << this->_connectionName << buffer;
+        //LOG(INFO) << receivedPacketSize << " Bytes received on " << this->_connectionName << buffer;
         try {
             opStatus = this->parseUpdate(buffer, (int32_t) receivedPacketSize);
         }
@@ -182,7 +182,7 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_motorspeed(pod.telemetry->motorSpeed);
 
     protoMessage->set_lvdcnodestate(lvdcNone);
-    protoMessage->set_brakenodestate(bnsNone);
+    protoMessage->set_brakenodestate(pod.telemetry->receivedBrakeNodeState);
 
 
     // Add Updates todo probably put this in a function with a pointer to the proto as an argument
@@ -210,7 +210,7 @@ std::unique_ptr<google::protobuf::Message> BrakeNodeConnection::getProtoUpdateMe
     protoMessage->set_packetnum(this->getNewPacketId());
     BrakeNodeStates manualState = this->pod.telemetry->manualBrakeNodeState;
     if(manualState == bnsNone){
-        protoMessage->set_nodestate(this->pod.telemetry->brakeNodeState);
+        protoMessage->set_nodestate(this->pod.telemetry->commandedBrakeNodeState);
         return protoMessage;
     }
     if(manualState == bnsSolenoidControl){

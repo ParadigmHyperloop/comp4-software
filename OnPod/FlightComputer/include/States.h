@@ -54,8 +54,6 @@ protected:
     std::string _transitionReason = "";
     PodStates _stateIdentifier = psBooting;
     PodStates _nextStateIdentifier = psBooting;
-    BrakeNodeStates _brakeNodeState = bnsBooting;
-    LvdcNodeStates  _lvdcNodeState = lvdcBooting;
     TelemetryManager* pod;
 };
 

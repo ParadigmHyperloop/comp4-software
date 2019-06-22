@@ -43,11 +43,11 @@ enableBrakeNodeStates.click(function () {
 disableBrakeNodeStates.click(function () {
     manualBrakeNodeStates.attr('disabled','disabled');
     let command = {};
-    command['target'] = 'brake node';
+    command['target'] = 'brake_node';
     command['state'] = 'bnsNone';
-    $("#solenoid-controls").removeClass("in").css("height","")
+    socket.emit('manual_state_command', JSON.stringify(command));
 
-    socket.emit('manual_state_command', JSON.stringify(command))
+    $("#solenoid-controls").removeClass("in").css("height","");
 });
 
 manualBrakeNodeStates.click(function () {
@@ -92,7 +92,10 @@ enableLvdcNodeStates.click(function () {
 
 disableLvdcNodeStates.click(function () {
     manualLvdcNodeStates.attr('disabled','disabled');
-    //todo send command to set manual brake node field to none
+    let command = {};
+    command['target'] = 'lvdc_node';
+    command['configuration'] = 'lvdcNone';
+    socket.emit('manual_configuration_command', JSON.stringify(command))
 });
 
 

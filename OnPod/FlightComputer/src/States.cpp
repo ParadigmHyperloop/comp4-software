@@ -40,11 +40,8 @@ int32_t PodState::checkCommunicationFlags(){
 }
 
 int32_t PodState::checkNodeStates(){
-    if(this->_brakeNodeState != this->pod->telemetry->brakeNodeState){
+    if(this->pod->telemetry->commandedBrakeNodeState != this->pod->telemetry->receivedBrakeNodeState){
         return BRAKE_NODE_INDEX;
-    }
-    if(this->_lvdcNodeState != this->pod->telemetry->lvdcNodeState){
-        return LVDC_NODE_INDEX;
     }
     return FLAGS_GOOD;
 }
@@ -100,14 +97,6 @@ bool PodState::isTransitioning(){
     return this->_transitioning;
 }
 
-LvdcNodeStates PodState::getLvdcNodeState(){
-    return _lvdcNodeState;
-}
-
-BrakeNodeStates PodState::getBrakeNodeState(){
-    return _brakeNodeState;
-}
-
 const std::string PodState::getTransitionReason(){
     return _transitionReason;
 }
@@ -139,8 +128,8 @@ std::unique_ptr<PodState> PodState::createState(PodStates newState, TelemetryMan
 
 Booting::Booting(TelemetryManager* pod): PodState(pod) {
     _stateIdentifier = psBooting;
-    _brakeNodeState = bnsBooting;
-    _lvdcNodeState = lvdcBooting;
+    this->pod->telemetry->commandedBrakeNodeState = bnsBooting;
+    //_lvdcNodeState = lvdcBooting;
 }
 
 Booting::~Booting() = default;
@@ -157,8 +146,8 @@ bool Booting::testTransitions(){
 
 Standby::Standby(TelemetryManager * pod): PodState(pod) {
     _stateIdentifier = psStandby;
-    _brakeNodeState = bnsStandby;
-    _lvdcNodeState = lvdcStandby;
+    this->pod->telemetry->commandedBrakeNodeState = bnsStandby;
+    //_lvdcNodeState = lvdcStandby;
     this->pod->telemetry->controlsInterfaceState = ciNone; // Guard against auto transition
 }
 
@@ -188,8 +177,8 @@ bool Standby::testTransitions() {
 
 Arming::Arming(TelemetryManager * pod ): PodState(pod) {
     _stateIdentifier = psArming;
-    _brakeNodeState = bnsStandby;
-    _lvdcNodeState = lvdcFlight;
+    this->pod->telemetry->commandedBrakeNodeState = bnsStandby;
+    //_lvdcNodeState = lvdcFlight;
 }
 
 Arming::~Arming() = default;
@@ -231,8 +220,8 @@ bool Arming::testTransitions() {
 
 Armed::Armed(TelemetryManager * pod) : PodState(pod) {
     _stateIdentifier = psArmed;
-    _brakeNodeState = bnsStandby;
-    _lvdcNodeState = lvdcFlight;
+    this->pod->telemetry->commandedBrakeNodeState = bnsStandby;
+    //_lvdcNodeState = lvdcFlight;
 }
 
 Armed::~Armed() {
@@ -268,8 +257,8 @@ bool Armed::testTransitions() {
  */
 PreFlight::PreFlight(TelemetryManager* pod) : PodState(pod) {
     _stateIdentifier = psPreFlight;
-    _brakeNodeState = bnsFlight;
-    _lvdcNodeState = lvdcFlight;
+    this->pod->telemetry->commandedBrakeNodeState = bnsFlight;
+    //_lvdcNodeState = lvdcFlight;
 }
 
 PreFlight::~PreFlight() = default;
@@ -303,8 +292,8 @@ bool PreFlight::testTransitions() {
 
 Acceleration::Acceleration(TelemetryManager * pod) : PodState(pod) {
     _stateIdentifier = psAcceleration;
-    _brakeNodeState = bnsFlight;
-    _lvdcNodeState = lvdcFlight;
+    this->pod->telemetry->commandedBrakeNodeState = bnsFlight;
+    //_lvdcNodeState = lvdcFlight;
     this->pod->telemetry->commandedTorque = this->pod->telemetry->motorTorque;
     LOG(INFO)<<this->pod->telemetry->commandedTorque;
 }
@@ -346,8 +335,8 @@ bool Acceleration::testTransitions() {
 
 Braking::Braking(TelemetryManager* pod) : PodState(pod) {
     _stateIdentifier = psBraking;
-    _brakeNodeState = bnsBraking;
-    _lvdcNodeState = lvdcFlight;
+    this->pod->telemetry->commandedBrakeNodeState = bnsBraking;
+    //_lvdcNodeState = lvdcFlight;
 }
 
 Braking::~Braking() = default;

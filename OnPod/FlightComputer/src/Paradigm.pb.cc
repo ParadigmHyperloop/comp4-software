@@ -467,20 +467,22 @@ const ::google::protobuf::uint32 TableStruct_Paradigm_2eproto::offsets[] PROTOBU
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, packetnum_),
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, state_),
   PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, highpowerpackvoltage_),
   PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, lowpowerpackvoltage_),
   PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, highpowerpackcurrent_),
   PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, lowpowerpackcurrent_),
-  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, rail5voltage_),
-  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, rail12lowpowervoltage_),
-  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, rail12highpowervoltage_),
-  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, rail24voltage_),
-  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, rail5current_),
-  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, rail12lowpowercurrent_),
-  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, rail24current_),
-  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, railinvertercurrent_),
-  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, railcooling1current_),
-  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, railcooling2current_),
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, lowpower5voltage_),
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, lowpower12voltage_),
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, highpower12voltage_),
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, lowpower24voltage_),
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, lowpower5current_),
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, lowpower12current_),
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, nodecurrent_),
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, invertercurrent_),
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, cooling1current_),
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, cooling2current_),
   0,
   1,
   2,
@@ -495,6 +497,8 @@ const ::google::protobuf::uint32 TableStruct_Paradigm_2eproto::offsets[] PROTOBU
   11,
   12,
   13,
+  14,
+  15,
   PROTOBUF_FIELD_OFFSET(::BrakeNodeToFc, _has_bits_),
   PROTOBUF_FIELD_OFFSET(::BrakeNodeToFc, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -564,10 +568,10 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] PROTOBUF_SE
   { 199, 207, sizeof(::FcToLvdcNode)},
   { 210, 223, sizeof(::DtsNodeToFc)},
   { 231, 240, sizeof(::EnclosureNodeToFc)},
-  { 244, 263, sizeof(::LvdcNodeToFc)},
-  { 277, 295, sizeof(::BrakeNodeToFc)},
-  { 308, 322, sizeof(::FlightConfig)},
-  { 331, 337, sizeof(::DefaultFcToNode)},
+  { 244, 265, sizeof(::LvdcNodeToFc)},
+  { 281, 299, sizeof(::BrakeNodeToFc)},
+  { 312, 326, sizeof(::FlightConfig)},
+  { 335, 341, sizeof(::DefaultFcToNode)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -669,55 +673,56 @@ const char descriptor_table_protodef_Paradigm_2eproto[] =
   "ePressure\030\010 \002(\002\"|\n\021EnclosureNodeToFc\022\021\n\t"
   "packetNum\030\001 \002(\005\022\031\n\021enclosurePressure\030\002 \002"
   "(\002\022\034\n\024enclosureTemperature\030\003 \002(\002\022\033\n\023cool"
-  "antLinePressure\030\004 \002(\002\"\223\003\n\014LvdcNodeToFc\022\034"
-  "\n\024highPowerPackVoltage\030\001 \002(\002\022\033\n\023lowPower"
-  "PackVoltage\030\002 \002(\002\022\034\n\024highPowerPackCurren"
-  "t\030\003 \002(\002\022\033\n\023lowPowerPackCurrent\030\004 \002(\002\022\024\n\014"
-  "rail5Voltage\030\005 \002(\002\022\035\n\025rail12LowPowerVolt"
-  "age\030\006 \002(\002\022\036\n\026rail12HighPowerVoltage\030\007 \002("
-  "\002\022\025\n\rrail24Voltage\030\010 \002(\002\022\024\n\014rail5Current"
-  "\030\t \002(\002\022\035\n\025rail12LowPowerCurrent\030\n \002(\002\022\025\n"
-  "\rrail24Current\030\013 \002(\002\022\033\n\023railInverterCurr"
-  "ent\030\014 \002(\002\022\033\n\023railCooling1Current\030\r \002(\002\022\033"
-  "\n\023railCooling2Current\030\016 \002(\002\"\275\002\n\rBrakeNod"
-  "eToFc\022\021\n\tpacketNum\030\001 \002(\005\022\037\n\005state\030\002 \002(\0162"
-  "\020.BrakeNodeStates\022\021\n\tsolenoid1\030\003 \002(\010\022\021\n\t"
-  "solenoid2\030\004 \002(\010\022\021\n\tsolenoid3\030\005 \002(\010\022\021\n\tso"
-  "lenoid4\030\006 \002(\010\022\024\n\014highPressure\030\007 \002(\002\022\024\n\014l"
-  "owPressure1\030\010 \002(\002\022\024\n\014lowPressure2\030\t \002(\002\022"
-  "\024\n\014lowPressure3\030\n \002(\002\022\031\n\021lowPressureComm"
-  "on\030\013 \002(\002\022\034\n\024pneumaticTemperature\030\014 \002(\002\022\033"
-  "\n\023coolantTankPressure\030\r \002(\002\"\240\002\n\014FlightCo"
-  "nfig\022\030\n\020retrievalTimeout\030\001 \001(\r\022\036\n\020pdsTel"
-  "emetryPort\030\002 \001(\005:\0047000\022\031\n\013commandPort\030\003 "
-  "\001(\005:\0046000\022\037\n\020heartbeatTimeout\030\004 \001(\005:\005100"
-  "00\022\021\n\tpodDriver\030\005 \001(\t\022&\n\023controlLaptopIp"
-  "Addr\030\006 \001(\t:\t127.0.0.1\022\033\n\rbrakeNodePort\030\007"
-  " \001(\004:\0045555\022\036\n\020brakeNodeTimeout\030\010 \001(\004:\00440"
-  "00\022\"\n\023brakeNodeServerPort\030\t \001(\004:\00556641\"/"
-  "\n\017DefaultFcToNode\022\034\n\010podState\030\001 \001(\0162\n.Po"
-  "dStates*u\n\017BrakeNodeStates\022\016\n\nbnsBooting"
-  "\020\000\022\016\n\nbnsStandby\020\001\022\r\n\tbnsFlight\020\002\022\016\n\nbns"
-  "Braking\020\003\022\026\n\022bnsSolenoidControl\020\004\022\013\n\007bns"
-  "None\020\005*\244\001\n\tPodStates\022\r\n\tpsBooting\020\000\022\r\n\tp"
-  "sStandby\020\001\022\014\n\010psArming\020\002\022\013\n\007psArmed\020\003\022\017\n"
-  "\013psPreFlight\020\004\022\022\n\016psAcceleration\020\005\022\016\n\nps"
-  "Coasting\020\006\022\r\n\tpsBraking\020\007\022\016\n\npsShutdown\020"
-  "\010\022\n\n\006psNone\020\t*C\n\013MotorStates\022\t\n\005msOff\020\000\022"
-  "\016\n\nmsCharging\020\001\022\n\n\006msIdle\020\002\022\r\n\tmsEngaged"
-  "\020\003*q\n\027ControlsInterfaceStates\022\r\n\tciStand"
-  "by\020\000\022\t\n\005ciArm\020\001\022\014\n\010ciFlight\020\002\022\023\n\017ciEmerg"
-  "encyStop\020\003\022\n\n\006ciNone\020\004\022\r\n\tciRestart\020\005*-\n"
-  "\016InverterStates\022\n\n\006isNone\020\000\022\017\n\013isConnect"
-  "ed\020\001*)\n\027BatteryManagementStates\022\016\n\nbmsNo"
-  "minal\020\000*P\n\016LvdcNodeStates\022\017\n\013lvdcBooting"
-  "\020\000\022\017\n\013lvdcStandby\020\001\022\016\n\nlvdcFlight\020\002\022\014\n\010l"
-  "vdcNone\020\003"
+  "antLinePressure\030\004 \002(\002\"\270\003\n\014LvdcNodeToFc\022\021"
+  "\n\tpacketNum\030\001 \002(\005\022\036\n\005state\030\002 \002(\0162\017.LvdcN"
+  "odeStates\022\034\n\024highPowerPackVoltage\030\003 \002(\002\022"
+  "\033\n\023lowPowerPackVoltage\030\004 \002(\002\022\034\n\024highPowe"
+  "rPackCurrent\030\005 \002(\002\022\033\n\023lowPowerPackCurren"
+  "t\030\006 \002(\002\022\030\n\020lowPower5Voltage\030\007 \002(\002\022\031\n\021low"
+  "Power12Voltage\030\010 \002(\002\022\032\n\022highPower12Volta"
+  "ge\030\t \002(\002\022\031\n\021lowPower24Voltage\030\n \002(\002\022\030\n\020l"
+  "owPower5Current\030\013 \002(\002\022\031\n\021lowPower12Curre"
+  "nt\030\014 \002(\002\022\023\n\013nodeCurrent\030\r \002(\002\022\027\n\017inverte"
+  "rCurrent\030\016 \002(\002\022\027\n\017cooling1Current\030\017 \002(\002\022"
+  "\027\n\017cooling2Current\030\020 \002(\002\"\275\002\n\rBrakeNodeTo"
+  "Fc\022\021\n\tpacketNum\030\001 \002(\005\022\037\n\005state\030\002 \002(\0162\020.B"
+  "rakeNodeStates\022\021\n\tsolenoid1\030\003 \002(\010\022\021\n\tsol"
+  "enoid2\030\004 \002(\010\022\021\n\tsolenoid3\030\005 \002(\010\022\021\n\tsolen"
+  "oid4\030\006 \002(\010\022\024\n\014highPressure\030\007 \002(\002\022\024\n\014lowP"
+  "ressure1\030\010 \002(\002\022\024\n\014lowPressure2\030\t \002(\002\022\024\n\014"
+  "lowPressure3\030\n \002(\002\022\031\n\021lowPressureCommon\030"
+  "\013 \002(\002\022\034\n\024pneumaticTemperature\030\014 \002(\002\022\033\n\023c"
+  "oolantTankPressure\030\r \002(\002\"\237\002\n\014FlightConfi"
+  "g\022\030\n\020retrievalTimeout\030\001 \001(\r\022\036\n\020pdsTeleme"
+  "tryPort\030\002 \001(\005:\0047000\022\031\n\013commandPort\030\003 \001(\005"
+  ":\0046000\022\037\n\020heartbeatTimeout\030\004 \001(\005:\00510000\022"
+  "\021\n\tpodDriver\030\005 \001(\t\022&\n\023controlLaptopIpAdd"
+  "r\030\006 \001(\t:\t127.0.0.1\022\033\n\rbrakeNodePort\030\007 \001("
+  "\004:\0045555\022\036\n\020brakeNodeTimeout\030\010 \001(\004:\0044000\022"
+  "!\n\023brakeNodeServerPort\030\t \001(\004:\0045550\"/\n\017De"
+  "faultFcToNode\022\034\n\010podState\030\001 \001(\0162\n.PodSta"
+  "tes*u\n\017BrakeNodeStates\022\016\n\nbnsBooting\020\000\022\016"
+  "\n\nbnsStandby\020\001\022\r\n\tbnsFlight\020\002\022\016\n\nbnsBrak"
+  "ing\020\003\022\026\n\022bnsSolenoidControl\020\004\022\013\n\007bnsNone"
+  "\020\005*\244\001\n\tPodStates\022\r\n\tpsBooting\020\000\022\r\n\tpsSta"
+  "ndby\020\001\022\014\n\010psArming\020\002\022\013\n\007psArmed\020\003\022\017\n\013psP"
+  "reFlight\020\004\022\022\n\016psAcceleration\020\005\022\016\n\npsCoas"
+  "ting\020\006\022\r\n\tpsBraking\020\007\022\016\n\npsShutdown\020\010\022\n\n"
+  "\006psNone\020\t*C\n\013MotorStates\022\t\n\005msOff\020\000\022\016\n\nm"
+  "sCharging\020\001\022\n\n\006msIdle\020\002\022\r\n\tmsEngaged\020\003*q"
+  "\n\027ControlsInterfaceStates\022\r\n\tciStandby\020\000"
+  "\022\t\n\005ciArm\020\001\022\014\n\010ciFlight\020\002\022\023\n\017ciEmergency"
+  "Stop\020\003\022\n\n\006ciNone\020\004\022\r\n\tciRestart\020\005*-\n\016Inv"
+  "erterStates\022\n\n\006isNone\020\000\022\017\n\013isConnected\020\001"
+  "*)\n\027BatteryManagementStates\022\016\n\nbmsNomina"
+  "l\020\000*P\n\016LvdcNodeStates\022\017\n\013lvdcBooting\020\000\022\017"
+  "\n\013lvdcStandby\020\001\022\016\n\nlvdcFlight\020\002\022\014\n\010lvdcN"
+  "one\020\003"
   ;
 ::google::protobuf::internal::DescriptorTable descriptor_table_Paradigm_2eproto = {
   false, InitDefaults_Paradigm_2eproto, 
   descriptor_table_protodef_Paradigm_2eproto,
-  "Paradigm.proto", &assign_descriptors_table_Paradigm_2eproto, 4889,
+  "Paradigm.proto", &assign_descriptors_table_Paradigm_2eproto, 4925,
 };
 
 void AddDescriptors_Paradigm_2eproto() {
@@ -7513,65 +7518,73 @@ void LvdcNodeToFc::InitAsDefaultInstance() {
 }
 class LvdcNodeToFc::HasBitSetters {
  public:
-  static void set_has_highpowerpackvoltage(LvdcNodeToFc* msg) {
+  static void set_has_packetnum(LvdcNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00000001u;
   }
-  static void set_has_lowpowerpackvoltage(LvdcNodeToFc* msg) {
+  static void set_has_state(LvdcNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00000002u;
   }
-  static void set_has_highpowerpackcurrent(LvdcNodeToFc* msg) {
+  static void set_has_highpowerpackvoltage(LvdcNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00000004u;
   }
-  static void set_has_lowpowerpackcurrent(LvdcNodeToFc* msg) {
+  static void set_has_lowpowerpackvoltage(LvdcNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00000008u;
   }
-  static void set_has_rail5voltage(LvdcNodeToFc* msg) {
+  static void set_has_highpowerpackcurrent(LvdcNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00000010u;
   }
-  static void set_has_rail12lowpowervoltage(LvdcNodeToFc* msg) {
+  static void set_has_lowpowerpackcurrent(LvdcNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00000020u;
   }
-  static void set_has_rail12highpowervoltage(LvdcNodeToFc* msg) {
+  static void set_has_lowpower5voltage(LvdcNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00000040u;
   }
-  static void set_has_rail24voltage(LvdcNodeToFc* msg) {
+  static void set_has_lowpower12voltage(LvdcNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00000080u;
   }
-  static void set_has_rail5current(LvdcNodeToFc* msg) {
+  static void set_has_highpower12voltage(LvdcNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00000100u;
   }
-  static void set_has_rail12lowpowercurrent(LvdcNodeToFc* msg) {
+  static void set_has_lowpower24voltage(LvdcNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00000200u;
   }
-  static void set_has_rail24current(LvdcNodeToFc* msg) {
+  static void set_has_lowpower5current(LvdcNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00000400u;
   }
-  static void set_has_railinvertercurrent(LvdcNodeToFc* msg) {
+  static void set_has_lowpower12current(LvdcNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00000800u;
   }
-  static void set_has_railcooling1current(LvdcNodeToFc* msg) {
+  static void set_has_nodecurrent(LvdcNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00001000u;
   }
-  static void set_has_railcooling2current(LvdcNodeToFc* msg) {
+  static void set_has_invertercurrent(LvdcNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00002000u;
+  }
+  static void set_has_cooling1current(LvdcNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00004000u;
+  }
+  static void set_has_cooling2current(LvdcNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00008000u;
   }
 };
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int LvdcNodeToFc::kPacketNumFieldNumber;
+const int LvdcNodeToFc::kStateFieldNumber;
 const int LvdcNodeToFc::kHighPowerPackVoltageFieldNumber;
 const int LvdcNodeToFc::kLowPowerPackVoltageFieldNumber;
 const int LvdcNodeToFc::kHighPowerPackCurrentFieldNumber;
 const int LvdcNodeToFc::kLowPowerPackCurrentFieldNumber;
-const int LvdcNodeToFc::kRail5VoltageFieldNumber;
-const int LvdcNodeToFc::kRail12LowPowerVoltageFieldNumber;
-const int LvdcNodeToFc::kRail12HighPowerVoltageFieldNumber;
-const int LvdcNodeToFc::kRail24VoltageFieldNumber;
-const int LvdcNodeToFc::kRail5CurrentFieldNumber;
-const int LvdcNodeToFc::kRail12LowPowerCurrentFieldNumber;
-const int LvdcNodeToFc::kRail24CurrentFieldNumber;
-const int LvdcNodeToFc::kRailInverterCurrentFieldNumber;
-const int LvdcNodeToFc::kRailCooling1CurrentFieldNumber;
-const int LvdcNodeToFc::kRailCooling2CurrentFieldNumber;
+const int LvdcNodeToFc::kLowPower5VoltageFieldNumber;
+const int LvdcNodeToFc::kLowPower12VoltageFieldNumber;
+const int LvdcNodeToFc::kHighPower12VoltageFieldNumber;
+const int LvdcNodeToFc::kLowPower24VoltageFieldNumber;
+const int LvdcNodeToFc::kLowPower5CurrentFieldNumber;
+const int LvdcNodeToFc::kLowPower12CurrentFieldNumber;
+const int LvdcNodeToFc::kNodeCurrentFieldNumber;
+const int LvdcNodeToFc::kInverterCurrentFieldNumber;
+const int LvdcNodeToFc::kCooling1CurrentFieldNumber;
+const int LvdcNodeToFc::kCooling2CurrentFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 LvdcNodeToFc::LvdcNodeToFc()
@@ -7584,16 +7597,16 @@ LvdcNodeToFc::LvdcNodeToFc(const LvdcNodeToFc& from)
       _internal_metadata_(nullptr),
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::memcpy(&highpowerpackvoltage_, &from.highpowerpackvoltage_,
-    static_cast<size_t>(reinterpret_cast<char*>(&railcooling2current_) -
-    reinterpret_cast<char*>(&highpowerpackvoltage_)) + sizeof(railcooling2current_));
+  ::memcpy(&packetnum_, &from.packetnum_,
+    static_cast<size_t>(reinterpret_cast<char*>(&cooling2current_) -
+    reinterpret_cast<char*>(&packetnum_)) + sizeof(cooling2current_));
   // @@protoc_insertion_point(copy_constructor:LvdcNodeToFc)
 }
 
 void LvdcNodeToFc::SharedCtor() {
-  ::memset(&highpowerpackvoltage_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&railcooling2current_) -
-      reinterpret_cast<char*>(&highpowerpackvoltage_)) + sizeof(railcooling2current_));
+  ::memset(&packetnum_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&cooling2current_) -
+      reinterpret_cast<char*>(&packetnum_)) + sizeof(cooling2current_));
 }
 
 LvdcNodeToFc::~LvdcNodeToFc() {
@@ -7621,14 +7634,14 @@ void LvdcNodeToFc::Clear() {
 
   cached_has_bits = _has_bits_[0];
   if (cached_has_bits & 0x000000ffu) {
-    ::memset(&highpowerpackvoltage_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&rail24voltage_) -
-        reinterpret_cast<char*>(&highpowerpackvoltage_)) + sizeof(rail24voltage_));
+    ::memset(&packetnum_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&lowpower12voltage_) -
+        reinterpret_cast<char*>(&packetnum_)) + sizeof(lowpower12voltage_));
   }
-  if (cached_has_bits & 0x00003f00u) {
-    ::memset(&rail5current_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&railcooling2current_) -
-        reinterpret_cast<char*>(&rail5current_)) + sizeof(railcooling2current_));
+  if (cached_has_bits & 0x0000ff00u) {
+    ::memset(&highpower12voltage_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&cooling2current_) -
+        reinterpret_cast<char*>(&highpower12voltage_)) + sizeof(cooling2current_));
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -7647,101 +7660,120 @@ const char* LvdcNodeToFc::_InternalParse(const char* begin, const char* end, voi
     ptr = ::google::protobuf::io::Parse32(ptr, &tag);
     GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
     switch (tag >> 3) {
-      // required float highPowerPackVoltage = 1;
+      // required int32 packetNum = 1;
       case 1: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 13) goto handle_unusual;
+        if (static_cast<::google::protobuf::uint8>(tag) != 8) goto handle_unusual;
+        msg->set_packetnum(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // required .LvdcNodeStates state = 2;
+      case 2: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 16) goto handle_unusual;
+        ::google::protobuf::uint64 val = ::google::protobuf::internal::ReadVarint(&ptr);
+        if (!::LvdcNodeStates_IsValid(val)) {
+          ::google::protobuf::internal::WriteVarint(2, val, msg->mutable_unknown_fields());
+          break;
+        }
+        msg->set_state(static_cast<::LvdcNodeStates>(val));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // required float highPowerPackVoltage = 3;
+      case 3: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 29) goto handle_unusual;
         msg->set_highpowerpackvoltage(::google::protobuf::io::UnalignedLoad<float>(ptr));
         ptr += sizeof(float);
         break;
       }
-      // required float lowPowerPackVoltage = 2;
-      case 2: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 21) goto handle_unusual;
+      // required float lowPowerPackVoltage = 4;
+      case 4: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 37) goto handle_unusual;
         msg->set_lowpowerpackvoltage(::google::protobuf::io::UnalignedLoad<float>(ptr));
         ptr += sizeof(float);
         break;
       }
-      // required float highPowerPackCurrent = 3;
-      case 3: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 29) goto handle_unusual;
+      // required float highPowerPackCurrent = 5;
+      case 5: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 45) goto handle_unusual;
         msg->set_highpowerpackcurrent(::google::protobuf::io::UnalignedLoad<float>(ptr));
         ptr += sizeof(float);
         break;
       }
-      // required float lowPowerPackCurrent = 4;
-      case 4: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 37) goto handle_unusual;
+      // required float lowPowerPackCurrent = 6;
+      case 6: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 53) goto handle_unusual;
         msg->set_lowpowerpackcurrent(::google::protobuf::io::UnalignedLoad<float>(ptr));
         ptr += sizeof(float);
         break;
       }
-      // required float rail5Voltage = 5;
-      case 5: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 45) goto handle_unusual;
-        msg->set_rail5voltage(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
-      // required float rail12LowPowerVoltage = 6;
-      case 6: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 53) goto handle_unusual;
-        msg->set_rail12lowpowervoltage(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
-      // required float rail12HighPowerVoltage = 7;
+      // required float lowPower5Voltage = 7;
       case 7: {
         if (static_cast<::google::protobuf::uint8>(tag) != 61) goto handle_unusual;
-        msg->set_rail12highpowervoltage(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        msg->set_lowpower5voltage(::google::protobuf::io::UnalignedLoad<float>(ptr));
         ptr += sizeof(float);
         break;
       }
-      // required float rail24Voltage = 8;
+      // required float lowPower12Voltage = 8;
       case 8: {
         if (static_cast<::google::protobuf::uint8>(tag) != 69) goto handle_unusual;
-        msg->set_rail24voltage(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        msg->set_lowpower12voltage(::google::protobuf::io::UnalignedLoad<float>(ptr));
         ptr += sizeof(float);
         break;
       }
-      // required float rail5Current = 9;
+      // required float highPower12Voltage = 9;
       case 9: {
         if (static_cast<::google::protobuf::uint8>(tag) != 77) goto handle_unusual;
-        msg->set_rail5current(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        msg->set_highpower12voltage(::google::protobuf::io::UnalignedLoad<float>(ptr));
         ptr += sizeof(float);
         break;
       }
-      // required float rail12LowPowerCurrent = 10;
+      // required float lowPower24Voltage = 10;
       case 10: {
         if (static_cast<::google::protobuf::uint8>(tag) != 85) goto handle_unusual;
-        msg->set_rail12lowpowercurrent(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        msg->set_lowpower24voltage(::google::protobuf::io::UnalignedLoad<float>(ptr));
         ptr += sizeof(float);
         break;
       }
-      // required float rail24Current = 11;
+      // required float lowPower5Current = 11;
       case 11: {
         if (static_cast<::google::protobuf::uint8>(tag) != 93) goto handle_unusual;
-        msg->set_rail24current(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        msg->set_lowpower5current(::google::protobuf::io::UnalignedLoad<float>(ptr));
         ptr += sizeof(float);
         break;
       }
-      // required float railInverterCurrent = 12;
+      // required float lowPower12Current = 12;
       case 12: {
         if (static_cast<::google::protobuf::uint8>(tag) != 101) goto handle_unusual;
-        msg->set_railinvertercurrent(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        msg->set_lowpower12current(::google::protobuf::io::UnalignedLoad<float>(ptr));
         ptr += sizeof(float);
         break;
       }
-      // required float railCooling1Current = 13;
+      // required float nodeCurrent = 13;
       case 13: {
         if (static_cast<::google::protobuf::uint8>(tag) != 109) goto handle_unusual;
-        msg->set_railcooling1current(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        msg->set_nodecurrent(::google::protobuf::io::UnalignedLoad<float>(ptr));
         ptr += sizeof(float);
         break;
       }
-      // required float railCooling2Current = 14;
+      // required float inverterCurrent = 14;
       case 14: {
         if (static_cast<::google::protobuf::uint8>(tag) != 117) goto handle_unusual;
-        msg->set_railcooling2current(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        msg->set_invertercurrent(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      // required float cooling1Current = 15;
+      case 15: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 125) goto handle_unusual;
+        msg->set_cooling1current(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      // required float cooling2Current = 16;
+      case 16: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 133) goto handle_unusual;
+        msg->set_cooling2current(::google::protobuf::io::UnalignedLoad<float>(ptr));
         ptr += sizeof(float);
         break;
       }
@@ -7768,13 +7800,45 @@ bool LvdcNodeToFc::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:LvdcNodeToFc)
   for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required float highPowerPackVoltage = 1;
+      // required int32 packetNum = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (13 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (8 & 0xFF)) {
+          HasBitSetters::set_has_packetnum(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &packetnum_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required .LvdcNodeStates state = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (16 & 0xFF)) {
+          int value = 0;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::LvdcNodeStates_IsValid(value)) {
+            set_state(static_cast< ::LvdcNodeStates >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(
+                2, static_cast<::google::protobuf::uint64>(value));
+          }
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required float highPowerPackVoltage = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (29 & 0xFF)) {
           HasBitSetters::set_has_highpowerpackvoltage(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -7785,9 +7849,9 @@ bool LvdcNodeToFc::MergePartialFromCodedStream(
         break;
       }
 
-      // required float lowPowerPackVoltage = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (21 & 0xFF)) {
+      // required float lowPowerPackVoltage = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (37 & 0xFF)) {
           HasBitSetters::set_has_lowpowerpackvoltage(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -7798,9 +7862,9 @@ bool LvdcNodeToFc::MergePartialFromCodedStream(
         break;
       }
 
-      // required float highPowerPackCurrent = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (29 & 0xFF)) {
+      // required float highPowerPackCurrent = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (45 & 0xFF)) {
           HasBitSetters::set_has_highpowerpackcurrent(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -7811,9 +7875,9 @@ bool LvdcNodeToFc::MergePartialFromCodedStream(
         break;
       }
 
-      // required float lowPowerPackCurrent = 4;
-      case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (37 & 0xFF)) {
+      // required float lowPowerPackCurrent = 6;
+      case 6: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (53 & 0xFF)) {
           HasBitSetters::set_has_lowpowerpackcurrent(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -7824,130 +7888,130 @@ bool LvdcNodeToFc::MergePartialFromCodedStream(
         break;
       }
 
-      // required float rail5Voltage = 5;
-      case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (45 & 0xFF)) {
-          HasBitSetters::set_has_rail5voltage(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &rail5voltage_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required float rail12LowPowerVoltage = 6;
-      case 6: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (53 & 0xFF)) {
-          HasBitSetters::set_has_rail12lowpowervoltage(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &rail12lowpowervoltage_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required float rail12HighPowerVoltage = 7;
+      // required float lowPower5Voltage = 7;
       case 7: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (61 & 0xFF)) {
-          HasBitSetters::set_has_rail12highpowervoltage(this);
+          HasBitSetters::set_has_lowpower5voltage(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &rail12highpowervoltage_)));
+                 input, &lowpower5voltage_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required float rail24Voltage = 8;
+      // required float lowPower12Voltage = 8;
       case 8: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (69 & 0xFF)) {
-          HasBitSetters::set_has_rail24voltage(this);
+          HasBitSetters::set_has_lowpower12voltage(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &rail24voltage_)));
+                 input, &lowpower12voltage_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required float rail5Current = 9;
+      // required float highPower12Voltage = 9;
       case 9: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (77 & 0xFF)) {
-          HasBitSetters::set_has_rail5current(this);
+          HasBitSetters::set_has_highpower12voltage(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &rail5current_)));
+                 input, &highpower12voltage_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required float rail12LowPowerCurrent = 10;
+      // required float lowPower24Voltage = 10;
       case 10: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (85 & 0xFF)) {
-          HasBitSetters::set_has_rail12lowpowercurrent(this);
+          HasBitSetters::set_has_lowpower24voltage(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &rail12lowpowercurrent_)));
+                 input, &lowpower24voltage_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required float rail24Current = 11;
+      // required float lowPower5Current = 11;
       case 11: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (93 & 0xFF)) {
-          HasBitSetters::set_has_rail24current(this);
+          HasBitSetters::set_has_lowpower5current(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &rail24current_)));
+                 input, &lowpower5current_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required float railInverterCurrent = 12;
+      // required float lowPower12Current = 12;
       case 12: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (101 & 0xFF)) {
-          HasBitSetters::set_has_railinvertercurrent(this);
+          HasBitSetters::set_has_lowpower12current(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &railinvertercurrent_)));
+                 input, &lowpower12current_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required float railCooling1Current = 13;
+      // required float nodeCurrent = 13;
       case 13: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (109 & 0xFF)) {
-          HasBitSetters::set_has_railcooling1current(this);
+          HasBitSetters::set_has_nodecurrent(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &railcooling1current_)));
+                 input, &nodecurrent_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required float railCooling2Current = 14;
+      // required float inverterCurrent = 14;
       case 14: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (117 & 0xFF)) {
-          HasBitSetters::set_has_railcooling2current(this);
+          HasBitSetters::set_has_invertercurrent(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &railcooling2current_)));
+                 input, &invertercurrent_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required float cooling1Current = 15;
+      case 15: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (125 & 0xFF)) {
+          HasBitSetters::set_has_cooling1current(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &cooling1current_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required float cooling2Current = 16;
+      case 16: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (133 & 0xFF)) {
+          HasBitSetters::set_has_cooling2current(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &cooling2current_)));
         } else {
           goto handle_unusual;
         }
@@ -7982,74 +8046,85 @@ void LvdcNodeToFc::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required float highPowerPackVoltage = 1;
+  // required int32 packetNum = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->highpowerpackvoltage(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->packetnum(), output);
   }
 
-  // required float lowPowerPackVoltage = 2;
+  // required .LvdcNodeStates state = 2;
   if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->lowpowerpackvoltage(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      2, this->state(), output);
   }
 
-  // required float highPowerPackCurrent = 3;
+  // required float highPowerPackVoltage = 3;
   if (cached_has_bits & 0x00000004u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->highpowerpackcurrent(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->highpowerpackvoltage(), output);
   }
 
-  // required float lowPowerPackCurrent = 4;
+  // required float lowPowerPackVoltage = 4;
   if (cached_has_bits & 0x00000008u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(4, this->lowpowerpackcurrent(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(4, this->lowpowerpackvoltage(), output);
   }
 
-  // required float rail5Voltage = 5;
+  // required float highPowerPackCurrent = 5;
   if (cached_has_bits & 0x00000010u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(5, this->rail5voltage(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(5, this->highpowerpackcurrent(), output);
   }
 
-  // required float rail12LowPowerVoltage = 6;
+  // required float lowPowerPackCurrent = 6;
   if (cached_has_bits & 0x00000020u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(6, this->rail12lowpowervoltage(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(6, this->lowpowerpackcurrent(), output);
   }
 
-  // required float rail12HighPowerVoltage = 7;
+  // required float lowPower5Voltage = 7;
   if (cached_has_bits & 0x00000040u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(7, this->rail12highpowervoltage(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(7, this->lowpower5voltage(), output);
   }
 
-  // required float rail24Voltage = 8;
+  // required float lowPower12Voltage = 8;
   if (cached_has_bits & 0x00000080u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(8, this->rail24voltage(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(8, this->lowpower12voltage(), output);
   }
 
-  // required float rail5Current = 9;
+  // required float highPower12Voltage = 9;
   if (cached_has_bits & 0x00000100u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(9, this->rail5current(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(9, this->highpower12voltage(), output);
   }
 
-  // required float rail12LowPowerCurrent = 10;
+  // required float lowPower24Voltage = 10;
   if (cached_has_bits & 0x00000200u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(10, this->rail12lowpowercurrent(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(10, this->lowpower24voltage(), output);
   }
 
-  // required float rail24Current = 11;
+  // required float lowPower5Current = 11;
   if (cached_has_bits & 0x00000400u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(11, this->rail24current(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(11, this->lowpower5current(), output);
   }
 
-  // required float railInverterCurrent = 12;
+  // required float lowPower12Current = 12;
   if (cached_has_bits & 0x00000800u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(12, this->railinvertercurrent(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(12, this->lowpower12current(), output);
   }
 
-  // required float railCooling1Current = 13;
+  // required float nodeCurrent = 13;
   if (cached_has_bits & 0x00001000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(13, this->railcooling1current(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(13, this->nodecurrent(), output);
   }
 
-  // required float railCooling2Current = 14;
+  // required float inverterCurrent = 14;
   if (cached_has_bits & 0x00002000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(14, this->railcooling2current(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(14, this->invertercurrent(), output);
+  }
+
+  // required float cooling1Current = 15;
+  if (cached_has_bits & 0x00004000u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(15, this->cooling1current(), output);
+  }
+
+  // required float cooling2Current = 16;
+  if (cached_has_bits & 0x00008000u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(16, this->cooling2current(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -8066,74 +8141,85 @@ void LvdcNodeToFc::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required float highPowerPackVoltage = 1;
+  // required int32 packetNum = 1;
   if (cached_has_bits & 0x00000001u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->highpowerpackvoltage(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->packetnum(), target);
   }
 
-  // required float lowPowerPackVoltage = 2;
+  // required .LvdcNodeStates state = 2;
   if (cached_has_bits & 0x00000002u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->lowpowerpackvoltage(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      2, this->state(), target);
   }
 
-  // required float highPowerPackCurrent = 3;
+  // required float highPowerPackVoltage = 3;
   if (cached_has_bits & 0x00000004u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->highpowerpackcurrent(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->highpowerpackvoltage(), target);
   }
 
-  // required float lowPowerPackCurrent = 4;
+  // required float lowPowerPackVoltage = 4;
   if (cached_has_bits & 0x00000008u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(4, this->lowpowerpackcurrent(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(4, this->lowpowerpackvoltage(), target);
   }
 
-  // required float rail5Voltage = 5;
+  // required float highPowerPackCurrent = 5;
   if (cached_has_bits & 0x00000010u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(5, this->rail5voltage(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(5, this->highpowerpackcurrent(), target);
   }
 
-  // required float rail12LowPowerVoltage = 6;
+  // required float lowPowerPackCurrent = 6;
   if (cached_has_bits & 0x00000020u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(6, this->rail12lowpowervoltage(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(6, this->lowpowerpackcurrent(), target);
   }
 
-  // required float rail12HighPowerVoltage = 7;
+  // required float lowPower5Voltage = 7;
   if (cached_has_bits & 0x00000040u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(7, this->rail12highpowervoltage(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(7, this->lowpower5voltage(), target);
   }
 
-  // required float rail24Voltage = 8;
+  // required float lowPower12Voltage = 8;
   if (cached_has_bits & 0x00000080u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(8, this->rail24voltage(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(8, this->lowpower12voltage(), target);
   }
 
-  // required float rail5Current = 9;
+  // required float highPower12Voltage = 9;
   if (cached_has_bits & 0x00000100u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(9, this->rail5current(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(9, this->highpower12voltage(), target);
   }
 
-  // required float rail12LowPowerCurrent = 10;
+  // required float lowPower24Voltage = 10;
   if (cached_has_bits & 0x00000200u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(10, this->rail12lowpowercurrent(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(10, this->lowpower24voltage(), target);
   }
 
-  // required float rail24Current = 11;
+  // required float lowPower5Current = 11;
   if (cached_has_bits & 0x00000400u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(11, this->rail24current(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(11, this->lowpower5current(), target);
   }
 
-  // required float railInverterCurrent = 12;
+  // required float lowPower12Current = 12;
   if (cached_has_bits & 0x00000800u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(12, this->railinvertercurrent(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(12, this->lowpower12current(), target);
   }
 
-  // required float railCooling1Current = 13;
+  // required float nodeCurrent = 13;
   if (cached_has_bits & 0x00001000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(13, this->railcooling1current(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(13, this->nodecurrent(), target);
   }
 
-  // required float railCooling2Current = 14;
+  // required float inverterCurrent = 14;
   if (cached_has_bits & 0x00002000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(14, this->railcooling2current(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(14, this->invertercurrent(), target);
+  }
+
+  // required float cooling1Current = 15;
+  if (cached_has_bits & 0x00004000u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(15, this->cooling1current(), target);
+  }
+
+  // required float cooling2Current = 16;
+  if (cached_has_bits & 0x00008000u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(16, this->cooling2current(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -8148,74 +8234,87 @@ size_t LvdcNodeToFc::RequiredFieldsByteSizeFallback() const {
 // @@protoc_insertion_point(required_fields_byte_size_fallback_start:LvdcNodeToFc)
   size_t total_size = 0;
 
+  if (has_packetnum()) {
+    // required int32 packetNum = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->packetnum());
+  }
+
+  if (has_state()) {
+    // required .LvdcNodeStates state = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->state());
+  }
+
   if (has_highpowerpackvoltage()) {
-    // required float highPowerPackVoltage = 1;
+    // required float highPowerPackVoltage = 3;
     total_size += 1 + 4;
   }
 
   if (has_lowpowerpackvoltage()) {
-    // required float lowPowerPackVoltage = 2;
+    // required float lowPowerPackVoltage = 4;
     total_size += 1 + 4;
   }
 
   if (has_highpowerpackcurrent()) {
-    // required float highPowerPackCurrent = 3;
+    // required float highPowerPackCurrent = 5;
     total_size += 1 + 4;
   }
 
   if (has_lowpowerpackcurrent()) {
-    // required float lowPowerPackCurrent = 4;
+    // required float lowPowerPackCurrent = 6;
     total_size += 1 + 4;
   }
 
-  if (has_rail5voltage()) {
-    // required float rail5Voltage = 5;
+  if (has_lowpower5voltage()) {
+    // required float lowPower5Voltage = 7;
     total_size += 1 + 4;
   }
 
-  if (has_rail12lowpowervoltage()) {
-    // required float rail12LowPowerVoltage = 6;
+  if (has_lowpower12voltage()) {
+    // required float lowPower12Voltage = 8;
     total_size += 1 + 4;
   }
 
-  if (has_rail12highpowervoltage()) {
-    // required float rail12HighPowerVoltage = 7;
+  if (has_highpower12voltage()) {
+    // required float highPower12Voltage = 9;
     total_size += 1 + 4;
   }
 
-  if (has_rail24voltage()) {
-    // required float rail24Voltage = 8;
+  if (has_lowpower24voltage()) {
+    // required float lowPower24Voltage = 10;
     total_size += 1 + 4;
   }
 
-  if (has_rail5current()) {
-    // required float rail5Current = 9;
+  if (has_lowpower5current()) {
+    // required float lowPower5Current = 11;
     total_size += 1 + 4;
   }
 
-  if (has_rail12lowpowercurrent()) {
-    // required float rail12LowPowerCurrent = 10;
+  if (has_lowpower12current()) {
+    // required float lowPower12Current = 12;
     total_size += 1 + 4;
   }
 
-  if (has_rail24current()) {
-    // required float rail24Current = 11;
+  if (has_nodecurrent()) {
+    // required float nodeCurrent = 13;
     total_size += 1 + 4;
   }
 
-  if (has_railinvertercurrent()) {
-    // required float railInverterCurrent = 12;
+  if (has_invertercurrent()) {
+    // required float inverterCurrent = 14;
     total_size += 1 + 4;
   }
 
-  if (has_railcooling1current()) {
-    // required float railCooling1Current = 13;
+  if (has_cooling1current()) {
+    // required float cooling1Current = 15;
     total_size += 1 + 4;
   }
 
-  if (has_railcooling2current()) {
-    // required float railCooling2Current = 14;
-    total_size += 1 + 4;
+  if (has_cooling2current()) {
+    // required float cooling2Current = 16;
+    total_size += 2 + 4;
   }
 
   return total_size;
@@ -8229,48 +8328,57 @@ size_t LvdcNodeToFc::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
-  if (((_has_bits_[0] & 0x00003fff) ^ 0x00003fff) == 0) {  // All required fields are present.
-    // required float highPowerPackVoltage = 1;
+  if (((_has_bits_[0] & 0x0000ffff) ^ 0x0000ffff) == 0) {  // All required fields are present.
+    // required int32 packetNum = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->packetnum());
+
+    // required .LvdcNodeStates state = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->state());
+
+    // required float highPowerPackVoltage = 3;
     total_size += 1 + 4;
 
-    // required float lowPowerPackVoltage = 2;
+    // required float lowPowerPackVoltage = 4;
     total_size += 1 + 4;
 
-    // required float highPowerPackCurrent = 3;
+    // required float highPowerPackCurrent = 5;
     total_size += 1 + 4;
 
-    // required float lowPowerPackCurrent = 4;
+    // required float lowPowerPackCurrent = 6;
     total_size += 1 + 4;
 
-    // required float rail5Voltage = 5;
+    // required float lowPower5Voltage = 7;
     total_size += 1 + 4;
 
-    // required float rail12LowPowerVoltage = 6;
+    // required float lowPower12Voltage = 8;
     total_size += 1 + 4;
 
-    // required float rail12HighPowerVoltage = 7;
+    // required float highPower12Voltage = 9;
     total_size += 1 + 4;
 
-    // required float rail24Voltage = 8;
+    // required float lowPower24Voltage = 10;
     total_size += 1 + 4;
 
-    // required float rail5Current = 9;
+    // required float lowPower5Current = 11;
     total_size += 1 + 4;
 
-    // required float rail12LowPowerCurrent = 10;
+    // required float lowPower12Current = 12;
     total_size += 1 + 4;
 
-    // required float rail24Current = 11;
+    // required float nodeCurrent = 13;
     total_size += 1 + 4;
 
-    // required float railInverterCurrent = 12;
+    // required float inverterCurrent = 14;
     total_size += 1 + 4;
 
-    // required float railCooling1Current = 13;
+    // required float cooling1Current = 15;
     total_size += 1 + 4;
 
-    // required float railCooling2Current = 14;
-    total_size += 1 + 4;
+    // required float cooling2Current = 16;
+    total_size += 2 + 4;
 
   } else {
     total_size += RequiredFieldsByteSizeFallback();
@@ -8309,49 +8417,55 @@ void LvdcNodeToFc::MergeFrom(const LvdcNodeToFc& from) {
   cached_has_bits = from._has_bits_[0];
   if (cached_has_bits & 0x000000ffu) {
     if (cached_has_bits & 0x00000001u) {
-      highpowerpackvoltage_ = from.highpowerpackvoltage_;
+      packetnum_ = from.packetnum_;
     }
     if (cached_has_bits & 0x00000002u) {
-      lowpowerpackvoltage_ = from.lowpowerpackvoltage_;
+      state_ = from.state_;
     }
     if (cached_has_bits & 0x00000004u) {
-      highpowerpackcurrent_ = from.highpowerpackcurrent_;
+      highpowerpackvoltage_ = from.highpowerpackvoltage_;
     }
     if (cached_has_bits & 0x00000008u) {
-      lowpowerpackcurrent_ = from.lowpowerpackcurrent_;
+      lowpowerpackvoltage_ = from.lowpowerpackvoltage_;
     }
     if (cached_has_bits & 0x00000010u) {
-      rail5voltage_ = from.rail5voltage_;
+      highpowerpackcurrent_ = from.highpowerpackcurrent_;
     }
     if (cached_has_bits & 0x00000020u) {
-      rail12lowpowervoltage_ = from.rail12lowpowervoltage_;
+      lowpowerpackcurrent_ = from.lowpowerpackcurrent_;
     }
     if (cached_has_bits & 0x00000040u) {
-      rail12highpowervoltage_ = from.rail12highpowervoltage_;
+      lowpower5voltage_ = from.lowpower5voltage_;
     }
     if (cached_has_bits & 0x00000080u) {
-      rail24voltage_ = from.rail24voltage_;
+      lowpower12voltage_ = from.lowpower12voltage_;
     }
     _has_bits_[0] |= cached_has_bits;
   }
-  if (cached_has_bits & 0x00003f00u) {
+  if (cached_has_bits & 0x0000ff00u) {
     if (cached_has_bits & 0x00000100u) {
-      rail5current_ = from.rail5current_;
+      highpower12voltage_ = from.highpower12voltage_;
     }
     if (cached_has_bits & 0x00000200u) {
-      rail12lowpowercurrent_ = from.rail12lowpowercurrent_;
+      lowpower24voltage_ = from.lowpower24voltage_;
     }
     if (cached_has_bits & 0x00000400u) {
-      rail24current_ = from.rail24current_;
+      lowpower5current_ = from.lowpower5current_;
     }
     if (cached_has_bits & 0x00000800u) {
-      railinvertercurrent_ = from.railinvertercurrent_;
+      lowpower12current_ = from.lowpower12current_;
     }
     if (cached_has_bits & 0x00001000u) {
-      railcooling1current_ = from.railcooling1current_;
+      nodecurrent_ = from.nodecurrent_;
     }
     if (cached_has_bits & 0x00002000u) {
-      railcooling2current_ = from.railcooling2current_;
+      invertercurrent_ = from.invertercurrent_;
+    }
+    if (cached_has_bits & 0x00004000u) {
+      cooling1current_ = from.cooling1current_;
+    }
+    if (cached_has_bits & 0x00008000u) {
+      cooling2current_ = from.cooling2current_;
     }
     _has_bits_[0] |= cached_has_bits;
   }
@@ -8372,7 +8486,7 @@ void LvdcNodeToFc::CopyFrom(const LvdcNodeToFc& from) {
 }
 
 bool LvdcNodeToFc::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00003fff) != 0x00003fff) return false;
+  if ((_has_bits_[0] & 0x0000ffff) != 0x0000ffff) return false;
   return true;
 }
 
@@ -8384,20 +8498,22 @@ void LvdcNodeToFc::InternalSwap(LvdcNodeToFc* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_has_bits_[0], other->_has_bits_[0]);
+  swap(packetnum_, other->packetnum_);
+  swap(state_, other->state_);
   swap(highpowerpackvoltage_, other->highpowerpackvoltage_);
   swap(lowpowerpackvoltage_, other->lowpowerpackvoltage_);
   swap(highpowerpackcurrent_, other->highpowerpackcurrent_);
   swap(lowpowerpackcurrent_, other->lowpowerpackcurrent_);
-  swap(rail5voltage_, other->rail5voltage_);
-  swap(rail12lowpowervoltage_, other->rail12lowpowervoltage_);
-  swap(rail12highpowervoltage_, other->rail12highpowervoltage_);
-  swap(rail24voltage_, other->rail24voltage_);
-  swap(rail5current_, other->rail5current_);
-  swap(rail12lowpowercurrent_, other->rail12lowpowercurrent_);
-  swap(rail24current_, other->rail24current_);
-  swap(railinvertercurrent_, other->railinvertercurrent_);
-  swap(railcooling1current_, other->railcooling1current_);
-  swap(railcooling2current_, other->railcooling2current_);
+  swap(lowpower5voltage_, other->lowpower5voltage_);
+  swap(lowpower12voltage_, other->lowpower12voltage_);
+  swap(highpower12voltage_, other->highpower12voltage_);
+  swap(lowpower24voltage_, other->lowpower24voltage_);
+  swap(lowpower5current_, other->lowpower5current_);
+  swap(lowpower12current_, other->lowpower12current_);
+  swap(nodecurrent_, other->nodecurrent_);
+  swap(invertercurrent_, other->invertercurrent_);
+  swap(cooling1current_, other->cooling1current_);
+  swap(cooling2current_, other->cooling2current_);
 }
 
 ::google::protobuf::Metadata LvdcNodeToFc::GetMetadata() const {
@@ -9361,7 +9477,7 @@ void FlightConfig::SharedCtor() {
   commandport_ = 6000;
   brakenodeport_ = PROTOBUF_ULONGLONG(5555);
   brakenodetimeout_ = PROTOBUF_ULONGLONG(4000);
-  brakenodeserverport_ = PROTOBUF_ULONGLONG(56641);
+  brakenodeserverport_ = PROTOBUF_ULONGLONG(5550);
 }
 
 FlightConfig::~FlightConfig() {
@@ -9406,7 +9522,7 @@ void FlightConfig::Clear() {
     brakenodeport_ = PROTOBUF_ULONGLONG(5555);
     brakenodetimeout_ = PROTOBUF_ULONGLONG(4000);
   }
-  brakenodeserverport_ = PROTOBUF_ULONGLONG(56641);
+  brakenodeserverport_ = PROTOBUF_ULONGLONG(5550);
   _has_bits_.Clear();
   _internal_metadata_.Clear();
 }
@@ -9498,7 +9614,7 @@ const char* FlightConfig::_InternalParse(const char* begin, const char* end, voi
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // optional uint64 brakeNodeServerPort = 9 [default = 56641];
+      // optional uint64 brakeNodeServerPort = 9 [default = 5550];
       case 9: {
         if (static_cast<::google::protobuf::uint8>(tag) != 72) goto handle_unusual;
         msg->set_brakenodeserverport(::google::protobuf::internal::ReadVarint(&ptr));
@@ -9647,7 +9763,7 @@ bool FlightConfig::MergePartialFromCodedStream(
         break;
       }
 
-      // optional uint64 brakeNodeServerPort = 9 [default = 56641];
+      // optional uint64 brakeNodeServerPort = 9 [default = 5550];
       case 9: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (72 & 0xFF)) {
           HasBitSetters::set_has_brakenodeserverport(this);
@@ -9738,7 +9854,7 @@ void FlightConfig::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt64(8, this->brakenodetimeout(), output);
   }
 
-  // optional uint64 brakeNodeServerPort = 9 [default = 56641];
+  // optional uint64 brakeNodeServerPort = 9 [default = 5550];
   if (cached_has_bits & 0x00000100u) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt64(9, this->brakenodeserverport(), output);
   }
@@ -9809,7 +9925,7 @@ void FlightConfig::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(8, this->brakenodetimeout(), target);
   }
 
-  // optional uint64 brakeNodeServerPort = 9 [default = 56641];
+  // optional uint64 brakeNodeServerPort = 9 [default = 5550];
   if (cached_has_bits & 0x00000100u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(9, this->brakenodeserverport(), target);
   }
@@ -9894,7 +10010,7 @@ size_t FlightConfig::ByteSizeLong() const {
     }
 
   }
-  // optional uint64 brakeNodeServerPort = 9 [default = 56641];
+  // optional uint64 brakeNodeServerPort = 9 [default = 5550];
   if (cached_has_bits & 0x00000100u) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt64Size(
