@@ -119,6 +119,14 @@ float TelemetryManager::getHvBatteryPackMaxCellVoltage(){
     return this->telemetry->hvBatteryPackMaxCellVoltage;
 }
 
+void TelemetryManager::setHvBatteryPackMaxCellTemperature(float value) {
+    this->telemetry->hvBatteryPackMaxCellTemperature = value;
+}
+
+void TelemetryManager::setHvBatteryPackStateOfCharge(int value) {
+    this->telemetry->hvBatteryPackStateOfCharge = value;
+}
+
 void TelemetryManager::setSolenoid(bool value, int32_t identifier){
     // Set Value in Memory
     switch(identifier){

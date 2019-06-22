@@ -174,6 +174,8 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_flightdistance(pod.telemetry->flightDistance);
     protoMessage->set_motortorque(pod.telemetry->motorTorque);
     protoMessage->set_inverterheartbeat(pod.telemetry->inverterHeartbeat);
+    protoMessage->set_hvbatterypackmaxcelltemperature(pod.telemetry->hvBatteryPackMaxCellTemperature);
+    protoMessage->set_hvbatterypackstateofcharge(pod.telemetry->hvBatteryPackStateOfCharge);
 
     // Add Updates todo probably put this in a function with a pointer to the proto as an argument
     if(this->pod.telemetry->updates.size() > 0){

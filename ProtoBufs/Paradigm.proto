@@ -116,8 +116,9 @@ message Telemetry {
     optional float hvBatteryPackVoltage = 26;
     optional float hvBatteryPackCurrent = 27;
     optional float hvBatteryPackMaxCellTemperature = 28;
-    optional float hvBatteryPackMinimumCellVoltage = 29;
     optional float hvBatteryPackMaxCellVoltage = 30;
+    optional float hvBatteryPackMinimumCellVoltage = 29;
+    optional int32  hvBatteryPackStateOfCharge = 79;
 
     // Brake Node
     optional bool solenoid1 = 32;

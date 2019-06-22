@@ -39,6 +39,8 @@ struct PodValues {
     float hvBatteryPackCurrent = 0;
     float hvBatteryPackMinimumCellVoltage = 0;
     float hvBatteryPackMaxCellVoltage = 0;
+    int hvBatteryPackStateOfCharge = 0;
+    float hvBatteryPackMaxCellTemperature = 0;
 
     //Inverter
     int32_t maxIgbtTemperature = 0;
