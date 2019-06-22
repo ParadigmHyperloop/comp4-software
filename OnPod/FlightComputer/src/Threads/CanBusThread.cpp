@@ -139,6 +139,7 @@ void startInverterBroadcast(int bcmSocket){
 
 void setInverterTorque(int torque, int bcmSocket){
     struct broadcastManagerConfig msg = {};
+    torque *=10;
     int32_t highByte = torque/256;
     int32_t lowByte = torque%256;
     msg.msg_head.opcode  = TX_SETUP;
