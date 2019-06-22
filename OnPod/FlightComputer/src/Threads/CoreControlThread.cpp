@@ -22,7 +22,7 @@ void coreControlLoopThread(TelemetryManager pod){
                 pod.setPodState(newState, reason);
                 pod.sendUpdate(reason);
                 LOG(INFO)<<reason;
-                //TODO Update All nodes
+                //TODO Update All nodes?
             }
         }
     }

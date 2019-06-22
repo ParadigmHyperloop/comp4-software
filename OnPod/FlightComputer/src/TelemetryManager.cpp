@@ -209,7 +209,6 @@ void TelemetryManager::setSensorFlag(int32_t status, int32_t index){
     }
     if(currentStatus != status){
         this->telemetry->sensorFlags[index] = status;
-        //ForceControlLoopIteration? TODO
         return;
     }
 }
@@ -221,7 +220,6 @@ void TelemetryManager::setConnectionFlag(int32_t status, int32_t index){
     }
     if(currentStatus != status){
         this->telemetry->connectionFlags[index] = status;
-        //ForceControlLoopIteration? TODO
         return;
     }
 }

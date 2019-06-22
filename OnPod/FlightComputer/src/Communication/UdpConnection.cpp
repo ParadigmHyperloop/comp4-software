@@ -8,8 +8,11 @@ UdpConnection::UdpConnection(TelemetryManager pod){
 };
 
 void UdpConnection::setRecvBufferSize(int32_t bufferSize) {
-    //todo log failure
-    int32_t s = setsockopt(this->_inboundSocket, SOL_SOCKET, SO_RCVBUF, &bufferSize, sizeof(bufferSize));
+    int32_t status = setsockopt(this->_inboundSocket, SOL_SOCKET, SO_RCVBUF, &bufferSize, sizeof(bufferSize));
+    if(status < 0){
+        std::string error = std::string("Failed to set recv buffer size ") + std::strerror(errno);
+        throw std::runtime_error(error);
+    }
 }
 
 
@@ -176,6 +179,7 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_inverterheartbeat(pod.telemetry->inverterHeartbeat);
     protoMessage->set_hvbatterypackmaxcelltemperature(pod.telemetry->hvBatteryPackMaxCellTemperature);
     protoMessage->set_hvbatterypackstateofcharge(pod.telemetry->hvBatteryPackStateOfCharge);
+    protoMessage->set_motorspeed(pod.telemetry->motorSpeed);
 
     protoMessage->set_lvdcnodestate(lvdcNone);
     protoMessage->set_brakenodestate(bnsNone);
