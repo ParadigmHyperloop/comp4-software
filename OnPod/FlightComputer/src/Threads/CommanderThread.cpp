@@ -35,7 +35,6 @@ void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
         return;
     }
     if (podCommand.has_controlsinterfacestate()) {
-        //LOG(INFO)<<podCommand.controlsinterfacestate();
         Pod->setControlsInterfaceState(podCommand.controlsinterfacestate());
     }
     if (podCommand.has_automaticstatetransitions()) {
@@ -65,6 +64,7 @@ void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
             Pod->telemetry->manualSolenoidConfiguration[i] = podCommand.solenoidconfiguration(i);
         }
     }
+    Pod->sendUpdate("Command Parsed");
 }
 
 int32_t unserializeProtoMessage(TelemetryManager *Pod, char buffer[], int32_t messageSize) {

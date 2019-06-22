@@ -4,6 +4,8 @@
 
 #define INVERTER_BROADCAST_ID 0
 #define INVERTER_FRAME_ID 0x0C0
+#define INVERTER_HEARTBEAT_FRAME_ID 0x0A7
+#define BMS_HEARTBEAT_FRAME_ID 0x6b2
 
 int32_t getCanSocketRaw(){
     // Service variables
@@ -24,8 +26,6 @@ int32_t getCanSocketRaw(){
     int flags = fcntl(canSock, F_GETFL);
     flags |= O_NONBLOCK;
     fcntl(canSock, F_SETFL, flags);
-
-
 
     // Set a receive filter so we only receive select CAN IDs
     struct can_filter canFilter[6];
@@ -98,7 +98,7 @@ int32_t getCanSocketBrodcastManager() {
 void startInverterHeartbeat(int bcmSocket){
     struct broadcastManagerConfig bcmMessage = {};
     bcmMessage.msg_head.opcode  = RX_SETUP;
-    bcmMessage.msg_head.can_id  = 0x0A7; // todo check this is an inverter message
+    bcmMessage.msg_head.can_id  = INVERTER_HEARTBEAT_FRAME_ID;
     bcmMessage.msg_head.flags   = SETTIMER | STARTTIMER;   // We're starting the timer right away. Probably wont want start the
     bcmMessage.msg_head.nframes = 0;
     bcmMessage.msg_head.count   = 0;
@@ -166,7 +166,6 @@ void setInverterTorque(int torque, int bcmSocket){
     }
 }
 
-
 void readRawSocket(int socket, TelemetryManager& pod){
     struct can_frame receivedCanFrame = {};
     ssize_t receivedPacketSize;
@@ -189,7 +188,13 @@ void readBcmSocket(int socket, TelemetryManager& pod) {
     receivedPacketSize = read(socket, &bcmUpdate, sizeof(bcmUpdate));
     if (receivedPacketSize > 0 ) {
         if(bcmUpdate.msg_head.opcode == RX_TIMEOUT ){
-            std::cout << "TIMEOUT";
+            switch(bcmUpdate.msg_head.can_id){
+                case INVERTER_HEARTBEAT_FRAME_ID:
+                    pod.telemetry->inverterHeartbeat = 0;
+                    break;
+                case BMS_HEARTBEAT_FRAME_ID:
+                    pod.telemetry->connectionFlags[2] = 0;
+            }
         }
     }
     else if(receivedPacketSize < 0){
@@ -222,6 +227,13 @@ int canNetworkThread(TelemetryManager Pod){
     }
     try{
         startInverterBroadcast(canSockBcm);
+    }
+    catch (const std::runtime_error &error){
+        LOG(INFO) << error.what();
+        return -1;
+    }
+    try{
+        startInverterHeartbeat(canSockBcm);
     }
     catch (const std::runtime_error &error){
         LOG(INFO) << error.what();

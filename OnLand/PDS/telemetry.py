@@ -56,10 +56,10 @@ def main():
     while udp_socket.is_connected():
         data = udp_socket.recv(timedelta(seconds=UDP_TELEM_TIMEOUT))
         if data is not None:
-            if broadcast_timer.time_since_pulse() > TELEMETRY_BROADCAST_FREQUENCY:
+            pod_data = Telemetry()
+            pod_data.ParseFromString(data)
+            if broadcast_timer.time_since_pulse() > TELEMETRY_BROADCAST_FREQUENCY or pod_data.updateMessages:
                 broadcast_timer.pulse()
-                pod_data = Telemetry()
-                pod_data.ParseFromString(data)
                 json_pod_data = json_format.MessageToJson(pod_data)
                 sio.emit('pod_telemetry', json_pod_data)
                 # pod_data = MessageToDict(pod_data)

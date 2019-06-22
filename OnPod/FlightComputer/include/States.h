@@ -45,6 +45,8 @@ public:
 
     void commonChecks();
 
+    void armedChecks();
+
 
 protected:
     std::chrono::steady_clock::time_point _enterStateTime;

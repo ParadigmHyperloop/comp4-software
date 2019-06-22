@@ -31,7 +31,7 @@ struct PodValues {
     bool automaticTransitions = true;
 
     //ConnectionsArray
-    std::vector<int32_t> connectionFlags;
+    std::vector<int32_t> connectionFlags;  // brakeNode, LVDCNode, BMS, Interface
     std::vector<int32_t> sensorFlags;
 
     // HV-BMS
@@ -48,6 +48,7 @@ struct PodValues {
     int32_t motorSpeed = 0;
     int32_t inverterBusVoltage = 0;
     int32_t commandedTorque = 0;
+    int32_t inverterHeartbeat = 0;
 
     // Atmosphere
     double tubePressure = 0;

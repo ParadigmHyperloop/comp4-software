@@ -86,7 +86,6 @@ void UdpConnection::giveUpdate() {
 
     ssize_t payloadSize;
     std::unique_ptr<google::protobuf::Message> protoPacket(this->getProtoUpdateMessage());
-
     payloadSize = protoPacket->ByteSizeLong();
     unsigned char payload[payloadSize];
 
@@ -175,7 +174,7 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_flightdistance(pod.telemetry->flightDistance);
     protoMessage->set_motortorque(pod.telemetry->motorTorque);
 
-    // Add Updates todo probably put this in a function with a pointer to the proto as an arguement
+    // Add Updates todo probably put this in a function with a pointer to the proto as an argument
     if(this->pod.telemetry->updates.size() > 0){
         std::lock_guard<std::mutex> lock(this->pod.telemetry->updatesLock);
         for(std::string& update : this->pod.telemetry->updates){

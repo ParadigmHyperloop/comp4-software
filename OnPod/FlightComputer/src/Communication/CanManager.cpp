@@ -18,6 +18,7 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             pod.setHvBatteryPackVoltage(hvBatteryPackVoltage);
             pod.setHvBatteryPackMaxCellVoltage(hvBatteryPackMaxCellVoltage);
             pod.setHvBatteryPackMinimumCellVoltage(hvBatteryPackMinimumCellVoltage);
+            pod.telemetry->connectionFlags[2] = 1;
         }
         case 0x0A0: {
             indices = {1,0};
@@ -52,6 +53,7 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             indices = {1,0};
             auto dcBusVoltage = extractCanValue<int>(frame.data, indices, 10);
             pod.telemetry->inverterBusVoltage = dcBusVoltage;
+            pod.telemetry->inverterHeartbeat = 1;
         }
             break;
         default:

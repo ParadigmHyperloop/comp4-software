@@ -68,6 +68,16 @@ void PodState::commonChecks() {
     }*/
 }
 
+void PodState::armedChecks(){
+    if(!this->pod->telemetry->inverterHeartbeat){
+        std::string error = "Inverter Heartbeat Expired.";
+        throw std::runtime_error(error);
+    }
+
+    //todo check array for inverter values
+
+}
+
 void PodState::setupTransition(PodStates nextState, const std::string& reason){
     this->_transitioning = true;
     this->_transitionReason = reason;
@@ -152,7 +162,7 @@ Standby::Standby(TelemetryManager * pod): PodState(pod) {
     this->pod->telemetry->controlsInterfaceState = ciNone; // Guard against auto transition
 }
 
-Standby::~Standby() = default;
+Standby::~Standby() = default; // todo set all sensors to a false value here
 
 bool Standby::testTransitions() {
     try {
@@ -189,6 +199,13 @@ bool Arming::testTransitions() {
         this->setupTransition(psStandby, "Emergency Stop. Pod --> Standby");
         return true;
     }
+    if(this->timeInStateMilis() < 3000 ){ //Allow nodes to update sensors or timeout if not
+        return false;
+    }
+    if(this->timeInStateMilis() > 30000 ){
+        this->setupTransition(psStandby, "Arming Timout. Pod --> Standby");
+        return true;
+    }
     try {
         this->commonChecks();
     }
@@ -196,9 +213,16 @@ bool Arming::testTransitions() {
         this->setupTransition(psStandby, error.what());
         return true;
     }
+    if(this->pod->telemetry->inverterHeartbeat){ // and this->checkInverterValues
+        // all passed
+    }
     //todo validate that we are receiving telemetry from the inverter
     if(true){
         this->setupTransition(psArmed, (std::string)"Arming Passed. Pod --> Armed");
+        return true;
+    }
+    if(this->timeInStateMilis() > 30000 ){
+        this->setupTransition(psStandby, "Arming Timout. Pod --> Standby");
         return true;
     }
     return false;
@@ -225,6 +249,7 @@ bool Armed::testTransitions() {
     }
     try {
         this->commonChecks();
+        this->armedChecks();
     }
     catch (const std::runtime_error &error ){
         this->setupTransition(psStandby, error.what());
@@ -259,6 +284,7 @@ bool PreFlight::testTransitions() {
     }
     try {
         this->commonChecks();
+        this->armedChecks();
     }
     catch (const std::runtime_error &error ){
         this->setupTransition(psStandby, error.what());
@@ -301,6 +327,7 @@ bool Acceleration::testTransitions() {
     // todo critical vs non critical changes
     try {
         this->commonChecks();
+        this->armedChecks();
     }
     catch (const std::runtime_error &error ){
         this->setupTransition(psBraking, error.what());
