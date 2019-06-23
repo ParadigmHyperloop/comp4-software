@@ -41,7 +41,7 @@ int32_t PodState::checkCommunicationFlags(){
 
 int32_t PodState::checkNodeStates(){
     if(this->pod->telemetry->commandedBrakeNodeState != this->pod->telemetry->receivedBrakeNodeState){
-        return BRAKE_NODE_INDEX;
+        return BRAKE_NODE_HEARTBEAT_INDEX;
     }
     return FLAGS_GOOD;
 }

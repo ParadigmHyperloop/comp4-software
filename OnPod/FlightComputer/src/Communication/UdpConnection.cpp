@@ -152,7 +152,7 @@ int32_t UdpConnection::getConnectionIndex(){
 
 PdsConnection::PdsConnection(TelemetryManager pod) : UdpConnection(pod) {
     this->_connectionName = "Controls Interface Data : ";
-    this->_connectionStatusIndex = PDS_CONNECTION_INDEX;
+    this->_connectionStatusIndex = -1;
 };
 
 std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage() {
@@ -201,7 +201,7 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
 
 BrakeNodeConnection::BrakeNodeConnection(TelemetryManager pod) : UdpConnection(pod) {
     this->_connectionName = "Brake Node : ";
-    this->_connectionStatusIndex = BRAKE_NODE_INDEX;
+    this->_connectionStatusIndex = BRAKE_NODE_HEARTBEAT_INDEX;
 }
 
 std::unique_ptr<google::protobuf::Message> BrakeNodeConnection::getProtoUpdateMessage() {
@@ -247,7 +247,7 @@ bool BrakeNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
 
 EnclosureNodeConnection::EnclosureNodeConnection(TelemetryManager pod) : UdpConnection(pod) {
     this->_connectionName = "Enclosure Node : ";
-    this->_connectionStatusIndex = ENCLOSURE_CONNECTION_INDEX;
+    this->_connectionStatusIndex = ENCLOSURE_HEARTBEAT_INDEX;
 }
 
 

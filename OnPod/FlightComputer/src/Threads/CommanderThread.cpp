@@ -30,6 +30,36 @@ int32_t createCommanderServerSocket(int32_t serverPortNumber) {
     return serverSock;
 }
 
+void parseOverrides(PodCommand podCommand, TelemetryManager *Pod) {
+    // This is gross... dont look! ;)
+    for (int i = 0; i < 5; ++i) {
+        if(podCommand.sensoroverrideconfiguration(i)){
+            Pod->telemetry->nodeSensorFlags[i] = 2;
+        }
+    }
+    if(podCommand.sensoroverrideconfiguration(5)){
+        Pod->setConnectionFlag(2,2);
+        for(auto &flag : Pod->telemetry->bmsSensorFlags){
+            flag = 2;
+        }
+    }
+    if(podCommand.sensoroverrideconfiguration(6)){
+        Pod->setInverterHeartbeat(2);
+        for(auto &flag : Pod->telemetry->inverterSensorFlags){
+            flag = 2;
+        }
+    }
+    if(podCommand.sensoroverrideconfiguration(7)){
+        Pod->setConnectionFlag(2,BRAKE_NODE_HEARTBEAT_INDEX);
+    }
+    if(podCommand.sensoroverrideconfiguration(8)){
+        Pod->setConnectionFlag(2,LVDC_NODE_HEARTBEAT_INDEX);
+    }
+    if(podCommand.sensoroverrideconfiguration(9)){
+        Pod->setConnectionFlag(2,ENCLOSURE_HEARTBEAT_INDEX);
+    }
+}
+
 void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
     if(!podCommand.has_hascommand()){
         return;
@@ -63,6 +93,9 @@ void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
         for(int i = 0 ; i < 4 ; i++){
             Pod->telemetry->manualSolenoidConfiguration[i] = podCommand.solenoidconfiguration(i);
         }
+    }
+    if (podCommand.sensoroverrideconfiguration_size() >= 1){
+        parseOverrides(podCommand, Pod);
     }
 }
 

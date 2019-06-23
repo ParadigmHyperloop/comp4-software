@@ -15,7 +15,7 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             pod.setHvBatteryPackStateOfCharge(hvBatteryPackSoc);
             pod.setHvBatteryPackCurrent(hvBatteryPackCurrent);
             pod.setHvBatteryPackVoltage(hvBatteryPackVoltage);
-            pod.setConnectionFlag(1,2);
+            pod.setConnectionFlag(1,BMS_HEARTBEAT_INDEX);
         }
         case 0x6b2: {
             indices = {2, 3};

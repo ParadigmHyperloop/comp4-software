@@ -4,8 +4,6 @@
 #include "TelemetryManager.h"
 
 #define FLAGS_GOOD -1
-#define BRAKE_NODE_INDEX 1
-#define LVDC_NODE_INDEX 2
 
 class TelemetryManager;
 

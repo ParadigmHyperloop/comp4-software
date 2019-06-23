@@ -5,6 +5,12 @@
 #include <cstdint>
 #include "Paradigm.pb.h"
 
+#define BRAKE_NODE_HEARTBEAT_INDEX 0
+#define LVDC_NODE_HEARTBEAT_INDEX 1
+#define BMS_HEARTBEAT_INDEX 2
+#define INTERFACE_HEARTBEAT_INDEX 3
+#define ENCLOSURE_HEARTBEAT_INDEX 4
+
 class PodState;
 
 struct PodValues {
