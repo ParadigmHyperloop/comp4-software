@@ -2,7 +2,7 @@
 #define FLIGHTCOMPUTER_SENSORCONFIG_H
 
 // Count
-#define TOTAL_SENSOR_COUNT 10
+
 #define TOTAL_CONNECTION_COUNT 10
 
 // Constants
@@ -12,9 +12,19 @@
 #define CLOSED 0
 #define OPEN 1
 
+// Inverter Sensor Flag Indices
+#define INVERTER_SENSOR_COUNT 2
+#define MOTOR_TEMPERATURE_INDEX 0
+#define BUS_VOLTAGE_INDEX 1
 
-// Sensor Flag indices
+// BMS Sensor Flag Indices
+#define BMS_SENSOR_COUNT 3
+#define PACK_VOLTAGE_INDEX 0
+#define MAX_CELL_TEMP_INDEX 1
+#define SOC_INDEX 2
 
+// Node Sensor Flag indices
+#define NODE_SENSOR_COUNT 10
 #define LP1_INDEX 0
 #define LP2_INDEX 1
 #define LP3_INDEX 2

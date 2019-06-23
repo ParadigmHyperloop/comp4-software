@@ -33,7 +33,9 @@ struct PodValues {
 
     //ConnectionsArray
     std::vector<int32_t> connectionFlags;  // brakeNode, LVDCNode, BMS, Interface
-    std::vector<int32_t> sensorFlags;
+    std::vector<int32_t> nodeSensorFlags;
+    std::vector<int32_t> inverterSensorFlags;
+    std::vector<int32_t> bmsSensorFlags;
 
     // HV-BMS
     float hvBatteryPackVoltage = 0;

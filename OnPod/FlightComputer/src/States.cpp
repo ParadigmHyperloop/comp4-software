@@ -20,7 +20,7 @@ unsigned int PodState::timeInStateSeconds() {
 }
 
 int32_t PodState::checkSensorFlags(){
-    std::vector<int32_t> flags = this->pod->telemetry->sensorFlags;
+    std::vector<int32_t> flags = this->pod->telemetry->nodeSensorFlags;
     for(std::size_t i=0; i<flags.size(); ++i){
         if(flags[i] == 0){
             return i;

@@ -50,7 +50,6 @@ void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
         if(state == bnsSolenoidControl){
             std::fill(Pod->telemetry->manualSolenoidConfiguration.begin(), Pod->telemetry->manualSolenoidConfiguration.end(), false);
         }
-        LOG(INFO) << podCommand.manualbrakenodestate();
         Pod->setManualBrakeNodeState(podCommand.manualbrakenodestate());
     }
     if (podCommand.has_manuallvdcnodestate()) {
@@ -58,6 +57,7 @@ void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
     }
     if (podCommand.has_manualpodstate()) {
         Pod->setManualPodState(podCommand.manualpodstate());
+        Pod->setAutomaticTransitions(false);
     }
     if (podCommand.solenoidconfiguration_size() >= 4){
         for(int i = 0 ; i < 4 ; i++){

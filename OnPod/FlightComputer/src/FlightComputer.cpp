@@ -19,8 +19,9 @@ using namespace std;
 
 // Factory for initializing the telemetry struct
 void initializeTelemetryStruct(PodValues &telemetry){
-    // Vectors
-    telemetry.sensorFlags = std::vector<int32_t>(TOTAL_SENSOR_COUNT, 2);
+    telemetry.nodeSensorFlags = std::vector<int32_t>(NODE_SENSOR_COUNT, 2);
+    telemetry.inverterSensorFlags = std::vector<int32_t>(INVERTER_SENSOR_COUNT, 2);
+    telemetry.bmsSensorFlags = std::vector<int32_t>(BMS_SENSOR_COUNT, 2);
     telemetry.connectionFlags = std::vector<int32_t>(TOTAL_CONNECTION_COUNT,2);
     telemetry.manualSolenoidConfiguration = std::vector<bool>(4,false);
 }
@@ -61,17 +62,17 @@ int main( int32_t argc, char** argv)
     TelemetryManager controlTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
     controlTelemManager.bWritePodState = true;
     controlTelemManager.setPodState(psBooting, (std::string)"Booting..."); // Set Pod state to booting
-    controlTelemManager.bWriteBreakNodeState = true;
     std::thread coreControlThread(coreControlLoopThread, controlTelemManager);
 
     //CAN Thread
     TelemetryManager canTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
+    canTelemManager.bWriteInverter = true;
+    canTelemManager.bWriteBms = true;
     std::thread canThread(canNetworkThread, canTelemManager);
 
 
     //TelemetryManager Internal Network Thread
     TelemetryManager pinTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
-    pinTelemManager.bWriteBreakNodeState = true;
     std::thread pinThread(udpTelemetryThread, pinTelemManager);
 
 	// Controls Interface Connection Thread
