@@ -25,14 +25,18 @@ FlightConfigServer *FlightConfigServer::getServer(int32_t port) {
     return _configServer;
 }
 
-flightConfig FlightConfigServer::runServer() {
+void FlightConfigServer::closePorts(){
+    close(this->_listenerSocketID);
+}
 
+FlightConfig FlightConfigServer::runServer() {
     LOG(INFO) << "Creating TelemetryManager Initilizer socket";
     char controlLaptopAddr[NI_MAXHOST] = {0};
     this->_listenerSocketID = socket(AF_INET, SOCK_STREAM, 0);
+    int option = 1;
+    setsockopt(this->_listenerSocketID, SOL_SOCKET, SO_REUSEADDR, &option, sizeof(option));
     if (this->_listenerSocketID == -1) {
-        //todo throw runtime error with string
-        std::string error = std::string("Failed to pod initlizer create socket") + std::strerror(errno);
+        std::string error = std::string("Failed to pod initializer create socket") + std::strerror(errno);
         throw std::runtime_error(error);
     }
 
@@ -77,7 +81,7 @@ flightConfig FlightConfigServer::runServer() {
 
 
     char buf[4096] = {0};
-    flightConfig config;
+    FlightConfig config;
     while (true) {
         int32_t iBytesReceived = recv(clientSocket, buf, 4096, MSG_DONTWAIT);
         if (iBytesReceived > 0 ) {

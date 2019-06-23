@@ -1,16 +1,17 @@
+import collections
 import json
-import sys
-import requests
-from datetime import datetime
 import logging as log
-from flask import Flask, redirect, render_template, jsonify
+import sys
+from datetime import datetime
+
+import requests
+from flask import Flask, redirect, render_template, jsonify, request
+
 from ControlLaptop.LocalStorage.ConfigurationSotrage import LocalStorage
 from ControlLaptop.LocalStorage.FlightConfig import FlightConfig
 from ControlLaptop.SocketController import PodCommunicator
-from templates._sidebar import get_page_title, NAV_BAR
-from ControlLaptop.forms import FlightConfigurationForm
-import collections
-
+from ControlLaptop.forms import FlightProfileForm, PodConfigurationForm
+from ControlLaptop.templates._sidebar import get_page_title, NAV_BAR
 
 log.basicConfig(stream=sys.stdout, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=log.INFO)
 app = Flask(__name__)
@@ -33,7 +34,7 @@ with app.app_context():
 
 @app.route("/")
 def index():
-    return redirect('/ui/')
+    return redirect('/dashboard')
 
 
 @app.errorhandler(404)
@@ -48,24 +49,22 @@ def inject_now():
 
 @app.route('/submit_configuration', methods=['POST'])
 def submit_configuration():
-    configuration_form = FlightConfigurationForm()
+    configuration_form = PodConfigurationForm()
     flight_configuration = FlightConfig.get_flight_config_instance()
+    pod_communicator = PodCommunicator.get_pod_communicator()
+
     if configuration_form.validate_on_submit():
         flight_configuration.update_config(
             {
                 'retrieval_timeout': int(configuration_form.retrieval_timeout.data),
-                'max_flight_time': int(configuration_form.max_flight_time.data),
-                'motor_speed': int(configuration_form.motor_speed.data),
                 'telemetry_port': int(configuration_form.telemetry_port.data),
                 'command_port': int(configuration_form.command_port.data),
-                'flight_length': int(configuration_form.flight_Length.data),
                 'heartbeat_timeout': int(configuration_form.heartbeat_timout.data),
                 'pod_address': configuration_form.pod_ip.data,
                 'pod_driver': 'Motor' if configuration_form.pod_driver.data is True else 'Simulation',
             }
         )
-        command_sent = PodCommunicator.get_pod_communicator().send_configuration(
-            configuration=flight_configuration.read_config())
+        command_sent = pod_communicator.send_configuration(configuration=flight_configuration.read_config())
         if command_sent is True:
             return jsonify({'status': 'ok'})
         else:
@@ -101,15 +100,47 @@ def ui(path):
     )
 
 
+@app.route("/dashboard")
+def dashboard():
+    path = request.path
+    title = get_page_title(path[1:])
+
+    with open('ControlLaptop/templates/tables/BmsSensors.json') as json_file:
+        bms_sensors = order_sensors(json.load(json_file))
+    with open('ControlLaptop/templates/tables/InverterSensors.json') as json_file:
+        inverter_sensors = order_sensors(json.load(json_file))
+
+    arm_form = FlightProfileForm()
+    return render_template(
+        path+".html",
+        active_page=path,
+        title=title,
+        armForm=arm_form,
+        sensors=[LocalStorage.get_sensors()],
+        bms_sensors=bms_sensors,
+        inverter_sensors=inverter_sensors
+    )
+
+
+@app.route('/parseFlightProfile', methods=['post'])
+def parse_flight_profile_command():
+    form = FlightProfileForm()
+    if form.validate_on_submit():
+        from ControlLaptop.socketIoRoutes import socket_io as sio
+        sio.emit("flight_profile_command", form.data, room="command_updates")
+        return jsonify({'status': 'success'})
+    return jsonify({'status': 'error', 'context': form.errors})
+
+
 @app.route('/dts')
 def dts():
     page = 'dts'
     title = get_page_title(page)
-    with open('ControlLaptop/templates/_cards/tables/DtsSensors.json') as json_file:
+    with open('ControlLaptop/templates/tables/DtsSensors.json') as json_file:
         sensors = order_sensors(json.load(json_file))
-    with open('ControlLaptop/templates/_cards/tables/BmsSensors.json') as json_file:
+    with open('ControlLaptop/templates/tables/BmsSensors.json') as json_file:
         bms_sensors = order_sensors(json.load(json_file))
-    with open('ControlLaptop/templates/_cards/tables/InverterSensors.json') as json_file:
+    with open('ControlLaptop/templates/tables/InverterSensors.json') as json_file:
         inverter_sensors = order_sensors(json.load(json_file))
     return render_template(
         page+".html",
@@ -125,7 +156,7 @@ def dts():
 def proofTest():
     page = 'proofTest'
     title = get_page_title(page)
-    with open('ControlLaptop/templates/_cards/tables/ProofTestSensors.json') as json_file:
+    with open('ControlLaptop/templates/tables/ProofTestSensors.json') as json_file:
         sensors = order_sensors(json.load(json_file))
     return render_template(
         page+".html",
@@ -137,20 +168,20 @@ def proofTest():
 
 @app.route('/profile')
 def get_flight_profile_template():
-    page = 'profile'
+    page = 'connect'
     title = get_page_title(page)
     return render_template(
         page+".html",
         active_page=page,
         title=title,
-        configuration_form=FlightConfigurationForm(),
+        configuration_form=PodConfigurationForm(),
         saved_configuration=FlightConfig.get_flight_config_instance().read_config()
     )
 
 
 @app.route('/sensor_ranges')
 def add_numbers():
-    with open('ControlLaptop/templates/_cards/tables/SensorRanges.json') as json_file:
+    with open('ControlLaptop/templates/tables/SensorRanges.json') as json_file:
         data = json_file.read().replace('\n', '')
     return data
 

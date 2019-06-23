@@ -40,6 +40,11 @@ void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
     if (podCommand.has_automaticstatetransitions()) {
         Pod->setAutomaticTransitions(podCommand.automaticstatetransitions());
     }
+    if(podCommand.has_maxflighttime()){
+        Pod->telemetry->maxFlightTime = podCommand.maxflighttime();
+        Pod->telemetry->motorTorque = podCommand.motortorque();
+        Pod->telemetry->flightDistance = podCommand.flightdistance();
+    }
     if (podCommand.has_manualbrakenodestate()){
         BrakeNodeStates state = podCommand.manualbrakenodestate();
         if(state == bnsSolenoidControl){
@@ -98,23 +103,23 @@ int32_t commanderThread(TelemetryManager Pod) {
     Heartbeat pulse = Heartbeat(Pod.sPodNetworkValues->iCommaderTimeoutMili);
 
     //pod state != shutdown
-    while (Pod.telemetry->podState->getStateValue() != psShutdown) {
+    while (Pod.getPodStateValue() != psShutdown) {
 
         /* Accepted connection gets put iNewSockfd,
         * thread will hang here until a connection is recieved.
         */
         connectionSock = accept(serverSock, nullptr, nullptr);
         if (connectionSock < 0) {
-            LOG(INFO) << (std::string)"ERROR on acception Commander connection" + std::strerror(errno);
+            LOG(INFO) << (std::string)"ERROR on accept() on Commander socket : " + std::strerror(errno);
         }
         operationStatus = fcntl(connectionSock, F_SETFL, fcntl(connectionSock, F_GETFL, 0) | O_NONBLOCK);
         if(operationStatus == -1){
-            //todo throw error and string errno
+            LOG(INFO) << (std::string)"ERROR on making commander socket non-blocking : " + std::strerror(errno);
         }
 
         LOG(INFO) << "Controls Interface Connected";
         pulse.feed();
-        while (Pod.telemetry->podState->getStateValue() != psShutdown) {
+        while (Pod.getPodStateValue() != psShutdown) {
             messageSize = read(connectionSock, buffer, 255);
             if (messageSize < 0) {
                 if (errno == 11) //Erno 11 means no message available on non blocking socket

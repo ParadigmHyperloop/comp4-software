@@ -1,16 +1,20 @@
 import socketio
 import time
 import logging as log
+import time
 from datetime import timedelta
-from config import SOCKET_SERVER, POD_IP, UDP_TELEM_PORT, MAX_MESSAGE_SIZE, UDP_TELEM_TIMEOUT, TELEMETRY_BROADCAST_FREQUENCY
-from PDS.UDP.PodUdpConnection import PodUdpConnection
-from Paradigm_pb2 import Telemetry
-from helpers.heartbeat_timer import HeartbeatTimer
+
+import socketio
 from google.protobuf import json_format
 from google.protobuf.json_format import MessageToDict
+
+from PDS.UDP.PodUdpConnection import PodUdpConnection
+from PDS.helpers.heartbeat_timer import HeartbeatTimer
+from Paradigm_pb2 import Telemetry
+from config import SOCKET_SERVER, POD_IP, UDP_TELEM_PORT, MAX_MESSAGE_SIZE, UDP_TELEM_TIMEOUT, \
+    TELEMETRY_BROADCAST_FREQUENCY
 import sys
 import json
-
 broadcast_timer = HeartbeatTimer()
 log.basicConfig(stream=sys.stdout, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
@@ -26,6 +30,8 @@ def on_connect():
 
 @sio.on('disconnect')
 def on_disconnect():
+    connection_status['status'] = 0
+    sio.emit('connection_updates', json.dumps(connection_status))
     sio.emit('telemetry_connection', '0')
     log.warning("Front End: Disconnected")
 
@@ -50,14 +56,14 @@ def main():
     while udp_socket.is_connected():
         data = udp_socket.recv(timedelta(seconds=UDP_TELEM_TIMEOUT))
         if data is not None:
-            if broadcast_timer.time_since_pulse() > TELEMETRY_BROADCAST_FREQUENCY:
+            pod_data = Telemetry()
+            pod_data.ParseFromString(data)
+            if broadcast_timer.time_since_pulse() > TELEMETRY_BROADCAST_FREQUENCY or pod_data.updateMessages:
                 broadcast_timer.pulse()
-                pod_data = Telemetry()
-                pod_data.ParseFromString(data)
                 json_pod_data = json_format.MessageToJson(pod_data)
                 sio.emit('pod_telemetry', json_pod_data)
-                # pod_data = MessageToDict(pod_data)
-                # log.warning("Telemetry: {}".format(pod_data))
+                pod_data = MessageToDict(pod_data)
+                log.warning("Telemetry: {}".format(pod_data))
         else:
             connection_status['status'] = 0
             sio.emit('connection_updates', json.dumps(connection_status))
@@ -65,6 +71,7 @@ def main():
     udp_socket.close()
     connection_status['status'] = 0
     sio.emit('connection_updates', json.dumps(connection_status))
+
 
 if __name__ == "__main__":
     try:

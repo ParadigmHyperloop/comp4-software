@@ -9,58 +9,68 @@ class PodState;
 
 struct PodValues {
     // States
+    std::mutex stateLock;
     std::unique_ptr<PodState> podState;
-    ControlsInterfaceStates controlsInterfaceState;
-    MotorStates motorState;
-    MotorStates motorState;
-    BrakeNodeStates brakeNodeState;
-    LvdcNodeStates lvdcNodeState;
+    ControlsInterfaceStates controlsInterfaceState = ciNone;
+    BrakeNodeStates receivedBrakeNodeState = bnsNone;
+    BrakeNodeStates commandedBrakeNodeState = bnsNone;
+    LvdcNodeStates lvdcNodeState = lvdcNone;
+
+    // Flight Profile
+    int32_t motorTorque = 0;
+    int32_t flightDistance = 0;
+    int32_t maxFlightTime = 0;
+
+    // Updates
+    std::mutex updatesLock;
+    std::vector<std::string> updates;
 
     //Manual States
-    PodStates manualPodState;
-    MotorStates manualMotorState;
-    BrakeNodeStates manualBrakeNodeState;
-    LvdcNodeStates manualLvdcNodeState;
-    bool automaticTransitions;
+    PodStates manualPodState = psNone;
+    BrakeNodeStates manualBrakeNodeState = bnsNone;
+    LvdcNodeStates manualLvdcNodeState = lvdcNone;
+    bool automaticTransitions = true;
 
     //ConnectionsArray
-    std::vector<int32_t> connectionFlags;
+    std::vector<int32_t> connectionFlags;  // brakeNode, LVDCNode, BMS, Interface
     std::vector<int32_t> sensorFlags;
 
     // HV-BMS
-    float hvBatteryPackVoltage;
-    float hvBatteryPackCurrent;
-    float hvBatteryPackMinimumCellVoltage;
-    float hvBatteryPackMaxCellVoltage;
+    float hvBatteryPackVoltage = 0;
+    float hvBatteryPackCurrent = 0;
+    float hvBatteryPackMinimumCellVoltage = 0;
+    float hvBatteryPackMaxCellVoltage = 0;
+    int hvBatteryPackStateOfCharge = 0;
+    float hvBatteryPackMaxCellTemperature = 0;
 
     //Inverter
-    int32_t maxIgbtTemperature;
-    int32_t gateDriverTemperature;
-    int32_t inverterControlBoardTemperature;
-    int32_t motorTemperature;
-    int32_t inverterBusVoltage;
+    int32_t maxIgbtTemperature = 0;
+    int32_t gateDriverTemperature = 0;
+    int32_t inverterControlBoardTemperature = 0;
+    int32_t motorTemperature = 0;
+    int32_t motorSpeed = 0;
+    int32_t inverterBusVoltage = 0;
+    int32_t commandedTorque = 0;
+    int32_t inverterHeartbeat = 0;
 
     // Atmosphere
-    double tubePressure;
-
-    // Terminal
-    ControlsInterfaceStates eTerminalCommand;
+    double tubePressure = 0;
 
     // Brake Node
     bool solenoid1;
     bool solenoid2;
     bool solenoid3;
     bool solenoid4;
-    float lowPressure1;
-    float lowPressure2;
-    float lowPressure3;
-    float lowPressure4;
-    float highPressure;
-    float pressureVesselTemperature;
+    float lowPressure1 = 0;
+    float lowPressure2 = 0;
+    float lowPressure3 = 0;
+    float lowPressure4 = 0;
+    float highPressure = 0;
+    float pressureVesselTemperature = 0;
     std::vector<bool> manualSolenoidConfiguration = {};
 
     // DTS
-    float rotorTemperature;
+    float rotorTemperature = 0;
 };
 
 struct PodNetwork {

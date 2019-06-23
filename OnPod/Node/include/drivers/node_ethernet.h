@@ -1,5 +1,5 @@
-#ifndef NODEETHERNET_H
-#define NODEETHERNET_H
+#ifndef NODE_ETHERNET_H
+#define NODE_ETHERNET_H
 
 #include <Ethernet.h>
 #include <EthernetUdp.h>
@@ -14,10 +14,6 @@ private:
     const uint16_t NODE_PORT;
     const uint8_t NODE_TYPE;
 
-    // packet counters to ensure packets are recieved in order
-    uint32_t rxPacketNum = 0;
-    uint32_t txPacketNum = 0;
-
     EthernetUDP Udp;
 public:
     UDPClass(uint8_t SS_PIN, IPAddress NODE_IP, uint16_t NODE_PORT,
@@ -29,10 +25,6 @@ public:
 
     uint8_t uRecvBuffer[RX_BUFFER_SIZE];
     uint8_t uSendBuffer[TX_BUFFER_SIZE];
-
-    // packet counter getters
-    uint32_t getTxPacketNum() {return txPacketNum;};
-    uint32_t getRxPacketNum() {return rxPacketNum;};
 };
 
 #endif

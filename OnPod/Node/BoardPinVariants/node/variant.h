@@ -110,6 +110,9 @@ static const uint8_t SOL_CLK = 28;
 static const uint8_t SOL_RESET = 30;
 static const uint8_t SOL_ENABLE = 31;
 
+// INVERTER DIN
+static const uint8_t INVERTER_EN = 1;
+
 // USB
 #define PIN_USB_HOST_ENABLE (4ul)
 #define PIN_USB_DM          (5ul)

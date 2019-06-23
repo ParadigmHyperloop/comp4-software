@@ -13,6 +13,7 @@ class PodState{
 
 public:
     PodState();
+    virtual ~PodState();
 
     PodState(TelemetryManager*);
 
@@ -30,9 +31,9 @@ public:
 
     const std::string getTransitionReason();
 
-    unsigned int getTimeInStateMilis();
+    unsigned int timeInStateSeconds();
 
-    static std::unique_ptr<PodState> createState(PodStates);
+    static std::unique_ptr<PodState> createState(PodStates, TelemetryManager* );
 
     void setupTransition(PodStates, const std::string&);
 
@@ -42,6 +43,10 @@ public:
 
     int32_t checkNodeStates();
 
+    void commonChecks();
+
+    void armedChecks();
+
 
 protected:
     std::chrono::steady_clock::time_point _enterStateTime;
@@ -49,29 +54,56 @@ protected:
     std::string _transitionReason = "";
     PodStates _stateIdentifier = psBooting;
     PodStates _nextStateIdentifier = psBooting;
-    BrakeNodeStates _brakeNodeState = bnsBooting;
-    LvdcNodeStates  _lvdcNodeState = lvdcBooting;
     TelemetryManager* pod;
 };
 
-class Booting: public PodState{
+class Booting: public PodState {
 public:
-    Booting(){
-        _stateIdentifier = psBooting;
-        _brakeNodeState = bnsBooting;
-        _lvdcNodeState = lvdcBooting;
-    }
+    Booting(TelemetryManager*);
+    ~Booting();
     bool testTransitions() override;
 };
 
-class Standby: public PodState{
-    Standby(){
-        _stateIdentifier = psStandby;
-        _brakeNodeState = bnsStandby;
-        _lvdcNodeState = lvdcStandby;
-    }
+class Standby: public PodState {
+public:
+    Standby(TelemetryManager*);
+    ~Standby();
     bool testTransitions() override;
 };
 
+class Arming : public PodState {
+public:
+    Arming(TelemetryManager*);
+    ~Arming();
+    bool testTransitions() override;
+};
+
+class Armed : public PodState {
+public:
+    Armed(TelemetryManager*);
+    ~Armed();
+    bool testTransitions() override;
+};
+
+class PreFlight : public PodState {
+public:
+    PreFlight(TelemetryManager*);
+    ~PreFlight() override ;
+    bool testTransitions() override;
+};
+
+class Acceleration : public PodState {
+public:
+    Acceleration(TelemetryManager*);
+    ~Acceleration();
+    bool testTransitions() override;
+};
+
+class Braking : public PodState {
+public:
+    Braking(TelemetryManager*);
+    ~Braking();
+    bool testTransitions() override;
+};
 
 #endif //FLIGHTCOMPUTER_STATES_H

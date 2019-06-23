@@ -1,11 +1,12 @@
 $( document ).ready(function() {
-    conectionLoader = $("#connected-loader");
-    noConnectionLoader = $("#no-connection-loader");
-    telemetryLoader = $("#telemetry-loader");
-    noTelemetryLoader = $("#no-telemetry-loader");
-    telemetryCount = $("#telem-received-num");
+    window.conectionLoader = $("#connected-loader");
+    window.noConnectionLoader = $("#no-connection-loader");
+    window.telemetryLoader = $("#telemetry-loader");
+    window.noTelemetryLoader = $("#no-telemetry-loader");
+    window.telemetryCount = $("#telem-received-num");
 
     socket.emit('join_room','connection_updates');
+    socket.emit('join_room','telemetry_updates');
 });
 
 
@@ -34,11 +35,8 @@ function toggleCommanderIndicator(status){
 }
 
 socket.on('connection_update', function (update_json) {
-
-    console.log("got it!");
-
-    update = JSON.parse(update_json);
-    connection = update['name'];
+    const update = JSON.parse(update_json);
+    const connection = update['name'];
     status = update['status'];
 
     if(connection === 'commander'){
@@ -51,7 +49,7 @@ socket.on('connection_update', function (update_json) {
 
 socket.on('pod_telemetry', function (data) {
     toggleTelemetryIndicator(1);
-    count = telemetryCount.text();
+    let count = telemetryCount.text();
     count++;
     telemetryCount.text(count);
 });

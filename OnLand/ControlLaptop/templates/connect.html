@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+ {% include '_cards/connectionCards.html' %}
+</div>
+<div class="row">
+   <div class="col-md-12">
+      {% include '_forms/setPodConfiguration.html' %}
+   </div>
+</div>
+
+{% endblock %}
+
+{% block pageScripts %}
+    <script src="{{ url_for('static',filename='assets/js/podConfiguration.js') }}"></script>
+{% endblock %}

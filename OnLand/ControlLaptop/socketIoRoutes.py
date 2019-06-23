@@ -1,4 +1,4 @@
-from flask_socketio import SocketIO, join_room, leave_room
+from flask_socketio import SocketIO, join_room
 from ControlLaptop.views import app
 import logging as log
 
@@ -26,9 +26,9 @@ def complete_room_join(room):
     join_room(room)
 
 
-@socket_io.on('command')
-def interface_command(command):
-    socket_io.emit("command", command, room="command_updates")
+@socket_io.on('frontend_notification')
+def frontend_notification(notification):
+    socket_io.emit("frontend_notification", notification, room="notification_updates")
 
 
 @socket_io.on('connection_updates')
@@ -59,4 +59,9 @@ def logger_controls(data):
 @socket_io.on('logger_feedback')
 def logger_feedback(feedback):
     socket_io.emit('logger_feedback', feedback, room='logger_feedback_updates')
+
+
+@socket_io.on('cycle_process')
+def logger_feedback(feedback):
+    socket_io.emit('cycle_process', feedback, room='process_control')
 

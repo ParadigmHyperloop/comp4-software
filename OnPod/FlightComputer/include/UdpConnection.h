@@ -58,9 +58,7 @@ public:
      *
      * @requires: ConfigServer() has been called
      *
-     * @throws: Runtime error if parsing the proto message fails.
-     *
-     * //TODO throw error if config server hasnt been set
+     * @throws: Runtime error if parsing the proto message fails or socket is broken.
      */
     void getUpdate();
 

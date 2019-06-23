@@ -8,8 +8,11 @@ UdpConnection::UdpConnection(TelemetryManager pod){
 };
 
 void UdpConnection::setRecvBufferSize(int32_t bufferSize) {
-    //todo log failure
-    int32_t s = setsockopt(this->_inboundSocket, SOL_SOCKET, SO_RCVBUF, &bufferSize, sizeof(bufferSize));
+    int32_t status = setsockopt(this->_inboundSocket, SOL_SOCKET, SO_RCVBUF, &bufferSize, sizeof(bufferSize));
+    if(status < 0){
+        std::string error = std::string("Failed to set recv buffer size ") + std::strerror(errno);
+        throw std::runtime_error(error);
+    }
 }
 
 
@@ -61,7 +64,7 @@ void UdpConnection::getUpdate() {
     bzero(&buffer, sizeof buffer);
     ssize_t receivedPacketSize = recvfrom(this->_inboundSocket, buffer, 200, 0, nullptr, nullptr);
     if (receivedPacketSize != -1) {
-        LOG(INFO) << receivedPacketSize << " Bytes received on " << this->_connectionName << buffer;
+        //LOG(INFO) << receivedPacketSize << " Bytes received on " << this->_connectionName << buffer;
         try {
             opStatus = this->parseUpdate(buffer, (int32_t) receivedPacketSize);
         }
@@ -86,7 +89,6 @@ void UdpConnection::giveUpdate() {
 
     ssize_t payloadSize;
     std::unique_ptr<google::protobuf::Message> protoPacket(this->getProtoUpdateMessage());
-
     payloadSize = protoPacket->ByteSizeLong();
     unsigned char payload[payloadSize];
 
@@ -155,7 +157,7 @@ PdsConnection::PdsConnection(TelemetryManager pod) : UdpConnection(pod) {
 
 std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage() {
     std::unique_ptr<Telemetry> protoMessage (new Telemetry());
-    protoMessage->set_podstate(pod.telemetry->podState->getStateValue());
+    protoMessage->set_podstate(pod.getPodStateValue());
     protoMessage->set_lowpressure1(pod.telemetry->lowPressure1);
     protoMessage->set_highpressure(pod.telemetry->highPressure);
     protoMessage->set_solenoid1(pod.telemetry->solenoid1);
@@ -171,6 +173,25 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_invertercontrolboardtemperature(pod.telemetry->inverterControlBoardTemperature);
     protoMessage->set_motortemperature(pod.telemetry->motorTemperature);
     protoMessage->set_inverterbusvoltage(pod.telemetry->inverterBusVoltage);
+    protoMessage->set_maxflighttime(pod.telemetry->maxFlightTime);
+    protoMessage->set_flightdistance(pod.telemetry->flightDistance);
+    protoMessage->set_motortorque(pod.telemetry->motorTorque);
+    protoMessage->set_inverterheartbeat(pod.telemetry->inverterHeartbeat);
+    protoMessage->set_hvbatterypackmaxcelltemperature(pod.telemetry->hvBatteryPackMaxCellTemperature);
+    protoMessage->set_hvbatterypackstateofcharge(pod.telemetry->hvBatteryPackStateOfCharge);
+    protoMessage->set_motorspeed(pod.telemetry->motorSpeed);
+
+    protoMessage->set_lvdcnodestate(lvdcNone);
+    protoMessage->set_brakenodestate(pod.telemetry->receivedBrakeNodeState);
+
+    // Add Updates todo probably put this in a function with a pointer to the proto as an argument
+    if(this->pod.telemetry->updates.size() > 0){
+        std::lock_guard<std::mutex> lock(this->pod.telemetry->updatesLock);
+        for(std::string& update : this->pod.telemetry->updates){
+            protoMessage->add_updatemessages(update);
+        }
+        this->pod.telemetry->updates.clear();
+    }
     return protoMessage;
 }
 
@@ -188,7 +209,7 @@ std::unique_ptr<google::protobuf::Message> BrakeNodeConnection::getProtoUpdateMe
     protoMessage->set_packetnum(this->getNewPacketId());
     BrakeNodeStates manualState = this->pod.telemetry->manualBrakeNodeState;
     if(manualState == bnsNone){
-        protoMessage->set_nodestate(this->pod.telemetry->manualBrakeNodeState);
+        protoMessage->set_nodestate(this->pod.telemetry->commandedBrakeNodeState);
         return protoMessage;
     }
     if(manualState == bnsSolenoidControl){
@@ -203,7 +224,7 @@ std::unique_ptr<google::protobuf::Message> BrakeNodeConnection::getProtoUpdateMe
 }
 
 bool BrakeNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
-    DtsNodeToFc protoMessage = DtsNodeToFc();
+    BrakeNodeToFc protoMessage = BrakeNodeToFc();
     if (!protoMessage.ParseFromArray(buffer, messageSize)) {
         std::string strError = "Failed to parse Update from Brake Node";
         throw std::invalid_argument(strError);
@@ -211,11 +232,11 @@ bool BrakeNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
     if(this->checkPacketId(protoMessage.packetnum())){
         return false;
     }
-    this->pod.setSolenoid(protoMessage.brakesolenoidstate(),SOL1_INDEX);
-    this->pod.setSolenoid(protoMessage.ventsolenoidstate(), SOL4_INDEX);
+    this->pod.setSolenoid(protoMessage.solenoid1(),SOL1_INDEX);
+    this->pod.setSolenoid(protoMessage.solenoid2(), SOL4_INDEX);
    // this->pod.setPressureVesselTemperature(protoMessage.pneumatictemperature());
-    this->pod.setHighPressure(protoMessage.tankpressure());
-    this->pod.setLowPressure(protoMessage.brakepressure(), LP1_INDEX);
+    this->pod.setHighPressure(protoMessage.highpressure());
+    this->pod.setLowPressure(protoMessage.lowpressure1(), LP1_INDEX);
     //this->pod.telemetry->rotorTemperature = protoMessage.rotortemperature(); //dts
     return true;
 }

@@ -13,14 +13,14 @@ $(document).ready(function () {
 });
 
 socket.on ('logger_feedback', function (data) {
-    feedback = JSON.parse(data);
-    status = feedback['feedback'];
+    const feedback = JSON.parse(data);
+    const status = feedback['feedback'];
     console.log(status);
     if(status === 'started'){
         showNotification('Logging Session Started', 'Success');
     }
     else if(status === 'stopped'){
-        filename = feedback['filename'];
+        const filename = feedback['filename'];
         showNotification('Session Ended - FileName: '+ filename, 'Success');
     }
 });

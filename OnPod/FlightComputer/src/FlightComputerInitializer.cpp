@@ -19,11 +19,11 @@ FlightComputerInitializer* FlightComputerInitializer::GetInstance()
 void FlightComputerInitializer::importLoggerLibrary()
 {
     el::Helpers::setThreadName("main");
-    std::ifstream infile("home/debian/logging.conf");
-
+    std::ifstream infile("/home/debian/logging.conf");
     if (infile.good())
     {
-        el::Configurations conf("home/debian/logging.conf");
+        return;
+        el::Configurations conf("/home/debian/logging.conf");
         el::Loggers::reconfigureAllLoggers(conf);
     } else
     {
@@ -33,7 +33,7 @@ void FlightComputerInitializer::importLoggerLibrary()
     }
 }
 
-void FlightComputerInitializer::updatePodNetworkValues(PodNetwork& podNetworkValues, flightConfig& config)
+void FlightComputerInitializer::updatePodNetworkValues(PodNetwork& podNetworkValues, FlightConfig& config)
 {
     std::string cNodeIpAddrs[] = {"192.168.1.20"};
     podNetworkValues.cNodeIpAddrs.assign(begin(cNodeIpAddrs), end(cNodeIpAddrs)); // Node IPs

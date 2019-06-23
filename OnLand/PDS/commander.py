@@ -1,11 +1,14 @@
-import logging as log
-import socketio
-import time
-from Paradigm_pb2 import *
-from PDS.TCP.PodTcpConnection import PodTcpConnection
-from helpers.heartbeat_timer import HeartbeatTimer
-from config import COMMANDER_BACKUP_PULSE, COMMANDER_TIMEOUT_TIME, COMMANDER_PULSE_SPEED, POD_IP, POD_COMMANDER_PORT, COMMANDER_BROADCAST_FREQUENCY, SOCKET_SERVER
 import json
+import logging as log
+import time
+
+import socketio
+
+from PDS.TCP.PodTcpConnection import PodTcpConnection
+from PDS.helpers.heartbeat_timer import HeartbeatTimer
+from Paradigm_pb2 import *
+from config import COMMANDER_BACKUP_PULSE, COMMANDER_TIMEOUT_TIME, COMMANDER_PULSE_SPEED, POD_IP, POD_COMMANDER_PORT, \
+    COMMANDER_BROADCAST_FREQUENCY, SOCKET_SERVER
 
 log.basicConfig(stream=sys.stdout, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 pod_command = PodCommand()
@@ -28,6 +31,7 @@ def on_disconnect():
     log.info("Commander Thread: Disconnected from SocketIO")
     sio.emit('ping', 0)
 
+
 @sio.on('manual_state_command')
 def on_state_command(command):
     command = json.loads(command)
@@ -43,6 +47,9 @@ def on_state_command(command):
         new_pod_command.manualPodState = PodStates.Value(state)
     elif target == 'lvdc_node':
         new_pod_command.manualLvdcNodeState = LvdcNodeStates.Value(state)
+    elif target == 'interface_state':
+        new_pod_command.controlsInterfaceState = ControlsInterfaceStates.Value(state)
+        print(state)
 
     pod.send_packet(new_pod_command.SerializeToString())
 
@@ -64,6 +71,17 @@ def on_state_command(command):
         new_pod_command.powerRailConfiguration.extend(configuration)
 
     pod.send_packet(new_pod_command.SerializeToString())
+
+
+@sio.on('flight_profile_command')
+def on_arm_command(profile):
+    new_pod_command = PodCommand()
+    new_pod_command.hasCommand = True
+    new_pod_command.motorTorque = profile['motor_speed']
+    new_pod_command.flightDistance = profile['flight_distance']
+    new_pod_command.maxFlightTime = profile['max_flight_time']
+    pod.send_packet(new_pod_command.SerializeToString())
+
 
 @sio.on('command')
 def on_command(command):
@@ -90,7 +108,7 @@ def main():
         try:
             sio.connect(SOCKET_SERVER)
         except:
-            log.info("Commader cannot connect to SocketIO")
+            log.info("Commander cannot connect to SocketIO")
             time.sleep(2)
         else:
             connected = True

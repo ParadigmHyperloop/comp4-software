@@ -1,3 +1,4 @@
+#include <Paradigm.pb.h>
 #include "TelemetryManager.h"
 #include "Common.h"
 #include "comparingHelpers.h"
@@ -8,13 +9,23 @@ TelemetryManager::TelemetryManager()=default;
 TelemetryManager::TelemetryManager(PodValues *sPodValues, PodNetwork *sNetworkVals) {
     this->telemetry = sPodValues;
     this->sPodNetworkValues = sNetworkVals;
-};
+}
 
+void TelemetryManager::sendUpdate(std::string update) {
+    LOG(INFO)<<update;
+    std::lock_guard<std::mutex> lock(this->telemetry->stateLock);
+    this->telemetry->updates.push_back(update);
+}
+
+PodStates TelemetryManager::getPodStateValue() {
+    std::lock_guard<std::mutex> lock(this->telemetry->stateLock);
+    return this->telemetry->podState->getStateValue();
+}
 
 int32_t TelemetryManager::setPodState(PodStates newState, const std::string &reason) {
     if (this->bWritePodState){
-        LOG(INFO) << reason;
-        this->telemetry->podState = std::move(PodState::createState(newState));
+        std::lock_guard<std::mutex> lock(this->telemetry->stateLock);
+        this->telemetry->podState = std::move(PodState::createState(newState, this));
         return 1;
     } else {
         return 0;
@@ -109,6 +120,14 @@ float TelemetryManager::getHvBatteryPackMaxCellVoltage(){
     return this->telemetry->hvBatteryPackMaxCellVoltage;
 }
 
+void TelemetryManager::setHvBatteryPackMaxCellTemperature(float value) {
+    this->telemetry->hvBatteryPackMaxCellTemperature = value;
+}
+
+void TelemetryManager::setHvBatteryPackStateOfCharge(int value) {
+    this->telemetry->hvBatteryPackStateOfCharge = value;
+}
+
 void TelemetryManager::setSolenoid(bool value, int32_t identifier){
     // Set Value in Memory
     switch(identifier){
@@ -130,7 +149,7 @@ void TelemetryManager::setSolenoid(bool value, int32_t identifier){
 void TelemetryManager::setLowPressure(float value, int identifier){
 
     bool status = true;
-    PodStates currentState = this->telemetry->podState->getStateValue();
+    PodStates currentState = this->getPodStateValue();
 
     // Set Value in Memory
     switch(identifier){
@@ -161,7 +180,7 @@ void TelemetryManager::setLowPressure(float value, int identifier){
 
 void TelemetryManager::setHighPressure(float value){
     bool status = false;
-    PodStates currentState = this->telemetry->podState->getStateValue();
+    PodStates currentState = this->getPodStateValue();
 
     this->telemetry->highPressure = value;
     if(currentState == psStandby){
@@ -190,7 +209,6 @@ void TelemetryManager::setSensorFlag(int32_t status, int32_t index){
     }
     if(currentStatus != status){
         this->telemetry->sensorFlags[index] = status;
-        //ForceControlLoopIteration? TODO
         return;
     }
 }
@@ -202,7 +220,14 @@ void TelemetryManager::setConnectionFlag(int32_t status, int32_t index){
     }
     if(currentStatus != status){
         this->telemetry->connectionFlags[index] = status;
-        //ForceControlLoopIteration? TODO
         return;
     }
 }
+
+void TelemetryManager::setInverterHeartbeat(int32_t value) {
+    if(this->telemetry->inverterHeartbeat != 2){
+        this->telemetry->inverterHeartbeat = value;
+    }
+    return;
+}
+

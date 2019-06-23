@@ -16,4 +16,3 @@ class HeartbeatTimer:
 
     def pulse(self):
         self._last_pulse = self._current_time_milli()
-
