@@ -1,3 +1,8 @@
+/** LVDC Node program with state machine.
+ * Receives commands from Flight Computer and
+ * transmits back LVDC sensor values over UDP.
+ **/
+
 #include <Arduino.h>
 #include <pb_decode.h>
 #include <pb_encode.h>
@@ -38,9 +43,9 @@ uint32_t txPacketNum = 0;
 uint32_t rxPacketNum = 0;
 
 // instantiate protobuf objects
-FcToLvdcNode pFcCommand = FcToLvdcNode_init_default;
-LvdcNodeToFc pLvdcNodeTelemetry = LvdcNodeToFc_init_default;
-LvdcNodeStates lvdcNodeState = LvdcNodeStates_lvdcBooting;
+FcToLvdcNode    pFcCommand          = FcToLvdcNode_init_default;
+LvdcNodeToFc    pLvdcNodeTelemetry  = LvdcNodeToFc_init_default;
+LvdcNodeStates  lvdcNodeState       = LvdcNodeStates_lvdcBooting;
 
 void sendToFlightComputer(void*) {
     pLvdcNodeTelemetry.packetNum = txPacketNum;
@@ -121,6 +126,6 @@ void loop() {
         }
     }
 
-    // send to FC is interval has expired
-    txTimer.update();
+    // send to FC if interval has expired
+    txTimer.update();  //TODO: is this setup?
 }

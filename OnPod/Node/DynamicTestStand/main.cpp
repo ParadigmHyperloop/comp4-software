@@ -1,3 +1,9 @@
+/** Dynamic Test Stand Node main program and state machine.
+ * Program that controls the sensors and brake solenoids.
+ * 
+ * Specific for use with DTS, not on full pod!
+ **/
+
 #include <Arduino.h>
 #include <pb_decode.h>
 #include <pb_encode.h>

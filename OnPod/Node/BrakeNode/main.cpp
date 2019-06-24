@@ -1,3 +1,11 @@
+/** Brake Node main program and state machine.
+ * Program that controls the sensors and brake solenoids on the pod.
+ * 
+ * - Communicates with the Flight Computer over UDP.
+ * - Has Heartbeat timeout, TODO: Watchdog timer
+ * - Drives solenoids, ir_temp, thermocouples and hp/lp transducers.
+ **/
+
 #include <Arduino.h>
 #include <pb_decode.h>
 #include <pb_encode.h>
@@ -22,7 +30,6 @@ Timer txTimer;
 Timer fcHeartbeatTimer;
 bool heartBeatExpired = false;
 uint8_t timerEventNumber = 0;
-
 
 // instantiate adc and all sensors with which it interfaces
 SPIClass adcSPI (&PERIPH_SPI1, MISO1, SCK1, MOSI1, PAD_SPI1_TX, PAD_SPI1_RX);

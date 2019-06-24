@@ -10,5 +10,4 @@ void ACS711::init() {
 
 float ACS711::read() {
     uint16_t uAdcConversion = adc->getuAdcData()[uAdcChannel];
-
 }
