@@ -1,0 +1,1 @@
+/usr/bin/arm-linux-gnueabihf-g++  -O3 -DNDEBUG  -static-libgcc  -static-libstdc++ CMakeFiles/FlightComputer.dir/main.cpp.o  -o FlightComputer 
