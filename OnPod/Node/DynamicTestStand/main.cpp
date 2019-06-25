@@ -1,3 +1,10 @@
+/* Board: Node
+ *
+ * Dynamic Test Stand Node main program and state machine.
+ * Program that controls the sensors and brake solenoids.
+ * Specific for use with DTS, not on full pod!
+ */
+
 #include <Arduino.h>
 #include <pb_decode.h>
 #include <pb_encode.h>
@@ -6,12 +13,10 @@
 #include "drivers/node_ethernet.h"
 #include "drivers/solenoid_driver_DRV8806.h"
 #include "drivers/solenoid.h"
-
 #include "sensors/ir_temp_OS101E.h"
 #include "sensors/thermocouple.h"
 #include "sensors/hp_transducer_U5374.h"
 #include "sensors/lp_transducer_PX2300P.h"
-
 #include "Paradigm.pb.h"
 #include "../../pod_internal_network.h"
 
@@ -91,14 +96,6 @@ void loop() {
             if (pDtsNodeTelemetry.rotorTemperature > 500) {
                 dtsState = BrakeNodeStates_bnsError;
             }
-            break;
-        case BrakeNodeStates_bnsVenting:
-            brakeSolenoid.close();
-            ventSolenoid.open();
-            break;
-        case BrakeNodeStates_bnsError:
-            brakeSolenoid.close();
-            ventSolenoid.open();
             break;
     }
 

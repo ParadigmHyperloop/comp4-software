@@ -1,21 +1,29 @@
+/* Board: Arduino Mega
+ *
+ * Navigation node module for sending the number of spokes counted
+ * and the highest count of lines from both IR sensors.
+ * This utilizes the tachometer and two IR sensors and will
+ * transmit the calculated values serially.
+ */
+
 #include <Arduino.h>
 #include <Timer.h>
 
 Timer printTimer;
 Timer irEqualizeTimer;
 
-const float DISTANCE_PER_SPOKE = 0.1; // circumference of wheel / num of spokes
-const uint16_t PRINT_INTERVAL = 200; // print every x milliseconds
-const uint8_t LEFT_IR_INT_PIN = 2; // interrupt pin for left IR sensor
-const uint8_t RIGHT_IR_INT_PIN = 3; // interrupt pin for right IR sensor
-const uint8_t TACH_INT_PIN = 18; //  interrupt pin for optical tachometer
-const uint16_t IR_EQUALIZE_DELAY = 50; // run `equalizeIrCount` every x milliseconds
+const float    DISTANCE_PER_SPOKE = 0.1;  // circumference of wheel
+const uint16_t PRINT_INTERVAL     = 200;  // print every x milliseconds
+const uint8_t  LEFT_IR_INT_PIN    = 2;    // interrupt pin for left IR sensor
+const uint8_t  RIGHT_IR_INT_PIN   = 3;    // interrupt pin for right IR sensor
+const uint8_t  TACH_INT_PIN       = 18;   // interrupt pin for optical tachometer
+const uint16_t IR_EQUALIZE_DELAY  = 50;   // run `equalizeIrCount` every x milliseconds
 
-uint32_t spoke_count = 0;
-uint32_t left_strip_count = 0;
-uint32_t right_strip_count = 0;
+uint32_t spoke_count        = 0;
+uint32_t left_strip_count   = 0;
+uint32_t right_strip_count  = 0;
 
-bool left_ir_triggered_flag = false;
+bool left_ir_triggered_flag  = false;
 bool right_ir_triggered_flag = false;
 
 // called on tach interrupt

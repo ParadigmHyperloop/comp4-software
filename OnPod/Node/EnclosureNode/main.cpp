@@ -1,3 +1,6 @@
+/* Encolsure Node program that transmits data to
+ * the Flight Computer over UDP.
+ */
 #include <Arduino.h>
 #include <pb_encode.h>
 #include <pb_decode.h>
@@ -39,5 +42,4 @@ void setup() {
 
 void loop() {
     txTimer.update();  // check to see if it's time to send another packet
-
 }
