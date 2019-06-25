@@ -1,4 +1,1 @@
-/snap/clion/73/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=/usr/bin/arm-linux-gnueabihf-gcc -DCMAKE_CXX_COMPILER=/usr/bin/arm-linux-gnueabihf-g++ -G "CodeBlocks - Unix Makefiles" /home/liam/Development/comp4-software/Examples/BBSerial
--- Configuring done
--- Generating done
--- Build files have been written to: /home/liam/Development/comp4-software/Examples/BBSerial/build/target
+CMakeLists.txt not found in /home/liam/Development/comp4-software/Examples/BBSerial Select CMakeLists.txt file...

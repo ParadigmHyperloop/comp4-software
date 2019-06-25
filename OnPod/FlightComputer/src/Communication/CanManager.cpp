@@ -66,8 +66,9 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
         }
             break;
         default:
-            std::string error = "Unknown CAN ID : " + std::to_string(frame.can_id);
-            throw std::runtime_error(error);
+            return;
+            //std::string error = "Unknown CAN ID : " + std::to_string(frame.can_id);
+            //throw std::runtime_error(error);
     }
 }
 

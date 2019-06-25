@@ -66,9 +66,8 @@ void PodState::commonChecks() {
 }
 
 void PodState::armedChecks(){
-    return;
     if(!this->pod->telemetry->inverterHeartbeat){
-        std::string error = "Inverter Heartbeat Expired.";
+        std::string error = "Armed Check Failed. Inverter Heartbeat Expired.";
         throw std::runtime_error(error);
     }
     //todo check array for inverter values
@@ -183,7 +182,7 @@ Arming::Arming(TelemetryManager * pod ): PodState(pod) {
 Arming::~Arming() = default;
 
 bool Arming::testTransitions() {
-    if(this->pod->telemetry->controlsInterfaceState == ciEmergencyStop){
+    if(this->pod->telemetry->controlsInterfaceState == ciEmergencyStop || this->pod->telemetry->controlsInterfaceState == ciStandby ){
         this->setupTransition(psStandby, "Emergency Stop. Pod --> Standby");
         return true;
     }
@@ -228,7 +227,7 @@ Armed::~Armed() {
 }
 
 bool Armed::testTransitions() {
-    if(this->pod->telemetry->controlsInterfaceState == ciEmergencyStop){
+    if(this->pod->telemetry->controlsInterfaceState == ciEmergencyStop || this->pod->telemetry->controlsInterfaceState == ciStandby ){
         this->setupTransition(psStandby, "Emergency Stop. Pod --> Standby");
         return true;
     }

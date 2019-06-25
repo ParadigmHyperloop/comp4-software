@@ -20,7 +20,7 @@ class PodConfigurationForm(FlaskForm):
 
 class FlightProfileForm(FlaskForm):
     max_flight_time = IntegerField('Maximum Flight Time (s)', validators=[DataRequired("Required"), NumberRange(0, 100, "0 < Flight Time < 100")])
-    motor_speed = IntegerField('Motor Speed (units)', validators=[DataRequired("Required"), NumberRange(0, 100, "0  < Distance < 100 ")])
+    motor_speed = IntegerField('Motor Torque (N/m)', validators=[DataRequired("Required"), NumberRange(0, 10000, "0  < Distance < 100 ")])
     flight_distance = IntegerField('Flight Distance (meters)', validators=[DataRequired("Required"), NumberRange(0, 100, "0  < Flight Distance < 100 ")])
     #todo radial for air or vaccume
 
