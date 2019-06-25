@@ -1,0 +1,76 @@
+<div class="collapse"  id="flightProfileCollapse">
+    <div class="card">
+       <div class="header">
+          <h4 class="title">Set Profile</h4>
+       </div>
+       <div class="content">
+          <form>
+               <div class="form-group">
+                   {{ armForm.csrf_token }}
+                   <div class="row">
+                       <div class="col-md-4">
+                            {{ armForm.flight_distance.label }}<br>
+                            {{ armForm.flight_distance(class_="form-control") }}
+                       </div>
+                       <div class="col-md-4">
+                            {{ armForm.max_flight_time.label }}<br>
+                            {{ armForm.max_flight_time(class_="form-control") }}
+                       </div>
+                       <div class="col-md-4">
+                            {{ armForm.motor_speed.label }}<br>
+                            {{ armForm.motor_speed(class_="form-control") }}
+                       </div>
+                   </div>
+                   <div class="row text-center">
+                       <input type="submit" value="SEND"/>
+                   </div>
+               </div>
+          </form>
+       </div>
+    </div>
+</div>
+
+<style>
+    .card label{
+        color: black;
+        font-size: 17px;
+    }
+</style>
+
+
+<script>
+    $(document).ready(function() {
+        $('form').submit(function (e) {
+            var url = "{{ url_for('parse_flight_profile_command') }}"; // send the form data here.
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: $('form').serialize(), // serializes the form's elements.
+                success: function (response) {
+                    let status = response['status']
+                    if(status === 'success'){
+                        showNotification('Profile Sent','Success')
+                    }
+                    else{
+                        const errors = response['context']
+                        for (let key in errors) {
+                            if (errors.hasOwnProperty(key)) {
+                                let error_message = errors[key][0];
+                                showNotification(error_message,'Danger')
+                            }
+                        }
+                    }
+                }
+            });
+            e.preventDefault(); // block the traditional submission of the form.
+        });
+        // Inject our CSRF token into our AJAX request.
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", "{{ armForm.csrf_token._value() }}")
+                }
+            }
+        })
+    });
+</script>

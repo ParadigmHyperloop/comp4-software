@@ -1,15 +1,18 @@
 #include "UdpConnection.h"
+#include "../Constants/SensorConfig.h"
 
-
-UdpConnection::UdpConnection(Pod pod){
+UdpConnection::UdpConnection(TelemetryManager pod){
     this->pod = pod;
     struct sockaddr_in socketAddress = {0};
     this->_destSockAddr = socketAddress;
 };
 
 void UdpConnection::setRecvBufferSize(int32_t bufferSize) {
-    //todo log failure
-    int32_t s = setsockopt(this->_inboundSocket, SOL_SOCKET, SO_RCVBUF, &bufferSize, sizeof(bufferSize));
+    int32_t status = setsockopt(this->_inboundSocket, SOL_SOCKET, SO_RCVBUF, &bufferSize, sizeof(bufferSize));
+    if(status < 0){
+        std::string error = std::string("Failed to set recv buffer size ") + std::strerror(errno);
+        throw std::runtime_error(error);
+    }
 }
 
 
@@ -34,8 +37,25 @@ void UdpConnection::configureServer(int32_t serverPort, int32_t connectionTimeou
     }
 }
 
+int32_t UdpConnection::getNewPacketId() {
+    return this->_lastPacketSentId++;
+}
+
+int32_t UdpConnection::checkPacketId(int32_t id) {
+    if(id < this->_lastPacketReceivedId){
+        return false;
+    }
+    else{
+        this->_lastPacketReceivedId = id;
+        return true;
+    }
+}
+
 
 void UdpConnection::getUpdate() {
+
+    bool opStatus = false;
+
     if (this->_inboundSocket == -1) {
         std::string error = "getUpdate() : Server socket invalid";
         throw std::runtime_error(error);
@@ -44,19 +64,22 @@ void UdpConnection::getUpdate() {
     bzero(&buffer, sizeof buffer);
     ssize_t receivedPacketSize = recvfrom(this->_inboundSocket, buffer, 200, 0, nullptr, nullptr);
     if (receivedPacketSize != -1) {
-       // LOG(INFO) << receivedPacketSize << " Bytes received on " << this->_connectionName << buffer;
+        //LOG(INFO) << receivedPacketSize << " Bytes received on " << this->_connectionName << buffer;
         try {
-            this->parseUpdate(buffer, (int32_t) receivedPacketSize);
+            opStatus = this->parseUpdate(buffer, (int32_t) receivedPacketSize);
         }
         catch (const std::invalid_argument &e) {
             std::string error = "getUpdate() : " + std::string(e.what());
+            this->pod.setConnectionFlag(false, this->getConnectionIndex());
             throw std::runtime_error(error);
         }
-        this->_pulse.feed();
-        this->setConnectionStatus(true);
+        if(opStatus){
+            this->_pulse.feed();
+        }
+        this->pod.setConnectionFlag(true, this->getConnectionIndex());
     } else {
         if (this->_pulse.expired()) {
-            this->setConnectionStatus(false);
+            this->pod.setConnectionFlag(false, this->getConnectionIndex());
         }
     }
 }
@@ -66,7 +89,6 @@ void UdpConnection::giveUpdate() {
 
     ssize_t payloadSize;
     std::unique_ptr<google::protobuf::Message> protoPacket(this->getProtoUpdateMessage());
-
     payloadSize = protoPacket->ByteSizeLong();
     unsigned char payload[payloadSize];
 
@@ -86,7 +108,6 @@ void UdpConnection::closeConnection() {
     close(this->_inboundSocket);
     close(this->_outboundSocket);
 }
-
 
 std::unique_ptr<google::protobuf::Message> UdpConnection::getProtoUpdateMessage() {
     std::unique_ptr<DefaultFcToNode> protoMessage (new DefaultFcToNode());
@@ -120,57 +141,136 @@ bool UdpConnection::_createServerSocket() {
     return true;
 }
 
+int32_t UdpConnection::getConnectionIndex(){
+    return this->_connectionStatusIndex;
+}
 
-PdsConnection::PdsConnection(Pod pod) : UdpConnection(pod) {
+
+/*
+ *  ***************** PDS Connection *******************
+ */
+
+PdsConnection::PdsConnection(TelemetryManager pod) : UdpConnection(pod) {
     this->_connectionName = "Controls Interface Data : ";
+    this->_connectionStatusIndex = PDS_CONNECTION_INDEX;
 };
 
 std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage() {
     std::unique_ptr<Telemetry> protoMessage (new Telemetry());
-    protoMessage->set_podstate(pod.sPodValues->podState);
-    protoMessage->set_lowpressure1(pod.sPodValues->lowPressure1);
-    protoMessage->set_highpressure(pod.sPodValues->highPressure);
-    protoMessage->set_solenoid1(pod.sPodValues->solenoid1);
-    protoMessage->set_solenoid2(pod.sPodValues->solenoid2);
-    protoMessage->set_pressurevesseltemperature(pod.sPodValues->pressureVesselTemperature);
-    protoMessage->set_railtemperature(pod.sPodValues->railTemperature);
-    protoMessage->set_hvbatterypackvoltage(pod.sPodValues->hvBatteryPackVoltage);
-    protoMessage->set_hvbatterypackcurrent(pod.sPodValues->hvBatteryPackCurrent);
-    protoMessage->set_hvbatterypackmaxcellvoltage(pod.sPodValues->hvBatteryPackMaxCellVoltage);
-    protoMessage->set_hvbatterypackminimumcellvoltage(pod.sPodValues->hvBatteryPackMinimumCellVoltage);
+    protoMessage->set_podstate(pod.getPodStateValue());
+    protoMessage->set_lowpressure1(pod.telemetry->lowPressure1);
+    protoMessage->set_highpressure(pod.telemetry->highPressure);
+    protoMessage->set_solenoid1(pod.telemetry->solenoid1);
+    protoMessage->set_solenoid2(pod.telemetry->solenoid2);
+    protoMessage->set_pressurevesseltemperature(pod.telemetry->pressureVesselTemperature);
+    protoMessage->set_railtemperature(pod.telemetry->rotorTemperature);
+    protoMessage->set_hvbatterypackvoltage(pod.telemetry->hvBatteryPackVoltage);
+    protoMessage->set_hvbatterypackcurrent(pod.telemetry->hvBatteryPackCurrent);
+    protoMessage->set_hvbatterypackmaxcellvoltage(pod.telemetry->hvBatteryPackMaxCellVoltage);
+    protoMessage->set_hvbatterypackminimumcellvoltage(pod.telemetry->hvBatteryPackMinimumCellVoltage);
+    protoMessage->set_maxigbttemperature(pod.telemetry->maxIgbtTemperature);
+    protoMessage->set_gatedrivertemperature(pod.telemetry->gateDriverTemperature);
+    protoMessage->set_invertercontrolboardtemperature(pod.telemetry->inverterControlBoardTemperature);
+    protoMessage->set_motortemperature(pod.telemetry->motorTemperature);
+    protoMessage->set_inverterbusvoltage(pod.telemetry->inverterBusVoltage);
+    protoMessage->set_maxflighttime(pod.telemetry->maxFlightTime);
+    protoMessage->set_flightdistance(pod.telemetry->flightDistance);
+    protoMessage->set_motortorque(pod.telemetry->motorTorque);
+    protoMessage->set_inverterheartbeat(pod.telemetry->inverterHeartbeat);
+    protoMessage->set_hvbatterypackmaxcelltemperature(pod.telemetry->hvBatteryPackMaxCellTemperature);
+    protoMessage->set_hvbatterypackstateofcharge(pod.telemetry->hvBatteryPackStateOfCharge);
+    protoMessage->set_motorspeed(pod.telemetry->motorSpeed);
+
+    protoMessage->set_lvdcnodestate(lvdcNone);
+    protoMessage->set_brakenodestate(pod.telemetry->receivedBrakeNodeState);
+
+    // Add Updates todo probably put this in a function with a pointer to the proto as an argument
+    if(this->pod.telemetry->updates.size() > 0){
+        std::lock_guard<std::mutex> lock(this->pod.telemetry->updatesLock);
+        for(std::string& update : this->pod.telemetry->updates){
+            protoMessage->add_updatemessages(update);
+        }
+        this->pod.telemetry->updates.clear();
+    }
     return protoMessage;
 }
 
+/*
+ *  ***************** Brake Node Connection *******************
+ */
 
-BrakeNodeConnection::BrakeNodeConnection(Pod pod) : UdpConnection(pod) {
+BrakeNodeConnection::BrakeNodeConnection(TelemetryManager pod) : UdpConnection(pod) {
     this->_connectionName = "Brake Node : ";
-};
-
-void BrakeNodeConnection::setConnectionStatus(bool status){
-    this->pod.sPodValues->connectionsArray[0] = status;
+    this->_connectionStatusIndex = BRAKE_NODE_INDEX;
 }
 
 std::unique_ptr<google::protobuf::Message> BrakeNodeConnection::getProtoUpdateMessage() {
     std::unique_ptr<FcToBrakeNode> protoMessage (new FcToBrakeNode());
-    protoMessage->set_podstate(this->pod.sPodValues->podState);
-    protoMessage->set_manualnodestate(this->pod.sPodValues->manualBrakeNodeState);
+    protoMessage->set_packetnum(this->getNewPacketId());
+    BrakeNodeStates manualState = this->pod.telemetry->manualBrakeNodeState;
+    if(manualState == bnsNone){
+        protoMessage->set_nodestate(this->pod.telemetry->commandedBrakeNodeState);
+        return protoMessage;
+    }
+    if(manualState == bnsSolenoidControl){
+        protoMessage->set_solenoid1config(this->pod.telemetry->manualSolenoidConfiguration[0]);
+        protoMessage->set_solenoid2config(this->pod.telemetry->manualSolenoidConfiguration[1]);
+        protoMessage->set_solenoid3config(this->pod.telemetry->manualSolenoidConfiguration[2]);
+        protoMessage->set_solenoid4config(this->pod.telemetry->manualSolenoidConfiguration[3]);
+    }
+    protoMessage->set_nodestate(this->pod.telemetry->manualBrakeNodeState);
+    //LOG(INFO)<<protoMessage->DebugString();
     return protoMessage;
 }
 
 bool BrakeNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
-    DtsNodeToFc protoMessage = DtsNodeToFc();
+    BrakeNodeToFc protoMessage = BrakeNodeToFc();
     if (!protoMessage.ParseFromArray(buffer, messageSize)) {
         std::string strError = "Failed to parse Update from Brake Node";
         throw std::invalid_argument(strError);
     }
-    this->pod.sPodValues->solenoid1 = protoMessage.brakesolenoidstate();
-    this->pod.sPodValues->solenoid2 = protoMessage.ventsolenoidstate();
-    this->pod.sPodValues->railTemperature = protoMessage.rotortemperature();
-    this->pod.sPodValues->pressureVesselTemperature = protoMessage.pneumatictemperature();
-    this->pod.sPodValues->highPressure = protoMessage.tankpressure();
-    this->pod.sPodValues->lowPressure1 = protoMessage.brakepressure();
+    if(this->checkPacketId(protoMessage.packetnum())){
+        return false;
+    }
+    this->pod.setSolenoid(protoMessage.solenoid1(),SOL1_INDEX);
+    this->pod.setSolenoid(protoMessage.solenoid2(), SOL4_INDEX);
+   // this->pod.setPressureVesselTemperature(protoMessage.pneumatictemperature());
+    this->pod.setHighPressure(protoMessage.highpressure());
+    this->pod.setLowPressure(protoMessage.lowpressure1(), LP1_INDEX);
+    //this->pod.telemetry->rotorTemperature = protoMessage.rotortemperature(); //dts
     return true;
 }
+
+/*
+ *  ***************** Enclosure Node Connection *******************
+ */
+
+EnclosureNodeConnection::EnclosureNodeConnection(TelemetryManager pod) : UdpConnection(pod) {
+    this->_connectionName = "Enclosure Node : ";
+    this->_connectionStatusIndex = ENCLOSURE_CONNECTION_INDEX;
+}
+
+
+bool EnclosureNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
+    EnclosureNodeToFc protoMessage = EnclosureNodeToFc();
+    if (!protoMessage.ParseFromArray(buffer, messageSize)) {
+        std::string strError = "Failed to parse Update from Enclosure";
+        throw std::invalid_argument(strError);
+    }
+    if(this->checkPacketId(protoMessage.packetnum())){
+        return false;
+    }
+
+    //TODO Add parsings
+
+    return true;
+
+}
+
+/*
+ *  ***************** Enclosure Node Connection *******************
+ */
+
 
 
 

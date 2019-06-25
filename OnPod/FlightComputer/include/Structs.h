@@ -5,72 +5,72 @@
 #include <cstdint>
 #include "Paradigm.pb.h"
 
-
-
-
-//enum PodStates { psStandby, psArming, psArmed, psAcceleration, psCoasting, psBraking, psDisarm, psRetrieval, psEmergency, psBooting };
-
-//enum eBreakNodeStates { bnsBooting, bnsStandby, bnsArming, bnsArmed, bnsFlight, bnsBraking, bnsVenting, bnsRetrieval, bnsError};
-
-//enum TerminalStates { tsConnected, tsDropped, tsTerminalEmergency};
-
-//enum TerminalCommands { tcTerminalArm, tcTerminalFlight, tcTerminalStop, tcTerminalNone};
-
-//enum MotorStates { msIdle, msDrive};
+class PodState;
 
 struct PodValues {
     // States
-    PodStates podState = psBooting;
-    ControlsInterfaceStates terminalState;
-    MotorStates motorState;
-    BrakeNodeStates brakeNodeState;
-    LvdcNodeStates lvdcNodeState;
+    std::mutex stateLock;
+    std::unique_ptr<PodState> podState;
+    ControlsInterfaceStates controlsInterfaceState = ciNone;
+    BrakeNodeStates receivedBrakeNodeState = bnsNone;
+    BrakeNodeStates commandedBrakeNodeState = bnsNone;
+    LvdcNodeStates lvdcNodeState = lvdcNone;
+
+    // Flight Profile
+    int32_t motorTorque = 0;
+    int32_t flightDistance = 0;
+    int32_t maxFlightTime = 0;
+
+    // Updates
+    std::mutex updatesLock;
+    std::vector<std::string> updates;
 
     //Manual States
-    PodStates manualPodState;
-    ControlsInterfaceStates manualTerminalState;
-    MotorStates manualMotorState;
-    BrakeNodeStates manualBrakeNodeState;
-    LvdcNodeStates manualLvdcNodeState;
-    bool automaticTransitions;
+    PodStates manualPodState = psNone;
+    BrakeNodeStates manualBrakeNodeState = bnsNone;
+    LvdcNodeStates manualLvdcNodeState = lvdcNone;
+    bool automaticTransitions = true;
 
     //ConnectionsArray
-    std::vector<bool> connectionsArray = {false, false, false, false, false}; // [brake , rear, lvdc, bms, inverter]
-
-    // Navigation
-    float distance = 0;
-    float velocity = 0;
-    // Rear Node
-    float gpioValues;
+    std::vector<int32_t> connectionFlags;  // brakeNode, LVDCNode, BMS, Interface
+    std::vector<int32_t> sensorFlags;
 
     // HV-BMS
-    float hvBatteryPackVoltage;
-    float hvBatteryPackCurrent;
-    float hvBatteryPackMinimumCellVoltage;
-    float hvBatteryPackMaxCellVoltage;
+    float hvBatteryPackVoltage = 0;
+    float hvBatteryPackCurrent = 0;
+    float hvBatteryPackMinimumCellVoltage = 0;
+    float hvBatteryPackMaxCellVoltage = 0;
+    int hvBatteryPackStateOfCharge = 0;
+    float hvBatteryPackMaxCellTemperature = 0;
 
+    //Inverter
+    int32_t maxIgbtTemperature = 0;
+    int32_t gateDriverTemperature = 0;
+    int32_t inverterControlBoardTemperature = 0;
+    int32_t motorTemperature = 0;
+    int32_t motorSpeed = 0;
+    int32_t inverterBusVoltage = 0;
+    int32_t commandedTorque = 0;
+    int32_t inverterHeartbeat = 0;
 
-    //FlagsV2
-    unsigned char flagsArray[3] = {0};
-    int32_t iFlagsArraySize = 3;
     // Atmosphere
-    double tubePressure;
-    // Terminal
-    ControlsInterfaceStates eTerminalCommand;
+    double tubePressure = 0;
+
     // Brake Node
     bool solenoid1;
     bool solenoid2;
     bool solenoid3;
     bool solenoid4;
-    bool solenoid5;
-    bool solenoid6;
-    float lowPressure1;
-    float lowPressure2;
-    float lowPressure3;
-    float lowPressure4;
-    float highPressure;
-    float pressureVesselTemperature;
-    float railTemperature;
+    float lowPressure1 = 0;
+    float lowPressure2 = 0;
+    float lowPressure3 = 0;
+    float lowPressure4 = 0;
+    float highPressure = 0;
+    float pressureVesselTemperature = 0;
+    std::vector<bool> manualSolenoidConfiguration = {};
+
+    // DTS
+    float rotorTemperature = 0;
 };
 
 struct PodNetwork {

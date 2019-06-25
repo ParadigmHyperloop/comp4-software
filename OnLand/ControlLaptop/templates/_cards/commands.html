@@ -1,0 +1,65 @@
+<div class="card card-top">
+   <div class="header">
+      <h4 class="title">Controls</h4>
+      <p class="category"></p>
+   </div>
+   <div class="content">
+       <div class="row text-center">
+            <button class="btn btn-success btn-command btn-send-command" data-state="ciFlight"> FLIGHT </button>
+       </div>
+       <div class="row">
+           <div class="col-md-6">
+               <div class="row text-center">
+                   <button class="btn btn-warning btn-command btn-send-command" data-state="ciArm"> ARM </button>
+               </div>
+               <div class="row text-center">
+                    <button class="btn btn-warning btn-command btn-send-command"  data-state="ciStandby"> DISARM </button>
+               </div>
+               <div class="row text-center">
+                    <button class="btn btn-warning btn-command btn-send-command"  data-state="ciRestart"> RESTART </button>
+                </div>
+           </div>
+           <div class="col-md-6">
+                <div class="row text-center">
+                    <button class="btn btn-primary btn-command" type="button" data-toggle="collapse" data-target="#flightProfileCollapse" aria-expanded="false" aria-controls="flightProfileCollapse"> SET PROFILE </button>
+                </div>
+               <div class="row text-center">
+                    <button class="btn btn-primary btn-command"> OVERRIDES </button>
+                </div>
+                <div class="row text-center">
+                    <button class="btn btn-info btn-command" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="manualControlsCollapse"> MANUAL CONTROL </button>
+                </div>
+           </div>
+       </div>
+       <div class="row text-center">
+            <button class="btn btn-danger btn-command btn-send-command" data-state="ciEmergencyStop"> ESTOP </button>
+       </div>
+   </div>
+</div>
+
+
+
+ <style>
+     .btn-command{
+         overflow: hidden;
+         margin: .6em;
+         width: -webkit-fill-available;
+         color: black !important;
+     }
+ </style>
+
+<script>
+
+let commmnand_buttons = $('.btn-send-command');
+
+commmnand_buttons.click(function () {
+    const btn = $(this);
+    const state = btn.data('state');
+    let command = {};
+    command['target'] = 'interface_state';
+    command['state'] = state;
+    socket.emit('manual_state_command', JSON.stringify(command));
+});
+
+
+</script>

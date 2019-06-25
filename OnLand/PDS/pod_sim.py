@@ -1,9 +1,8 @@
 import socket
 import time
 import random
-from PDS.config import POD_COMMANDER_PORT
-from PDS.Paradigm_pb2 import telemetry
-
+from config import POD_COMMANDER_PORT
+from Paradigm_pb2 import Telemetry
 
 def create_telem(packet):
     packet.lp1 = random.randint(1, 101)
@@ -25,7 +24,7 @@ def main():
     conn, addr = stcp.accept()
     print(conn, addr)
 
-    pod_data = telemetry()
+    pod_data = Telemetry()
 
     while(1):
         create_telem(pod_data)

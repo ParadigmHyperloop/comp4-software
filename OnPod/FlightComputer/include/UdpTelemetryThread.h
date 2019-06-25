@@ -11,12 +11,12 @@
  * @param Pod
  * @return A pointer to a BrakeNodeConnection
  */
-UdpConnection *getBrakeNodeConnection(Pod);
+UdpConnection *getBrakeNodeConnection(TelemetryManager);
 
-UdpConnection *getRearNodeConnection(Pod);
+UdpConnection *getRearNodeConnection(TelemetryManager);
 
 
 
-int32_t udpTelemetryThread(Pod Pod);
+int32_t udpTelemetryThread(TelemetryManager Pod);
 
 #endif //FLIGHTCOMPUTER_UDPTELEMETRYTHREAD_H

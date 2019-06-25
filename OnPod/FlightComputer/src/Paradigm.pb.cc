@@ -16,10 +16,6 @@
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
 
-class BrakeNodeDataDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<BrakeNodeData> _instance;
-} _BrakeNodeData_default_instance_;
 class PodCommandDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<PodCommand> _instance;
@@ -32,36 +28,34 @@ class FcToBrakeNodeDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<FcToBrakeNode> _instance;
 } _FcToBrakeNode_default_instance_;
+class FcToLvdcNodeDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<FcToLvdcNode> _instance;
+} _FcToLvdcNode_default_instance_;
 class DtsNodeToFcDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<DtsNodeToFc> _instance;
 } _DtsNodeToFc_default_instance_;
-class RearNodeToFcDefaultTypeInternal {
+class EnclosureNodeToFcDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<RearNodeToFc> _instance;
-} _RearNodeToFc_default_instance_;
-class flightConfigDefaultTypeInternal {
+  ::google::protobuf::internal::ExplicitlyConstructed<EnclosureNodeToFc> _instance;
+} _EnclosureNodeToFc_default_instance_;
+class LvdcNodeToFcDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<flightConfig> _instance;
-} _flightConfig_default_instance_;
+  ::google::protobuf::internal::ExplicitlyConstructed<LvdcNodeToFc> _instance;
+} _LvdcNodeToFc_default_instance_;
+class BrakeNodeToFcDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<BrakeNodeToFc> _instance;
+} _BrakeNodeToFc_default_instance_;
+class FlightConfigDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<FlightConfig> _instance;
+} _FlightConfig_default_instance_;
 class DefaultFcToNodeDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<DefaultFcToNode> _instance;
 } _DefaultFcToNode_default_instance_;
-static void InitDefaultsBrakeNodeData_Paradigm_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::_BrakeNodeData_default_instance_;
-    new (ptr) ::BrakeNodeData();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::BrakeNodeData::InitAsDefaultInstance();
-}
-
-::google::protobuf::internal::SCCInfo<0> scc_info_BrakeNodeData_Paradigm_2eproto =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsBrakeNodeData_Paradigm_2eproto}, {}};
-
 static void InitDefaultsPodCommand_Paradigm_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -104,6 +98,20 @@ static void InitDefaultsFcToBrakeNode_Paradigm_2eproto() {
 ::google::protobuf::internal::SCCInfo<0> scc_info_FcToBrakeNode_Paradigm_2eproto =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsFcToBrakeNode_Paradigm_2eproto}, {}};
 
+static void InitDefaultsFcToLvdcNode_Paradigm_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::_FcToLvdcNode_default_instance_;
+    new (ptr) ::FcToLvdcNode();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::FcToLvdcNode::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_FcToLvdcNode_Paradigm_2eproto =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsFcToLvdcNode_Paradigm_2eproto}, {}};
+
 static void InitDefaultsDtsNodeToFc_Paradigm_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -118,37 +126,65 @@ static void InitDefaultsDtsNodeToFc_Paradigm_2eproto() {
 ::google::protobuf::internal::SCCInfo<0> scc_info_DtsNodeToFc_Paradigm_2eproto =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsDtsNodeToFc_Paradigm_2eproto}, {}};
 
-static void InitDefaultsRearNodeToFc_Paradigm_2eproto() {
+static void InitDefaultsEnclosureNodeToFc_Paradigm_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::_RearNodeToFc_default_instance_;
-    new (ptr) ::RearNodeToFc();
+    void* ptr = &::_EnclosureNodeToFc_default_instance_;
+    new (ptr) ::EnclosureNodeToFc();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::RearNodeToFc::InitAsDefaultInstance();
+  ::EnclosureNodeToFc::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<0> scc_info_RearNodeToFc_Paradigm_2eproto =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsRearNodeToFc_Paradigm_2eproto}, {}};
+::google::protobuf::internal::SCCInfo<0> scc_info_EnclosureNodeToFc_Paradigm_2eproto =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsEnclosureNodeToFc_Paradigm_2eproto}, {}};
 
-static void InitDefaultsflightConfig_Paradigm_2eproto() {
+static void InitDefaultsLvdcNodeToFc_Paradigm_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-  ::flightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.DefaultConstruct();
-  *::flightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get_mutable() = ::std::string("192.168.0.103", 13);
+  {
+    void* ptr = &::_LvdcNodeToFc_default_instance_;
+    new (ptr) ::LvdcNodeToFc();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::LvdcNodeToFc::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_LvdcNodeToFc_Paradigm_2eproto =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsLvdcNodeToFc_Paradigm_2eproto}, {}};
+
+static void InitDefaultsBrakeNodeToFc_Paradigm_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::_BrakeNodeToFc_default_instance_;
+    new (ptr) ::BrakeNodeToFc();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::BrakeNodeToFc::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_BrakeNodeToFc_Paradigm_2eproto =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsBrakeNodeToFc_Paradigm_2eproto}, {}};
+
+static void InitDefaultsFlightConfig_Paradigm_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  ::FlightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.DefaultConstruct();
+  *::FlightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get_mutable() = ::std::string("127.0.0.1", 9);
   ::google::protobuf::internal::OnShutdownDestroyString(
-      ::flightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get_mutable());
+      ::FlightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get_mutable());
   {
-    void* ptr = &::_flightConfig_default_instance_;
-    new (ptr) ::flightConfig();
+    void* ptr = &::_FlightConfig_default_instance_;
+    new (ptr) ::FlightConfig();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::flightConfig::InitAsDefaultInstance();
+  ::FlightConfig::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<0> scc_info_flightConfig_Paradigm_2eproto =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsflightConfig_Paradigm_2eproto}, {}};
+::google::protobuf::internal::SCCInfo<0> scc_info_FlightConfig_Paradigm_2eproto =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsFlightConfig_Paradigm_2eproto}, {}};
 
 static void InitDefaultsDefaultFcToNode_Paradigm_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -165,78 +201,61 @@ static void InitDefaultsDefaultFcToNode_Paradigm_2eproto() {
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsDefaultFcToNode_Paradigm_2eproto}, {}};
 
 void InitDefaults_Paradigm_2eproto() {
-  ::google::protobuf::internal::InitSCC(&scc_info_BrakeNodeData_Paradigm_2eproto.base);
   ::google::protobuf::internal::InitSCC(&scc_info_PodCommand_Paradigm_2eproto.base);
   ::google::protobuf::internal::InitSCC(&scc_info_Telemetry_Paradigm_2eproto.base);
   ::google::protobuf::internal::InitSCC(&scc_info_FcToBrakeNode_Paradigm_2eproto.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_FcToLvdcNode_Paradigm_2eproto.base);
   ::google::protobuf::internal::InitSCC(&scc_info_DtsNodeToFc_Paradigm_2eproto.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_RearNodeToFc_Paradigm_2eproto.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_flightConfig_Paradigm_2eproto.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_EnclosureNodeToFc_Paradigm_2eproto.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_LvdcNodeToFc_Paradigm_2eproto.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_BrakeNodeToFc_Paradigm_2eproto.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_FlightConfig_Paradigm_2eproto.base);
   ::google::protobuf::internal::InitSCC(&scc_info_DefaultFcToNode_Paradigm_2eproto.base);
 }
 
-::google::protobuf::Metadata file_level_metadata_Paradigm_2eproto[8];
-const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors_Paradigm_2eproto[8];
+::google::protobuf::Metadata file_level_metadata_Paradigm_2eproto[10];
+const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors_Paradigm_2eproto[7];
 constexpr ::google::protobuf::ServiceDescriptor const** file_level_service_descriptors_Paradigm_2eproto = nullptr;
 
 const ::google::protobuf::uint32 TableStruct_Paradigm_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  PROTOBUF_FIELD_OFFSET(::BrakeNodeData, _has_bits_),
-  PROTOBUF_FIELD_OFFSET(::BrakeNodeData, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::BrakeNodeData, id_),
-  PROTOBUF_FIELD_OFFSET(::BrakeNodeData, state_),
-  PROTOBUF_FIELD_OFFSET(::BrakeNodeData, sol1_),
-  PROTOBUF_FIELD_OFFSET(::BrakeNodeData, sol2_),
-  PROTOBUF_FIELD_OFFSET(::BrakeNodeData, sol3_),
-  PROTOBUF_FIELD_OFFSET(::BrakeNodeData, sol4_),
-  PROTOBUF_FIELD_OFFSET(::BrakeNodeData, sol5_),
-  PROTOBUF_FIELD_OFFSET(::BrakeNodeData, sol6_),
-  PROTOBUF_FIELD_OFFSET(::BrakeNodeData, hp_),
-  PROTOBUF_FIELD_OFFSET(::BrakeNodeData, lp1_),
-  PROTOBUF_FIELD_OFFSET(::BrakeNodeData, lp2_),
-  PROTOBUF_FIELD_OFFSET(::BrakeNodeData, lp3_),
-  PROTOBUF_FIELD_OFFSET(::BrakeNodeData, lp4_),
-  PROTOBUF_FIELD_OFFSET(::BrakeNodeData, temp_),
-  0,
-  13,
-  1,
-  2,
-  3,
-  4,
-  5,
-  6,
-  7,
-  8,
-  9,
-  10,
-  11,
-  12,
   PROTOBUF_FIELD_OFFSET(::PodCommand, _has_bits_),
   PROTOBUF_FIELD_OFFSET(::PodCommand, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::PodCommand, hascommand_),
   PROTOBUF_FIELD_OFFSET(::PodCommand, controlsinterfacestate_),
   PROTOBUF_FIELD_OFFSET(::PodCommand, manualpodstate_),
   PROTOBUF_FIELD_OFFSET(::PodCommand, manualbrakenodestate_),
   PROTOBUF_FIELD_OFFSET(::PodCommand, manualmotorstate_),
   PROTOBUF_FIELD_OFFSET(::PodCommand, manuallvdcnodestate_),
   PROTOBUF_FIELD_OFFSET(::PodCommand, automaticstatetransitions_),
+  PROTOBUF_FIELD_OFFSET(::PodCommand, solenoidconfiguration_),
+  PROTOBUF_FIELD_OFFSET(::PodCommand, powerrailconfiguration_),
+  PROTOBUF_FIELD_OFFSET(::PodCommand, sensoroverrideconfiguration_),
+  PROTOBUF_FIELD_OFFSET(::PodCommand, motortorque_),
+  PROTOBUF_FIELD_OFFSET(::PodCommand, flightdistance_),
+  PROTOBUF_FIELD_OFFSET(::PodCommand, maxflighttime_),
+  5,
   0,
   1,
   2,
   3,
   4,
-  5,
+  6,
+  ~0u,
+  ~0u,
+  ~0u,
+  7,
+  8,
+  9,
   PROTOBUF_FIELD_OFFSET(::Telemetry, _has_bits_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::Telemetry, podstate_),
-  PROTOBUF_FIELD_OFFSET(::Telemetry, breaknodestate_),
+  PROTOBUF_FIELD_OFFSET(::Telemetry, brakenodestate_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, motorstate_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, controlsinterfacestate_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, inverterstate_),
@@ -250,30 +269,27 @@ const ::google::protobuf::uint32 TableStruct_Paradigm_2eproto::offsets[] PROTOBU
   PROTOBUF_FIELD_OFFSET(::Telemetry, podposition_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, podvelocity_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, podaccelerationx_),
-  PROTOBUF_FIELD_OFFSET(::Telemetry, podaccelerationy_),
-  PROTOBUF_FIELD_OFFSET(::Telemetry, podaccelerationz_),
-  PROTOBUF_FIELD_OFFSET(::Telemetry, imuvelocity_),
-  PROTOBUF_FIELD_OFFSET(::Telemetry, imuaccelerationx_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, tachometervelocity_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, resolvervelocity_),
-  PROTOBUF_FIELD_OFFSET(::Telemetry, invertertemperature1_),
-  PROTOBUF_FIELD_OFFSET(::Telemetry, invertertemperature2_),
-  PROTOBUF_FIELD_OFFSET(::Telemetry, invertertemperature3_),
-  PROTOBUF_FIELD_OFFSET(::Telemetry, motorcurrent_),
-  PROTOBUF_FIELD_OFFSET(::Telemetry, motorvoltage_),
+  PROTOBUF_FIELD_OFFSET(::Telemetry, maxigbttemperature_),
+  PROTOBUF_FIELD_OFFSET(::Telemetry, gatedrivertemperature_),
+  PROTOBUF_FIELD_OFFSET(::Telemetry, invertercontrolboardtemperature_),
+  PROTOBUF_FIELD_OFFSET(::Telemetry, motortemperature_),
+  PROTOBUF_FIELD_OFFSET(::Telemetry, inverterbusvoltage_),
+  PROTOBUF_FIELD_OFFSET(::Telemetry, inverterheartbeat_),
+  PROTOBUF_FIELD_OFFSET(::Telemetry, motorspeed_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, invertervoltages_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, invertercurrents_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, hvbatterypackvoltage_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, hvbatterypackcurrent_),
-  PROTOBUF_FIELD_OFFSET(::Telemetry, hvbatterycelltemperatures_),
-  PROTOBUF_FIELD_OFFSET(::Telemetry, hvbatterypackminimumcellvoltage_),
+  PROTOBUF_FIELD_OFFSET(::Telemetry, hvbatterypackmaxcelltemperature_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, hvbatterypackmaxcellvoltage_),
+  PROTOBUF_FIELD_OFFSET(::Telemetry, hvbatterypackminimumcellvoltage_),
+  PROTOBUF_FIELD_OFFSET(::Telemetry, hvbatterypackstateofcharge_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, solenoid1_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, solenoid2_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, solenoid3_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, solenoid4_),
-  PROTOBUF_FIELD_OFFSET(::Telemetry, solenoid5_),
-  PROTOBUF_FIELD_OFFSET(::Telemetry, solenoid6_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, highpressure_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, lowpressure1_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, lowpressure2_),
@@ -307,14 +323,18 @@ const ::google::protobuf::uint32 TableStruct_Paradigm_2eproto::offsets[] PROTOBU
   PROTOBUF_FIELD_OFFSET(::Telemetry, railcurrentsensor7_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, railcurrentsensor8_),
   PROTOBUF_FIELD_OFFSET(::Telemetry, railcurrentflag_),
+  PROTOBUF_FIELD_OFFSET(::Telemetry, motortorque_),
+  PROTOBUF_FIELD_OFFSET(::Telemetry, flightdistance_),
+  PROTOBUF_FIELD_OFFSET(::Telemetry, maxflighttime_),
+  PROTOBUF_FIELD_OFFSET(::Telemetry, updatemessages_),
   0,
   1,
   2,
   3,
   4,
-  50,
-  23,
-  28,
+  45,
+  19,
+  25,
   5,
   6,
   ~0u,
@@ -329,17 +349,19 @@ const ::google::protobuf::uint32 TableStruct_Paradigm_2eproto::offsets[] PROTOBU
   14,
   15,
   16,
+  68,
+  65,
   17,
   18,
-  19,
   20,
   21,
   22,
   24,
-  25,
-  ~0u,
+  23,
+  69,
   26,
   27,
+  28,
   29,
   30,
   31,
@@ -356,37 +378,53 @@ const ::google::protobuf::uint32 TableStruct_Paradigm_2eproto::offsets[] PROTOBU
   42,
   43,
   44,
-  45,
   46,
   47,
   48,
   49,
+  50,
   51,
   52,
   53,
+  62,
   54,
   55,
   56,
   57,
   58,
-  67,
   59,
   60,
   61,
-  62,
   63,
   64,
-  65,
   66,
-  68,
+  67,
+  ~0u,
   PROTOBUF_FIELD_OFFSET(::FcToBrakeNode, _has_bits_),
   PROTOBUF_FIELD_OFFSET(::FcToBrakeNode, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::FcToBrakeNode, packetnum_),
-  PROTOBUF_FIELD_OFFSET(::FcToBrakeNode, podstate_),
-  PROTOBUF_FIELD_OFFSET(::FcToBrakeNode, manualnodestate_),
+  PROTOBUF_FIELD_OFFSET(::FcToBrakeNode, nodestate_),
+  PROTOBUF_FIELD_OFFSET(::FcToBrakeNode, solenoid1config_),
+  PROTOBUF_FIELD_OFFSET(::FcToBrakeNode, solenoid2config_),
+  PROTOBUF_FIELD_OFFSET(::FcToBrakeNode, solenoid3config_),
+  PROTOBUF_FIELD_OFFSET(::FcToBrakeNode, solenoid4config_),
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  PROTOBUF_FIELD_OFFSET(::FcToLvdcNode, _has_bits_),
+  PROTOBUF_FIELD_OFFSET(::FcToLvdcNode, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::FcToLvdcNode, packetnum_),
+  PROTOBUF_FIELD_OFFSET(::FcToLvdcNode, podstate_),
+  PROTOBUF_FIELD_OFFSET(::FcToLvdcNode, manualnodestate_),
   0,
   1,
   2,
@@ -404,53 +442,117 @@ const ::google::protobuf::uint32 TableStruct_Paradigm_2eproto::offsets[] PROTOBU
   PROTOBUF_FIELD_OFFSET(::DtsNodeToFc, tankpressure_),
   PROTOBUF_FIELD_OFFSET(::DtsNodeToFc, brakepressure_),
   0,
-  7,
   1,
   2,
   3,
   4,
   5,
   6,
-  PROTOBUF_FIELD_OFFSET(::RearNodeToFc, _has_bits_),
-  PROTOBUF_FIELD_OFFSET(::RearNodeToFc, _internal_metadata_),
+  7,
+  PROTOBUF_FIELD_OFFSET(::EnclosureNodeToFc, _has_bits_),
+  PROTOBUF_FIELD_OFFSET(::EnclosureNodeToFc, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::RearNodeToFc, packetnum_),
-  PROTOBUF_FIELD_OFFSET(::RearNodeToFc, tubepressure_),
-  PROTOBUF_FIELD_OFFSET(::RearNodeToFc, coolantpressure1_),
-  PROTOBUF_FIELD_OFFSET(::RearNodeToFc, coolantpressure2_),
-  PROTOBUF_FIELD_OFFSET(::RearNodeToFc, coolantpressure3_),
-  PROTOBUF_FIELD_OFFSET(::RearNodeToFc, coolanttemperature_),
+  PROTOBUF_FIELD_OFFSET(::EnclosureNodeToFc, packetnum_),
+  PROTOBUF_FIELD_OFFSET(::EnclosureNodeToFc, enclosurepressure_),
+  PROTOBUF_FIELD_OFFSET(::EnclosureNodeToFc, enclosuretemperature_),
+  PROTOBUF_FIELD_OFFSET(::EnclosureNodeToFc, coolantlinepressure_),
+  0,
+  1,
+  2,
+  3,
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, _has_bits_),
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, packetnum_),
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, state_),
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, highpowerpackvoltage_),
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, lowpowerpackvoltage_),
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, highpowerpackcurrent_),
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, lowpowerpackcurrent_),
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, lowpower5voltage_),
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, lowpower12voltage_),
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, highpower12voltage_),
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, lowpower24voltage_),
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, lowpower5current_),
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, lowpower12current_),
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, nodecurrent_),
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, invertercurrent_),
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, cooling1current_),
+  PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, cooling2current_),
   0,
   1,
   2,
   3,
   4,
   5,
-  PROTOBUF_FIELD_OFFSET(::flightConfig, _has_bits_),
-  PROTOBUF_FIELD_OFFSET(::flightConfig, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::flightConfig, retrievaltimeout_),
-  PROTOBUF_FIELD_OFFSET(::flightConfig, maxflighttime_),
-  PROTOBUF_FIELD_OFFSET(::flightConfig, motorspeed_),
-  PROTOBUF_FIELD_OFFSET(::flightConfig, pdstelemetryport_),
-  PROTOBUF_FIELD_OFFSET(::flightConfig, commandport_),
-  PROTOBUF_FIELD_OFFSET(::flightConfig, flightlength_),
-  PROTOBUF_FIELD_OFFSET(::flightConfig, heartbeattimeout_),
-  PROTOBUF_FIELD_OFFSET(::flightConfig, poddriver_),
-  PROTOBUF_FIELD_OFFSET(::flightConfig, controllaptopipaddr_),
-  5,
-  2,
-  3,
+  6,
   7,
   8,
-  4,
-  6,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  PROTOBUF_FIELD_OFFSET(::BrakeNodeToFc, _has_bits_),
+  PROTOBUF_FIELD_OFFSET(::BrakeNodeToFc, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::BrakeNodeToFc, packetnum_),
+  PROTOBUF_FIELD_OFFSET(::BrakeNodeToFc, state_),
+  PROTOBUF_FIELD_OFFSET(::BrakeNodeToFc, solenoid1_),
+  PROTOBUF_FIELD_OFFSET(::BrakeNodeToFc, solenoid2_),
+  PROTOBUF_FIELD_OFFSET(::BrakeNodeToFc, solenoid3_),
+  PROTOBUF_FIELD_OFFSET(::BrakeNodeToFc, solenoid4_),
+  PROTOBUF_FIELD_OFFSET(::BrakeNodeToFc, highpressure_),
+  PROTOBUF_FIELD_OFFSET(::BrakeNodeToFc, lowpressure1_),
+  PROTOBUF_FIELD_OFFSET(::BrakeNodeToFc, lowpressure2_),
+  PROTOBUF_FIELD_OFFSET(::BrakeNodeToFc, lowpressure3_),
+  PROTOBUF_FIELD_OFFSET(::BrakeNodeToFc, lowpressurecommon_),
+  PROTOBUF_FIELD_OFFSET(::BrakeNodeToFc, pneumatictemperature_),
+  PROTOBUF_FIELD_OFFSET(::BrakeNodeToFc, coolanttankpressure_),
   0,
   1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  PROTOBUF_FIELD_OFFSET(::FlightConfig, _has_bits_),
+  PROTOBUF_FIELD_OFFSET(::FlightConfig, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::FlightConfig, retrievaltimeout_),
+  PROTOBUF_FIELD_OFFSET(::FlightConfig, pdstelemetryport_),
+  PROTOBUF_FIELD_OFFSET(::FlightConfig, commandport_),
+  PROTOBUF_FIELD_OFFSET(::FlightConfig, heartbeattimeout_),
+  PROTOBUF_FIELD_OFFSET(::FlightConfig, poddriver_),
+  PROTOBUF_FIELD_OFFSET(::FlightConfig, controllaptopipaddr_),
+  PROTOBUF_FIELD_OFFSET(::FlightConfig, brakenodeport_),
+  PROTOBUF_FIELD_OFFSET(::FlightConfig, brakenodetimeout_),
+  PROTOBUF_FIELD_OFFSET(::FlightConfig, brakenodeserverport_),
+  2,
+  4,
+  5,
+  3,
+  0,
+  1,
+  6,
+  7,
+  8,
   PROTOBUF_FIELD_OFFSET(::DefaultFcToNode, _has_bits_),
   PROTOBUF_FIELD_OFFSET(::DefaultFcToNode, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -460,142 +562,167 @@ const ::google::protobuf::uint32 TableStruct_Paradigm_2eproto::offsets[] PROTOBU
   0,
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, 19, sizeof(::BrakeNodeData)},
-  { 33, 44, sizeof(::PodCommand)},
-  { 50, 127, sizeof(::Telemetry)},
-  { 199, 207, sizeof(::FcToBrakeNode)},
+  { 0, 18, sizeof(::PodCommand)},
+  { 31, 109, sizeof(::Telemetry)},
+  { 182, 193, sizeof(::FcToBrakeNode)},
+  { 199, 207, sizeof(::FcToLvdcNode)},
   { 210, 223, sizeof(::DtsNodeToFc)},
-  { 231, 242, sizeof(::RearNodeToFc)},
-  { 248, 262, sizeof(::flightConfig)},
-  { 271, 277, sizeof(::DefaultFcToNode)},
+  { 231, 240, sizeof(::EnclosureNodeToFc)},
+  { 244, 265, sizeof(::LvdcNodeToFc)},
+  { 281, 299, sizeof(::BrakeNodeToFc)},
+  { 312, 326, sizeof(::FlightConfig)},
+  { 335, 341, sizeof(::DefaultFcToNode)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::google::protobuf::Message*>(&::_BrakeNodeData_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::_PodCommand_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::_Telemetry_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::_FcToBrakeNode_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::_FcToLvdcNode_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::_DtsNodeToFc_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::_RearNodeToFc_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::_flightConfig_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::_EnclosureNodeToFc_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::_LvdcNodeToFc_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::_BrakeNodeToFc_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::_FlightConfig_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::_DefaultFcToNode_default_instance_),
 };
 
 ::google::protobuf::internal::AssignDescriptorsTable assign_descriptors_table_Paradigm_2eproto = {
   {}, AddDescriptors_Paradigm_2eproto, "Paradigm.proto", schemas,
   file_default_instances, TableStruct_Paradigm_2eproto::offsets,
-  file_level_metadata_Paradigm_2eproto, 8, file_level_enum_descriptors_Paradigm_2eproto, file_level_service_descriptors_Paradigm_2eproto,
+  file_level_metadata_Paradigm_2eproto, 10, file_level_enum_descriptors_Paradigm_2eproto, file_level_service_descriptors_Paradigm_2eproto,
 };
 
 const char descriptor_table_protodef_Paradigm_2eproto[] =
-  "\n\016Paradigm.proto\"\336\001\n\rBrakeNodeData\022\n\n\002id"
-  "\030\001 \002(\005\022\037\n\005state\030\016 \001(\0162\020.BrakeNodeStates\022"
-  "\014\n\004sol1\030\002 \001(\010\022\014\n\004sol2\030\003 \001(\010\022\014\n\004sol3\030\004 \001("
-  "\010\022\014\n\004sol4\030\005 \001(\010\022\014\n\004sol5\030\006 \001(\010\022\014\n\004sol6\030\007 "
-  "\001(\010\022\n\n\002hp\030\010 \001(\005\022\013\n\003lp1\030\t \001(\005\022\013\n\003lp2\030\n \001("
-  "\005\022\013\n\003lp3\030\013 \001(\005\022\013\n\003lp4\030\014 \001(\005\022\014\n\004temp\030\r \001("
-  "\005\"\223\002\n\nPodCommand\0228\n\026controlsInterfaceSta"
-  "te\030\001 \001(\0162\030.ControlsInterfaceStates\022\"\n\016ma"
-  "nualPodState\030\002 \001(\0162\n.PodStates\022.\n\024manual"
-  "BrakeNodeState\030\003 \001(\0162\020.BrakeNodeStates\022&"
-  "\n\020manualMotorState\030\004 \001(\0162\014.MotorStates\022,"
-  "\n\023manualLvdcNodeState\030\005 \001(\0162\017.LvdcNodeSt"
-  "ates\022!\n\031automaticStateTransitions\030\006 \001(\010\""
-  "\301\017\n\tTelemetry\022\034\n\010podState\030\001 \001(\0162\n.PodSta"
-  "tes\022(\n\016breakNodeState\030\002 \001(\0162\020.BrakeNodeS"
-  "tates\022 \n\nmotorState\030\003 \001(\0162\014.MotorStates\022"
-  "8\n\026controlsInterfaceState\030\004 \001(\0162\030.Contro"
-  "lsInterfaceStates\022&\n\rinverterState\030\005 \001(\016"
-  "2\017.InverterStates\022&\n\rlvdcNodeState\0306 \001(\016"
-  "2\017.LvdcNodeStates\0228\n\026batteryManagementSt"
-  "ate\030\031 \001(\0162\030.BatteryManagementStates\022.\n\032b"
-  "reakNodePerceivedPodState\030\037 \001(\0162\n.PodSta"
-  "tes\022\023\n\013missionTime\030\006 \001(\005\022\022\n\nflightTime\030\007"
-  " \001(\005\022\026\n\016heartbeatFlags\030\010 \003(\005\022\027\n\017heartbea"
-  "tValues\030G \003(\005\022\023\n\013podPosition\030\t \001(\005\022\023\n\013po"
-  "dVelocity\030\n \001(\005\022\030\n\020podAccelerationX\030\013 \001("
-  "\005\022\030\n\020podAccelerationY\030\014 \001(\005\022\030\n\020podAccele"
-  "rationZ\030\r \001(\005\022\023\n\013imuVelocity\030\016 \001(\005\022\030\n\020im"
-  "uAccelerationX\030\017 \001(\005\022\032\n\022tachometerVeloci"
-  "ty\030\020 \001(\005\022\030\n\020resolverVelocity\030\021 \001(\005\022\034\n\024in"
-  "verterTemperature1\030\022 \001(\005\022\034\n\024inverterTemp"
-  "erature2\030\023 \001(\005\022\034\n\024inverterTemperature3\030\024"
-  " \001(\005\022\024\n\014motorCurrent\030\025 \001(\005\022\024\n\014motorVolta"
-  "ge\030\026 \001(\005\022\030\n\020inverterVoltages\030\027 \001(\005\022\030\n\020in"
-  "verterCurrents\030\030 \001(\005\022\034\n\024hvBatteryPackVol"
-  "tage\030\032 \001(\002\022\034\n\024hvBatteryPackCurrent\030\033 \001(\002"
-  "\022!\n\031hvBatteryCellTemperatures\030\034 \003(\005\022\'\n\037h"
-  "vBatteryPackMinimumCellVoltage\030\035 \001(\002\022#\n\033"
-  "hvBatteryPackMaxCellVoltage\030\036 \001(\002\022\021\n\tsol"
-  "enoid1\030  \001(\010\022\021\n\tsolenoid2\030! \001(\010\022\021\n\tsolen"
-  "oid3\030\" \001(\010\022\021\n\tsolenoid4\030# \001(\010\022\021\n\tsolenoi"
-  "d5\030$ \001(\010\022\021\n\tsolenoid6\030% \001(\010\022\024\n\014highPress"
-  "ure\030& \001(\002\022\024\n\014lowPressure1\030\' \001(\002\022\024\n\014lowPr"
-  "essure2\030( \001(\002\022\024\n\014lowPressure3\030) \001(\002\022\024\n\014l"
-  "owPressure4\030* \001(\002\022!\n\031pressureVesselTempe"
-  "rature\030+ \001(\002\022$\n\034electronicsEnclosurePres"
-  "sure\030, \001(\005\022\031\n\021railDisplacementX\030- \001(\005\022\031\n"
-  "\021railDisplacementY\030. \001(\005\022\024\n\014tubePressure"
-  "\0300 \001(\005\022\030\n\020coolantPressure1\0301 \001(\005\022\030\n\020cool"
-  "antPressure2\0302 \001(\005\022\030\n\020coolantPressure3\0303"
-  " \001(\005\022\032\n\022coolantTemperature\0304 \001(\005\022\027\n\017rail"
-  "Temperature\0305 \001(\002\022\024\n\014pack1Voltage\0307 \001(\005\022"
-  "\024\n\014pack2Voltage\0308 \001(\005\022\024\n\014pack1Current\0309 "
-  "\001(\005\022\024\n\014pack2Current\030: \001(\005\022\024\n\014rail1Voltag"
-  "e\030; \001(\005\022\024\n\014rail2Voltage\030< \001(\005\022\024\n\014rail3Vo"
-  "ltage\030= \001(\005\022\024\n\014rail4Voltage\030> \001(\005\022\027\n\017rai"
-  "lVoltageFlag\030H \001(\005\022\032\n\022railCurrentSensor1"
-  "\030\? \001(\005\022\032\n\022railCurrentSensor2\030@ \001(\005\022\032\n\022ra"
-  "ilCurrentSensor3\030A \001(\005\022\032\n\022railCurrentSen"
-  "sor4\030B \001(\005\022\032\n\022railCurrentSensor5\030C \001(\005\022\032"
-  "\n\022railCurrentSensor6\030D \001(\005\022\032\n\022railCurren"
-  "tSensor7\030E \001(\005\022\032\n\022railCurrentSensor8\030F \001"
-  "(\005\022\027\n\017railCurrentFlag\030I \001(\005\"k\n\rFcToBrake"
-  "Node\022\021\n\tpacketNum\030\001 \001(\005\022\034\n\010podState\030\002 \001("
-  "\0162\n.PodStates\022)\n\017manualNodeState\030\003 \001(\0162\020"
-  ".BrakeNodeStates\"\217\002\n\013DtsNodeToFc\022\024\n\tpack"
-  "etNum\030\001 \002(\005:\0010\0224\n\016brakeNodeState\030\002 \002(\0162\020"
-  ".BrakeNodeStates:\nbnsStandby\022!\n\022brakeSol"
-  "enoidState\030\003 \002(\010:\005false\022 \n\021ventSolenoidS"
-  "tate\030\004 \002(\010:\005false\022\033\n\020rotorTemperature\030\005 "
-  "\002(\002:\0010\022\037\n\024pneumaticTemperature\030\006 \002(\002:\0010\022"
-  "\027\n\014tankPressure\030\007 \002(\002:\0010\022\030\n\rbrakePressur"
-  "e\030\010 \002(\002:\0010\"\263\001\n\014RearNodeToFc\022\024\n\tpacketNum"
-  "\030\001 \002(\005:\0010\022\027\n\014tubePressure\030\002 \002(\002:\0010\022\033\n\020co"
-  "olantPressure1\030\003 \002(\002:\0010\022\033\n\020coolantPressu"
-  "re2\030\004 \002(\002:\0010\022\033\n\020coolantPressure3\030\005 \002(\002:\001"
-  "0\022\035\n\022coolantTemperature\030\006 \002(\002:\0010\"\204\002\n\014fli"
-  "ghtConfig\022\030\n\020retrievalTimeout\030\001 \001(\r\022\025\n\rm"
-  "axFlightTime\030\002 \001(\004\022\022\n\nmotorSpeed\030\003 \001(\004\022\036"
-  "\n\020pdsTelemetryPort\030\004 \001(\005:\0047000\022\031\n\013comman"
-  "dPort\030\005 \001(\005:\0046000\022\024\n\014flightLength\030\006 \001(\004\022"
-  "\037\n\020heartbeatTimeout\030\007 \001(\005:\00510000\022\021\n\tpodD"
-  "river\030\010 \001(\t\022*\n\023controlLaptopIpAddr\030\t \001(\t"
-  ":\r192.168.0.103\"/\n\017DefaultFcToNode\022\034\n\010po"
-  "dState\030\001 \001(\0162\n.PodStates*\265\001\n\017BrakeNodeSt"
-  "ates\022\016\n\nbnsBooting\020\000\022\016\n\nbnsStandby\020\001\022\r\n\t"
-  "bnsArming\020\002\022\014\n\010bnsArmed\020\003\022\r\n\tbnsFlight\020\004"
-  "\022\016\n\nbnsBraking\020\005\022\016\n\nbnsVenting\020\006\022\020\n\014bnsR"
-  "etrieval\020\007\022\014\n\010bnsError\020\010\022\026\n\022bnsSolenoidC"
-  "ontrol\020\t*\313\001\n\tPodStates\022\r\n\tpsBooting\020\000\022\r\n"
-  "\tpsStandby\020\001\022\014\n\010psArming\020\002\022\013\n\007psArmed\020\003\022"
-  "\017\n\013psPreFlight\020\004\022\022\n\016psAcceleration\020\005\022\016\n\n"
-  "psCoasting\020\006\022\r\n\tpsBraking\020\007\022\017\n\013psDisarmi"
-  "ng\020\010\022\017\n\013psRetrieval\020\t\022\017\n\013psEmergency\020\n\022\016"
-  "\n\npsShutdown\020\013*C\n\013MotorStates\022\t\n\005msOff\020\000"
-  "\022\016\n\nmsCharging\020\001\022\n\n\006msIdle\020\002\022\r\n\tmsEngage"
-  "d\020\003*p\n\027ControlsInterfaceStates\022\r\n\tciStan"
-  "dby\020\000\022\t\n\005ciArm\020\001\022\014\n\010ciFlight\020\002\022\014\n\010ciDisa"
-  "rm\020\003\022\n\n\006ciTaxi\020\004\022\023\n\017ciEmergencyStop\020\005* \n"
-  "\016InverterStates\022\016\n\niConnected\020\000*)\n\027Batte"
-  "ryManagementStates\022\016\n\nbmsNominal\020\000*.\n\016Re"
-  "arNodeStates\022\r\n\trnBooting\020\000\022\r\n\trnNominal"
-  "\020\001*!\n\016LvdcNodeStates\022\017\n\013lvdcBooting\020\000"
+  "\n\016Paradigm.proto\"\326\003\n\nPodCommand\022\031\n\nhasCo"
+  "mmand\030\007 \001(\010:\005false\0228\n\026controlsInterfaceS"
+  "tate\030\001 \001(\0162\030.ControlsInterfaceStates\022\"\n\016"
+  "manualPodState\030\002 \001(\0162\n.PodStates\022.\n\024manu"
+  "alBrakeNodeState\030\003 \001(\0162\020.BrakeNodeStates"
+  "\022&\n\020manualMotorState\030\004 \001(\0162\014.MotorStates"
+  "\022,\n\023manualLvdcNodeState\030\005 \001(\0162\017.LvdcNode"
+  "States\022!\n\031automaticStateTransitions\030\006 \001("
+  "\010\022\035\n\025solenoidConfiguration\030\010 \003(\005\022\036\n\026powe"
+  "rRailConfiguration\030\t \003(\005\022#\n\033sensorOverri"
+  "deConfiguration\030\n \003(\005\022\023\n\013motorTorque\030\013 \001"
+  "(\r\022\026\n\016flightDistance\030\014 \001(\r\022\025\n\rmaxFlightT"
+  "ime\030\r \001(\r\"\201\020\n\tTelemetry\022\034\n\010podState\030\001 \001("
+  "\0162\n.PodStates\022(\n\016brakeNodeState\030\002 \001(\0162\020."
+  "BrakeNodeStates\022 \n\nmotorState\030\003 \001(\0162\014.Mo"
+  "torStates\0228\n\026controlsInterfaceState\030\004 \001("
+  "\0162\030.ControlsInterfaceStates\022&\n\rinverterS"
+  "tate\030\005 \001(\0162\017.InverterStates\022&\n\rlvdcNodeS"
+  "tate\0306 \001(\0162\017.LvdcNodeStates\0228\n\026batteryMa"
+  "nagementState\030\031 \001(\0162\030.BatteryManagementS"
+  "tates\022.\n\032breakNodePerceivedPodState\030\037 \001("
+  "\0162\n.PodStates\022\023\n\013missionTime\030\006 \001(\005\022\022\n\nfl"
+  "ightTime\030\007 \001(\005\022\026\n\016heartbeatFlags\030\010 \003(\005\022\027"
+  "\n\017heartbeatValues\030G \003(\005\022\023\n\013podPosition\030\t"
+  " \001(\005\022\023\n\013podVelocity\030\n \001(\005\022\030\n\020podAccelera"
+  "tionX\030\013 \001(\005\022\032\n\022tachometerVelocity\030\020 \001(\005\022"
+  "\030\n\020resolverVelocity\030\021 \001(\005\022\032\n\022maxIgbtTemp"
+  "erature\030\022 \001(\005\022\035\n\025gateDriverTemperature\030\023"
+  " \001(\005\022\'\n\037inverterControlBoardTemperature\030"
+  "\024 \001(\005\022\030\n\020motorTemperature\030\025 \001(\005\022\032\n\022inver"
+  "terBusVoltage\030\026 \001(\005\022\031\n\021inverterHeartbeat"
+  "\030N \001(\005\022\022\n\nmotorSpeed\030P \001(\005\022\030\n\020inverterVo"
+  "ltages\030\027 \001(\005\022\030\n\020inverterCurrents\030\030 \001(\005\022\034"
+  "\n\024hvBatteryPackVoltage\030\032 \001(\002\022\034\n\024hvBatter"
+  "yPackCurrent\030\033 \001(\002\022\'\n\037hvBatteryPackMaxCe"
+  "llTemperature\030\034 \001(\002\022#\n\033hvBatteryPackMaxC"
+  "ellVoltage\030\036 \001(\002\022\'\n\037hvBatteryPackMinimum"
+  "CellVoltage\030\035 \001(\002\022\"\n\032hvBatteryPackStateO"
+  "fCharge\030O \001(\005\022\021\n\tsolenoid1\030  \001(\010\022\021\n\tsole"
+  "noid2\030! \001(\010\022\021\n\tsolenoid3\030\" \001(\010\022\021\n\tsoleno"
+  "id4\030# \001(\010\022\024\n\014highPressure\030& \001(\002\022\024\n\014lowPr"
+  "essure1\030\' \001(\002\022\024\n\014lowPressure2\030( \001(\002\022\024\n\014l"
+  "owPressure3\030) \001(\002\022\024\n\014lowPressure4\030* \001(\002\022"
+  "!\n\031pressureVesselTemperature\030+ \001(\002\022$\n\034el"
+  "ectronicsEnclosurePressure\030, \001(\005\022\031\n\021rail"
+  "DisplacementX\030- \001(\005\022\031\n\021railDisplacementY"
+  "\030. \001(\005\022\024\n\014tubePressure\0300 \001(\005\022\030\n\020coolantP"
+  "ressure1\0301 \001(\005\022\030\n\020coolantPressure2\0302 \001(\005"
+  "\022\030\n\020coolantPressure3\0303 \001(\005\022\032\n\022coolantTem"
+  "perature\0304 \001(\005\022\027\n\017railTemperature\0305 \001(\002\022"
+  "\024\n\014pack1Voltage\0307 \001(\005\022\024\n\014pack2Voltage\0308 "
+  "\001(\005\022\024\n\014pack1Current\0309 \001(\005\022\024\n\014pack2Curren"
+  "t\030: \001(\005\022\024\n\014rail1Voltage\030; \001(\005\022\024\n\014rail2Vo"
+  "ltage\030< \001(\005\022\024\n\014rail3Voltage\030= \001(\005\022\024\n\014rai"
+  "l4Voltage\030> \001(\005\022\027\n\017railVoltageFlag\030H \001(\005"
+  "\022\032\n\022railCurrentSensor1\030\? \001(\005\022\032\n\022railCurr"
+  "entSensor2\030@ \001(\005\022\032\n\022railCurrentSensor3\030A"
+  " \001(\005\022\032\n\022railCurrentSensor4\030B \001(\005\022\032\n\022rail"
+  "CurrentSensor5\030C \001(\005\022\032\n\022railCurrentSenso"
+  "r6\030D \001(\005\022\032\n\022railCurrentSensor7\030E \001(\005\022\032\n\022"
+  "railCurrentSensor8\030F \001(\005\022\027\n\017railCurrentF"
+  "lag\030I \001(\005\022\023\n\013motorTorque\030J \001(\r\022\026\n\016flight"
+  "Distance\030K \001(\r\022\025\n\rmaxFlightTime\030L \001(\r\022\026\n"
+  "\016updateMessages\030M \003(\t\"\253\001\n\rFcToBrakeNode\022"
+  "\021\n\tpacketNum\030\001 \001(\005\022#\n\tnodeState\030\002 \001(\0162\020."
+  "BrakeNodeStates\022\027\n\017solenoid1Config\030\003 \001(\010"
+  "\022\027\n\017solenoid2Config\030\004 \001(\010\022\027\n\017solenoid3Co"
+  "nfig\030\005 \001(\010\022\027\n\017solenoid4Config\030\006 \001(\010\"i\n\014F"
+  "cToLvdcNode\022\021\n\tpacketNum\030\001 \001(\005\022\034\n\010podSta"
+  "te\030\002 \001(\0162\n.PodStates\022(\n\017manualNodeState\030"
+  "\003 \001(\0162\017.LvdcNodeStates\"\346\001\n\013DtsNodeToFc\022\021"
+  "\n\tpacketNum\030\001 \002(\005\022(\n\016brakeNodeState\030\002 \002("
+  "\0162\020.BrakeNodeStates\022\032\n\022brakeSolenoidStat"
+  "e\030\003 \002(\010\022\031\n\021ventSolenoidState\030\004 \002(\010\022\030\n\020ro"
+  "torTemperature\030\005 \002(\002\022\034\n\024pneumaticTempera"
+  "ture\030\006 \002(\002\022\024\n\014tankPressure\030\007 \002(\002\022\025\n\rbrak"
+  "ePressure\030\010 \002(\002\"|\n\021EnclosureNodeToFc\022\021\n\t"
+  "packetNum\030\001 \002(\005\022\031\n\021enclosurePressure\030\002 \002"
+  "(\002\022\034\n\024enclosureTemperature\030\003 \002(\002\022\033\n\023cool"
+  "antLinePressure\030\004 \002(\002\"\270\003\n\014LvdcNodeToFc\022\021"
+  "\n\tpacketNum\030\001 \002(\005\022\036\n\005state\030\002 \002(\0162\017.LvdcN"
+  "odeStates\022\034\n\024highPowerPackVoltage\030\003 \002(\002\022"
+  "\033\n\023lowPowerPackVoltage\030\004 \002(\002\022\034\n\024highPowe"
+  "rPackCurrent\030\005 \002(\002\022\033\n\023lowPowerPackCurren"
+  "t\030\006 \002(\002\022\030\n\020lowPower5Voltage\030\007 \002(\002\022\031\n\021low"
+  "Power12Voltage\030\010 \002(\002\022\032\n\022highPower12Volta"
+  "ge\030\t \002(\002\022\031\n\021lowPower24Voltage\030\n \002(\002\022\030\n\020l"
+  "owPower5Current\030\013 \002(\002\022\031\n\021lowPower12Curre"
+  "nt\030\014 \002(\002\022\023\n\013nodeCurrent\030\r \002(\002\022\027\n\017inverte"
+  "rCurrent\030\016 \002(\002\022\027\n\017cooling1Current\030\017 \002(\002\022"
+  "\027\n\017cooling2Current\030\020 \002(\002\"\275\002\n\rBrakeNodeTo"
+  "Fc\022\021\n\tpacketNum\030\001 \002(\005\022\037\n\005state\030\002 \002(\0162\020.B"
+  "rakeNodeStates\022\021\n\tsolenoid1\030\003 \002(\010\022\021\n\tsol"
+  "enoid2\030\004 \002(\010\022\021\n\tsolenoid3\030\005 \002(\010\022\021\n\tsolen"
+  "oid4\030\006 \002(\010\022\024\n\014highPressure\030\007 \002(\002\022\024\n\014lowP"
+  "ressure1\030\010 \002(\002\022\024\n\014lowPressure2\030\t \002(\002\022\024\n\014"
+  "lowPressure3\030\n \002(\002\022\031\n\021lowPressureCommon\030"
+  "\013 \002(\002\022\034\n\024pneumaticTemperature\030\014 \002(\002\022\033\n\023c"
+  "oolantTankPressure\030\r \002(\002\"\237\002\n\014FlightConfi"
+  "g\022\030\n\020retrievalTimeout\030\001 \001(\r\022\036\n\020pdsTeleme"
+  "tryPort\030\002 \001(\005:\0047000\022\031\n\013commandPort\030\003 \001(\005"
+  ":\0046000\022\037\n\020heartbeatTimeout\030\004 \001(\005:\00510000\022"
+  "\021\n\tpodDriver\030\005 \001(\t\022&\n\023controlLaptopIpAdd"
+  "r\030\006 \001(\t:\t127.0.0.1\022\033\n\rbrakeNodePort\030\007 \001("
+  "\004:\0045555\022\036\n\020brakeNodeTimeout\030\010 \001(\004:\0044000\022"
+  "!\n\023brakeNodeServerPort\030\t \001(\004:\0045550\"/\n\017De"
+  "faultFcToNode\022\034\n\010podState\030\001 \001(\0162\n.PodSta"
+  "tes*u\n\017BrakeNodeStates\022\016\n\nbnsBooting\020\000\022\016"
+  "\n\nbnsStandby\020\001\022\r\n\tbnsFlight\020\002\022\016\n\nbnsBrak"
+  "ing\020\003\022\026\n\022bnsSolenoidControl\020\004\022\013\n\007bnsNone"
+  "\020\005*\244\001\n\tPodStates\022\r\n\tpsBooting\020\000\022\r\n\tpsSta"
+  "ndby\020\001\022\014\n\010psArming\020\002\022\013\n\007psArmed\020\003\022\017\n\013psP"
+  "reFlight\020\004\022\022\n\016psAcceleration\020\005\022\016\n\npsCoas"
+  "ting\020\006\022\r\n\tpsBraking\020\007\022\016\n\npsShutdown\020\010\022\n\n"
+  "\006psNone\020\t*C\n\013MotorStates\022\t\n\005msOff\020\000\022\016\n\nm"
+  "sCharging\020\001\022\n\n\006msIdle\020\002\022\r\n\tmsEngaged\020\003*q"
+  "\n\027ControlsInterfaceStates\022\r\n\tciStandby\020\000"
+  "\022\t\n\005ciArm\020\001\022\014\n\010ciFlight\020\002\022\023\n\017ciEmergency"
+  "Stop\020\003\022\n\n\006ciNone\020\004\022\r\n\tciRestart\020\005*-\n\016Inv"
+  "erterStates\022\n\n\006isNone\020\000\022\017\n\013isConnected\020\001"
+  "*)\n\027BatteryManagementStates\022\016\n\nbmsNomina"
+  "l\020\000*P\n\016LvdcNodeStates\022\017\n\013lvdcBooting\020\000\022\017"
+  "\n\013lvdcStandby\020\001\022\016\n\nlvdcFlight\020\002\022\014\n\010lvdcN"
+  "one\020\003"
   ;
 ::google::protobuf::internal::DescriptorTable descriptor_table_Paradigm_2eproto = {
   false, InitDefaults_Paradigm_2eproto, 
   descriptor_table_protodef_Paradigm_2eproto,
-  "Paradigm.proto", &assign_descriptors_table_Paradigm_2eproto, 4117,
+  "Paradigm.proto", &assign_descriptors_table_Paradigm_2eproto, 4925,
 };
 
 void AddDescriptors_Paradigm_2eproto() {
@@ -619,10 +746,6 @@ bool BrakeNodeStates_IsValid(int value) {
     case 3:
     case 4:
     case 5:
-    case 6:
-    case 7:
-    case 8:
-    case 9:
       return true;
     default:
       return false;
@@ -645,8 +768,6 @@ bool PodStates_IsValid(int value) {
     case 7:
     case 8:
     case 9:
-    case 10:
-    case 11:
       return true;
     default:
       return false;
@@ -694,6 +815,7 @@ const ::google::protobuf::EnumDescriptor* InverterStates_descriptor() {
 bool InverterStates_IsValid(int value) {
   switch (value) {
     case 0:
+    case 1:
       return true;
     default:
       return false;
@@ -713,910 +835,20 @@ bool BatteryManagementStates_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* RearNodeStates_descriptor() {
-  ::google::protobuf::internal::AssignDescriptors(&assign_descriptors_table_Paradigm_2eproto);
-  return file_level_enum_descriptors_Paradigm_2eproto[6];
-}
-bool RearNodeStates_IsValid(int value) {
-  switch (value) {
-    case 0:
-    case 1:
-      return true;
-    default:
-      return false;
-  }
-}
-
 const ::google::protobuf::EnumDescriptor* LvdcNodeStates_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&assign_descriptors_table_Paradigm_2eproto);
-  return file_level_enum_descriptors_Paradigm_2eproto[7];
+  return file_level_enum_descriptors_Paradigm_2eproto[6];
 }
 bool LvdcNodeStates_IsValid(int value) {
   switch (value) {
     case 0:
+    case 1:
+    case 2:
+    case 3:
       return true;
     default:
       return false;
   }
-}
-
-
-// ===================================================================
-
-void BrakeNodeData::InitAsDefaultInstance() {
-}
-class BrakeNodeData::HasBitSetters {
- public:
-  static void set_has_id(BrakeNodeData* msg) {
-    msg->_has_bits_[0] |= 0x00000001u;
-  }
-  static void set_has_state(BrakeNodeData* msg) {
-    msg->_has_bits_[0] |= 0x00002000u;
-  }
-  static void set_has_sol1(BrakeNodeData* msg) {
-    msg->_has_bits_[0] |= 0x00000002u;
-  }
-  static void set_has_sol2(BrakeNodeData* msg) {
-    msg->_has_bits_[0] |= 0x00000004u;
-  }
-  static void set_has_sol3(BrakeNodeData* msg) {
-    msg->_has_bits_[0] |= 0x00000008u;
-  }
-  static void set_has_sol4(BrakeNodeData* msg) {
-    msg->_has_bits_[0] |= 0x00000010u;
-  }
-  static void set_has_sol5(BrakeNodeData* msg) {
-    msg->_has_bits_[0] |= 0x00000020u;
-  }
-  static void set_has_sol6(BrakeNodeData* msg) {
-    msg->_has_bits_[0] |= 0x00000040u;
-  }
-  static void set_has_hp(BrakeNodeData* msg) {
-    msg->_has_bits_[0] |= 0x00000080u;
-  }
-  static void set_has_lp1(BrakeNodeData* msg) {
-    msg->_has_bits_[0] |= 0x00000100u;
-  }
-  static void set_has_lp2(BrakeNodeData* msg) {
-    msg->_has_bits_[0] |= 0x00000200u;
-  }
-  static void set_has_lp3(BrakeNodeData* msg) {
-    msg->_has_bits_[0] |= 0x00000400u;
-  }
-  static void set_has_lp4(BrakeNodeData* msg) {
-    msg->_has_bits_[0] |= 0x00000800u;
-  }
-  static void set_has_temp(BrakeNodeData* msg) {
-    msg->_has_bits_[0] |= 0x00001000u;
-  }
-};
-
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int BrakeNodeData::kIdFieldNumber;
-const int BrakeNodeData::kStateFieldNumber;
-const int BrakeNodeData::kSol1FieldNumber;
-const int BrakeNodeData::kSol2FieldNumber;
-const int BrakeNodeData::kSol3FieldNumber;
-const int BrakeNodeData::kSol4FieldNumber;
-const int BrakeNodeData::kSol5FieldNumber;
-const int BrakeNodeData::kSol6FieldNumber;
-const int BrakeNodeData::kHpFieldNumber;
-const int BrakeNodeData::kLp1FieldNumber;
-const int BrakeNodeData::kLp2FieldNumber;
-const int BrakeNodeData::kLp3FieldNumber;
-const int BrakeNodeData::kLp4FieldNumber;
-const int BrakeNodeData::kTempFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
-BrakeNodeData::BrakeNodeData()
-  : ::google::protobuf::Message(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:BrakeNodeData)
-}
-BrakeNodeData::BrakeNodeData(const BrakeNodeData& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(nullptr),
-      _has_bits_(from._has_bits_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::memcpy(&id_, &from.id_,
-    static_cast<size_t>(reinterpret_cast<char*>(&state_) -
-    reinterpret_cast<char*>(&id_)) + sizeof(state_));
-  // @@protoc_insertion_point(copy_constructor:BrakeNodeData)
-}
-
-void BrakeNodeData::SharedCtor() {
-  ::memset(&id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&state_) -
-      reinterpret_cast<char*>(&id_)) + sizeof(state_));
-}
-
-BrakeNodeData::~BrakeNodeData() {
-  // @@protoc_insertion_point(destructor:BrakeNodeData)
-  SharedDtor();
-}
-
-void BrakeNodeData::SharedDtor() {
-}
-
-void BrakeNodeData::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-const BrakeNodeData& BrakeNodeData::default_instance() {
-  ::google::protobuf::internal::InitSCC(&::scc_info_BrakeNodeData_Paradigm_2eproto.base);
-  return *internal_default_instance();
-}
-
-
-void BrakeNodeData::Clear() {
-// @@protoc_insertion_point(message_clear_start:BrakeNodeData)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x000000ffu) {
-    ::memset(&id_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&hp_) -
-        reinterpret_cast<char*>(&id_)) + sizeof(hp_));
-  }
-  if (cached_has_bits & 0x00003f00u) {
-    ::memset(&lp1_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&state_) -
-        reinterpret_cast<char*>(&lp1_)) + sizeof(state_));
-  }
-  _has_bits_.Clear();
-  _internal_metadata_.Clear();
-}
-
-#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-const char* BrakeNodeData::_InternalParse(const char* begin, const char* end, void* object,
-                  ::google::protobuf::internal::ParseContext* ctx) {
-  auto msg = static_cast<BrakeNodeData*>(object);
-  ::google::protobuf::int32 size; (void)size;
-  int depth; (void)depth;
-  ::google::protobuf::uint32 tag;
-  ::google::protobuf::internal::ParseFunc parser_till_end; (void)parser_till_end;
-  auto ptr = begin;
-  while (ptr < end) {
-    ptr = ::google::protobuf::io::Parse32(ptr, &tag);
-    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-    switch (tag >> 3) {
-      // required int32 id = 1;
-      case 1: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 8) goto handle_unusual;
-        msg->set_id(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
-      // optional bool sol1 = 2;
-      case 2: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 16) goto handle_unusual;
-        msg->set_sol1(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
-      // optional bool sol2 = 3;
-      case 3: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 24) goto handle_unusual;
-        msg->set_sol2(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
-      // optional bool sol3 = 4;
-      case 4: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 32) goto handle_unusual;
-        msg->set_sol3(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
-      // optional bool sol4 = 5;
-      case 5: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 40) goto handle_unusual;
-        msg->set_sol4(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
-      // optional bool sol5 = 6;
-      case 6: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 48) goto handle_unusual;
-        msg->set_sol5(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
-      // optional bool sol6 = 7;
-      case 7: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 56) goto handle_unusual;
-        msg->set_sol6(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
-      // optional int32 hp = 8;
-      case 8: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 64) goto handle_unusual;
-        msg->set_hp(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
-      // optional int32 lp1 = 9;
-      case 9: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 72) goto handle_unusual;
-        msg->set_lp1(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
-      // optional int32 lp2 = 10;
-      case 10: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 80) goto handle_unusual;
-        msg->set_lp2(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
-      // optional int32 lp3 = 11;
-      case 11: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 88) goto handle_unusual;
-        msg->set_lp3(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
-      // optional int32 lp4 = 12;
-      case 12: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 96) goto handle_unusual;
-        msg->set_lp4(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
-      // optional int32 temp = 13;
-      case 13: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 104) goto handle_unusual;
-        msg->set_temp(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
-      // optional .BrakeNodeStates state = 14;
-      case 14: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 112) goto handle_unusual;
-        ::google::protobuf::uint64 val = ::google::protobuf::internal::ReadVarint(&ptr);
-        if (!::BrakeNodeStates_IsValid(val)) {
-          ::google::protobuf::internal::WriteVarint(14, val, msg->mutable_unknown_fields());
-          break;
-        }
-        msg->set_state(static_cast<::BrakeNodeStates>(val));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
-      default: {
-      handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
-          ctx->EndGroup(tag);
-          return ptr;
-        }
-        auto res = UnknownFieldParse(tag, {_InternalParse, msg},
-          ptr, end, msg->_internal_metadata_.mutable_unknown_fields(), ctx);
-        ptr = res.first;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr != nullptr);
-        if (res.second) return ptr;
-      }
-    }  // switch
-  }  // while
-  return ptr;
-}
-#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-bool BrakeNodeData::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:BrakeNodeData)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int32 id = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (8 & 0xFF)) {
-          HasBitSetters::set_has_id(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &id_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional bool sol1 = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (16 & 0xFF)) {
-          HasBitSetters::set_has_sol1(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &sol1_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional bool sol2 = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (24 & 0xFF)) {
-          HasBitSetters::set_has_sol2(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &sol2_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional bool sol3 = 4;
-      case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (32 & 0xFF)) {
-          HasBitSetters::set_has_sol3(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &sol3_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional bool sol4 = 5;
-      case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (40 & 0xFF)) {
-          HasBitSetters::set_has_sol4(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &sol4_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional bool sol5 = 6;
-      case 6: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (48 & 0xFF)) {
-          HasBitSetters::set_has_sol5(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &sol5_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional bool sol6 = 7;
-      case 7: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (56 & 0xFF)) {
-          HasBitSetters::set_has_sol6(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &sol6_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional int32 hp = 8;
-      case 8: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (64 & 0xFF)) {
-          HasBitSetters::set_has_hp(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &hp_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional int32 lp1 = 9;
-      case 9: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (72 & 0xFF)) {
-          HasBitSetters::set_has_lp1(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &lp1_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional int32 lp2 = 10;
-      case 10: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (80 & 0xFF)) {
-          HasBitSetters::set_has_lp2(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &lp2_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional int32 lp3 = 11;
-      case 11: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (88 & 0xFF)) {
-          HasBitSetters::set_has_lp3(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &lp3_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional int32 lp4 = 12;
-      case 12: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (96 & 0xFF)) {
-          HasBitSetters::set_has_lp4(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &lp4_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional int32 temp = 13;
-      case 13: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (104 & 0xFF)) {
-          HasBitSetters::set_has_temp(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &temp_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional .BrakeNodeStates state = 14;
-      case 14: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (112 & 0xFF)) {
-          int value = 0;
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          if (::BrakeNodeStates_IsValid(value)) {
-            set_state(static_cast< ::BrakeNodeStates >(value));
-          } else {
-            mutable_unknown_fields()->AddVarint(
-                14, static_cast<::google::protobuf::uint64>(value));
-          }
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:BrakeNodeData)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:BrakeNodeData)
-  return false;
-#undef DO_
-}
-#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-
-void BrakeNodeData::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:BrakeNodeData)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = _has_bits_[0];
-  // required int32 id = 1;
-  if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->id(), output);
-  }
-
-  // optional bool sol1 = 2;
-  if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(2, this->sol1(), output);
-  }
-
-  // optional bool sol2 = 3;
-  if (cached_has_bits & 0x00000004u) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(3, this->sol2(), output);
-  }
-
-  // optional bool sol3 = 4;
-  if (cached_has_bits & 0x00000008u) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(4, this->sol3(), output);
-  }
-
-  // optional bool sol4 = 5;
-  if (cached_has_bits & 0x00000010u) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(5, this->sol4(), output);
-  }
-
-  // optional bool sol5 = 6;
-  if (cached_has_bits & 0x00000020u) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(6, this->sol5(), output);
-  }
-
-  // optional bool sol6 = 7;
-  if (cached_has_bits & 0x00000040u) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(7, this->sol6(), output);
-  }
-
-  // optional int32 hp = 8;
-  if (cached_has_bits & 0x00000080u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(8, this->hp(), output);
-  }
-
-  // optional int32 lp1 = 9;
-  if (cached_has_bits & 0x00000100u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(9, this->lp1(), output);
-  }
-
-  // optional int32 lp2 = 10;
-  if (cached_has_bits & 0x00000200u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(10, this->lp2(), output);
-  }
-
-  // optional int32 lp3 = 11;
-  if (cached_has_bits & 0x00000400u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(11, this->lp3(), output);
-  }
-
-  // optional int32 lp4 = 12;
-  if (cached_has_bits & 0x00000800u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(12, this->lp4(), output);
-  }
-
-  // optional int32 temp = 13;
-  if (cached_has_bits & 0x00001000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(13, this->temp(), output);
-  }
-
-  // optional .BrakeNodeStates state = 14;
-  if (cached_has_bits & 0x00002000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      14, this->state(), output);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        _internal_metadata_.unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:BrakeNodeData)
-}
-
-::google::protobuf::uint8* BrakeNodeData::InternalSerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:BrakeNodeData)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = _has_bits_[0];
-  // required int32 id = 1;
-  if (cached_has_bits & 0x00000001u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->id(), target);
-  }
-
-  // optional bool sol1 = 2;
-  if (cached_has_bits & 0x00000002u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(2, this->sol1(), target);
-  }
-
-  // optional bool sol2 = 3;
-  if (cached_has_bits & 0x00000004u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(3, this->sol2(), target);
-  }
-
-  // optional bool sol3 = 4;
-  if (cached_has_bits & 0x00000008u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(4, this->sol3(), target);
-  }
-
-  // optional bool sol4 = 5;
-  if (cached_has_bits & 0x00000010u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(5, this->sol4(), target);
-  }
-
-  // optional bool sol5 = 6;
-  if (cached_has_bits & 0x00000020u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(6, this->sol5(), target);
-  }
-
-  // optional bool sol6 = 7;
-  if (cached_has_bits & 0x00000040u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(7, this->sol6(), target);
-  }
-
-  // optional int32 hp = 8;
-  if (cached_has_bits & 0x00000080u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(8, this->hp(), target);
-  }
-
-  // optional int32 lp1 = 9;
-  if (cached_has_bits & 0x00000100u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(9, this->lp1(), target);
-  }
-
-  // optional int32 lp2 = 10;
-  if (cached_has_bits & 0x00000200u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(10, this->lp2(), target);
-  }
-
-  // optional int32 lp3 = 11;
-  if (cached_has_bits & 0x00000400u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(11, this->lp3(), target);
-  }
-
-  // optional int32 lp4 = 12;
-  if (cached_has_bits & 0x00000800u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(12, this->lp4(), target);
-  }
-
-  // optional int32 temp = 13;
-  if (cached_has_bits & 0x00001000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(13, this->temp(), target);
-  }
-
-  // optional .BrakeNodeStates state = 14;
-  if (cached_has_bits & 0x00002000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      14, this->state(), target);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:BrakeNodeData)
-  return target;
-}
-
-size_t BrakeNodeData::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:BrakeNodeData)
-  size_t total_size = 0;
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        _internal_metadata_.unknown_fields());
-  }
-  // required int32 id = 1;
-  if (has_id()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->id());
-  }
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x000000feu) {
-    // optional bool sol1 = 2;
-    if (cached_has_bits & 0x00000002u) {
-      total_size += 1 + 1;
-    }
-
-    // optional bool sol2 = 3;
-    if (cached_has_bits & 0x00000004u) {
-      total_size += 1 + 1;
-    }
-
-    // optional bool sol3 = 4;
-    if (cached_has_bits & 0x00000008u) {
-      total_size += 1 + 1;
-    }
-
-    // optional bool sol4 = 5;
-    if (cached_has_bits & 0x00000010u) {
-      total_size += 1 + 1;
-    }
-
-    // optional bool sol5 = 6;
-    if (cached_has_bits & 0x00000020u) {
-      total_size += 1 + 1;
-    }
-
-    // optional bool sol6 = 7;
-    if (cached_has_bits & 0x00000040u) {
-      total_size += 1 + 1;
-    }
-
-    // optional int32 hp = 8;
-    if (cached_has_bits & 0x00000080u) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->hp());
-    }
-
-  }
-  if (cached_has_bits & 0x00003f00u) {
-    // optional int32 lp1 = 9;
-    if (cached_has_bits & 0x00000100u) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->lp1());
-    }
-
-    // optional int32 lp2 = 10;
-    if (cached_has_bits & 0x00000200u) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->lp2());
-    }
-
-    // optional int32 lp3 = 11;
-    if (cached_has_bits & 0x00000400u) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->lp3());
-    }
-
-    // optional int32 lp4 = 12;
-    if (cached_has_bits & 0x00000800u) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->lp4());
-    }
-
-    // optional int32 temp = 13;
-    if (cached_has_bits & 0x00001000u) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->temp());
-    }
-
-    // optional .BrakeNodeStates state = 14;
-    if (cached_has_bits & 0x00002000u) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->state());
-    }
-
-  }
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
-}
-
-void BrakeNodeData::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:BrakeNodeData)
-  GOOGLE_DCHECK_NE(&from, this);
-  const BrakeNodeData* source =
-      ::google::protobuf::DynamicCastToGenerated<BrakeNodeData>(
-          &from);
-  if (source == nullptr) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BrakeNodeData)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:BrakeNodeData)
-    MergeFrom(*source);
-  }
-}
-
-void BrakeNodeData::MergeFrom(const BrakeNodeData& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:BrakeNodeData)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 0x000000ffu) {
-    if (cached_has_bits & 0x00000001u) {
-      id_ = from.id_;
-    }
-    if (cached_has_bits & 0x00000002u) {
-      sol1_ = from.sol1_;
-    }
-    if (cached_has_bits & 0x00000004u) {
-      sol2_ = from.sol2_;
-    }
-    if (cached_has_bits & 0x00000008u) {
-      sol3_ = from.sol3_;
-    }
-    if (cached_has_bits & 0x00000010u) {
-      sol4_ = from.sol4_;
-    }
-    if (cached_has_bits & 0x00000020u) {
-      sol5_ = from.sol5_;
-    }
-    if (cached_has_bits & 0x00000040u) {
-      sol6_ = from.sol6_;
-    }
-    if (cached_has_bits & 0x00000080u) {
-      hp_ = from.hp_;
-    }
-    _has_bits_[0] |= cached_has_bits;
-  }
-  if (cached_has_bits & 0x00003f00u) {
-    if (cached_has_bits & 0x00000100u) {
-      lp1_ = from.lp1_;
-    }
-    if (cached_has_bits & 0x00000200u) {
-      lp2_ = from.lp2_;
-    }
-    if (cached_has_bits & 0x00000400u) {
-      lp3_ = from.lp3_;
-    }
-    if (cached_has_bits & 0x00000800u) {
-      lp4_ = from.lp4_;
-    }
-    if (cached_has_bits & 0x00001000u) {
-      temp_ = from.temp_;
-    }
-    if (cached_has_bits & 0x00002000u) {
-      state_ = from.state_;
-    }
-    _has_bits_[0] |= cached_has_bits;
-  }
-}
-
-void BrakeNodeData::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:BrakeNodeData)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void BrakeNodeData::CopyFrom(const BrakeNodeData& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:BrakeNodeData)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool BrakeNodeData::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
-  return true;
-}
-
-void BrakeNodeData::Swap(BrakeNodeData* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void BrakeNodeData::InternalSwap(BrakeNodeData* other) {
-  using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
-  swap(id_, other->id_);
-  swap(sol1_, other->sol1_);
-  swap(sol2_, other->sol2_);
-  swap(sol3_, other->sol3_);
-  swap(sol4_, other->sol4_);
-  swap(sol5_, other->sol5_);
-  swap(sol6_, other->sol6_);
-  swap(hp_, other->hp_);
-  swap(lp1_, other->lp1_);
-  swap(lp2_, other->lp2_);
-  swap(lp3_, other->lp3_);
-  swap(lp4_, other->lp4_);
-  swap(temp_, other->temp_);
-  swap(state_, other->state_);
-}
-
-::google::protobuf::Metadata BrakeNodeData::GetMetadata() const {
-  ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_Paradigm_2eproto);
-  return ::file_level_metadata_Paradigm_2eproto[kIndexInFileMessages];
 }
 
 
@@ -1626,6 +858,9 @@ void PodCommand::InitAsDefaultInstance() {
 }
 class PodCommand::HasBitSetters {
  public:
+  static void set_has_hascommand(PodCommand* msg) {
+    msg->_has_bits_[0] |= 0x00000020u;
+  }
   static void set_has_controlsinterfacestate(PodCommand* msg) {
     msg->_has_bits_[0] |= 0x00000001u;
   }
@@ -1642,17 +877,33 @@ class PodCommand::HasBitSetters {
     msg->_has_bits_[0] |= 0x00000010u;
   }
   static void set_has_automaticstatetransitions(PodCommand* msg) {
-    msg->_has_bits_[0] |= 0x00000020u;
+    msg->_has_bits_[0] |= 0x00000040u;
+  }
+  static void set_has_motortorque(PodCommand* msg) {
+    msg->_has_bits_[0] |= 0x00000080u;
+  }
+  static void set_has_flightdistance(PodCommand* msg) {
+    msg->_has_bits_[0] |= 0x00000100u;
+  }
+  static void set_has_maxflighttime(PodCommand* msg) {
+    msg->_has_bits_[0] |= 0x00000200u;
   }
 };
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int PodCommand::kHasCommandFieldNumber;
 const int PodCommand::kControlsInterfaceStateFieldNumber;
 const int PodCommand::kManualPodStateFieldNumber;
 const int PodCommand::kManualBrakeNodeStateFieldNumber;
 const int PodCommand::kManualMotorStateFieldNumber;
 const int PodCommand::kManualLvdcNodeStateFieldNumber;
 const int PodCommand::kAutomaticStateTransitionsFieldNumber;
+const int PodCommand::kSolenoidConfigurationFieldNumber;
+const int PodCommand::kPowerRailConfigurationFieldNumber;
+const int PodCommand::kSensorOverrideConfigurationFieldNumber;
+const int PodCommand::kMotorTorqueFieldNumber;
+const int PodCommand::kFlightDistanceFieldNumber;
+const int PodCommand::kMaxFlightTimeFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 PodCommand::PodCommand()
@@ -1663,18 +914,21 @@ PodCommand::PodCommand()
 PodCommand::PodCommand(const PodCommand& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(nullptr),
-      _has_bits_(from._has_bits_) {
+      _has_bits_(from._has_bits_),
+      solenoidconfiguration_(from.solenoidconfiguration_),
+      powerrailconfiguration_(from.powerrailconfiguration_),
+      sensoroverrideconfiguration_(from.sensoroverrideconfiguration_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&controlsinterfacestate_, &from.controlsinterfacestate_,
-    static_cast<size_t>(reinterpret_cast<char*>(&automaticstatetransitions_) -
-    reinterpret_cast<char*>(&controlsinterfacestate_)) + sizeof(automaticstatetransitions_));
+    static_cast<size_t>(reinterpret_cast<char*>(&maxflighttime_) -
+    reinterpret_cast<char*>(&controlsinterfacestate_)) + sizeof(maxflighttime_));
   // @@protoc_insertion_point(copy_constructor:PodCommand)
 }
 
 void PodCommand::SharedCtor() {
   ::memset(&controlsinterfacestate_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&automaticstatetransitions_) -
-      reinterpret_cast<char*>(&controlsinterfacestate_)) + sizeof(automaticstatetransitions_));
+      reinterpret_cast<char*>(&maxflighttime_) -
+      reinterpret_cast<char*>(&controlsinterfacestate_)) + sizeof(maxflighttime_));
 }
 
 PodCommand::~PodCommand() {
@@ -1700,11 +954,19 @@ void PodCommand::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  solenoidconfiguration_.Clear();
+  powerrailconfiguration_.Clear();
+  sensoroverrideconfiguration_.Clear();
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x0000003fu) {
+  if (cached_has_bits & 0x000000ffu) {
     ::memset(&controlsinterfacestate_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&automaticstatetransitions_) -
-        reinterpret_cast<char*>(&controlsinterfacestate_)) + sizeof(automaticstatetransitions_));
+        reinterpret_cast<char*>(&motortorque_) -
+        reinterpret_cast<char*>(&controlsinterfacestate_)) + sizeof(motortorque_));
+  }
+  if (cached_has_bits & 0x00000300u) {
+    ::memset(&flightdistance_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&maxflighttime_) -
+        reinterpret_cast<char*>(&flightdistance_)) + sizeof(maxflighttime_));
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -1790,6 +1052,94 @@ const char* PodCommand::_InternalParse(const char* begin, const char* end, void*
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
+      // optional bool hasCommand = 7 [default = false];
+      case 7: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 56) goto handle_unusual;
+        msg->set_hascommand(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // repeated int32 solenoidConfiguration = 8;
+      case 8: {
+        if (static_cast<::google::protobuf::uint8>(tag) == 64) {
+          do {
+            msg->add_solenoidconfiguration(::google::protobuf::internal::ReadVarint(&ptr));
+            GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+            if (ptr >= end) break;
+          } while ((::google::protobuf::io::UnalignedLoad<::google::protobuf::uint64>(ptr) & 255) == 64 && (ptr += 1));
+          break;
+        } else if (static_cast<::google::protobuf::uint8>(tag) != 66) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        parser_till_end = ::google::protobuf::internal::PackedInt32Parser;
+        object = msg->mutable_solenoidconfiguration();
+        if (size > end - ptr) goto len_delim_till_end;
+        auto newend = ptr + size;
+        if (size) ptr = parser_till_end(ptr, newend, object, ctx);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr == newend);
+        break;
+      }
+      // repeated int32 powerRailConfiguration = 9;
+      case 9: {
+        if (static_cast<::google::protobuf::uint8>(tag) == 72) {
+          do {
+            msg->add_powerrailconfiguration(::google::protobuf::internal::ReadVarint(&ptr));
+            GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+            if (ptr >= end) break;
+          } while ((::google::protobuf::io::UnalignedLoad<::google::protobuf::uint64>(ptr) & 255) == 72 && (ptr += 1));
+          break;
+        } else if (static_cast<::google::protobuf::uint8>(tag) != 74) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        parser_till_end = ::google::protobuf::internal::PackedInt32Parser;
+        object = msg->mutable_powerrailconfiguration();
+        if (size > end - ptr) goto len_delim_till_end;
+        auto newend = ptr + size;
+        if (size) ptr = parser_till_end(ptr, newend, object, ctx);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr == newend);
+        break;
+      }
+      // repeated int32 sensorOverrideConfiguration = 10;
+      case 10: {
+        if (static_cast<::google::protobuf::uint8>(tag) == 80) {
+          do {
+            msg->add_sensoroverrideconfiguration(::google::protobuf::internal::ReadVarint(&ptr));
+            GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+            if (ptr >= end) break;
+          } while ((::google::protobuf::io::UnalignedLoad<::google::protobuf::uint64>(ptr) & 255) == 80 && (ptr += 1));
+          break;
+        } else if (static_cast<::google::protobuf::uint8>(tag) != 82) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        parser_till_end = ::google::protobuf::internal::PackedInt32Parser;
+        object = msg->mutable_sensoroverrideconfiguration();
+        if (size > end - ptr) goto len_delim_till_end;
+        auto newend = ptr + size;
+        if (size) ptr = parser_till_end(ptr, newend, object, ctx);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr == newend);
+        break;
+      }
+      // optional uint32 motorTorque = 11;
+      case 11: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 88) goto handle_unusual;
+        msg->set_motortorque(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // optional uint32 flightDistance = 12;
+      case 12: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 96) goto handle_unusual;
+        msg->set_flightdistance(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // optional uint32 maxFlightTime = 13;
+      case 13: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 104) goto handle_unusual;
+        msg->set_maxflighttime(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
       default: {
       handle_unusual:
         if ((tag & 7) == 4 || tag == 0) {
@@ -1805,6 +1155,9 @@ const char* PodCommand::_InternalParse(const char* begin, const char* end, void*
     }  // switch
   }  // while
   return ptr;
+len_delim_till_end:
+  return ctx->StoreAndTailCall(ptr, end, {_InternalParse, msg},
+                               {parser_till_end, object}, size);
 }
 #else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 bool PodCommand::MergePartialFromCodedStream(
@@ -1925,6 +1278,106 @@ bool PodCommand::MergePartialFromCodedStream(
         break;
       }
 
+      // optional bool hasCommand = 7 [default = false];
+      case 7: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (56 & 0xFF)) {
+          HasBitSetters::set_has_hascommand(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &hascommand_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated int32 solenoidConfiguration = 8;
+      case 8: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (64 & 0xFF)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 1, 64u, input, this->mutable_solenoidconfiguration())));
+        } else if (static_cast< ::google::protobuf::uint8>(tag) == (66 & 0xFF)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, this->mutable_solenoidconfiguration())));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated int32 powerRailConfiguration = 9;
+      case 9: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (72 & 0xFF)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 1, 72u, input, this->mutable_powerrailconfiguration())));
+        } else if (static_cast< ::google::protobuf::uint8>(tag) == (74 & 0xFF)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, this->mutable_powerrailconfiguration())));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated int32 sensorOverrideConfiguration = 10;
+      case 10: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (80 & 0xFF)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 1, 80u, input, this->mutable_sensoroverrideconfiguration())));
+        } else if (static_cast< ::google::protobuf::uint8>(tag) == (82 & 0xFF)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, this->mutable_sensoroverrideconfiguration())));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // optional uint32 motorTorque = 11;
+      case 11: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (88 & 0xFF)) {
+          HasBitSetters::set_has_motortorque(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &motortorque_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // optional uint32 flightDistance = 12;
+      case 12: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (96 & 0xFF)) {
+          HasBitSetters::set_has_flightdistance(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &flightdistance_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // optional uint32 maxFlightTime = 13;
+      case 13: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (104 & 0xFF)) {
+          HasBitSetters::set_has_maxflighttime(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &maxflighttime_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -1984,8 +1437,46 @@ void PodCommand::SerializeWithCachedSizes(
   }
 
   // optional bool automaticStateTransitions = 6;
-  if (cached_has_bits & 0x00000020u) {
+  if (cached_has_bits & 0x00000040u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(6, this->automaticstatetransitions(), output);
+  }
+
+  // optional bool hasCommand = 7 [default = false];
+  if (cached_has_bits & 0x00000020u) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(7, this->hascommand(), output);
+  }
+
+  // repeated int32 solenoidConfiguration = 8;
+  for (int i = 0, n = this->solenoidconfiguration_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(
+      8, this->solenoidconfiguration(i), output);
+  }
+
+  // repeated int32 powerRailConfiguration = 9;
+  for (int i = 0, n = this->powerrailconfiguration_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(
+      9, this->powerrailconfiguration(i), output);
+  }
+
+  // repeated int32 sensorOverrideConfiguration = 10;
+  for (int i = 0, n = this->sensoroverrideconfiguration_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(
+      10, this->sensoroverrideconfiguration(i), output);
+  }
+
+  // optional uint32 motorTorque = 11;
+  if (cached_has_bits & 0x00000080u) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(11, this->motortorque(), output);
+  }
+
+  // optional uint32 flightDistance = 12;
+  if (cached_has_bits & 0x00000100u) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(12, this->flightdistance(), output);
+  }
+
+  // optional uint32 maxFlightTime = 13;
+  if (cached_has_bits & 0x00000200u) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(13, this->maxflighttime(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -2033,8 +1524,40 @@ void PodCommand::SerializeWithCachedSizes(
   }
 
   // optional bool automaticStateTransitions = 6;
-  if (cached_has_bits & 0x00000020u) {
+  if (cached_has_bits & 0x00000040u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(6, this->automaticstatetransitions(), target);
+  }
+
+  // optional bool hasCommand = 7 [default = false];
+  if (cached_has_bits & 0x00000020u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(7, this->hascommand(), target);
+  }
+
+  // repeated int32 solenoidConfiguration = 8;
+  target = ::google::protobuf::internal::WireFormatLite::
+    WriteInt32ToArray(8, this->solenoidconfiguration_, target);
+
+  // repeated int32 powerRailConfiguration = 9;
+  target = ::google::protobuf::internal::WireFormatLite::
+    WriteInt32ToArray(9, this->powerrailconfiguration_, target);
+
+  // repeated int32 sensorOverrideConfiguration = 10;
+  target = ::google::protobuf::internal::WireFormatLite::
+    WriteInt32ToArray(10, this->sensoroverrideconfiguration_, target);
+
+  // optional uint32 motorTorque = 11;
+  if (cached_has_bits & 0x00000080u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(11, this->motortorque(), target);
+  }
+
+  // optional uint32 flightDistance = 12;
+  if (cached_has_bits & 0x00000100u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(12, this->flightdistance(), target);
+  }
+
+  // optional uint32 maxFlightTime = 13;
+  if (cached_has_bits & 0x00000200u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(13, this->maxflighttime(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -2058,8 +1581,35 @@ size_t PodCommand::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  // repeated int32 solenoidConfiguration = 8;
+  {
+    size_t data_size = ::google::protobuf::internal::WireFormatLite::
+      Int32Size(this->solenoidconfiguration_);
+    total_size += 1 *
+                  ::google::protobuf::internal::FromIntSize(this->solenoidconfiguration_size());
+    total_size += data_size;
+  }
+
+  // repeated int32 powerRailConfiguration = 9;
+  {
+    size_t data_size = ::google::protobuf::internal::WireFormatLite::
+      Int32Size(this->powerrailconfiguration_);
+    total_size += 1 *
+                  ::google::protobuf::internal::FromIntSize(this->powerrailconfiguration_size());
+    total_size += data_size;
+  }
+
+  // repeated int32 sensorOverrideConfiguration = 10;
+  {
+    size_t data_size = ::google::protobuf::internal::WireFormatLite::
+      Int32Size(this->sensoroverrideconfiguration_);
+    total_size += 1 *
+                  ::google::protobuf::internal::FromIntSize(this->sensoroverrideconfiguration_size());
+    total_size += data_size;
+  }
+
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x0000003fu) {
+  if (cached_has_bits & 0x000000ffu) {
     // optional .ControlsInterfaceStates controlsInterfaceState = 1;
     if (cached_has_bits & 0x00000001u) {
       total_size += 1 +
@@ -2090,9 +1640,37 @@ size_t PodCommand::ByteSizeLong() const {
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->manuallvdcnodestate());
     }
 
-    // optional bool automaticStateTransitions = 6;
+    // optional bool hasCommand = 7 [default = false];
     if (cached_has_bits & 0x00000020u) {
       total_size += 1 + 1;
+    }
+
+    // optional bool automaticStateTransitions = 6;
+    if (cached_has_bits & 0x00000040u) {
+      total_size += 1 + 1;
+    }
+
+    // optional uint32 motorTorque = 11;
+    if (cached_has_bits & 0x00000080u) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->motortorque());
+    }
+
+  }
+  if (cached_has_bits & 0x00000300u) {
+    // optional uint32 flightDistance = 12;
+    if (cached_has_bits & 0x00000100u) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->flightdistance());
+    }
+
+    // optional uint32 maxFlightTime = 13;
+    if (cached_has_bits & 0x00000200u) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->maxflighttime());
     }
 
   }
@@ -2123,8 +1701,11 @@ void PodCommand::MergeFrom(const PodCommand& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
+  solenoidconfiguration_.MergeFrom(from.solenoidconfiguration_);
+  powerrailconfiguration_.MergeFrom(from.powerrailconfiguration_);
+  sensoroverrideconfiguration_.MergeFrom(from.sensoroverrideconfiguration_);
   cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 0x0000003fu) {
+  if (cached_has_bits & 0x000000ffu) {
     if (cached_has_bits & 0x00000001u) {
       controlsinterfacestate_ = from.controlsinterfacestate_;
     }
@@ -2141,7 +1722,22 @@ void PodCommand::MergeFrom(const PodCommand& from) {
       manuallvdcnodestate_ = from.manuallvdcnodestate_;
     }
     if (cached_has_bits & 0x00000020u) {
+      hascommand_ = from.hascommand_;
+    }
+    if (cached_has_bits & 0x00000040u) {
       automaticstatetransitions_ = from.automaticstatetransitions_;
+    }
+    if (cached_has_bits & 0x00000080u) {
+      motortorque_ = from.motortorque_;
+    }
+    _has_bits_[0] |= cached_has_bits;
+  }
+  if (cached_has_bits & 0x00000300u) {
+    if (cached_has_bits & 0x00000100u) {
+      flightdistance_ = from.flightdistance_;
+    }
+    if (cached_has_bits & 0x00000200u) {
+      maxflighttime_ = from.maxflighttime_;
     }
     _has_bits_[0] |= cached_has_bits;
   }
@@ -2173,12 +1769,19 @@ void PodCommand::InternalSwap(PodCommand* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_has_bits_[0], other->_has_bits_[0]);
+  solenoidconfiguration_.InternalSwap(&other->solenoidconfiguration_);
+  powerrailconfiguration_.InternalSwap(&other->powerrailconfiguration_);
+  sensoroverrideconfiguration_.InternalSwap(&other->sensoroverrideconfiguration_);
   swap(controlsinterfacestate_, other->controlsinterfacestate_);
   swap(manualpodstate_, other->manualpodstate_);
   swap(manualbrakenodestate_, other->manualbrakenodestate_);
   swap(manualmotorstate_, other->manualmotorstate_);
   swap(manuallvdcnodestate_, other->manuallvdcnodestate_);
+  swap(hascommand_, other->hascommand_);
   swap(automaticstatetransitions_, other->automaticstatetransitions_);
+  swap(motortorque_, other->motortorque_);
+  swap(flightdistance_, other->flightdistance_);
+  swap(maxflighttime_, other->maxflighttime_);
 }
 
 ::google::protobuf::Metadata PodCommand::GetMetadata() const {
@@ -2196,7 +1799,7 @@ class Telemetry::HasBitSetters {
   static void set_has_podstate(Telemetry* msg) {
     msg->_has_bits_[0] |= 0x00000001u;
   }
-  static void set_has_breaknodestate(Telemetry* msg) {
+  static void set_has_brakenodestate(Telemetry* msg) {
     msg->_has_bits_[0] |= 0x00000002u;
   }
   static void set_has_motorstate(Telemetry* msg) {
@@ -2209,13 +1812,13 @@ class Telemetry::HasBitSetters {
     msg->_has_bits_[0] |= 0x00000010u;
   }
   static void set_has_lvdcnodestate(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x00040000u;
+    msg->_has_bits_[1] |= 0x00002000u;
   }
   static void set_has_batterymanagementstate(Telemetry* msg) {
-    msg->_has_bits_[0] |= 0x00800000u;
+    msg->_has_bits_[0] |= 0x00080000u;
   }
   static void set_has_breaknodeperceivedpodstate(Telemetry* msg) {
-    msg->_has_bits_[0] |= 0x10000000u;
+    msg->_has_bits_[0] |= 0x02000000u;
   }
   static void set_has_missiontime(Telemetry* msg) {
     msg->_has_bits_[0] |= 0x00000020u;
@@ -2232,179 +1835,182 @@ class Telemetry::HasBitSetters {
   static void set_has_podaccelerationx(Telemetry* msg) {
     msg->_has_bits_[0] |= 0x00000200u;
   }
-  static void set_has_podaccelerationy(Telemetry* msg) {
+  static void set_has_tachometervelocity(Telemetry* msg) {
     msg->_has_bits_[0] |= 0x00000400u;
   }
-  static void set_has_podaccelerationz(Telemetry* msg) {
+  static void set_has_resolvervelocity(Telemetry* msg) {
     msg->_has_bits_[0] |= 0x00000800u;
   }
-  static void set_has_imuvelocity(Telemetry* msg) {
+  static void set_has_maxigbttemperature(Telemetry* msg) {
     msg->_has_bits_[0] |= 0x00001000u;
   }
-  static void set_has_imuaccelerationx(Telemetry* msg) {
+  static void set_has_gatedrivertemperature(Telemetry* msg) {
     msg->_has_bits_[0] |= 0x00002000u;
   }
-  static void set_has_tachometervelocity(Telemetry* msg) {
+  static void set_has_invertercontrolboardtemperature(Telemetry* msg) {
     msg->_has_bits_[0] |= 0x00004000u;
   }
-  static void set_has_resolvervelocity(Telemetry* msg) {
+  static void set_has_motortemperature(Telemetry* msg) {
     msg->_has_bits_[0] |= 0x00008000u;
   }
-  static void set_has_invertertemperature1(Telemetry* msg) {
+  static void set_has_inverterbusvoltage(Telemetry* msg) {
     msg->_has_bits_[0] |= 0x00010000u;
   }
-  static void set_has_invertertemperature2(Telemetry* msg) {
-    msg->_has_bits_[0] |= 0x00020000u;
+  static void set_has_inverterheartbeat(Telemetry* msg) {
+    msg->_has_bits_[2] |= 0x00000010u;
   }
-  static void set_has_invertertemperature3(Telemetry* msg) {
-    msg->_has_bits_[0] |= 0x00040000u;
-  }
-  static void set_has_motorcurrent(Telemetry* msg) {
-    msg->_has_bits_[0] |= 0x00080000u;
-  }
-  static void set_has_motorvoltage(Telemetry* msg) {
-    msg->_has_bits_[0] |= 0x00100000u;
-  }
-  static void set_has_invertervoltages(Telemetry* msg) {
-    msg->_has_bits_[0] |= 0x00200000u;
-  }
-  static void set_has_invertercurrents(Telemetry* msg) {
-    msg->_has_bits_[0] |= 0x00400000u;
-  }
-  static void set_has_hvbatterypackvoltage(Telemetry* msg) {
-    msg->_has_bits_[0] |= 0x01000000u;
-  }
-  static void set_has_hvbatterypackcurrent(Telemetry* msg) {
-    msg->_has_bits_[0] |= 0x02000000u;
-  }
-  static void set_has_hvbatterypackminimumcellvoltage(Telemetry* msg) {
-    msg->_has_bits_[0] |= 0x04000000u;
-  }
-  static void set_has_hvbatterypackmaxcellvoltage(Telemetry* msg) {
-    msg->_has_bits_[0] |= 0x08000000u;
-  }
-  static void set_has_solenoid1(Telemetry* msg) {
-    msg->_has_bits_[0] |= 0x20000000u;
-  }
-  static void set_has_solenoid2(Telemetry* msg) {
-    msg->_has_bits_[0] |= 0x40000000u;
-  }
-  static void set_has_solenoid3(Telemetry* msg) {
-    msg->_has_bits_[0] |= 0x80000000u;
-  }
-  static void set_has_solenoid4(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x00000001u;
-  }
-  static void set_has_solenoid5(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x00000002u;
-  }
-  static void set_has_solenoid6(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x00000004u;
-  }
-  static void set_has_highpressure(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x00000008u;
-  }
-  static void set_has_lowpressure1(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x00000010u;
-  }
-  static void set_has_lowpressure2(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x00000020u;
-  }
-  static void set_has_lowpressure3(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x00000040u;
-  }
-  static void set_has_lowpressure4(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x00000080u;
-  }
-  static void set_has_pressurevesseltemperature(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x00000100u;
-  }
-  static void set_has_electronicsenclosurepressure(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x00000200u;
-  }
-  static void set_has_raildisplacementx(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x00000400u;
-  }
-  static void set_has_raildisplacementy(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x00000800u;
-  }
-  static void set_has_tubepressure(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x00001000u;
-  }
-  static void set_has_coolantpressure1(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x00002000u;
-  }
-  static void set_has_coolantpressure2(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x00004000u;
-  }
-  static void set_has_coolantpressure3(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x00008000u;
-  }
-  static void set_has_coolanttemperature(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x00010000u;
-  }
-  static void set_has_railtemperature(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x00020000u;
-  }
-  static void set_has_pack1voltage(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x00080000u;
-  }
-  static void set_has_pack2voltage(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x00100000u;
-  }
-  static void set_has_pack1current(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x00200000u;
-  }
-  static void set_has_pack2current(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x00400000u;
-  }
-  static void set_has_rail1voltage(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x00800000u;
-  }
-  static void set_has_rail2voltage(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x01000000u;
-  }
-  static void set_has_rail3voltage(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x02000000u;
-  }
-  static void set_has_rail4voltage(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x04000000u;
-  }
-  static void set_has_railvoltageflag(Telemetry* msg) {
-    msg->_has_bits_[2] |= 0x00000008u;
-  }
-  static void set_has_railcurrentsensor1(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x08000000u;
-  }
-  static void set_has_railcurrentsensor2(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x10000000u;
-  }
-  static void set_has_railcurrentsensor3(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x20000000u;
-  }
-  static void set_has_railcurrentsensor4(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x40000000u;
-  }
-  static void set_has_railcurrentsensor5(Telemetry* msg) {
-    msg->_has_bits_[1] |= 0x80000000u;
-  }
-  static void set_has_railcurrentsensor6(Telemetry* msg) {
-    msg->_has_bits_[2] |= 0x00000001u;
-  }
-  static void set_has_railcurrentsensor7(Telemetry* msg) {
+  static void set_has_motorspeed(Telemetry* msg) {
     msg->_has_bits_[2] |= 0x00000002u;
   }
+  static void set_has_invertervoltages(Telemetry* msg) {
+    msg->_has_bits_[0] |= 0x00020000u;
+  }
+  static void set_has_invertercurrents(Telemetry* msg) {
+    msg->_has_bits_[0] |= 0x00040000u;
+  }
+  static void set_has_hvbatterypackvoltage(Telemetry* msg) {
+    msg->_has_bits_[0] |= 0x00100000u;
+  }
+  static void set_has_hvbatterypackcurrent(Telemetry* msg) {
+    msg->_has_bits_[0] |= 0x00200000u;
+  }
+  static void set_has_hvbatterypackmaxcelltemperature(Telemetry* msg) {
+    msg->_has_bits_[0] |= 0x00400000u;
+  }
+  static void set_has_hvbatterypackmaxcellvoltage(Telemetry* msg) {
+    msg->_has_bits_[0] |= 0x01000000u;
+  }
+  static void set_has_hvbatterypackminimumcellvoltage(Telemetry* msg) {
+    msg->_has_bits_[0] |= 0x00800000u;
+  }
+  static void set_has_hvbatterypackstateofcharge(Telemetry* msg) {
+    msg->_has_bits_[2] |= 0x00000020u;
+  }
+  static void set_has_solenoid1(Telemetry* msg) {
+    msg->_has_bits_[0] |= 0x04000000u;
+  }
+  static void set_has_solenoid2(Telemetry* msg) {
+    msg->_has_bits_[0] |= 0x08000000u;
+  }
+  static void set_has_solenoid3(Telemetry* msg) {
+    msg->_has_bits_[0] |= 0x10000000u;
+  }
+  static void set_has_solenoid4(Telemetry* msg) {
+    msg->_has_bits_[0] |= 0x20000000u;
+  }
+  static void set_has_highpressure(Telemetry* msg) {
+    msg->_has_bits_[0] |= 0x40000000u;
+  }
+  static void set_has_lowpressure1(Telemetry* msg) {
+    msg->_has_bits_[0] |= 0x80000000u;
+  }
+  static void set_has_lowpressure2(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x00000001u;
+  }
+  static void set_has_lowpressure3(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x00000002u;
+  }
+  static void set_has_lowpressure4(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x00000004u;
+  }
+  static void set_has_pressurevesseltemperature(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x00000008u;
+  }
+  static void set_has_electronicsenclosurepressure(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x00000010u;
+  }
+  static void set_has_raildisplacementx(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x00000020u;
+  }
+  static void set_has_raildisplacementy(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x00000040u;
+  }
+  static void set_has_tubepressure(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x00000080u;
+  }
+  static void set_has_coolantpressure1(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x00000100u;
+  }
+  static void set_has_coolantpressure2(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x00000200u;
+  }
+  static void set_has_coolantpressure3(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x00000400u;
+  }
+  static void set_has_coolanttemperature(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x00000800u;
+  }
+  static void set_has_railtemperature(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x00001000u;
+  }
+  static void set_has_pack1voltage(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x00004000u;
+  }
+  static void set_has_pack2voltage(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x00008000u;
+  }
+  static void set_has_pack1current(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x00010000u;
+  }
+  static void set_has_pack2current(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x00020000u;
+  }
+  static void set_has_rail1voltage(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x00040000u;
+  }
+  static void set_has_rail2voltage(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x00080000u;
+  }
+  static void set_has_rail3voltage(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x00100000u;
+  }
+  static void set_has_rail4voltage(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x00200000u;
+  }
+  static void set_has_railvoltageflag(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x40000000u;
+  }
+  static void set_has_railcurrentsensor1(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x00400000u;
+  }
+  static void set_has_railcurrentsensor2(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x00800000u;
+  }
+  static void set_has_railcurrentsensor3(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x01000000u;
+  }
+  static void set_has_railcurrentsensor4(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x02000000u;
+  }
+  static void set_has_railcurrentsensor5(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x04000000u;
+  }
+  static void set_has_railcurrentsensor6(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x08000000u;
+  }
+  static void set_has_railcurrentsensor7(Telemetry* msg) {
+    msg->_has_bits_[1] |= 0x10000000u;
+  }
   static void set_has_railcurrentsensor8(Telemetry* msg) {
-    msg->_has_bits_[2] |= 0x00000004u;
+    msg->_has_bits_[1] |= 0x20000000u;
   }
   static void set_has_railcurrentflag(Telemetry* msg) {
-    msg->_has_bits_[2] |= 0x00000010u;
+    msg->_has_bits_[1] |= 0x80000000u;
+  }
+  static void set_has_motortorque(Telemetry* msg) {
+    msg->_has_bits_[2] |= 0x00000001u;
+  }
+  static void set_has_flightdistance(Telemetry* msg) {
+    msg->_has_bits_[2] |= 0x00000004u;
+  }
+  static void set_has_maxflighttime(Telemetry* msg) {
+    msg->_has_bits_[2] |= 0x00000008u;
   }
 };
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int Telemetry::kPodStateFieldNumber;
-const int Telemetry::kBreakNodeStateFieldNumber;
+const int Telemetry::kBrakeNodeStateFieldNumber;
 const int Telemetry::kMotorStateFieldNumber;
 const int Telemetry::kControlsInterfaceStateFieldNumber;
 const int Telemetry::kInverterStateFieldNumber;
@@ -2418,30 +2024,27 @@ const int Telemetry::kHeartbeatValuesFieldNumber;
 const int Telemetry::kPodPositionFieldNumber;
 const int Telemetry::kPodVelocityFieldNumber;
 const int Telemetry::kPodAccelerationXFieldNumber;
-const int Telemetry::kPodAccelerationYFieldNumber;
-const int Telemetry::kPodAccelerationZFieldNumber;
-const int Telemetry::kImuVelocityFieldNumber;
-const int Telemetry::kImuAccelerationXFieldNumber;
 const int Telemetry::kTachometerVelocityFieldNumber;
 const int Telemetry::kResolverVelocityFieldNumber;
-const int Telemetry::kInverterTemperature1FieldNumber;
-const int Telemetry::kInverterTemperature2FieldNumber;
-const int Telemetry::kInverterTemperature3FieldNumber;
-const int Telemetry::kMotorCurrentFieldNumber;
-const int Telemetry::kMotorVoltageFieldNumber;
+const int Telemetry::kMaxIgbtTemperatureFieldNumber;
+const int Telemetry::kGateDriverTemperatureFieldNumber;
+const int Telemetry::kInverterControlBoardTemperatureFieldNumber;
+const int Telemetry::kMotorTemperatureFieldNumber;
+const int Telemetry::kInverterBusVoltageFieldNumber;
+const int Telemetry::kInverterHeartbeatFieldNumber;
+const int Telemetry::kMotorSpeedFieldNumber;
 const int Telemetry::kInverterVoltagesFieldNumber;
 const int Telemetry::kInverterCurrentsFieldNumber;
 const int Telemetry::kHvBatteryPackVoltageFieldNumber;
 const int Telemetry::kHvBatteryPackCurrentFieldNumber;
-const int Telemetry::kHvBatteryCellTemperaturesFieldNumber;
-const int Telemetry::kHvBatteryPackMinimumCellVoltageFieldNumber;
+const int Telemetry::kHvBatteryPackMaxCellTemperatureFieldNumber;
 const int Telemetry::kHvBatteryPackMaxCellVoltageFieldNumber;
+const int Telemetry::kHvBatteryPackMinimumCellVoltageFieldNumber;
+const int Telemetry::kHvBatteryPackStateOfChargeFieldNumber;
 const int Telemetry::kSolenoid1FieldNumber;
 const int Telemetry::kSolenoid2FieldNumber;
 const int Telemetry::kSolenoid3FieldNumber;
 const int Telemetry::kSolenoid4FieldNumber;
-const int Telemetry::kSolenoid5FieldNumber;
-const int Telemetry::kSolenoid6FieldNumber;
 const int Telemetry::kHighPressureFieldNumber;
 const int Telemetry::kLowPressure1FieldNumber;
 const int Telemetry::kLowPressure2FieldNumber;
@@ -2475,6 +2078,10 @@ const int Telemetry::kRailCurrentSensor6FieldNumber;
 const int Telemetry::kRailCurrentSensor7FieldNumber;
 const int Telemetry::kRailCurrentSensor8FieldNumber;
 const int Telemetry::kRailCurrentFlagFieldNumber;
+const int Telemetry::kMotorTorqueFieldNumber;
+const int Telemetry::kFlightDistanceFieldNumber;
+const int Telemetry::kMaxFlightTimeFieldNumber;
+const int Telemetry::kUpdateMessagesFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Telemetry::Telemetry()
@@ -2487,19 +2094,21 @@ Telemetry::Telemetry(const Telemetry& from)
       _internal_metadata_(nullptr),
       _has_bits_(from._has_bits_),
       heartbeatflags_(from.heartbeatflags_),
-      hvbatterycelltemperatures_(from.hvbatterycelltemperatures_),
-      heartbeatvalues_(from.heartbeatvalues_) {
+      heartbeatvalues_(from.heartbeatvalues_),
+      updatemessages_(from.updatemessages_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&podstate_, &from.podstate_,
-    static_cast<size_t>(reinterpret_cast<char*>(&railcurrentflag_) -
-    reinterpret_cast<char*>(&podstate_)) + sizeof(railcurrentflag_));
+    static_cast<size_t>(reinterpret_cast<char*>(&hvbatterypackstateofcharge_) -
+    reinterpret_cast<char*>(&podstate_)) + sizeof(hvbatterypackstateofcharge_));
   // @@protoc_insertion_point(copy_constructor:Telemetry)
 }
 
 void Telemetry::SharedCtor() {
+  ::google::protobuf::internal::InitSCC(
+      &scc_info_Telemetry_Paradigm_2eproto.base);
   ::memset(&podstate_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&railcurrentflag_) -
-      reinterpret_cast<char*>(&podstate_)) + sizeof(railcurrentflag_));
+      reinterpret_cast<char*>(&hvbatterypackstateofcharge_) -
+      reinterpret_cast<char*>(&podstate_)) + sizeof(hvbatterypackstateofcharge_));
 }
 
 Telemetry::~Telemetry() {
@@ -2526,8 +2135,8 @@ void Telemetry::Clear() {
   (void) cached_has_bits;
 
   heartbeatflags_.Clear();
-  hvbatterycelltemperatures_.Clear();
   heartbeatvalues_.Clear();
+  updatemessages_.Clear();
   cached_has_bits = _has_bits_[0];
   if (cached_has_bits & 0x000000ffu) {
     ::memset(&podstate_, 0, static_cast<size_t>(
@@ -2536,45 +2145,45 @@ void Telemetry::Clear() {
   }
   if (cached_has_bits & 0x0000ff00u) {
     ::memset(&podvelocity_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&resolvervelocity_) -
-        reinterpret_cast<char*>(&podvelocity_)) + sizeof(resolvervelocity_));
+        reinterpret_cast<char*>(&motortemperature_) -
+        reinterpret_cast<char*>(&podvelocity_)) + sizeof(motortemperature_));
   }
   if (cached_has_bits & 0x00ff0000u) {
-    ::memset(&invertertemperature1_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&batterymanagementstate_) -
-        reinterpret_cast<char*>(&invertertemperature1_)) + sizeof(batterymanagementstate_));
+    ::memset(&inverterbusvoltage_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&hvbatterypackminimumcellvoltage_) -
+        reinterpret_cast<char*>(&inverterbusvoltage_)) + sizeof(hvbatterypackminimumcellvoltage_));
   }
   if (cached_has_bits & 0xff000000u) {
-    ::memset(&hvbatterypackvoltage_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&solenoid3_) -
-        reinterpret_cast<char*>(&hvbatterypackvoltage_)) + sizeof(solenoid3_));
+    ::memset(&hvbatterypackmaxcellvoltage_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&lowpressure1_) -
+        reinterpret_cast<char*>(&hvbatterypackmaxcellvoltage_)) + sizeof(lowpressure1_));
   }
   cached_has_bits = _has_bits_[1];
   if (cached_has_bits & 0x000000ffu) {
-    ::memset(&solenoid4_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&lowpressure4_) -
-        reinterpret_cast<char*>(&solenoid4_)) + sizeof(lowpressure4_));
+    ::memset(&lowpressure2_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&tubepressure_) -
+        reinterpret_cast<char*>(&lowpressure2_)) + sizeof(tubepressure_));
   }
   if (cached_has_bits & 0x0000ff00u) {
-    ::memset(&pressurevesseltemperature_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&coolantpressure3_) -
-        reinterpret_cast<char*>(&pressurevesseltemperature_)) + sizeof(coolantpressure3_));
+    ::memset(&coolantpressure1_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&pack2voltage_) -
+        reinterpret_cast<char*>(&coolantpressure1_)) + sizeof(pack2voltage_));
   }
   if (cached_has_bits & 0x00ff0000u) {
-    ::memset(&coolanttemperature_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&rail1voltage_) -
-        reinterpret_cast<char*>(&coolanttemperature_)) + sizeof(rail1voltage_));
+    ::memset(&pack1current_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&railcurrentsensor2_) -
+        reinterpret_cast<char*>(&pack1current_)) + sizeof(railcurrentsensor2_));
   }
   if (cached_has_bits & 0xff000000u) {
-    ::memset(&rail2voltage_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&railcurrentsensor5_) -
-        reinterpret_cast<char*>(&rail2voltage_)) + sizeof(railcurrentsensor5_));
+    ::memset(&railcurrentsensor3_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&railcurrentflag_) -
+        reinterpret_cast<char*>(&railcurrentsensor3_)) + sizeof(railcurrentflag_));
   }
   cached_has_bits = _has_bits_[2];
-  if (cached_has_bits & 0x0000001fu) {
-    ::memset(&railcurrentsensor6_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&railcurrentflag_) -
-        reinterpret_cast<char*>(&railcurrentsensor6_)) + sizeof(railcurrentflag_));
+  if (cached_has_bits & 0x0000003fu) {
+    ::memset(&motortorque_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&hvbatterypackstateofcharge_) -
+        reinterpret_cast<char*>(&motortorque_)) + sizeof(hvbatterypackstateofcharge_));
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -2605,7 +2214,7 @@ const char* Telemetry::_InternalParse(const char* begin, const char* end, void* 
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // optional .BrakeNodeStates breakNodeState = 2;
+      // optional .BrakeNodeStates brakeNodeState = 2;
       case 2: {
         if (static_cast<::google::protobuf::uint8>(tag) != 16) goto handle_unusual;
         ::google::protobuf::uint64 val = ::google::protobuf::internal::ReadVarint(&ptr);
@@ -2613,7 +2222,7 @@ const char* Telemetry::_InternalParse(const char* begin, const char* end, void* 
           ::google::protobuf::internal::WriteVarint(2, val, msg->mutable_unknown_fields());
           break;
         }
-        msg->set_breaknodestate(static_cast<::BrakeNodeStates>(val));
+        msg->set_brakenodestate(static_cast<::BrakeNodeStates>(val));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
@@ -2708,34 +2317,6 @@ const char* Telemetry::_InternalParse(const char* begin, const char* end, void* 
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // optional int32 podAccelerationY = 12;
-      case 12: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 96) goto handle_unusual;
-        msg->set_podaccelerationy(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
-      // optional int32 podAccelerationZ = 13;
-      case 13: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 104) goto handle_unusual;
-        msg->set_podaccelerationz(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
-      // optional int32 imuVelocity = 14;
-      case 14: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 112) goto handle_unusual;
-        msg->set_imuvelocity(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
-      // optional int32 imuAccelerationX = 15;
-      case 15: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 120) goto handle_unusual;
-        msg->set_imuaccelerationx(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
       // optional int32 tachometerVelocity = 16;
       case 16: {
         if (static_cast<::google::protobuf::uint8>(tag) != 128) goto handle_unusual;
@@ -2750,38 +2331,38 @@ const char* Telemetry::_InternalParse(const char* begin, const char* end, void* 
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // optional int32 inverterTemperature1 = 18;
+      // optional int32 maxIgbtTemperature = 18;
       case 18: {
         if (static_cast<::google::protobuf::uint8>(tag) != 144) goto handle_unusual;
-        msg->set_invertertemperature1(::google::protobuf::internal::ReadVarint(&ptr));
+        msg->set_maxigbttemperature(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // optional int32 inverterTemperature2 = 19;
+      // optional int32 gateDriverTemperature = 19;
       case 19: {
         if (static_cast<::google::protobuf::uint8>(tag) != 152) goto handle_unusual;
-        msg->set_invertertemperature2(::google::protobuf::internal::ReadVarint(&ptr));
+        msg->set_gatedrivertemperature(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // optional int32 inverterTemperature3 = 20;
+      // optional int32 inverterControlBoardTemperature = 20;
       case 20: {
         if (static_cast<::google::protobuf::uint8>(tag) != 160) goto handle_unusual;
-        msg->set_invertertemperature3(::google::protobuf::internal::ReadVarint(&ptr));
+        msg->set_invertercontrolboardtemperature(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // optional int32 motorCurrent = 21;
+      // optional int32 motorTemperature = 21;
       case 21: {
         if (static_cast<::google::protobuf::uint8>(tag) != 168) goto handle_unusual;
-        msg->set_motorcurrent(::google::protobuf::internal::ReadVarint(&ptr));
+        msg->set_motortemperature(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // optional int32 motorVoltage = 22;
+      // optional int32 inverterBusVoltage = 22;
       case 22: {
         if (static_cast<::google::protobuf::uint8>(tag) != 176) goto handle_unusual;
-        msg->set_motorvoltage(::google::protobuf::internal::ReadVarint(&ptr));
+        msg->set_inverterbusvoltage(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
@@ -2825,24 +2406,11 @@ const char* Telemetry::_InternalParse(const char* begin, const char* end, void* 
         ptr += sizeof(float);
         break;
       }
-      // repeated int32 hvBatteryCellTemperatures = 28;
+      // optional float hvBatteryPackMaxCellTemperature = 28;
       case 28: {
-        if (static_cast<::google::protobuf::uint8>(tag) == 224) {
-          do {
-            msg->add_hvbatterycelltemperatures(::google::protobuf::internal::ReadVarint(&ptr));
-            GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-            if (ptr >= end) break;
-          } while ((::google::protobuf::io::UnalignedLoad<::google::protobuf::uint64>(ptr) & 65535) == 480 && (ptr += 2));
-          break;
-        } else if (static_cast<::google::protobuf::uint8>(tag) != 226) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::google::protobuf::internal::PackedInt32Parser;
-        object = msg->mutable_hvbatterycelltemperatures();
-        if (size > end - ptr) goto len_delim_till_end;
-        auto newend = ptr + size;
-        if (size) ptr = parser_till_end(ptr, newend, object, ctx);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr == newend);
+        if (static_cast<::google::protobuf::uint8>(tag) != 229) goto handle_unusual;
+        msg->set_hvbatterypackmaxcelltemperature(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
         break;
       }
       // optional float hvBatteryPackMinimumCellVoltage = 29;
@@ -2896,20 +2464,6 @@ const char* Telemetry::_InternalParse(const char* begin, const char* end, void* 
       case 35: {
         if (static_cast<::google::protobuf::uint8>(tag) != 24) goto handle_unusual;
         msg->set_solenoid4(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
-      // optional bool solenoid5 = 36;
-      case 36: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 32) goto handle_unusual;
-        msg->set_solenoid5(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
-      // optional bool solenoid6 = 37;
-      case 37: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 40) goto handle_unusual;
-        msg->set_solenoid6(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
@@ -3176,6 +2730,67 @@ const char* Telemetry::_InternalParse(const char* begin, const char* end, void* 
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
+      // optional uint32 motorTorque = 74;
+      case 74: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 80) goto handle_unusual;
+        msg->set_motortorque(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // optional uint32 flightDistance = 75;
+      case 75: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 88) goto handle_unusual;
+        msg->set_flightdistance(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // optional uint32 maxFlightTime = 76;
+      case 76: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 96) goto handle_unusual;
+        msg->set_maxflighttime(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // repeated string updateMessages = 77;
+      case 77: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 106) goto handle_unusual;
+        do {
+          ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+          GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+          ctx->extra_parse_data().SetFieldName("Telemetry.updateMessages");
+          object = msg->add_updatemessages();
+          if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+            parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8Verify;
+            goto string_till_end;
+          }
+          GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8Verify(ptr, size, ctx));
+          ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+          ptr += size;
+          if (ptr >= end) break;
+        } while ((::google::protobuf::io::UnalignedLoad<::google::protobuf::uint64>(ptr) & 65535) == 1258 && (ptr += 2));
+        break;
+      }
+      // optional int32 inverterHeartbeat = 78;
+      case 78: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 112) goto handle_unusual;
+        msg->set_inverterheartbeat(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // optional int32 hvBatteryPackStateOfCharge = 79;
+      case 79: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 120) goto handle_unusual;
+        msg->set_hvbatterypackstateofcharge(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // optional int32 motorSpeed = 80;
+      case 80: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 128) goto handle_unusual;
+        msg->set_motorspeed(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
       default: {
       handle_unusual:
         if ((tag & 7) == 4 || tag == 0) {
@@ -3191,6 +2806,10 @@ const char* Telemetry::_InternalParse(const char* begin, const char* end, void* 
     }  // switch
   }  // while
   return ptr;
+string_till_end:
+  static_cast<::std::string*>(object)->clear();
+  static_cast<::std::string*>(object)->reserve(size);
+  goto len_delim_till_end;
 len_delim_till_end:
   return ctx->StoreAndTailCall(ptr, end, {_InternalParse, msg},
                                {parser_till_end, object}, size);
@@ -3225,7 +2844,7 @@ bool Telemetry::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .BrakeNodeStates breakNodeState = 2;
+      // optional .BrakeNodeStates brakeNodeState = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (16 & 0xFF)) {
           int value = 0;
@@ -3233,7 +2852,7 @@ bool Telemetry::MergePartialFromCodedStream(
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
           if (::BrakeNodeStates_IsValid(value)) {
-            set_breaknodestate(static_cast< ::BrakeNodeStates >(value));
+            set_brakenodestate(static_cast< ::BrakeNodeStates >(value));
           } else {
             mutable_unknown_fields()->AddVarint(
                 2, static_cast<::google::protobuf::uint64>(value));
@@ -3382,58 +3001,6 @@ bool Telemetry::MergePartialFromCodedStream(
         break;
       }
 
-      // optional int32 podAccelerationY = 12;
-      case 12: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (96 & 0xFF)) {
-          HasBitSetters::set_has_podaccelerationy(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &podaccelerationy_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional int32 podAccelerationZ = 13;
-      case 13: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (104 & 0xFF)) {
-          HasBitSetters::set_has_podaccelerationz(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &podaccelerationz_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional int32 imuVelocity = 14;
-      case 14: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (112 & 0xFF)) {
-          HasBitSetters::set_has_imuvelocity(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &imuvelocity_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional int32 imuAccelerationX = 15;
-      case 15: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (120 & 0xFF)) {
-          HasBitSetters::set_has_imuaccelerationx(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &imuaccelerationx_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
       // optional int32 tachometerVelocity = 16;
       case 16: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (128 & 0xFF)) {
@@ -3460,65 +3027,65 @@ bool Telemetry::MergePartialFromCodedStream(
         break;
       }
 
-      // optional int32 inverterTemperature1 = 18;
+      // optional int32 maxIgbtTemperature = 18;
       case 18: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (144 & 0xFF)) {
-          HasBitSetters::set_has_invertertemperature1(this);
+          HasBitSetters::set_has_maxigbttemperature(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &invertertemperature1_)));
+                 input, &maxigbttemperature_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // optional int32 inverterTemperature2 = 19;
+      // optional int32 gateDriverTemperature = 19;
       case 19: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (152 & 0xFF)) {
-          HasBitSetters::set_has_invertertemperature2(this);
+          HasBitSetters::set_has_gatedrivertemperature(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &invertertemperature2_)));
+                 input, &gatedrivertemperature_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // optional int32 inverterTemperature3 = 20;
+      // optional int32 inverterControlBoardTemperature = 20;
       case 20: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (160 & 0xFF)) {
-          HasBitSetters::set_has_invertertemperature3(this);
+          HasBitSetters::set_has_invertercontrolboardtemperature(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &invertertemperature3_)));
+                 input, &invertercontrolboardtemperature_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // optional int32 motorCurrent = 21;
+      // optional int32 motorTemperature = 21;
       case 21: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (168 & 0xFF)) {
-          HasBitSetters::set_has_motorcurrent(this);
+          HasBitSetters::set_has_motortemperature(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &motorcurrent_)));
+                 input, &motortemperature_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // optional int32 motorVoltage = 22;
+      // optional int32 inverterBusVoltage = 22;
       case 22: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (176 & 0xFF)) {
-          HasBitSetters::set_has_motorvoltage(this);
+          HasBitSetters::set_has_inverterbusvoltage(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &motorvoltage_)));
+                 input, &inverterbusvoltage_)));
         } else {
           goto handle_unusual;
         }
@@ -3596,16 +3163,13 @@ bool Telemetry::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated int32 hvBatteryCellTemperatures = 28;
+      // optional float hvBatteryPackMaxCellTemperature = 28;
       case 28: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (224 & 0xFF)) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 2, 224u, input, this->mutable_hvbatterycelltemperatures())));
-        } else if (static_cast< ::google::protobuf::uint8>(tag) == (226 & 0xFF)) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, this->mutable_hvbatterycelltemperatures())));
+        if (static_cast< ::google::protobuf::uint8>(tag) == (229 & 0xFF)) {
+          HasBitSetters::set_has_hvbatterypackmaxcelltemperature(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &hvbatterypackmaxcelltemperature_)));
         } else {
           goto handle_unusual;
         }
@@ -3703,32 +3267,6 @@ bool Telemetry::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &solenoid4_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional bool solenoid5 = 36;
-      case 36: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (288 & 0xFF)) {
-          HasBitSetters::set_has_solenoid5(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &solenoid5_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional bool solenoid6 = 37;
-      case 37: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (296 & 0xFF)) {
-          HasBitSetters::set_has_solenoid6(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &solenoid6_)));
         } else {
           goto handle_unusual;
         }
@@ -4199,6 +3737,100 @@ bool Telemetry::MergePartialFromCodedStream(
         break;
       }
 
+      // optional uint32 motorTorque = 74;
+      case 74: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (592 & 0xFF)) {
+          HasBitSetters::set_has_motortorque(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &motortorque_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // optional uint32 flightDistance = 75;
+      case 75: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (600 & 0xFF)) {
+          HasBitSetters::set_has_flightdistance(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &flightdistance_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // optional uint32 maxFlightTime = 76;
+      case 76: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (608 & 0xFF)) {
+          HasBitSetters::set_has_maxflighttime(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &maxflighttime_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated string updateMessages = 77;
+      case 77: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (618 & 0xFF)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->add_updatemessages()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->updatemessages(this->updatemessages_size() - 1).data(),
+            static_cast<int>(this->updatemessages(this->updatemessages_size() - 1).length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "Telemetry.updateMessages");
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // optional int32 inverterHeartbeat = 78;
+      case 78: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (624 & 0xFF)) {
+          HasBitSetters::set_has_inverterheartbeat(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &inverterheartbeat_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // optional int32 hvBatteryPackStateOfCharge = 79;
+      case 79: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (632 & 0xFF)) {
+          HasBitSetters::set_has_hvbatterypackstateofcharge(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &hvbatterypackstateofcharge_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // optional int32 motorSpeed = 80;
+      case 80: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (640 & 0xFF)) {
+          HasBitSetters::set_has_motorspeed(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &motorspeed_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -4233,10 +3865,10 @@ void Telemetry::SerializeWithCachedSizes(
       1, this->podstate(), output);
   }
 
-  // optional .BrakeNodeStates breakNodeState = 2;
+  // optional .BrakeNodeStates brakeNodeState = 2;
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      2, this->breaknodestate(), output);
+      2, this->brakenodestate(), output);
   }
 
   // optional .MotorStates motorState = 3;
@@ -4288,299 +3920,267 @@ void Telemetry::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(11, this->podaccelerationx(), output);
   }
 
-  // optional int32 podAccelerationY = 12;
-  if (cached_has_bits & 0x00000400u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(12, this->podaccelerationy(), output);
-  }
-
-  // optional int32 podAccelerationZ = 13;
-  if (cached_has_bits & 0x00000800u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(13, this->podaccelerationz(), output);
-  }
-
-  // optional int32 imuVelocity = 14;
-  if (cached_has_bits & 0x00001000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(14, this->imuvelocity(), output);
-  }
-
-  // optional int32 imuAccelerationX = 15;
-  if (cached_has_bits & 0x00002000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(15, this->imuaccelerationx(), output);
-  }
-
   // optional int32 tachometerVelocity = 16;
-  if (cached_has_bits & 0x00004000u) {
+  if (cached_has_bits & 0x00000400u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(16, this->tachometervelocity(), output);
   }
 
   // optional int32 resolverVelocity = 17;
-  if (cached_has_bits & 0x00008000u) {
+  if (cached_has_bits & 0x00000800u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(17, this->resolvervelocity(), output);
   }
 
-  // optional int32 inverterTemperature1 = 18;
+  // optional int32 maxIgbtTemperature = 18;
+  if (cached_has_bits & 0x00001000u) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(18, this->maxigbttemperature(), output);
+  }
+
+  // optional int32 gateDriverTemperature = 19;
+  if (cached_has_bits & 0x00002000u) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(19, this->gatedrivertemperature(), output);
+  }
+
+  // optional int32 inverterControlBoardTemperature = 20;
+  if (cached_has_bits & 0x00004000u) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(20, this->invertercontrolboardtemperature(), output);
+  }
+
+  // optional int32 motorTemperature = 21;
+  if (cached_has_bits & 0x00008000u) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(21, this->motortemperature(), output);
+  }
+
+  // optional int32 inverterBusVoltage = 22;
   if (cached_has_bits & 0x00010000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(18, this->invertertemperature1(), output);
-  }
-
-  // optional int32 inverterTemperature2 = 19;
-  if (cached_has_bits & 0x00020000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(19, this->invertertemperature2(), output);
-  }
-
-  // optional int32 inverterTemperature3 = 20;
-  if (cached_has_bits & 0x00040000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(20, this->invertertemperature3(), output);
-  }
-
-  // optional int32 motorCurrent = 21;
-  if (cached_has_bits & 0x00080000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(21, this->motorcurrent(), output);
-  }
-
-  // optional int32 motorVoltage = 22;
-  if (cached_has_bits & 0x00100000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(22, this->motorvoltage(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(22, this->inverterbusvoltage(), output);
   }
 
   // optional int32 inverterVoltages = 23;
-  if (cached_has_bits & 0x00200000u) {
+  if (cached_has_bits & 0x00020000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(23, this->invertervoltages(), output);
   }
 
   // optional int32 inverterCurrents = 24;
-  if (cached_has_bits & 0x00400000u) {
+  if (cached_has_bits & 0x00040000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(24, this->invertercurrents(), output);
   }
 
   // optional .BatteryManagementStates batteryManagementState = 25;
-  if (cached_has_bits & 0x00800000u) {
+  if (cached_has_bits & 0x00080000u) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       25, this->batterymanagementstate(), output);
   }
 
   // optional float hvBatteryPackVoltage = 26;
-  if (cached_has_bits & 0x01000000u) {
+  if (cached_has_bits & 0x00100000u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(26, this->hvbatterypackvoltage(), output);
   }
 
   // optional float hvBatteryPackCurrent = 27;
-  if (cached_has_bits & 0x02000000u) {
+  if (cached_has_bits & 0x00200000u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(27, this->hvbatterypackcurrent(), output);
   }
 
-  // repeated int32 hvBatteryCellTemperatures = 28;
-  for (int i = 0, n = this->hvbatterycelltemperatures_size(); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(
-      28, this->hvbatterycelltemperatures(i), output);
+  // optional float hvBatteryPackMaxCellTemperature = 28;
+  if (cached_has_bits & 0x00400000u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(28, this->hvbatterypackmaxcelltemperature(), output);
   }
 
   // optional float hvBatteryPackMinimumCellVoltage = 29;
-  if (cached_has_bits & 0x04000000u) {
+  if (cached_has_bits & 0x00800000u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(29, this->hvbatterypackminimumcellvoltage(), output);
   }
 
   // optional float hvBatteryPackMaxCellVoltage = 30;
-  if (cached_has_bits & 0x08000000u) {
+  if (cached_has_bits & 0x01000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(30, this->hvbatterypackmaxcellvoltage(), output);
   }
 
   // optional .PodStates breakNodePerceivedPodState = 31;
-  if (cached_has_bits & 0x10000000u) {
+  if (cached_has_bits & 0x02000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       31, this->breaknodeperceivedpodstate(), output);
   }
 
   // optional bool solenoid1 = 32;
-  if (cached_has_bits & 0x20000000u) {
+  if (cached_has_bits & 0x04000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(32, this->solenoid1(), output);
   }
 
   // optional bool solenoid2 = 33;
-  if (cached_has_bits & 0x40000000u) {
+  if (cached_has_bits & 0x08000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(33, this->solenoid2(), output);
   }
 
   // optional bool solenoid3 = 34;
-  if (cached_has_bits & 0x80000000u) {
+  if (cached_has_bits & 0x10000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(34, this->solenoid3(), output);
   }
 
-  cached_has_bits = _has_bits_[1];
   // optional bool solenoid4 = 35;
-  if (cached_has_bits & 0x00000001u) {
+  if (cached_has_bits & 0x20000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(35, this->solenoid4(), output);
   }
 
-  // optional bool solenoid5 = 36;
-  if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(36, this->solenoid5(), output);
-  }
-
-  // optional bool solenoid6 = 37;
-  if (cached_has_bits & 0x00000004u) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(37, this->solenoid6(), output);
-  }
-
   // optional float highPressure = 38;
-  if (cached_has_bits & 0x00000008u) {
+  if (cached_has_bits & 0x40000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(38, this->highpressure(), output);
   }
 
   // optional float lowPressure1 = 39;
-  if (cached_has_bits & 0x00000010u) {
+  if (cached_has_bits & 0x80000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(39, this->lowpressure1(), output);
   }
 
+  cached_has_bits = _has_bits_[1];
   // optional float lowPressure2 = 40;
-  if (cached_has_bits & 0x00000020u) {
+  if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(40, this->lowpressure2(), output);
   }
 
   // optional float lowPressure3 = 41;
-  if (cached_has_bits & 0x00000040u) {
+  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(41, this->lowpressure3(), output);
   }
 
   // optional float lowPressure4 = 42;
-  if (cached_has_bits & 0x00000080u) {
+  if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(42, this->lowpressure4(), output);
   }
 
   // optional float pressureVesselTemperature = 43;
-  if (cached_has_bits & 0x00000100u) {
+  if (cached_has_bits & 0x00000008u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(43, this->pressurevesseltemperature(), output);
   }
 
   // optional int32 electronicsEnclosurePressure = 44;
-  if (cached_has_bits & 0x00000200u) {
+  if (cached_has_bits & 0x00000010u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(44, this->electronicsenclosurepressure(), output);
   }
 
   // optional int32 railDisplacementX = 45;
-  if (cached_has_bits & 0x00000400u) {
+  if (cached_has_bits & 0x00000020u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(45, this->raildisplacementx(), output);
   }
 
   // optional int32 railDisplacementY = 46;
-  if (cached_has_bits & 0x00000800u) {
+  if (cached_has_bits & 0x00000040u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(46, this->raildisplacementy(), output);
   }
 
   // optional int32 tubePressure = 48;
-  if (cached_has_bits & 0x00001000u) {
+  if (cached_has_bits & 0x00000080u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(48, this->tubepressure(), output);
   }
 
   // optional int32 coolantPressure1 = 49;
-  if (cached_has_bits & 0x00002000u) {
+  if (cached_has_bits & 0x00000100u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(49, this->coolantpressure1(), output);
   }
 
   // optional int32 coolantPressure2 = 50;
-  if (cached_has_bits & 0x00004000u) {
+  if (cached_has_bits & 0x00000200u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(50, this->coolantpressure2(), output);
   }
 
   // optional int32 coolantPressure3 = 51;
-  if (cached_has_bits & 0x00008000u) {
+  if (cached_has_bits & 0x00000400u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(51, this->coolantpressure3(), output);
   }
 
   // optional int32 coolantTemperature = 52;
-  if (cached_has_bits & 0x00010000u) {
+  if (cached_has_bits & 0x00000800u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(52, this->coolanttemperature(), output);
   }
 
   // optional float railTemperature = 53;
-  if (cached_has_bits & 0x00020000u) {
+  if (cached_has_bits & 0x00001000u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(53, this->railtemperature(), output);
   }
 
   // optional .LvdcNodeStates lvdcNodeState = 54;
-  if (cached_has_bits & 0x00040000u) {
+  if (cached_has_bits & 0x00002000u) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       54, this->lvdcnodestate(), output);
   }
 
   // optional int32 pack1Voltage = 55;
-  if (cached_has_bits & 0x00080000u) {
+  if (cached_has_bits & 0x00004000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(55, this->pack1voltage(), output);
   }
 
   // optional int32 pack2Voltage = 56;
-  if (cached_has_bits & 0x00100000u) {
+  if (cached_has_bits & 0x00008000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(56, this->pack2voltage(), output);
   }
 
   // optional int32 pack1Current = 57;
-  if (cached_has_bits & 0x00200000u) {
+  if (cached_has_bits & 0x00010000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(57, this->pack1current(), output);
   }
 
   // optional int32 pack2Current = 58;
-  if (cached_has_bits & 0x00400000u) {
+  if (cached_has_bits & 0x00020000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(58, this->pack2current(), output);
   }
 
   // optional int32 rail1Voltage = 59;
-  if (cached_has_bits & 0x00800000u) {
+  if (cached_has_bits & 0x00040000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(59, this->rail1voltage(), output);
   }
 
   // optional int32 rail2Voltage = 60;
-  if (cached_has_bits & 0x01000000u) {
+  if (cached_has_bits & 0x00080000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(60, this->rail2voltage(), output);
   }
 
   // optional int32 rail3Voltage = 61;
-  if (cached_has_bits & 0x02000000u) {
+  if (cached_has_bits & 0x00100000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(61, this->rail3voltage(), output);
   }
 
   // optional int32 rail4Voltage = 62;
-  if (cached_has_bits & 0x04000000u) {
+  if (cached_has_bits & 0x00200000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(62, this->rail4voltage(), output);
   }
 
   // optional int32 railCurrentSensor1 = 63;
-  if (cached_has_bits & 0x08000000u) {
+  if (cached_has_bits & 0x00400000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(63, this->railcurrentsensor1(), output);
   }
 
   // optional int32 railCurrentSensor2 = 64;
-  if (cached_has_bits & 0x10000000u) {
+  if (cached_has_bits & 0x00800000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(64, this->railcurrentsensor2(), output);
   }
 
   // optional int32 railCurrentSensor3 = 65;
-  if (cached_has_bits & 0x20000000u) {
+  if (cached_has_bits & 0x01000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(65, this->railcurrentsensor3(), output);
   }
 
   // optional int32 railCurrentSensor4 = 66;
-  if (cached_has_bits & 0x40000000u) {
+  if (cached_has_bits & 0x02000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(66, this->railcurrentsensor4(), output);
   }
 
   // optional int32 railCurrentSensor5 = 67;
-  if (cached_has_bits & 0x80000000u) {
+  if (cached_has_bits & 0x04000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(67, this->railcurrentsensor5(), output);
   }
 
-  cached_has_bits = _has_bits_[2];
   // optional int32 railCurrentSensor6 = 68;
-  if (cached_has_bits & 0x00000001u) {
+  if (cached_has_bits & 0x08000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(68, this->railcurrentsensor6(), output);
   }
 
   // optional int32 railCurrentSensor7 = 69;
-  if (cached_has_bits & 0x00000002u) {
+  if (cached_has_bits & 0x10000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(69, this->railcurrentsensor7(), output);
   }
 
   // optional int32 railCurrentSensor8 = 70;
-  if (cached_has_bits & 0x00000004u) {
+  if (cached_has_bits & 0x20000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(70, this->railcurrentsensor8(), output);
   }
 
@@ -4591,13 +4191,54 @@ void Telemetry::SerializeWithCachedSizes(
   }
 
   // optional int32 railVoltageFlag = 72;
-  if (cached_has_bits & 0x00000008u) {
+  if (cached_has_bits & 0x40000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(72, this->railvoltageflag(), output);
   }
 
   // optional int32 railCurrentFlag = 73;
-  if (cached_has_bits & 0x00000010u) {
+  if (cached_has_bits & 0x80000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(73, this->railcurrentflag(), output);
+  }
+
+  cached_has_bits = _has_bits_[2];
+  // optional uint32 motorTorque = 74;
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(74, this->motortorque(), output);
+  }
+
+  // optional uint32 flightDistance = 75;
+  if (cached_has_bits & 0x00000004u) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(75, this->flightdistance(), output);
+  }
+
+  // optional uint32 maxFlightTime = 76;
+  if (cached_has_bits & 0x00000008u) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(76, this->maxflighttime(), output);
+  }
+
+  // repeated string updateMessages = 77;
+  for (int i = 0, n = this->updatemessages_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->updatemessages(i).data(), static_cast<int>(this->updatemessages(i).length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "Telemetry.updateMessages");
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      77, this->updatemessages(i), output);
+  }
+
+  // optional int32 inverterHeartbeat = 78;
+  if (cached_has_bits & 0x00000010u) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(78, this->inverterheartbeat(), output);
+  }
+
+  // optional int32 hvBatteryPackStateOfCharge = 79;
+  if (cached_has_bits & 0x00000020u) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(79, this->hvbatterypackstateofcharge(), output);
+  }
+
+  // optional int32 motorSpeed = 80;
+  if (cached_has_bits & 0x00000002u) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(80, this->motorspeed(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -4620,10 +4261,10 @@ void Telemetry::SerializeWithCachedSizes(
       1, this->podstate(), target);
   }
 
-  // optional .BrakeNodeStates breakNodeState = 2;
+  // optional .BrakeNodeStates brakeNodeState = 2;
   if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      2, this->breaknodestate(), target);
+      2, this->brakenodestate(), target);
   }
 
   // optional .MotorStates motorState = 3;
@@ -4673,297 +4314,267 @@ void Telemetry::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(11, this->podaccelerationx(), target);
   }
 
-  // optional int32 podAccelerationY = 12;
-  if (cached_has_bits & 0x00000400u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(12, this->podaccelerationy(), target);
-  }
-
-  // optional int32 podAccelerationZ = 13;
-  if (cached_has_bits & 0x00000800u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(13, this->podaccelerationz(), target);
-  }
-
-  // optional int32 imuVelocity = 14;
-  if (cached_has_bits & 0x00001000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(14, this->imuvelocity(), target);
-  }
-
-  // optional int32 imuAccelerationX = 15;
-  if (cached_has_bits & 0x00002000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(15, this->imuaccelerationx(), target);
-  }
-
   // optional int32 tachometerVelocity = 16;
-  if (cached_has_bits & 0x00004000u) {
+  if (cached_has_bits & 0x00000400u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(16, this->tachometervelocity(), target);
   }
 
   // optional int32 resolverVelocity = 17;
-  if (cached_has_bits & 0x00008000u) {
+  if (cached_has_bits & 0x00000800u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(17, this->resolvervelocity(), target);
   }
 
-  // optional int32 inverterTemperature1 = 18;
+  // optional int32 maxIgbtTemperature = 18;
+  if (cached_has_bits & 0x00001000u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(18, this->maxigbttemperature(), target);
+  }
+
+  // optional int32 gateDriverTemperature = 19;
+  if (cached_has_bits & 0x00002000u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(19, this->gatedrivertemperature(), target);
+  }
+
+  // optional int32 inverterControlBoardTemperature = 20;
+  if (cached_has_bits & 0x00004000u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(20, this->invertercontrolboardtemperature(), target);
+  }
+
+  // optional int32 motorTemperature = 21;
+  if (cached_has_bits & 0x00008000u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(21, this->motortemperature(), target);
+  }
+
+  // optional int32 inverterBusVoltage = 22;
   if (cached_has_bits & 0x00010000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(18, this->invertertemperature1(), target);
-  }
-
-  // optional int32 inverterTemperature2 = 19;
-  if (cached_has_bits & 0x00020000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(19, this->invertertemperature2(), target);
-  }
-
-  // optional int32 inverterTemperature3 = 20;
-  if (cached_has_bits & 0x00040000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(20, this->invertertemperature3(), target);
-  }
-
-  // optional int32 motorCurrent = 21;
-  if (cached_has_bits & 0x00080000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(21, this->motorcurrent(), target);
-  }
-
-  // optional int32 motorVoltage = 22;
-  if (cached_has_bits & 0x00100000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(22, this->motorvoltage(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(22, this->inverterbusvoltage(), target);
   }
 
   // optional int32 inverterVoltages = 23;
-  if (cached_has_bits & 0x00200000u) {
+  if (cached_has_bits & 0x00020000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(23, this->invertervoltages(), target);
   }
 
   // optional int32 inverterCurrents = 24;
-  if (cached_has_bits & 0x00400000u) {
+  if (cached_has_bits & 0x00040000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(24, this->invertercurrents(), target);
   }
 
   // optional .BatteryManagementStates batteryManagementState = 25;
-  if (cached_has_bits & 0x00800000u) {
+  if (cached_has_bits & 0x00080000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       25, this->batterymanagementstate(), target);
   }
 
   // optional float hvBatteryPackVoltage = 26;
-  if (cached_has_bits & 0x01000000u) {
+  if (cached_has_bits & 0x00100000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(26, this->hvbatterypackvoltage(), target);
   }
 
   // optional float hvBatteryPackCurrent = 27;
-  if (cached_has_bits & 0x02000000u) {
+  if (cached_has_bits & 0x00200000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(27, this->hvbatterypackcurrent(), target);
   }
 
-  // repeated int32 hvBatteryCellTemperatures = 28;
-  target = ::google::protobuf::internal::WireFormatLite::
-    WriteInt32ToArray(28, this->hvbatterycelltemperatures_, target);
+  // optional float hvBatteryPackMaxCellTemperature = 28;
+  if (cached_has_bits & 0x00400000u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(28, this->hvbatterypackmaxcelltemperature(), target);
+  }
 
   // optional float hvBatteryPackMinimumCellVoltage = 29;
-  if (cached_has_bits & 0x04000000u) {
+  if (cached_has_bits & 0x00800000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(29, this->hvbatterypackminimumcellvoltage(), target);
   }
 
   // optional float hvBatteryPackMaxCellVoltage = 30;
-  if (cached_has_bits & 0x08000000u) {
+  if (cached_has_bits & 0x01000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(30, this->hvbatterypackmaxcellvoltage(), target);
   }
 
   // optional .PodStates breakNodePerceivedPodState = 31;
-  if (cached_has_bits & 0x10000000u) {
+  if (cached_has_bits & 0x02000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       31, this->breaknodeperceivedpodstate(), target);
   }
 
   // optional bool solenoid1 = 32;
-  if (cached_has_bits & 0x20000000u) {
+  if (cached_has_bits & 0x04000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(32, this->solenoid1(), target);
   }
 
   // optional bool solenoid2 = 33;
-  if (cached_has_bits & 0x40000000u) {
+  if (cached_has_bits & 0x08000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(33, this->solenoid2(), target);
   }
 
   // optional bool solenoid3 = 34;
-  if (cached_has_bits & 0x80000000u) {
+  if (cached_has_bits & 0x10000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(34, this->solenoid3(), target);
   }
 
-  cached_has_bits = _has_bits_[1];
   // optional bool solenoid4 = 35;
-  if (cached_has_bits & 0x00000001u) {
+  if (cached_has_bits & 0x20000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(35, this->solenoid4(), target);
   }
 
-  // optional bool solenoid5 = 36;
-  if (cached_has_bits & 0x00000002u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(36, this->solenoid5(), target);
-  }
-
-  // optional bool solenoid6 = 37;
-  if (cached_has_bits & 0x00000004u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(37, this->solenoid6(), target);
-  }
-
   // optional float highPressure = 38;
-  if (cached_has_bits & 0x00000008u) {
+  if (cached_has_bits & 0x40000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(38, this->highpressure(), target);
   }
 
   // optional float lowPressure1 = 39;
-  if (cached_has_bits & 0x00000010u) {
+  if (cached_has_bits & 0x80000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(39, this->lowpressure1(), target);
   }
 
+  cached_has_bits = _has_bits_[1];
   // optional float lowPressure2 = 40;
-  if (cached_has_bits & 0x00000020u) {
+  if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(40, this->lowpressure2(), target);
   }
 
   // optional float lowPressure3 = 41;
-  if (cached_has_bits & 0x00000040u) {
+  if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(41, this->lowpressure3(), target);
   }
 
   // optional float lowPressure4 = 42;
-  if (cached_has_bits & 0x00000080u) {
+  if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(42, this->lowpressure4(), target);
   }
 
   // optional float pressureVesselTemperature = 43;
-  if (cached_has_bits & 0x00000100u) {
+  if (cached_has_bits & 0x00000008u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(43, this->pressurevesseltemperature(), target);
   }
 
   // optional int32 electronicsEnclosurePressure = 44;
-  if (cached_has_bits & 0x00000200u) {
+  if (cached_has_bits & 0x00000010u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(44, this->electronicsenclosurepressure(), target);
   }
 
   // optional int32 railDisplacementX = 45;
-  if (cached_has_bits & 0x00000400u) {
+  if (cached_has_bits & 0x00000020u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(45, this->raildisplacementx(), target);
   }
 
   // optional int32 railDisplacementY = 46;
-  if (cached_has_bits & 0x00000800u) {
+  if (cached_has_bits & 0x00000040u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(46, this->raildisplacementy(), target);
   }
 
   // optional int32 tubePressure = 48;
-  if (cached_has_bits & 0x00001000u) {
+  if (cached_has_bits & 0x00000080u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(48, this->tubepressure(), target);
   }
 
   // optional int32 coolantPressure1 = 49;
-  if (cached_has_bits & 0x00002000u) {
+  if (cached_has_bits & 0x00000100u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(49, this->coolantpressure1(), target);
   }
 
   // optional int32 coolantPressure2 = 50;
-  if (cached_has_bits & 0x00004000u) {
+  if (cached_has_bits & 0x00000200u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(50, this->coolantpressure2(), target);
   }
 
   // optional int32 coolantPressure3 = 51;
-  if (cached_has_bits & 0x00008000u) {
+  if (cached_has_bits & 0x00000400u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(51, this->coolantpressure3(), target);
   }
 
   // optional int32 coolantTemperature = 52;
-  if (cached_has_bits & 0x00010000u) {
+  if (cached_has_bits & 0x00000800u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(52, this->coolanttemperature(), target);
   }
 
   // optional float railTemperature = 53;
-  if (cached_has_bits & 0x00020000u) {
+  if (cached_has_bits & 0x00001000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(53, this->railtemperature(), target);
   }
 
   // optional .LvdcNodeStates lvdcNodeState = 54;
-  if (cached_has_bits & 0x00040000u) {
+  if (cached_has_bits & 0x00002000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       54, this->lvdcnodestate(), target);
   }
 
   // optional int32 pack1Voltage = 55;
-  if (cached_has_bits & 0x00080000u) {
+  if (cached_has_bits & 0x00004000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(55, this->pack1voltage(), target);
   }
 
   // optional int32 pack2Voltage = 56;
-  if (cached_has_bits & 0x00100000u) {
+  if (cached_has_bits & 0x00008000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(56, this->pack2voltage(), target);
   }
 
   // optional int32 pack1Current = 57;
-  if (cached_has_bits & 0x00200000u) {
+  if (cached_has_bits & 0x00010000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(57, this->pack1current(), target);
   }
 
   // optional int32 pack2Current = 58;
-  if (cached_has_bits & 0x00400000u) {
+  if (cached_has_bits & 0x00020000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(58, this->pack2current(), target);
   }
 
   // optional int32 rail1Voltage = 59;
-  if (cached_has_bits & 0x00800000u) {
+  if (cached_has_bits & 0x00040000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(59, this->rail1voltage(), target);
   }
 
   // optional int32 rail2Voltage = 60;
-  if (cached_has_bits & 0x01000000u) {
+  if (cached_has_bits & 0x00080000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(60, this->rail2voltage(), target);
   }
 
   // optional int32 rail3Voltage = 61;
-  if (cached_has_bits & 0x02000000u) {
+  if (cached_has_bits & 0x00100000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(61, this->rail3voltage(), target);
   }
 
   // optional int32 rail4Voltage = 62;
-  if (cached_has_bits & 0x04000000u) {
+  if (cached_has_bits & 0x00200000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(62, this->rail4voltage(), target);
   }
 
   // optional int32 railCurrentSensor1 = 63;
-  if (cached_has_bits & 0x08000000u) {
+  if (cached_has_bits & 0x00400000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(63, this->railcurrentsensor1(), target);
   }
 
   // optional int32 railCurrentSensor2 = 64;
-  if (cached_has_bits & 0x10000000u) {
+  if (cached_has_bits & 0x00800000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(64, this->railcurrentsensor2(), target);
   }
 
   // optional int32 railCurrentSensor3 = 65;
-  if (cached_has_bits & 0x20000000u) {
+  if (cached_has_bits & 0x01000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(65, this->railcurrentsensor3(), target);
   }
 
   // optional int32 railCurrentSensor4 = 66;
-  if (cached_has_bits & 0x40000000u) {
+  if (cached_has_bits & 0x02000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(66, this->railcurrentsensor4(), target);
   }
 
   // optional int32 railCurrentSensor5 = 67;
-  if (cached_has_bits & 0x80000000u) {
+  if (cached_has_bits & 0x04000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(67, this->railcurrentsensor5(), target);
   }
 
-  cached_has_bits = _has_bits_[2];
   // optional int32 railCurrentSensor6 = 68;
-  if (cached_has_bits & 0x00000001u) {
+  if (cached_has_bits & 0x08000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(68, this->railcurrentsensor6(), target);
   }
 
   // optional int32 railCurrentSensor7 = 69;
-  if (cached_has_bits & 0x00000002u) {
+  if (cached_has_bits & 0x10000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(69, this->railcurrentsensor7(), target);
   }
 
   // optional int32 railCurrentSensor8 = 70;
-  if (cached_has_bits & 0x00000004u) {
+  if (cached_has_bits & 0x20000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(70, this->railcurrentsensor8(), target);
   }
 
@@ -4972,13 +4583,54 @@ void Telemetry::SerializeWithCachedSizes(
     WriteInt32ToArray(71, this->heartbeatvalues_, target);
 
   // optional int32 railVoltageFlag = 72;
-  if (cached_has_bits & 0x00000008u) {
+  if (cached_has_bits & 0x40000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(72, this->railvoltageflag(), target);
   }
 
   // optional int32 railCurrentFlag = 73;
-  if (cached_has_bits & 0x00000010u) {
+  if (cached_has_bits & 0x80000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(73, this->railcurrentflag(), target);
+  }
+
+  cached_has_bits = _has_bits_[2];
+  // optional uint32 motorTorque = 74;
+  if (cached_has_bits & 0x00000001u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(74, this->motortorque(), target);
+  }
+
+  // optional uint32 flightDistance = 75;
+  if (cached_has_bits & 0x00000004u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(75, this->flightdistance(), target);
+  }
+
+  // optional uint32 maxFlightTime = 76;
+  if (cached_has_bits & 0x00000008u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(76, this->maxflighttime(), target);
+  }
+
+  // repeated string updateMessages = 77;
+  for (int i = 0, n = this->updatemessages_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->updatemessages(i).data(), static_cast<int>(this->updatemessages(i).length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "Telemetry.updateMessages");
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteStringToArray(77, this->updatemessages(i), target);
+  }
+
+  // optional int32 inverterHeartbeat = 78;
+  if (cached_has_bits & 0x00000010u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(78, this->inverterheartbeat(), target);
+  }
+
+  // optional int32 hvBatteryPackStateOfCharge = 79;
+  if (cached_has_bits & 0x00000020u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(79, this->hvbatterypackstateofcharge(), target);
+  }
+
+  // optional int32 motorSpeed = 80;
+  if (cached_has_bits & 0x00000002u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(80, this->motorspeed(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -5011,15 +4663,6 @@ size_t Telemetry::ByteSizeLong() const {
     total_size += data_size;
   }
 
-  // repeated int32 hvBatteryCellTemperatures = 28;
-  {
-    size_t data_size = ::google::protobuf::internal::WireFormatLite::
-      Int32Size(this->hvbatterycelltemperatures_);
-    total_size += 2 *
-                  ::google::protobuf::internal::FromIntSize(this->hvbatterycelltemperatures_size());
-    total_size += data_size;
-  }
-
   // repeated int32 heartbeatValues = 71;
   {
     size_t data_size = ::google::protobuf::internal::WireFormatLite::
@@ -5027,6 +4670,14 @@ size_t Telemetry::ByteSizeLong() const {
     total_size += 2 *
                   ::google::protobuf::internal::FromIntSize(this->heartbeatvalues_size());
     total_size += data_size;
+  }
+
+  // repeated string updateMessages = 77;
+  total_size += 2 *
+      ::google::protobuf::internal::FromIntSize(this->updatemessages_size());
+  for (int i = 0, n = this->updatemessages_size(); i < n; i++) {
+    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+      this->updatemessages(i));
   }
 
   cached_has_bits = _has_bits_[0];
@@ -5037,10 +4688,10 @@ size_t Telemetry::ByteSizeLong() const {
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->podstate());
     }
 
-    // optional .BrakeNodeStates breakNodeState = 2;
+    // optional .BrakeNodeStates brakeNodeState = 2;
     if (cached_has_bits & 0x00000002u) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->breaknodestate());
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->brakenodestate());
     }
 
     // optional .MotorStates motorState = 3;
@@ -5098,396 +4749,405 @@ size_t Telemetry::ByteSizeLong() const {
           this->podaccelerationx());
     }
 
-    // optional int32 podAccelerationY = 12;
-    if (cached_has_bits & 0x00000400u) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->podaccelerationy());
-    }
-
-    // optional int32 podAccelerationZ = 13;
-    if (cached_has_bits & 0x00000800u) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->podaccelerationz());
-    }
-
-    // optional int32 imuVelocity = 14;
-    if (cached_has_bits & 0x00001000u) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->imuvelocity());
-    }
-
-    // optional int32 imuAccelerationX = 15;
-    if (cached_has_bits & 0x00002000u) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->imuaccelerationx());
-    }
-
     // optional int32 tachometerVelocity = 16;
-    if (cached_has_bits & 0x00004000u) {
+    if (cached_has_bits & 0x00000400u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->tachometervelocity());
     }
 
     // optional int32 resolverVelocity = 17;
-    if (cached_has_bits & 0x00008000u) {
+    if (cached_has_bits & 0x00000800u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->resolvervelocity());
     }
 
+    // optional int32 maxIgbtTemperature = 18;
+    if (cached_has_bits & 0x00001000u) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->maxigbttemperature());
+    }
+
+    // optional int32 gateDriverTemperature = 19;
+    if (cached_has_bits & 0x00002000u) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->gatedrivertemperature());
+    }
+
+    // optional int32 inverterControlBoardTemperature = 20;
+    if (cached_has_bits & 0x00004000u) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->invertercontrolboardtemperature());
+    }
+
+    // optional int32 motorTemperature = 21;
+    if (cached_has_bits & 0x00008000u) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->motortemperature());
+    }
+
   }
   if (cached_has_bits & 0x00ff0000u) {
-    // optional int32 inverterTemperature1 = 18;
+    // optional int32 inverterBusVoltage = 22;
     if (cached_has_bits & 0x00010000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->invertertemperature1());
-    }
-
-    // optional int32 inverterTemperature2 = 19;
-    if (cached_has_bits & 0x00020000u) {
-      total_size += 2 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->invertertemperature2());
-    }
-
-    // optional int32 inverterTemperature3 = 20;
-    if (cached_has_bits & 0x00040000u) {
-      total_size += 2 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->invertertemperature3());
-    }
-
-    // optional int32 motorCurrent = 21;
-    if (cached_has_bits & 0x00080000u) {
-      total_size += 2 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->motorcurrent());
-    }
-
-    // optional int32 motorVoltage = 22;
-    if (cached_has_bits & 0x00100000u) {
-      total_size += 2 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->motorvoltage());
+          this->inverterbusvoltage());
     }
 
     // optional int32 inverterVoltages = 23;
-    if (cached_has_bits & 0x00200000u) {
+    if (cached_has_bits & 0x00020000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->invertervoltages());
     }
 
     // optional int32 inverterCurrents = 24;
-    if (cached_has_bits & 0x00400000u) {
+    if (cached_has_bits & 0x00040000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->invertercurrents());
     }
 
     // optional .BatteryManagementStates batteryManagementState = 25;
-    if (cached_has_bits & 0x00800000u) {
+    if (cached_has_bits & 0x00080000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->batterymanagementstate());
     }
 
-  }
-  if (cached_has_bits & 0xff000000u) {
     // optional float hvBatteryPackVoltage = 26;
-    if (cached_has_bits & 0x01000000u) {
+    if (cached_has_bits & 0x00100000u) {
       total_size += 2 + 4;
     }
 
     // optional float hvBatteryPackCurrent = 27;
-    if (cached_has_bits & 0x02000000u) {
+    if (cached_has_bits & 0x00200000u) {
+      total_size += 2 + 4;
+    }
+
+    // optional float hvBatteryPackMaxCellTemperature = 28;
+    if (cached_has_bits & 0x00400000u) {
       total_size += 2 + 4;
     }
 
     // optional float hvBatteryPackMinimumCellVoltage = 29;
-    if (cached_has_bits & 0x04000000u) {
+    if (cached_has_bits & 0x00800000u) {
       total_size += 2 + 4;
     }
 
+  }
+  if (cached_has_bits & 0xff000000u) {
     // optional float hvBatteryPackMaxCellVoltage = 30;
-    if (cached_has_bits & 0x08000000u) {
+    if (cached_has_bits & 0x01000000u) {
       total_size += 2 + 4;
     }
 
     // optional .PodStates breakNodePerceivedPodState = 31;
-    if (cached_has_bits & 0x10000000u) {
+    if (cached_has_bits & 0x02000000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->breaknodeperceivedpodstate());
     }
 
     // optional bool solenoid1 = 32;
-    if (cached_has_bits & 0x20000000u) {
+    if (cached_has_bits & 0x04000000u) {
       total_size += 2 + 1;
     }
 
     // optional bool solenoid2 = 33;
-    if (cached_has_bits & 0x40000000u) {
+    if (cached_has_bits & 0x08000000u) {
       total_size += 2 + 1;
     }
 
     // optional bool solenoid3 = 34;
-    if (cached_has_bits & 0x80000000u) {
+    if (cached_has_bits & 0x10000000u) {
       total_size += 2 + 1;
+    }
+
+    // optional bool solenoid4 = 35;
+    if (cached_has_bits & 0x20000000u) {
+      total_size += 2 + 1;
+    }
+
+    // optional float highPressure = 38;
+    if (cached_has_bits & 0x40000000u) {
+      total_size += 2 + 4;
+    }
+
+    // optional float lowPressure1 = 39;
+    if (cached_has_bits & 0x80000000u) {
+      total_size += 2 + 4;
     }
 
   }
   cached_has_bits = _has_bits_[1];
   if (cached_has_bits & 0x000000ffu) {
-    // optional bool solenoid4 = 35;
-    if (cached_has_bits & 0x00000001u) {
-      total_size += 2 + 1;
-    }
-
-    // optional bool solenoid5 = 36;
-    if (cached_has_bits & 0x00000002u) {
-      total_size += 2 + 1;
-    }
-
-    // optional bool solenoid6 = 37;
-    if (cached_has_bits & 0x00000004u) {
-      total_size += 2 + 1;
-    }
-
-    // optional float highPressure = 38;
-    if (cached_has_bits & 0x00000008u) {
-      total_size += 2 + 4;
-    }
-
-    // optional float lowPressure1 = 39;
-    if (cached_has_bits & 0x00000010u) {
-      total_size += 2 + 4;
-    }
-
     // optional float lowPressure2 = 40;
-    if (cached_has_bits & 0x00000020u) {
+    if (cached_has_bits & 0x00000001u) {
       total_size += 2 + 4;
     }
 
     // optional float lowPressure3 = 41;
-    if (cached_has_bits & 0x00000040u) {
+    if (cached_has_bits & 0x00000002u) {
       total_size += 2 + 4;
     }
 
     // optional float lowPressure4 = 42;
-    if (cached_has_bits & 0x00000080u) {
+    if (cached_has_bits & 0x00000004u) {
       total_size += 2 + 4;
     }
 
-  }
-  if (cached_has_bits & 0x0000ff00u) {
     // optional float pressureVesselTemperature = 43;
-    if (cached_has_bits & 0x00000100u) {
+    if (cached_has_bits & 0x00000008u) {
       total_size += 2 + 4;
     }
 
     // optional int32 electronicsEnclosurePressure = 44;
-    if (cached_has_bits & 0x00000200u) {
+    if (cached_has_bits & 0x00000010u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->electronicsenclosurepressure());
     }
 
     // optional int32 railDisplacementX = 45;
-    if (cached_has_bits & 0x00000400u) {
+    if (cached_has_bits & 0x00000020u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->raildisplacementx());
     }
 
     // optional int32 railDisplacementY = 46;
-    if (cached_has_bits & 0x00000800u) {
+    if (cached_has_bits & 0x00000040u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->raildisplacementy());
     }
 
     // optional int32 tubePressure = 48;
-    if (cached_has_bits & 0x00001000u) {
+    if (cached_has_bits & 0x00000080u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->tubepressure());
     }
 
+  }
+  if (cached_has_bits & 0x0000ff00u) {
     // optional int32 coolantPressure1 = 49;
-    if (cached_has_bits & 0x00002000u) {
+    if (cached_has_bits & 0x00000100u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->coolantpressure1());
     }
 
     // optional int32 coolantPressure2 = 50;
-    if (cached_has_bits & 0x00004000u) {
+    if (cached_has_bits & 0x00000200u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->coolantpressure2());
     }
 
     // optional int32 coolantPressure3 = 51;
-    if (cached_has_bits & 0x00008000u) {
+    if (cached_has_bits & 0x00000400u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->coolantpressure3());
     }
 
-  }
-  if (cached_has_bits & 0x00ff0000u) {
     // optional int32 coolantTemperature = 52;
-    if (cached_has_bits & 0x00010000u) {
+    if (cached_has_bits & 0x00000800u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->coolanttemperature());
     }
 
     // optional float railTemperature = 53;
-    if (cached_has_bits & 0x00020000u) {
+    if (cached_has_bits & 0x00001000u) {
       total_size += 2 + 4;
     }
 
     // optional .LvdcNodeStates lvdcNodeState = 54;
-    if (cached_has_bits & 0x00040000u) {
+    if (cached_has_bits & 0x00002000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->lvdcnodestate());
     }
 
     // optional int32 pack1Voltage = 55;
-    if (cached_has_bits & 0x00080000u) {
+    if (cached_has_bits & 0x00004000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->pack1voltage());
     }
 
     // optional int32 pack2Voltage = 56;
-    if (cached_has_bits & 0x00100000u) {
+    if (cached_has_bits & 0x00008000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->pack2voltage());
     }
 
+  }
+  if (cached_has_bits & 0x00ff0000u) {
     // optional int32 pack1Current = 57;
-    if (cached_has_bits & 0x00200000u) {
+    if (cached_has_bits & 0x00010000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->pack1current());
     }
 
     // optional int32 pack2Current = 58;
-    if (cached_has_bits & 0x00400000u) {
+    if (cached_has_bits & 0x00020000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->pack2current());
     }
 
     // optional int32 rail1Voltage = 59;
-    if (cached_has_bits & 0x00800000u) {
+    if (cached_has_bits & 0x00040000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->rail1voltage());
     }
 
-  }
-  if (cached_has_bits & 0xff000000u) {
     // optional int32 rail2Voltage = 60;
-    if (cached_has_bits & 0x01000000u) {
+    if (cached_has_bits & 0x00080000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->rail2voltage());
     }
 
     // optional int32 rail3Voltage = 61;
-    if (cached_has_bits & 0x02000000u) {
+    if (cached_has_bits & 0x00100000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->rail3voltage());
     }
 
     // optional int32 rail4Voltage = 62;
-    if (cached_has_bits & 0x04000000u) {
+    if (cached_has_bits & 0x00200000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->rail4voltage());
     }
 
     // optional int32 railCurrentSensor1 = 63;
-    if (cached_has_bits & 0x08000000u) {
+    if (cached_has_bits & 0x00400000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->railcurrentsensor1());
     }
 
     // optional int32 railCurrentSensor2 = 64;
-    if (cached_has_bits & 0x10000000u) {
+    if (cached_has_bits & 0x00800000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->railcurrentsensor2());
     }
 
+  }
+  if (cached_has_bits & 0xff000000u) {
     // optional int32 railCurrentSensor3 = 65;
-    if (cached_has_bits & 0x20000000u) {
+    if (cached_has_bits & 0x01000000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->railcurrentsensor3());
     }
 
     // optional int32 railCurrentSensor4 = 66;
-    if (cached_has_bits & 0x40000000u) {
+    if (cached_has_bits & 0x02000000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->railcurrentsensor4());
     }
 
     // optional int32 railCurrentSensor5 = 67;
-    if (cached_has_bits & 0x80000000u) {
+    if (cached_has_bits & 0x04000000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->railcurrentsensor5());
     }
 
-  }
-  cached_has_bits = _has_bits_[2];
-  if (cached_has_bits & 0x0000001fu) {
     // optional int32 railCurrentSensor6 = 68;
-    if (cached_has_bits & 0x00000001u) {
+    if (cached_has_bits & 0x08000000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->railcurrentsensor6());
     }
 
     // optional int32 railCurrentSensor7 = 69;
-    if (cached_has_bits & 0x00000002u) {
+    if (cached_has_bits & 0x10000000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->railcurrentsensor7());
     }
 
     // optional int32 railCurrentSensor8 = 70;
-    if (cached_has_bits & 0x00000004u) {
+    if (cached_has_bits & 0x20000000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->railcurrentsensor8());
     }
 
     // optional int32 railVoltageFlag = 72;
-    if (cached_has_bits & 0x00000008u) {
+    if (cached_has_bits & 0x40000000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->railvoltageflag());
     }
 
     // optional int32 railCurrentFlag = 73;
-    if (cached_has_bits & 0x00000010u) {
+    if (cached_has_bits & 0x80000000u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->railcurrentflag());
+    }
+
+  }
+  cached_has_bits = _has_bits_[2];
+  if (cached_has_bits & 0x0000003fu) {
+    // optional uint32 motorTorque = 74;
+    if (cached_has_bits & 0x00000001u) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->motortorque());
+    }
+
+    // optional int32 motorSpeed = 80;
+    if (cached_has_bits & 0x00000002u) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->motorspeed());
+    }
+
+    // optional uint32 flightDistance = 75;
+    if (cached_has_bits & 0x00000004u) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->flightdistance());
+    }
+
+    // optional uint32 maxFlightTime = 76;
+    if (cached_has_bits & 0x00000008u) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->maxflighttime());
+    }
+
+    // optional int32 inverterHeartbeat = 78;
+    if (cached_has_bits & 0x00000010u) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->inverterheartbeat());
+    }
+
+    // optional int32 hvBatteryPackStateOfCharge = 79;
+    if (cached_has_bits & 0x00000020u) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->hvbatterypackstateofcharge());
     }
 
   }
@@ -5519,15 +5179,15 @@ void Telemetry::MergeFrom(const Telemetry& from) {
   (void) cached_has_bits;
 
   heartbeatflags_.MergeFrom(from.heartbeatflags_);
-  hvbatterycelltemperatures_.MergeFrom(from.hvbatterycelltemperatures_);
   heartbeatvalues_.MergeFrom(from.heartbeatvalues_);
+  updatemessages_.MergeFrom(from.updatemessages_);
   cached_has_bits = from._has_bits_[0];
   if (cached_has_bits & 0x000000ffu) {
     if (cached_has_bits & 0x00000001u) {
       podstate_ = from.podstate_;
     }
     if (cached_has_bits & 0x00000002u) {
-      breaknodestate_ = from.breaknodestate_;
+      brakenodestate_ = from.brakenodestate_;
     }
     if (cached_has_bits & 0x00000004u) {
       motorstate_ = from.motorstate_;
@@ -5557,204 +5217,207 @@ void Telemetry::MergeFrom(const Telemetry& from) {
       podaccelerationx_ = from.podaccelerationx_;
     }
     if (cached_has_bits & 0x00000400u) {
-      podaccelerationy_ = from.podaccelerationy_;
-    }
-    if (cached_has_bits & 0x00000800u) {
-      podaccelerationz_ = from.podaccelerationz_;
-    }
-    if (cached_has_bits & 0x00001000u) {
-      imuvelocity_ = from.imuvelocity_;
-    }
-    if (cached_has_bits & 0x00002000u) {
-      imuaccelerationx_ = from.imuaccelerationx_;
-    }
-    if (cached_has_bits & 0x00004000u) {
       tachometervelocity_ = from.tachometervelocity_;
     }
-    if (cached_has_bits & 0x00008000u) {
+    if (cached_has_bits & 0x00000800u) {
       resolvervelocity_ = from.resolvervelocity_;
+    }
+    if (cached_has_bits & 0x00001000u) {
+      maxigbttemperature_ = from.maxigbttemperature_;
+    }
+    if (cached_has_bits & 0x00002000u) {
+      gatedrivertemperature_ = from.gatedrivertemperature_;
+    }
+    if (cached_has_bits & 0x00004000u) {
+      invertercontrolboardtemperature_ = from.invertercontrolboardtemperature_;
+    }
+    if (cached_has_bits & 0x00008000u) {
+      motortemperature_ = from.motortemperature_;
     }
     _has_bits_[0] |= cached_has_bits;
   }
   if (cached_has_bits & 0x00ff0000u) {
     if (cached_has_bits & 0x00010000u) {
-      invertertemperature1_ = from.invertertemperature1_;
+      inverterbusvoltage_ = from.inverterbusvoltage_;
     }
     if (cached_has_bits & 0x00020000u) {
-      invertertemperature2_ = from.invertertemperature2_;
-    }
-    if (cached_has_bits & 0x00040000u) {
-      invertertemperature3_ = from.invertertemperature3_;
-    }
-    if (cached_has_bits & 0x00080000u) {
-      motorcurrent_ = from.motorcurrent_;
-    }
-    if (cached_has_bits & 0x00100000u) {
-      motorvoltage_ = from.motorvoltage_;
-    }
-    if (cached_has_bits & 0x00200000u) {
       invertervoltages_ = from.invertervoltages_;
     }
-    if (cached_has_bits & 0x00400000u) {
+    if (cached_has_bits & 0x00040000u) {
       invertercurrents_ = from.invertercurrents_;
     }
-    if (cached_has_bits & 0x00800000u) {
+    if (cached_has_bits & 0x00080000u) {
       batterymanagementstate_ = from.batterymanagementstate_;
+    }
+    if (cached_has_bits & 0x00100000u) {
+      hvbatterypackvoltage_ = from.hvbatterypackvoltage_;
+    }
+    if (cached_has_bits & 0x00200000u) {
+      hvbatterypackcurrent_ = from.hvbatterypackcurrent_;
+    }
+    if (cached_has_bits & 0x00400000u) {
+      hvbatterypackmaxcelltemperature_ = from.hvbatterypackmaxcelltemperature_;
+    }
+    if (cached_has_bits & 0x00800000u) {
+      hvbatterypackminimumcellvoltage_ = from.hvbatterypackminimumcellvoltage_;
     }
     _has_bits_[0] |= cached_has_bits;
   }
   if (cached_has_bits & 0xff000000u) {
     if (cached_has_bits & 0x01000000u) {
-      hvbatterypackvoltage_ = from.hvbatterypackvoltage_;
-    }
-    if (cached_has_bits & 0x02000000u) {
-      hvbatterypackcurrent_ = from.hvbatterypackcurrent_;
-    }
-    if (cached_has_bits & 0x04000000u) {
-      hvbatterypackminimumcellvoltage_ = from.hvbatterypackminimumcellvoltage_;
-    }
-    if (cached_has_bits & 0x08000000u) {
       hvbatterypackmaxcellvoltage_ = from.hvbatterypackmaxcellvoltage_;
     }
-    if (cached_has_bits & 0x10000000u) {
+    if (cached_has_bits & 0x02000000u) {
       breaknodeperceivedpodstate_ = from.breaknodeperceivedpodstate_;
     }
-    if (cached_has_bits & 0x20000000u) {
+    if (cached_has_bits & 0x04000000u) {
       solenoid1_ = from.solenoid1_;
     }
-    if (cached_has_bits & 0x40000000u) {
+    if (cached_has_bits & 0x08000000u) {
       solenoid2_ = from.solenoid2_;
     }
-    if (cached_has_bits & 0x80000000u) {
+    if (cached_has_bits & 0x10000000u) {
       solenoid3_ = from.solenoid3_;
+    }
+    if (cached_has_bits & 0x20000000u) {
+      solenoid4_ = from.solenoid4_;
+    }
+    if (cached_has_bits & 0x40000000u) {
+      highpressure_ = from.highpressure_;
+    }
+    if (cached_has_bits & 0x80000000u) {
+      lowpressure1_ = from.lowpressure1_;
     }
     _has_bits_[0] |= cached_has_bits;
   }
   cached_has_bits = from._has_bits_[1];
   if (cached_has_bits & 0x000000ffu) {
     if (cached_has_bits & 0x00000001u) {
-      solenoid4_ = from.solenoid4_;
-    }
-    if (cached_has_bits & 0x00000002u) {
-      solenoid5_ = from.solenoid5_;
-    }
-    if (cached_has_bits & 0x00000004u) {
-      solenoid6_ = from.solenoid6_;
-    }
-    if (cached_has_bits & 0x00000008u) {
-      highpressure_ = from.highpressure_;
-    }
-    if (cached_has_bits & 0x00000010u) {
-      lowpressure1_ = from.lowpressure1_;
-    }
-    if (cached_has_bits & 0x00000020u) {
       lowpressure2_ = from.lowpressure2_;
     }
-    if (cached_has_bits & 0x00000040u) {
+    if (cached_has_bits & 0x00000002u) {
       lowpressure3_ = from.lowpressure3_;
     }
-    if (cached_has_bits & 0x00000080u) {
+    if (cached_has_bits & 0x00000004u) {
       lowpressure4_ = from.lowpressure4_;
+    }
+    if (cached_has_bits & 0x00000008u) {
+      pressurevesseltemperature_ = from.pressurevesseltemperature_;
+    }
+    if (cached_has_bits & 0x00000010u) {
+      electronicsenclosurepressure_ = from.electronicsenclosurepressure_;
+    }
+    if (cached_has_bits & 0x00000020u) {
+      raildisplacementx_ = from.raildisplacementx_;
+    }
+    if (cached_has_bits & 0x00000040u) {
+      raildisplacementy_ = from.raildisplacementy_;
+    }
+    if (cached_has_bits & 0x00000080u) {
+      tubepressure_ = from.tubepressure_;
     }
     _has_bits_[1] |= cached_has_bits;
   }
   if (cached_has_bits & 0x0000ff00u) {
     if (cached_has_bits & 0x00000100u) {
-      pressurevesseltemperature_ = from.pressurevesseltemperature_;
-    }
-    if (cached_has_bits & 0x00000200u) {
-      electronicsenclosurepressure_ = from.electronicsenclosurepressure_;
-    }
-    if (cached_has_bits & 0x00000400u) {
-      raildisplacementx_ = from.raildisplacementx_;
-    }
-    if (cached_has_bits & 0x00000800u) {
-      raildisplacementy_ = from.raildisplacementy_;
-    }
-    if (cached_has_bits & 0x00001000u) {
-      tubepressure_ = from.tubepressure_;
-    }
-    if (cached_has_bits & 0x00002000u) {
       coolantpressure1_ = from.coolantpressure1_;
     }
-    if (cached_has_bits & 0x00004000u) {
+    if (cached_has_bits & 0x00000200u) {
       coolantpressure2_ = from.coolantpressure2_;
     }
-    if (cached_has_bits & 0x00008000u) {
+    if (cached_has_bits & 0x00000400u) {
       coolantpressure3_ = from.coolantpressure3_;
+    }
+    if (cached_has_bits & 0x00000800u) {
+      coolanttemperature_ = from.coolanttemperature_;
+    }
+    if (cached_has_bits & 0x00001000u) {
+      railtemperature_ = from.railtemperature_;
+    }
+    if (cached_has_bits & 0x00002000u) {
+      lvdcnodestate_ = from.lvdcnodestate_;
+    }
+    if (cached_has_bits & 0x00004000u) {
+      pack1voltage_ = from.pack1voltage_;
+    }
+    if (cached_has_bits & 0x00008000u) {
+      pack2voltage_ = from.pack2voltage_;
     }
     _has_bits_[1] |= cached_has_bits;
   }
   if (cached_has_bits & 0x00ff0000u) {
     if (cached_has_bits & 0x00010000u) {
-      coolanttemperature_ = from.coolanttemperature_;
-    }
-    if (cached_has_bits & 0x00020000u) {
-      railtemperature_ = from.railtemperature_;
-    }
-    if (cached_has_bits & 0x00040000u) {
-      lvdcnodestate_ = from.lvdcnodestate_;
-    }
-    if (cached_has_bits & 0x00080000u) {
-      pack1voltage_ = from.pack1voltage_;
-    }
-    if (cached_has_bits & 0x00100000u) {
-      pack2voltage_ = from.pack2voltage_;
-    }
-    if (cached_has_bits & 0x00200000u) {
       pack1current_ = from.pack1current_;
     }
-    if (cached_has_bits & 0x00400000u) {
+    if (cached_has_bits & 0x00020000u) {
       pack2current_ = from.pack2current_;
     }
-    if (cached_has_bits & 0x00800000u) {
+    if (cached_has_bits & 0x00040000u) {
       rail1voltage_ = from.rail1voltage_;
+    }
+    if (cached_has_bits & 0x00080000u) {
+      rail2voltage_ = from.rail2voltage_;
+    }
+    if (cached_has_bits & 0x00100000u) {
+      rail3voltage_ = from.rail3voltage_;
+    }
+    if (cached_has_bits & 0x00200000u) {
+      rail4voltage_ = from.rail4voltage_;
+    }
+    if (cached_has_bits & 0x00400000u) {
+      railcurrentsensor1_ = from.railcurrentsensor1_;
+    }
+    if (cached_has_bits & 0x00800000u) {
+      railcurrentsensor2_ = from.railcurrentsensor2_;
     }
     _has_bits_[1] |= cached_has_bits;
   }
   if (cached_has_bits & 0xff000000u) {
     if (cached_has_bits & 0x01000000u) {
-      rail2voltage_ = from.rail2voltage_;
-    }
-    if (cached_has_bits & 0x02000000u) {
-      rail3voltage_ = from.rail3voltage_;
-    }
-    if (cached_has_bits & 0x04000000u) {
-      rail4voltage_ = from.rail4voltage_;
-    }
-    if (cached_has_bits & 0x08000000u) {
-      railcurrentsensor1_ = from.railcurrentsensor1_;
-    }
-    if (cached_has_bits & 0x10000000u) {
-      railcurrentsensor2_ = from.railcurrentsensor2_;
-    }
-    if (cached_has_bits & 0x20000000u) {
       railcurrentsensor3_ = from.railcurrentsensor3_;
     }
-    if (cached_has_bits & 0x40000000u) {
+    if (cached_has_bits & 0x02000000u) {
       railcurrentsensor4_ = from.railcurrentsensor4_;
     }
-    if (cached_has_bits & 0x80000000u) {
+    if (cached_has_bits & 0x04000000u) {
       railcurrentsensor5_ = from.railcurrentsensor5_;
+    }
+    if (cached_has_bits & 0x08000000u) {
+      railcurrentsensor6_ = from.railcurrentsensor6_;
+    }
+    if (cached_has_bits & 0x10000000u) {
+      railcurrentsensor7_ = from.railcurrentsensor7_;
+    }
+    if (cached_has_bits & 0x20000000u) {
+      railcurrentsensor8_ = from.railcurrentsensor8_;
+    }
+    if (cached_has_bits & 0x40000000u) {
+      railvoltageflag_ = from.railvoltageflag_;
+    }
+    if (cached_has_bits & 0x80000000u) {
+      railcurrentflag_ = from.railcurrentflag_;
     }
     _has_bits_[1] |= cached_has_bits;
   }
   cached_has_bits = from._has_bits_[2];
-  if (cached_has_bits & 0x0000001fu) {
+  if (cached_has_bits & 0x0000003fu) {
     if (cached_has_bits & 0x00000001u) {
-      railcurrentsensor6_ = from.railcurrentsensor6_;
+      motortorque_ = from.motortorque_;
     }
     if (cached_has_bits & 0x00000002u) {
-      railcurrentsensor7_ = from.railcurrentsensor7_;
+      motorspeed_ = from.motorspeed_;
     }
     if (cached_has_bits & 0x00000004u) {
-      railcurrentsensor8_ = from.railcurrentsensor8_;
+      flightdistance_ = from.flightdistance_;
     }
     if (cached_has_bits & 0x00000008u) {
-      railvoltageflag_ = from.railvoltageflag_;
+      maxflighttime_ = from.maxflighttime_;
     }
     if (cached_has_bits & 0x00000010u) {
-      railcurrentflag_ = from.railcurrentflag_;
+      inverterheartbeat_ = from.inverterheartbeat_;
+    }
+    if (cached_has_bits & 0x00000020u) {
+      hvbatterypackstateofcharge_ = from.hvbatterypackstateofcharge_;
     }
     _has_bits_[2] |= cached_has_bits;
   }
@@ -5789,10 +5452,10 @@ void Telemetry::InternalSwap(Telemetry* other) {
   swap(_has_bits_[1], other->_has_bits_[1]);
   swap(_has_bits_[2], other->_has_bits_[2]);
   heartbeatflags_.InternalSwap(&other->heartbeatflags_);
-  hvbatterycelltemperatures_.InternalSwap(&other->hvbatterycelltemperatures_);
   heartbeatvalues_.InternalSwap(&other->heartbeatvalues_);
+  updatemessages_.InternalSwap(CastToBase(&other->updatemessages_));
   swap(podstate_, other->podstate_);
-  swap(breaknodestate_, other->breaknodestate_);
+  swap(brakenodestate_, other->brakenodestate_);
   swap(motorstate_, other->motorstate_);
   swap(controlsinterfacestate_, other->controlsinterfacestate_);
   swap(inverterstate_, other->inverterstate_);
@@ -5801,22 +5464,19 @@ void Telemetry::InternalSwap(Telemetry* other) {
   swap(podposition_, other->podposition_);
   swap(podvelocity_, other->podvelocity_);
   swap(podaccelerationx_, other->podaccelerationx_);
-  swap(podaccelerationy_, other->podaccelerationy_);
-  swap(podaccelerationz_, other->podaccelerationz_);
-  swap(imuvelocity_, other->imuvelocity_);
-  swap(imuaccelerationx_, other->imuaccelerationx_);
   swap(tachometervelocity_, other->tachometervelocity_);
   swap(resolvervelocity_, other->resolvervelocity_);
-  swap(invertertemperature1_, other->invertertemperature1_);
-  swap(invertertemperature2_, other->invertertemperature2_);
-  swap(invertertemperature3_, other->invertertemperature3_);
-  swap(motorcurrent_, other->motorcurrent_);
-  swap(motorvoltage_, other->motorvoltage_);
+  swap(maxigbttemperature_, other->maxigbttemperature_);
+  swap(gatedrivertemperature_, other->gatedrivertemperature_);
+  swap(invertercontrolboardtemperature_, other->invertercontrolboardtemperature_);
+  swap(motortemperature_, other->motortemperature_);
+  swap(inverterbusvoltage_, other->inverterbusvoltage_);
   swap(invertervoltages_, other->invertervoltages_);
   swap(invertercurrents_, other->invertercurrents_);
   swap(batterymanagementstate_, other->batterymanagementstate_);
   swap(hvbatterypackvoltage_, other->hvbatterypackvoltage_);
   swap(hvbatterypackcurrent_, other->hvbatterypackcurrent_);
+  swap(hvbatterypackmaxcelltemperature_, other->hvbatterypackmaxcelltemperature_);
   swap(hvbatterypackminimumcellvoltage_, other->hvbatterypackminimumcellvoltage_);
   swap(hvbatterypackmaxcellvoltage_, other->hvbatterypackmaxcellvoltage_);
   swap(breaknodeperceivedpodstate_, other->breaknodeperceivedpodstate_);
@@ -5824,8 +5484,6 @@ void Telemetry::InternalSwap(Telemetry* other) {
   swap(solenoid2_, other->solenoid2_);
   swap(solenoid3_, other->solenoid3_);
   swap(solenoid4_, other->solenoid4_);
-  swap(solenoid5_, other->solenoid5_);
-  swap(solenoid6_, other->solenoid6_);
   swap(highpressure_, other->highpressure_);
   swap(lowpressure1_, other->lowpressure1_);
   swap(lowpressure2_, other->lowpressure2_);
@@ -5860,6 +5518,12 @@ void Telemetry::InternalSwap(Telemetry* other) {
   swap(railcurrentsensor8_, other->railcurrentsensor8_);
   swap(railvoltageflag_, other->railvoltageflag_);
   swap(railcurrentflag_, other->railcurrentflag_);
+  swap(motortorque_, other->motortorque_);
+  swap(motorspeed_, other->motorspeed_);
+  swap(flightdistance_, other->flightdistance_);
+  swap(maxflighttime_, other->maxflighttime_);
+  swap(inverterheartbeat_, other->inverterheartbeat_);
+  swap(hvbatterypackstateofcharge_, other->hvbatterypackstateofcharge_);
 }
 
 ::google::protobuf::Metadata Telemetry::GetMetadata() const {
@@ -5877,18 +5541,30 @@ class FcToBrakeNode::HasBitSetters {
   static void set_has_packetnum(FcToBrakeNode* msg) {
     msg->_has_bits_[0] |= 0x00000001u;
   }
-  static void set_has_podstate(FcToBrakeNode* msg) {
+  static void set_has_nodestate(FcToBrakeNode* msg) {
     msg->_has_bits_[0] |= 0x00000002u;
   }
-  static void set_has_manualnodestate(FcToBrakeNode* msg) {
+  static void set_has_solenoid1config(FcToBrakeNode* msg) {
     msg->_has_bits_[0] |= 0x00000004u;
+  }
+  static void set_has_solenoid2config(FcToBrakeNode* msg) {
+    msg->_has_bits_[0] |= 0x00000008u;
+  }
+  static void set_has_solenoid3config(FcToBrakeNode* msg) {
+    msg->_has_bits_[0] |= 0x00000010u;
+  }
+  static void set_has_solenoid4config(FcToBrakeNode* msg) {
+    msg->_has_bits_[0] |= 0x00000020u;
   }
 };
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int FcToBrakeNode::kPacketNumFieldNumber;
-const int FcToBrakeNode::kPodStateFieldNumber;
-const int FcToBrakeNode::kManualNodeStateFieldNumber;
+const int FcToBrakeNode::kNodeStateFieldNumber;
+const int FcToBrakeNode::kSolenoid1ConfigFieldNumber;
+const int FcToBrakeNode::kSolenoid2ConfigFieldNumber;
+const int FcToBrakeNode::kSolenoid3ConfigFieldNumber;
+const int FcToBrakeNode::kSolenoid4ConfigFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 FcToBrakeNode::FcToBrakeNode()
@@ -5902,15 +5578,15 @@ FcToBrakeNode::FcToBrakeNode(const FcToBrakeNode& from)
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&packetnum_, &from.packetnum_,
-    static_cast<size_t>(reinterpret_cast<char*>(&manualnodestate_) -
-    reinterpret_cast<char*>(&packetnum_)) + sizeof(manualnodestate_));
+    static_cast<size_t>(reinterpret_cast<char*>(&solenoid4config_) -
+    reinterpret_cast<char*>(&packetnum_)) + sizeof(solenoid4config_));
   // @@protoc_insertion_point(copy_constructor:FcToBrakeNode)
 }
 
 void FcToBrakeNode::SharedCtor() {
   ::memset(&packetnum_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&manualnodestate_) -
-      reinterpret_cast<char*>(&packetnum_)) + sizeof(manualnodestate_));
+      reinterpret_cast<char*>(&solenoid4config_) -
+      reinterpret_cast<char*>(&packetnum_)) + sizeof(solenoid4config_));
 }
 
 FcToBrakeNode::~FcToBrakeNode() {
@@ -5937,10 +5613,10 @@ void FcToBrakeNode::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000007u) {
+  if (cached_has_bits & 0x0000003fu) {
     ::memset(&packetnum_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&manualnodestate_) -
-        reinterpret_cast<char*>(&packetnum_)) + sizeof(manualnodestate_));
+        reinterpret_cast<char*>(&solenoid4config_) -
+        reinterpret_cast<char*>(&packetnum_)) + sizeof(solenoid4config_));
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -5966,27 +5642,43 @@ const char* FcToBrakeNode::_InternalParse(const char* begin, const char* end, vo
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // optional .PodStates podState = 2;
+      // optional .BrakeNodeStates nodeState = 2;
       case 2: {
         if (static_cast<::google::protobuf::uint8>(tag) != 16) goto handle_unusual;
         ::google::protobuf::uint64 val = ::google::protobuf::internal::ReadVarint(&ptr);
-        if (!::PodStates_IsValid(val)) {
+        if (!::BrakeNodeStates_IsValid(val)) {
           ::google::protobuf::internal::WriteVarint(2, val, msg->mutable_unknown_fields());
           break;
         }
-        msg->set_podstate(static_cast<::PodStates>(val));
+        msg->set_nodestate(static_cast<::BrakeNodeStates>(val));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // optional .BrakeNodeStates manualNodeState = 3;
+      // optional bool solenoid1Config = 3;
       case 3: {
         if (static_cast<::google::protobuf::uint8>(tag) != 24) goto handle_unusual;
-        ::google::protobuf::uint64 val = ::google::protobuf::internal::ReadVarint(&ptr);
-        if (!::BrakeNodeStates_IsValid(val)) {
-          ::google::protobuf::internal::WriteVarint(3, val, msg->mutable_unknown_fields());
-          break;
-        }
-        msg->set_manualnodestate(static_cast<::BrakeNodeStates>(val));
+        msg->set_solenoid1config(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // optional bool solenoid2Config = 4;
+      case 4: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 32) goto handle_unusual;
+        msg->set_solenoid2config(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // optional bool solenoid3Config = 5;
+      case 5: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 40) goto handle_unusual;
+        msg->set_solenoid3config(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // optional bool solenoid4Config = 6;
+      case 6: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 48) goto handle_unusual;
+        msg->set_solenoid4config(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
@@ -6030,15 +5722,15 @@ bool FcToBrakeNode::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .PodStates podState = 2;
+      // optional .BrakeNodeStates nodeState = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (16 & 0xFF)) {
           int value = 0;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::PodStates_IsValid(value)) {
-            set_podstate(static_cast< ::PodStates >(value));
+          if (::BrakeNodeStates_IsValid(value)) {
+            set_nodestate(static_cast< ::BrakeNodeStates >(value));
           } else {
             mutable_unknown_fields()->AddVarint(
                 2, static_cast<::google::protobuf::uint64>(value));
@@ -6049,19 +5741,52 @@ bool FcToBrakeNode::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .BrakeNodeStates manualNodeState = 3;
+      // optional bool solenoid1Config = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (24 & 0xFF)) {
-          int value = 0;
+          HasBitSetters::set_has_solenoid1config(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          if (::BrakeNodeStates_IsValid(value)) {
-            set_manualnodestate(static_cast< ::BrakeNodeStates >(value));
-          } else {
-            mutable_unknown_fields()->AddVarint(
-                3, static_cast<::google::protobuf::uint64>(value));
-          }
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &solenoid1config_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // optional bool solenoid2Config = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (32 & 0xFF)) {
+          HasBitSetters::set_has_solenoid2config(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &solenoid2config_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // optional bool solenoid3Config = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (40 & 0xFF)) {
+          HasBitSetters::set_has_solenoid3config(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &solenoid3config_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // optional bool solenoid4Config = 6;
+      case 6: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (48 & 0xFF)) {
+          HasBitSetters::set_has_solenoid4config(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &solenoid4config_)));
         } else {
           goto handle_unusual;
         }
@@ -6101,16 +5826,30 @@ void FcToBrakeNode::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->packetnum(), output);
   }
 
-  // optional .PodStates podState = 2;
+  // optional .BrakeNodeStates nodeState = 2;
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      2, this->podstate(), output);
+      2, this->nodestate(), output);
   }
 
-  // optional .BrakeNodeStates manualNodeState = 3;
+  // optional bool solenoid1Config = 3;
   if (cached_has_bits & 0x00000004u) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      3, this->manualnodestate(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteBool(3, this->solenoid1config(), output);
+  }
+
+  // optional bool solenoid2Config = 4;
+  if (cached_has_bits & 0x00000008u) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(4, this->solenoid2config(), output);
+  }
+
+  // optional bool solenoid3Config = 5;
+  if (cached_has_bits & 0x00000010u) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(5, this->solenoid3config(), output);
+  }
+
+  // optional bool solenoid4Config = 6;
+  if (cached_has_bits & 0x00000020u) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(6, this->solenoid4config(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -6132,16 +5871,30 @@ void FcToBrakeNode::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->packetnum(), target);
   }
 
-  // optional .PodStates podState = 2;
+  // optional .BrakeNodeStates nodeState = 2;
   if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      2, this->podstate(), target);
+      2, this->nodestate(), target);
   }
 
-  // optional .BrakeNodeStates manualNodeState = 3;
+  // optional bool solenoid1Config = 3;
   if (cached_has_bits & 0x00000004u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      3, this->manualnodestate(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(3, this->solenoid1config(), target);
+  }
+
+  // optional bool solenoid2Config = 4;
+  if (cached_has_bits & 0x00000008u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(4, this->solenoid2config(), target);
+  }
+
+  // optional bool solenoid3Config = 5;
+  if (cached_has_bits & 0x00000010u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(5, this->solenoid3config(), target);
+  }
+
+  // optional bool solenoid4Config = 6;
+  if (cached_has_bits & 0x00000020u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(6, this->solenoid4config(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -6166,7 +5919,7 @@ size_t FcToBrakeNode::ByteSizeLong() const {
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000007u) {
+  if (cached_has_bits & 0x0000003fu) {
     // optional int32 packetNum = 1;
     if (cached_has_bits & 0x00000001u) {
       total_size += 1 +
@@ -6174,16 +5927,30 @@ size_t FcToBrakeNode::ByteSizeLong() const {
           this->packetnum());
     }
 
-    // optional .PodStates podState = 2;
+    // optional .BrakeNodeStates nodeState = 2;
     if (cached_has_bits & 0x00000002u) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->podstate());
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->nodestate());
     }
 
-    // optional .BrakeNodeStates manualNodeState = 3;
+    // optional bool solenoid1Config = 3;
     if (cached_has_bits & 0x00000004u) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->manualnodestate());
+      total_size += 1 + 1;
+    }
+
+    // optional bool solenoid2Config = 4;
+    if (cached_has_bits & 0x00000008u) {
+      total_size += 1 + 1;
+    }
+
+    // optional bool solenoid3Config = 5;
+    if (cached_has_bits & 0x00000010u) {
+      total_size += 1 + 1;
+    }
+
+    // optional bool solenoid4Config = 6;
+    if (cached_has_bits & 0x00000020u) {
+      total_size += 1 + 1;
     }
 
   }
@@ -6215,15 +5982,24 @@ void FcToBrakeNode::MergeFrom(const FcToBrakeNode& from) {
   (void) cached_has_bits;
 
   cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 0x00000007u) {
+  if (cached_has_bits & 0x0000003fu) {
     if (cached_has_bits & 0x00000001u) {
       packetnum_ = from.packetnum_;
     }
     if (cached_has_bits & 0x00000002u) {
-      podstate_ = from.podstate_;
+      nodestate_ = from.nodestate_;
     }
     if (cached_has_bits & 0x00000004u) {
-      manualnodestate_ = from.manualnodestate_;
+      solenoid1config_ = from.solenoid1config_;
+    }
+    if (cached_has_bits & 0x00000008u) {
+      solenoid2config_ = from.solenoid2config_;
+    }
+    if (cached_has_bits & 0x00000010u) {
+      solenoid3config_ = from.solenoid3config_;
+    }
+    if (cached_has_bits & 0x00000020u) {
+      solenoid4config_ = from.solenoid4config_;
     }
     _has_bits_[0] |= cached_has_bits;
   }
@@ -6256,11 +6032,412 @@ void FcToBrakeNode::InternalSwap(FcToBrakeNode* other) {
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   swap(packetnum_, other->packetnum_);
+  swap(nodestate_, other->nodestate_);
+  swap(solenoid1config_, other->solenoid1config_);
+  swap(solenoid2config_, other->solenoid2config_);
+  swap(solenoid3config_, other->solenoid3config_);
+  swap(solenoid4config_, other->solenoid4config_);
+}
+
+::google::protobuf::Metadata FcToBrakeNode::GetMetadata() const {
+  ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_Paradigm_2eproto);
+  return ::file_level_metadata_Paradigm_2eproto[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void FcToLvdcNode::InitAsDefaultInstance() {
+}
+class FcToLvdcNode::HasBitSetters {
+ public:
+  static void set_has_packetnum(FcToLvdcNode* msg) {
+    msg->_has_bits_[0] |= 0x00000001u;
+  }
+  static void set_has_podstate(FcToLvdcNode* msg) {
+    msg->_has_bits_[0] |= 0x00000002u;
+  }
+  static void set_has_manualnodestate(FcToLvdcNode* msg) {
+    msg->_has_bits_[0] |= 0x00000004u;
+  }
+};
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int FcToLvdcNode::kPacketNumFieldNumber;
+const int FcToLvdcNode::kPodStateFieldNumber;
+const int FcToLvdcNode::kManualNodeStateFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+FcToLvdcNode::FcToLvdcNode()
+  : ::google::protobuf::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:FcToLvdcNode)
+}
+FcToLvdcNode::FcToLvdcNode(const FcToLvdcNode& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(nullptr),
+      _has_bits_(from._has_bits_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::memcpy(&packetnum_, &from.packetnum_,
+    static_cast<size_t>(reinterpret_cast<char*>(&manualnodestate_) -
+    reinterpret_cast<char*>(&packetnum_)) + sizeof(manualnodestate_));
+  // @@protoc_insertion_point(copy_constructor:FcToLvdcNode)
+}
+
+void FcToLvdcNode::SharedCtor() {
+  ::memset(&packetnum_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&manualnodestate_) -
+      reinterpret_cast<char*>(&packetnum_)) + sizeof(manualnodestate_));
+}
+
+FcToLvdcNode::~FcToLvdcNode() {
+  // @@protoc_insertion_point(destructor:FcToLvdcNode)
+  SharedDtor();
+}
+
+void FcToLvdcNode::SharedDtor() {
+}
+
+void FcToLvdcNode::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const FcToLvdcNode& FcToLvdcNode::default_instance() {
+  ::google::protobuf::internal::InitSCC(&::scc_info_FcToLvdcNode_Paradigm_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void FcToLvdcNode::Clear() {
+// @@protoc_insertion_point(message_clear_start:FcToLvdcNode)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 0x00000007u) {
+    ::memset(&packetnum_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&manualnodestate_) -
+        reinterpret_cast<char*>(&packetnum_)) + sizeof(manualnodestate_));
+  }
+  _has_bits_.Clear();
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* FcToLvdcNode::_InternalParse(const char* begin, const char* end, void* object,
+                  ::google::protobuf::internal::ParseContext* ctx) {
+  auto msg = static_cast<FcToLvdcNode*>(object);
+  ::google::protobuf::int32 size; (void)size;
+  int depth; (void)depth;
+  ::google::protobuf::uint32 tag;
+  ::google::protobuf::internal::ParseFunc parser_till_end; (void)parser_till_end;
+  auto ptr = begin;
+  while (ptr < end) {
+    ptr = ::google::protobuf::io::Parse32(ptr, &tag);
+    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+    switch (tag >> 3) {
+      // optional int32 packetNum = 1;
+      case 1: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 8) goto handle_unusual;
+        msg->set_packetnum(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // optional .PodStates podState = 2;
+      case 2: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 16) goto handle_unusual;
+        ::google::protobuf::uint64 val = ::google::protobuf::internal::ReadVarint(&ptr);
+        if (!::PodStates_IsValid(val)) {
+          ::google::protobuf::internal::WriteVarint(2, val, msg->mutable_unknown_fields());
+          break;
+        }
+        msg->set_podstate(static_cast<::PodStates>(val));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // optional .LvdcNodeStates manualNodeState = 3;
+      case 3: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 24) goto handle_unusual;
+        ::google::protobuf::uint64 val = ::google::protobuf::internal::ReadVarint(&ptr);
+        if (!::LvdcNodeStates_IsValid(val)) {
+          ::google::protobuf::internal::WriteVarint(3, val, msg->mutable_unknown_fields());
+          break;
+        }
+        msg->set_manualnodestate(static_cast<::LvdcNodeStates>(val));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->EndGroup(tag);
+          return ptr;
+        }
+        auto res = UnknownFieldParse(tag, {_InternalParse, msg},
+          ptr, end, msg->_internal_metadata_.mutable_unknown_fields(), ctx);
+        ptr = res.first;
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr != nullptr);
+        if (res.second) return ptr;
+      }
+    }  // switch
+  }  // while
+  return ptr;
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool FcToLvdcNode::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:FcToLvdcNode)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional int32 packetNum = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (8 & 0xFF)) {
+          HasBitSetters::set_has_packetnum(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &packetnum_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // optional .PodStates podState = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (16 & 0xFF)) {
+          int value = 0;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::PodStates_IsValid(value)) {
+            set_podstate(static_cast< ::PodStates >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(
+                2, static_cast<::google::protobuf::uint64>(value));
+          }
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // optional .LvdcNodeStates manualNodeState = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (24 & 0xFF)) {
+          int value = 0;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::LvdcNodeStates_IsValid(value)) {
+            set_manualnodestate(static_cast< ::LvdcNodeStates >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(
+                3, static_cast<::google::protobuf::uint64>(value));
+          }
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:FcToLvdcNode)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:FcToLvdcNode)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void FcToLvdcNode::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:FcToLvdcNode)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // optional int32 packetNum = 1;
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->packetnum(), output);
+  }
+
+  // optional .PodStates podState = 2;
+  if (cached_has_bits & 0x00000002u) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      2, this->podstate(), output);
+  }
+
+  // optional .LvdcNodeStates manualNodeState = 3;
+  if (cached_has_bits & 0x00000004u) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      3, this->manualnodestate(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:FcToLvdcNode)
+}
+
+::google::protobuf::uint8* FcToLvdcNode::InternalSerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:FcToLvdcNode)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // optional int32 packetNum = 1;
+  if (cached_has_bits & 0x00000001u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->packetnum(), target);
+  }
+
+  // optional .PodStates podState = 2;
+  if (cached_has_bits & 0x00000002u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      2, this->podstate(), target);
+  }
+
+  // optional .LvdcNodeStates manualNodeState = 3;
+  if (cached_has_bits & 0x00000004u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      3, this->manualnodestate(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:FcToLvdcNode)
+  return target;
+}
+
+size_t FcToLvdcNode::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:FcToLvdcNode)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 0x00000007u) {
+    // optional int32 packetNum = 1;
+    if (cached_has_bits & 0x00000001u) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->packetnum());
+    }
+
+    // optional .PodStates podState = 2;
+    if (cached_has_bits & 0x00000002u) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->podstate());
+    }
+
+    // optional .LvdcNodeStates manualNodeState = 3;
+    if (cached_has_bits & 0x00000004u) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->manualnodestate());
+    }
+
+  }
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void FcToLvdcNode::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:FcToLvdcNode)
+  GOOGLE_DCHECK_NE(&from, this);
+  const FcToLvdcNode* source =
+      ::google::protobuf::DynamicCastToGenerated<FcToLvdcNode>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:FcToLvdcNode)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:FcToLvdcNode)
+    MergeFrom(*source);
+  }
+}
+
+void FcToLvdcNode::MergeFrom(const FcToLvdcNode& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:FcToLvdcNode)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._has_bits_[0];
+  if (cached_has_bits & 0x00000007u) {
+    if (cached_has_bits & 0x00000001u) {
+      packetnum_ = from.packetnum_;
+    }
+    if (cached_has_bits & 0x00000002u) {
+      podstate_ = from.podstate_;
+    }
+    if (cached_has_bits & 0x00000004u) {
+      manualnodestate_ = from.manualnodestate_;
+    }
+    _has_bits_[0] |= cached_has_bits;
+  }
+}
+
+void FcToLvdcNode::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:FcToLvdcNode)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void FcToLvdcNode::CopyFrom(const FcToLvdcNode& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:FcToLvdcNode)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool FcToLvdcNode::IsInitialized() const {
+  return true;
+}
+
+void FcToLvdcNode::Swap(FcToLvdcNode* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void FcToLvdcNode::InternalSwap(FcToLvdcNode* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
+  swap(packetnum_, other->packetnum_);
   swap(podstate_, other->podstate_);
   swap(manualnodestate_, other->manualnodestate_);
 }
 
-::google::protobuf::Metadata FcToBrakeNode::GetMetadata() const {
+::google::protobuf::Metadata FcToLvdcNode::GetMetadata() const {
   ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_Paradigm_2eproto);
   return ::file_level_metadata_Paradigm_2eproto[kIndexInFileMessages];
 }
@@ -6276,25 +6453,25 @@ class DtsNodeToFc::HasBitSetters {
     msg->_has_bits_[0] |= 0x00000001u;
   }
   static void set_has_brakenodestate(DtsNodeToFc* msg) {
-    msg->_has_bits_[0] |= 0x00000080u;
-  }
-  static void set_has_brakesolenoidstate(DtsNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00000002u;
   }
-  static void set_has_ventsolenoidstate(DtsNodeToFc* msg) {
+  static void set_has_brakesolenoidstate(DtsNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00000004u;
   }
-  static void set_has_rotortemperature(DtsNodeToFc* msg) {
+  static void set_has_ventsolenoidstate(DtsNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00000008u;
   }
-  static void set_has_pneumatictemperature(DtsNodeToFc* msg) {
+  static void set_has_rotortemperature(DtsNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00000010u;
   }
-  static void set_has_tankpressure(DtsNodeToFc* msg) {
+  static void set_has_pneumatictemperature(DtsNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00000020u;
   }
-  static void set_has_brakepressure(DtsNodeToFc* msg) {
+  static void set_has_tankpressure(DtsNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00000040u;
+  }
+  static void set_has_brakepressure(DtsNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00000080u;
   }
 };
 
@@ -6320,8 +6497,8 @@ DtsNodeToFc::DtsNodeToFc(const DtsNodeToFc& from)
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&packetnum_, &from.packetnum_,
-    static_cast<size_t>(reinterpret_cast<char*>(&brakenodestate_) -
-    reinterpret_cast<char*>(&packetnum_)) + sizeof(brakenodestate_));
+    static_cast<size_t>(reinterpret_cast<char*>(&brakepressure_) -
+    reinterpret_cast<char*>(&packetnum_)) + sizeof(brakepressure_));
   // @@protoc_insertion_point(copy_constructor:DtsNodeToFc)
 }
 
@@ -6329,7 +6506,6 @@ void DtsNodeToFc::SharedCtor() {
   ::memset(&packetnum_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&brakepressure_) -
       reinterpret_cast<char*>(&packetnum_)) + sizeof(brakepressure_));
-  brakenodestate_ = 1;
 }
 
 DtsNodeToFc::~DtsNodeToFc() {
@@ -6360,7 +6536,6 @@ void DtsNodeToFc::Clear() {
     ::memset(&packetnum_, 0, static_cast<size_t>(
         reinterpret_cast<char*>(&brakepressure_) -
         reinterpret_cast<char*>(&packetnum_)) + sizeof(brakepressure_));
-    brakenodestate_ = 1;
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -6379,14 +6554,14 @@ const char* DtsNodeToFc::_InternalParse(const char* begin, const char* end, void
     ptr = ::google::protobuf::io::Parse32(ptr, &tag);
     GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
     switch (tag >> 3) {
-      // required int32 packetNum = 1 [default = 0];
+      // required int32 packetNum = 1;
       case 1: {
         if (static_cast<::google::protobuf::uint8>(tag) != 8) goto handle_unusual;
         msg->set_packetnum(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // required .BrakeNodeStates brakeNodeState = 2 [default = bnsStandby];
+      // required .BrakeNodeStates brakeNodeState = 2;
       case 2: {
         if (static_cast<::google::protobuf::uint8>(tag) != 16) goto handle_unusual;
         ::google::protobuf::uint64 val = ::google::protobuf::internal::ReadVarint(&ptr);
@@ -6398,42 +6573,42 @@ const char* DtsNodeToFc::_InternalParse(const char* begin, const char* end, void
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // required bool brakeSolenoidState = 3 [default = false];
+      // required bool brakeSolenoidState = 3;
       case 3: {
         if (static_cast<::google::protobuf::uint8>(tag) != 24) goto handle_unusual;
         msg->set_brakesolenoidstate(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // required bool ventSolenoidState = 4 [default = false];
+      // required bool ventSolenoidState = 4;
       case 4: {
         if (static_cast<::google::protobuf::uint8>(tag) != 32) goto handle_unusual;
         msg->set_ventsolenoidstate(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // required float rotorTemperature = 5 [default = 0];
+      // required float rotorTemperature = 5;
       case 5: {
         if (static_cast<::google::protobuf::uint8>(tag) != 45) goto handle_unusual;
         msg->set_rotortemperature(::google::protobuf::io::UnalignedLoad<float>(ptr));
         ptr += sizeof(float);
         break;
       }
-      // required float pneumaticTemperature = 6 [default = 0];
+      // required float pneumaticTemperature = 6;
       case 6: {
         if (static_cast<::google::protobuf::uint8>(tag) != 53) goto handle_unusual;
         msg->set_pneumatictemperature(::google::protobuf::io::UnalignedLoad<float>(ptr));
         ptr += sizeof(float);
         break;
       }
-      // required float tankPressure = 7 [default = 0];
+      // required float tankPressure = 7;
       case 7: {
         if (static_cast<::google::protobuf::uint8>(tag) != 61) goto handle_unusual;
         msg->set_tankpressure(::google::protobuf::io::UnalignedLoad<float>(ptr));
         ptr += sizeof(float);
         break;
       }
-      // required float brakePressure = 8 [default = 0];
+      // required float brakePressure = 8;
       case 8: {
         if (static_cast<::google::protobuf::uint8>(tag) != 69) goto handle_unusual;
         msg->set_brakepressure(::google::protobuf::io::UnalignedLoad<float>(ptr));
@@ -6467,7 +6642,7 @@ bool DtsNodeToFc::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int32 packetNum = 1 [default = 0];
+      // required int32 packetNum = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (8 & 0xFF)) {
           HasBitSetters::set_has_packetnum(this);
@@ -6480,7 +6655,7 @@ bool DtsNodeToFc::MergePartialFromCodedStream(
         break;
       }
 
-      // required .BrakeNodeStates brakeNodeState = 2 [default = bnsStandby];
+      // required .BrakeNodeStates brakeNodeState = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (16 & 0xFF)) {
           int value = 0;
@@ -6499,7 +6674,7 @@ bool DtsNodeToFc::MergePartialFromCodedStream(
         break;
       }
 
-      // required bool brakeSolenoidState = 3 [default = false];
+      // required bool brakeSolenoidState = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (24 & 0xFF)) {
           HasBitSetters::set_has_brakesolenoidstate(this);
@@ -6512,7 +6687,7 @@ bool DtsNodeToFc::MergePartialFromCodedStream(
         break;
       }
 
-      // required bool ventSolenoidState = 4 [default = false];
+      // required bool ventSolenoidState = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (32 & 0xFF)) {
           HasBitSetters::set_has_ventsolenoidstate(this);
@@ -6525,7 +6700,7 @@ bool DtsNodeToFc::MergePartialFromCodedStream(
         break;
       }
 
-      // required float rotorTemperature = 5 [default = 0];
+      // required float rotorTemperature = 5;
       case 5: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (45 & 0xFF)) {
           HasBitSetters::set_has_rotortemperature(this);
@@ -6538,7 +6713,7 @@ bool DtsNodeToFc::MergePartialFromCodedStream(
         break;
       }
 
-      // required float pneumaticTemperature = 6 [default = 0];
+      // required float pneumaticTemperature = 6;
       case 6: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (53 & 0xFF)) {
           HasBitSetters::set_has_pneumatictemperature(this);
@@ -6551,7 +6726,7 @@ bool DtsNodeToFc::MergePartialFromCodedStream(
         break;
       }
 
-      // required float tankPressure = 7 [default = 0];
+      // required float tankPressure = 7;
       case 7: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (61 & 0xFF)) {
           HasBitSetters::set_has_tankpressure(this);
@@ -6564,7 +6739,7 @@ bool DtsNodeToFc::MergePartialFromCodedStream(
         break;
       }
 
-      // required float brakePressure = 8 [default = 0];
+      // required float brakePressure = 8;
       case 8: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (69 & 0xFF)) {
           HasBitSetters::set_has_brakepressure(this);
@@ -6605,44 +6780,44 @@ void DtsNodeToFc::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required int32 packetNum = 1 [default = 0];
+  // required int32 packetNum = 1;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->packetnum(), output);
   }
 
-  // required .BrakeNodeStates brakeNodeState = 2 [default = bnsStandby];
-  if (cached_has_bits & 0x00000080u) {
+  // required .BrakeNodeStates brakeNodeState = 2;
+  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       2, this->brakenodestate(), output);
   }
 
-  // required bool brakeSolenoidState = 3 [default = false];
-  if (cached_has_bits & 0x00000002u) {
+  // required bool brakeSolenoidState = 3;
+  if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(3, this->brakesolenoidstate(), output);
   }
 
-  // required bool ventSolenoidState = 4 [default = false];
-  if (cached_has_bits & 0x00000004u) {
+  // required bool ventSolenoidState = 4;
+  if (cached_has_bits & 0x00000008u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(4, this->ventsolenoidstate(), output);
   }
 
-  // required float rotorTemperature = 5 [default = 0];
-  if (cached_has_bits & 0x00000008u) {
+  // required float rotorTemperature = 5;
+  if (cached_has_bits & 0x00000010u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(5, this->rotortemperature(), output);
   }
 
-  // required float pneumaticTemperature = 6 [default = 0];
-  if (cached_has_bits & 0x00000010u) {
+  // required float pneumaticTemperature = 6;
+  if (cached_has_bits & 0x00000020u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(6, this->pneumatictemperature(), output);
   }
 
-  // required float tankPressure = 7 [default = 0];
-  if (cached_has_bits & 0x00000020u) {
+  // required float tankPressure = 7;
+  if (cached_has_bits & 0x00000040u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(7, this->tankpressure(), output);
   }
 
-  // required float brakePressure = 8 [default = 0];
-  if (cached_has_bits & 0x00000040u) {
+  // required float brakePressure = 8;
+  if (cached_has_bits & 0x00000080u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(8, this->brakepressure(), output);
   }
 
@@ -6660,44 +6835,44 @@ void DtsNodeToFc::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required int32 packetNum = 1 [default = 0];
+  // required int32 packetNum = 1;
   if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->packetnum(), target);
   }
 
-  // required .BrakeNodeStates brakeNodeState = 2 [default = bnsStandby];
-  if (cached_has_bits & 0x00000080u) {
+  // required .BrakeNodeStates brakeNodeState = 2;
+  if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       2, this->brakenodestate(), target);
   }
 
-  // required bool brakeSolenoidState = 3 [default = false];
-  if (cached_has_bits & 0x00000002u) {
+  // required bool brakeSolenoidState = 3;
+  if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(3, this->brakesolenoidstate(), target);
   }
 
-  // required bool ventSolenoidState = 4 [default = false];
-  if (cached_has_bits & 0x00000004u) {
+  // required bool ventSolenoidState = 4;
+  if (cached_has_bits & 0x00000008u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(4, this->ventsolenoidstate(), target);
   }
 
-  // required float rotorTemperature = 5 [default = 0];
-  if (cached_has_bits & 0x00000008u) {
+  // required float rotorTemperature = 5;
+  if (cached_has_bits & 0x00000010u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(5, this->rotortemperature(), target);
   }
 
-  // required float pneumaticTemperature = 6 [default = 0];
-  if (cached_has_bits & 0x00000010u) {
+  // required float pneumaticTemperature = 6;
+  if (cached_has_bits & 0x00000020u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(6, this->pneumatictemperature(), target);
   }
 
-  // required float tankPressure = 7 [default = 0];
-  if (cached_has_bits & 0x00000020u) {
+  // required float tankPressure = 7;
+  if (cached_has_bits & 0x00000040u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(7, this->tankpressure(), target);
   }
 
-  // required float brakePressure = 8 [default = 0];
-  if (cached_has_bits & 0x00000040u) {
+  // required float brakePressure = 8;
+  if (cached_has_bits & 0x00000080u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(8, this->brakepressure(), target);
   }
 
@@ -6714,46 +6889,46 @@ size_t DtsNodeToFc::RequiredFieldsByteSizeFallback() const {
   size_t total_size = 0;
 
   if (has_packetnum()) {
-    // required int32 packetNum = 1 [default = 0];
+    // required int32 packetNum = 1;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->packetnum());
   }
 
+  if (has_brakenodestate()) {
+    // required .BrakeNodeStates brakeNodeState = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->brakenodestate());
+  }
+
   if (has_brakesolenoidstate()) {
-    // required bool brakeSolenoidState = 3 [default = false];
+    // required bool brakeSolenoidState = 3;
     total_size += 1 + 1;
   }
 
   if (has_ventsolenoidstate()) {
-    // required bool ventSolenoidState = 4 [default = false];
+    // required bool ventSolenoidState = 4;
     total_size += 1 + 1;
   }
 
   if (has_rotortemperature()) {
-    // required float rotorTemperature = 5 [default = 0];
+    // required float rotorTemperature = 5;
     total_size += 1 + 4;
   }
 
   if (has_pneumatictemperature()) {
-    // required float pneumaticTemperature = 6 [default = 0];
+    // required float pneumaticTemperature = 6;
     total_size += 1 + 4;
   }
 
   if (has_tankpressure()) {
-    // required float tankPressure = 7 [default = 0];
+    // required float tankPressure = 7;
     total_size += 1 + 4;
   }
 
   if (has_brakepressure()) {
-    // required float brakePressure = 8 [default = 0];
+    // required float brakePressure = 8;
     total_size += 1 + 4;
-  }
-
-  if (has_brakenodestate()) {
-    // required .BrakeNodeStates brakeNodeState = 2 [default = bnsStandby];
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->brakenodestate());
   }
 
   return total_size;
@@ -6768,32 +6943,32 @@ size_t DtsNodeToFc::ByteSizeLong() const {
         _internal_metadata_.unknown_fields());
   }
   if (((_has_bits_[0] & 0x000000ff) ^ 0x000000ff) == 0) {  // All required fields are present.
-    // required int32 packetNum = 1 [default = 0];
+    // required int32 packetNum = 1;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->packetnum());
 
-    // required bool brakeSolenoidState = 3 [default = false];
-    total_size += 1 + 1;
-
-    // required bool ventSolenoidState = 4 [default = false];
-    total_size += 1 + 1;
-
-    // required float rotorTemperature = 5 [default = 0];
-    total_size += 1 + 4;
-
-    // required float pneumaticTemperature = 6 [default = 0];
-    total_size += 1 + 4;
-
-    // required float tankPressure = 7 [default = 0];
-    total_size += 1 + 4;
-
-    // required float brakePressure = 8 [default = 0];
-    total_size += 1 + 4;
-
-    // required .BrakeNodeStates brakeNodeState = 2 [default = bnsStandby];
+    // required .BrakeNodeStates brakeNodeState = 2;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->brakenodestate());
+
+    // required bool brakeSolenoidState = 3;
+    total_size += 1 + 1;
+
+    // required bool ventSolenoidState = 4;
+    total_size += 1 + 1;
+
+    // required float rotorTemperature = 5;
+    total_size += 1 + 4;
+
+    // required float pneumaticTemperature = 6;
+    total_size += 1 + 4;
+
+    // required float tankPressure = 7;
+    total_size += 1 + 4;
+
+    // required float brakePressure = 8;
+    total_size += 1 + 4;
 
   } else {
     total_size += RequiredFieldsByteSizeFallback();
@@ -6835,25 +7010,25 @@ void DtsNodeToFc::MergeFrom(const DtsNodeToFc& from) {
       packetnum_ = from.packetnum_;
     }
     if (cached_has_bits & 0x00000002u) {
-      brakesolenoidstate_ = from.brakesolenoidstate_;
+      brakenodestate_ = from.brakenodestate_;
     }
     if (cached_has_bits & 0x00000004u) {
-      ventsolenoidstate_ = from.ventsolenoidstate_;
+      brakesolenoidstate_ = from.brakesolenoidstate_;
     }
     if (cached_has_bits & 0x00000008u) {
-      rotortemperature_ = from.rotortemperature_;
+      ventsolenoidstate_ = from.ventsolenoidstate_;
     }
     if (cached_has_bits & 0x00000010u) {
-      pneumatictemperature_ = from.pneumatictemperature_;
+      rotortemperature_ = from.rotortemperature_;
     }
     if (cached_has_bits & 0x00000020u) {
-      tankpressure_ = from.tankpressure_;
+      pneumatictemperature_ = from.pneumatictemperature_;
     }
     if (cached_has_bits & 0x00000040u) {
-      brakepressure_ = from.brakepressure_;
+      tankpressure_ = from.tankpressure_;
     }
     if (cached_has_bits & 0x00000080u) {
-      brakenodestate_ = from.brakenodestate_;
+      brakepressure_ = from.brakepressure_;
     }
     _has_bits_[0] |= cached_has_bits;
   }
@@ -6887,13 +7062,13 @@ void DtsNodeToFc::InternalSwap(DtsNodeToFc* other) {
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   swap(packetnum_, other->packetnum_);
+  swap(brakenodestate_, other->brakenodestate_);
   swap(brakesolenoidstate_, other->brakesolenoidstate_);
   swap(ventsolenoidstate_, other->ventsolenoidstate_);
   swap(rotortemperature_, other->rotortemperature_);
   swap(pneumatictemperature_, other->pneumatictemperature_);
   swap(tankpressure_, other->tankpressure_);
   swap(brakepressure_, other->brakepressure_);
-  swap(brakenodestate_, other->brakenodestate_);
 }
 
 ::google::protobuf::Metadata DtsNodeToFc::GetMetadata() const {
@@ -6904,98 +7079,90 @@ void DtsNodeToFc::InternalSwap(DtsNodeToFc* other) {
 
 // ===================================================================
 
-void RearNodeToFc::InitAsDefaultInstance() {
+void EnclosureNodeToFc::InitAsDefaultInstance() {
 }
-class RearNodeToFc::HasBitSetters {
+class EnclosureNodeToFc::HasBitSetters {
  public:
-  static void set_has_packetnum(RearNodeToFc* msg) {
+  static void set_has_packetnum(EnclosureNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00000001u;
   }
-  static void set_has_tubepressure(RearNodeToFc* msg) {
+  static void set_has_enclosurepressure(EnclosureNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00000002u;
   }
-  static void set_has_coolantpressure1(RearNodeToFc* msg) {
+  static void set_has_enclosuretemperature(EnclosureNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00000004u;
   }
-  static void set_has_coolantpressure2(RearNodeToFc* msg) {
+  static void set_has_coolantlinepressure(EnclosureNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00000008u;
-  }
-  static void set_has_coolantpressure3(RearNodeToFc* msg) {
-    msg->_has_bits_[0] |= 0x00000010u;
-  }
-  static void set_has_coolanttemperature(RearNodeToFc* msg) {
-    msg->_has_bits_[0] |= 0x00000020u;
   }
 };
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int RearNodeToFc::kPacketNumFieldNumber;
-const int RearNodeToFc::kTubePressureFieldNumber;
-const int RearNodeToFc::kCoolantPressure1FieldNumber;
-const int RearNodeToFc::kCoolantPressure2FieldNumber;
-const int RearNodeToFc::kCoolantPressure3FieldNumber;
-const int RearNodeToFc::kCoolantTemperatureFieldNumber;
+const int EnclosureNodeToFc::kPacketNumFieldNumber;
+const int EnclosureNodeToFc::kEnclosurePressureFieldNumber;
+const int EnclosureNodeToFc::kEnclosureTemperatureFieldNumber;
+const int EnclosureNodeToFc::kCoolantLinePressureFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-RearNodeToFc::RearNodeToFc()
+EnclosureNodeToFc::EnclosureNodeToFc()
   : ::google::protobuf::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:RearNodeToFc)
+  // @@protoc_insertion_point(constructor:EnclosureNodeToFc)
 }
-RearNodeToFc::RearNodeToFc(const RearNodeToFc& from)
+EnclosureNodeToFc::EnclosureNodeToFc(const EnclosureNodeToFc& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(nullptr),
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&packetnum_, &from.packetnum_,
-    static_cast<size_t>(reinterpret_cast<char*>(&coolanttemperature_) -
-    reinterpret_cast<char*>(&packetnum_)) + sizeof(coolanttemperature_));
-  // @@protoc_insertion_point(copy_constructor:RearNodeToFc)
+    static_cast<size_t>(reinterpret_cast<char*>(&coolantlinepressure_) -
+    reinterpret_cast<char*>(&packetnum_)) + sizeof(coolantlinepressure_));
+  // @@protoc_insertion_point(copy_constructor:EnclosureNodeToFc)
 }
 
-void RearNodeToFc::SharedCtor() {
+void EnclosureNodeToFc::SharedCtor() {
   ::memset(&packetnum_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&coolanttemperature_) -
-      reinterpret_cast<char*>(&packetnum_)) + sizeof(coolanttemperature_));
+      reinterpret_cast<char*>(&coolantlinepressure_) -
+      reinterpret_cast<char*>(&packetnum_)) + sizeof(coolantlinepressure_));
 }
 
-RearNodeToFc::~RearNodeToFc() {
-  // @@protoc_insertion_point(destructor:RearNodeToFc)
+EnclosureNodeToFc::~EnclosureNodeToFc() {
+  // @@protoc_insertion_point(destructor:EnclosureNodeToFc)
   SharedDtor();
 }
 
-void RearNodeToFc::SharedDtor() {
+void EnclosureNodeToFc::SharedDtor() {
 }
 
-void RearNodeToFc::SetCachedSize(int size) const {
+void EnclosureNodeToFc::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const RearNodeToFc& RearNodeToFc::default_instance() {
-  ::google::protobuf::internal::InitSCC(&::scc_info_RearNodeToFc_Paradigm_2eproto.base);
+const EnclosureNodeToFc& EnclosureNodeToFc::default_instance() {
+  ::google::protobuf::internal::InitSCC(&::scc_info_EnclosureNodeToFc_Paradigm_2eproto.base);
   return *internal_default_instance();
 }
 
 
-void RearNodeToFc::Clear() {
-// @@protoc_insertion_point(message_clear_start:RearNodeToFc)
+void EnclosureNodeToFc::Clear() {
+// @@protoc_insertion_point(message_clear_start:EnclosureNodeToFc)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x0000003fu) {
+  if (cached_has_bits & 0x0000000fu) {
     ::memset(&packetnum_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&coolanttemperature_) -
-        reinterpret_cast<char*>(&packetnum_)) + sizeof(coolanttemperature_));
+        reinterpret_cast<char*>(&coolantlinepressure_) -
+        reinterpret_cast<char*>(&packetnum_)) + sizeof(coolantlinepressure_));
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
 }
 
 #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-const char* RearNodeToFc::_InternalParse(const char* begin, const char* end, void* object,
+const char* EnclosureNodeToFc::_InternalParse(const char* begin, const char* end, void* object,
                   ::google::protobuf::internal::ParseContext* ctx) {
-  auto msg = static_cast<RearNodeToFc*>(object);
+  auto msg = static_cast<EnclosureNodeToFc*>(object);
   ::google::protobuf::int32 size; (void)size;
   int depth; (void)depth;
   ::google::protobuf::uint32 tag;
@@ -7005,45 +7172,31 @@ const char* RearNodeToFc::_InternalParse(const char* begin, const char* end, voi
     ptr = ::google::protobuf::io::Parse32(ptr, &tag);
     GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
     switch (tag >> 3) {
-      // required int32 packetNum = 1 [default = 0];
+      // required int32 packetNum = 1;
       case 1: {
         if (static_cast<::google::protobuf::uint8>(tag) != 8) goto handle_unusual;
         msg->set_packetnum(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // required float tubePressure = 2 [default = 0];
+      // required float enclosurePressure = 2;
       case 2: {
         if (static_cast<::google::protobuf::uint8>(tag) != 21) goto handle_unusual;
-        msg->set_tubepressure(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        msg->set_enclosurepressure(::google::protobuf::io::UnalignedLoad<float>(ptr));
         ptr += sizeof(float);
         break;
       }
-      // required float coolantPressure1 = 3 [default = 0];
+      // required float enclosureTemperature = 3;
       case 3: {
         if (static_cast<::google::protobuf::uint8>(tag) != 29) goto handle_unusual;
-        msg->set_coolantpressure1(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        msg->set_enclosuretemperature(::google::protobuf::io::UnalignedLoad<float>(ptr));
         ptr += sizeof(float);
         break;
       }
-      // required float coolantPressure2 = 4 [default = 0];
+      // required float coolantLinePressure = 4;
       case 4: {
         if (static_cast<::google::protobuf::uint8>(tag) != 37) goto handle_unusual;
-        msg->set_coolantpressure2(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
-      // required float coolantPressure3 = 5 [default = 0];
-      case 5: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 45) goto handle_unusual;
-        msg->set_coolantpressure3(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
-      // required float coolantTemperature = 6 [default = 0];
-      case 6: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 53) goto handle_unusual;
-        msg->set_coolanttemperature(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        msg->set_coolantlinepressure(::google::protobuf::io::UnalignedLoad<float>(ptr));
         ptr += sizeof(float);
         break;
       }
@@ -7064,17 +7217,17 @@ const char* RearNodeToFc::_InternalParse(const char* begin, const char* end, voi
   return ptr;
 }
 #else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-bool RearNodeToFc::MergePartialFromCodedStream(
+bool EnclosureNodeToFc::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:RearNodeToFc)
+  // @@protoc_insertion_point(parse_start:EnclosureNodeToFc)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int32 packetNum = 1 [default = 0];
+      // required int32 packetNum = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (8 & 0xFF)) {
           HasBitSetters::set_has_packetnum(this);
@@ -7087,65 +7240,39 @@ bool RearNodeToFc::MergePartialFromCodedStream(
         break;
       }
 
-      // required float tubePressure = 2 [default = 0];
+      // required float enclosurePressure = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (21 & 0xFF)) {
-          HasBitSetters::set_has_tubepressure(this);
+          HasBitSetters::set_has_enclosurepressure(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &tubepressure_)));
+                 input, &enclosurepressure_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required float coolantPressure1 = 3 [default = 0];
+      // required float enclosureTemperature = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (29 & 0xFF)) {
-          HasBitSetters::set_has_coolantpressure1(this);
+          HasBitSetters::set_has_enclosuretemperature(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &coolantpressure1_)));
+                 input, &enclosuretemperature_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required float coolantPressure2 = 4 [default = 0];
+      // required float coolantLinePressure = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (37 & 0xFF)) {
-          HasBitSetters::set_has_coolantpressure2(this);
+          HasBitSetters::set_has_coolantlinepressure(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &coolantpressure2_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required float coolantPressure3 = 5 [default = 0];
-      case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (45 & 0xFF)) {
-          HasBitSetters::set_has_coolantpressure3(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &coolantpressure3_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required float coolantTemperature = 6 [default = 0];
-      case 6: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (53 & 0xFF)) {
-          HasBitSetters::set_has_coolanttemperature(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &coolanttemperature_)));
+                 input, &coolantlinepressure_)));
         } else {
           goto handle_unusual;
         }
@@ -7164,144 +7291,114 @@ bool RearNodeToFc::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:RearNodeToFc)
+  // @@protoc_insertion_point(parse_success:EnclosureNodeToFc)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:RearNodeToFc)
+  // @@protoc_insertion_point(parse_failure:EnclosureNodeToFc)
   return false;
 #undef DO_
 }
 #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 
-void RearNodeToFc::SerializeWithCachedSizes(
+void EnclosureNodeToFc::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:RearNodeToFc)
+  // @@protoc_insertion_point(serialize_start:EnclosureNodeToFc)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required int32 packetNum = 1 [default = 0];
+  // required int32 packetNum = 1;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->packetnum(), output);
   }
 
-  // required float tubePressure = 2 [default = 0];
+  // required float enclosurePressure = 2;
   if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->tubepressure(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->enclosurepressure(), output);
   }
 
-  // required float coolantPressure1 = 3 [default = 0];
+  // required float enclosureTemperature = 3;
   if (cached_has_bits & 0x00000004u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->coolantpressure1(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->enclosuretemperature(), output);
   }
 
-  // required float coolantPressure2 = 4 [default = 0];
+  // required float coolantLinePressure = 4;
   if (cached_has_bits & 0x00000008u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(4, this->coolantpressure2(), output);
-  }
-
-  // required float coolantPressure3 = 5 [default = 0];
-  if (cached_has_bits & 0x00000010u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(5, this->coolantpressure3(), output);
-  }
-
-  // required float coolantTemperature = 6 [default = 0];
-  if (cached_has_bits & 0x00000020u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(6, this->coolanttemperature(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(4, this->coolantlinepressure(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:RearNodeToFc)
+  // @@protoc_insertion_point(serialize_end:EnclosureNodeToFc)
 }
 
-::google::protobuf::uint8* RearNodeToFc::InternalSerializeWithCachedSizesToArray(
+::google::protobuf::uint8* EnclosureNodeToFc::InternalSerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:RearNodeToFc)
+  // @@protoc_insertion_point(serialize_to_array_start:EnclosureNodeToFc)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required int32 packetNum = 1 [default = 0];
+  // required int32 packetNum = 1;
   if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->packetnum(), target);
   }
 
-  // required float tubePressure = 2 [default = 0];
+  // required float enclosurePressure = 2;
   if (cached_has_bits & 0x00000002u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->tubepressure(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->enclosurepressure(), target);
   }
 
-  // required float coolantPressure1 = 3 [default = 0];
+  // required float enclosureTemperature = 3;
   if (cached_has_bits & 0x00000004u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->coolantpressure1(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->enclosuretemperature(), target);
   }
 
-  // required float coolantPressure2 = 4 [default = 0];
+  // required float coolantLinePressure = 4;
   if (cached_has_bits & 0x00000008u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(4, this->coolantpressure2(), target);
-  }
-
-  // required float coolantPressure3 = 5 [default = 0];
-  if (cached_has_bits & 0x00000010u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(5, this->coolantpressure3(), target);
-  }
-
-  // required float coolantTemperature = 6 [default = 0];
-  if (cached_has_bits & 0x00000020u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(6, this->coolanttemperature(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(4, this->coolantlinepressure(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:RearNodeToFc)
+  // @@protoc_insertion_point(serialize_to_array_end:EnclosureNodeToFc)
   return target;
 }
 
-size_t RearNodeToFc::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:RearNodeToFc)
+size_t EnclosureNodeToFc::RequiredFieldsByteSizeFallback() const {
+// @@protoc_insertion_point(required_fields_byte_size_fallback_start:EnclosureNodeToFc)
   size_t total_size = 0;
 
   if (has_packetnum()) {
-    // required int32 packetNum = 1 [default = 0];
+    // required int32 packetNum = 1;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->packetnum());
   }
 
-  if (has_tubepressure()) {
-    // required float tubePressure = 2 [default = 0];
+  if (has_enclosurepressure()) {
+    // required float enclosurePressure = 2;
     total_size += 1 + 4;
   }
 
-  if (has_coolantpressure1()) {
-    // required float coolantPressure1 = 3 [default = 0];
+  if (has_enclosuretemperature()) {
+    // required float enclosureTemperature = 3;
     total_size += 1 + 4;
   }
 
-  if (has_coolantpressure2()) {
-    // required float coolantPressure2 = 4 [default = 0];
-    total_size += 1 + 4;
-  }
-
-  if (has_coolantpressure3()) {
-    // required float coolantPressure3 = 5 [default = 0];
-    total_size += 1 + 4;
-  }
-
-  if (has_coolanttemperature()) {
-    // required float coolantTemperature = 6 [default = 0];
+  if (has_coolantlinepressure()) {
+    // required float coolantLinePressure = 4;
     total_size += 1 + 4;
   }
 
   return total_size;
 }
-size_t RearNodeToFc::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:RearNodeToFc)
+size_t EnclosureNodeToFc::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:EnclosureNodeToFc)
   size_t total_size = 0;
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -7309,25 +7406,19 @@ size_t RearNodeToFc::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
-  if (((_has_bits_[0] & 0x0000003f) ^ 0x0000003f) == 0) {  // All required fields are present.
-    // required int32 packetNum = 1 [default = 0];
+  if (((_has_bits_[0] & 0x0000000f) ^ 0x0000000f) == 0) {  // All required fields are present.
+    // required int32 packetNum = 1;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->packetnum());
 
-    // required float tubePressure = 2 [default = 0];
+    // required float enclosurePressure = 2;
     total_size += 1 + 4;
 
-    // required float coolantPressure1 = 3 [default = 0];
+    // required float enclosureTemperature = 3;
     total_size += 1 + 4;
 
-    // required float coolantPressure2 = 4 [default = 0];
-    total_size += 1 + 4;
-
-    // required float coolantPressure3 = 5 [default = 0];
-    total_size += 1 + 4;
-
-    // required float coolantTemperature = 6 [default = 0];
+    // required float coolantLinePressure = 4;
     total_size += 1 + 4;
 
   } else {
@@ -7342,88 +7433,80 @@ size_t RearNodeToFc::ByteSizeLong() const {
   return total_size;
 }
 
-void RearNodeToFc::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:RearNodeToFc)
+void EnclosureNodeToFc::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:EnclosureNodeToFc)
   GOOGLE_DCHECK_NE(&from, this);
-  const RearNodeToFc* source =
-      ::google::protobuf::DynamicCastToGenerated<RearNodeToFc>(
+  const EnclosureNodeToFc* source =
+      ::google::protobuf::DynamicCastToGenerated<EnclosureNodeToFc>(
           &from);
   if (source == nullptr) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:RearNodeToFc)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:EnclosureNodeToFc)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:RearNodeToFc)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:EnclosureNodeToFc)
     MergeFrom(*source);
   }
 }
 
-void RearNodeToFc::MergeFrom(const RearNodeToFc& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:RearNodeToFc)
+void EnclosureNodeToFc::MergeFrom(const EnclosureNodeToFc& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:EnclosureNodeToFc)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 0x0000003fu) {
+  if (cached_has_bits & 0x0000000fu) {
     if (cached_has_bits & 0x00000001u) {
       packetnum_ = from.packetnum_;
     }
     if (cached_has_bits & 0x00000002u) {
-      tubepressure_ = from.tubepressure_;
+      enclosurepressure_ = from.enclosurepressure_;
     }
     if (cached_has_bits & 0x00000004u) {
-      coolantpressure1_ = from.coolantpressure1_;
+      enclosuretemperature_ = from.enclosuretemperature_;
     }
     if (cached_has_bits & 0x00000008u) {
-      coolantpressure2_ = from.coolantpressure2_;
-    }
-    if (cached_has_bits & 0x00000010u) {
-      coolantpressure3_ = from.coolantpressure3_;
-    }
-    if (cached_has_bits & 0x00000020u) {
-      coolanttemperature_ = from.coolanttemperature_;
+      coolantlinepressure_ = from.coolantlinepressure_;
     }
     _has_bits_[0] |= cached_has_bits;
   }
 }
 
-void RearNodeToFc::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:RearNodeToFc)
+void EnclosureNodeToFc::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:EnclosureNodeToFc)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void RearNodeToFc::CopyFrom(const RearNodeToFc& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:RearNodeToFc)
+void EnclosureNodeToFc::CopyFrom(const EnclosureNodeToFc& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:EnclosureNodeToFc)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool RearNodeToFc::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000003f) != 0x0000003f) return false;
+bool EnclosureNodeToFc::IsInitialized() const {
+  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
   return true;
 }
 
-void RearNodeToFc::Swap(RearNodeToFc* other) {
+void EnclosureNodeToFc::Swap(EnclosureNodeToFc* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void RearNodeToFc::InternalSwap(RearNodeToFc* other) {
+void EnclosureNodeToFc::InternalSwap(EnclosureNodeToFc* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   swap(packetnum_, other->packetnum_);
-  swap(tubepressure_, other->tubepressure_);
-  swap(coolantpressure1_, other->coolantpressure1_);
-  swap(coolantpressure2_, other->coolantpressure2_);
-  swap(coolantpressure3_, other->coolantpressure3_);
-  swap(coolanttemperature_, other->coolanttemperature_);
+  swap(enclosurepressure_, other->enclosurepressure_);
+  swap(enclosuretemperature_, other->enclosuretemperature_);
+  swap(coolantlinepressure_, other->coolantlinepressure_);
 }
 
-::google::protobuf::Metadata RearNodeToFc::GetMetadata() const {
+::google::protobuf::Metadata EnclosureNodeToFc::GetMetadata() const {
   ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_Paradigm_2eproto);
   return ::file_level_metadata_Paradigm_2eproto[kIndexInFileMessages];
 }
@@ -7431,58 +7514,1940 @@ void RearNodeToFc::InternalSwap(RearNodeToFc* other) {
 
 // ===================================================================
 
-void flightConfig::InitAsDefaultInstance() {
+void LvdcNodeToFc::InitAsDefaultInstance() {
 }
-class flightConfig::HasBitSetters {
+class LvdcNodeToFc::HasBitSetters {
  public:
-  static void set_has_retrievaltimeout(flightConfig* msg) {
-    msg->_has_bits_[0] |= 0x00000020u;
-  }
-  static void set_has_maxflighttime(flightConfig* msg) {
-    msg->_has_bits_[0] |= 0x00000004u;
-  }
-  static void set_has_motorspeed(flightConfig* msg) {
-    msg->_has_bits_[0] |= 0x00000008u;
-  }
-  static void set_has_pdstelemetryport(flightConfig* msg) {
-    msg->_has_bits_[0] |= 0x00000080u;
-  }
-  static void set_has_commandport(flightConfig* msg) {
-    msg->_has_bits_[0] |= 0x00000100u;
-  }
-  static void set_has_flightlength(flightConfig* msg) {
-    msg->_has_bits_[0] |= 0x00000010u;
-  }
-  static void set_has_heartbeattimeout(flightConfig* msg) {
-    msg->_has_bits_[0] |= 0x00000040u;
-  }
-  static void set_has_poddriver(flightConfig* msg) {
+  static void set_has_packetnum(LvdcNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00000001u;
   }
-  static void set_has_controllaptopipaddr(flightConfig* msg) {
+  static void set_has_state(LvdcNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00000002u;
+  }
+  static void set_has_highpowerpackvoltage(LvdcNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00000004u;
+  }
+  static void set_has_lowpowerpackvoltage(LvdcNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00000008u;
+  }
+  static void set_has_highpowerpackcurrent(LvdcNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00000010u;
+  }
+  static void set_has_lowpowerpackcurrent(LvdcNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00000020u;
+  }
+  static void set_has_lowpower5voltage(LvdcNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00000040u;
+  }
+  static void set_has_lowpower12voltage(LvdcNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00000080u;
+  }
+  static void set_has_highpower12voltage(LvdcNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00000100u;
+  }
+  static void set_has_lowpower24voltage(LvdcNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00000200u;
+  }
+  static void set_has_lowpower5current(LvdcNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00000400u;
+  }
+  static void set_has_lowpower12current(LvdcNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00000800u;
+  }
+  static void set_has_nodecurrent(LvdcNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00001000u;
+  }
+  static void set_has_invertercurrent(LvdcNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00002000u;
+  }
+  static void set_has_cooling1current(LvdcNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00004000u;
+  }
+  static void set_has_cooling2current(LvdcNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00008000u;
   }
 };
 
-::google::protobuf::internal::ExplicitlyConstructed<::std::string> flightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_;
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int flightConfig::kRetrievalTimeoutFieldNumber;
-const int flightConfig::kMaxFlightTimeFieldNumber;
-const int flightConfig::kMotorSpeedFieldNumber;
-const int flightConfig::kPdsTelemetryPortFieldNumber;
-const int flightConfig::kCommandPortFieldNumber;
-const int flightConfig::kFlightLengthFieldNumber;
-const int flightConfig::kHeartbeatTimeoutFieldNumber;
-const int flightConfig::kPodDriverFieldNumber;
-const int flightConfig::kControlLaptopIpAddrFieldNumber;
+const int LvdcNodeToFc::kPacketNumFieldNumber;
+const int LvdcNodeToFc::kStateFieldNumber;
+const int LvdcNodeToFc::kHighPowerPackVoltageFieldNumber;
+const int LvdcNodeToFc::kLowPowerPackVoltageFieldNumber;
+const int LvdcNodeToFc::kHighPowerPackCurrentFieldNumber;
+const int LvdcNodeToFc::kLowPowerPackCurrentFieldNumber;
+const int LvdcNodeToFc::kLowPower5VoltageFieldNumber;
+const int LvdcNodeToFc::kLowPower12VoltageFieldNumber;
+const int LvdcNodeToFc::kHighPower12VoltageFieldNumber;
+const int LvdcNodeToFc::kLowPower24VoltageFieldNumber;
+const int LvdcNodeToFc::kLowPower5CurrentFieldNumber;
+const int LvdcNodeToFc::kLowPower12CurrentFieldNumber;
+const int LvdcNodeToFc::kNodeCurrentFieldNumber;
+const int LvdcNodeToFc::kInverterCurrentFieldNumber;
+const int LvdcNodeToFc::kCooling1CurrentFieldNumber;
+const int LvdcNodeToFc::kCooling2CurrentFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-flightConfig::flightConfig()
+LvdcNodeToFc::LvdcNodeToFc()
   : ::google::protobuf::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:flightConfig)
+  // @@protoc_insertion_point(constructor:LvdcNodeToFc)
 }
-flightConfig::flightConfig(const flightConfig& from)
+LvdcNodeToFc::LvdcNodeToFc(const LvdcNodeToFc& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(nullptr),
+      _has_bits_(from._has_bits_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::memcpy(&packetnum_, &from.packetnum_,
+    static_cast<size_t>(reinterpret_cast<char*>(&cooling2current_) -
+    reinterpret_cast<char*>(&packetnum_)) + sizeof(cooling2current_));
+  // @@protoc_insertion_point(copy_constructor:LvdcNodeToFc)
+}
+
+void LvdcNodeToFc::SharedCtor() {
+  ::memset(&packetnum_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&cooling2current_) -
+      reinterpret_cast<char*>(&packetnum_)) + sizeof(cooling2current_));
+}
+
+LvdcNodeToFc::~LvdcNodeToFc() {
+  // @@protoc_insertion_point(destructor:LvdcNodeToFc)
+  SharedDtor();
+}
+
+void LvdcNodeToFc::SharedDtor() {
+}
+
+void LvdcNodeToFc::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const LvdcNodeToFc& LvdcNodeToFc::default_instance() {
+  ::google::protobuf::internal::InitSCC(&::scc_info_LvdcNodeToFc_Paradigm_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void LvdcNodeToFc::Clear() {
+// @@protoc_insertion_point(message_clear_start:LvdcNodeToFc)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 0x000000ffu) {
+    ::memset(&packetnum_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&lowpower12voltage_) -
+        reinterpret_cast<char*>(&packetnum_)) + sizeof(lowpower12voltage_));
+  }
+  if (cached_has_bits & 0x0000ff00u) {
+    ::memset(&highpower12voltage_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&cooling2current_) -
+        reinterpret_cast<char*>(&highpower12voltage_)) + sizeof(cooling2current_));
+  }
+  _has_bits_.Clear();
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* LvdcNodeToFc::_InternalParse(const char* begin, const char* end, void* object,
+                  ::google::protobuf::internal::ParseContext* ctx) {
+  auto msg = static_cast<LvdcNodeToFc*>(object);
+  ::google::protobuf::int32 size; (void)size;
+  int depth; (void)depth;
+  ::google::protobuf::uint32 tag;
+  ::google::protobuf::internal::ParseFunc parser_till_end; (void)parser_till_end;
+  auto ptr = begin;
+  while (ptr < end) {
+    ptr = ::google::protobuf::io::Parse32(ptr, &tag);
+    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+    switch (tag >> 3) {
+      // required int32 packetNum = 1;
+      case 1: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 8) goto handle_unusual;
+        msg->set_packetnum(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // required .LvdcNodeStates state = 2;
+      case 2: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 16) goto handle_unusual;
+        ::google::protobuf::uint64 val = ::google::protobuf::internal::ReadVarint(&ptr);
+        if (!::LvdcNodeStates_IsValid(val)) {
+          ::google::protobuf::internal::WriteVarint(2, val, msg->mutable_unknown_fields());
+          break;
+        }
+        msg->set_state(static_cast<::LvdcNodeStates>(val));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // required float highPowerPackVoltage = 3;
+      case 3: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 29) goto handle_unusual;
+        msg->set_highpowerpackvoltage(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      // required float lowPowerPackVoltage = 4;
+      case 4: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 37) goto handle_unusual;
+        msg->set_lowpowerpackvoltage(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      // required float highPowerPackCurrent = 5;
+      case 5: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 45) goto handle_unusual;
+        msg->set_highpowerpackcurrent(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      // required float lowPowerPackCurrent = 6;
+      case 6: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 53) goto handle_unusual;
+        msg->set_lowpowerpackcurrent(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      // required float lowPower5Voltage = 7;
+      case 7: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 61) goto handle_unusual;
+        msg->set_lowpower5voltage(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      // required float lowPower12Voltage = 8;
+      case 8: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 69) goto handle_unusual;
+        msg->set_lowpower12voltage(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      // required float highPower12Voltage = 9;
+      case 9: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 77) goto handle_unusual;
+        msg->set_highpower12voltage(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      // required float lowPower24Voltage = 10;
+      case 10: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 85) goto handle_unusual;
+        msg->set_lowpower24voltage(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      // required float lowPower5Current = 11;
+      case 11: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 93) goto handle_unusual;
+        msg->set_lowpower5current(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      // required float lowPower12Current = 12;
+      case 12: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 101) goto handle_unusual;
+        msg->set_lowpower12current(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      // required float nodeCurrent = 13;
+      case 13: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 109) goto handle_unusual;
+        msg->set_nodecurrent(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      // required float inverterCurrent = 14;
+      case 14: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 117) goto handle_unusual;
+        msg->set_invertercurrent(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      // required float cooling1Current = 15;
+      case 15: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 125) goto handle_unusual;
+        msg->set_cooling1current(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      // required float cooling2Current = 16;
+      case 16: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 133) goto handle_unusual;
+        msg->set_cooling2current(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->EndGroup(tag);
+          return ptr;
+        }
+        auto res = UnknownFieldParse(tag, {_InternalParse, msg},
+          ptr, end, msg->_internal_metadata_.mutable_unknown_fields(), ctx);
+        ptr = res.first;
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr != nullptr);
+        if (res.second) return ptr;
+      }
+    }  // switch
+  }  // while
+  return ptr;
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool LvdcNodeToFc::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:LvdcNodeToFc)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 packetNum = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (8 & 0xFF)) {
+          HasBitSetters::set_has_packetnum(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &packetnum_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required .LvdcNodeStates state = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (16 & 0xFF)) {
+          int value = 0;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::LvdcNodeStates_IsValid(value)) {
+            set_state(static_cast< ::LvdcNodeStates >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(
+                2, static_cast<::google::protobuf::uint64>(value));
+          }
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required float highPowerPackVoltage = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (29 & 0xFF)) {
+          HasBitSetters::set_has_highpowerpackvoltage(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &highpowerpackvoltage_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required float lowPowerPackVoltage = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (37 & 0xFF)) {
+          HasBitSetters::set_has_lowpowerpackvoltage(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &lowpowerpackvoltage_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required float highPowerPackCurrent = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (45 & 0xFF)) {
+          HasBitSetters::set_has_highpowerpackcurrent(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &highpowerpackcurrent_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required float lowPowerPackCurrent = 6;
+      case 6: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (53 & 0xFF)) {
+          HasBitSetters::set_has_lowpowerpackcurrent(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &lowpowerpackcurrent_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required float lowPower5Voltage = 7;
+      case 7: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (61 & 0xFF)) {
+          HasBitSetters::set_has_lowpower5voltage(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &lowpower5voltage_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required float lowPower12Voltage = 8;
+      case 8: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (69 & 0xFF)) {
+          HasBitSetters::set_has_lowpower12voltage(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &lowpower12voltage_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required float highPower12Voltage = 9;
+      case 9: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (77 & 0xFF)) {
+          HasBitSetters::set_has_highpower12voltage(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &highpower12voltage_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required float lowPower24Voltage = 10;
+      case 10: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (85 & 0xFF)) {
+          HasBitSetters::set_has_lowpower24voltage(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &lowpower24voltage_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required float lowPower5Current = 11;
+      case 11: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (93 & 0xFF)) {
+          HasBitSetters::set_has_lowpower5current(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &lowpower5current_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required float lowPower12Current = 12;
+      case 12: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (101 & 0xFF)) {
+          HasBitSetters::set_has_lowpower12current(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &lowpower12current_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required float nodeCurrent = 13;
+      case 13: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (109 & 0xFF)) {
+          HasBitSetters::set_has_nodecurrent(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &nodecurrent_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required float inverterCurrent = 14;
+      case 14: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (117 & 0xFF)) {
+          HasBitSetters::set_has_invertercurrent(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &invertercurrent_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required float cooling1Current = 15;
+      case 15: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (125 & 0xFF)) {
+          HasBitSetters::set_has_cooling1current(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &cooling1current_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required float cooling2Current = 16;
+      case 16: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (133 & 0xFF)) {
+          HasBitSetters::set_has_cooling2current(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &cooling2current_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:LvdcNodeToFc)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:LvdcNodeToFc)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void LvdcNodeToFc::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:LvdcNodeToFc)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // required int32 packetNum = 1;
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->packetnum(), output);
+  }
+
+  // required .LvdcNodeStates state = 2;
+  if (cached_has_bits & 0x00000002u) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      2, this->state(), output);
+  }
+
+  // required float highPowerPackVoltage = 3;
+  if (cached_has_bits & 0x00000004u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->highpowerpackvoltage(), output);
+  }
+
+  // required float lowPowerPackVoltage = 4;
+  if (cached_has_bits & 0x00000008u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(4, this->lowpowerpackvoltage(), output);
+  }
+
+  // required float highPowerPackCurrent = 5;
+  if (cached_has_bits & 0x00000010u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(5, this->highpowerpackcurrent(), output);
+  }
+
+  // required float lowPowerPackCurrent = 6;
+  if (cached_has_bits & 0x00000020u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(6, this->lowpowerpackcurrent(), output);
+  }
+
+  // required float lowPower5Voltage = 7;
+  if (cached_has_bits & 0x00000040u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(7, this->lowpower5voltage(), output);
+  }
+
+  // required float lowPower12Voltage = 8;
+  if (cached_has_bits & 0x00000080u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(8, this->lowpower12voltage(), output);
+  }
+
+  // required float highPower12Voltage = 9;
+  if (cached_has_bits & 0x00000100u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(9, this->highpower12voltage(), output);
+  }
+
+  // required float lowPower24Voltage = 10;
+  if (cached_has_bits & 0x00000200u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(10, this->lowpower24voltage(), output);
+  }
+
+  // required float lowPower5Current = 11;
+  if (cached_has_bits & 0x00000400u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(11, this->lowpower5current(), output);
+  }
+
+  // required float lowPower12Current = 12;
+  if (cached_has_bits & 0x00000800u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(12, this->lowpower12current(), output);
+  }
+
+  // required float nodeCurrent = 13;
+  if (cached_has_bits & 0x00001000u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(13, this->nodecurrent(), output);
+  }
+
+  // required float inverterCurrent = 14;
+  if (cached_has_bits & 0x00002000u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(14, this->invertercurrent(), output);
+  }
+
+  // required float cooling1Current = 15;
+  if (cached_has_bits & 0x00004000u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(15, this->cooling1current(), output);
+  }
+
+  // required float cooling2Current = 16;
+  if (cached_has_bits & 0x00008000u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(16, this->cooling2current(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:LvdcNodeToFc)
+}
+
+::google::protobuf::uint8* LvdcNodeToFc::InternalSerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:LvdcNodeToFc)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // required int32 packetNum = 1;
+  if (cached_has_bits & 0x00000001u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->packetnum(), target);
+  }
+
+  // required .LvdcNodeStates state = 2;
+  if (cached_has_bits & 0x00000002u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      2, this->state(), target);
+  }
+
+  // required float highPowerPackVoltage = 3;
+  if (cached_has_bits & 0x00000004u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->highpowerpackvoltage(), target);
+  }
+
+  // required float lowPowerPackVoltage = 4;
+  if (cached_has_bits & 0x00000008u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(4, this->lowpowerpackvoltage(), target);
+  }
+
+  // required float highPowerPackCurrent = 5;
+  if (cached_has_bits & 0x00000010u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(5, this->highpowerpackcurrent(), target);
+  }
+
+  // required float lowPowerPackCurrent = 6;
+  if (cached_has_bits & 0x00000020u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(6, this->lowpowerpackcurrent(), target);
+  }
+
+  // required float lowPower5Voltage = 7;
+  if (cached_has_bits & 0x00000040u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(7, this->lowpower5voltage(), target);
+  }
+
+  // required float lowPower12Voltage = 8;
+  if (cached_has_bits & 0x00000080u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(8, this->lowpower12voltage(), target);
+  }
+
+  // required float highPower12Voltage = 9;
+  if (cached_has_bits & 0x00000100u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(9, this->highpower12voltage(), target);
+  }
+
+  // required float lowPower24Voltage = 10;
+  if (cached_has_bits & 0x00000200u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(10, this->lowpower24voltage(), target);
+  }
+
+  // required float lowPower5Current = 11;
+  if (cached_has_bits & 0x00000400u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(11, this->lowpower5current(), target);
+  }
+
+  // required float lowPower12Current = 12;
+  if (cached_has_bits & 0x00000800u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(12, this->lowpower12current(), target);
+  }
+
+  // required float nodeCurrent = 13;
+  if (cached_has_bits & 0x00001000u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(13, this->nodecurrent(), target);
+  }
+
+  // required float inverterCurrent = 14;
+  if (cached_has_bits & 0x00002000u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(14, this->invertercurrent(), target);
+  }
+
+  // required float cooling1Current = 15;
+  if (cached_has_bits & 0x00004000u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(15, this->cooling1current(), target);
+  }
+
+  // required float cooling2Current = 16;
+  if (cached_has_bits & 0x00008000u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(16, this->cooling2current(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:LvdcNodeToFc)
+  return target;
+}
+
+size_t LvdcNodeToFc::RequiredFieldsByteSizeFallback() const {
+// @@protoc_insertion_point(required_fields_byte_size_fallback_start:LvdcNodeToFc)
+  size_t total_size = 0;
+
+  if (has_packetnum()) {
+    // required int32 packetNum = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->packetnum());
+  }
+
+  if (has_state()) {
+    // required .LvdcNodeStates state = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->state());
+  }
+
+  if (has_highpowerpackvoltage()) {
+    // required float highPowerPackVoltage = 3;
+    total_size += 1 + 4;
+  }
+
+  if (has_lowpowerpackvoltage()) {
+    // required float lowPowerPackVoltage = 4;
+    total_size += 1 + 4;
+  }
+
+  if (has_highpowerpackcurrent()) {
+    // required float highPowerPackCurrent = 5;
+    total_size += 1 + 4;
+  }
+
+  if (has_lowpowerpackcurrent()) {
+    // required float lowPowerPackCurrent = 6;
+    total_size += 1 + 4;
+  }
+
+  if (has_lowpower5voltage()) {
+    // required float lowPower5Voltage = 7;
+    total_size += 1 + 4;
+  }
+
+  if (has_lowpower12voltage()) {
+    // required float lowPower12Voltage = 8;
+    total_size += 1 + 4;
+  }
+
+  if (has_highpower12voltage()) {
+    // required float highPower12Voltage = 9;
+    total_size += 1 + 4;
+  }
+
+  if (has_lowpower24voltage()) {
+    // required float lowPower24Voltage = 10;
+    total_size += 1 + 4;
+  }
+
+  if (has_lowpower5current()) {
+    // required float lowPower5Current = 11;
+    total_size += 1 + 4;
+  }
+
+  if (has_lowpower12current()) {
+    // required float lowPower12Current = 12;
+    total_size += 1 + 4;
+  }
+
+  if (has_nodecurrent()) {
+    // required float nodeCurrent = 13;
+    total_size += 1 + 4;
+  }
+
+  if (has_invertercurrent()) {
+    // required float inverterCurrent = 14;
+    total_size += 1 + 4;
+  }
+
+  if (has_cooling1current()) {
+    // required float cooling1Current = 15;
+    total_size += 1 + 4;
+  }
+
+  if (has_cooling2current()) {
+    // required float cooling2Current = 16;
+    total_size += 2 + 4;
+  }
+
+  return total_size;
+}
+size_t LvdcNodeToFc::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:LvdcNodeToFc)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  if (((_has_bits_[0] & 0x0000ffff) ^ 0x0000ffff) == 0) {  // All required fields are present.
+    // required int32 packetNum = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->packetnum());
+
+    // required .LvdcNodeStates state = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->state());
+
+    // required float highPowerPackVoltage = 3;
+    total_size += 1 + 4;
+
+    // required float lowPowerPackVoltage = 4;
+    total_size += 1 + 4;
+
+    // required float highPowerPackCurrent = 5;
+    total_size += 1 + 4;
+
+    // required float lowPowerPackCurrent = 6;
+    total_size += 1 + 4;
+
+    // required float lowPower5Voltage = 7;
+    total_size += 1 + 4;
+
+    // required float lowPower12Voltage = 8;
+    total_size += 1 + 4;
+
+    // required float highPower12Voltage = 9;
+    total_size += 1 + 4;
+
+    // required float lowPower24Voltage = 10;
+    total_size += 1 + 4;
+
+    // required float lowPower5Current = 11;
+    total_size += 1 + 4;
+
+    // required float lowPower12Current = 12;
+    total_size += 1 + 4;
+
+    // required float nodeCurrent = 13;
+    total_size += 1 + 4;
+
+    // required float inverterCurrent = 14;
+    total_size += 1 + 4;
+
+    // required float cooling1Current = 15;
+    total_size += 1 + 4;
+
+    // required float cooling2Current = 16;
+    total_size += 2 + 4;
+
+  } else {
+    total_size += RequiredFieldsByteSizeFallback();
+  }
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void LvdcNodeToFc::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:LvdcNodeToFc)
+  GOOGLE_DCHECK_NE(&from, this);
+  const LvdcNodeToFc* source =
+      ::google::protobuf::DynamicCastToGenerated<LvdcNodeToFc>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:LvdcNodeToFc)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:LvdcNodeToFc)
+    MergeFrom(*source);
+  }
+}
+
+void LvdcNodeToFc::MergeFrom(const LvdcNodeToFc& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:LvdcNodeToFc)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._has_bits_[0];
+  if (cached_has_bits & 0x000000ffu) {
+    if (cached_has_bits & 0x00000001u) {
+      packetnum_ = from.packetnum_;
+    }
+    if (cached_has_bits & 0x00000002u) {
+      state_ = from.state_;
+    }
+    if (cached_has_bits & 0x00000004u) {
+      highpowerpackvoltage_ = from.highpowerpackvoltage_;
+    }
+    if (cached_has_bits & 0x00000008u) {
+      lowpowerpackvoltage_ = from.lowpowerpackvoltage_;
+    }
+    if (cached_has_bits & 0x00000010u) {
+      highpowerpackcurrent_ = from.highpowerpackcurrent_;
+    }
+    if (cached_has_bits & 0x00000020u) {
+      lowpowerpackcurrent_ = from.lowpowerpackcurrent_;
+    }
+    if (cached_has_bits & 0x00000040u) {
+      lowpower5voltage_ = from.lowpower5voltage_;
+    }
+    if (cached_has_bits & 0x00000080u) {
+      lowpower12voltage_ = from.lowpower12voltage_;
+    }
+    _has_bits_[0] |= cached_has_bits;
+  }
+  if (cached_has_bits & 0x0000ff00u) {
+    if (cached_has_bits & 0x00000100u) {
+      highpower12voltage_ = from.highpower12voltage_;
+    }
+    if (cached_has_bits & 0x00000200u) {
+      lowpower24voltage_ = from.lowpower24voltage_;
+    }
+    if (cached_has_bits & 0x00000400u) {
+      lowpower5current_ = from.lowpower5current_;
+    }
+    if (cached_has_bits & 0x00000800u) {
+      lowpower12current_ = from.lowpower12current_;
+    }
+    if (cached_has_bits & 0x00001000u) {
+      nodecurrent_ = from.nodecurrent_;
+    }
+    if (cached_has_bits & 0x00002000u) {
+      invertercurrent_ = from.invertercurrent_;
+    }
+    if (cached_has_bits & 0x00004000u) {
+      cooling1current_ = from.cooling1current_;
+    }
+    if (cached_has_bits & 0x00008000u) {
+      cooling2current_ = from.cooling2current_;
+    }
+    _has_bits_[0] |= cached_has_bits;
+  }
+}
+
+void LvdcNodeToFc::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:LvdcNodeToFc)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void LvdcNodeToFc::CopyFrom(const LvdcNodeToFc& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:LvdcNodeToFc)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool LvdcNodeToFc::IsInitialized() const {
+  if ((_has_bits_[0] & 0x0000ffff) != 0x0000ffff) return false;
+  return true;
+}
+
+void LvdcNodeToFc::Swap(LvdcNodeToFc* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void LvdcNodeToFc::InternalSwap(LvdcNodeToFc* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
+  swap(packetnum_, other->packetnum_);
+  swap(state_, other->state_);
+  swap(highpowerpackvoltage_, other->highpowerpackvoltage_);
+  swap(lowpowerpackvoltage_, other->lowpowerpackvoltage_);
+  swap(highpowerpackcurrent_, other->highpowerpackcurrent_);
+  swap(lowpowerpackcurrent_, other->lowpowerpackcurrent_);
+  swap(lowpower5voltage_, other->lowpower5voltage_);
+  swap(lowpower12voltage_, other->lowpower12voltage_);
+  swap(highpower12voltage_, other->highpower12voltage_);
+  swap(lowpower24voltage_, other->lowpower24voltage_);
+  swap(lowpower5current_, other->lowpower5current_);
+  swap(lowpower12current_, other->lowpower12current_);
+  swap(nodecurrent_, other->nodecurrent_);
+  swap(invertercurrent_, other->invertercurrent_);
+  swap(cooling1current_, other->cooling1current_);
+  swap(cooling2current_, other->cooling2current_);
+}
+
+::google::protobuf::Metadata LvdcNodeToFc::GetMetadata() const {
+  ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_Paradigm_2eproto);
+  return ::file_level_metadata_Paradigm_2eproto[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void BrakeNodeToFc::InitAsDefaultInstance() {
+}
+class BrakeNodeToFc::HasBitSetters {
+ public:
+  static void set_has_packetnum(BrakeNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00000001u;
+  }
+  static void set_has_state(BrakeNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00000002u;
+  }
+  static void set_has_solenoid1(BrakeNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00000004u;
+  }
+  static void set_has_solenoid2(BrakeNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00000008u;
+  }
+  static void set_has_solenoid3(BrakeNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00000010u;
+  }
+  static void set_has_solenoid4(BrakeNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00000020u;
+  }
+  static void set_has_highpressure(BrakeNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00000040u;
+  }
+  static void set_has_lowpressure1(BrakeNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00000080u;
+  }
+  static void set_has_lowpressure2(BrakeNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00000100u;
+  }
+  static void set_has_lowpressure3(BrakeNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00000200u;
+  }
+  static void set_has_lowpressurecommon(BrakeNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00000400u;
+  }
+  static void set_has_pneumatictemperature(BrakeNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00000800u;
+  }
+  static void set_has_coolanttankpressure(BrakeNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00001000u;
+  }
+};
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int BrakeNodeToFc::kPacketNumFieldNumber;
+const int BrakeNodeToFc::kStateFieldNumber;
+const int BrakeNodeToFc::kSolenoid1FieldNumber;
+const int BrakeNodeToFc::kSolenoid2FieldNumber;
+const int BrakeNodeToFc::kSolenoid3FieldNumber;
+const int BrakeNodeToFc::kSolenoid4FieldNumber;
+const int BrakeNodeToFc::kHighPressureFieldNumber;
+const int BrakeNodeToFc::kLowPressure1FieldNumber;
+const int BrakeNodeToFc::kLowPressure2FieldNumber;
+const int BrakeNodeToFc::kLowPressure3FieldNumber;
+const int BrakeNodeToFc::kLowPressureCommonFieldNumber;
+const int BrakeNodeToFc::kPneumaticTemperatureFieldNumber;
+const int BrakeNodeToFc::kCoolantTankPressureFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+BrakeNodeToFc::BrakeNodeToFc()
+  : ::google::protobuf::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:BrakeNodeToFc)
+}
+BrakeNodeToFc::BrakeNodeToFc(const BrakeNodeToFc& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(nullptr),
+      _has_bits_(from._has_bits_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::memcpy(&packetnum_, &from.packetnum_,
+    static_cast<size_t>(reinterpret_cast<char*>(&coolanttankpressure_) -
+    reinterpret_cast<char*>(&packetnum_)) + sizeof(coolanttankpressure_));
+  // @@protoc_insertion_point(copy_constructor:BrakeNodeToFc)
+}
+
+void BrakeNodeToFc::SharedCtor() {
+  ::memset(&packetnum_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&coolanttankpressure_) -
+      reinterpret_cast<char*>(&packetnum_)) + sizeof(coolanttankpressure_));
+}
+
+BrakeNodeToFc::~BrakeNodeToFc() {
+  // @@protoc_insertion_point(destructor:BrakeNodeToFc)
+  SharedDtor();
+}
+
+void BrakeNodeToFc::SharedDtor() {
+}
+
+void BrakeNodeToFc::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const BrakeNodeToFc& BrakeNodeToFc::default_instance() {
+  ::google::protobuf::internal::InitSCC(&::scc_info_BrakeNodeToFc_Paradigm_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void BrakeNodeToFc::Clear() {
+// @@protoc_insertion_point(message_clear_start:BrakeNodeToFc)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 0x000000ffu) {
+    ::memset(&packetnum_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&lowpressure1_) -
+        reinterpret_cast<char*>(&packetnum_)) + sizeof(lowpressure1_));
+  }
+  if (cached_has_bits & 0x00001f00u) {
+    ::memset(&lowpressure2_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&coolanttankpressure_) -
+        reinterpret_cast<char*>(&lowpressure2_)) + sizeof(coolanttankpressure_));
+  }
+  _has_bits_.Clear();
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* BrakeNodeToFc::_InternalParse(const char* begin, const char* end, void* object,
+                  ::google::protobuf::internal::ParseContext* ctx) {
+  auto msg = static_cast<BrakeNodeToFc*>(object);
+  ::google::protobuf::int32 size; (void)size;
+  int depth; (void)depth;
+  ::google::protobuf::uint32 tag;
+  ::google::protobuf::internal::ParseFunc parser_till_end; (void)parser_till_end;
+  auto ptr = begin;
+  while (ptr < end) {
+    ptr = ::google::protobuf::io::Parse32(ptr, &tag);
+    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+    switch (tag >> 3) {
+      // required int32 packetNum = 1;
+      case 1: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 8) goto handle_unusual;
+        msg->set_packetnum(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // required .BrakeNodeStates state = 2;
+      case 2: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 16) goto handle_unusual;
+        ::google::protobuf::uint64 val = ::google::protobuf::internal::ReadVarint(&ptr);
+        if (!::BrakeNodeStates_IsValid(val)) {
+          ::google::protobuf::internal::WriteVarint(2, val, msg->mutable_unknown_fields());
+          break;
+        }
+        msg->set_state(static_cast<::BrakeNodeStates>(val));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // required bool solenoid1 = 3;
+      case 3: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 24) goto handle_unusual;
+        msg->set_solenoid1(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // required bool solenoid2 = 4;
+      case 4: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 32) goto handle_unusual;
+        msg->set_solenoid2(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // required bool solenoid3 = 5;
+      case 5: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 40) goto handle_unusual;
+        msg->set_solenoid3(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // required bool solenoid4 = 6;
+      case 6: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 48) goto handle_unusual;
+        msg->set_solenoid4(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // required float highPressure = 7;
+      case 7: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 61) goto handle_unusual;
+        msg->set_highpressure(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      // required float lowPressure1 = 8;
+      case 8: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 69) goto handle_unusual;
+        msg->set_lowpressure1(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      // required float lowPressure2 = 9;
+      case 9: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 77) goto handle_unusual;
+        msg->set_lowpressure2(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      // required float lowPressure3 = 10;
+      case 10: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 85) goto handle_unusual;
+        msg->set_lowpressure3(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      // required float lowPressureCommon = 11;
+      case 11: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 93) goto handle_unusual;
+        msg->set_lowpressurecommon(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      // required float pneumaticTemperature = 12;
+      case 12: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 101) goto handle_unusual;
+        msg->set_pneumatictemperature(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      // required float coolantTankPressure = 13;
+      case 13: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 109) goto handle_unusual;
+        msg->set_coolanttankpressure(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->EndGroup(tag);
+          return ptr;
+        }
+        auto res = UnknownFieldParse(tag, {_InternalParse, msg},
+          ptr, end, msg->_internal_metadata_.mutable_unknown_fields(), ctx);
+        ptr = res.first;
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr != nullptr);
+        if (res.second) return ptr;
+      }
+    }  // switch
+  }  // while
+  return ptr;
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool BrakeNodeToFc::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:BrakeNodeToFc)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 packetNum = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (8 & 0xFF)) {
+          HasBitSetters::set_has_packetnum(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &packetnum_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required .BrakeNodeStates state = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (16 & 0xFF)) {
+          int value = 0;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::BrakeNodeStates_IsValid(value)) {
+            set_state(static_cast< ::BrakeNodeStates >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(
+                2, static_cast<::google::protobuf::uint64>(value));
+          }
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required bool solenoid1 = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (24 & 0xFF)) {
+          HasBitSetters::set_has_solenoid1(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &solenoid1_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required bool solenoid2 = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (32 & 0xFF)) {
+          HasBitSetters::set_has_solenoid2(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &solenoid2_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required bool solenoid3 = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (40 & 0xFF)) {
+          HasBitSetters::set_has_solenoid3(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &solenoid3_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required bool solenoid4 = 6;
+      case 6: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (48 & 0xFF)) {
+          HasBitSetters::set_has_solenoid4(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &solenoid4_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required float highPressure = 7;
+      case 7: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (61 & 0xFF)) {
+          HasBitSetters::set_has_highpressure(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &highpressure_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required float lowPressure1 = 8;
+      case 8: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (69 & 0xFF)) {
+          HasBitSetters::set_has_lowpressure1(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &lowpressure1_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required float lowPressure2 = 9;
+      case 9: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (77 & 0xFF)) {
+          HasBitSetters::set_has_lowpressure2(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &lowpressure2_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required float lowPressure3 = 10;
+      case 10: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (85 & 0xFF)) {
+          HasBitSetters::set_has_lowpressure3(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &lowpressure3_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required float lowPressureCommon = 11;
+      case 11: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (93 & 0xFF)) {
+          HasBitSetters::set_has_lowpressurecommon(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &lowpressurecommon_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required float pneumaticTemperature = 12;
+      case 12: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (101 & 0xFF)) {
+          HasBitSetters::set_has_pneumatictemperature(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &pneumatictemperature_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required float coolantTankPressure = 13;
+      case 13: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (109 & 0xFF)) {
+          HasBitSetters::set_has_coolanttankpressure(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &coolanttankpressure_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:BrakeNodeToFc)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:BrakeNodeToFc)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void BrakeNodeToFc::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:BrakeNodeToFc)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // required int32 packetNum = 1;
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->packetnum(), output);
+  }
+
+  // required .BrakeNodeStates state = 2;
+  if (cached_has_bits & 0x00000002u) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      2, this->state(), output);
+  }
+
+  // required bool solenoid1 = 3;
+  if (cached_has_bits & 0x00000004u) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(3, this->solenoid1(), output);
+  }
+
+  // required bool solenoid2 = 4;
+  if (cached_has_bits & 0x00000008u) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(4, this->solenoid2(), output);
+  }
+
+  // required bool solenoid3 = 5;
+  if (cached_has_bits & 0x00000010u) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(5, this->solenoid3(), output);
+  }
+
+  // required bool solenoid4 = 6;
+  if (cached_has_bits & 0x00000020u) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(6, this->solenoid4(), output);
+  }
+
+  // required float highPressure = 7;
+  if (cached_has_bits & 0x00000040u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(7, this->highpressure(), output);
+  }
+
+  // required float lowPressure1 = 8;
+  if (cached_has_bits & 0x00000080u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(8, this->lowpressure1(), output);
+  }
+
+  // required float lowPressure2 = 9;
+  if (cached_has_bits & 0x00000100u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(9, this->lowpressure2(), output);
+  }
+
+  // required float lowPressure3 = 10;
+  if (cached_has_bits & 0x00000200u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(10, this->lowpressure3(), output);
+  }
+
+  // required float lowPressureCommon = 11;
+  if (cached_has_bits & 0x00000400u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(11, this->lowpressurecommon(), output);
+  }
+
+  // required float pneumaticTemperature = 12;
+  if (cached_has_bits & 0x00000800u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(12, this->pneumatictemperature(), output);
+  }
+
+  // required float coolantTankPressure = 13;
+  if (cached_has_bits & 0x00001000u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(13, this->coolanttankpressure(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:BrakeNodeToFc)
+}
+
+::google::protobuf::uint8* BrakeNodeToFc::InternalSerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:BrakeNodeToFc)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // required int32 packetNum = 1;
+  if (cached_has_bits & 0x00000001u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->packetnum(), target);
+  }
+
+  // required .BrakeNodeStates state = 2;
+  if (cached_has_bits & 0x00000002u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      2, this->state(), target);
+  }
+
+  // required bool solenoid1 = 3;
+  if (cached_has_bits & 0x00000004u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(3, this->solenoid1(), target);
+  }
+
+  // required bool solenoid2 = 4;
+  if (cached_has_bits & 0x00000008u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(4, this->solenoid2(), target);
+  }
+
+  // required bool solenoid3 = 5;
+  if (cached_has_bits & 0x00000010u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(5, this->solenoid3(), target);
+  }
+
+  // required bool solenoid4 = 6;
+  if (cached_has_bits & 0x00000020u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(6, this->solenoid4(), target);
+  }
+
+  // required float highPressure = 7;
+  if (cached_has_bits & 0x00000040u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(7, this->highpressure(), target);
+  }
+
+  // required float lowPressure1 = 8;
+  if (cached_has_bits & 0x00000080u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(8, this->lowpressure1(), target);
+  }
+
+  // required float lowPressure2 = 9;
+  if (cached_has_bits & 0x00000100u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(9, this->lowpressure2(), target);
+  }
+
+  // required float lowPressure3 = 10;
+  if (cached_has_bits & 0x00000200u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(10, this->lowpressure3(), target);
+  }
+
+  // required float lowPressureCommon = 11;
+  if (cached_has_bits & 0x00000400u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(11, this->lowpressurecommon(), target);
+  }
+
+  // required float pneumaticTemperature = 12;
+  if (cached_has_bits & 0x00000800u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(12, this->pneumatictemperature(), target);
+  }
+
+  // required float coolantTankPressure = 13;
+  if (cached_has_bits & 0x00001000u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(13, this->coolanttankpressure(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:BrakeNodeToFc)
+  return target;
+}
+
+size_t BrakeNodeToFc::RequiredFieldsByteSizeFallback() const {
+// @@protoc_insertion_point(required_fields_byte_size_fallback_start:BrakeNodeToFc)
+  size_t total_size = 0;
+
+  if (has_packetnum()) {
+    // required int32 packetNum = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->packetnum());
+  }
+
+  if (has_state()) {
+    // required .BrakeNodeStates state = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->state());
+  }
+
+  if (has_solenoid1()) {
+    // required bool solenoid1 = 3;
+    total_size += 1 + 1;
+  }
+
+  if (has_solenoid2()) {
+    // required bool solenoid2 = 4;
+    total_size += 1 + 1;
+  }
+
+  if (has_solenoid3()) {
+    // required bool solenoid3 = 5;
+    total_size += 1 + 1;
+  }
+
+  if (has_solenoid4()) {
+    // required bool solenoid4 = 6;
+    total_size += 1 + 1;
+  }
+
+  if (has_highpressure()) {
+    // required float highPressure = 7;
+    total_size += 1 + 4;
+  }
+
+  if (has_lowpressure1()) {
+    // required float lowPressure1 = 8;
+    total_size += 1 + 4;
+  }
+
+  if (has_lowpressure2()) {
+    // required float lowPressure2 = 9;
+    total_size += 1 + 4;
+  }
+
+  if (has_lowpressure3()) {
+    // required float lowPressure3 = 10;
+    total_size += 1 + 4;
+  }
+
+  if (has_lowpressurecommon()) {
+    // required float lowPressureCommon = 11;
+    total_size += 1 + 4;
+  }
+
+  if (has_pneumatictemperature()) {
+    // required float pneumaticTemperature = 12;
+    total_size += 1 + 4;
+  }
+
+  if (has_coolanttankpressure()) {
+    // required float coolantTankPressure = 13;
+    total_size += 1 + 4;
+  }
+
+  return total_size;
+}
+size_t BrakeNodeToFc::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:BrakeNodeToFc)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  if (((_has_bits_[0] & 0x00001fff) ^ 0x00001fff) == 0) {  // All required fields are present.
+    // required int32 packetNum = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->packetnum());
+
+    // required .BrakeNodeStates state = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->state());
+
+    // required bool solenoid1 = 3;
+    total_size += 1 + 1;
+
+    // required bool solenoid2 = 4;
+    total_size += 1 + 1;
+
+    // required bool solenoid3 = 5;
+    total_size += 1 + 1;
+
+    // required bool solenoid4 = 6;
+    total_size += 1 + 1;
+
+    // required float highPressure = 7;
+    total_size += 1 + 4;
+
+    // required float lowPressure1 = 8;
+    total_size += 1 + 4;
+
+    // required float lowPressure2 = 9;
+    total_size += 1 + 4;
+
+    // required float lowPressure3 = 10;
+    total_size += 1 + 4;
+
+    // required float lowPressureCommon = 11;
+    total_size += 1 + 4;
+
+    // required float pneumaticTemperature = 12;
+    total_size += 1 + 4;
+
+    // required float coolantTankPressure = 13;
+    total_size += 1 + 4;
+
+  } else {
+    total_size += RequiredFieldsByteSizeFallback();
+  }
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void BrakeNodeToFc::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BrakeNodeToFc)
+  GOOGLE_DCHECK_NE(&from, this);
+  const BrakeNodeToFc* source =
+      ::google::protobuf::DynamicCastToGenerated<BrakeNodeToFc>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BrakeNodeToFc)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BrakeNodeToFc)
+    MergeFrom(*source);
+  }
+}
+
+void BrakeNodeToFc::MergeFrom(const BrakeNodeToFc& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BrakeNodeToFc)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._has_bits_[0];
+  if (cached_has_bits & 0x000000ffu) {
+    if (cached_has_bits & 0x00000001u) {
+      packetnum_ = from.packetnum_;
+    }
+    if (cached_has_bits & 0x00000002u) {
+      state_ = from.state_;
+    }
+    if (cached_has_bits & 0x00000004u) {
+      solenoid1_ = from.solenoid1_;
+    }
+    if (cached_has_bits & 0x00000008u) {
+      solenoid2_ = from.solenoid2_;
+    }
+    if (cached_has_bits & 0x00000010u) {
+      solenoid3_ = from.solenoid3_;
+    }
+    if (cached_has_bits & 0x00000020u) {
+      solenoid4_ = from.solenoid4_;
+    }
+    if (cached_has_bits & 0x00000040u) {
+      highpressure_ = from.highpressure_;
+    }
+    if (cached_has_bits & 0x00000080u) {
+      lowpressure1_ = from.lowpressure1_;
+    }
+    _has_bits_[0] |= cached_has_bits;
+  }
+  if (cached_has_bits & 0x00001f00u) {
+    if (cached_has_bits & 0x00000100u) {
+      lowpressure2_ = from.lowpressure2_;
+    }
+    if (cached_has_bits & 0x00000200u) {
+      lowpressure3_ = from.lowpressure3_;
+    }
+    if (cached_has_bits & 0x00000400u) {
+      lowpressurecommon_ = from.lowpressurecommon_;
+    }
+    if (cached_has_bits & 0x00000800u) {
+      pneumatictemperature_ = from.pneumatictemperature_;
+    }
+    if (cached_has_bits & 0x00001000u) {
+      coolanttankpressure_ = from.coolanttankpressure_;
+    }
+    _has_bits_[0] |= cached_has_bits;
+  }
+}
+
+void BrakeNodeToFc::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BrakeNodeToFc)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void BrakeNodeToFc::CopyFrom(const BrakeNodeToFc& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BrakeNodeToFc)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool BrakeNodeToFc::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00001fff) != 0x00001fff) return false;
+  return true;
+}
+
+void BrakeNodeToFc::Swap(BrakeNodeToFc* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void BrakeNodeToFc::InternalSwap(BrakeNodeToFc* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
+  swap(packetnum_, other->packetnum_);
+  swap(state_, other->state_);
+  swap(solenoid1_, other->solenoid1_);
+  swap(solenoid2_, other->solenoid2_);
+  swap(solenoid3_, other->solenoid3_);
+  swap(solenoid4_, other->solenoid4_);
+  swap(highpressure_, other->highpressure_);
+  swap(lowpressure1_, other->lowpressure1_);
+  swap(lowpressure2_, other->lowpressure2_);
+  swap(lowpressure3_, other->lowpressure3_);
+  swap(lowpressurecommon_, other->lowpressurecommon_);
+  swap(pneumatictemperature_, other->pneumatictemperature_);
+  swap(coolanttankpressure_, other->coolanttankpressure_);
+}
+
+::google::protobuf::Metadata BrakeNodeToFc::GetMetadata() const {
+  ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_Paradigm_2eproto);
+  return ::file_level_metadata_Paradigm_2eproto[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void FlightConfig::InitAsDefaultInstance() {
+}
+class FlightConfig::HasBitSetters {
+ public:
+  static void set_has_retrievaltimeout(FlightConfig* msg) {
+    msg->_has_bits_[0] |= 0x00000004u;
+  }
+  static void set_has_pdstelemetryport(FlightConfig* msg) {
+    msg->_has_bits_[0] |= 0x00000010u;
+  }
+  static void set_has_commandport(FlightConfig* msg) {
+    msg->_has_bits_[0] |= 0x00000020u;
+  }
+  static void set_has_heartbeattimeout(FlightConfig* msg) {
+    msg->_has_bits_[0] |= 0x00000008u;
+  }
+  static void set_has_poddriver(FlightConfig* msg) {
+    msg->_has_bits_[0] |= 0x00000001u;
+  }
+  static void set_has_controllaptopipaddr(FlightConfig* msg) {
+    msg->_has_bits_[0] |= 0x00000002u;
+  }
+  static void set_has_brakenodeport(FlightConfig* msg) {
+    msg->_has_bits_[0] |= 0x00000040u;
+  }
+  static void set_has_brakenodetimeout(FlightConfig* msg) {
+    msg->_has_bits_[0] |= 0x00000080u;
+  }
+  static void set_has_brakenodeserverport(FlightConfig* msg) {
+    msg->_has_bits_[0] |= 0x00000100u;
+  }
+};
+
+::google::protobuf::internal::ExplicitlyConstructed<::std::string> FlightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_;
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int FlightConfig::kRetrievalTimeoutFieldNumber;
+const int FlightConfig::kPdsTelemetryPortFieldNumber;
+const int FlightConfig::kCommandPortFieldNumber;
+const int FlightConfig::kHeartbeatTimeoutFieldNumber;
+const int FlightConfig::kPodDriverFieldNumber;
+const int FlightConfig::kControlLaptopIpAddrFieldNumber;
+const int FlightConfig::kBrakeNodePortFieldNumber;
+const int FlightConfig::kBrakeNodeTimeoutFieldNumber;
+const int FlightConfig::kBrakeNodeServerPortFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+FlightConfig::FlightConfig()
+  : ::google::protobuf::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:FlightConfig)
+}
+FlightConfig::FlightConfig(const FlightConfig& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(nullptr),
       _has_bits_(from._has_bits_) {
@@ -7491,50 +9456,51 @@ flightConfig::flightConfig(const flightConfig& from)
   if (from.has_poddriver()) {
     poddriver_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.poddriver_);
   }
-  controllaptopipaddr_.UnsafeSetDefault(&::flightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get());
+  controllaptopipaddr_.UnsafeSetDefault(&::FlightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get());
   if (from.has_controllaptopipaddr()) {
-    controllaptopipaddr_.AssignWithDefault(&::flightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get(), from.controllaptopipaddr_);
+    controllaptopipaddr_.AssignWithDefault(&::FlightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get(), from.controllaptopipaddr_);
   }
-  ::memcpy(&maxflighttime_, &from.maxflighttime_,
-    static_cast<size_t>(reinterpret_cast<char*>(&commandport_) -
-    reinterpret_cast<char*>(&maxflighttime_)) + sizeof(commandport_));
-  // @@protoc_insertion_point(copy_constructor:flightConfig)
+  ::memcpy(&retrievaltimeout_, &from.retrievaltimeout_,
+    static_cast<size_t>(reinterpret_cast<char*>(&brakenodeserverport_) -
+    reinterpret_cast<char*>(&retrievaltimeout_)) + sizeof(brakenodeserverport_));
+  // @@protoc_insertion_point(copy_constructor:FlightConfig)
 }
 
-void flightConfig::SharedCtor() {
+void FlightConfig::SharedCtor() {
   ::google::protobuf::internal::InitSCC(
-      &scc_info_flightConfig_Paradigm_2eproto.base);
+      &scc_info_FlightConfig_Paradigm_2eproto.base);
   poddriver_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  controllaptopipaddr_.UnsafeSetDefault(&::flightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get());
-  ::memset(&maxflighttime_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&retrievaltimeout_) -
-      reinterpret_cast<char*>(&maxflighttime_)) + sizeof(retrievaltimeout_));
+  controllaptopipaddr_.UnsafeSetDefault(&::FlightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get());
+  retrievaltimeout_ = 0u;
   heartbeattimeout_ = 10000;
   pdstelemetryport_ = 7000;
   commandport_ = 6000;
+  brakenodeport_ = PROTOBUF_ULONGLONG(5555);
+  brakenodetimeout_ = PROTOBUF_ULONGLONG(4000);
+  brakenodeserverport_ = PROTOBUF_ULONGLONG(5550);
 }
 
-flightConfig::~flightConfig() {
-  // @@protoc_insertion_point(destructor:flightConfig)
+FlightConfig::~FlightConfig() {
+  // @@protoc_insertion_point(destructor:FlightConfig)
   SharedDtor();
 }
 
-void flightConfig::SharedDtor() {
+void FlightConfig::SharedDtor() {
   poddriver_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  controllaptopipaddr_.DestroyNoArena(&::flightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get());
+  controllaptopipaddr_.DestroyNoArena(&::FlightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get());
 }
 
-void flightConfig::SetCachedSize(int size) const {
+void FlightConfig::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const flightConfig& flightConfig::default_instance() {
-  ::google::protobuf::internal::InitSCC(&::scc_info_flightConfig_Paradigm_2eproto.base);
+const FlightConfig& FlightConfig::default_instance() {
+  ::google::protobuf::internal::InitSCC(&::scc_info_FlightConfig_Paradigm_2eproto.base);
   return *internal_default_instance();
 }
 
 
-void flightConfig::Clear() {
-// @@protoc_insertion_point(message_clear_start:flightConfig)
+void FlightConfig::Clear() {
+// @@protoc_insertion_point(message_clear_start:FlightConfig)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -7545,25 +9511,26 @@ void flightConfig::Clear() {
       poddriver_.ClearNonDefaultToEmptyNoArena();
     }
     if (cached_has_bits & 0x00000002u) {
-      controllaptopipaddr_.UnsafeMutablePointer()->assign(*&::flightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get());
+      controllaptopipaddr_.UnsafeMutablePointer()->assign(*&::FlightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get());
     }
   }
   if (cached_has_bits & 0x000000fcu) {
-    ::memset(&maxflighttime_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&retrievaltimeout_) -
-        reinterpret_cast<char*>(&maxflighttime_)) + sizeof(retrievaltimeout_));
+    retrievaltimeout_ = 0u;
     heartbeattimeout_ = 10000;
     pdstelemetryport_ = 7000;
+    commandport_ = 6000;
+    brakenodeport_ = PROTOBUF_ULONGLONG(5555);
+    brakenodetimeout_ = PROTOBUF_ULONGLONG(4000);
   }
-  commandport_ = 6000;
+  brakenodeserverport_ = PROTOBUF_ULONGLONG(5550);
   _has_bits_.Clear();
   _internal_metadata_.Clear();
 }
 
 #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-const char* flightConfig::_InternalParse(const char* begin, const char* end, void* object,
+const char* FlightConfig::_InternalParse(const char* begin, const char* end, void* object,
                   ::google::protobuf::internal::ParseContext* ctx) {
-  auto msg = static_cast<flightConfig*>(object);
+  auto msg = static_cast<FlightConfig*>(object);
   ::google::protobuf::int32 size; (void)size;
   int depth; (void)depth;
   ::google::protobuf::uint32 tag;
@@ -7580,54 +9547,33 @@ const char* flightConfig::_InternalParse(const char* begin, const char* end, voi
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // optional uint64 maxFlightTime = 2;
+      // optional int32 pdsTelemetryPort = 2 [default = 7000];
       case 2: {
         if (static_cast<::google::protobuf::uint8>(tag) != 16) goto handle_unusual;
-        msg->set_maxflighttime(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
-      // optional uint64 motorSpeed = 3;
-      case 3: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 24) goto handle_unusual;
-        msg->set_motorspeed(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
-      // optional int32 pdsTelemetryPort = 4 [default = 7000];
-      case 4: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 32) goto handle_unusual;
         msg->set_pdstelemetryport(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // optional int32 commandPort = 5 [default = 6000];
-      case 5: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 40) goto handle_unusual;
+      // optional int32 commandPort = 3 [default = 6000];
+      case 3: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 24) goto handle_unusual;
         msg->set_commandport(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // optional uint64 flightLength = 6;
-      case 6: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 48) goto handle_unusual;
-        msg->set_flightlength(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
-      // optional int32 heartbeatTimeout = 7 [default = 10000];
-      case 7: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 56) goto handle_unusual;
+      // optional int32 heartbeatTimeout = 4 [default = 10000];
+      case 4: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 32) goto handle_unusual;
         msg->set_heartbeattimeout(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // optional string podDriver = 8;
-      case 8: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 66) goto handle_unusual;
+      // optional string podDriver = 5;
+      case 5: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 42) goto handle_unusual;
         ptr = ::google::protobuf::io::ReadSize(ptr, &size);
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        ctx->extra_parse_data().SetFieldName("flightConfig.podDriver");
+        ctx->extra_parse_data().SetFieldName("FlightConfig.podDriver");
         object = msg->mutable_poddriver();
         if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
           parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8Verify;
@@ -7638,12 +9584,12 @@ const char* flightConfig::_InternalParse(const char* begin, const char* end, voi
         ptr += size;
         break;
       }
-      // optional string controlLaptopIpAddr = 9 [default = "192.168.0.103"];
-      case 9: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 74) goto handle_unusual;
+      // optional string controlLaptopIpAddr = 6 [default = "127.0.0.1"];
+      case 6: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 50) goto handle_unusual;
         ptr = ::google::protobuf::io::ReadSize(ptr, &size);
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        ctx->extra_parse_data().SetFieldName("flightConfig.controlLaptopIpAddr");
+        ctx->extra_parse_data().SetFieldName("FlightConfig.controlLaptopIpAddr");
         object = msg->mutable_controllaptopipaddr();
         if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
           parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8Verify;
@@ -7652,6 +9598,27 @@ const char* flightConfig::_InternalParse(const char* begin, const char* end, voi
         GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8Verify(ptr, size, ctx));
         ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
         ptr += size;
+        break;
+      }
+      // optional uint64 brakeNodePort = 7 [default = 5555];
+      case 7: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 56) goto handle_unusual;
+        msg->set_brakenodeport(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // optional uint64 brakeNodeTimeout = 8 [default = 4000];
+      case 8: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 64) goto handle_unusual;
+        msg->set_brakenodetimeout(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // optional uint64 brakeNodeServerPort = 9 [default = 5550];
+      case 9: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 72) goto handle_unusual;
+        msg->set_brakenodeserverport(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
       default: {
@@ -7678,11 +9645,11 @@ len_delim_till_end:
                                {parser_till_end, object}, size);
 }
 #else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-bool flightConfig::MergePartialFromCodedStream(
+bool FlightConfig::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:flightConfig)
+  // @@protoc_insertion_point(parse_start:FlightConfig)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
@@ -7701,35 +9668,9 @@ bool flightConfig::MergePartialFromCodedStream(
         break;
       }
 
-      // optional uint64 maxFlightTime = 2;
+      // optional int32 pdsTelemetryPort = 2 [default = 7000];
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (16 & 0xFF)) {
-          HasBitSetters::set_has_maxflighttime(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
-                 input, &maxflighttime_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional uint64 motorSpeed = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (24 & 0xFF)) {
-          HasBitSetters::set_has_motorspeed(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
-                 input, &motorspeed_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional int32 pdsTelemetryPort = 4 [default = 7000];
-      case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (32 & 0xFF)) {
           HasBitSetters::set_has_pdstelemetryport(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -7740,9 +9681,9 @@ bool flightConfig::MergePartialFromCodedStream(
         break;
       }
 
-      // optional int32 commandPort = 5 [default = 6000];
-      case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (40 & 0xFF)) {
+      // optional int32 commandPort = 3 [default = 6000];
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (24 & 0xFF)) {
           HasBitSetters::set_has_commandport(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -7753,22 +9694,9 @@ bool flightConfig::MergePartialFromCodedStream(
         break;
       }
 
-      // optional uint64 flightLength = 6;
-      case 6: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (48 & 0xFF)) {
-          HasBitSetters::set_has_flightlength(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
-                 input, &flightlength_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional int32 heartbeatTimeout = 7 [default = 10000];
-      case 7: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (56 & 0xFF)) {
+      // optional int32 heartbeatTimeout = 4 [default = 10000];
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (32 & 0xFF)) {
           HasBitSetters::set_has_heartbeattimeout(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -7779,30 +9707,69 @@ bool flightConfig::MergePartialFromCodedStream(
         break;
       }
 
-      // optional string podDriver = 8;
-      case 8: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (66 & 0xFF)) {
+      // optional string podDriver = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (42 & 0xFF)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_poddriver()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->poddriver().data(), static_cast<int>(this->poddriver().length()),
             ::google::protobuf::internal::WireFormat::PARSE,
-            "flightConfig.podDriver");
+            "FlightConfig.podDriver");
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // optional string controlLaptopIpAddr = 9 [default = "192.168.0.103"];
-      case 9: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (74 & 0xFF)) {
+      // optional string controlLaptopIpAddr = 6 [default = "127.0.0.1"];
+      case 6: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (50 & 0xFF)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_controllaptopipaddr()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->controllaptopipaddr().data(), static_cast<int>(this->controllaptopipaddr().length()),
             ::google::protobuf::internal::WireFormat::PARSE,
-            "flightConfig.controlLaptopIpAddr");
+            "FlightConfig.controlLaptopIpAddr");
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // optional uint64 brakeNodePort = 7 [default = 5555];
+      case 7: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (56 & 0xFF)) {
+          HasBitSetters::set_has_brakenodeport(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &brakenodeport_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // optional uint64 brakeNodeTimeout = 8 [default = 4000];
+      case 8: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (64 & 0xFF)) {
+          HasBitSetters::set_has_brakenodetimeout(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &brakenodetimeout_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // optional uint64 brakeNodeServerPort = 9 [default = 5550];
+      case 9: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (72 & 0xFF)) {
+          HasBitSetters::set_has_brakenodeserverport(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &brakenodeserverport_)));
         } else {
           goto handle_unusual;
         }
@@ -7821,158 +9788,158 @@ bool flightConfig::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:flightConfig)
+  // @@protoc_insertion_point(parse_success:FlightConfig)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:flightConfig)
+  // @@protoc_insertion_point(parse_failure:FlightConfig)
   return false;
 #undef DO_
 }
 #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 
-void flightConfig::SerializeWithCachedSizes(
+void FlightConfig::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:flightConfig)
+  // @@protoc_insertion_point(serialize_start:FlightConfig)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // optional uint32 retrievalTimeout = 1;
-  if (cached_has_bits & 0x00000020u) {
+  if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->retrievaltimeout(), output);
   }
 
-  // optional uint64 maxFlightTime = 2;
-  if (cached_has_bits & 0x00000004u) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt64(2, this->maxflighttime(), output);
-  }
-
-  // optional uint64 motorSpeed = 3;
-  if (cached_has_bits & 0x00000008u) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt64(3, this->motorspeed(), output);
-  }
-
-  // optional int32 pdsTelemetryPort = 4 [default = 7000];
-  if (cached_has_bits & 0x00000080u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->pdstelemetryport(), output);
-  }
-
-  // optional int32 commandPort = 5 [default = 6000];
-  if (cached_has_bits & 0x00000100u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->commandport(), output);
-  }
-
-  // optional uint64 flightLength = 6;
+  // optional int32 pdsTelemetryPort = 2 [default = 7000];
   if (cached_has_bits & 0x00000010u) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt64(6, this->flightlength(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->pdstelemetryport(), output);
   }
 
-  // optional int32 heartbeatTimeout = 7 [default = 10000];
-  if (cached_has_bits & 0x00000040u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(7, this->heartbeattimeout(), output);
+  // optional int32 commandPort = 3 [default = 6000];
+  if (cached_has_bits & 0x00000020u) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->commandport(), output);
   }
 
-  // optional string podDriver = 8;
+  // optional int32 heartbeatTimeout = 4 [default = 10000];
+  if (cached_has_bits & 0x00000008u) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->heartbeattimeout(), output);
+  }
+
+  // optional string podDriver = 5;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->poddriver().data(), static_cast<int>(this->poddriver().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "flightConfig.podDriver");
+      "FlightConfig.podDriver");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      8, this->poddriver(), output);
+      5, this->poddriver(), output);
   }
 
-  // optional string controlLaptopIpAddr = 9 [default = "192.168.0.103"];
+  // optional string controlLaptopIpAddr = 6 [default = "127.0.0.1"];
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->controllaptopipaddr().data(), static_cast<int>(this->controllaptopipaddr().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "flightConfig.controlLaptopIpAddr");
+      "FlightConfig.controlLaptopIpAddr");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      9, this->controllaptopipaddr(), output);
+      6, this->controllaptopipaddr(), output);
+  }
+
+  // optional uint64 brakeNodePort = 7 [default = 5555];
+  if (cached_has_bits & 0x00000040u) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(7, this->brakenodeport(), output);
+  }
+
+  // optional uint64 brakeNodeTimeout = 8 [default = 4000];
+  if (cached_has_bits & 0x00000080u) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(8, this->brakenodetimeout(), output);
+  }
+
+  // optional uint64 brakeNodeServerPort = 9 [default = 5550];
+  if (cached_has_bits & 0x00000100u) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(9, this->brakenodeserverport(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:flightConfig)
+  // @@protoc_insertion_point(serialize_end:FlightConfig)
 }
 
-::google::protobuf::uint8* flightConfig::InternalSerializeWithCachedSizesToArray(
+::google::protobuf::uint8* FlightConfig::InternalSerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:flightConfig)
+  // @@protoc_insertion_point(serialize_to_array_start:FlightConfig)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // optional uint32 retrievalTimeout = 1;
-  if (cached_has_bits & 0x00000020u) {
+  if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->retrievaltimeout(), target);
   }
 
-  // optional uint64 maxFlightTime = 2;
-  if (cached_has_bits & 0x00000004u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(2, this->maxflighttime(), target);
-  }
-
-  // optional uint64 motorSpeed = 3;
-  if (cached_has_bits & 0x00000008u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(3, this->motorspeed(), target);
-  }
-
-  // optional int32 pdsTelemetryPort = 4 [default = 7000];
-  if (cached_has_bits & 0x00000080u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->pdstelemetryport(), target);
-  }
-
-  // optional int32 commandPort = 5 [default = 6000];
-  if (cached_has_bits & 0x00000100u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->commandport(), target);
-  }
-
-  // optional uint64 flightLength = 6;
+  // optional int32 pdsTelemetryPort = 2 [default = 7000];
   if (cached_has_bits & 0x00000010u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(6, this->flightlength(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->pdstelemetryport(), target);
   }
 
-  // optional int32 heartbeatTimeout = 7 [default = 10000];
-  if (cached_has_bits & 0x00000040u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(7, this->heartbeattimeout(), target);
+  // optional int32 commandPort = 3 [default = 6000];
+  if (cached_has_bits & 0x00000020u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->commandport(), target);
   }
 
-  // optional string podDriver = 8;
+  // optional int32 heartbeatTimeout = 4 [default = 10000];
+  if (cached_has_bits & 0x00000008u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->heartbeattimeout(), target);
+  }
+
+  // optional string podDriver = 5;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->poddriver().data(), static_cast<int>(this->poddriver().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "flightConfig.podDriver");
+      "FlightConfig.podDriver");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        8, this->poddriver(), target);
+        5, this->poddriver(), target);
   }
 
-  // optional string controlLaptopIpAddr = 9 [default = "192.168.0.103"];
+  // optional string controlLaptopIpAddr = 6 [default = "127.0.0.1"];
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->controllaptopipaddr().data(), static_cast<int>(this->controllaptopipaddr().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "flightConfig.controlLaptopIpAddr");
+      "FlightConfig.controlLaptopIpAddr");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        9, this->controllaptopipaddr(), target);
+        6, this->controllaptopipaddr(), target);
+  }
+
+  // optional uint64 brakeNodePort = 7 [default = 5555];
+  if (cached_has_bits & 0x00000040u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(7, this->brakenodeport(), target);
+  }
+
+  // optional uint64 brakeNodeTimeout = 8 [default = 4000];
+  if (cached_has_bits & 0x00000080u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(8, this->brakenodetimeout(), target);
+  }
+
+  // optional uint64 brakeNodeServerPort = 9 [default = 5550];
+  if (cached_has_bits & 0x00000100u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(9, this->brakenodeserverport(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:flightConfig)
+  // @@protoc_insertion_point(serialize_to_array_end:FlightConfig)
   return target;
 }
 
-size_t flightConfig::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:flightConfig)
+size_t FlightConfig::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:FlightConfig)
   size_t total_size = 0;
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -7986,68 +9953,68 @@ size_t flightConfig::ByteSizeLong() const {
 
   cached_has_bits = _has_bits_[0];
   if (cached_has_bits & 0x000000ffu) {
-    // optional string podDriver = 8;
+    // optional string podDriver = 5;
     if (cached_has_bits & 0x00000001u) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->poddriver());
     }
 
-    // optional string controlLaptopIpAddr = 9 [default = "192.168.0.103"];
+    // optional string controlLaptopIpAddr = 6 [default = "127.0.0.1"];
     if (cached_has_bits & 0x00000002u) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->controllaptopipaddr());
     }
 
-    // optional uint64 maxFlightTime = 2;
-    if (cached_has_bits & 0x00000004u) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::UInt64Size(
-          this->maxflighttime());
-    }
-
-    // optional uint64 motorSpeed = 3;
-    if (cached_has_bits & 0x00000008u) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::UInt64Size(
-          this->motorspeed());
-    }
-
-    // optional uint64 flightLength = 6;
-    if (cached_has_bits & 0x00000010u) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::UInt64Size(
-          this->flightlength());
-    }
-
     // optional uint32 retrievalTimeout = 1;
-    if (cached_has_bits & 0x00000020u) {
+    if (cached_has_bits & 0x00000004u) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::UInt32Size(
           this->retrievaltimeout());
     }
 
-    // optional int32 heartbeatTimeout = 7 [default = 10000];
-    if (cached_has_bits & 0x00000040u) {
+    // optional int32 heartbeatTimeout = 4 [default = 10000];
+    if (cached_has_bits & 0x00000008u) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->heartbeattimeout());
     }
 
-    // optional int32 pdsTelemetryPort = 4 [default = 7000];
-    if (cached_has_bits & 0x00000080u) {
+    // optional int32 pdsTelemetryPort = 2 [default = 7000];
+    if (cached_has_bits & 0x00000010u) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->pdstelemetryport());
     }
 
+    // optional int32 commandPort = 3 [default = 6000];
+    if (cached_has_bits & 0x00000020u) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->commandport());
+    }
+
+    // optional uint64 brakeNodePort = 7 [default = 5555];
+    if (cached_has_bits & 0x00000040u) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt64Size(
+          this->brakenodeport());
+    }
+
+    // optional uint64 brakeNodeTimeout = 8 [default = 4000];
+    if (cached_has_bits & 0x00000080u) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt64Size(
+          this->brakenodetimeout());
+    }
+
   }
-  // optional int32 commandPort = 5 [default = 6000];
+  // optional uint64 brakeNodeServerPort = 9 [default = 5550];
   if (cached_has_bits & 0x00000100u) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->commandport());
+      ::google::protobuf::internal::WireFormatLite::UInt64Size(
+        this->brakenodeserverport());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -8055,23 +10022,23 @@ size_t flightConfig::ByteSizeLong() const {
   return total_size;
 }
 
-void flightConfig::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:flightConfig)
+void FlightConfig::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:FlightConfig)
   GOOGLE_DCHECK_NE(&from, this);
-  const flightConfig* source =
-      ::google::protobuf::DynamicCastToGenerated<flightConfig>(
+  const FlightConfig* source =
+      ::google::protobuf::DynamicCastToGenerated<FlightConfig>(
           &from);
   if (source == nullptr) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:flightConfig)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:FlightConfig)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:flightConfig)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:FlightConfig)
     MergeFrom(*source);
   }
 }
 
-void flightConfig::MergeFrom(const flightConfig& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:flightConfig)
+void FlightConfig::MergeFrom(const FlightConfig& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:FlightConfig)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
@@ -8085,73 +10052,73 @@ void flightConfig::MergeFrom(const flightConfig& from) {
     }
     if (cached_has_bits & 0x00000002u) {
       _has_bits_[0] |= 0x00000002u;
-      controllaptopipaddr_.AssignWithDefault(&::flightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get(), from.controllaptopipaddr_);
+      controllaptopipaddr_.AssignWithDefault(&::FlightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get(), from.controllaptopipaddr_);
     }
     if (cached_has_bits & 0x00000004u) {
-      maxflighttime_ = from.maxflighttime_;
-    }
-    if (cached_has_bits & 0x00000008u) {
-      motorspeed_ = from.motorspeed_;
-    }
-    if (cached_has_bits & 0x00000010u) {
-      flightlength_ = from.flightlength_;
-    }
-    if (cached_has_bits & 0x00000020u) {
       retrievaltimeout_ = from.retrievaltimeout_;
     }
-    if (cached_has_bits & 0x00000040u) {
+    if (cached_has_bits & 0x00000008u) {
       heartbeattimeout_ = from.heartbeattimeout_;
     }
-    if (cached_has_bits & 0x00000080u) {
+    if (cached_has_bits & 0x00000010u) {
       pdstelemetryport_ = from.pdstelemetryport_;
+    }
+    if (cached_has_bits & 0x00000020u) {
+      commandport_ = from.commandport_;
+    }
+    if (cached_has_bits & 0x00000040u) {
+      brakenodeport_ = from.brakenodeport_;
+    }
+    if (cached_has_bits & 0x00000080u) {
+      brakenodetimeout_ = from.brakenodetimeout_;
     }
     _has_bits_[0] |= cached_has_bits;
   }
   if (cached_has_bits & 0x00000100u) {
-    set_commandport(from.commandport());
+    set_brakenodeserverport(from.brakenodeserverport());
   }
 }
 
-void flightConfig::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:flightConfig)
+void FlightConfig::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:FlightConfig)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void flightConfig::CopyFrom(const flightConfig& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:flightConfig)
+void FlightConfig::CopyFrom(const FlightConfig& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:FlightConfig)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool flightConfig::IsInitialized() const {
+bool FlightConfig::IsInitialized() const {
   return true;
 }
 
-void flightConfig::Swap(flightConfig* other) {
+void FlightConfig::Swap(FlightConfig* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void flightConfig::InternalSwap(flightConfig* other) {
+void FlightConfig::InternalSwap(FlightConfig* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   poddriver_.Swap(&other->poddriver_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  controllaptopipaddr_.Swap(&other->controllaptopipaddr_, &::flightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get(),
+  controllaptopipaddr_.Swap(&other->controllaptopipaddr_, &::FlightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get(),
     GetArenaNoVirtual());
-  swap(maxflighttime_, other->maxflighttime_);
-  swap(motorspeed_, other->motorspeed_);
-  swap(flightlength_, other->flightlength_);
   swap(retrievaltimeout_, other->retrievaltimeout_);
   swap(heartbeattimeout_, other->heartbeattimeout_);
   swap(pdstelemetryport_, other->pdstelemetryport_);
   swap(commandport_, other->commandport_);
+  swap(brakenodeport_, other->brakenodeport_);
+  swap(brakenodetimeout_, other->brakenodetimeout_);
+  swap(brakenodeserverport_, other->brakenodeserverport_);
 }
 
-::google::protobuf::Metadata flightConfig::GetMetadata() const {
+::google::protobuf::Metadata FlightConfig::GetMetadata() const {
   ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_Paradigm_2eproto);
   return ::file_level_metadata_Paradigm_2eproto[kIndexInFileMessages];
 }
@@ -8441,9 +10408,6 @@ void DefaultFcToNode::InternalSwap(DefaultFcToNode* other) {
 // @@protoc_insertion_point(namespace_scope)
 namespace google {
 namespace protobuf {
-template<> PROTOBUF_NOINLINE ::BrakeNodeData* Arena::CreateMaybeMessage< ::BrakeNodeData >(Arena* arena) {
-  return Arena::CreateInternal< ::BrakeNodeData >(arena);
-}
 template<> PROTOBUF_NOINLINE ::PodCommand* Arena::CreateMaybeMessage< ::PodCommand >(Arena* arena) {
   return Arena::CreateInternal< ::PodCommand >(arena);
 }
@@ -8453,14 +10417,23 @@ template<> PROTOBUF_NOINLINE ::Telemetry* Arena::CreateMaybeMessage< ::Telemetry
 template<> PROTOBUF_NOINLINE ::FcToBrakeNode* Arena::CreateMaybeMessage< ::FcToBrakeNode >(Arena* arena) {
   return Arena::CreateInternal< ::FcToBrakeNode >(arena);
 }
+template<> PROTOBUF_NOINLINE ::FcToLvdcNode* Arena::CreateMaybeMessage< ::FcToLvdcNode >(Arena* arena) {
+  return Arena::CreateInternal< ::FcToLvdcNode >(arena);
+}
 template<> PROTOBUF_NOINLINE ::DtsNodeToFc* Arena::CreateMaybeMessage< ::DtsNodeToFc >(Arena* arena) {
   return Arena::CreateInternal< ::DtsNodeToFc >(arena);
 }
-template<> PROTOBUF_NOINLINE ::RearNodeToFc* Arena::CreateMaybeMessage< ::RearNodeToFc >(Arena* arena) {
-  return Arena::CreateInternal< ::RearNodeToFc >(arena);
+template<> PROTOBUF_NOINLINE ::EnclosureNodeToFc* Arena::CreateMaybeMessage< ::EnclosureNodeToFc >(Arena* arena) {
+  return Arena::CreateInternal< ::EnclosureNodeToFc >(arena);
 }
-template<> PROTOBUF_NOINLINE ::flightConfig* Arena::CreateMaybeMessage< ::flightConfig >(Arena* arena) {
-  return Arena::CreateInternal< ::flightConfig >(arena);
+template<> PROTOBUF_NOINLINE ::LvdcNodeToFc* Arena::CreateMaybeMessage< ::LvdcNodeToFc >(Arena* arena) {
+  return Arena::CreateInternal< ::LvdcNodeToFc >(arena);
+}
+template<> PROTOBUF_NOINLINE ::BrakeNodeToFc* Arena::CreateMaybeMessage< ::BrakeNodeToFc >(Arena* arena) {
+  return Arena::CreateInternal< ::BrakeNodeToFc >(arena);
+}
+template<> PROTOBUF_NOINLINE ::FlightConfig* Arena::CreateMaybeMessage< ::FlightConfig >(Arena* arena) {
+  return Arena::CreateInternal< ::FlightConfig >(arena);
 }
 template<> PROTOBUF_NOINLINE ::DefaultFcToNode* Arena::CreateMaybeMessage< ::DefaultFcToNode >(Arena* arena) {
   return Arena::CreateInternal< ::DefaultFcToNode >(arena);

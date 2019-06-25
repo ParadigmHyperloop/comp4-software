@@ -1,0 +1,103 @@
+{
+  "solenoid1": {
+    "psBooting": [0,0],
+    "psAcceleration": [0,0],
+    "psBraking": [1,1],
+    "psDisarming": [1,1],
+    "psStandby": [1,1]
+  },
+  "solenoid2": {
+    "psBooting": [0,0],
+    "psAcceleration": [0,0],
+    "psBraking": [0,0],
+    "psDisarming": [1,1],
+    "psStandby": [1,1]
+  },
+  "railTemperature": {
+    "psBooting": [0,20],
+    "psAcceleration": [0,20],
+    "psBraking": [0,450],
+    "psDisarming": [0,20],
+    "psStandby": [1,1]
+  },
+  "pressureVesselTemperature": {
+    "psBooting": [-25,35],
+    "psAcceleration": [-25,35],
+    "psBraking": [-25,35],
+    "psDisarming": [-25,35],
+    "psFlight": [-25,50],
+    "psStandby": [-25,30]
+  },
+  "highPressure": {
+    "psBooting": [13,1750],
+    "psAcceleration": [13,1750],
+    "psBraking": [13,1750],
+    "psDisarming": [13,1750],
+    "psFlight": [13,2650],
+    "psStandby": [13,2650]
+  },
+  "lowPressure1": {
+    "psBooting": [13,17],
+    "psAcceleration": [13,17],
+    "psBraking": [270,280],
+    "psDisarming": [13,17],
+    "psStandby": [1,1]
+  },
+  "hvBatteryPackVoltage": {
+    "psBooting": [0,100],
+    "psAcceleration": [0,100],
+    "psBraking": [0,100],
+    "psDisarming": [0,100]
+  },
+  "hvBatteryPackCurrent": {
+    "psBooting": [0,100],
+    "psAcceleration": [0,100],
+    "psBraking": [0,100],
+    "psDisarming": [0,100]
+  },
+  "hvBatteryPackMinimumCellVoltage": {
+    "psBooting": [0,100],
+    "psAcceleration": [0,100],
+    "psBraking": [0,100],
+    "psDisarming": [0,100]
+  },
+  "hvBatteryPackMaxCellVoltage": {
+    "psBooting": [0,100],
+    "psAcceleration": [0,100],
+    "psBraking": [0,100],
+    "psDisarming": [0,100]
+  },
+  "maxIgbtTemperature": {
+    "psBooting": [13,17],
+    "psAcceleration": [13,17],
+    "psBraking": [270,280],
+    "psDisarming": [13,17],
+    "psStandby": [1,1]
+  },
+  "gateDriverTemperature": {
+    "psBooting": [0,100],
+    "psAcceleration": [0,100],
+    "psBraking": [0,100],
+    "psDisarming": [0,100],
+    "psStandby": [1,1]
+  },
+  "inverterControlBoardTemperature": {
+    "psBooting": [0,100],
+    "psAcceleration": [0,100],
+    "psBraking": [0,100],
+    "psDisarming": [0,100],
+    "psStandby": [1,1]
+  },
+  "motorTemperature": {
+    "psBooting": [0,100],
+    "psAcceleration": [0,100],
+    "psBraking": [0,100],
+    "psDisarming": [0,100]
+  },
+  "inverterBusVoltage": {
+    "psBooting": [0,100],
+    "psAcceleration": [0,100],
+    "psBraking": [0,100],
+    "psDisarming": [0,100]
+  }
+}

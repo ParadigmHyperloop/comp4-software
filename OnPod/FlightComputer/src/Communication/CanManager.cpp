@@ -1,96 +1,74 @@
 #include "CanManager.h"
+#include <algorithm>
+#include <initializer_list>
 
-
-
-
-void processFrame(const struct canfd_frame &frame, Pod &pod) {
+void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
+    std::vector<int> indices = {0, 1};
     switch (frame.can_id) {
-        case 0x6b2: {
-            std::vector<int> indices = {0,1};
-            auto hvBatteryPackVoltage = extractCanValue <float> (frame.data, indices, (float)10.0);
-            indices = {2,3};
-            auto hvBatteryPackCurrent = extractCanValue <float>(frame.data, indices, (float)10.0);
-            indices = {4,5};
-            auto hvBatteryPackMaxCellVoltage = extractCanValue <float>(frame.data, indices, (float)10000.0);
-            indices = {6,7};
-            auto hvBatteryPackMinimumCellVoltage = extractCanValue <float>(frame.data, indices, (float)10000.0);
-
+        case 0x6b3:{
+            indices = {2, 3};
+            auto hvBatteryPackVoltage = extractCanValue<float>(frame.data, indices, (float) 10.0);
+            indices = {0, 1};
+            auto hvBatteryPackCurrent = extractCanValue<float>(frame.data, indices, (float) 10.0);
+            indices = {4};
+            auto hvBatteryPackSoc = extractCanValue<int>(frame.data, indices, 2);
+            pod.setHvBatteryPackStateOfCharge(hvBatteryPackSoc);
             pod.setHvBatteryPackCurrent(hvBatteryPackCurrent);
             pod.setHvBatteryPackVoltage(hvBatteryPackVoltage);
+            pod.setConnectionFlag(1,2);
+        }
+        case 0x6b2: {
+            indices = {2, 3};
+            auto hvBatteryPackMaxCellTemperature = extractCanValue<float>(frame.data, indices, (float) 1.0);
+            indices = {6, 7};
+            auto hvBatteryPackMaxCellVoltage = extractCanValue<float>(frame.data, indices, (float) 10000.0);
+            indices = {4, 5};
+            auto hvBatteryPackMinimumCellVoltage = extractCanValue<float>(frame.data, indices, (float) 10000.0);
             pod.setHvBatteryPackMaxCellVoltage(hvBatteryPackMaxCellVoltage);
             pod.setHvBatteryPackMinimumCellVoltage(hvBatteryPackMinimumCellVoltage);
+            pod.setHvBatteryPackMaxCellTemperature(hvBatteryPackMaxCellTemperature);
+
+        }
+        case 0x0A0: {
+            indices = {1,0};
+            auto igbtPhaseA = extractCanValue<int>(frame.data, indices, 10);
+            indices = {3,2};
+            auto igbtPhaseB = extractCanValue<int>(frame.data, indices, 10);
+            indices = {5,4};
+            auto igbtPhaseC = extractCanValue<int>(frame.data, indices, 10);
+            auto maxIgbtTemperature = std::max({igbtPhaseA, igbtPhaseB, igbtPhaseC});
+            indices = {7,6};
+            auto gateDriverBoard = extractCanValue<int>(frame.data, indices, 10);
+            
+            pod.telemetry->maxIgbtTemperature = maxIgbtTemperature;
+            pod.telemetry->gateDriverTemperature = gateDriverBoard;
+        }
+        case 0x0A1: {
+            indices = {1,0};
+            auto controlBoard = extractCanValue<int>(frame.data, indices, 10);
+            pod.telemetry->inverterControlBoardTemperature = controlBoard;
+        }
+        case 0x0A2: {
+            indices = {5,4};
+            auto motorTemp = extractCanValue<int>(frame.data, indices, 10);
+            pod.telemetry->motorTemperature = motorTemp;
+        }
+        case 0x0A5: {
+            indices = {3,2};
+            auto motorSpeed = extractCanValue<int>(frame.data, indices, 1);
+            pod.telemetry->motorSpeed = motorSpeed;
+        }
+        case 0x0A7:{
+            indices = {1,0};
+            auto dcBusVoltage = extractCanValue<int>(frame.data, indices, 10);
+            pod.telemetry->inverterBusVoltage = dcBusVoltage;
+            pod.telemetry->inverterHeartbeat = 1;
         }
             break;
         default:
-            //todo throw error instead
-            LOG(INFO) << "Unknown CAN ID" << frame.can_id;
-            break;
+            std::string error = "Unknown CAN ID : " + std::to_string(frame.can_id);
+            throw std::runtime_error(error);
     }
 }
 
 
-int CanThread(Pod Pod){
-    //Logging
-    el::Helpers::setThreadName("CAN Thread");
-    LOG(INFO) << "Starting CAN Thread";
-
-    // Service variables
-    int operationStatus;
-
-    // CAN connection variables
-    struct sockaddr_can canSockAddr = {};
-    struct ifreq interfaceRequest = {};
-    int canSock;
-
-    // Open the CAN network interface
-    canSock = socket(PF_CAN, SOCK_RAW, CAN_RAW);
-    if (canSock == -1) {
-        LOG(INFO) << "Error: Creating CAN Socket" << std::strerror(errno);
-        return -1;
-    }
-
-    // Set a receive filter so we only receive select CAN IDs
-    struct can_filter canFilter[1];
-    canFilter[0].can_id = 0x6B2;
-    canFilter[0].can_mask = CAN_SFF_MASK;
-
-    operationStatus = ::setsockopt(canSock, SOL_CAN_RAW, CAN_RAW_FILTER, &canFilter, sizeof(canFilter));
-    if (operationStatus == -1) {
-        LOG(INFO) << "Error: Setting CAN Filter: " << std::strerror(errno);
-        return -1;
-    }
-
-
-
-    strcpy(interfaceRequest.ifr_name, "can0"); // Set Interface name
-    operationStatus = ioctl(canSock, SIOCGIFINDEX, &interfaceRequest);
-    if (operationStatus == -1) {
-        LOG(INFO) << "Error: Setting CAN Interface" << std::strerror(errno);
-        return -1;
-    }
-
-    // Bind the socket to the network interface
-    canSockAddr.can_family = AF_CAN;
-    canSockAddr.can_ifindex = interfaceRequest.ifr_ifindex;
-    operationStatus = bind(
-            canSock,
-            reinterpret_cast<struct sockaddr *>(&canSockAddr),
-            sizeof(canSockAddr)
-    );
-    if (operationStatus == -1) {
-        LOG(INFO) << "Error: Binding CAN Interface" << std::strerror(errno);
-        return -1;
-    }
-
-
-    LOG(INFO) << "Starting CAN Main Loop";
-    while (Pod.sPodValues->podState != psShutdown) {
-        struct canfd_frame canFrame = {0}; //TODO remove this zero once we dont need it
-        // Read in a CAN CanFrame
-        ssize_t iReceivedPacketSize = read(canSock, &canFrame, CANFD_MTU);
-        if (iReceivedPacketSize) {
-            processFrame(canFrame, Pod);
-        }
-    }
-    close(canSock);
-}

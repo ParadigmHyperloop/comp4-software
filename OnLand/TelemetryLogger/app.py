@@ -1,12 +1,14 @@
-import socketio
 import json
-import time
-from TelemetryLogger.LogToCSV import CsvTelemetryLoggerTesting
 import logging as log
 import sys
+import time
+
+import socketio
+
+from TelemetryLogger.LogToCSV import CsvTelemetryLoggerTesting
 from config import SOCKET_SERVER
 
-log.basicConfig(stream=sys.stdout, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=log.INFO)
+log.basicConfig(stream=sys.stdout, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 sio = socketio.Client()
 csv_logger = None
 
@@ -21,27 +23,30 @@ def on_connect():
 def on_disconnect():
     log.info('End Logging')
     global csv_logger
-    csv_logger.end_session()
+    if csv_logger is not None:
+        csv_logger.end_session()
 
 
-@sio.on('start_logging_session')
-def start_logging_session(data):
-    log.info('Start Logging')
+@sio.on('logger_control')
+def parse_command(command_json):
     global csv_logger
-    csv_logger = CsvTelemetryLoggerTesting()
-    csv_logger.start_log_session()
-    sio.emit('logging_session_started', 'started')
+    command_object = json.loads(command_json)
+    command = command_object['command']
+
+    response = dict()
+    if command == "start":
+        csv_logger = CsvTelemetryLoggerTesting()
+        csv_logger.start_log_session()
+        response['feedback'] = 'started'
+    elif command == "stop":
+        if csv_logger is not None:
+            csv_logger.end_session()
+            response['feedback'] = 'stopped'
+            response['filename'] = csv_logger.log_file_name
+    sio.emit('logger_feedback', json.dumps(response))
 
 
-@sio.on('end_logging_session')
-def end_logging_session(data):
-    log.info('End Logging')
-    global csv_logger
-    csv_logger.end_session()
-    sio.emit('logging_session_ended', csv_logger.log_file_name)
-
-
-@sio.on('telemetry')
+@sio.on('pod_telemetry')
 def on_log_telemetry(data):
     global csv_logger
     telemetry = json.loads(data)
@@ -60,6 +65,8 @@ def main():
             time.sleep(2)
         else:
             connected = True
+    sio.emit('join_room', 'logger_control_updates')
+    sio.emit('join_room', 'telemetry_updates')
     sio.wait()
 
 
