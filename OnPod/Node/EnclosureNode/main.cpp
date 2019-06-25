@@ -1,4 +1,6 @@
-/* Encolsure Node program that transmits data to
+/* Board: Arduino Mega
+ *
+ * Encolsure Node program that transmits data to
  * the Flight Computer over UDP.
  */
 #include <Arduino.h>
