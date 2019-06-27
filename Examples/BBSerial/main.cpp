@@ -95,79 +95,46 @@ int main()
 
 int main(void)
 {
-    int fd;/*File Descriptor*/
-
-    printf("\n +----------------------------------+");
-    printf("\n |        Serial Port Read          |");
-    printf("\n +----------------------------------+");
-
-    /*------------------------------- Opening the Serial Port -------------------------------*/
-
-    /* Change /dev/ttyUSB0 to the one corresponding to your system */
-
-    fd = open("/dev/ttyUSB1",O_RDWR | O_NOCTTY);	/* ttyUSB0 is the FT232 based USB2SERIAL Converter   */
-    /* O_RDWR   - Read/Write access to serial port       */
-    /* O_NOCTTY - No terminal will control the process   */
-    /* Open in blocking mode,read will wait              */
-
-
-
+    int fd;
+    fd = open("/dev/ttyUSB0",O_RDWR | O_NOCTTY);	/* ttyUSB0 is the FT232 based USB2SERIAL Converter   */
     if(fd == -1)						/* Error Checking */
-        printf("\n  Error! in Opening ttyUSB0  ");
+        printf("\n Error! in Opening");
     else
-        printf("\n  ttyUSB0 Opened Successfully ");
+        printf("\n Opened Successfully ");
 
+    struct termios SerialPortSettings;
+    tcgetattr(fd, &SerialPortSettings);
+    cfsetispeed(&SerialPortSettings,B19200);
+    cfsetospeed(&SerialPortSettings,B19200);
+    SerialPortSettings.c_cflag &= ~PARENB;
+    SerialPortSettings.c_cflag &= ~CSTOPB;
+    SerialPortSettings.c_cflag &= ~CSIZE;
+    SerialPortSettings.c_cflag |=  CS8;
+    SerialPortSettings.c_cflag &= ~CRTSCTS;
+    SerialPortSettings.c_cflag |= CREAD | CLOCAL;
+    SerialPortSettings.c_iflag &= ~(IXON | IXOFF | IXANY);
+    SerialPortSettings.c_iflag &= ~(ICANON | ECHO | ECHOE | ISIG);
+    SerialPortSettings.c_oflag &= ~OPOST;
+    SerialPortSettings.c_cc[VMIN] = 0;
+    SerialPortSettings.c_cc[VTIME] = 100;
 
-    /*---------- Setting the Attributes of the serial port using termios structure --------- */
-
-    struct termios SerialPortSettings;	/* Create the structure                          */
-
-    tcgetattr(fd, &SerialPortSettings);	/* Get the current attributes of the Serial port */
-
-    /* Setting the Baud rate */
-    cfsetispeed(&SerialPortSettings,B9600); /* Set Read  Speed as 9600                       */
-    cfsetospeed(&SerialPortSettings,B9600); /* Set Write Speed as 9600                       */
-
-    /* 8N1 Mode */
-    SerialPortSettings.c_cflag &= ~PARENB;   /* Disables the Parity Enable bit(PARENB),So No Parity   */
-    SerialPortSettings.c_cflag &= ~CSTOPB;   /* CSTOPB = 2 Stop bits,here it is cleared so 1 Stop bit */
-    SerialPortSettings.c_cflag &= ~CSIZE;	 /* Clears the mask for setting the data size             */
-    SerialPortSettings.c_cflag |=  CS8;      /* Set the data bits = 8                                 */
-
-    SerialPortSettings.c_cflag &= ~CRTSCTS;       /* No Hardware flow Control                         */
-    SerialPortSettings.c_cflag |= CREAD | CLOCAL; /* Enable receiver,Ignore Modem Control lines       */
-
-
-    SerialPortSettings.c_iflag &= ~(IXON | IXOFF | IXANY);          /* Disable XON/XOFF flow control both i/p and o/p */
-    SerialPortSettings.c_iflag &= ~(ICANON | ECHO | ECHOE | ISIG);  /* Non Cannonical mode                            */
-
-    SerialPortSettings.c_oflag &= ~OPOST;/*No Output Processing*/
-
-    /* Setting Time outs */
-    SerialPortSettings.c_cc[VMIN] = 13; /* Read at least 10 characters */
-    SerialPortSettings.c_cc[VTIME] = 1; /* Wait indefinetly   */
-
-    if((tcsetattr(fd,TCSANOW,&SerialPortSettings)) != 0) /* Set the attributes to the termios structure*/
+    if((tcsetattr(fd,TCSANOW,&SerialPortSettings)) != 0) { /* Set the attributes to the termios structure*/
         printf("\n  ERROR ! in Setting attributes");
-    else
-        printf("\n  BaudRate = 9600 \n  StopBits = 1 \n  Parity   = none");
-
-    /*------------------------------- Read data from serial port -----------------------------*/
-
-    tcflush(fd, TCIFLUSH);   /* Discards old data in the rx buffer            */
-
-    char read_buffer[30];   /* Buffer to store the data received              */
+    }
+    tcflush(fd, TCIFLUSH);
+    char read_buffer[10];
     memset(&read_buffer,0, sizeof(read_buffer));
-    int  bytes_read = 0;    /* Number of bytes read by the read() system call */
-    int i = 0;
-
+    int  bytes_read = 0;
     while(1)
     {
+        write (fd, "1", 1);
+        usleep(15000);
         bytes_read=read(fd,read_buffer, sizeof(read_buffer));
         if(bytes_read > 0){
             std::string num(read_buffer);
             std::cout<<num << std::endl;
-            //memset(&read_buffer,0, sizeof(read_buffer));
+        } else{
+            std::cout<<"Expired"<< std::endl;
         }
     }
     close(fd); /* Close the serial port */
