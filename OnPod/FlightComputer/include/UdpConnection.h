@@ -7,11 +7,6 @@
 #include "TelemetryManager.h"
 #include <NetworkHelpers.h>
 
-#define BRAKE_CONNECTION_INDEX 0
-#define LVDC_CONNECTION_INDEX 1
-#define ENCLOSURE_CONNECTION_INDEX 2
-#define PDS_CONNECTION_INDEX 3
-
 /**
  *
  *

@@ -20,7 +20,7 @@ unsigned int PodState::timeInStateSeconds() {
 }
 
 int32_t PodState::checkSensorFlags(){
-    std::vector<int32_t> flags = this->pod->telemetry->sensorFlags;
+    std::vector<int32_t> flags = this->pod->telemetry->nodeSensorFlags;
     for(std::size_t i=0; i<flags.size(); ++i){
         if(flags[i] == 0){
             return i;
@@ -41,7 +41,7 @@ int32_t PodState::checkCommunicationFlags(){
 
 int32_t PodState::checkNodeStates(){
     if(this->pod->telemetry->commandedBrakeNodeState != this->pod->telemetry->receivedBrakeNodeState){
-        return BRAKE_NODE_INDEX;
+        return BRAKE_NODE_HEARTBEAT_INDEX;
     }
     return FLAGS_GOOD;
 }

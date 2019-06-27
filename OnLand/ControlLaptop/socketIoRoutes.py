@@ -51,6 +51,11 @@ def manual_configuration_command(command):
     socket_io.emit("manual_configuration_command", command, room='command_updates')
 
 
+@socket_io.on('overrides_command')
+def overrides_command(command):
+    socket_io.emit("overrides_command", command, room='command_updates')
+
+
 @socket_io.on('logger_control')
 def logger_controls(data):
     socket_io.emit('logger_control', data, room='logger_control_updates')

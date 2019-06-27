@@ -5,6 +5,12 @@
 #include <cstdint>
 #include "Paradigm.pb.h"
 
+#define BRAKE_NODE_HEARTBEAT_INDEX 0
+#define LVDC_NODE_HEARTBEAT_INDEX 1
+#define BMS_HEARTBEAT_INDEX 2
+#define INTERFACE_HEARTBEAT_INDEX 3
+#define ENCLOSURE_HEARTBEAT_INDEX 4
+
 class PodState;
 
 struct PodValues {
@@ -33,7 +39,9 @@ struct PodValues {
 
     //ConnectionsArray
     std::vector<int32_t> connectionFlags;  // brakeNode, LVDCNode, BMS, Interface
-    std::vector<int32_t> sensorFlags;
+    std::vector<int32_t> nodeSensorFlags;
+    std::vector<int32_t> inverterSensorFlags;
+    std::vector<int32_t> bmsSensorFlags;
 
     // HV-BMS
     float hvBatteryPackVoltage = 0;
