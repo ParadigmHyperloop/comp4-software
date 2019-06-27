@@ -8,7 +8,7 @@ const uint8_t LVDC_NODE_IP[4] = {192, 168, 0, 21};
 const uint8_t ENCLOSURE_NODE_IP[4] = {192, 168, 0, 22};
 
 // IP ports
-const uint16_t FC_BRAKE_NODE_PORT = 5550;
+const uint16_t FC_BRAKE_NODE_PORT = 59279;
 const uint16_t FC_ENCLOSURE_NODE_PORT = 5551;
 const uint16_t FC_LVDC_NODE_PORT = 5552;
 const uint16_t BRAKE_NODE_PORT = 5555;
@@ -18,7 +18,7 @@ const uint16_t ENCLOSURE_NODE_PORT = 5555;
 // send intervals
 const uint16_t FC_TO_BRAKE_NODE_INTERVAL = 50;
 const uint16_t FC_TO_LVDC_NODE_INTERVAL = 50;
-const uint16_t BRAKE_NODE_TO_FC_INTERVAL = 50;
+const uint16_t BRAKE_NODE_TO_FC_INTERVAL = 100;
 const uint16_t LVDC_NODE_TO_FC_INTERVAL = 50;
 const uint16_t ENCLOSURE_NODE_TO_FC_INTERVAL = 50;
 

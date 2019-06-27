@@ -1,3 +1,12 @@
+/* Board: Node
+ *
+ * Brake Node main program and state machine.
+ * Program that controls the sensors and brake solenoids on the pod.
+ * - Communicates with the Flight Computer over UDP.
+ * - Has Heartbeat timeout, TODO: Watchdog timer
+ * - Drives solenoids, ir_temp, thermocouples and hp/lp transducers.
+ */
+
 #include <Arduino.h>
 #include <pb_decode.h>
 #include <pb_encode.h>
@@ -7,12 +16,10 @@
 #include "drivers/node_ethernet.h"
 #include "drivers/solenoid_driver_DRV8806.h"
 #include "drivers/solenoid.h"
-
 #include "sensors/ir_temp_OS101E.h"
 #include "sensors/thermocouple.h"
 #include "sensors/hp_transducer_U5374.h"
 #include "sensors/lp_transducer_PX2300P.h"
-
 #include "Paradigm.pb.h"
 #include "../../pod_internal_network.h"
 
@@ -22,7 +29,6 @@ Timer txTimer;
 Timer fcHeartbeatTimer;
 bool heartBeatExpired = false;
 uint8_t timerEventNumber = 0;
-
 
 // instantiate adc and all sensors with which it interfaces
 SPIClass adcSPI (&PERIPH_SPI1, MISO1, SCK1, MOSI1, PAD_SPI1_TX, PAD_SPI1_RX);
@@ -157,9 +163,6 @@ void loop() {
         pb_istream_t inStream = pb_istream_from_buffer(udp.uRecvBuffer, sizeof(udp.uRecvBuffer));
         pb_decode(&inStream, FcToBrakeNode_fields, &pFcCommand);
         if (pFcCommand.has_nodeState) {
-            if (pBrakeNodeTelemetry.state != pFcCommand.nodeState) {
-              Serial.println(pFcCommand.nodeState);
-            }
             pBrakeNodeTelemetry.state = pFcCommand.nodeState;
         }
         fcHeartbeatTimer.after(HEARTBEAT_INTERVAL, expireHeartbeat, (void*)0);

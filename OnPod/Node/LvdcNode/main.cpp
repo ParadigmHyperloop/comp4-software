@@ -1,3 +1,9 @@
+/* Board: LVDC Node
+ *
+ * LVDC Node program with state machine.
+ * Receives commands from Flight Computer and
+ * transmits back LVDC sensor values over UDP.
+ */
 #include <Arduino.h>
 #include <pb_decode.h>
 #include <pb_encode.h>
@@ -7,7 +13,6 @@
 #include "sensors/voltage_divider.h"
 #include "sensors/current_sensor_ACS711.h"
 #include "drivers/node_ethernet.h"
-
 #include "Paradigm.pb.h"
 #include "../../pod_internal_network.h"
 
@@ -38,9 +43,9 @@ uint32_t txPacketNum = 0;
 uint32_t rxPacketNum = 0;
 
 // instantiate protobuf objects
-FcToLvdcNode pFcCommand = FcToLvdcNode_init_default;
-LvdcNodeToFc pLvdcNodeTelemetry = LvdcNodeToFc_init_default;
-LvdcNodeStates lvdcNodeState = LvdcNodeStates_lvdcBooting;
+FcToLvdcNode    pFcCommand          = FcToLvdcNode_init_default;
+LvdcNodeToFc    pLvdcNodeTelemetry  = LvdcNodeToFc_init_default;
+LvdcNodeStates  lvdcNodeState       = LvdcNodeStates_lvdcBooting;
 
 void sendToFlightComputer(void*) {
     pLvdcNodeTelemetry.packetNum = txPacketNum;
