@@ -122,20 +122,26 @@ int main(void)
         printf("\n  ERROR ! in Setting attributes");
     }
     tcflush(fd, TCIFLUSH);
-    char read_buffer[10];
-    memset(&read_buffer,0, sizeof(read_buffer));
+    char read_buffer[10] = {};
     int  bytes_read = 0;
+    int total_bytes_read = 0;
+    std::stringstream data;
     while(1)
     {
         write (fd, "1", 1);
-        usleep(15000);
-        bytes_read=read(fd,read_buffer, sizeof(read_buffer));
-        if(bytes_read > 0){
-            std::string num(read_buffer);
-            std::cout<<num << std::endl;
-        } else{
-            std::cout<<"Expired"<< std::endl;
+        while(total_bytes_read < 9){
+            bytes_read=read(fd,read_buffer, sizeof(read_buffer));
+            if(bytes_read > 0){
+                total_bytes_read += bytes_read;
+                data << read_buffer;
+                memset(&read_buffer,0, bytes_read);
+            } else{
+                std::cout<<"Expired"<< std::endl;
+            }
         }
+        std::cout<<data.str()<< std::endl;
+        data.str(std::string());
+        total_bytes_read = 0;
     }
     close(fd); /* Close the serial port */
 }
