@@ -14,6 +14,7 @@ INITIALIZE_EASYLOGGINGPP
 #include "CanBusThread.h"
 #include "Constants/Constants.h"
 #include "Constants/SensorConfig.h"
+#include "NavigationThread.h"
 
 using namespace std;
 
@@ -69,6 +70,11 @@ int main( int32_t argc, char** argv)
     canTelemManager.bWriteInverter = true;
     canTelemManager.bWriteBms = true;
     std::thread canThread(canNetworkThread, canTelemManager);
+
+
+    //Navigation Thread
+    TelemetryManager navTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
+    std::thread navThread(NavigationThread, navTelemManager);
 
 
     //TelemetryManager Internal Network Thread

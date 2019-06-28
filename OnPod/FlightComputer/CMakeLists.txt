@@ -29,7 +29,6 @@ endif ()
 
 find_package(Threads REQUIRED)
 if (THREADS_HAVE_PTHREAD_ARG)
-    message("have")
     target_compile_options(FlightComputer PUBLIC "-pthread")
 endif ()
 

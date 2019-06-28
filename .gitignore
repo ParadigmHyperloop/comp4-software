@@ -77,3 +77,13 @@ OnPod/Node/NodeTest
 Examples/BBSerial/build/host/
 
 Examples/BBSerial/build/target/
+
+OnPod/FlightComputer/libs/ProtoBuffer/
+
+ProtoBufs/Paradigm/py/Paradigm_pb2\.py
+
+OnPod/FlightComputer/src/Paradigm\.pb\.cc
+
+Testing/ManualCommandTesting/Paradigm_pb2\.py
+
+Testing/NodeSimulator/Paradigm_pb2\.py

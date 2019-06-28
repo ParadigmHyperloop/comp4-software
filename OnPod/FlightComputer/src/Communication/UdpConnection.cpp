@@ -181,6 +181,11 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_hvbatterypackstateofcharge(pod.telemetry->hvBatteryPackStateOfCharge);
     protoMessage->set_motorspeed(pod.telemetry->motorSpeed);
 
+    protoMessage->set_irdistance(pod.telemetry->irDistance);
+    protoMessage->set_irrpm(pod.telemetry->irRpm);
+    protoMessage->set_tachdistance(pod.telemetry->tachDistance);
+    protoMessage->set_tachrpm(pod.telemetry->tachRpm);
+
     protoMessage->set_lvdcnodestate(lvdcNone);
     protoMessage->set_brakenodestate(pod.telemetry->receivedBrakeNodeState);
 

@@ -27,6 +27,12 @@ struct PodValues {
     int32_t flightDistance = 0;
     int32_t maxFlightTime = 0;
 
+    //Navigation
+    int32_t tachRpm = 0;
+    int32_t irRpm = 0;
+    float tachDistance = 0;
+    float irDistance = 0;
+
     // Updates
     std::mutex updatesLock;
     std::vector<std::string> updates;

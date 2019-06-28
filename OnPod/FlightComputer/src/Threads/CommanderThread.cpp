@@ -31,6 +31,7 @@ int32_t createCommanderServerSocket(int32_t serverPortNumber) {
 }
 
 void parseOverrides(PodCommand podCommand, TelemetryManager *Pod) {
+    Pod->sendUpdate("Parsing Overrides");
     // This is gross... dont look! ;)
     for (int i = 0; i < 5; ++i) {
         if(podCommand.sensoroverrideconfiguration(i)){
