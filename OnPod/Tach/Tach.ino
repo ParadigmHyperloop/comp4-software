@@ -1,42 +1,61 @@
+#define TACH_INTER 19
+#define LEFT_INTER 18
+#define RIGHT_INTER 3
+
+char dataBuffer [60];
 float micro_to_min = 60000000.0;
-float spokes = 32;
 
-float revolutions = 0;
-unsigned long rpm_time = micros();
-unsigned long print_time = millis();
-unsigned long resolution_time = millis();
+volatile int tach_revolutions = 0; 
+volatile int left_revolutions = 0;
+volatile int right_revolutions = 0;
 
-float rpm = 0;
-float new_rpm = 0;
+int tach_rpm, left_rpm, right_rpm = 0;
+double last_measurment_time, print_time = millis();
+float elapsed_time;
 
-// the setup function runs once when you press reset or power the board
+void tach_isr(){
+  tach_revolutions++;
+}
+
+void left_isr(){
+  left_revolutions++;
+}
+
+void right_isr(){
+  right_revolutions++;
+}
+
+
 void setup() {
   Serial.begin(9600);
   Serial.println("starting...");
-  attachInterrupt(digitalPinToInterrupt(2), myISR, RISING);
+  attachInterrupt(digitalPinToInterrupt(TACH_INTER), tach_isr, FALLING);
+  attachInterrupt(digitalPinToInterrupt(LEFT_INTER), left_isr, RISING);
+  attachInterrupt(digitalPinToInterrupt(RIGHT_INTER), right_isr, RISING);
 }
 
-// the loop function runs over and over again forever
 void loop() {
-  if(millis()-print_time > 1000){
-    Serial.println(rpm);
-    print_time = millis();
-  }
-}
 
-void myISR(){
-  revolutions++;
-    if(millis() - resolution_time > 500 ){
-      if(revolutions>0){
-        detachInterrupt(2); 
-        float rotation_time = micros() - rpm_time;
-        rpm = (revolutions*((float)60000000.0))/(rotation_time*((float)32.0));  
-        rpm_time = micros();
-        revolutions = 0;
-        rotation_time = micros();
-        resolution_time = millis(); 
-        attachInterrupt(digitalPinToInterrupt(2), myISR, RISING);
-      }
-    }
-  return;
+  //if (Serial.available() > 0) {
+  if(millis()-print_time > 2000){
+    detachInterrupt(TACH_INTER); 
+    
+    elapsed_time = millis()-last_measurment_time;
+    float time_period = 60000.0/elapsed_time;
+    tach_rpm = time_period*tach_revolutions;
+    left_rpm = 60000.0/(elapsed_time)*left_revolutions;
+
+    Serial.read();
+    sprintf(dataBuffer,"%05u,%05u",tach_rpm,left_rpm);
+    Serial.println(dataBuffer);
+    Serial.println(left_revolutions);
+    attachInterrupt(digitalPinToInterrupt(TACH_INTER), tach_isr, FALLING);
+
+    tach_revolutions = 0;
+    left_revolutions = 0;
+    last_measurment_time = millis();
+    print_time = millis();
+    memset(dataBuffer,0,sizeof(dataBuffer));
+  }
+  
 }
