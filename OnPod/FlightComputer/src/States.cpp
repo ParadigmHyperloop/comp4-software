@@ -196,6 +196,7 @@ bool Arming::testTransitions() {
     }
     try {
         this->commonChecks();
+        this->armedChecks();
     }
     catch (const std::runtime_error &error ){
         this->setupTransition(psStandby, error.what());
@@ -314,7 +315,8 @@ bool Acceleration::testTransitions() {
         this->armedChecks();
     }
     catch (const std::runtime_error &error ){
-        this->setupTransition(psBraking, error.what());
+        std::string reason = "Pod --> Braking";
+        this->setupTransition(psBraking, error.what() + reason);
         return true;
     }
     // Navigation checks
