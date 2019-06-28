@@ -51,13 +51,16 @@ int32_t UdpConnection::checkPacketId(int32_t id) {
 }
 
 void UdpConnection::getUpdate() {
+    if (this->_inboundSocket == UNCONFIGURED) {
+        return;
+    }
+    if (this->_inboundSocket == -1) {
+        std::string error = this->_connectionName + "getUpdate() : Server socket invalid";
+        throw std::runtime_error(error);
+    }
 
     bool opStatus = false;
 
-    if (this->_inboundSocket == -1) {
-        std::string error = "getUpdate() : Server socket invalid";
-        throw std::runtime_error(error);
-    }
     char buffer[200] = {0};
     bzero(&buffer, sizeof buffer);
     ssize_t receivedPacketSize = recvfrom(this->_inboundSocket, buffer, 200, 0, nullptr, nullptr);
@@ -83,7 +86,7 @@ void UdpConnection::getUpdate() {
 }
 
 void UdpConnection::giveUpdate() {
-    if(!this->_update_freq.expired()){
+    if(!this->_update_freq.expired() || this->_outboundSocket == UNCONFIGURED){
         return;
     }
     this->_update_freq.feed();
@@ -269,9 +272,14 @@ bool EnclosureNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
 }
 
 /*
- *  ***************** Enclosure Node Connection *******************
+ *  ***************** LVDC Node Connection *******************
  */
 
+LvdcNodeConnection::LvdcNodeConnection(TelemetryManager pod) : UdpConnection(pod) {
+    this->_connectionName = "Lvdc Node : ";
+    this->_connectionStatusIndex = LVDC_NODE_HEARTBEAT_INDEX;
+}
 
-
-
+bool LvdcNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
+    return true; //todo
+}
