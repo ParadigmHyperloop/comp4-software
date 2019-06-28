@@ -230,7 +230,35 @@ void TelemetryManager::setPressureVesselTemperature(float value){
     this->setNodeSensorFlag(status, HP_TEMP_INDEX);
 }
 
-// Inverter
+//          Enclosure
+void TelemetryManager::setEnclosurePressure(float value) {
+    bool status;
+    this->telemetry->enclosurePressure = value;
+    status = inRange<float>(value, ATMOSPHERE, ATMOSPHERE_THRESHOLD);
+    this->setNodeSensorFlag(status, ENCLOSURE_PRESSURE_INDEX);
+}
+
+void TelemetryManager::setEnclosureTemperature(float value) {
+    bool status;
+    this->telemetry->enclosureTemperature = value;
+    status = inRange<float>(value, ENCLOSURE_TEMP, ENCLOSURE_TEMP_THRESHOLD);
+    this->setNodeSensorFlag(status, ENCLOSURE_TEMPERATURE_INDEX);
+}
+
+void TelemetryManager::setCoolantLinePressure(float value) {
+    bool status;
+    PodStates currentState = this->getPodStateValue();
+    if(currentState == psArming || currentState == psArmed || currentState == psAcceleration || currentState == psCoasting){
+        status = inThreshold<float>(value, COOLING_ENGAGED, COOLING_THRESHOLD);
+    }else{
+        status = inRange<float>(value, 10, COOLING_ENGAGED + COOLING_THRESHOLD);
+    }
+    // Set sensor flag
+    this->setNodeSensorFlag(status, COOLING_PRESSURE_INDEX);
+}
+
+
+//          Inverter
 
 void TelemetryManager::setMaxIgbtTemperature(float value) {
     if (!this->bWriteInverter) {
@@ -297,7 +325,6 @@ void TelemetryManager::setInverterBusVoltage(int value) {
 
 
 //          Flag Setting
-
 
 void TelemetryManager::setNodeSensorFlag(int32_t status, int32_t index){
     int32_t currentStatus = this->telemetry->nodeSensorFlags[index];

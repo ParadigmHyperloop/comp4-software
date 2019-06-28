@@ -64,6 +64,11 @@ struct PodValues {
     // Atmosphere
     double tubePressure = 0;
 
+    // Enclosure
+    float enclosurePressure = 0;
+    float enclosureTemperature = 0;
+    float coolingLinePressure = 0;
+
     // Brake Node
     bool solenoid1;
     bool solenoid2;

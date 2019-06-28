@@ -241,7 +241,6 @@ bool BrakeNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
    // this->pod.setPressureVesselTemperature(protoMessage.pneumatictemperature());
     this->pod.setHighPressure(protoMessage.highpressure());
     this->pod.setLowPressure(protoMessage.lowpressure1(), LP1_INDEX);
-    //this->pod.telemetry->rotorTemperature = protoMessage.rotortemperature(); //dts
     return true;
 }
 
@@ -254,7 +253,6 @@ EnclosureNodeConnection::EnclosureNodeConnection(TelemetryManager pod) : UdpConn
     this->_connectionStatusIndex = ENCLOSURE_HEARTBEAT_INDEX;
 }
 
-
 bool EnclosureNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
     EnclosureNodeToFc protoMessage = EnclosureNodeToFc();
     if (!protoMessage.ParseFromArray(buffer, messageSize)) {
@@ -264,11 +262,10 @@ bool EnclosureNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
     if(this->checkPacketId(protoMessage.packetnum())){
         return false;
     }
-
-    //TODO Add parsings
-
+    this->pod.setEnclosurePressure(protoMessage.enclosurepressure());
+    this->pod.setEnclosureTemperature(protoMessage.enclosuretemperature());
+    this->pod.setCoolantLinePressure(protoMessage.coolantlinepressure());
     return true;
-
 }
 
 /*
