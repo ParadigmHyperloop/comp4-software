@@ -2431,12 +2431,12 @@ class FlightConfig :
   ::google::protobuf::uint32 retrievaltimeout() const;
   void set_retrievaltimeout(::google::protobuf::uint32 value);
 
-  // optional int32 heartbeatTimeout = 4 [default = 10000];
-  bool has_heartbeattimeout() const;
-  void clear_heartbeattimeout();
-  static const int kHeartbeatTimeoutFieldNumber = 4;
-  ::google::protobuf::int32 heartbeattimeout() const;
-  void set_heartbeattimeout(::google::protobuf::int32 value);
+  // optional int32 brakeNodeUpdateFreq = 11 [default = 10];
+  bool has_brakenodeupdatefreq() const;
+  void clear_brakenodeupdatefreq();
+  static const int kBrakeNodeUpdateFreqFieldNumber = 11;
+  ::google::protobuf::int32 brakenodeupdatefreq() const;
+  void set_brakenodeupdatefreq(::google::protobuf::int32 value);
 
   // optional int32 pdsTelemetryPort = 2 [default = 7000];
   bool has_pdstelemetryport() const;
@@ -2458,6 +2458,20 @@ class FlightConfig :
   static const int kBrakeNodePortFieldNumber = 7;
   ::google::protobuf::uint64 brakenodeport() const;
   void set_brakenodeport(::google::protobuf::uint64 value);
+
+  // optional int32 heartbeatTimeout = 4 [default = 10000];
+  bool has_heartbeattimeout() const;
+  void clear_heartbeattimeout();
+  static const int kHeartbeatTimeoutFieldNumber = 4;
+  ::google::protobuf::int32 heartbeattimeout() const;
+  void set_heartbeattimeout(::google::protobuf::int32 value);
+
+  // optional int32 pdsUpdateFreq = 10 [default = 500];
+  bool has_pdsupdatefreq() const;
+  void clear_pdsupdatefreq();
+  static const int kPdsUpdateFreqFieldNumber = 10;
+  ::google::protobuf::int32 pdsupdatefreq() const;
+  void set_pdsupdatefreq(::google::protobuf::int32 value);
 
   // optional uint64 brakeNodeTimeout = 8 [default = 4000];
   bool has_brakenodetimeout() const;
@@ -2486,10 +2500,12 @@ class FlightConfig :
   private:
   ::google::protobuf::internal::ArenaStringPtr controllaptopipaddr_;
   ::google::protobuf::uint32 retrievaltimeout_;
-  ::google::protobuf::int32 heartbeattimeout_;
+  ::google::protobuf::int32 brakenodeupdatefreq_;
   ::google::protobuf::int32 pdstelemetryport_;
   ::google::protobuf::int32 commandport_;
   ::google::protobuf::uint64 brakenodeport_;
+  ::google::protobuf::int32 heartbeattimeout_;
+  ::google::protobuf::int32 pdsupdatefreq_;
   ::google::protobuf::uint64 brakenodetimeout_;
   ::google::protobuf::uint64 brakenodeserverport_;
   friend struct ::TableStruct_Paradigm_2eproto;
@@ -5292,18 +5308,18 @@ inline void FlightConfig::set_commandport(::google::protobuf::int32 value) {
 
 // optional int32 heartbeatTimeout = 4 [default = 10000];
 inline bool FlightConfig::has_heartbeattimeout() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000080u) != 0;
 }
 inline void FlightConfig::clear_heartbeattimeout() {
   heartbeattimeout_ = 10000;
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000080u;
 }
 inline ::google::protobuf::int32 FlightConfig::heartbeattimeout() const {
   // @@protoc_insertion_point(field_get:FlightConfig.heartbeatTimeout)
   return heartbeattimeout_;
 }
 inline void FlightConfig::set_heartbeattimeout(::google::protobuf::int32 value) {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000080u;
   heartbeattimeout_ = value;
   // @@protoc_insertion_point(field_set:FlightConfig.heartbeatTimeout)
 }
@@ -5448,38 +5464,74 @@ inline void FlightConfig::set_brakenodeport(::google::protobuf::uint64 value) {
 
 // optional uint64 brakeNodeTimeout = 8 [default = 4000];
 inline bool FlightConfig::has_brakenodetimeout() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
+  return (_has_bits_[0] & 0x00000200u) != 0;
 }
 inline void FlightConfig::clear_brakenodetimeout() {
   brakenodetimeout_ = PROTOBUF_ULONGLONG(4000);
-  _has_bits_[0] &= ~0x00000080u;
+  _has_bits_[0] &= ~0x00000200u;
 }
 inline ::google::protobuf::uint64 FlightConfig::brakenodetimeout() const {
   // @@protoc_insertion_point(field_get:FlightConfig.brakeNodeTimeout)
   return brakenodetimeout_;
 }
 inline void FlightConfig::set_brakenodetimeout(::google::protobuf::uint64 value) {
-  _has_bits_[0] |= 0x00000080u;
+  _has_bits_[0] |= 0x00000200u;
   brakenodetimeout_ = value;
   // @@protoc_insertion_point(field_set:FlightConfig.brakeNodeTimeout)
 }
 
 // optional uint64 brakeNodeServerPort = 9 [default = 5550];
 inline bool FlightConfig::has_brakenodeserverport() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
+  return (_has_bits_[0] & 0x00000400u) != 0;
 }
 inline void FlightConfig::clear_brakenodeserverport() {
   brakenodeserverport_ = PROTOBUF_ULONGLONG(5550);
-  _has_bits_[0] &= ~0x00000100u;
+  _has_bits_[0] &= ~0x00000400u;
 }
 inline ::google::protobuf::uint64 FlightConfig::brakenodeserverport() const {
   // @@protoc_insertion_point(field_get:FlightConfig.brakeNodeServerPort)
   return brakenodeserverport_;
 }
 inline void FlightConfig::set_brakenodeserverport(::google::protobuf::uint64 value) {
-  _has_bits_[0] |= 0x00000100u;
+  _has_bits_[0] |= 0x00000400u;
   brakenodeserverport_ = value;
   // @@protoc_insertion_point(field_set:FlightConfig.brakeNodeServerPort)
+}
+
+// optional int32 pdsUpdateFreq = 10 [default = 500];
+inline bool FlightConfig::has_pdsupdatefreq() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void FlightConfig::clear_pdsupdatefreq() {
+  pdsupdatefreq_ = 500;
+  _has_bits_[0] &= ~0x00000100u;
+}
+inline ::google::protobuf::int32 FlightConfig::pdsupdatefreq() const {
+  // @@protoc_insertion_point(field_get:FlightConfig.pdsUpdateFreq)
+  return pdsupdatefreq_;
+}
+inline void FlightConfig::set_pdsupdatefreq(::google::protobuf::int32 value) {
+  _has_bits_[0] |= 0x00000100u;
+  pdsupdatefreq_ = value;
+  // @@protoc_insertion_point(field_set:FlightConfig.pdsUpdateFreq)
+}
+
+// optional int32 brakeNodeUpdateFreq = 11 [default = 10];
+inline bool FlightConfig::has_brakenodeupdatefreq() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void FlightConfig::clear_brakenodeupdatefreq() {
+  brakenodeupdatefreq_ = 10;
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline ::google::protobuf::int32 FlightConfig::brakenodeupdatefreq() const {
+  // @@protoc_insertion_point(field_get:FlightConfig.brakeNodeUpdateFreq)
+  return brakenodeupdatefreq_;
+}
+inline void FlightConfig::set_brakenodeupdatefreq(::google::protobuf::int32 value) {
+  _has_bits_[0] |= 0x00000008u;
+  brakenodeupdatefreq_ = value;
+  // @@protoc_insertion_point(field_set:FlightConfig.brakeNodeUpdateFreq)
 }
 
 // -------------------------------------------------------------------

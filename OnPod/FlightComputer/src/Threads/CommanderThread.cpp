@@ -124,7 +124,7 @@ int32_t commanderThread(TelemetryManager Pod) {
     //Sockets and buffers
     int32_t connectionSock, operationStatus;
     ssize_t messageSize;
-    int32_t serverSock = createCommanderServerSocket(Pod.sPodNetworkValues->iCommanderPortNumber);
+    int32_t serverSock = createCommanderServerSocket(Pod.sPodNetworkValues->commanderPortNumber);
     char buffer[256] = {0};
     if (serverSock < 0) {
         // Restart thread?
@@ -133,7 +133,7 @@ int32_t commanderThread(TelemetryManager Pod) {
     }
 
     //Watchdog
-    Heartbeat pulse = Heartbeat(Pod.sPodNetworkValues->iCommaderTimeoutMili);
+    Heartbeat pulse = Heartbeat(Pod.sPodNetworkValues->commaderTimeoutMili);
 
     //pod state != shutdown
     while (Pod.getPodStateValue() != psShutdown) {

@@ -15,16 +15,15 @@ void UdpConnection::setRecvBufferSize(int32_t bufferSize) {
     }
 }
 
-
-void UdpConnection::configureClient(const std::string &destIp, int32_t destPortNum, int32_t outboundSocket) {
+void UdpConnection::configureClient(const std::string &destIp, int32_t destPortNum, int32_t outboundSocket, int32_t update_freq) {
     struct sockaddr_in sAddr = {0};
     this->_outboundSocket = outboundSocket;
     this->_destSockAddr = sAddr;
     this->_destSockAddr = createGenericNodeAddr();
     this->_destSockAddr.sin_port = htons(destPortNum);
     this->_destSockAddr.sin_addr.s_addr = inet_addr(destIp.c_str());
+    this->_update_freq = Heartbeat(update_freq);
 }
-
 
 void UdpConnection::configureServer(int32_t serverPort, int32_t connectionTimeoutMilis) {
     this->_pulse = Heartbeat(connectionTimeoutMilis);
@@ -50,7 +49,6 @@ int32_t UdpConnection::checkPacketId(int32_t id) {
         return true;
     }
 }
-
 
 void UdpConnection::getUpdate() {
 
@@ -84,8 +82,11 @@ void UdpConnection::getUpdate() {
     }
 }
 
-
 void UdpConnection::giveUpdate() {
+    if(!this->_update_freq.expired()){
+        return;
+    }
+    this->_update_freq.feed();
 
     ssize_t payloadSize;
     std::unique_ptr<google::protobuf::Message> protoPacket(this->getProtoUpdateMessage());
