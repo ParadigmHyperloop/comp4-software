@@ -33,7 +33,7 @@ public:
      * @param destPortNum : Port of the destination address
      * @param outboundSocket : Socket to use when sending data
      */
-    void configureClient(const std::string &destIp, int32_t destPortNum, int32_t outboundSocket);
+    void configureClient(const std::string &destIp, int32_t destPortNum, int32_t outboundSocket, int32_t update_freq);
 
 
 
@@ -102,6 +102,7 @@ protected:
     int32_t _inboundSocket = -1;
     int32_t _serverPort = -1;
     Heartbeat _pulse = Heartbeat(0);
+    Heartbeat _update_freq;
     std::string _connectionName = "";
     struct sockaddr_in _destSockAddr{};
     int32_t _connectionStatusIndex;

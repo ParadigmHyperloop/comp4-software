@@ -82,22 +82,22 @@ struct PodValues {
 };
 
 struct PodNetwork {
-
     std::vector<int32_t> iActiveNodes = {0, 0, 0};
 
     std::vector<std::string> cNodeIpAddrs; //IP addrs of all nodes order: Brake, Rear, LVDC, Enclosure
-    int32_t iBrakeNodeServerPortNumber;
-    int32_t iBrakeNodePort; //Port # used by nodes to receive UDP updates
-    int32_t iNodeTimeoutMili;
+    int32_t brakeNodeServerPortNumber;
+    int32_t brakeNodePort; //Port # used by nodes to receive UDP updates
+    int32_t brakeNodeUpdateFreq; // How often we send state to Brake Node;
 
-    int32_t iNodeClientSocket; //Port used to send data to nodes
+    int32_t nodeTimeoutMili; // Max time to get update from a node
+    int32_t nodeClientSocket; //Port used to send data to nodes
 
-    int32_t iCommanderPortNumber; //Port # used by TCP Commander socket
-    int32_t iCommaderTimeoutMili; //Timeout
+    int32_t commanderPortNumber; //Port # used by TCP Commander socket
+    int32_t commaderTimeoutMili; //Timeout
 
-    int32_t iPdsTelemeteryPort; // Port # to send telemetry
+    int32_t pdsUpdateFreq; // How often we send telem to PDS
+    int32_t pdsTelemeteryPort; // Port # to send telemetry
     std::string strPdsIpAddr;
-
 };
 
 struct clientSocketConfig {

@@ -1,6 +1,10 @@
 #include "Heartbeat.h"
 #include "Common.h"
 
+Heartbeat::Heartbeat() {
+    this->_timeOutMilis = 0;
+}
+
 Heartbeat::Heartbeat(int32_t timeoutMilis)
 {
 	this->_timeOutMilis = timeoutMilis;
