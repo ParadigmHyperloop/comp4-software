@@ -713,7 +713,7 @@ const char descriptor_table_protodef_Paradigm_2eproto[] =
   "ort\030\t \001(\004:\0045550\022\032\n\rpdsUpdateFreq\030\n \001(\005:\003"
   "500\022\037\n\023brakeNodeUpdateFreq\030\013 \001(\005:\00210\022\'\n\031"
   "enclosureNodeServerNumber\030\014 \001(\005:\0045551\022\"\n"
-  "\024lvdcNodeServerNumber\030\r \001(\005:\0045551\"/\n\017Def"
+  "\024lvdcNodeServerNumber\030\r \001(\005:\0045552\"/\n\017Def"
   "aultFcToNode\022\034\n\010podState\030\001 \001(\0162\n.PodStat"
   "es*u\n\017BrakeNodeStates\022\016\n\nbnsBooting\020\000\022\016\n"
   "\nbnsStandby\020\001\022\r\n\tbnsFlight\020\002\022\016\n\nbnsBraki"
@@ -9548,7 +9548,7 @@ void FlightConfig::SharedCtor() {
   poddriver_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   controllaptopipaddr_.UnsafeSetDefault(&::FlightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get());
   retrievaltimeout_ = 0u;
-  lvdcnodeservernumber_ = 5551;
+  lvdcnodeservernumber_ = 5552;
   pdstelemetryport_ = 7000;
   commandport_ = 6000;
   nodeport_ = PROTOBUF_ULONGLONG(5555);
@@ -9596,7 +9596,7 @@ void FlightConfig::Clear() {
   }
   if (cached_has_bits & 0x000000fcu) {
     retrievaltimeout_ = 0u;
-    lvdcnodeservernumber_ = 5551;
+    lvdcnodeservernumber_ = 5552;
     pdstelemetryport_ = 7000;
     commandport_ = 6000;
     nodeport_ = PROTOBUF_ULONGLONG(5555);
@@ -9728,7 +9728,7 @@ const char* FlightConfig::_InternalParse(const char* begin, const char* end, voi
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // optional int32 lvdcNodeServerNumber = 13 [default = 5551];
+      // optional int32 lvdcNodeServerNumber = 13 [default = 5552];
       case 13: {
         if (static_cast<::google::protobuf::uint8>(tag) != 104) goto handle_unusual;
         msg->set_lvdcnodeservernumber(::google::protobuf::internal::ReadVarint(&ptr));
@@ -9929,7 +9929,7 @@ bool FlightConfig::MergePartialFromCodedStream(
         break;
       }
 
-      // optional int32 lvdcNodeServerNumber = 13 [default = 5551];
+      // optional int32 lvdcNodeServerNumber = 13 [default = 5552];
       case 13: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (104 & 0xFF)) {
           HasBitSetters::set_has_lvdcnodeservernumber(this);
@@ -10040,7 +10040,7 @@ void FlightConfig::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(12, this->enclosurenodeservernumber(), output);
   }
 
-  // optional int32 lvdcNodeServerNumber = 13 [default = 5551];
+  // optional int32 lvdcNodeServerNumber = 13 [default = 5552];
   if (cached_has_bits & 0x00000008u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(13, this->lvdcnodeservernumber(), output);
   }
@@ -10131,7 +10131,7 @@ void FlightConfig::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(12, this->enclosurenodeservernumber(), target);
   }
 
-  // optional int32 lvdcNodeServerNumber = 13 [default = 5551];
+  // optional int32 lvdcNodeServerNumber = 13 [default = 5552];
   if (cached_has_bits & 0x00000008u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(13, this->lvdcnodeservernumber(), target);
   }
@@ -10180,7 +10180,7 @@ size_t FlightConfig::ByteSizeLong() const {
           this->retrievaltimeout());
     }
 
-    // optional int32 lvdcNodeServerNumber = 13 [default = 5551];
+    // optional int32 lvdcNodeServerNumber = 13 [default = 5552];
     if (cached_has_bits & 0x00000008u) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(

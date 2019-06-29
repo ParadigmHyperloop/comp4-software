@@ -4,6 +4,8 @@
 #include "Common.h"
 #include "Heartbeat.h"
 #include "TelemetryManager.h"
+#include "Constants/SensorConfig.h"
+
 
 // Get manual state change commands. Get Estop command
 
@@ -32,6 +34,7 @@ int32_t createCommanderServerSocket(int32_t serverPortNumber) {
 
 void parseOverrides(PodCommand podCommand, TelemetryManager *Pod) {
     // This is gross... dont look! ;)
+    int32_t flag;
     for (int i = 0; i < 5; ++i) {
         if(podCommand.sensoroverrideconfiguration(i)){
             Pod->telemetry->nodeSensorFlags[i] = 2;
@@ -57,6 +60,18 @@ void parseOverrides(PodCommand podCommand, TelemetryManager *Pod) {
     }
     if(podCommand.sensoroverrideconfiguration(9)){
         Pod->setConnectionFlag(2,ENCLOSURE_HEARTBEAT_INDEX);
+    }
+    if(podCommand.sensoroverrideconfiguration(10)){
+        Pod->setNodeSensorFlag(2,ENCLOSURE_PRESSURE_INDEX);
+    }
+    if(podCommand.sensoroverrideconfiguration(11)){
+        Pod->setNodeSensorFlag(2,ENCLOSURE_TEMPERATURE_INDEX);
+    }
+    if(podCommand.sensoroverrideconfiguration(12)){
+        Pod->setNodeSensorFlag(2,COOLING_PRESSURE_INDEX);
+    }
+    if(podCommand.sensoroverrideconfiguration(13)){
+        Pod->setNodeSensorFlag(2,COOLING_TEMPERATURE_INDEX);
     }
 }
 

@@ -138,7 +138,7 @@ bool UdpConnection::_createServerSocket() {
     SocketAddr.sin_addr.s_addr = INADDR_ANY;
     int32_t status = bind(serverSocket, (struct sockaddr *) &SocketAddr, sizeof(SocketAddr));
     if (status < 0) {
-        std::string sError = std::string("Binding Server Socket: ") + std::strerror(errno);
+        std::string sError = this->_connectionName + std::string("Binding Server Socket: ") + std::strerror(errno);
         throw std::runtime_error(sError);
     }
     this->_inboundSocket = serverSocket;

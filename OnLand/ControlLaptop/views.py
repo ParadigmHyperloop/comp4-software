@@ -193,7 +193,7 @@ def parse_overrdies():
     form = OverridesForm()
     if form.validate_on_submit():
         data = form.data
-        profile = [None] * 10
+        profile = [None] * 14
         profile[0] = data['lp_1']
         profile[1] = data['lp_2']
         profile[2] = data['lp_3']
@@ -208,7 +208,6 @@ def parse_overrdies():
         profile[11] = data['enclosure_temperature']
         profile[12] = data['cooling_pressure']
         profile[13] = data['cooling_temperature']
-
         payload = dict()
         payload['target'] = 'pod'
         payload['configuration'] = profile

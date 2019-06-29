@@ -2439,7 +2439,7 @@ class FlightConfig :
   ::google::protobuf::uint32 retrievaltimeout() const;
   void set_retrievaltimeout(::google::protobuf::uint32 value);
 
-  // optional int32 lvdcNodeServerNumber = 13 [default = 5551];
+  // optional int32 lvdcNodeServerNumber = 13 [default = 5552];
   bool has_lvdcnodeservernumber() const;
   void clear_lvdcnodeservernumber();
   static const int kLvdcNodeServerNumberFieldNumber = 13;
@@ -5594,12 +5594,12 @@ inline void FlightConfig::set_enclosurenodeservernumber(::google::protobuf::int3
   // @@protoc_insertion_point(field_set:FlightConfig.enclosureNodeServerNumber)
 }
 
-// optional int32 lvdcNodeServerNumber = 13 [default = 5551];
+// optional int32 lvdcNodeServerNumber = 13 [default = 5552];
 inline bool FlightConfig::has_lvdcnodeservernumber() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void FlightConfig::clear_lvdcnodeservernumber() {
-  lvdcnodeservernumber_ = 5551;
+  lvdcnodeservernumber_ = 5552;
   _has_bits_[0] &= ~0x00000008u;
 }
 inline ::google::protobuf::int32 FlightConfig::lvdcnodeservernumber() const {
