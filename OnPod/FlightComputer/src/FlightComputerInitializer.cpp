@@ -49,5 +49,4 @@ void FlightComputerInitializer::updatePodNetworkValues(PodNetwork& podNetworkVal
     podNetworkValues.strPdsIpAddr = config.controllaptopipaddr(); // Ip Addr of PDS.
     podNetworkValues.brakeNodeUpdateFreq = config.brakenodeupdatefreq();
     podNetworkValues.pdsUpdateFreq = config.pdsupdatefreq();
-
 }
