@@ -25,6 +25,19 @@
                             {{ overridesForm.hp_temp(class_="form") }}
                        </div>
                         <div class="col-md-2">
+                            {{ overridesForm.enclosure_pressure.label }}
+                            {{ overridesForm.enclosure_pressure(class_="form") }}
+                           <br>
+                            {{ overridesForm.enclosure_temperature.label }}
+                            {{ overridesForm.enclosure_temperature(class_="form") }}
+                           <br>
+                            {{ overridesForm.cooling_pressure.label }}
+                            {{ overridesForm.cooling_pressure(class_="form") }}
+                            <br>
+                            {{ overridesForm.cooling_temperature.label }}
+                            {{ overridesForm.cooling_temperature(class_="form") }}
+                       </div>
+                        <div class="col-md-2">
                             {{ overridesForm.bms_values.label }}
                             {{ overridesForm.bms_values(class_="form") }}
                             <br>

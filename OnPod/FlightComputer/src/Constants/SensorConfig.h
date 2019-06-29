@@ -30,6 +30,10 @@
 #define LP3_INDEX 2
 #define HP_INDEX  3
 #define HP_TEMP_INDEX 4
+#define ENCLOSURE_PRESSURE_INDEX 5
+#define ENCLOSURE_TEMPERATURE_INDEX 6
+#define COOLING_PRESSURE_INDEX 7
+#define COOLING_TEMPERATURE_INDEX 8
 
 // Solenoid Status indices
 #define SOL1_INDEX 0
@@ -37,6 +41,11 @@
 #define SOL3_INDEX 2
 #define SOL4_INDEX 3
 
+// Enclosure
+#define ENCLOSURE_TEMP 20
+#define ENCLOSURE_TEMP_THRESHOLD 5
+#define COOLING_ENGAGED 30
+#define COOLING_THRESHOLD 5
 
 // Pneumatics
 

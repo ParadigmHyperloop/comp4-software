@@ -4,7 +4,7 @@
 UdpConnection *getBrakeNodeConnection(TelemetryManager Pod) {
     auto BrakeNode = new BrakeNodeConnection(Pod);
     try {
-        BrakeNode->configureClient(Pod.sPodNetworkValues->cNodeIpAddrs[0], Pod.sPodNetworkValues->brakeNodePort,
+        BrakeNode->configureClient(Pod.sPodNetworkValues->cNodeIpAddrs[0], Pod.sPodNetworkValues->nodePort,
                                    Pod.sPodNetworkValues->nodeClientSocket, Pod.sPodNetworkValues->brakeNodeUpdateFreq);
         BrakeNode->configureServer(Pod.sPodNetworkValues->brakeNodeServerPortNumber,
                                    Pod.sPodNetworkValues->nodeTimeoutMili);
@@ -16,10 +16,33 @@ UdpConnection *getBrakeNodeConnection(TelemetryManager Pod) {
     return BrakeNode;
 }
 
-UdpConnection *getRearNodeConnection(TelemetryManager Pod) {
-    auto BrakeNode = new BrakeNodeConnection(Pod);
-    return BrakeNode;
+UdpConnection *getEnclosureNodeConnection(TelemetryManager Pod) {
+    auto enclosureNode = new EnclosureNodeConnection(Pod);
+    try {
+        enclosureNode->configureServer(Pod.sPodNetworkValues->enclosureNodeServerNumber,
+                                   Pod.sPodNetworkValues->nodeTimeoutMili);
+        enclosureNode->setRecvBufferSize(100); // Small recv buffer keeps parsed data fresh.
+    }
+    catch (std::runtime_error &e) {
+        throw e;
+    }
+    return enclosureNode;
 }
+
+UdpConnection *getLvdcNodeConnection(TelemetryManager Pod) {
+    auto lvdcNode = new LvdcNodeConnection(Pod);
+    try {
+        lvdcNode->configureServer(Pod.sPodNetworkValues->lvdcNodeServerNumber,
+                                       Pod.sPodNetworkValues->nodeTimeoutMili);
+        lvdcNode->setRecvBufferSize(100); // Small recv buffer keeps parsed data fresh.
+    }
+    catch (std::runtime_error &e) {
+        throw e;
+    }
+    return lvdcNode;
+}
+
+
 
 UdpConnection *getPdsConnection(TelemetryManager Pod){
     auto connection = new PdsConnection(Pod);
@@ -49,12 +72,16 @@ int32_t udpTelemetryThread(TelemetryManager Pod) {
         return -1;
     }
 
-    UdpConnection* paradigmDataShuffle = getPdsConnection(Pod);
-
     std::vector<UdpConnection *> nodes; // Vector containing all Node Connections
     try {
         UdpConnection *brakeNode = getBrakeNodeConnection(Pod);
         nodes.push_back(brakeNode);
+        UdpConnection* paradigmDataShuffle = getPdsConnection(Pod);
+        nodes.push_back(paradigmDataShuffle);
+        UdpConnection* enclosureNode = getEnclosureNodeConnection(Pod);
+        nodes.push_back(enclosureNode);
+        UdpConnection* lvdcNode = getLvdcNodeConnection(Pod);
+        nodes.push_back(lvdcNode);
     }
     catch (std::runtime_error &e) {
         LOG(INFO) << e.what();
@@ -71,15 +98,12 @@ int32_t udpTelemetryThread(TelemetryManager Pod) {
                 LOG(INFO) << e.what();
             }
         }
-        paradigmDataShuffle->giveUpdate(); //Send telemetry packet to PDS
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
     for (auto &&node: nodes) {
         node->closeConnection();
         delete node;
     }
     close(Pod.sPodNetworkValues->nodeClientSocket);
-    delete paradigmDataShuffle;
     return 1;
 }
 

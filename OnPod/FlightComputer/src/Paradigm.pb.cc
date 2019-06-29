@@ -458,10 +458,12 @@ const ::google::protobuf::uint32 TableStruct_Paradigm_2eproto::offsets[] PROTOBU
   PROTOBUF_FIELD_OFFSET(::EnclosureNodeToFc, enclosurepressure_),
   PROTOBUF_FIELD_OFFSET(::EnclosureNodeToFc, enclosuretemperature_),
   PROTOBUF_FIELD_OFFSET(::EnclosureNodeToFc, coolantlinepressure_),
+  PROTOBUF_FIELD_OFFSET(::EnclosureNodeToFc, coolantlinepressure2_),
   0,
   1,
   2,
   3,
+  4,
   PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, _has_bits_),
   PROTOBUF_FIELD_OFFSET(::LvdcNodeToFc, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -541,11 +543,13 @@ const ::google::protobuf::uint32 TableStruct_Paradigm_2eproto::offsets[] PROTOBU
   PROTOBUF_FIELD_OFFSET(::FlightConfig, heartbeattimeout_),
   PROTOBUF_FIELD_OFFSET(::FlightConfig, poddriver_),
   PROTOBUF_FIELD_OFFSET(::FlightConfig, controllaptopipaddr_),
-  PROTOBUF_FIELD_OFFSET(::FlightConfig, brakenodeport_),
-  PROTOBUF_FIELD_OFFSET(::FlightConfig, brakenodetimeout_),
+  PROTOBUF_FIELD_OFFSET(::FlightConfig, nodeport_),
+  PROTOBUF_FIELD_OFFSET(::FlightConfig, nodetimeout_),
   PROTOBUF_FIELD_OFFSET(::FlightConfig, brakenodeserverport_),
   PROTOBUF_FIELD_OFFSET(::FlightConfig, pdsupdatefreq_),
   PROTOBUF_FIELD_OFFSET(::FlightConfig, brakenodeupdatefreq_),
+  PROTOBUF_FIELD_OFFSET(::FlightConfig, enclosurenodeservernumber_),
+  PROTOBUF_FIELD_OFFSET(::FlightConfig, lvdcnodeservernumber_),
   2,
   4,
   5,
@@ -556,6 +560,8 @@ const ::google::protobuf::uint32 TableStruct_Paradigm_2eproto::offsets[] PROTOBU
   9,
   10,
   8,
+  11,
+  12,
   3,
   PROTOBUF_FIELD_OFFSET(::DefaultFcToNode, _has_bits_),
   PROTOBUF_FIELD_OFFSET(::DefaultFcToNode, _internal_metadata_),
@@ -571,11 +577,11 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] PROTOBUF_SE
   { 182, 193, sizeof(::FcToBrakeNode)},
   { 199, 207, sizeof(::FcToLvdcNode)},
   { 210, 223, sizeof(::DtsNodeToFc)},
-  { 231, 240, sizeof(::EnclosureNodeToFc)},
-  { 244, 265, sizeof(::LvdcNodeToFc)},
-  { 281, 299, sizeof(::BrakeNodeToFc)},
-  { 312, 328, sizeof(::FlightConfig)},
-  { 339, 345, sizeof(::DefaultFcToNode)},
+  { 231, 241, sizeof(::EnclosureNodeToFc)},
+  { 246, 267, sizeof(::LvdcNodeToFc)},
+  { 283, 301, sizeof(::BrakeNodeToFc)},
+  { 314, 332, sizeof(::FlightConfig)},
+  { 345, 351, sizeof(::DefaultFcToNode)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -674,60 +680,63 @@ const char descriptor_table_protodef_Paradigm_2eproto[] =
   "e\030\003 \002(\010\022\031\n\021ventSolenoidState\030\004 \002(\010\022\030\n\020ro"
   "torTemperature\030\005 \002(\002\022\034\n\024pneumaticTempera"
   "ture\030\006 \002(\002\022\024\n\014tankPressure\030\007 \002(\002\022\025\n\rbrak"
-  "ePressure\030\010 \002(\002\"|\n\021EnclosureNodeToFc\022\021\n\t"
-  "packetNum\030\001 \002(\005\022\031\n\021enclosurePressure\030\002 \002"
-  "(\002\022\034\n\024enclosureTemperature\030\003 \002(\002\022\033\n\023cool"
-  "antLinePressure\030\004 \002(\002\"\270\003\n\014LvdcNodeToFc\022\021"
-  "\n\tpacketNum\030\001 \002(\005\022\036\n\005state\030\002 \002(\0162\017.LvdcN"
-  "odeStates\022\034\n\024highPowerPackVoltage\030\003 \002(\002\022"
-  "\033\n\023lowPowerPackVoltage\030\004 \002(\002\022\034\n\024highPowe"
-  "rPackCurrent\030\005 \002(\002\022\033\n\023lowPowerPackCurren"
-  "t\030\006 \002(\002\022\030\n\020lowPower5Voltage\030\007 \002(\002\022\031\n\021low"
-  "Power12Voltage\030\010 \002(\002\022\032\n\022highPower12Volta"
-  "ge\030\t \002(\002\022\031\n\021lowPower24Voltage\030\n \002(\002\022\030\n\020l"
-  "owPower5Current\030\013 \002(\002\022\031\n\021lowPower12Curre"
-  "nt\030\014 \002(\002\022\023\n\013nodeCurrent\030\r \002(\002\022\027\n\017inverte"
-  "rCurrent\030\016 \002(\002\022\027\n\017cooling1Current\030\017 \002(\002\022"
-  "\027\n\017cooling2Current\030\020 \002(\002\"\275\002\n\rBrakeNodeTo"
-  "Fc\022\021\n\tpacketNum\030\001 \002(\005\022\037\n\005state\030\002 \002(\0162\020.B"
-  "rakeNodeStates\022\021\n\tsolenoid1\030\003 \002(\010\022\021\n\tsol"
-  "enoid2\030\004 \002(\010\022\021\n\tsolenoid3\030\005 \002(\010\022\021\n\tsolen"
-  "oid4\030\006 \002(\010\022\024\n\014highPressure\030\007 \002(\002\022\024\n\014lowP"
-  "ressure1\030\010 \002(\002\022\024\n\014lowPressure2\030\t \002(\002\022\024\n\014"
-  "lowPressure3\030\n \002(\002\022\031\n\021lowPressureCommon\030"
-  "\013 \002(\002\022\034\n\024pneumaticTemperature\030\014 \002(\002\022\033\n\023c"
-  "oolantTankPressure\030\r \002(\002\"\334\002\n\014FlightConfi"
-  "g\022\030\n\020retrievalTimeout\030\001 \001(\r\022\036\n\020pdsTeleme"
-  "tryPort\030\002 \001(\005:\0047000\022\031\n\013commandPort\030\003 \001(\005"
-  ":\0046000\022\037\n\020heartbeatTimeout\030\004 \001(\005:\00510000\022"
-  "\021\n\tpodDriver\030\005 \001(\t\022&\n\023controlLaptopIpAdd"
-  "r\030\006 \001(\t:\t127.0.0.1\022\033\n\rbrakeNodePort\030\007 \001("
-  "\004:\0045555\022\036\n\020brakeNodeTimeout\030\010 \001(\004:\0044000\022"
-  "!\n\023brakeNodeServerPort\030\t \001(\004:\0045550\022\032\n\rpd"
-  "sUpdateFreq\030\n \001(\005:\003500\022\037\n\023brakeNodeUpdat"
-  "eFreq\030\013 \001(\005:\00210\"/\n\017DefaultFcToNode\022\034\n\010po"
-  "dState\030\001 \001(\0162\n.PodStates*u\n\017BrakeNodeSta"
-  "tes\022\016\n\nbnsBooting\020\000\022\016\n\nbnsStandby\020\001\022\r\n\tb"
-  "nsFlight\020\002\022\016\n\nbnsBraking\020\003\022\026\n\022bnsSolenoi"
-  "dControl\020\004\022\013\n\007bnsNone\020\005*\244\001\n\tPodStates\022\r\n"
-  "\tpsBooting\020\000\022\r\n\tpsStandby\020\001\022\014\n\010psArming\020"
-  "\002\022\013\n\007psArmed\020\003\022\017\n\013psPreFlight\020\004\022\022\n\016psAcc"
-  "eleration\020\005\022\016\n\npsCoasting\020\006\022\r\n\tpsBraking"
-  "\020\007\022\016\n\npsShutdown\020\010\022\n\n\006psNone\020\t*C\n\013MotorS"
-  "tates\022\t\n\005msOff\020\000\022\016\n\nmsCharging\020\001\022\n\n\006msId"
-  "le\020\002\022\r\n\tmsEngaged\020\003*q\n\027ControlsInterface"
-  "States\022\r\n\tciStandby\020\000\022\t\n\005ciArm\020\001\022\014\n\010ciFl"
-  "ight\020\002\022\023\n\017ciEmergencyStop\020\003\022\n\n\006ciNone\020\004\022"
-  "\r\n\tciRestart\020\005*-\n\016InverterStates\022\n\n\006isNo"
-  "ne\020\000\022\017\n\013isConnected\020\001*)\n\027BatteryManageme"
-  "ntStates\022\016\n\nbmsNominal\020\000*P\n\016LvdcNodeStat"
-  "es\022\017\n\013lvdcBooting\020\000\022\017\n\013lvdcStandby\020\001\022\016\n\n"
-  "lvdcFlight\020\002\022\014\n\010lvdcNone\020\003"
+  "ePressure\030\010 \002(\002\"\232\001\n\021EnclosureNodeToFc\022\021\n"
+  "\tpacketNum\030\001 \002(\005\022\031\n\021enclosurePressure\030\002 "
+  "\002(\002\022\034\n\024enclosureTemperature\030\003 \002(\002\022\033\n\023coo"
+  "lantLinePressure\030\004 \002(\002\022\034\n\024coolantLinePre"
+  "ssure2\030\005 \002(\002\"\270\003\n\014LvdcNodeToFc\022\021\n\tpacketN"
+  "um\030\001 \002(\005\022\036\n\005state\030\002 \002(\0162\017.LvdcNodeStates"
+  "\022\034\n\024highPowerPackVoltage\030\003 \002(\002\022\033\n\023lowPow"
+  "erPackVoltage\030\004 \002(\002\022\034\n\024highPowerPackCurr"
+  "ent\030\005 \002(\002\022\033\n\023lowPowerPackCurrent\030\006 \002(\002\022\030"
+  "\n\020lowPower5Voltage\030\007 \002(\002\022\031\n\021lowPower12Vo"
+  "ltage\030\010 \002(\002\022\032\n\022highPower12Voltage\030\t \002(\002\022"
+  "\031\n\021lowPower24Voltage\030\n \002(\002\022\030\n\020lowPower5C"
+  "urrent\030\013 \002(\002\022\031\n\021lowPower12Current\030\014 \002(\002\022"
+  "\023\n\013nodeCurrent\030\r \002(\002\022\027\n\017inverterCurrent\030"
+  "\016 \002(\002\022\027\n\017cooling1Current\030\017 \002(\002\022\027\n\017coolin"
+  "g2Current\030\020 \002(\002\"\275\002\n\rBrakeNodeToFc\022\021\n\tpac"
+  "ketNum\030\001 \002(\005\022\037\n\005state\030\002 \002(\0162\020.BrakeNodeS"
+  "tates\022\021\n\tsolenoid1\030\003 \002(\010\022\021\n\tsolenoid2\030\004 "
+  "\002(\010\022\021\n\tsolenoid3\030\005 \002(\010\022\021\n\tsolenoid4\030\006 \002("
+  "\010\022\024\n\014highPressure\030\007 \002(\002\022\024\n\014lowPressure1\030"
+  "\010 \002(\002\022\024\n\014lowPressure2\030\t \002(\002\022\024\n\014lowPressu"
+  "re3\030\n \002(\002\022\031\n\021lowPressureCommon\030\013 \002(\002\022\034\n\024"
+  "pneumaticTemperature\030\014 \002(\002\022\033\n\023coolantTan"
+  "kPressure\030\r \002(\002\"\237\003\n\014FlightConfig\022\030\n\020retr"
+  "ievalTimeout\030\001 \001(\r\022\036\n\020pdsTelemetryPort\030\002"
+  " \001(\005:\0047000\022\031\n\013commandPort\030\003 \001(\005:\0046000\022\037\n"
+  "\020heartbeatTimeout\030\004 \001(\005:\00510000\022\021\n\tpodDri"
+  "ver\030\005 \001(\t\022&\n\023controlLaptopIpAddr\030\006 \001(\t:\t"
+  "127.0.0.1\022\026\n\010nodePort\030\007 \001(\004:\0045555\022\031\n\013nod"
+  "eTimeout\030\010 \001(\004:\0042000\022!\n\023brakeNodeServerP"
+  "ort\030\t \001(\004:\0045550\022\032\n\rpdsUpdateFreq\030\n \001(\005:\003"
+  "500\022\037\n\023brakeNodeUpdateFreq\030\013 \001(\005:\00210\022\'\n\031"
+  "enclosureNodeServerNumber\030\014 \001(\005:\0045551\022\"\n"
+  "\024lvdcNodeServerNumber\030\r \001(\005:\0045552\"/\n\017Def"
+  "aultFcToNode\022\034\n\010podState\030\001 \001(\0162\n.PodStat"
+  "es*u\n\017BrakeNodeStates\022\016\n\nbnsBooting\020\000\022\016\n"
+  "\nbnsStandby\020\001\022\r\n\tbnsFlight\020\002\022\016\n\nbnsBraki"
+  "ng\020\003\022\026\n\022bnsSolenoidControl\020\004\022\013\n\007bnsNone\020"
+  "\005*\244\001\n\tPodStates\022\r\n\tpsBooting\020\000\022\r\n\tpsStan"
+  "dby\020\001\022\014\n\010psArming\020\002\022\013\n\007psArmed\020\003\022\017\n\013psPr"
+  "eFlight\020\004\022\022\n\016psAcceleration\020\005\022\016\n\npsCoast"
+  "ing\020\006\022\r\n\tpsBraking\020\007\022\016\n\npsShutdown\020\010\022\n\n\006"
+  "psNone\020\t*C\n\013MotorStates\022\t\n\005msOff\020\000\022\016\n\nms"
+  "Charging\020\001\022\n\n\006msIdle\020\002\022\r\n\tmsEngaged\020\003*q\n"
+  "\027ControlsInterfaceStates\022\r\n\tciStandby\020\000\022"
+  "\t\n\005ciArm\020\001\022\014\n\010ciFlight\020\002\022\023\n\017ciEmergencyS"
+  "top\020\003\022\n\n\006ciNone\020\004\022\r\n\tciRestart\020\005*-\n\016Inve"
+  "rterStates\022\n\n\006isNone\020\000\022\017\n\013isConnected\020\001*"
+  ")\n\027BatteryManagementStates\022\016\n\nbmsNominal"
+  "\020\000*P\n\016LvdcNodeStates\022\017\n\013lvdcBooting\020\000\022\017\n"
+  "\013lvdcStandby\020\001\022\016\n\nlvdcFlight\020\002\022\014\n\010lvdcNo"
+  "ne\020\003"
   ;
 ::google::protobuf::internal::DescriptorTable descriptor_table_Paradigm_2eproto = {
   false, InitDefaults_Paradigm_2eproto, 
   descriptor_table_protodef_Paradigm_2eproto,
-  "Paradigm.proto", &assign_descriptors_table_Paradigm_2eproto, 4986,
+  "Paradigm.proto", &assign_descriptors_table_Paradigm_2eproto, 5084,
 };
 
 void AddDescriptors_Paradigm_2eproto() {
@@ -7100,6 +7109,9 @@ class EnclosureNodeToFc::HasBitSetters {
   static void set_has_coolantlinepressure(EnclosureNodeToFc* msg) {
     msg->_has_bits_[0] |= 0x00000008u;
   }
+  static void set_has_coolantlinepressure2(EnclosureNodeToFc* msg) {
+    msg->_has_bits_[0] |= 0x00000010u;
+  }
 };
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
@@ -7107,6 +7119,7 @@ const int EnclosureNodeToFc::kPacketNumFieldNumber;
 const int EnclosureNodeToFc::kEnclosurePressureFieldNumber;
 const int EnclosureNodeToFc::kEnclosureTemperatureFieldNumber;
 const int EnclosureNodeToFc::kCoolantLinePressureFieldNumber;
+const int EnclosureNodeToFc::kCoolantLinePressure2FieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 EnclosureNodeToFc::EnclosureNodeToFc()
@@ -7120,15 +7133,15 @@ EnclosureNodeToFc::EnclosureNodeToFc(const EnclosureNodeToFc& from)
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&packetnum_, &from.packetnum_,
-    static_cast<size_t>(reinterpret_cast<char*>(&coolantlinepressure_) -
-    reinterpret_cast<char*>(&packetnum_)) + sizeof(coolantlinepressure_));
+    static_cast<size_t>(reinterpret_cast<char*>(&coolantlinepressure2_) -
+    reinterpret_cast<char*>(&packetnum_)) + sizeof(coolantlinepressure2_));
   // @@protoc_insertion_point(copy_constructor:EnclosureNodeToFc)
 }
 
 void EnclosureNodeToFc::SharedCtor() {
   ::memset(&packetnum_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&coolantlinepressure_) -
-      reinterpret_cast<char*>(&packetnum_)) + sizeof(coolantlinepressure_));
+      reinterpret_cast<char*>(&coolantlinepressure2_) -
+      reinterpret_cast<char*>(&packetnum_)) + sizeof(coolantlinepressure2_));
 }
 
 EnclosureNodeToFc::~EnclosureNodeToFc() {
@@ -7155,10 +7168,10 @@ void EnclosureNodeToFc::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x0000000fu) {
+  if (cached_has_bits & 0x0000001fu) {
     ::memset(&packetnum_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&coolantlinepressure_) -
-        reinterpret_cast<char*>(&packetnum_)) + sizeof(coolantlinepressure_));
+        reinterpret_cast<char*>(&coolantlinepressure2_) -
+        reinterpret_cast<char*>(&packetnum_)) + sizeof(coolantlinepressure2_));
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -7202,6 +7215,13 @@ const char* EnclosureNodeToFc::_InternalParse(const char* begin, const char* end
       case 4: {
         if (static_cast<::google::protobuf::uint8>(tag) != 37) goto handle_unusual;
         msg->set_coolantlinepressure(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      // required float coolantLinePressure2 = 5;
+      case 5: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 45) goto handle_unusual;
+        msg->set_coolantlinepressure2(::google::protobuf::io::UnalignedLoad<float>(ptr));
         ptr += sizeof(float);
         break;
       }
@@ -7284,6 +7304,19 @@ bool EnclosureNodeToFc::MergePartialFromCodedStream(
         break;
       }
 
+      // required float coolantLinePressure2 = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (45 & 0xFF)) {
+          HasBitSetters::set_has_coolantlinepressure2(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &coolantlinepressure2_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -7332,6 +7365,11 @@ void EnclosureNodeToFc::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteFloat(4, this->coolantlinepressure(), output);
   }
 
+  // required float coolantLinePressure2 = 5;
+  if (cached_has_bits & 0x00000010u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(5, this->coolantlinepressure2(), output);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
@@ -7364,6 +7402,11 @@ void EnclosureNodeToFc::SerializeWithCachedSizes(
   // required float coolantLinePressure = 4;
   if (cached_has_bits & 0x00000008u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(4, this->coolantlinepressure(), target);
+  }
+
+  // required float coolantLinePressure2 = 5;
+  if (cached_has_bits & 0x00000010u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(5, this->coolantlinepressure2(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -7400,6 +7443,11 @@ size_t EnclosureNodeToFc::RequiredFieldsByteSizeFallback() const {
     total_size += 1 + 4;
   }
 
+  if (has_coolantlinepressure2()) {
+    // required float coolantLinePressure2 = 5;
+    total_size += 1 + 4;
+  }
+
   return total_size;
 }
 size_t EnclosureNodeToFc::ByteSizeLong() const {
@@ -7411,7 +7459,7 @@ size_t EnclosureNodeToFc::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
-  if (((_has_bits_[0] & 0x0000000f) ^ 0x0000000f) == 0) {  // All required fields are present.
+  if (((_has_bits_[0] & 0x0000001f) ^ 0x0000001f) == 0) {  // All required fields are present.
     // required int32 packetNum = 1;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
@@ -7424,6 +7472,9 @@ size_t EnclosureNodeToFc::ByteSizeLong() const {
     total_size += 1 + 4;
 
     // required float coolantLinePressure = 4;
+    total_size += 1 + 4;
+
+    // required float coolantLinePressure2 = 5;
     total_size += 1 + 4;
 
   } else {
@@ -7461,7 +7512,7 @@ void EnclosureNodeToFc::MergeFrom(const EnclosureNodeToFc& from) {
   (void) cached_has_bits;
 
   cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 0x0000000fu) {
+  if (cached_has_bits & 0x0000001fu) {
     if (cached_has_bits & 0x00000001u) {
       packetnum_ = from.packetnum_;
     }
@@ -7473,6 +7524,9 @@ void EnclosureNodeToFc::MergeFrom(const EnclosureNodeToFc& from) {
     }
     if (cached_has_bits & 0x00000008u) {
       coolantlinepressure_ = from.coolantlinepressure_;
+    }
+    if (cached_has_bits & 0x00000010u) {
+      coolantlinepressure2_ = from.coolantlinepressure2_;
     }
     _has_bits_[0] |= cached_has_bits;
   }
@@ -7493,7 +7547,7 @@ void EnclosureNodeToFc::CopyFrom(const EnclosureNodeToFc& from) {
 }
 
 bool EnclosureNodeToFc::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
+  if ((_has_bits_[0] & 0x0000001f) != 0x0000001f) return false;
   return true;
 }
 
@@ -7509,6 +7563,7 @@ void EnclosureNodeToFc::InternalSwap(EnclosureNodeToFc* other) {
   swap(enclosurepressure_, other->enclosurepressure_);
   swap(enclosuretemperature_, other->enclosuretemperature_);
   swap(coolantlinepressure_, other->coolantlinepressure_);
+  swap(coolantlinepressure2_, other->coolantlinepressure2_);
 }
 
 ::google::protobuf::Metadata EnclosureNodeToFc::GetMetadata() const {
@@ -9423,10 +9478,10 @@ class FlightConfig::HasBitSetters {
   static void set_has_controllaptopipaddr(FlightConfig* msg) {
     msg->_has_bits_[0] |= 0x00000002u;
   }
-  static void set_has_brakenodeport(FlightConfig* msg) {
+  static void set_has_nodeport(FlightConfig* msg) {
     msg->_has_bits_[0] |= 0x00000040u;
   }
-  static void set_has_brakenodetimeout(FlightConfig* msg) {
+  static void set_has_nodetimeout(FlightConfig* msg) {
     msg->_has_bits_[0] |= 0x00000200u;
   }
   static void set_has_brakenodeserverport(FlightConfig* msg) {
@@ -9436,6 +9491,12 @@ class FlightConfig::HasBitSetters {
     msg->_has_bits_[0] |= 0x00000100u;
   }
   static void set_has_brakenodeupdatefreq(FlightConfig* msg) {
+    msg->_has_bits_[0] |= 0x00000800u;
+  }
+  static void set_has_enclosurenodeservernumber(FlightConfig* msg) {
+    msg->_has_bits_[0] |= 0x00001000u;
+  }
+  static void set_has_lvdcnodeservernumber(FlightConfig* msg) {
     msg->_has_bits_[0] |= 0x00000008u;
   }
 };
@@ -9448,11 +9509,13 @@ const int FlightConfig::kCommandPortFieldNumber;
 const int FlightConfig::kHeartbeatTimeoutFieldNumber;
 const int FlightConfig::kPodDriverFieldNumber;
 const int FlightConfig::kControlLaptopIpAddrFieldNumber;
-const int FlightConfig::kBrakeNodePortFieldNumber;
-const int FlightConfig::kBrakeNodeTimeoutFieldNumber;
+const int FlightConfig::kNodePortFieldNumber;
+const int FlightConfig::kNodeTimeoutFieldNumber;
 const int FlightConfig::kBrakeNodeServerPortFieldNumber;
 const int FlightConfig::kPdsUpdateFreqFieldNumber;
 const int FlightConfig::kBrakeNodeUpdateFreqFieldNumber;
+const int FlightConfig::kEnclosureNodeServerNumberFieldNumber;
+const int FlightConfig::kLvdcNodeServerNumberFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 FlightConfig::FlightConfig()
@@ -9474,8 +9537,8 @@ FlightConfig::FlightConfig(const FlightConfig& from)
     controllaptopipaddr_.AssignWithDefault(&::FlightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get(), from.controllaptopipaddr_);
   }
   ::memcpy(&retrievaltimeout_, &from.retrievaltimeout_,
-    static_cast<size_t>(reinterpret_cast<char*>(&brakenodeserverport_) -
-    reinterpret_cast<char*>(&retrievaltimeout_)) + sizeof(brakenodeserverport_));
+    static_cast<size_t>(reinterpret_cast<char*>(&enclosurenodeservernumber_) -
+    reinterpret_cast<char*>(&retrievaltimeout_)) + sizeof(enclosurenodeservernumber_));
   // @@protoc_insertion_point(copy_constructor:FlightConfig)
 }
 
@@ -9485,14 +9548,16 @@ void FlightConfig::SharedCtor() {
   poddriver_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   controllaptopipaddr_.UnsafeSetDefault(&::FlightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get());
   retrievaltimeout_ = 0u;
-  brakenodeupdatefreq_ = 10;
+  lvdcnodeservernumber_ = 5552;
   pdstelemetryport_ = 7000;
   commandport_ = 6000;
-  brakenodeport_ = PROTOBUF_ULONGLONG(5555);
+  nodeport_ = PROTOBUF_ULONGLONG(5555);
   heartbeattimeout_ = 10000;
   pdsupdatefreq_ = 500;
-  brakenodetimeout_ = PROTOBUF_ULONGLONG(4000);
+  nodetimeout_ = PROTOBUF_ULONGLONG(2000);
   brakenodeserverport_ = PROTOBUF_ULONGLONG(5550);
+  brakenodeupdatefreq_ = 10;
+  enclosurenodeservernumber_ = 5551;
 }
 
 FlightConfig::~FlightConfig() {
@@ -9531,16 +9596,18 @@ void FlightConfig::Clear() {
   }
   if (cached_has_bits & 0x000000fcu) {
     retrievaltimeout_ = 0u;
-    brakenodeupdatefreq_ = 10;
+    lvdcnodeservernumber_ = 5552;
     pdstelemetryport_ = 7000;
     commandport_ = 6000;
-    brakenodeport_ = PROTOBUF_ULONGLONG(5555);
+    nodeport_ = PROTOBUF_ULONGLONG(5555);
     heartbeattimeout_ = 10000;
   }
-  if (cached_has_bits & 0x00000700u) {
+  if (cached_has_bits & 0x00001f00u) {
     pdsupdatefreq_ = 500;
-    brakenodetimeout_ = PROTOBUF_ULONGLONG(4000);
+    nodetimeout_ = PROTOBUF_ULONGLONG(2000);
     brakenodeserverport_ = PROTOBUF_ULONGLONG(5550);
+    brakenodeupdatefreq_ = 10;
+    enclosurenodeservernumber_ = 5551;
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -9619,17 +9686,17 @@ const char* FlightConfig::_InternalParse(const char* begin, const char* end, voi
         ptr += size;
         break;
       }
-      // optional uint64 brakeNodePort = 7 [default = 5555];
+      // optional uint64 nodePort = 7 [default = 5555];
       case 7: {
         if (static_cast<::google::protobuf::uint8>(tag) != 56) goto handle_unusual;
-        msg->set_brakenodeport(::google::protobuf::internal::ReadVarint(&ptr));
+        msg->set_nodeport(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // optional uint64 brakeNodeTimeout = 8 [default = 4000];
+      // optional uint64 nodeTimeout = 8 [default = 2000];
       case 8: {
         if (static_cast<::google::protobuf::uint8>(tag) != 64) goto handle_unusual;
-        msg->set_brakenodetimeout(::google::protobuf::internal::ReadVarint(&ptr));
+        msg->set_nodetimeout(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
@@ -9651,6 +9718,20 @@ const char* FlightConfig::_InternalParse(const char* begin, const char* end, voi
       case 11: {
         if (static_cast<::google::protobuf::uint8>(tag) != 88) goto handle_unusual;
         msg->set_brakenodeupdatefreq(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // optional int32 enclosureNodeServerNumber = 12 [default = 5551];
+      case 12: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 96) goto handle_unusual;
+        msg->set_enclosurenodeservernumber(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // optional int32 lvdcNodeServerNumber = 13 [default = 5552];
+      case 13: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 104) goto handle_unusual;
+        msg->set_lvdcnodeservernumber(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
@@ -9770,26 +9851,26 @@ bool FlightConfig::MergePartialFromCodedStream(
         break;
       }
 
-      // optional uint64 brakeNodePort = 7 [default = 5555];
+      // optional uint64 nodePort = 7 [default = 5555];
       case 7: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (56 & 0xFF)) {
-          HasBitSetters::set_has_brakenodeport(this);
+          HasBitSetters::set_has_nodeport(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
-                 input, &brakenodeport_)));
+                 input, &nodeport_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // optional uint64 brakeNodeTimeout = 8 [default = 4000];
+      // optional uint64 nodeTimeout = 8 [default = 2000];
       case 8: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (64 & 0xFF)) {
-          HasBitSetters::set_has_brakenodetimeout(this);
+          HasBitSetters::set_has_nodetimeout(this);
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
-                 input, &brakenodetimeout_)));
+                 input, &nodetimeout_)));
         } else {
           goto handle_unusual;
         }
@@ -9829,6 +9910,32 @@ bool FlightConfig::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &brakenodeupdatefreq_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // optional int32 enclosureNodeServerNumber = 12 [default = 5551];
+      case 12: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (96 & 0xFF)) {
+          HasBitSetters::set_has_enclosurenodeservernumber(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &enclosurenodeservernumber_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // optional int32 lvdcNodeServerNumber = 13 [default = 5552];
+      case 13: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (104 & 0xFF)) {
+          HasBitSetters::set_has_lvdcnodeservernumber(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &lvdcnodeservernumber_)));
         } else {
           goto handle_unusual;
         }
@@ -9903,14 +10010,14 @@ void FlightConfig::SerializeWithCachedSizes(
       6, this->controllaptopipaddr(), output);
   }
 
-  // optional uint64 brakeNodePort = 7 [default = 5555];
+  // optional uint64 nodePort = 7 [default = 5555];
   if (cached_has_bits & 0x00000040u) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt64(7, this->brakenodeport(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(7, this->nodeport(), output);
   }
 
-  // optional uint64 brakeNodeTimeout = 8 [default = 4000];
+  // optional uint64 nodeTimeout = 8 [default = 2000];
   if (cached_has_bits & 0x00000200u) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt64(8, this->brakenodetimeout(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(8, this->nodetimeout(), output);
   }
 
   // optional uint64 brakeNodeServerPort = 9 [default = 5550];
@@ -9924,8 +10031,18 @@ void FlightConfig::SerializeWithCachedSizes(
   }
 
   // optional int32 brakeNodeUpdateFreq = 11 [default = 10];
-  if (cached_has_bits & 0x00000008u) {
+  if (cached_has_bits & 0x00000800u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(11, this->brakenodeupdatefreq(), output);
+  }
+
+  // optional int32 enclosureNodeServerNumber = 12 [default = 5551];
+  if (cached_has_bits & 0x00001000u) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(12, this->enclosurenodeservernumber(), output);
+  }
+
+  // optional int32 lvdcNodeServerNumber = 13 [default = 5552];
+  if (cached_has_bits & 0x00000008u) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(13, this->lvdcnodeservernumber(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -9984,14 +10101,14 @@ void FlightConfig::SerializeWithCachedSizes(
         6, this->controllaptopipaddr(), target);
   }
 
-  // optional uint64 brakeNodePort = 7 [default = 5555];
+  // optional uint64 nodePort = 7 [default = 5555];
   if (cached_has_bits & 0x00000040u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(7, this->brakenodeport(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(7, this->nodeport(), target);
   }
 
-  // optional uint64 brakeNodeTimeout = 8 [default = 4000];
+  // optional uint64 nodeTimeout = 8 [default = 2000];
   if (cached_has_bits & 0x00000200u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(8, this->brakenodetimeout(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(8, this->nodetimeout(), target);
   }
 
   // optional uint64 brakeNodeServerPort = 9 [default = 5550];
@@ -10005,8 +10122,18 @@ void FlightConfig::SerializeWithCachedSizes(
   }
 
   // optional int32 brakeNodeUpdateFreq = 11 [default = 10];
-  if (cached_has_bits & 0x00000008u) {
+  if (cached_has_bits & 0x00000800u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(11, this->brakenodeupdatefreq(), target);
+  }
+
+  // optional int32 enclosureNodeServerNumber = 12 [default = 5551];
+  if (cached_has_bits & 0x00001000u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(12, this->enclosurenodeservernumber(), target);
+  }
+
+  // optional int32 lvdcNodeServerNumber = 13 [default = 5552];
+  if (cached_has_bits & 0x00000008u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(13, this->lvdcnodeservernumber(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -10053,11 +10180,11 @@ size_t FlightConfig::ByteSizeLong() const {
           this->retrievaltimeout());
     }
 
-    // optional int32 brakeNodeUpdateFreq = 11 [default = 10];
+    // optional int32 lvdcNodeServerNumber = 13 [default = 5552];
     if (cached_has_bits & 0x00000008u) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->brakenodeupdatefreq());
+          this->lvdcnodeservernumber());
     }
 
     // optional int32 pdsTelemetryPort = 2 [default = 7000];
@@ -10074,11 +10201,11 @@ size_t FlightConfig::ByteSizeLong() const {
           this->commandport());
     }
 
-    // optional uint64 brakeNodePort = 7 [default = 5555];
+    // optional uint64 nodePort = 7 [default = 5555];
     if (cached_has_bits & 0x00000040u) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::UInt64Size(
-          this->brakenodeport());
+          this->nodeport());
     }
 
     // optional int32 heartbeatTimeout = 4 [default = 10000];
@@ -10089,7 +10216,7 @@ size_t FlightConfig::ByteSizeLong() const {
     }
 
   }
-  if (cached_has_bits & 0x00000700u) {
+  if (cached_has_bits & 0x00001f00u) {
     // optional int32 pdsUpdateFreq = 10 [default = 500];
     if (cached_has_bits & 0x00000100u) {
       total_size += 1 +
@@ -10097,11 +10224,11 @@ size_t FlightConfig::ByteSizeLong() const {
           this->pdsupdatefreq());
     }
 
-    // optional uint64 brakeNodeTimeout = 8 [default = 4000];
+    // optional uint64 nodeTimeout = 8 [default = 2000];
     if (cached_has_bits & 0x00000200u) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::UInt64Size(
-          this->brakenodetimeout());
+          this->nodetimeout());
     }
 
     // optional uint64 brakeNodeServerPort = 9 [default = 5550];
@@ -10109,6 +10236,20 @@ size_t FlightConfig::ByteSizeLong() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::UInt64Size(
           this->brakenodeserverport());
+    }
+
+    // optional int32 brakeNodeUpdateFreq = 11 [default = 10];
+    if (cached_has_bits & 0x00000800u) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->brakenodeupdatefreq());
+    }
+
+    // optional int32 enclosureNodeServerNumber = 12 [default = 5551];
+    if (cached_has_bits & 0x00001000u) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->enclosurenodeservernumber());
     }
 
   }
@@ -10153,7 +10294,7 @@ void FlightConfig::MergeFrom(const FlightConfig& from) {
       retrievaltimeout_ = from.retrievaltimeout_;
     }
     if (cached_has_bits & 0x00000008u) {
-      brakenodeupdatefreq_ = from.brakenodeupdatefreq_;
+      lvdcnodeservernumber_ = from.lvdcnodeservernumber_;
     }
     if (cached_has_bits & 0x00000010u) {
       pdstelemetryport_ = from.pdstelemetryport_;
@@ -10162,22 +10303,28 @@ void FlightConfig::MergeFrom(const FlightConfig& from) {
       commandport_ = from.commandport_;
     }
     if (cached_has_bits & 0x00000040u) {
-      brakenodeport_ = from.brakenodeport_;
+      nodeport_ = from.nodeport_;
     }
     if (cached_has_bits & 0x00000080u) {
       heartbeattimeout_ = from.heartbeattimeout_;
     }
     _has_bits_[0] |= cached_has_bits;
   }
-  if (cached_has_bits & 0x00000700u) {
+  if (cached_has_bits & 0x00001f00u) {
     if (cached_has_bits & 0x00000100u) {
       pdsupdatefreq_ = from.pdsupdatefreq_;
     }
     if (cached_has_bits & 0x00000200u) {
-      brakenodetimeout_ = from.brakenodetimeout_;
+      nodetimeout_ = from.nodetimeout_;
     }
     if (cached_has_bits & 0x00000400u) {
       brakenodeserverport_ = from.brakenodeserverport_;
+    }
+    if (cached_has_bits & 0x00000800u) {
+      brakenodeupdatefreq_ = from.brakenodeupdatefreq_;
+    }
+    if (cached_has_bits & 0x00001000u) {
+      enclosurenodeservernumber_ = from.enclosurenodeservernumber_;
     }
     _has_bits_[0] |= cached_has_bits;
   }
@@ -10214,14 +10361,16 @@ void FlightConfig::InternalSwap(FlightConfig* other) {
   controllaptopipaddr_.Swap(&other->controllaptopipaddr_, &::FlightConfig::_i_give_permission_to_break_this_code_default_controllaptopipaddr_.get(),
     GetArenaNoVirtual());
   swap(retrievaltimeout_, other->retrievaltimeout_);
-  swap(brakenodeupdatefreq_, other->brakenodeupdatefreq_);
+  swap(lvdcnodeservernumber_, other->lvdcnodeservernumber_);
   swap(pdstelemetryport_, other->pdstelemetryport_);
   swap(commandport_, other->commandport_);
-  swap(brakenodeport_, other->brakenodeport_);
+  swap(nodeport_, other->nodeport_);
   swap(heartbeattimeout_, other->heartbeattimeout_);
   swap(pdsupdatefreq_, other->pdsupdatefreq_);
-  swap(brakenodetimeout_, other->brakenodetimeout_);
+  swap(nodetimeout_, other->nodetimeout_);
   swap(brakenodeserverport_, other->brakenodeserverport_);
+  swap(brakenodeupdatefreq_, other->brakenodeupdatefreq_);
+  swap(enclosurenodeservernumber_, other->enclosurenodeservernumber_);
 }
 
 ::google::protobuf::Metadata FlightConfig::GetMetadata() const {

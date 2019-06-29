@@ -51,13 +51,16 @@ int32_t UdpConnection::checkPacketId(int32_t id) {
 }
 
 void UdpConnection::getUpdate() {
+    if (this->_inboundSocket == UNCONFIGURED) {
+        return;
+    }
+    if (this->_inboundSocket == -1) {
+        std::string error = this->_connectionName + "getUpdate() : Server socket invalid";
+        throw std::runtime_error(error);
+    }
 
     bool opStatus = false;
 
-    if (this->_inboundSocket == -1) {
-        std::string error = "getUpdate() : Server socket invalid";
-        throw std::runtime_error(error);
-    }
     char buffer[200] = {0};
     bzero(&buffer, sizeof buffer);
     ssize_t receivedPacketSize = recvfrom(this->_inboundSocket, buffer, 200, 0, nullptr, nullptr);
@@ -83,7 +86,7 @@ void UdpConnection::getUpdate() {
 }
 
 void UdpConnection::giveUpdate() {
-    if(!this->_update_freq.expired()){
+    if(!this->_update_freq.expired() || this->_outboundSocket == UNCONFIGURED){
         return;
     }
     this->_update_freq.feed();
@@ -135,7 +138,7 @@ bool UdpConnection::_createServerSocket() {
     SocketAddr.sin_addr.s_addr = INADDR_ANY;
     int32_t status = bind(serverSocket, (struct sockaddr *) &SocketAddr, sizeof(SocketAddr));
     if (status < 0) {
-        std::string sError = std::string("Binding Server Socket: ") + std::strerror(errno);
+        std::string sError = this->_connectionName + std::string("Binding Server Socket: ") + std::strerror(errno);
         throw std::runtime_error(sError);
     }
     this->_inboundSocket = serverSocket;
@@ -238,7 +241,6 @@ bool BrakeNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
    // this->pod.setPressureVesselTemperature(protoMessage.pneumatictemperature());
     this->pod.setHighPressure(protoMessage.highpressure());
     this->pod.setLowPressure(protoMessage.lowpressure1(), LP1_INDEX);
-    //this->pod.telemetry->rotorTemperature = protoMessage.rotortemperature(); //dts
     return true;
 }
 
@@ -251,7 +253,6 @@ EnclosureNodeConnection::EnclosureNodeConnection(TelemetryManager pod) : UdpConn
     this->_connectionStatusIndex = ENCLOSURE_HEARTBEAT_INDEX;
 }
 
-
 bool EnclosureNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
     EnclosureNodeToFc protoMessage = EnclosureNodeToFc();
     if (!protoMessage.ParseFromArray(buffer, messageSize)) {
@@ -261,17 +262,21 @@ bool EnclosureNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
     if(this->checkPacketId(protoMessage.packetnum())){
         return false;
     }
-
-    //TODO Add parsings
-
+    this->pod.setEnclosurePressure(protoMessage.enclosurepressure());
+    this->pod.setEnclosureTemperature(protoMessage.enclosuretemperature());
+    this->pod.setCoolantLinePressure(protoMessage.coolantlinepressure());
     return true;
-
 }
 
 /*
- *  ***************** Enclosure Node Connection *******************
+ *  ***************** LVDC Node Connection *******************
  */
 
+LvdcNodeConnection::LvdcNodeConnection(TelemetryManager pod) : UdpConnection(pod) {
+    this->_connectionName = "Lvdc Node : ";
+    this->_connectionStatusIndex = LVDC_NODE_HEARTBEAT_INDEX;
+}
 
-
-
+bool LvdcNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
+    return true; //todo
+}

@@ -37,16 +37,19 @@ void FlightComputerInitializer::updatePodNetworkValues(PodNetwork& podNetworkVal
 {
     std::string cNodeIpAddrs[] = {"192.168.1.20"};
     podNetworkValues.cNodeIpAddrs.assign(begin(cNodeIpAddrs), end(cNodeIpAddrs)); // Node IPs
+    podNetworkValues.strPdsIpAddr = config.controllaptopipaddr(); // Ip Addr of PDS.
 
-    podNetworkValues.brakeNodePort = config.brakenodeport(); // Port # that Nodes are listening on
-    podNetworkValues.nodeTimeoutMili = config.brakenodetimeout();
+    podNetworkValues.nodePort = config.nodeport(); // Port # that Nodes are listening on
+    podNetworkValues.nodeTimeoutMili = config.nodetimeout();
     podNetworkValues.brakeNodeServerPortNumber = config.brakenodeserverport(); // Port # to receive UDP from Nodes
+    podNetworkValues.enclosureNodeServerNumber = config.enclosurenodeservernumber();
+    podNetworkValues.lvdcNodeServerNumber = config.lvdcnodeservernumber();
 
     podNetworkValues.commaderTimeoutMili = config.heartbeattimeout(); // Timeout for heartbeat to Control Interface
     podNetworkValues.commanderPortNumber = config.commandport(); //Port # for TCP Commander
 
-    podNetworkValues.pdsTelemeteryPort = config.pdstelemetryport(); // Port # to send telemetry
-    podNetworkValues.strPdsIpAddr = config.controllaptopipaddr(); // Ip Addr of PDS.
     podNetworkValues.brakeNodeUpdateFreq = config.brakenodeupdatefreq();
     podNetworkValues.pdsUpdateFreq = config.pdsupdatefreq();
+    podNetworkValues.pdsTelemeteryPort = config.pdstelemetryport(); // Port # to send telemetry
+
 }
