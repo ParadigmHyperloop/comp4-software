@@ -52,5 +52,4 @@ void FlightComputerInitializer::updatePodNetworkValues(PodNetwork& podNetworkVal
     podNetworkValues.pdsUpdateFreq = config.pdsupdatefreq();
     podNetworkValues.pdsTelemeteryPort = config.pdstelemetryport(); // Port # to send telemetry
 
-
 }

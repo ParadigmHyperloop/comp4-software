@@ -204,6 +204,11 @@ def parse_overrdies():
         profile[7] = data['brake_node_heartbeat']
         profile[8] = data['lvdc_node_heartbeat']
         profile[9] = data['enclosure_node_heartbeat']
+        profile[10] = data['enclosure_pressure']
+        profile[11] = data['enclosure_temperature']
+        profile[12] = data['cooling_pressure']
+        profile[13] = data['cooling_temperature']
+
         payload = dict()
         payload['target'] = 'pod'
         payload['configuration'] = profile

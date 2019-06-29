@@ -14,6 +14,10 @@ class OverridesForm(FlaskForm):
     brake_node_heartbeat = BooleanField("Brake Node Heartbeat")
     lvdc_node_heartbeat = BooleanField("LVDC Node Heartbeat")
     enclosure_node_heartbeat = BooleanField("Enclosure Node Heartbeat")
+    enclosure_pressure = BooleanField("Enclosure Pressure")
+    enclosure_temperature = BooleanField("Enclosure Temperature")
+    cooling_pressure = BooleanField("Cooling Pressure")
+    cooling_temperature = BooleanField("Cooling Temperature")
 
 
 class PodConfigurationForm(FlaskForm):
