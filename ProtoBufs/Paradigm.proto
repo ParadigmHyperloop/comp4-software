@@ -173,6 +173,12 @@ message Telemetry {
 
     //Updates
     repeated string updateMessages = 77;
+
+    // Navigation Testing
+    optional uint32 tachRpm = 81;
+    optional uint32 irRpm = 82;
+    optional float tachDistance = 83;
+    optional float irDistance = 84;
 }
 
 // FC => NODE COMMANDS

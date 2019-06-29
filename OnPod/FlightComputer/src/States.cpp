@@ -67,7 +67,7 @@ void PodState::commonChecks() {
 
 void PodState::armedChecks(){
     if(!this->pod->telemetry->inverterHeartbeat){
-        std::string error = "Armed Check Failed. Inverter Heartbeat Expired.";
+        std::string error = "Inverter Heartbeat Expired.";
         throw std::runtime_error(error);
     }
     //todo check array for inverter values
