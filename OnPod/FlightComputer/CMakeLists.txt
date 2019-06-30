@@ -6,11 +6,12 @@ set(CMAKE_CXX_STANDARD 14)
 include_directories(libs/EasyLogger)
 include_directories(libs/ProtoBuffer)
 include_directories(include)
+include_directories(src)
 include_directories(include/ProtoBuffer)
 
 
 file(GLOB_RECURSE HEADERS "libs/*.h")
-file(GLOB_RECURSE SOURCES "src/*.c*")
+file(GLOB_RECURSE SOURCES "src/*.*")
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 

@@ -5,6 +5,7 @@
 #include "Common.h"
 class Heartbeat{
 public:
+    Heartbeat();
 	explicit Heartbeat(int32_t timeoutMilis);
 	void feed();
 	bool expired();

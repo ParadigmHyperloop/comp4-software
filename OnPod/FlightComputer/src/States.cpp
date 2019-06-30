@@ -120,9 +120,9 @@ std::unique_ptr<PodState> PodState::createState(PodStates newState, TelemetryMan
     }
 }
 
-/*
- *  ******************** BOOTING ***********************8
- */
+
+ // *  ******************** BOOTING ***********************8
+
 
 Booting::Booting(TelemetryManager* pod): PodState(pod) {
     _stateIdentifier = psBooting;
@@ -137,10 +137,8 @@ bool Booting::testTransitions(){
     return true;
 }
 
-/*
- *  ******************** STANDBY ***********************8
- */
-//TelemetryManager*
+
+// *  ******************** STANDBY ***********************8
 
 Standby::Standby(TelemetryManager * pod): PodState(pod) {
     _stateIdentifier = psStandby;
@@ -169,9 +167,9 @@ bool Standby::testTransitions() {
     return false;
 }
 
-/*
- *  ******************** ARMING ***********************8
- */
+
+// *  ******************** ARMING ***********************8
+
 
 Arming::Arming(TelemetryManager * pod ): PodState(pod) {
     _stateIdentifier = psArming;
@@ -186,7 +184,6 @@ bool Arming::testTransitions() {
         this->setupTransition(psStandby, "Emergency Stop. Pod --> Standby");
         return true;
     }
-    LOG(INFO)<< this->timeInStateSeconds();
     if(this->timeInStateSeconds() < 3 ){ //Allow nodes to update sensors or timeout if not
         return false;
     }
@@ -196,13 +193,11 @@ bool Arming::testTransitions() {
     }
     try {
         this->commonChecks();
+        this->armedChecks();
     }
     catch (const std::runtime_error &error ){
         this->setupTransition(psStandby, error.what());
         return true;
-    }
-    if(this->pod->telemetry->inverterHeartbeat){ // and this->checkInverterValues
-        // all passed
     }
     //todo validate that we are receiving telemetry from the inverter
     if(true){
@@ -212,9 +207,9 @@ bool Arming::testTransitions() {
     return false;
 }
 
-/*
- *  ******************** ARMED ***********************8
- */
+
+ //*  ******************** ARMED ***********************8
+
 
 Armed::Armed(TelemetryManager * pod) : PodState(pod) {
     _stateIdentifier = psArmed;
@@ -250,9 +245,9 @@ bool Armed::testTransitions() {
 }
 
 
-/*
- *  ******************** PREFLIGHT ***********************8
- */
+
+ // *  ******************** PREFLIGHT ***********************
+
 PreFlight::PreFlight(TelemetryManager* pod) : PodState(pod) {
     _stateIdentifier = psPreFlight;
     this->pod->telemetry->commandedBrakeNodeState = bnsFlight;
@@ -283,9 +278,9 @@ bool PreFlight::testTransitions() {
 
 
 
-/*
- *  ******************** ACCELERATION ***********************8
- */
+
+// *  ******************** ACCELERATION ***********************8
+
 
 
 Acceleration::Acceleration(TelemetryManager * pod) : PodState(pod) {
@@ -314,7 +309,7 @@ bool Acceleration::testTransitions() {
         this->armedChecks();
     }
     catch (const std::runtime_error &error ){
-        std::string reason = " Pod --> Braking";
+        std::string reason = "Pod --> Braking";
         this->setupTransition(psBraking, error.what() + reason);
         return true;
     }
@@ -328,9 +323,9 @@ bool Acceleration::testTransitions() {
 }
 
 
-/*
- *  ******************** BRAKING ***********************8
- */
+
+ // *  ******************** BRAKING ***********************8
+
 
 Braking::Braking(TelemetryManager* pod) : PodState(pod) {
     _stateIdentifier = psBraking;

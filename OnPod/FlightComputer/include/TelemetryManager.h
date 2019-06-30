@@ -34,6 +34,11 @@ class TelemetryManager
 		void setManualLvdcNodeState(LvdcNodeStates);
 		void setManualPodState(PodStates);
 
+		// Enclosure
+		void setEnclosurePressure(float);
+        void setEnclosureTemperature(float);
+        void setCoolantLinePressure(float);
+
 		// Inverter
 		void setMaxIgbtTemperature(float);
 		void setGateDriverTemperature(float);

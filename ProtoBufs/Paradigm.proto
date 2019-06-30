@@ -214,6 +214,7 @@ message EnclosureNodeToFc {
     required float enclosurePressure = 2;
     required float enclosureTemperature = 3;
     required float coolantLinePressure = 4;
+    required float coolantLinePressure2 = 5;
 }
 
 message LvdcNodeToFc {
@@ -261,9 +262,13 @@ message FlightConfig {
     optional int32 heartbeatTimeout = 4 [default = 10000];
     optional string podDriver = 5;
     optional string controlLaptopIpAddr = 6 [default = "127.0.0.1"];
-    optional uint64 brakeNodePort = 7 [default = 5555];
-    optional uint64 brakeNodeTimeout = 8 [default = 4000];
+    optional uint64 nodePort = 7 [default = 5555];
+    optional uint64 nodeTimeout = 8 [default = 2000];
     optional uint64 brakeNodeServerPort = 9 [default = 5550];
+    optional int32 pdsUpdateFreq = 10 [default = 500];
+    optional int32 brakeNodeUpdateFreq = 11 [default = 10];
+    optional int32 enclosureNodeServerNumber = 12 [default = 5551];
+    optional int32 lvdcNodeServerNumber = 13 [default = 5552];
 }
 
 message DefaultFcToNode {
