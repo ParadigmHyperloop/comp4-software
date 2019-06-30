@@ -12,6 +12,7 @@
 #include <vector>
 #include <sstream>
 #include "Heartbeat.h"
+#include "Constants/Constants.h"
 
 
 #define BUFFER_SIZE 35
@@ -22,7 +23,10 @@
 
 
 int8_t getSerialPort(){
-    int8_t serialPort = open("/dev/ttyUSB0",O_RDWR | O_NOCTTY);	/* ttyUSB0 is the FT232 based USB2SERIAL Converter   */
+    int8_t serialPort = open("/dev/ttyUSB0",O_RDWR | O_NOCTTY);
+    if (serialPort == -1){
+        serialPort = open("/dev/ttyO4",O_RDWR | O_NOCTTY);
+    }
     struct termios SerialPortSettings = {};
     tcgetattr(serialPort, &SerialPortSettings);
     cfsetispeed(&SerialPortSettings,B9600);
@@ -76,7 +80,9 @@ void readNavigationNode(int serialPort, TelemetryManager &pod){
     }
     dataStream >> irStripCount;
     std::stringstream().swap(dataStream);
+
     LOG(INFO)<<"TachRPM : "<<tachRpm << " IrRPM : "<< irRpm << " Spoke : "<< tachSpokeCount << " Strip : "<<irStripCount;
+
     pod.telemetry->irRpm = irRpm;
     pod.telemetry->tachRpm = tachRpm;
     pod.telemetry->tachDistance = (tachSpokeCount/8)*FRONT_WHEEL_CIRCUMFERENCE;

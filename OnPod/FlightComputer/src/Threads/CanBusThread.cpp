@@ -49,11 +49,15 @@ int32_t getCanSocketRaw(){
         std::string error = std::string("Error: Setting CAN Filter: ") + std::strerror(errno);
         throw std::runtime_error(error);
     }
-    strcpy(interfaceRequest.ifr_name, "can0"); // Set Interface name
+    strcpy(interfaceRequest.ifr_name, "can1"); // Set Interface name
     operationStatus = ioctl(canSock, SIOCGIFINDEX, &interfaceRequest);
     if (operationStatus == -1) {
-        std::string error = std::string("Error: Setting CAN Interface :") + std::strerror(errno);
-        throw std::runtime_error(error);
+        strcpy(interfaceRequest.ifr_name, "can0"); // Set Interface name
+        operationStatus = ioctl(canSock, SIOCGIFINDEX, &interfaceRequest);
+        if(operationStatus == -1){
+            std::string error = std::string("Error: Setting CAN Interface :") + std::strerror(errno);
+            throw std::runtime_error(error);
+        }
     }
     // Bind the socket to the network interface
     canSockAddr.can_family = AF_CAN;
