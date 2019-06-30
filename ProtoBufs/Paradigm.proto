@@ -207,7 +207,8 @@ message EnclosureNodeToFc {
     required int32 packetNum = 1;
     required float enclosurePressure = 2;
     required float enclosureTemperature = 3;
-    required float coolantLinePressure = 4;
+    required float coolantPressure1 = 4;
+    required float coolantPressure2 = 5;
 }
 
 message LvdcNodeToFc {
