@@ -239,7 +239,7 @@ int canNetworkThread(TelemetryManager Pod){
         return -1;
     }
     try{
-        startCanHeartbeat(canSockBcm, INVERTER_HEARTBEAT_FRAME_ID, 1);
+        startCanHeartbeat(canSockBcm, INVERTER_HEARTBEAT_FRAME_ID, 2);
         startCanHeartbeat(canSockBcm, BMS_HEARTBEAT_FRAME_ID, 1);
     }
     catch (const std::runtime_error &error){

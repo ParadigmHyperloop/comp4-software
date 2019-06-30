@@ -1842,6 +1842,13 @@ class EnclosureNodeToFc :
   float coolantlinepressure() const;
   void set_coolantlinepressure(float value);
 
+  // required float coolantLinePressure2 = 5;
+  bool has_coolantlinepressure2() const;
+  void clear_coolantlinepressure2();
+  static const int kCoolantLinePressure2FieldNumber = 5;
+  float coolantlinepressure2() const;
+  void set_coolantlinepressure2(float value);
+
   // @@protoc_insertion_point(class_scope:EnclosureNodeToFc)
  private:
   class HasBitSetters;
@@ -1856,6 +1863,7 @@ class EnclosureNodeToFc :
   float enclosurepressure_;
   float enclosuretemperature_;
   float coolantlinepressure_;
+  float coolantlinepressure2_;
   friend struct ::TableStruct_Paradigm_2eproto;
 };
 // -------------------------------------------------------------------
@@ -2463,12 +2471,12 @@ class FlightConfig :
   ::google::protobuf::uint32 retrievaltimeout() const;
   void set_retrievaltimeout(::google::protobuf::uint32 value);
 
-  // optional int32 heartbeatTimeout = 4 [default = 10000];
-  bool has_heartbeattimeout() const;
-  void clear_heartbeattimeout();
-  static const int kHeartbeatTimeoutFieldNumber = 4;
-  ::google::protobuf::int32 heartbeattimeout() const;
-  void set_heartbeattimeout(::google::protobuf::int32 value);
+  // optional int32 lvdcNodeServerNumber = 13 [default = 5552];
+  bool has_lvdcnodeservernumber() const;
+  void clear_lvdcnodeservernumber();
+  static const int kLvdcNodeServerNumberFieldNumber = 13;
+  ::google::protobuf::int32 lvdcnodeservernumber() const;
+  void set_lvdcnodeservernumber(::google::protobuf::int32 value);
 
   // optional int32 pdsTelemetryPort = 2 [default = 7000];
   bool has_pdstelemetryport() const;
@@ -2484,19 +2492,33 @@ class FlightConfig :
   ::google::protobuf::int32 commandport() const;
   void set_commandport(::google::protobuf::int32 value);
 
-  // optional uint64 brakeNodePort = 7 [default = 5555];
-  bool has_brakenodeport() const;
-  void clear_brakenodeport();
-  static const int kBrakeNodePortFieldNumber = 7;
-  ::google::protobuf::uint64 brakenodeport() const;
-  void set_brakenodeport(::google::protobuf::uint64 value);
+  // optional uint64 nodePort = 7 [default = 5555];
+  bool has_nodeport() const;
+  void clear_nodeport();
+  static const int kNodePortFieldNumber = 7;
+  ::google::protobuf::uint64 nodeport() const;
+  void set_nodeport(::google::protobuf::uint64 value);
 
-  // optional uint64 brakeNodeTimeout = 8 [default = 4000];
-  bool has_brakenodetimeout() const;
-  void clear_brakenodetimeout();
-  static const int kBrakeNodeTimeoutFieldNumber = 8;
-  ::google::protobuf::uint64 brakenodetimeout() const;
-  void set_brakenodetimeout(::google::protobuf::uint64 value);
+  // optional int32 heartbeatTimeout = 4 [default = 10000];
+  bool has_heartbeattimeout() const;
+  void clear_heartbeattimeout();
+  static const int kHeartbeatTimeoutFieldNumber = 4;
+  ::google::protobuf::int32 heartbeattimeout() const;
+  void set_heartbeattimeout(::google::protobuf::int32 value);
+
+  // optional int32 pdsUpdateFreq = 10 [default = 500];
+  bool has_pdsupdatefreq() const;
+  void clear_pdsupdatefreq();
+  static const int kPdsUpdateFreqFieldNumber = 10;
+  ::google::protobuf::int32 pdsupdatefreq() const;
+  void set_pdsupdatefreq(::google::protobuf::int32 value);
+
+  // optional uint64 nodeTimeout = 8 [default = 2000];
+  bool has_nodetimeout() const;
+  void clear_nodetimeout();
+  static const int kNodeTimeoutFieldNumber = 8;
+  ::google::protobuf::uint64 nodetimeout() const;
+  void set_nodetimeout(::google::protobuf::uint64 value);
 
   // optional uint64 brakeNodeServerPort = 9 [default = 5550];
   bool has_brakenodeserverport() const;
@@ -2504,6 +2526,20 @@ class FlightConfig :
   static const int kBrakeNodeServerPortFieldNumber = 9;
   ::google::protobuf::uint64 brakenodeserverport() const;
   void set_brakenodeserverport(::google::protobuf::uint64 value);
+
+  // optional int32 brakeNodeUpdateFreq = 11 [default = 10];
+  bool has_brakenodeupdatefreq() const;
+  void clear_brakenodeupdatefreq();
+  static const int kBrakeNodeUpdateFreqFieldNumber = 11;
+  ::google::protobuf::int32 brakenodeupdatefreq() const;
+  void set_brakenodeupdatefreq(::google::protobuf::int32 value);
+
+  // optional int32 enclosureNodeServerNumber = 12 [default = 5551];
+  bool has_enclosurenodeservernumber() const;
+  void clear_enclosurenodeservernumber();
+  static const int kEnclosureNodeServerNumberFieldNumber = 12;
+  ::google::protobuf::int32 enclosurenodeservernumber() const;
+  void set_enclosurenodeservernumber(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:FlightConfig)
  private:
@@ -2518,12 +2554,16 @@ class FlightConfig :
   private:
   ::google::protobuf::internal::ArenaStringPtr controllaptopipaddr_;
   ::google::protobuf::uint32 retrievaltimeout_;
-  ::google::protobuf::int32 heartbeattimeout_;
+  ::google::protobuf::int32 lvdcnodeservernumber_;
   ::google::protobuf::int32 pdstelemetryport_;
   ::google::protobuf::int32 commandport_;
-  ::google::protobuf::uint64 brakenodeport_;
-  ::google::protobuf::uint64 brakenodetimeout_;
+  ::google::protobuf::uint64 nodeport_;
+  ::google::protobuf::int32 heartbeattimeout_;
+  ::google::protobuf::int32 pdsupdatefreq_;
+  ::google::protobuf::uint64 nodetimeout_;
   ::google::protobuf::uint64 brakenodeserverport_;
+  ::google::protobuf::int32 brakenodeupdatefreq_;
+  ::google::protobuf::int32 enclosurenodeservernumber_;
   friend struct ::TableStruct_Paradigm_2eproto;
 };
 // -------------------------------------------------------------------
@@ -4804,6 +4844,24 @@ inline void EnclosureNodeToFc::set_coolantlinepressure(float value) {
   // @@protoc_insertion_point(field_set:EnclosureNodeToFc.coolantLinePressure)
 }
 
+// required float coolantLinePressure2 = 5;
+inline bool EnclosureNodeToFc::has_coolantlinepressure2() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void EnclosureNodeToFc::clear_coolantlinepressure2() {
+  coolantlinepressure2_ = 0;
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline float EnclosureNodeToFc::coolantlinepressure2() const {
+  // @@protoc_insertion_point(field_get:EnclosureNodeToFc.coolantLinePressure2)
+  return coolantlinepressure2_;
+}
+inline void EnclosureNodeToFc::set_coolantlinepressure2(float value) {
+  _has_bits_[0] |= 0x00000010u;
+  coolantlinepressure2_ = value;
+  // @@protoc_insertion_point(field_set:EnclosureNodeToFc.coolantLinePressure2)
+}
+
 // -------------------------------------------------------------------
 
 // LvdcNodeToFc
@@ -5396,18 +5454,18 @@ inline void FlightConfig::set_commandport(::google::protobuf::int32 value) {
 
 // optional int32 heartbeatTimeout = 4 [default = 10000];
 inline bool FlightConfig::has_heartbeattimeout() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000080u) != 0;
 }
 inline void FlightConfig::clear_heartbeattimeout() {
   heartbeattimeout_ = 10000;
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000080u;
 }
 inline ::google::protobuf::int32 FlightConfig::heartbeattimeout() const {
   // @@protoc_insertion_point(field_get:FlightConfig.heartbeatTimeout)
   return heartbeattimeout_;
 }
 inline void FlightConfig::set_heartbeattimeout(::google::protobuf::int32 value) {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000080u;
   heartbeattimeout_ = value;
   // @@protoc_insertion_point(field_set:FlightConfig.heartbeatTimeout)
 }
@@ -5532,58 +5590,130 @@ inline void FlightConfig::set_allocated_controllaptopipaddr(::std::string* contr
   // @@protoc_insertion_point(field_set_allocated:FlightConfig.controlLaptopIpAddr)
 }
 
-// optional uint64 brakeNodePort = 7 [default = 5555];
-inline bool FlightConfig::has_brakenodeport() const {
+// optional uint64 nodePort = 7 [default = 5555];
+inline bool FlightConfig::has_nodeport() const {
   return (_has_bits_[0] & 0x00000040u) != 0;
 }
-inline void FlightConfig::clear_brakenodeport() {
-  brakenodeport_ = PROTOBUF_ULONGLONG(5555);
+inline void FlightConfig::clear_nodeport() {
+  nodeport_ = PROTOBUF_ULONGLONG(5555);
   _has_bits_[0] &= ~0x00000040u;
 }
-inline ::google::protobuf::uint64 FlightConfig::brakenodeport() const {
-  // @@protoc_insertion_point(field_get:FlightConfig.brakeNodePort)
-  return brakenodeport_;
+inline ::google::protobuf::uint64 FlightConfig::nodeport() const {
+  // @@protoc_insertion_point(field_get:FlightConfig.nodePort)
+  return nodeport_;
 }
-inline void FlightConfig::set_brakenodeport(::google::protobuf::uint64 value) {
+inline void FlightConfig::set_nodeport(::google::protobuf::uint64 value) {
   _has_bits_[0] |= 0x00000040u;
-  brakenodeport_ = value;
-  // @@protoc_insertion_point(field_set:FlightConfig.brakeNodePort)
+  nodeport_ = value;
+  // @@protoc_insertion_point(field_set:FlightConfig.nodePort)
 }
 
-// optional uint64 brakeNodeTimeout = 8 [default = 4000];
-inline bool FlightConfig::has_brakenodetimeout() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
+// optional uint64 nodeTimeout = 8 [default = 2000];
+inline bool FlightConfig::has_nodetimeout() const {
+  return (_has_bits_[0] & 0x00000200u) != 0;
 }
-inline void FlightConfig::clear_brakenodetimeout() {
-  brakenodetimeout_ = PROTOBUF_ULONGLONG(4000);
-  _has_bits_[0] &= ~0x00000080u;
+inline void FlightConfig::clear_nodetimeout() {
+  nodetimeout_ = PROTOBUF_ULONGLONG(2000);
+  _has_bits_[0] &= ~0x00000200u;
 }
-inline ::google::protobuf::uint64 FlightConfig::brakenodetimeout() const {
-  // @@protoc_insertion_point(field_get:FlightConfig.brakeNodeTimeout)
-  return brakenodetimeout_;
+inline ::google::protobuf::uint64 FlightConfig::nodetimeout() const {
+  // @@protoc_insertion_point(field_get:FlightConfig.nodeTimeout)
+  return nodetimeout_;
 }
-inline void FlightConfig::set_brakenodetimeout(::google::protobuf::uint64 value) {
-  _has_bits_[0] |= 0x00000080u;
-  brakenodetimeout_ = value;
-  // @@protoc_insertion_point(field_set:FlightConfig.brakeNodeTimeout)
+inline void FlightConfig::set_nodetimeout(::google::protobuf::uint64 value) {
+  _has_bits_[0] |= 0x00000200u;
+  nodetimeout_ = value;
+  // @@protoc_insertion_point(field_set:FlightConfig.nodeTimeout)
 }
 
 // optional uint64 brakeNodeServerPort = 9 [default = 5550];
 inline bool FlightConfig::has_brakenodeserverport() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
+  return (_has_bits_[0] & 0x00000400u) != 0;
 }
 inline void FlightConfig::clear_brakenodeserverport() {
   brakenodeserverport_ = PROTOBUF_ULONGLONG(5550);
-  _has_bits_[0] &= ~0x00000100u;
+  _has_bits_[0] &= ~0x00000400u;
 }
 inline ::google::protobuf::uint64 FlightConfig::brakenodeserverport() const {
   // @@protoc_insertion_point(field_get:FlightConfig.brakeNodeServerPort)
   return brakenodeserverport_;
 }
 inline void FlightConfig::set_brakenodeserverport(::google::protobuf::uint64 value) {
-  _has_bits_[0] |= 0x00000100u;
+  _has_bits_[0] |= 0x00000400u;
   brakenodeserverport_ = value;
   // @@protoc_insertion_point(field_set:FlightConfig.brakeNodeServerPort)
+}
+
+// optional int32 pdsUpdateFreq = 10 [default = 500];
+inline bool FlightConfig::has_pdsupdatefreq() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void FlightConfig::clear_pdsupdatefreq() {
+  pdsupdatefreq_ = 500;
+  _has_bits_[0] &= ~0x00000100u;
+}
+inline ::google::protobuf::int32 FlightConfig::pdsupdatefreq() const {
+  // @@protoc_insertion_point(field_get:FlightConfig.pdsUpdateFreq)
+  return pdsupdatefreq_;
+}
+inline void FlightConfig::set_pdsupdatefreq(::google::protobuf::int32 value) {
+  _has_bits_[0] |= 0x00000100u;
+  pdsupdatefreq_ = value;
+  // @@protoc_insertion_point(field_set:FlightConfig.pdsUpdateFreq)
+}
+
+// optional int32 brakeNodeUpdateFreq = 11 [default = 10];
+inline bool FlightConfig::has_brakenodeupdatefreq() const {
+  return (_has_bits_[0] & 0x00000800u) != 0;
+}
+inline void FlightConfig::clear_brakenodeupdatefreq() {
+  brakenodeupdatefreq_ = 10;
+  _has_bits_[0] &= ~0x00000800u;
+}
+inline ::google::protobuf::int32 FlightConfig::brakenodeupdatefreq() const {
+  // @@protoc_insertion_point(field_get:FlightConfig.brakeNodeUpdateFreq)
+  return brakenodeupdatefreq_;
+}
+inline void FlightConfig::set_brakenodeupdatefreq(::google::protobuf::int32 value) {
+  _has_bits_[0] |= 0x00000800u;
+  brakenodeupdatefreq_ = value;
+  // @@protoc_insertion_point(field_set:FlightConfig.brakeNodeUpdateFreq)
+}
+
+// optional int32 enclosureNodeServerNumber = 12 [default = 5551];
+inline bool FlightConfig::has_enclosurenodeservernumber() const {
+  return (_has_bits_[0] & 0x00001000u) != 0;
+}
+inline void FlightConfig::clear_enclosurenodeservernumber() {
+  enclosurenodeservernumber_ = 5551;
+  _has_bits_[0] &= ~0x00001000u;
+}
+inline ::google::protobuf::int32 FlightConfig::enclosurenodeservernumber() const {
+  // @@protoc_insertion_point(field_get:FlightConfig.enclosureNodeServerNumber)
+  return enclosurenodeservernumber_;
+}
+inline void FlightConfig::set_enclosurenodeservernumber(::google::protobuf::int32 value) {
+  _has_bits_[0] |= 0x00001000u;
+  enclosurenodeservernumber_ = value;
+  // @@protoc_insertion_point(field_set:FlightConfig.enclosureNodeServerNumber)
+}
+
+// optional int32 lvdcNodeServerNumber = 13 [default = 5552];
+inline bool FlightConfig::has_lvdcnodeservernumber() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void FlightConfig::clear_lvdcnodeservernumber() {
+  lvdcnodeservernumber_ = 5552;
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline ::google::protobuf::int32 FlightConfig::lvdcnodeservernumber() const {
+  // @@protoc_insertion_point(field_get:FlightConfig.lvdcNodeServerNumber)
+  return lvdcnodeservernumber_;
+}
+inline void FlightConfig::set_lvdcnodeservernumber(::google::protobuf::int32 value) {
+  _has_bits_[0] |= 0x00000008u;
+  lvdcnodeservernumber_ = value;
+  // @@protoc_insertion_point(field_set:FlightConfig.lvdcNodeServerNumber)
 }
 
 // -------------------------------------------------------------------

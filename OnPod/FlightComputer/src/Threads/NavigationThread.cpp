@@ -14,7 +14,7 @@
 #include "Heartbeat.h"
 
 
-#define BUFFER_SIZE 23
+#define BUFFER_SIZE 35
 #define FRONT_WHEEL_RADIUS 0.09728
 #define FRONT_WHEEL_CIRCUMFERENCE 0.611228
 #define STRIP_DISTANCE 1.570796
@@ -70,12 +70,13 @@ void readNavigationNode(int serialPort, TelemetryManager &pod){
         std::getline(dataStream, data, ',');
         tachSpokeCount = std::stoi(data);
     }
-    catch (std::invalid_argument &e){
-        std::string sError = std::string("Parsing Nav Node Data: ") + std::strerror(errno);
+    catch (std::exception &e){
+        std::string sError = std::string("Error Parsing Nav Node Data");
         throw std::runtime_error(sError);
     }
     dataStream >> irStripCount;
     std::stringstream().swap(dataStream);
+    LOG(INFO)<<"TachRPM : "<<tachRpm << " IrRPM : "<< irRpm << " Spoke : "<< tachSpokeCount << " Strip : "<<irStripCount;
     pod.telemetry->irRpm = irRpm;
     pod.telemetry->tachRpm = tachRpm;
     pod.telemetry->tachDistance = (tachSpokeCount/8)*FRONT_WHEEL_CIRCUMFERENCE;
@@ -92,7 +93,7 @@ int32_t NavigationThread(TelemetryManager Pod) {
         return -1;
     }
 
-    Heartbeat navNodeUpdateFreq = Heartbeat(10);
+    Heartbeat navNodeUpdateFreq = Heartbeat(2000);
     float tachVelocity, motorVelocity, podVelocity;
 
     while(Pod.getPodStateValue() != psShutdown)
