@@ -94,6 +94,7 @@ class Acceleration : public PodState {
 public:
     Acceleration(TelemetryManager*);
     ~Acceleration();
+    float getBrakingDistance();
     bool testTransitions() override;
 };
 
