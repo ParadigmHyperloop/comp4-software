@@ -4,6 +4,8 @@
 #include "Common.h"
 #include "Heartbeat.h"
 #include "TelemetryManager.h"
+#include "Constants/SensorConfig.h"
+
 
 // Get manual state change commands. Get Estop command
 
@@ -30,6 +32,50 @@ int32_t createCommanderServerSocket(int32_t serverPortNumber) {
     return serverSock;
 }
 
+void parseOverrides(PodCommand podCommand, TelemetryManager *Pod) {
+    Pod->sendUpdate("Parsing Overrides");
+    // This is gross... dont look! ;)
+    int32_t flag;
+    for (int i = 0; i < 5; ++i) {
+        if(podCommand.sensoroverrideconfiguration(i)){
+            Pod->telemetry->nodeSensorFlags[i] = 2;
+        }
+    }
+    if(podCommand.sensoroverrideconfiguration(5)){
+        Pod->setConnectionFlag(2,2);
+        for(auto &flag : Pod->telemetry->bmsSensorFlags){
+            flag = 2;
+        }
+    }
+    if(podCommand.sensoroverrideconfiguration(6)){
+        Pod->setInverterHeartbeat(2);
+        for(auto &flag : Pod->telemetry->inverterSensorFlags){
+            flag = 2;
+        }
+    }
+    if(podCommand.sensoroverrideconfiguration(7)){
+        Pod->setConnectionFlag(2,BRAKE_NODE_HEARTBEAT_INDEX);
+    }
+    if(podCommand.sensoroverrideconfiguration(8)){
+        Pod->setConnectionFlag(2,LVDC_NODE_HEARTBEAT_INDEX);
+    }
+    if(podCommand.sensoroverrideconfiguration(9)){
+        Pod->setConnectionFlag(2,ENCLOSURE_HEARTBEAT_INDEX);
+    }
+    if(podCommand.sensoroverrideconfiguration(10)){
+        Pod->setNodeSensorFlag(2,ENCLOSURE_PRESSURE_INDEX);
+    }
+    if(podCommand.sensoroverrideconfiguration(11)){
+        Pod->setNodeSensorFlag(2,ENCLOSURE_TEMPERATURE_INDEX);
+    }
+    if(podCommand.sensoroverrideconfiguration(12)){
+        Pod->setNodeSensorFlag(2,COOLING_PRESSURE_INDEX);
+    }
+    if(podCommand.sensoroverrideconfiguration(13)){
+        Pod->setNodeSensorFlag(2,COOLING_TEMPERATURE_INDEX);
+    }
+}
+
 void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
     if(!podCommand.has_hascommand()){
         return;
@@ -40,12 +86,16 @@ void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
     if (podCommand.has_automaticstatetransitions()) {
         Pod->setAutomaticTransitions(podCommand.automaticstatetransitions());
     }
+    if(podCommand.has_maxflighttime()){
+        Pod->telemetry->maxFlightTime = podCommand.maxflighttime();
+        Pod->telemetry->motorTorque = podCommand.motortorque();
+        Pod->telemetry->flightDistance = podCommand.flightdistance();
+    }
     if (podCommand.has_manualbrakenodestate()){
         BrakeNodeStates state = podCommand.manualbrakenodestate();
         if(state == bnsSolenoidControl){
             std::fill(Pod->telemetry->manualSolenoidConfiguration.begin(), Pod->telemetry->manualSolenoidConfiguration.end(), false);
         }
-        LOG(INFO) << podCommand.manualbrakenodestate();
         Pod->setManualBrakeNodeState(podCommand.manualbrakenodestate());
     }
     if (podCommand.has_manuallvdcnodestate()) {
@@ -53,11 +103,15 @@ void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
     }
     if (podCommand.has_manualpodstate()) {
         Pod->setManualPodState(podCommand.manualpodstate());
+        Pod->setAutomaticTransitions(false);
     }
     if (podCommand.solenoidconfiguration_size() >= 4){
         for(int i = 0 ; i < 4 ; i++){
             Pod->telemetry->manualSolenoidConfiguration[i] = podCommand.solenoidconfiguration(i);
         }
+    }
+    if (podCommand.sensoroverrideconfiguration_size() >= 1){
+        parseOverrides(podCommand, Pod);
     }
 }
 
@@ -86,7 +140,7 @@ int32_t commanderThread(TelemetryManager Pod) {
     //Sockets and buffers
     int32_t connectionSock, operationStatus;
     ssize_t messageSize;
-    int32_t serverSock = createCommanderServerSocket(Pod.sPodNetworkValues->iCommanderPortNumber);
+    int32_t serverSock = createCommanderServerSocket(Pod.sPodNetworkValues->commanderPortNumber);
     char buffer[256] = {0};
     if (serverSock < 0) {
         // Restart thread?
@@ -95,26 +149,26 @@ int32_t commanderThread(TelemetryManager Pod) {
     }
 
     //Watchdog
-    Heartbeat pulse = Heartbeat(Pod.sPodNetworkValues->iCommaderTimeoutMili);
+    Heartbeat pulse = Heartbeat(Pod.sPodNetworkValues->commaderTimeoutMili);
 
     //pod state != shutdown
-    while (Pod.telemetry->podState->getStateValue() != psShutdown) {
+    while (Pod.getPodStateValue() != psShutdown) {
 
         /* Accepted connection gets put iNewSockfd,
         * thread will hang here until a connection is recieved.
         */
         connectionSock = accept(serverSock, nullptr, nullptr);
         if (connectionSock < 0) {
-            LOG(INFO) << (std::string)"ERROR on acception Commander connection" + std::strerror(errno);
+            LOG(INFO) << (std::string)"ERROR on accept() on Commander socket : " + std::strerror(errno);
         }
         operationStatus = fcntl(connectionSock, F_SETFL, fcntl(connectionSock, F_GETFL, 0) | O_NONBLOCK);
         if(operationStatus == -1){
-            //todo throw error and string errno
+            LOG(INFO) << (std::string)"ERROR on making commander socket non-blocking : " + std::strerror(errno);
         }
 
         LOG(INFO) << "Controls Interface Connected";
         pulse.feed();
-        while (Pod.telemetry->podState->getStateValue() != psShutdown) {
+        while (Pod.getPodStateValue() != psShutdown) {
             messageSize = read(connectionSock, buffer, 255);
             if (messageSize < 0) {
                 if (errno == 11) //Erno 11 means no message available on non blocking socket

@@ -1,27 +1,44 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, BooleanField
-from wtforms.validators import DataRequired
+from wtforms import StringField, SubmitField, BooleanField, IntegerField
+from wtforms.validators import DataRequired, NumberRange
 
 
-class FlightConfigurationForm(FlaskForm):
+class OverridesForm(FlaskForm):
+    lp_1 = BooleanField("Low Pressure 1")
+    lp_2 = BooleanField("Low Pressure 2")
+    lp_3 = BooleanField("Low Pressure 3")
+    hp = BooleanField("High Pressure")
+    hp_temp = BooleanField("Tank Temperature")
+    bms_values = BooleanField("BMS Values")
+    inverter_values = BooleanField("Inverter Values")
+    brake_node_heartbeat = BooleanField("Brake Node Heartbeat")
+    lvdc_node_heartbeat = BooleanField("LVDC Node Heartbeat")
+    enclosure_node_heartbeat = BooleanField("Enclosure Node Heartbeat")
+    enclosure_pressure = BooleanField("Enclosure Pressure")
+    enclosure_temperature = BooleanField("Enclosure Temperature")
+    cooling_pressure = BooleanField("Cooling Pressure")
+    cooling_temperature = BooleanField("Cooling Temperature")
+
+
+class PodConfigurationForm(FlaskForm):
     retrieval_timeout = StringField('Retrieval Timeout (s)',
-                                    validators=[DataRequired("Air Resistance")])
-    max_flight_time = StringField('Max Flight Time (s)',
-                                  validators=[DataRequired("Motor Speed")])
-    motor_speed = StringField('Motor Speed (units)',
-                              validators=[DataRequired("Motor Speed")])
+                                    validators=[DataRequired("Timeout")])
     telemetry_port = StringField('PDS Telemetry Port',
                                  validators=[DataRequired("PDS Port")])
     command_port = StringField('PDS Command Port',
                                validators=[DataRequired("PDS Port")])
-    flight_Length = StringField('Flight Length (s)',
-                                validators=[DataRequired("Expected FLight Length")])
     heartbeat_timout = StringField('HeartBeat Timeout (s)',
                                    validators=[DataRequired("HeartBeat Timeout")])
     pod_ip = StringField('Pod Address (IP)',
                          validators=[DataRequired("Pod Address")])
     pod_driver = BooleanField('Pod Driver: ')
     submit = SubmitField('Send Configuration')
+
+
+class FlightProfileForm(FlaskForm):
+    max_flight_time = IntegerField('Maximum Flight Time (s)', validators=[DataRequired("Required"), NumberRange(0, 100, "0 < Flight Time < 100")])
+    motor_speed = IntegerField('Motor Torque (N/m)', validators=[DataRequired("Required"), NumberRange(0, 10000, "0  < Distance < 100 ")])
+    flight_distance = IntegerField('Flight Distance (meters)', validators=[DataRequired("Required"), NumberRange(0, 100, "0  < Flight Distance < 100 ")])
 
 
 def validate_configuration_values(configuration_form):

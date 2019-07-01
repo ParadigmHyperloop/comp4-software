@@ -1,14 +1,15 @@
 #include "thermocouple.h"
 
-typeKThermo::typeKThermo (ADS7953 *adc, uint8_t uAdcChannel) :
+TypeKThermo::TypeKThermo (ADS7953 *adc, uint8_t uAdcChannel) :
     adc(adc), uAdcChannel(uAdcChannel)
     {}
 
-void typeKThermo::init() {
+void TypeKThermo::init() {
     adc->enableChannel(uAdcChannel);
 }
 
-float typeKThermo::read() {
+float TypeKThermo::read() {
     uint16_t uAdcConversion = adc->getuAdcData()[uAdcChannel];
-    return uAdcConversion/4.096 - 105;
+    float fVoltage = (float)uAdcConversion/(1<<ADC_BITS) * ADC_RANGE;
+    return (fVoltage - AD8495_VREF) / V_PER_DEGREE;
 }

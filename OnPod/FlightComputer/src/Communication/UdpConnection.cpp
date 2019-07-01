@@ -8,20 +8,22 @@ UdpConnection::UdpConnection(TelemetryManager pod){
 };
 
 void UdpConnection::setRecvBufferSize(int32_t bufferSize) {
-    //todo log failure
-    int32_t s = setsockopt(this->_inboundSocket, SOL_SOCKET, SO_RCVBUF, &bufferSize, sizeof(bufferSize));
+    int32_t status = setsockopt(this->_inboundSocket, SOL_SOCKET, SO_RCVBUF, &bufferSize, sizeof(bufferSize));
+    if(status < 0){
+        std::string error = std::string("Failed to set recv buffer size ") + std::strerror(errno);
+        throw std::runtime_error(error);
+    }
 }
 
-
-void UdpConnection::configureClient(const std::string &destIp, int32_t destPortNum, int32_t outboundSocket) {
+void UdpConnection::configureClient(const std::string &destIp, int32_t destPortNum, int32_t outboundSocket, int32_t update_freq) {
     struct sockaddr_in sAddr = {0};
     this->_outboundSocket = outboundSocket;
     this->_destSockAddr = sAddr;
     this->_destSockAddr = createGenericNodeAddr();
     this->_destSockAddr.sin_port = htons(destPortNum);
     this->_destSockAddr.sin_addr.s_addr = inet_addr(destIp.c_str());
+    this->_update_freq = Heartbeat(update_freq);
 }
-
 
 void UdpConnection::configureServer(int32_t serverPort, int32_t connectionTimeoutMilis) {
     this->_pulse = Heartbeat(connectionTimeoutMilis);
@@ -48,20 +50,22 @@ int32_t UdpConnection::checkPacketId(int32_t id) {
     }
 }
 
-
 void UdpConnection::getUpdate() {
+    if (this->_inboundSocket == UNCONFIGURED) {
+        return;
+    }
+    if (this->_inboundSocket == -1) {
+        std::string error = this->_connectionName + "getUpdate() : Server socket invalid";
+        throw std::runtime_error(error);
+    }
 
     bool opStatus = false;
 
-    if (this->_inboundSocket == -1) {
-        std::string error = "getUpdate() : Server socket invalid";
-        throw std::runtime_error(error);
-    }
     char buffer[200] = {0};
     bzero(&buffer, sizeof buffer);
     ssize_t receivedPacketSize = recvfrom(this->_inboundSocket, buffer, 200, 0, nullptr, nullptr);
     if (receivedPacketSize != -1) {
-        LOG(INFO) << receivedPacketSize << " Bytes received on " << this->_connectionName << buffer;
+        //LOG(INFO) << receivedPacketSize << " Bytes received on " << this->_connectionName << buffer;
         try {
             opStatus = this->parseUpdate(buffer, (int32_t) receivedPacketSize);
         }
@@ -81,12 +85,14 @@ void UdpConnection::getUpdate() {
     }
 }
 
-
 void UdpConnection::giveUpdate() {
+    if(!this->_update_freq.expired() || this->_outboundSocket == UNCONFIGURED){
+        return;
+    }
+    this->_update_freq.feed();
 
     ssize_t payloadSize;
     std::unique_ptr<google::protobuf::Message> protoPacket(this->getProtoUpdateMessage());
-
     payloadSize = protoPacket->ByteSizeLong();
     unsigned char payload[payloadSize];
 
@@ -132,7 +138,7 @@ bool UdpConnection::_createServerSocket() {
     SocketAddr.sin_addr.s_addr = INADDR_ANY;
     int32_t status = bind(serverSocket, (struct sockaddr *) &SocketAddr, sizeof(SocketAddr));
     if (status < 0) {
-        std::string sError = std::string("Binding Server Socket: ") + std::strerror(errno);
+        std::string sError = this->_connectionName + std::string("Binding Server Socket: ") + std::strerror(errno);
         throw std::runtime_error(sError);
     }
     this->_inboundSocket = serverSocket;
@@ -150,16 +156,22 @@ int32_t UdpConnection::getConnectionIndex(){
 
 PdsConnection::PdsConnection(TelemetryManager pod) : UdpConnection(pod) {
     this->_connectionName = "Controls Interface Data : ";
-    this->_connectionStatusIndex = PDS_CONNECTION_INDEX;
+    this->_connectionStatusIndex = -1;
 };
 
 std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage() {
     std::unique_ptr<Telemetry> protoMessage (new Telemetry());
-    protoMessage->set_podstate(pod.telemetry->podState->getStateValue());
+    protoMessage->set_podstate(pod.getPodStateValue());
     protoMessage->set_lowpressure1(pod.telemetry->lowPressure1);
+    protoMessage->set_lowpressure2(pod.telemetry->lowPressure2);
+    protoMessage->set_lowpressure3(pod.telemetry->lowPressure3);
+    protoMessage->set_lowpressure4(pod.telemetry->lowPressure4);
     protoMessage->set_highpressure(pod.telemetry->highPressure);
+    protoMessage->set_coolanttemperature(pod.telemetry->coolingTemperature); //todo
     protoMessage->set_solenoid1(pod.telemetry->solenoid1);
     protoMessage->set_solenoid2(pod.telemetry->solenoid2);
+    protoMessage->set_solenoid3(pod.telemetry->solenoid3);
+    protoMessage->set_solenoid4(pod.telemetry->solenoid4);
     protoMessage->set_pressurevesseltemperature(pod.telemetry->pressureVesselTemperature);
     protoMessage->set_railtemperature(pod.telemetry->rotorTemperature);
     protoMessage->set_hvbatterypackvoltage(pod.telemetry->hvBatteryPackVoltage);
@@ -171,6 +183,28 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_invertercontrolboardtemperature(pod.telemetry->inverterControlBoardTemperature);
     protoMessage->set_motortemperature(pod.telemetry->motorTemperature);
     protoMessage->set_inverterbusvoltage(pod.telemetry->inverterBusVoltage);
+    protoMessage->set_maxflighttime(pod.telemetry->maxFlightTime);
+    protoMessage->set_flightdistance(pod.telemetry->flightDistance);
+    protoMessage->set_motortorque(pod.telemetry->motorTorque);
+    protoMessage->set_inverterheartbeat(pod.telemetry->inverterHeartbeat);
+    protoMessage->set_hvbatterypackmaxcelltemperature(pod.telemetry->hvBatteryPackMaxCellTemperature);
+    protoMessage->set_hvbatterypackstateofcharge(pod.telemetry->hvBatteryPackStateOfCharge);
+    protoMessage->set_motorspeed(pod.telemetry->motorSpeed);
+    protoMessage->set_irdistance(pod.telemetry->irDistance);
+    protoMessage->set_irrpm(pod.telemetry->irRpm);
+    protoMessage->set_tachdistance(pod.telemetry->tachDistance);
+    protoMessage->set_tachrpm(pod.telemetry->tachRpm);
+    protoMessage->set_lvdcnodestate(lvdcNone);
+    protoMessage->set_brakenodestate(pod.telemetry->receivedBrakeNodeState);
+
+    // Add Updates todo probably put this in a function with a pointer to the proto as an argument
+    if(this->pod.telemetry->updates.size() > 0){
+        std::lock_guard<std::mutex> lock(this->pod.telemetry->updatesLock);
+        for(std::string& update : this->pod.telemetry->updates){
+            protoMessage->add_updatemessages(update);
+        }
+        this->pod.telemetry->updates.clear();
+    }
     return protoMessage;
 }
 
@@ -180,7 +214,7 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
 
 BrakeNodeConnection::BrakeNodeConnection(TelemetryManager pod) : UdpConnection(pod) {
     this->_connectionName = "Brake Node : ";
-    this->_connectionStatusIndex = BRAKE_NODE_INDEX;
+    this->_connectionStatusIndex = BRAKE_NODE_HEARTBEAT_INDEX;
 }
 
 std::unique_ptr<google::protobuf::Message> BrakeNodeConnection::getProtoUpdateMessage() {
@@ -188,7 +222,7 @@ std::unique_ptr<google::protobuf::Message> BrakeNodeConnection::getProtoUpdateMe
     protoMessage->set_packetnum(this->getNewPacketId());
     BrakeNodeStates manualState = this->pod.telemetry->manualBrakeNodeState;
     if(manualState == bnsNone){
-        protoMessage->set_nodestate(this->pod.telemetry->manualBrakeNodeState);
+        protoMessage->set_nodestate(this->pod.telemetry->commandedBrakeNodeState);
         return protoMessage;
     }
     if(manualState == bnsSolenoidControl){
@@ -203,20 +237,27 @@ std::unique_ptr<google::protobuf::Message> BrakeNodeConnection::getProtoUpdateMe
 }
 
 bool BrakeNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
-    DtsNodeToFc protoMessage = DtsNodeToFc();
+    BrakeNodeToFc protoMessage = BrakeNodeToFc();
     if (!protoMessage.ParseFromArray(buffer, messageSize)) {
         std::string strError = "Failed to parse Update from Brake Node";
         throw std::invalid_argument(strError);
     }
     if(this->checkPacketId(protoMessage.packetnum())){
-        return false;
+        //todo
     }
-    this->pod.setSolenoid(protoMessage.brakesolenoidstate(),SOL1_INDEX);
-    this->pod.setSolenoid(protoMessage.ventsolenoidstate(), SOL4_INDEX);
-   // this->pod.setPressureVesselTemperature(protoMessage.pneumatictemperature());
-    this->pod.setHighPressure(protoMessage.tankpressure());
-    this->pod.setLowPressure(protoMessage.brakepressure(), LP1_INDEX);
-    //this->pod.telemetry->rotorTemperature = protoMessage.rotortemperature(); //dts
+    this->pod.setSolenoid(protoMessage.solenoid1(),SOL1_INDEX);
+    this->pod.setSolenoid(protoMessage.solenoid2(), SOL2_INDEX);
+    this->pod.setSolenoid(protoMessage.solenoid3(), SOL3_INDEX);
+    this->pod.setSolenoid(protoMessage.solenoid4(), SOL4_INDEX);
+    this->pod.setPressureVesselTemperature(protoMessage.pneumatictemperature());
+    this->pod.setHighPressure(protoMessage.highpressure());
+    this->pod.setLowPressure(protoMessage.lowpressure1(), LP1_INDEX);
+    this->pod.setLowPressure(protoMessage.lowpressure2(), LP2_INDEX);
+    this->pod.setLowPressure(protoMessage.lowpressure3(), LP3_INDEX);
+    this->pod.setLowPressure(protoMessage.lowpressurecommon(), LP4_INDEX);
+    this->pod.setPressureVesselTemperature(protoMessage.pneumatictemperature());
+    this->pod.telemetry->coolingTemperature = protoMessage.coolanttemperature(); //todo
+    this->pod.telemetry->receivedBrakeNodeState = protoMessage.state();
     return true;
 }
 
@@ -226,9 +267,8 @@ bool BrakeNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
 
 EnclosureNodeConnection::EnclosureNodeConnection(TelemetryManager pod) : UdpConnection(pod) {
     this->_connectionName = "Enclosure Node : ";
-    this->_connectionStatusIndex = ENCLOSURE_CONNECTION_INDEX;
+    this->_connectionStatusIndex = ENCLOSURE_HEARTBEAT_INDEX;
 }
-
 
 bool EnclosureNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
     EnclosureNodeToFc protoMessage = EnclosureNodeToFc();
@@ -239,17 +279,21 @@ bool EnclosureNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
     if(this->checkPacketId(protoMessage.packetnum())){
         return false;
     }
-
-    //TODO Add parsings
-
+    this->pod.setEnclosurePressure(protoMessage.enclosurepressure());
+    this->pod.setEnclosureTemperature(protoMessage.enclosuretemperature());
+    this->pod.setCoolantLinePressure(protoMessage.coolantpressure1());
     return true;
-
 }
 
 /*
- *  ***************** Enclosure Node Connection *******************
+ *  ***************** LVDC Node Connection *******************
  */
 
+LvdcNodeConnection::LvdcNodeConnection(TelemetryManager pod) : UdpConnection(pod) {
+    this->_connectionName = "Lvdc Node : ";
+    this->_connectionStatusIndex = LVDC_NODE_HEARTBEAT_INDEX;
+}
 
-
-
+bool LvdcNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
+    return true; //todo
+}

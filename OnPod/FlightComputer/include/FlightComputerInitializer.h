@@ -12,7 +12,7 @@ private:
 public:
     static FlightComputerInitializer* GetInstance();
     void importLoggerLibrary();
-    void updatePodNetworkValues(PodNetwork&, flightConfig& config);
+    void updatePodNetworkValues(PodNetwork&, FlightConfig& config);
 
 
 

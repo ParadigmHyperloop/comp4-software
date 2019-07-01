@@ -2280,7 +2280,6 @@ fieldset[disabled] .btn-neutral.active {
 .card label {
     font-size: 12px;
     margin-bottom: 5px;
-    text-transform: uppercase;
 }
 
 .card .title {

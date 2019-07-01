@@ -4,6 +4,7 @@
 
 #include <linux/can.h>
 #include <linux/can/raw.h>
+#include <linux/can/bcm.h>
 #include <endian.h>
 #include <net/if.h>
 #include <sys/ioctl.h>
@@ -19,8 +20,13 @@
 #include "Common.h"
 #include "TelemetryManager.h"
 
+struct broadcastManagerConfig
+{
+    struct bcm_msg_head msg_head;
+    struct can_frame frame[1];
+};
 
-void processFrame(const struct canfd_frame &frame, TelemetryManager &pod);
+void processFrame(const struct can_frame &frame, TelemetryManager &pod);
 
 template <class T>
 T extractCanValue(const __u8 data[], const std::vector<int> &byteIndices, T conversionFactor){

@@ -1,0 +1,3 @@
+/home/liam/Development/comp4-software/Examples/BBSerial/build/host/CMakeFiles/rebuild_cache.dir
+/home/liam/Development/comp4-software/Examples/BBSerial/build/host/CMakeFiles/FlightComputer.dir
+/home/liam/Development/comp4-software/Examples/BBSerial/build/host/CMakeFiles/edit_cache.dir

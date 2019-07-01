@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 /home/liam/CLionProjects/motorDriving/build/host/CMakeFiles/rebuild_cache.dir
 /home/liam/CLionProjects/motorDriving/build/host/CMakeFiles/motorDriving.dir
 /home/liam/CLionProjects/motorDriving/build/host/CMakeFiles/edit_cache.dir
+=======
+/home/liam/Development/comp4-software/Examples/motorDriving/build/host/CMakeFiles/rebuild_cache.dir
+/home/liam/Development/comp4-software/Examples/motorDriving/build/host/CMakeFiles/motorDriving.dir
+/home/liam/Development/comp4-software/Examples/motorDriving/build/host/CMakeFiles/edit_cache.dir
+>>>>>>> master

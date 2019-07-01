@@ -27,7 +27,6 @@ const PinDescription g_APinDescription[] = {
 // 0 A0
   { PORTA, 2, PIO_ANALOG, PIN_ATTR_ANALOG, ADC_Channel0, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_2 },
 
-
 ////// External Sercom (ICSP:MISO,SCK,MOSI)//////
 // 1 MISO/GPIO wedit
   { PORTA, 21, PIO_DIGITAL, PIN_ATTR_DIGITAL, No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_NONE },

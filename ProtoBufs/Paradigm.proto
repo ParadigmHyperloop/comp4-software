@@ -36,6 +36,7 @@ enum ControlsInterfaceStates {
     ciFlight = 2;
     ciEmergencyStop = 3;
     ciNone = 4;
+    ciRestart = 5;
 }
 
 enum InverterStates {
@@ -66,13 +67,16 @@ message PodCommand {
     repeated int32 solenoidConfiguration = 8;
     repeated int32 powerRailConfiguration = 9;
     repeated int32 sensorOverrideConfiguration = 10;
+    optional uint32 motorTorque = 11;
+    optional uint32 flightDistance = 12;
+    optional uint32 maxFlightTime = 13;
 }
 
 // POD TELEMETRY
 message Telemetry {
     // States
     optional PodStates podState = 1;
-    optional BrakeNodeStates breakNodeState = 2;
+    optional BrakeNodeStates brakeNodeState = 2;
     optional MotorStates motorState = 3;
     optional ControlsInterfaceStates controlsInterfaceState = 4;
     optional InverterStates inverterState = 5;
@@ -92,10 +96,6 @@ message Telemetry {
     optional int32 podPosition = 9;
     optional int32 podVelocity = 10;
     optional int32 podAccelerationX = 11;
-    optional int32 podAccelerationY = 12;
-    optional int32 podAccelerationZ = 13;
-    optional int32 imuVelocity = 14;
-    optional int32 imuAccelerationX = 15;
     optional int32 tachometerVelocity = 16;
     optional int32 resolverVelocity = 17;
 
@@ -105,6 +105,8 @@ message Telemetry {
     optional int32 inverterControlBoardTemperature = 20;
     optional int32 motorTemperature = 21;
     optional int32 inverterBusVoltage = 22;
+    optional int32 inverterHeartbeat = 78;
+    optional int32 motorSpeed = 80;
 
 
     optional int32 inverterVoltages = 23;
@@ -114,9 +116,10 @@ message Telemetry {
     // HV-BMS
     optional float hvBatteryPackVoltage = 26;
     optional float hvBatteryPackCurrent = 27;
-    repeated int32 hvBatteryCellTemperatures = 28;
-    optional float hvBatteryPackMinimumCellVoltage = 29;
+    optional float hvBatteryPackMaxCellTemperature = 28;
     optional float hvBatteryPackMaxCellVoltage = 30;
+    optional float hvBatteryPackMinimumCellVoltage = 29;
+    optional int32  hvBatteryPackStateOfCharge = 79;
 
     // Brake Node
     optional bool solenoid1 = 32;
@@ -129,6 +132,7 @@ message Telemetry {
     optional float lowPressure3 = 41;
     optional float lowPressure4 = 42;
     optional float pressureVesselTemperature = 43;
+    optional int32 coolantTemperature = 52;
 
     optional int32 electronicsEnclosurePressure = 44;
     optional int32 railDisplacementX = 45;
@@ -139,7 +143,6 @@ message Telemetry {
     optional int32 coolantPressure1 = 49;
     optional int32 coolantPressure2 = 50;
     optional int32 coolantPressure3 = 51;
-    optional int32 coolantTemperature = 52;
     optional float railTemperature = 53;
 
     // Ghost Train
@@ -162,6 +165,20 @@ message Telemetry {
     optional int32 railCurrentSensor7 = 69;
     optional int32 railCurrentSensor8 = 70;
     optional int32 railCurrentFlag = 73;
+
+    //Flight Profile
+    optional uint32 motorTorque = 74;
+    optional uint32 flightDistance = 75;
+    optional uint32 maxFlightTime = 76;
+
+    //Updates
+    repeated string updateMessages = 77;
+
+    // Navigation Testing
+    optional uint32 tachRpm = 81;
+    optional uint32 irRpm = 82;
+    optional float tachDistance = 83;
+    optional float irDistance = 84;
 }
 
 // FC => NODE COMMANDS
@@ -196,26 +213,29 @@ message EnclosureNodeToFc {
     required int32 packetNum = 1;
     required float enclosurePressure = 2;
     required float enclosureTemperature = 3;
-    required float coolantLinePressure = 4;
+    required float coolantPressure1 = 4;
+    required float coolantPressure2 = 5;
 }
 
 message LvdcNodeToFc {
-    required float highPowerPackVoltage = 1;
-    required float lowPowerPackVoltage = 2;
-    required float highPowerPackCurrent = 3;
-    required float lowPowerPackCurrent = 4;
+    required int32 packetNum = 1;
+    required LvdcNodeStates state = 2;
+    required float highPowerPackVoltage = 3;
+    required float lowPowerPackVoltage = 4;
+    required float highPowerPackCurrent = 5;
+    required float lowPowerPackCurrent = 6;
 
-    required float rail5Voltage = 5;
-    required float rail12LowPowerVoltage = 6;
-    required float rail12HighPowerVoltage = 7;
-    required float rail24Voltage = 8;
+    required float lowPower5Voltage = 7;
+    required float lowPower12Voltage = 8;
+    required float highPower12Voltage = 9;
+    required float lowPower24Voltage = 10;
 
-    required float rail5Current = 9;
-    required float rail12LowPowerCurrent = 10;
-    required float rail24Current = 11;
-    required float railInverterCurrent = 12;
-    required float railCooling1Current = 13;
-    required float railCooling2Current = 14;
+    required float lowPower5Current = 11;
+    required float lowPower12Current = 12;
+    required float nodeCurrent = 13;
+    required float inverterCurrent = 14;
+    required float cooling1Current = 15;
+    required float cooling2Current = 16;
 }
 
 message BrakeNodeToFc {
@@ -231,23 +251,24 @@ message BrakeNodeToFc {
     required float lowPressure3 = 10;
     required float lowPressureCommon = 11;
     required float pneumaticTemperature = 12;
-    required float coolantTankPressure = 13;
+    required float coolantTemperature = 13;
 }
 
 // CONFIG
-message flightConfig {
+message FlightConfig {
     optional uint32 retrievalTimeout = 1;
-    optional uint64 maxFlightTime = 2;
-    optional uint64 motorSpeed = 3;
-    optional int32 pdsTelemetryPort = 4 [default = 7000];
-    optional int32 commandPort = 5 [default = 6000];
-    optional uint64 flightLength = 6;
-    optional int32 heartbeatTimeout = 7 [default = 10000];
-    optional string podDriver = 8;
-    optional string controlLaptopIpAddr = 9 [default = "127.0.0.1"];
-    optional uint64 brakeNodePort = 10 [default = 5555];
-    optional uint64 brakeNodeTimeout = 11 [default = 4000];
-    optional uint64 brakeNodeServerPort = 12 [default = 5555];
+    optional int32 pdsTelemetryPort = 2 [default = 7000];
+    optional int32 commandPort = 3 [default = 6000];
+    optional int32 heartbeatTimeout = 4 [default = 10000];
+    optional string podDriver = 5;
+    optional string controlLaptopIpAddr = 6 [default = "192.168.1.101"];
+    optional uint64 nodePort = 7 [default = 5555];
+    optional uint64 nodeTimeout = 8 [default = 2000];
+    optional uint64 brakeNodeServerPort = 9 [default = 5550];
+    optional int32 pdsUpdateFreq = 10 [default = 100];
+    optional int32 brakeNodeUpdateFreq = 11 [default = 10];
+    optional int32 enclosureNodeServerNumber = 12 [default = 5551];
+    optional int32 lvdcNodeServerNumber = 13 [default = 5552];
 }
 
 message DefaultFcToNode {

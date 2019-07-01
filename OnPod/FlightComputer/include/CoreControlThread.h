@@ -4,6 +4,6 @@
 #include "Common.h"
 #include "TelemetryManager.h"
 
-void coreControlLoop(TelemetryManager);
+void coreControlLoopThread(TelemetryManager);
 
 #endif

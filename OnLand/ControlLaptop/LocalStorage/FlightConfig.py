@@ -1,6 +1,6 @@
 import json
 import os
-
+import logging as log
 
 class FlightConfig:
     _path = 'LocalStorage/'
@@ -20,9 +20,9 @@ class FlightConfig:
 
     def read_config(self):
         with open(self._file_path, 'r') as infile:
-            config = json.load(infile)
+            config_settings = json.load(infile)
 
-        return config
+        return config_settings
 
     @staticmethod
     def get_flight_config_instance():

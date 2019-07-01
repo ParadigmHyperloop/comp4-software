@@ -1,0 +1,69 @@
+<div class="card card-top">
+   <div class="header">
+      <h4 class="title">States</h4>
+      <p class="category">How she be</p>
+   </div>
+   <div class="content row0">
+<table class="table" id="pod-state-values">
+  <thead>
+    <tr>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"></th>
+      <td><b>Flight Computer</b></td>
+      <td><span id="podState" class="telemetry-value">--</span></td>
+    </tr>
+    <tr>
+      <th scope="row"></th>
+      <td><b>Brake Node</b></td>
+      <td><span id="brakeNodeState" class="telemetry-value">--</span></td>
+    </tr>
+    <tr>
+      <th scope="row"></th>
+      <td><b>LVDC Node</b></td>
+      <td><span id="lvdcNodeState" class="telemetry-value">--</span></td>
+    </tr>
+  </tbody>
+</table>
+      <div class="footer">
+         <hr>
+         <div class="stats">
+            <i id="status0" class="fa fa-check text-success"></i>
+             <span id="status1" >Navigation Ok</span>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+
+<script>
+
+{#    let state_values = [];
+    $( document ).ready(function() {
+        socket.emit('join_room','telemetry_updates');
+        $("#pod-state-values").find("span").each(function(){ state_values.push(this.id); });
+    });
+
+
+    socket.on('pod_telemetry', function (data) {
+        let value, value_cell, value_name;
+        data = JSON.parse(data);
+        const length = state_values.length;
+        for (let index = 0; index < length; index++) {
+            value_name = state_values[index];
+            if(!data.hasOwnProperty(value_name)){
+                continue;
+            }
+            value = data[value_name];
+            value_cell = $("#" + value_name);
+            value_cell.text(value);
+        }
+    });
+
+    #}
+
+</script>
+

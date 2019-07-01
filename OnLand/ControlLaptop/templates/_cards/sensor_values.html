@@ -3,22 +3,18 @@
         <h4 class="title">Sensor Overview</h4>
     </div>
     <div class="content">
-        <table class="table table-hover table-striped table-condensed">
+        <table class="table table-hover table-striped table-condensed" id="sensorTable">
             <thead>
             <tr class="d-flex">
                 <th class="col-5" scope="col">Name</th>
-                <th class="col-2" scope="col">Min</th>
                 <th class="col-3" scope="col">Actual</th>
-                <th class="col-2" scope="col">Max</th>
             </tr>
             </thead>
             <tbody>
             {% for key, value in sensors.items() %}
-                <tr class="d-flex sensor-row" id="{{ key }}">
+                <tr class="d-flex sensor-row">
                     <th class="text-center col-5" scope="row">{{ value['name_pretty'] }}</th>
-                    <td id="{{ key }}-min" class="col-2"></td>
-                    <td id="{{ key }}-actual" class="col-3"></td>
-                    <td id="{{ key }}-max" class="col-2"></td>
+                    <td id="{{ key }}" class="col-3 telemetry-value"></td>
                 </tr>
             {% endfor %}
 

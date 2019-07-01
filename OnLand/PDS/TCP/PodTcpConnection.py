@@ -72,8 +72,9 @@ class PodTcpConnection:
             # When a non block socket doesnt receive anything it throws BlockingIOError
             return False
         except Exception as e:
+            log.info(e)
             self.close()
-            raise e
+            return
         else:  # No error, msg received
             if not msg:  # Empty message means that the connection was terminated by the pod
                 log.info('Pod closed connection')

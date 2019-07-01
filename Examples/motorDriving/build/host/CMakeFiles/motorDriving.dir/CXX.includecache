@@ -6,7 +6,11 @@
 
 #IncludeRegexTransform: 
 
+<<<<<<< HEAD
 /home/liam/CLionProjects/motorDriving/main.cpp
+=======
+/home/liam/Development/comp4-software/Examples/motorDriving/main.cpp
+>>>>>>> master
 unistd.h
 -
 iostream
