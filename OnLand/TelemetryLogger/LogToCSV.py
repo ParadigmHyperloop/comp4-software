@@ -51,4 +51,5 @@ class CsvTelemetryLoggerTesting:
         formatted['maxFlightTime'] = json['maxFlightTime']
         formatted['irRpm'] = json['irRpm']
         formatted['irDistance'] = json['irDistance']
+        formatted['IR RPM'] = json['irRpm']
         return formatted
