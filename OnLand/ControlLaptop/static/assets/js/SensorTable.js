@@ -1,4 +1,4 @@
-let pod_state = '';
+
 let sensor_ranges = false;
 let table_sensors = [];
 
@@ -68,6 +68,7 @@ let telemetry_value_elements = [];
 socket.on('pod_telemetry', function (data) {
     let value, value_cell, value_name;
     data = JSON.parse(data);
+    console.log(data);
     const length = telemetry_value_elements.length;
 
     for (let index = 0; index < length; index++) {

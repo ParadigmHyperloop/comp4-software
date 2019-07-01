@@ -190,7 +190,9 @@ void TelemetryManager::setLowPressure(float value, int identifier){
             this->telemetry->lowPressure2 = value;
             break;
         case LP3_INDEX:
-            this->telemetry->lowPressure2 = value;
+            this->telemetry->lowPressure3 = value;
+        case LP4_INDEX:
+            this->telemetry->lowPressure4 = value;
         default:
             break;
     }

@@ -24,11 +24,13 @@
     {% include '_forms/setOverrides.html' %}
 
     <div class="row">
-       <div class="col-md-6">
-           {% include '_cards/inverter_values.html' %}
-          {#{% include 'archived/sensor_status.html' %}#}
+        <div class="col-md-4">
+          {% include '_cards/sensor_values.html' %}
        </div>
-       <div class="col-md-4">
+       <div class="col-md-3">
+           {% include '_cards/inverter_values.html' %}
+       </div>
+       <div class="col-md-3">
                {% include '_cards/bms_values.html' %}
        </div>
        <div class="col-md-2">

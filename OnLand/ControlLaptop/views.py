@@ -109,6 +109,8 @@ def dashboard():
         bms_sensors = order_sensors(json.load(json_file))
     with open('ControlLaptop/templates/tables/InverterSensors.json') as json_file:
         inverter_sensors = order_sensors(json.load(json_file))
+    with open('ControlLaptop/templates/tables/ProofTestSensors.json') as json_file:
+        sensors = order_sensors(json.load(json_file))
 
     arm_form = FlightProfileForm()
     overrides_form = OverridesForm()
@@ -118,7 +120,7 @@ def dashboard():
         title=title,
         armForm=arm_form,
         overridesForm=overrides_form,
-        sensors=[LocalStorage.get_sensors()],
+        sensors=sensors,
         bms_sensors=bms_sensors,
         inverter_sensors=inverter_sensors
     )

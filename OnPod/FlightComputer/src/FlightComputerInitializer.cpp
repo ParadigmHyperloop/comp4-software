@@ -35,7 +35,7 @@ void FlightComputerInitializer::importLoggerLibrary()
 
 void FlightComputerInitializer::updatePodNetworkValues(PodNetwork& podNetworkValues, FlightConfig& config)
 {
-    std::string cNodeIpAddrs[] = {"192.168.1.20"};
+    std::string cNodeIpAddrs[] = {"192.168.1.120"};
     podNetworkValues.cNodeIpAddrs.assign(begin(cNodeIpAddrs), end(cNodeIpAddrs)); // Node IPs
     podNetworkValues.strPdsIpAddr = config.controllaptopipaddr(); // Ip Addr of PDS.
 
