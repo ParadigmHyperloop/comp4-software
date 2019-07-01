@@ -245,7 +245,7 @@ message BrakeNodeToFc {
     required float lowPressure3 = 10;
     required float lowPressureCommon = 11;
     required float pneumaticTemperature = 12;
-    required float coolantTankPressure = 13;
+    required float coolantTemperature = 13;
 }
 
 // CONFIG
