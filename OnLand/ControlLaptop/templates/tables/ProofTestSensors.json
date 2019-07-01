@@ -11,16 +11,20 @@
     "name_pretty": "Branch 3 Pressure",
       "order": 2
   },
+  "lowPressure4": {
+    "name_pretty": "Regulated Pressure",
+      "order": 3
+  },
       "highPressure": {
     "name_pretty": "High Pressure",
-      "order": 3
+      "order": 4
   },
   "pressureVesselTemperature": {
     "name_pretty": "Tank Temperature",
-      "order": 4
+      "order": 5
   },
   "coolingTemperature": {
     "name_pretty": "Cooling Temperature",
-      "order": 5
+      "order": 6
   }
 }
