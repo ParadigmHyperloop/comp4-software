@@ -19,12 +19,24 @@
     "name_pretty": "High Pressure",
       "order": 4
   },
-  "pressureVesselTemperature": {
-    "name_pretty": "Tank Temperature",
+  "enclosurePressure": {
+    "name_pretty": "Enclosure Pressure",
       "order": 5
   },
-  "coolingTemperature": {
-    "name_pretty": "Cooling Temperature",
+  "pressureVesselTemperature": {
+    "name_pretty": "Tank Temperature",
       "order": 6
+  },
+    "enclosureTemperature": {
+    "name_pretty": "Enclosure Temperature",
+      "order": 7
+  },
+    "coolantPressure1": {
+    "name_pretty": "Cooling Line Pressure",
+      "order": 8
+  },
+    "coolantTemperature": {
+    "name_pretty": "Cooling Temperature",
+      "order": 9
   }
 }

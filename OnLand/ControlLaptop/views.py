@@ -109,7 +109,7 @@ def dashboard():
         bms_sensors = order_sensors(json.load(json_file))
     with open('ControlLaptop/templates/tables/InverterSensors.json') as json_file:
         inverter_sensors = order_sensors(json.load(json_file))
-    with open('ControlLaptop/templates/tables/ProofTestSensors.json') as json_file:
+    with open('ControlLaptop/templates/tables/DashboardSensors.json') as json_file:
         sensors = order_sensors(json.load(json_file))
 
     arm_form = FlightProfileForm()
@@ -150,7 +150,7 @@ def dts():
 def proofTest():
     page = 'proofTest'
     title = get_page_title(page)
-    with open('ControlLaptop/templates/tables/ProofTestSensors.json') as json_file:
+    with open('ControlLaptop/templates/tables/DashboardSensors.json') as json_file:
         sensors = order_sensors(json.load(json_file))
     return render_template(
         page+".html",

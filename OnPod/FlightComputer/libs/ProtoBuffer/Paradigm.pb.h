@@ -880,19 +880,19 @@ class Telemetry :
   float pressurevesseltemperature() const;
   void set_pressurevesseltemperature(float value);
 
-  // optional int32 electronicsEnclosurePressure = 44;
-  bool has_electronicsenclosurepressure() const;
-  void clear_electronicsenclosurepressure();
-  static const int kElectronicsEnclosurePressureFieldNumber = 44;
-  ::google::protobuf::int32 electronicsenclosurepressure() const;
-  void set_electronicsenclosurepressure(::google::protobuf::int32 value);
+  // optional int32 enclosurePressure = 44;
+  bool has_enclosurepressure() const;
+  void clear_enclosurepressure();
+  static const int kEnclosurePressureFieldNumber = 44;
+  ::google::protobuf::int32 enclosurepressure() const;
+  void set_enclosurepressure(::google::protobuf::int32 value);
 
-  // optional int32 railDisplacementX = 45;
-  bool has_raildisplacementx() const;
-  void clear_raildisplacementx();
-  static const int kRailDisplacementXFieldNumber = 45;
-  ::google::protobuf::int32 raildisplacementx() const;
-  void set_raildisplacementx(::google::protobuf::int32 value);
+  // optional int32 enclosureTemperature = 45;
+  bool has_enclosuretemperature() const;
+  void clear_enclosuretemperature();
+  static const int kEnclosureTemperatureFieldNumber = 45;
+  ::google::protobuf::int32 enclosuretemperature() const;
+  void set_enclosuretemperature(::google::protobuf::int32 value);
 
   // optional int32 railDisplacementY = 46;
   bool has_raildisplacementy() const;
@@ -1192,8 +1192,8 @@ class Telemetry :
   float lowpressure3_;
   float lowpressure4_;
   float pressurevesseltemperature_;
-  ::google::protobuf::int32 electronicsenclosurepressure_;
-  ::google::protobuf::int32 raildisplacementx_;
+  ::google::protobuf::int32 enclosurepressure_;
+  ::google::protobuf::int32 enclosuretemperature_;
   ::google::protobuf::int32 raildisplacementy_;
   ::google::protobuf::int32 tubepressure_;
   ::google::protobuf::int32 coolantpressure1_;
@@ -2449,7 +2449,7 @@ class FlightConfig :
   ::std::string* release_poddriver();
   void set_allocated_poddriver(::std::string* poddriver);
 
-  // optional string controlLaptopIpAddr = 6 [default = "192.168.1.100"];
+  // optional string controlLaptopIpAddr = 6 [default = "127.0.1.100"];
   bool has_controllaptopipaddr() const;
   void clear_controllaptopipaddr();
   static const int kControlLaptopIpAddrFieldNumber = 6;
@@ -2506,7 +2506,7 @@ class FlightConfig :
   ::google::protobuf::int32 heartbeattimeout() const;
   void set_heartbeattimeout(::google::protobuf::int32 value);
 
-  // optional int32 pdsUpdateFreq = 10 [default = 500];
+  // optional int32 pdsUpdateFreq = 10 [default = 100];
   bool has_pdsupdatefreq() const;
   void clear_pdsupdatefreq();
   static const int kPdsUpdateFreqFieldNumber = 10;
@@ -3783,40 +3783,40 @@ inline void Telemetry::set_coolanttemperature(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:Telemetry.coolantTemperature)
 }
 
-// optional int32 electronicsEnclosurePressure = 44;
-inline bool Telemetry::has_electronicsenclosurepressure() const {
+// optional int32 enclosurePressure = 44;
+inline bool Telemetry::has_enclosurepressure() const {
   return (_has_bits_[1] & 0x00000010u) != 0;
 }
-inline void Telemetry::clear_electronicsenclosurepressure() {
-  electronicsenclosurepressure_ = 0;
+inline void Telemetry::clear_enclosurepressure() {
+  enclosurepressure_ = 0;
   _has_bits_[1] &= ~0x00000010u;
 }
-inline ::google::protobuf::int32 Telemetry::electronicsenclosurepressure() const {
-  // @@protoc_insertion_point(field_get:Telemetry.electronicsEnclosurePressure)
-  return electronicsenclosurepressure_;
+inline ::google::protobuf::int32 Telemetry::enclosurepressure() const {
+  // @@protoc_insertion_point(field_get:Telemetry.enclosurePressure)
+  return enclosurepressure_;
 }
-inline void Telemetry::set_electronicsenclosurepressure(::google::protobuf::int32 value) {
+inline void Telemetry::set_enclosurepressure(::google::protobuf::int32 value) {
   _has_bits_[1] |= 0x00000010u;
-  electronicsenclosurepressure_ = value;
-  // @@protoc_insertion_point(field_set:Telemetry.electronicsEnclosurePressure)
+  enclosurepressure_ = value;
+  // @@protoc_insertion_point(field_set:Telemetry.enclosurePressure)
 }
 
-// optional int32 railDisplacementX = 45;
-inline bool Telemetry::has_raildisplacementx() const {
+// optional int32 enclosureTemperature = 45;
+inline bool Telemetry::has_enclosuretemperature() const {
   return (_has_bits_[1] & 0x00000020u) != 0;
 }
-inline void Telemetry::clear_raildisplacementx() {
-  raildisplacementx_ = 0;
+inline void Telemetry::clear_enclosuretemperature() {
+  enclosuretemperature_ = 0;
   _has_bits_[1] &= ~0x00000020u;
 }
-inline ::google::protobuf::int32 Telemetry::raildisplacementx() const {
-  // @@protoc_insertion_point(field_get:Telemetry.railDisplacementX)
-  return raildisplacementx_;
+inline ::google::protobuf::int32 Telemetry::enclosuretemperature() const {
+  // @@protoc_insertion_point(field_get:Telemetry.enclosureTemperature)
+  return enclosuretemperature_;
 }
-inline void Telemetry::set_raildisplacementx(::google::protobuf::int32 value) {
+inline void Telemetry::set_enclosuretemperature(::google::protobuf::int32 value) {
   _has_bits_[1] |= 0x00000020u;
-  raildisplacementx_ = value;
-  // @@protoc_insertion_point(field_set:Telemetry.railDisplacementX)
+  enclosuretemperature_ = value;
+  // @@protoc_insertion_point(field_set:Telemetry.enclosureTemperature)
 }
 
 // optional int32 railDisplacementY = 46;
@@ -5530,7 +5530,7 @@ inline void FlightConfig::set_allocated_poddriver(::std::string* poddriver) {
   // @@protoc_insertion_point(field_set_allocated:FlightConfig.podDriver)
 }
 
-// optional string controlLaptopIpAddr = 6 [default = "192.168.1.100"];
+// optional string controlLaptopIpAddr = 6 [default = "127.0.1.100"];
 inline bool FlightConfig::has_controllaptopipaddr() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -5644,12 +5644,12 @@ inline void FlightConfig::set_brakenodeserverport(::google::protobuf::uint64 val
   // @@protoc_insertion_point(field_set:FlightConfig.brakeNodeServerPort)
 }
 
-// optional int32 pdsUpdateFreq = 10 [default = 500];
+// optional int32 pdsUpdateFreq = 10 [default = 100];
 inline bool FlightConfig::has_pdsupdatefreq() const {
   return (_has_bits_[0] & 0x00000100u) != 0;
 }
 inline void FlightConfig::clear_pdsupdatefreq() {
-  pdsupdatefreq_ = 500;
+  pdsupdatefreq_ = 100;
   _has_bits_[0] &= ~0x00000100u;
 }
 inline ::google::protobuf::int32 FlightConfig::pdsupdatefreq() const {
