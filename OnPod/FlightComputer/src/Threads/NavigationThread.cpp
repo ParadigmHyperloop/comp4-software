@@ -27,6 +27,7 @@ int8_t getSerialPort(){
     if (serialPort == -1){
         serialPort = open("/dev/ttyO4",O_RDWR | O_NOCTTY);
     }
+    //tcflush( serialPort, TCIFLUSH );
     struct termios SerialPortSettings = {};
     tcgetattr(serialPort, &SerialPortSettings);
     cfsetispeed(&SerialPortSettings,B9600);
@@ -38,12 +39,18 @@ int8_t getSerialPort(){
     SerialPortSettings.c_cflag &= ~CRTSCTS;
     SerialPortSettings.c_cflag |= CREAD | CLOCAL;
     SerialPortSettings.c_iflag &= ~(IXON | IXOFF | IXANY);
-    SerialPortSettings.c_iflag &= ~(ICANON | ECHO | ECHOE | ISIG);
+    SerialPortSettings.c_iflag &= ~(ICANON | ECHO | ECHOE | ISIG | ECHONL);
     SerialPortSettings.c_oflag &= ~OPOST;
+    SerialPortSettings.c_iflag &= ~(IGNBRK|BRKINT|PARMRK|ISTRIP|INLCR|IGNCR|ICRNL);
+    SerialPortSettings.c_oflag &= ~ONLCR;
     SerialPortSettings.c_cc[VMIN] = 0;
     SerialPortSettings.c_cc[VTIME] = 30;
-    tcsetattr(serialPort,TCSANOW,&SerialPortSettings);
-    tcflush(serialPort, TCIFLUSH);
+    int status = tcsetattr(serialPort,TCSANOW,&SerialPortSettings);
+
+    if(status < 0){
+        LOG(INFO)<< "Failed to set Serial Settings " <<  + std::strerror(errno);
+    }
+
     return serialPort;
 }
 
@@ -85,7 +92,7 @@ void readNavigationNode(int serialPort, TelemetryManager &pod){
 
     pod.telemetry->irRpm = irRpm;
     pod.telemetry->tachRpm = tachRpm;
-    pod.telemetry->tachDistance = (tachSpokeCount/8)*FRONT_WHEEL_CIRCUMFERENCE;
+    pod.telemetry->tachDistance = (tachSpokeCount/8.0)*FRONT_WHEEL_CIRCUMFERENCE;
     pod.telemetry->irDistance = irStripCount*STRIP_DISTANCE;
     return;
 }
@@ -98,10 +105,9 @@ int32_t NavigationThread(TelemetryManager Pod) {
         Pod.sendUpdate(error);
         return -1;
     }
-
-    Heartbeat navNodeUpdateFreq = Heartbeat(2000);
+    LOG(INFO)<<"Starting Nav thread with FD " << serialPort;
+    Heartbeat navNodeUpdateFreq = Heartbeat(1000);
     float tachVelocity, motorVelocity, podVelocity;
-
     while(Pod.getPodStateValue() != psShutdown)
     {
         if(navNodeUpdateFreq.expired()){

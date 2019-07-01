@@ -52,6 +52,7 @@ int32_t getCanSocketRaw(){
     strcpy(interfaceRequest.ifr_name, "can1"); // Set Interface name
     operationStatus = ioctl(canSock, SIOCGIFINDEX, &interfaceRequest);
     if (operationStatus == -1) {
+        LOG(INFO)<<"USING CAN1";
         strcpy(interfaceRequest.ifr_name, "can0"); // Set Interface name
         operationStatus = ioctl(canSock, SIOCGIFINDEX, &interfaceRequest);
         if(operationStatus == -1){
@@ -89,7 +90,17 @@ int32_t getCanSocketBrodcastManager() {
     flags |= O_NONBLOCK;
     fcntl(bcmSocket, F_SETFL, flags);
 
-    strcpy(interfaceRequest.ifr_name, "can0");
+    strcpy(interfaceRequest.ifr_name, "can1"); // Set Interface name
+    operationStatus = ioctl(bcmSocket, SIOCGIFINDEX, &interfaceRequest);
+    if(operationStatus < 0){
+        strcpy(interfaceRequest.ifr_name, "can0"); // Set Interface name
+        operationStatus = ioctl(bcmSocket, SIOCGIFINDEX, &interfaceRequest);
+        if(operationStatus < 1){
+            std::string error = std::string("Error: Connecting Broadcast Manager CAN Socket :") + std::strerror(errno);
+            throw std::runtime_error(error);
+        }
+    }
+
     ioctl(bcmSocket, SIOCGIFINDEX, &interfaceRequest);
     socketAddr.can_family = AF_CAN;
     socketAddr.can_ifindex = interfaceRequest.ifr_ifindex;
@@ -218,7 +229,7 @@ void readBcmSocket(int socket, TelemetryManager& pod) {
 int canNetworkThread(TelemetryManager Pod){
     //Logging
     el::Helpers::setThreadName("CAN Thread");
-    LOG(INFO) << "Starting CAN Thread";
+    LOG(INFO) << "Starting CAN Thread on ";
     int32_t canSockRaw = 0;
     int32_t canSockBcm = 0;
     try{
