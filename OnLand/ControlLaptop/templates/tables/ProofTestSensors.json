@@ -1,14 +1,26 @@
 {
-  "solenoid2": {
-    "name_pretty": "Vent Solenoid",
-    "order": 2
-  },
-  "pressureVesselTemperature": {
-    "name_pretty": "Pneumatic Temperature",
+  "lowPressure1": {
+    "name_pretty": "Branch 1 Pressure",
     "order": 0
   },
-    "highPressure": {
-    "name_pretty": "Tank Pressure",
-      "order": 1
+  "lowPressure2": {
+    "name_pretty": "Branch 2 Pressure",
+    "order": 1
+  },
+    "lowPressure3": {
+    "name_pretty": "Branch 3 Pressure",
+      "order": 2
+  },
+      "highPressure": {
+    "name_pretty": "High Pressure",
+      "order": 3
+  },
+  "pressureVesselTemperature": {
+    "name_pretty": "Tank Temperature",
+      "order": 4
+  },
+  "coolingTemperature": {
+    "name_pretty": "Cooling Temperature",
+      "order": 5
   }
 }
