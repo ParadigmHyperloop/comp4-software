@@ -84,7 +84,7 @@ int32_t NavigationThread(TelemetryManager Pod) {
         Pod.telemetry->tachDistance = (tachSpokeCount/8)*0.611228;
         Pod.telemetry->irDistance = irStripCount*1.570796;
 
-        //LOG(INFO)<<"Tach RPM< : "<< tachRpm<< " IR RPM : " << irRpm  << " Spoke Count : " << tachSpokeCount  <<  " Strip Count : " << irStripCount;
+        LOG(INFO)<<"Tach RPM< : "<< tachRpm<< " IR RPM : " << irRpm  << " Spoke Count : " << tachSpokeCount  <<  " Strip Count : " << irStripCount;
         sleep(1);
     }
     close(serialPort);
