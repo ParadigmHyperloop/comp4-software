@@ -330,7 +330,7 @@ bool Acceleration::testTransitions() {
 
 
 
- // *  ******************** BRAKING ***********************8
+ // *  ******************** BRAKING ***********************
 
 
 Braking::Braking(TelemetryManager* pod) : PodState(pod) {
