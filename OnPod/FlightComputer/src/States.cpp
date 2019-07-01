@@ -2,6 +2,7 @@
 #include "easylogging++.h"
 
 #define MIN_BRAKING_TIME 1
+#define BRAKING_DISTANCE 250
 
 PodState::PodState() = default;
 
@@ -154,7 +155,7 @@ bool Standby::testTransitions() {
         this->commonChecks();
     }
     catch (const std::runtime_error &e ){
-        //failing on e.what()
+        return false;
     }
     if(this->pod->telemetry->controlsInterfaceState == ciArm){
         if(this->pod->telemetry->maxFlightTime == 0){
@@ -306,15 +307,21 @@ bool Acceleration::testTransitions() {
     // todo critical vs non critical changes
     try {
         this->commonChecks();
-        this->armedChecks();
+        //this->armedChecks();
     }
     catch (const std::runtime_error &error ){
         std::string reason = "Pod --> Braking";
         this->setupTransition(psBraking, error.what() + reason);
         return true;
     }
-    // Navigation checks
-    // todo inverter comms and bms
+    // Navigation checks todo
+    float remainingTrack = pod->telemetry->flightDistance - (pod->telemetry->podPosition) - BRAKING_DISTANCE; //todo braking distance
+    //LOG(INFO)<< "Remaining Track : " << remainingTrack;
+/*    if(remainingTrack <= 0){
+        this->setupTransition(psBraking,"Braking Distance Reached. Pod --> Braking");
+        return true;
+    }*/
+
     if(this->timeInStateSeconds() > this->pod->telemetry->maxFlightTime ){
         this->setupTransition(psBraking, (std::string)" Flight Timout of " + std::to_string(this->timeInStateSeconds()) + " reached. Pod --> Braking");
         return true;

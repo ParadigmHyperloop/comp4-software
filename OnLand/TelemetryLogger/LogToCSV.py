@@ -45,4 +45,10 @@ class CsvTelemetryLoggerTesting:
         formatted['Solenoid 2'] = json['solenoid2']
         formatted['Solenoid 3'] = json['solenoid3']
         formatted['Solenoid 4'] = json['solenoid4']
+        formatted['podState'] = json['podState']
+        formatted['motorSpeed'] = json['motorSpeed']
+        formatted['motorTorque'] = json['motorTorque']
+        formatted['maxFlightTime'] = json['maxFlightTime']
+        formatted['irRpm'] = json['irRpm']
+        formatted['irDistance'] = json['irDistance']
         return formatted
