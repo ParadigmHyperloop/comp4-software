@@ -51,16 +51,14 @@
 #define BMS_HEARTBEAT_FRAME_ID 0x6b3
 #include <fcntl.h>
 
-
-
 #define START_DELAY_SECONDS 10
-#define DRIVE_TIME_SECONDS 5
-#define ACCEL_TIME_INCREMENTS_MS 100
+#define FULL_TORQUE_TIME_SECONDS 10
+#define ACCELTIME 15
 
-#define START_TORQUE 100
-#define ACCELTIME 4
-#define FINAL_TORQUE 400
+#define START_TORQUE 5
+#define FINAL_TORQUE 50
 
+#define ACCEL_TIME_INCREMENTS_MS 1000
 
 struct can_msg_bcm
 {
@@ -209,14 +207,17 @@ int main()
     int broadcastSocket = getCanSocketBrodcastManager();
     startInverterBroadcast(broadcastSocket);
 
-    sleep(START_DELAY_SECONDS);
+    std::cout<<"Straight Zeros"<<std::endl;
+
+   sleep(START_DELAY_SECONDS);
 
     int torque = START_TORQUE;
     setInverterTorque(START_TORQUE, broadcastSocket);
     int numberOfIncrements = (ACCELTIME*1000)/ACCEL_TIME_INCREMENTS_MS;
     int torqueIncrement = (FINAL_TORQUE-START_TORQUE)/numberOfIncrements;
 
-    Heartbeat timer = Heartbeat(100);
+
+    Heartbeat timer = Heartbeat(ACCEL_TIME_INCREMENTS_MS);
     timer.feed();
 
     int increment = 0;
@@ -232,11 +233,11 @@ int main()
     }
     setInverterTorque(FINAL_TORQUE, broadcastSocket);
 
-    sleep(DRIVE_TIME_SECONDS);
+    sleep(FULL_TORQUE_TIME_SECONDS);
 
     setInverterTorque(0, broadcastSocket);
 
-    sleep(5);
+    sleep(30);
 
 
 
