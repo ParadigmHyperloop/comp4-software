@@ -2449,7 +2449,7 @@ class FlightConfig :
   ::std::string* release_poddriver();
   void set_allocated_poddriver(::std::string* poddriver);
 
-  // optional string controlLaptopIpAddr = 6 [default = "127.0.1.100"];
+  // optional string controlLaptopIpAddr = 6 [default = "192.168.0.103"];
   bool has_controllaptopipaddr() const;
   void clear_controllaptopipaddr();
   static const int kControlLaptopIpAddrFieldNumber = 6;
@@ -2471,7 +2471,7 @@ class FlightConfig :
   ::google::protobuf::uint32 retrievaltimeout() const;
   void set_retrievaltimeout(::google::protobuf::uint32 value);
 
-  // optional int32 lvdcNodeServerNumber = 13 [default = 5552];
+  // optional int32 lvdcNodeServerNumber = 13 [default = 5551];
   bool has_lvdcnodeservernumber() const;
   void clear_lvdcnodeservernumber();
   static const int kLvdcNodeServerNumberFieldNumber = 13;
@@ -2527,14 +2527,14 @@ class FlightConfig :
   ::google::protobuf::uint64 brakenodeserverport() const;
   void set_brakenodeserverport(::google::protobuf::uint64 value);
 
-  // optional int32 brakeNodeUpdateFreq = 11 [default = 10];
+  // optional int32 brakeNodeUpdateFreq = 11 [default = 20];
   bool has_brakenodeupdatefreq() const;
   void clear_brakenodeupdatefreq();
   static const int kBrakeNodeUpdateFreqFieldNumber = 11;
   ::google::protobuf::int32 brakenodeupdatefreq() const;
   void set_brakenodeupdatefreq(::google::protobuf::int32 value);
 
-  // optional int32 enclosureNodeServerNumber = 12 [default = 5551];
+  // optional int32 enclosureNodeServerNumber = 12 [default = 5552];
   bool has_enclosurenodeservernumber() const;
   void clear_enclosurenodeservernumber();
   static const int kEnclosureNodeServerNumberFieldNumber = 12;
@@ -5530,7 +5530,7 @@ inline void FlightConfig::set_allocated_poddriver(::std::string* poddriver) {
   // @@protoc_insertion_point(field_set_allocated:FlightConfig.podDriver)
 }
 
-// optional string controlLaptopIpAddr = 6 [default = "127.0.1.100"];
+// optional string controlLaptopIpAddr = 6 [default = "192.168.0.103"];
 inline bool FlightConfig::has_controllaptopipaddr() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -5662,12 +5662,12 @@ inline void FlightConfig::set_pdsupdatefreq(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:FlightConfig.pdsUpdateFreq)
 }
 
-// optional int32 brakeNodeUpdateFreq = 11 [default = 10];
+// optional int32 brakeNodeUpdateFreq = 11 [default = 20];
 inline bool FlightConfig::has_brakenodeupdatefreq() const {
   return (_has_bits_[0] & 0x00000800u) != 0;
 }
 inline void FlightConfig::clear_brakenodeupdatefreq() {
-  brakenodeupdatefreq_ = 10;
+  brakenodeupdatefreq_ = 20;
   _has_bits_[0] &= ~0x00000800u;
 }
 inline ::google::protobuf::int32 FlightConfig::brakenodeupdatefreq() const {
@@ -5680,12 +5680,12 @@ inline void FlightConfig::set_brakenodeupdatefreq(::google::protobuf::int32 valu
   // @@protoc_insertion_point(field_set:FlightConfig.brakeNodeUpdateFreq)
 }
 
-// optional int32 enclosureNodeServerNumber = 12 [default = 5551];
+// optional int32 enclosureNodeServerNumber = 12 [default = 5552];
 inline bool FlightConfig::has_enclosurenodeservernumber() const {
   return (_has_bits_[0] & 0x00001000u) != 0;
 }
 inline void FlightConfig::clear_enclosurenodeservernumber() {
-  enclosurenodeservernumber_ = 5551;
+  enclosurenodeservernumber_ = 5552;
   _has_bits_[0] &= ~0x00001000u;
 }
 inline ::google::protobuf::int32 FlightConfig::enclosurenodeservernumber() const {
@@ -5698,12 +5698,12 @@ inline void FlightConfig::set_enclosurenodeservernumber(::google::protobuf::int3
   // @@protoc_insertion_point(field_set:FlightConfig.enclosureNodeServerNumber)
 }
 
-// optional int32 lvdcNodeServerNumber = 13 [default = 5552];
+// optional int32 lvdcNodeServerNumber = 13 [default = 5551];
 inline bool FlightConfig::has_lvdcnodeservernumber() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void FlightConfig::clear_lvdcnodeservernumber() {
-  lvdcnodeservernumber_ = 5552;
+  lvdcnodeservernumber_ = 5551;
   _has_bits_[0] &= ~0x00000008u;
 }
 inline ::google::protobuf::int32 FlightConfig::lvdcnodeservernumber() const {

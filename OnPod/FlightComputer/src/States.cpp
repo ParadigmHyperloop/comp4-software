@@ -315,7 +315,7 @@ bool Acceleration::testTransitions() {
         return true;
     }
     // Navigation checks todo
-    float remainingTrack = pod->telemetry->flightDistance - (pod->telemetry->podPosition) - BRAKING_DISTANCE;
+    float remainingTrack = pod->telemetry->flightDistance - (pod->telemetry->podPosition);// - BRAKING_DISTANCE;
     //LOG(INFO)<< "Remaining Track : " << remainingTrack;
     if(remainingTrack <= 0){
         this->setupTransition(psBraking,"Braking Distance Reached. Pod --> Braking");
