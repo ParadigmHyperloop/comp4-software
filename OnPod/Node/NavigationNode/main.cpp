@@ -12,16 +12,17 @@
 Timer printTimer;
 Timer irEqualizeTimer;
 
-const float    DISTANCE_PER_SPOKE = 0.1;  // circumference of wheel
-const uint16_t PRINT_INTERVAL     = 200;  // print every x milliseconds
-const uint8_t  LEFT_IR_INT_PIN    = 2;    // interrupt pin for left IR sensor
-const uint8_t  RIGHT_IR_INT_PIN   = 3;    // interrupt pin for right IR sensor
-const uint8_t  TACH_INT_PIN       = 18;   // interrupt pin for optical tachometer
-const uint16_t IR_EQUALIZE_DELAY  = 50;   // run `equalizeIrCount` every x milliseconds
+const uint16_t PRINT_INTERVAL    = 1000; // print every x milliseconds
+const uint8_t  LEFT_IR_INT_PIN   = 18;   // interrupt pin for left IR sensor
+const uint8_t  RIGHT_IR_INT_PIN  = 3;    // interrupt pin for right IR sensor
+const uint8_t  TACH_INT_PIN      = 19;   // interrupt pin for optical tachometer
+const uint16_t IR_EQUALIZE_DELAY = 50;   // run `equalizeIrCount` every x milliseconds
 
-uint32_t spoke_count        = 0;
-uint32_t left_strip_count   = 0;
-uint32_t right_strip_count  = 0;
+char data_buffer[50];
+
+uint32_t spoke_count       = 0;
+uint16_t left_strip_count  = 0;
+uint16_t right_strip_count = 0;
 
 bool left_ir_triggered_flag  = false;
 bool right_ir_triggered_flag = false;
@@ -71,15 +72,20 @@ void rightIrISR() {
 
 // send data to flight computer over serial
 void printData(void*) {
+    Serial.read();
     // stop tach interrupts while printing
     detachInterrupt(TACH_INT_PIN);
-    Serial.print(spoke_count);
-    Serial.print(",");
     if (right_strip_count >= left_strip_count) {
-        Serial.println(right_strip_count);
+        sprintf(data_buffer, "%08u,%08u", spoke_count, right_strip_count);
+        Serial.println(data_buffer);
     } else {
-        Serial.println(left_strip_count);
+        sprintf(data_buffer, "%08u,%08u", spoke_count, left_strip_count);
+        Serial.println(data_buffer);
     }
+    spoke_count = 0;
+    right_strip_count = 0;
+    left_strip_count = 0;
+    memset(data_buffer, 0, sizeof(data_buffer));
     attachInterrupt(digitalPinToInterrupt(TACH_INT_PIN), tachISR, FALLING);
 }
 
@@ -88,7 +94,7 @@ void setup() {
     attachInterrupt(digitalPinToInterrupt(TACH_INT_PIN), tachISR, FALLING);
     attachInterrupt(digitalPinToInterrupt(RIGHT_IR_INT_PIN), rightIrISR, FALLING);
     attachInterrupt(digitalPinToInterrupt(LEFT_IR_INT_PIN), leftIrISR, RISING);
-    printTimer.every(PRINT_INTERVAL, &printData, (void*)0);
+    printTimer.every(PRINT_INTERVAL, printData, (void*)0);
 }
 
 void loop() {
