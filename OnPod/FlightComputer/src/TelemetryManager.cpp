@@ -248,6 +248,9 @@ void TelemetryManager::setEnclosureTemperature(float value) {
 }
 
 void TelemetryManager::setCoolantLinePressure(float value) {
+
+    this->telemetry->coolingLinePressure = value;
+
     bool status;
     PodStates currentState = this->getPodStateValue();
     if(currentState == psArming || currentState == psArmed || currentState == psAcceleration || currentState == psCoasting){

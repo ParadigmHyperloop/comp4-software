@@ -52,7 +52,6 @@ int32_t getCanSocketRaw(){
     strcpy(interfaceRequest.ifr_name, "can1"); // Set Interface name
     operationStatus = ioctl(canSock, SIOCGIFINDEX, &interfaceRequest);
     if (operationStatus == -1) {
-        LOG(INFO)<<"USING CAN1";
         strcpy(interfaceRequest.ifr_name, "can0"); // Set Interface name
         operationStatus = ioctl(canSock, SIOCGIFINDEX, &interfaceRequest);
         if(operationStatus == -1){

@@ -93,7 +93,8 @@ void readNavigationNode(int serialPort, TelemetryManager &pod){
     pod.telemetry->irRpm = irRpm;
     pod.telemetry->tachRpm = tachRpm;
     pod.telemetry->tachDistance = (tachSpokeCount/8.0)*FRONT_WHEEL_CIRCUMFERENCE;
-    pod.telemetry->irDistance = irStripCount*STRIP_DISTANCE;
+    pod.telemetry->irDistance = irStripCount*FRONT_WHEEL_CIRCUMFERENCE;
+    LOG(INFO)<<"Tach : " << tachSpokeCount << "  IR : " << irStripCount;
     return;
 }
 

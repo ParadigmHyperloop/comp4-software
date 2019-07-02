@@ -315,13 +315,12 @@ bool Acceleration::testTransitions() {
         return true;
     }
     // Navigation checks todo
-    float remainingTrack = pod->telemetry->flightDistance - (pod->telemetry->podPosition) - BRAKING_DISTANCE; //todo braking distance
+    float remainingTrack = pod->telemetry->flightDistance - (pod->telemetry->podPosition);// - BRAKING_DISTANCE;
     //LOG(INFO)<< "Remaining Track : " << remainingTrack;
-/*    if(remainingTrack <= 0){
+    if(remainingTrack <= 0){
         this->setupTransition(psBraking,"Braking Distance Reached. Pod --> Braking");
         return true;
-    }*/
-
+    }
     if(this->timeInStateSeconds() > this->pod->telemetry->maxFlightTime ){
         this->setupTransition(psBraking, (std::string)" Flight Timout of " + std::to_string(this->timeInStateSeconds()) + " reached. Pod --> Braking");
         return true;
@@ -331,7 +330,7 @@ bool Acceleration::testTransitions() {
 
 
 
- // *  ******************** BRAKING ***********************8
+ // *  ******************** BRAKING ***********************
 
 
 Braking::Braking(TelemetryManager* pod) : PodState(pod) {

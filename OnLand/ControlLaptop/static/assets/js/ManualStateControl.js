@@ -30,7 +30,10 @@ manualPodStates.click(function () {
        return null;
    }
    const state = btn.data('state');
-   //todo finish
+   let command = {};
+   command['target'] = 'pod';
+   command['state'] = state;
+   socket.emit('manual_state_command', JSON.stringify(command));
 });
 
 ///////// BRAKE NODE STATES ////////
