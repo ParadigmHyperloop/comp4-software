@@ -7,6 +7,7 @@
 #include <pb_encode.h>
 #include <pb_decode.h>
 #include "Timer.h"
+#include <WDTZero.h>
 #include "../../pod_internal_network.h"
 #include "Paradigm.pb.h"
 
@@ -18,6 +19,8 @@
 const NodeType NODE_TYPE = ENCLOSURE;
 
 Timer txTimer;
+WDTZero internalWatchdog;
+
 HSC30P atmoTransducer(0x28);
 TC74 atmoTempSensor(0x4D);
 ArduinoPX250P coolantTransducer1(A2);
@@ -36,15 +39,14 @@ void sendToFlightComputer(void*) {
     );
     // encode the message object and store it in the UDP buffer
     pb_encode(&outStream, EnclosureNodeToFc_fields, &pEnclosureNodeTelemetry);
-    if (udp.sendPacket(FC_IP, FC_ENCLOSURE_NODE_PORT, outStream.bytes_written)) {
-        txPacketNum++;
-    }
+    udp.sendPacket(FC_IP, FC_ENCLOSURE_NODE_PORT, outStream.bytes_written);
 }
 
 void setup() {
     Serial.begin(9600);
     udp.init();
     txTimer.every(ENCLOSURE_NODE_TO_FC_INTERVAL, &sendToFlightComputer, (void*)0);
+    internalWatchdog.setup(WDT_HARDCYCLE1S);
 }
 
 void loop() {
@@ -53,4 +55,5 @@ void loop() {
     pEnclosureNodeTelemetry.coolantPressure1 = coolantTransducer1.read();
     pEnclosureNodeTelemetry.coolantPressure2 = coolantTransducer2.read();
     txTimer.update();  // check to see if it's time to send another packet
+    internalWatchdog.clear();
 }
