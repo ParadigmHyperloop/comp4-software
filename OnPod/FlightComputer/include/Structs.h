@@ -5,6 +5,12 @@
 #include <cstdint>
 #include "Paradigm.pb.h"
 
+#define BRAKE_NODE_HEARTBEAT_INDEX 0
+#define LVDC_NODE_HEARTBEAT_INDEX 1
+#define BMS_HEARTBEAT_INDEX 2
+#define INTERFACE_HEARTBEAT_INDEX 3
+#define ENCLOSURE_HEARTBEAT_INDEX 4
+
 class PodState;
 
 struct PodValues {
@@ -21,6 +27,16 @@ struct PodValues {
     int32_t flightDistance = 0;
     int32_t maxFlightTime = 0;
 
+
+    //Navigation
+    int32_t tachRpm = 0;
+    int32_t irRpm = 0;
+    float tachDistance = 0;
+    float irDistance = 0;
+    float podVelocity = 0;
+    float podPosition = 0;
+
+
     // Updates
     std::mutex updatesLock;
     std::vector<std::string> updates;
@@ -33,7 +49,9 @@ struct PodValues {
 
     //ConnectionsArray
     std::vector<int32_t> connectionFlags;  // brakeNode, LVDCNode, BMS, Interface
-    std::vector<int32_t> sensorFlags;
+    std::vector<int32_t> nodeSensorFlags;
+    std::vector<int32_t> inverterSensorFlags;
+    std::vector<int32_t> bmsSensorFlags;
 
     // HV-BMS
     float hvBatteryPackVoltage = 0;
@@ -56,6 +74,11 @@ struct PodValues {
     // Atmosphere
     double tubePressure = 0;
 
+    // Enclosure
+    float enclosurePressure = 0;
+    float enclosureTemperature = 0;
+    float coolingLinePressure = 0;
+
     // Brake Node
     bool solenoid1;
     bool solenoid2;
@@ -67,6 +90,7 @@ struct PodValues {
     float lowPressure4 = 0;
     float highPressure = 0;
     float pressureVesselTemperature = 0;
+    float coolingTemperature = 0;
     std::vector<bool> manualSolenoidConfiguration = {};
 
     // DTS
@@ -74,22 +98,26 @@ struct PodValues {
 };
 
 struct PodNetwork {
-
     std::vector<int32_t> iActiveNodes = {0, 0, 0};
 
     std::vector<std::string> cNodeIpAddrs; //IP addrs of all nodes order: Brake, Rear, LVDC, Enclosure
-    int32_t iBrakeNodeServerPortNumber;
-    int32_t iBrakeNodePort; //Port # used by nodes to receive UDP updates
-    int32_t iNodeTimeoutMili;
 
-    int32_t iNodeClientSocket; //Port used to send data to nodes
+    int32_t nodePort; //Port # used by nodes to receive UDP updates
+    int32_t nodeTimeoutMili; // Max time to get update from a node
+    int32_t nodeClientSocket; //Port used to send data to nodes
 
-    int32_t iCommanderPortNumber; //Port # used by TCP Commander socket
-    int32_t iCommaderTimeoutMili; //Timeout
+    int32_t brakeNodeServerPortNumber;
+    int32_t brakeNodeUpdateFreq; // How often we send state to Brake Node;
 
-    int32_t iPdsTelemeteryPort; // Port # to send telemetry
+    int32_t enclosureNodeServerNumber;
+    int32_t lvdcNodeServerNumber;
+
+    int32_t commanderPortNumber; //Port # used by TCP Commander socket
+    int32_t commaderTimeoutMili; //Timeout
+
+    int32_t pdsUpdateFreq; // How often we send telem to PDS
+    int32_t pdsTelemeteryPort; // Port # to send telemetry
     std::string strPdsIpAddr;
-
 };
 
 struct clientSocketConfig {

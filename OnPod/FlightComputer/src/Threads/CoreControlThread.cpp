@@ -2,17 +2,15 @@
 #include "States.h"
 
 void coreControlLoopThread(TelemetryManager pod){
-    // State will be initialized to booting from the struct factory
-
+    el::Helpers::setThreadName("Core Control Thread");
     while(pod.getPodStateValue() != psShutdown){
-        while(pod.telemetry->automaticTransitions && pod.getPodStateValue() != psShutdown) {
+        while(pod.telemetry->automaticTransitions && pod.getPodStateValue() != psShutdown){
             pod.telemetry->podState->testTransitions();
             if (pod.telemetry->podState->isTransitioning()) {
                 const std::string reason = pod.telemetry->podState->getTransitionReason();
                 PodStates newState = pod.telemetry->podState->getNewState();
                 pod.setPodState(newState, reason);
                 pod.sendUpdate(reason);
-                LOG(INFO)<<reason;
             }
         }
         while(!pod.telemetry->automaticTransitions && pod.getPodStateValue() != psShutdown){
@@ -26,9 +24,6 @@ void coreControlLoopThread(TelemetryManager pod){
             }
         }
     }
-
-
-
 }
 
 

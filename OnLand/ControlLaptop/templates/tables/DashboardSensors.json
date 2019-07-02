@@ -1,0 +1,42 @@
+{
+  "lowPressure1": {
+    "name_pretty": "Branch 1 Pressure",
+    "order": 0
+  },
+  "lowPressure2": {
+    "name_pretty": "Branch 2 Pressure",
+    "order": 1
+  },
+    "lowPressure3": {
+    "name_pretty": "Branch 3 Pressure",
+      "order": 2
+  },
+  "lowPressure4": {
+    "name_pretty": "Regulated Pressure",
+      "order": 3
+  },
+      "highPressure": {
+    "name_pretty": "High Pressure",
+      "order": 4
+  },
+  "enclosurePressure": {
+    "name_pretty": "Enclosure Pressure",
+      "order": 5
+  },
+  "pressureVesselTemperature": {
+    "name_pretty": "Tank Temperature",
+      "order": 6
+  },
+    "enclosureTemperature": {
+    "name_pretty": "Enclosure Temperature",
+      "order": 7
+  },
+    "coolantPressure1": {
+    "name_pretty": "Cooling Line Pressure",
+      "order": 8
+  },
+    "coolantTemperature": {
+    "name_pretty": "Cooling Temperature",
+      "order": 9
+  }
+}

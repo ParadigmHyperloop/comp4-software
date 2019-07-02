@@ -1,0 +1,1 @@
+/usr/bin/c++  -g  -static-libgcc  -static-libstdc++ CMakeFiles/FlightComputer.dir/main.cpp.o  -o FlightComputer 

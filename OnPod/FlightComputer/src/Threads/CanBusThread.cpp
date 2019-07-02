@@ -49,11 +49,15 @@ int32_t getCanSocketRaw(){
         std::string error = std::string("Error: Setting CAN Filter: ") + std::strerror(errno);
         throw std::runtime_error(error);
     }
-    strcpy(interfaceRequest.ifr_name, "can0"); // Set Interface name
+    strcpy(interfaceRequest.ifr_name, "can1"); // Set Interface name
     operationStatus = ioctl(canSock, SIOCGIFINDEX, &interfaceRequest);
     if (operationStatus == -1) {
-        std::string error = std::string("Error: Setting CAN Interface :") + std::strerror(errno);
-        throw std::runtime_error(error);
+        strcpy(interfaceRequest.ifr_name, "can0"); // Set Interface name
+        operationStatus = ioctl(canSock, SIOCGIFINDEX, &interfaceRequest);
+        if(operationStatus == -1){
+            std::string error = std::string("Error: Setting CAN Interface :") + std::strerror(errno);
+            throw std::runtime_error(error);
+        }
     }
     // Bind the socket to the network interface
     canSockAddr.can_family = AF_CAN;
@@ -85,7 +89,17 @@ int32_t getCanSocketBrodcastManager() {
     flags |= O_NONBLOCK;
     fcntl(bcmSocket, F_SETFL, flags);
 
-    strcpy(interfaceRequest.ifr_name, "can0");
+    strcpy(interfaceRequest.ifr_name, "can1"); // Set Interface name
+    operationStatus = ioctl(bcmSocket, SIOCGIFINDEX, &interfaceRequest);
+    if(operationStatus < 0){
+        strcpy(interfaceRequest.ifr_name, "can0"); // Set Interface name
+        operationStatus = ioctl(bcmSocket, SIOCGIFINDEX, &interfaceRequest);
+        if(operationStatus < 1){
+            std::string error = std::string("Error: Connecting Broadcast Manager CAN Socket :") + std::strerror(errno);
+            throw std::runtime_error(error);
+        }
+    }
+
     ioctl(bcmSocket, SIOCGIFINDEX, &interfaceRequest);
     socketAddr.can_family = AF_CAN;
     socketAddr.can_ifindex = interfaceRequest.ifr_ifindex;
@@ -214,7 +228,7 @@ void readBcmSocket(int socket, TelemetryManager& pod) {
 int canNetworkThread(TelemetryManager Pod){
     //Logging
     el::Helpers::setThreadName("CAN Thread");
-    LOG(INFO) << "Starting CAN Thread";
+    LOG(INFO) << "Starting CAN Thread on ";
     int32_t canSockRaw = 0;
     int32_t canSockBcm = 0;
     try{
@@ -239,7 +253,7 @@ int canNetworkThread(TelemetryManager Pod){
         return -1;
     }
     try{
-        startCanHeartbeat(canSockBcm, INVERTER_HEARTBEAT_FRAME_ID, 1);
+        startCanHeartbeat(canSockBcm, INVERTER_HEARTBEAT_FRAME_ID, 2);
         startCanHeartbeat(canSockBcm, BMS_HEARTBEAT_FRAME_ID, 1);
     }
     catch (const std::runtime_error &error){

@@ -2,7 +2,7 @@
 #define FLIGHTCOMPUTER_SENSORCONFIG_H
 
 // Count
-#define TOTAL_SENSOR_COUNT 10
+
 #define TOTAL_CONNECTION_COUNT 10
 
 // Constants
@@ -12,14 +12,29 @@
 #define CLOSED 0
 #define OPEN 1
 
+// Inverter Sensor Flag Indices
+#define INVERTER_SENSOR_COUNT 2
+#define MOTOR_TEMPERATURE_INDEX 0
+#define BUS_VOLTAGE_INDEX 1
 
-// Sensor Flag indices
+// BMS Sensor Flag Indices
+#define BMS_SENSOR_COUNT 3
+#define PACK_VOLTAGE_INDEX 0
+#define MAX_CELL_TEMP_INDEX 1
+#define SOC_INDEX 2
 
+// Node Sensor Flag indices
+#define NODE_SENSOR_COUNT 10
 #define LP1_INDEX 0
 #define LP2_INDEX 1
 #define LP3_INDEX 2
-#define HP_INDEX  3
-#define HP_TEMP_INDEX 4
+#define LP4_INDEX 4
+#define HP_INDEX  5
+#define HP_TEMP_INDEX 6
+#define ENCLOSURE_PRESSURE_INDEX 7
+#define ENCLOSURE_TEMPERATURE_INDEX 8
+#define COOLING_PRESSURE_INDEX 9
+#define COOLING_TEMPERATURE_INDEX 10
 
 // Solenoid Status indices
 #define SOL1_INDEX 0
@@ -27,6 +42,11 @@
 #define SOL3_INDEX 2
 #define SOL4_INDEX 3
 
+// Enclosure
+#define ENCLOSURE_TEMP 20
+#define ENCLOSURE_TEMP_THRESHOLD 5
+#define COOLING_ENGAGED 30
+#define COOLING_THRESHOLD 5
 
 // Pneumatics
 

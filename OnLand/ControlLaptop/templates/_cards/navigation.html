@@ -9,7 +9,31 @@
     <tr>
     </tr>
   </thead>
+
   <tbody>
+    <tr>
+      <th scope="row"></th>
+      <td><b>Tach</b></td>
+      <td><span  class="telemetry-value" id="tachRpm"> - </span>rot/m</td>
+      <td><span class="telemetry-value" id="tachDistance"> - </span>m</td>
+    </tr>
+    <tr>
+      <th scope="row"></th>
+      <td><b>IR</b></td>
+      <td><span class="telemetry-value" id="irRpm"> - </span>rot/m</td>
+      <td><span class="telemetry-value" id="irDistance"> - </span>m</td>
+    </tr>
+    <tr>
+      <th scope="row"></th>
+      <td><b>Motor</b></td>
+      <td><span class="telemetry-value" id="motorSpeed"> - </span>rot/m</td>
+      <td><span class="telemetry-value" id="motorDistance"> - </span>m</td>
+    </tr>
+  </tbody>
+
+
+
+{#  <tbody>
     <tr>
       <th scope="row"></th>
       <td><b>Distance</b></td>
@@ -25,7 +49,7 @@
       <td><b>Acceleration</b></td>
       <td><span id="podAccelerationX">-</span>m/s/s</td>
     </tr>
-  </tbody>
+  </tbody>#}
 </table>
       <div class="footer">
          <hr>
@@ -36,29 +60,3 @@
       </div>
    </div>
 </div>
-
-
-<script>
-
-let navigation_values = [];
-$( document ).ready(function() {
-    socket.emit('join_room','telemetry_updates');
-    $("#navigation-values").find("span").each(function(){ navigation_values.push(this.id); });
-});
-
-socket.on('pod_telemetry', function (data) {
-    let value, value_cell, value_name;
-    data = JSON.parse(data);
-    const length = navigation_values.length;
-    for (let index = 0; index < length; index++) {
-        value_name = navigation_values[index];
-        if(!data.hasOwnProperty(value_name)){
-            continue;
-        }
-        value = data[value_name];
-        value_cell = $("#" + value_name);
-        value_cell.text(value.toFixed(2));
-    }
-});
-
-</script>

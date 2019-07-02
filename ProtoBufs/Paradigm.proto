@@ -132,17 +132,17 @@ message Telemetry {
     optional float lowPressure3 = 41;
     optional float lowPressure4 = 42;
     optional float pressureVesselTemperature = 43;
+    optional float coolantTemperature = 52;
 
-    optional int32 electronicsEnclosurePressure = 44;
-    optional int32 railDisplacementX = 45;
+    optional float enclosurePressure = 44;
+    optional float enclosureTemperature = 45;
     optional int32 railDisplacementY = 46;
 
     // Rear Node
-    optional int32 tubePressure = 48;
-    optional int32 coolantPressure1 = 49;
-    optional int32 coolantPressure2 = 50;
-    optional int32 coolantPressure3 = 51;
-    optional int32 coolantTemperature = 52;
+    optional float tubePressure = 48;
+    optional float coolantPressure1 = 49;
+    optional float coolantPressure2 = 50;
+    optional float coolantPressure3 = 51;
     optional float railTemperature = 53;
 
     // Ghost Train
@@ -173,6 +173,12 @@ message Telemetry {
 
     //Updates
     repeated string updateMessages = 77;
+
+    // Navigation Testing
+    optional uint32 tachRpm = 81;
+    optional uint32 irRpm = 82;
+    optional float tachDistance = 83;
+    optional float irDistance = 84;
 }
 
 // FC => NODE COMMANDS
@@ -255,10 +261,15 @@ message FlightConfig {
     optional int32 commandPort = 3 [default = 6000];
     optional int32 heartbeatTimeout = 4 [default = 10000];
     optional string podDriver = 5;
-    optional string controlLaptopIpAddr = 6 [default = "127.0.0.1"];
-    optional uint64 brakeNodePort = 7 [default = 5555];
-    optional uint64 brakeNodeTimeout = 8 [default = 4000];
+    optional string controlLaptopIpAddr = 6 [default = "192.168.0.103"];
+    //optional string controlLaptopIpAddr = 6 [default = "127.0.1.100"];
+    optional uint64 nodePort = 7 [default = 5555];
+    optional uint64 nodeTimeout = 8 [default = 2000];
     optional uint64 brakeNodeServerPort = 9 [default = 5550];
+    optional int32 pdsUpdateFreq = 10 [default = 100];
+    optional int32 brakeNodeUpdateFreq = 11 [default = 20];
+    optional int32 enclosureNodeServerNumber = 12 [default = 5552];
+    optional int32 lvdcNodeServerNumber = 13 [default = 5551];
 }
 
 message DefaultFcToNode {

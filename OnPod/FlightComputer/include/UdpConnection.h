@@ -1,16 +1,12 @@
 #ifndef FLIGHTCOMPUTER_UDPCONNECTION_H
 #define FLIGHTCOMPUTER_UDPCONNECTION_H
 
+#define UNCONFIGURED -2
 
 #include "Heartbeat.h"
 #include "Common.h"
 #include "TelemetryManager.h"
 #include <NetworkHelpers.h>
-
-#define BRAKE_CONNECTION_INDEX 0
-#define LVDC_CONNECTION_INDEX 1
-#define ENCLOSURE_CONNECTION_INDEX 2
-#define PDS_CONNECTION_INDEX 3
 
 /**
  *
@@ -38,7 +34,7 @@ public:
      * @param destPortNum : Port of the destination address
      * @param outboundSocket : Socket to use when sending data
      */
-    void configureClient(const std::string &destIp, int32_t destPortNum, int32_t outboundSocket);
+    void configureClient(const std::string &destIp, int32_t destPortNum, int32_t outboundSocket, int32_t update_freq);
 
 
 
@@ -103,10 +99,11 @@ protected:
     TelemetryManager pod;
     uint32_t _lastPacketSentId = 0;
     uint32_t _lastPacketReceivedId = 0;
-    int32_t _outboundSocket = -1;
-    int32_t _inboundSocket = -1;
-    int32_t _serverPort = -1;
+    int32_t _outboundSocket = UNCONFIGURED;
+    int32_t _inboundSocket = UNCONFIGURED;
+    int32_t _serverPort = UNCONFIGURED;
     Heartbeat _pulse = Heartbeat(0);
+    Heartbeat _update_freq;
     std::string _connectionName = "";
     struct sockaddr_in _destSockAddr{};
     int32_t _connectionStatusIndex;
@@ -118,7 +115,6 @@ public:
 
     explicit PdsConnection(TelemetryManager pod);
 
-    //TODO can we do this without putting the proto on the heap?
     std::unique_ptr<google::protobuf::Message> getProtoUpdateMessage() override;
 };
 
@@ -147,4 +143,14 @@ class EnclosureNodeConnection : public UdpConnection{
 
 };
 
+class LvdcNodeConnection : public UdpConnection{
+
+public:
+    ~LvdcNodeConnection() override = default;
+
+    explicit LvdcNodeConnection(TelemetryManager pod);
+
+    bool parseUpdate(char buffer[], int32_t messageSize) override;
+
+};
 #endif //FLIGHTCOMPUTER_UDPCONNECTION_H

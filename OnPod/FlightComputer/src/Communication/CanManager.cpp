@@ -15,7 +15,7 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             pod.setHvBatteryPackStateOfCharge(hvBatteryPackSoc);
             pod.setHvBatteryPackCurrent(hvBatteryPackCurrent);
             pod.setHvBatteryPackVoltage(hvBatteryPackVoltage);
-            pod.setConnectionFlag(1,2);
+            pod.setConnectionFlag(1,BMS_HEARTBEAT_INDEX);
         }
         case 0x6b2: {
             indices = {2, 3};
@@ -39,35 +39,34 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             auto maxIgbtTemperature = std::max({igbtPhaseA, igbtPhaseB, igbtPhaseC});
             indices = {7,6};
             auto gateDriverBoard = extractCanValue<int>(frame.data, indices, 10);
-            
-            pod.telemetry->maxIgbtTemperature = maxIgbtTemperature;
-            pod.telemetry->gateDriverTemperature = gateDriverBoard;
+            pod.setMaxIgbtTemperature(maxIgbtTemperature);
+            pod.setGateDriverTemperature(gateDriverBoard);
         }
         case 0x0A1: {
             indices = {1,0};
             auto controlBoard = extractCanValue<int>(frame.data, indices, 10);
-            pod.telemetry->inverterControlBoardTemperature = controlBoard;
+            pod.setInverterControlBoardTemperature(controlBoard);
         }
         case 0x0A2: {
             indices = {5,4};
             auto motorTemp = extractCanValue<int>(frame.data, indices, 10);
-            pod.telemetry->motorTemperature = motorTemp;
+            pod.setMotorTemperature(motorTemp);
         }
         case 0x0A5: {
             indices = {3,2};
             auto motorSpeed = extractCanValue<int>(frame.data, indices, 1);
-            pod.telemetry->motorSpeed = motorSpeed;
+            pod.setMotorSpeed(motorSpeed);
         }
-        case 0x0A7:{
+        case 0x0A7: {
             indices = {1,0};
             auto dcBusVoltage = extractCanValue<int>(frame.data, indices, 10);
-            pod.telemetry->inverterBusVoltage = dcBusVoltage;
-            pod.telemetry->inverterHeartbeat = 1;
+            pod.setInverterBusVoltage(dcBusVoltage);
+            pod.setInverterHeartbeat(1);
         }
-            break;
         default:
-            std::string error = "Unknown CAN ID : " + std::to_string(frame.can_id);
-            throw std::runtime_error(error);
+            return;
+            //std::string error = "Unknown CAN ID : " + std::to_string(frame.can_id);
+            //throw std::runtime_error(error);
     }
 }
 

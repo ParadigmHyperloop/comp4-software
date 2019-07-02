@@ -21,12 +21,6 @@
 
 <script>
 
-
-$( document ).ready(function() {
-    socket.emit('join_room','telemetry_updates');
-    $("#navigation-values").find("span").each(function(){ navigation_values.push(this.id); });
-});
-
 const updatesTable = $('#events-table-body');
 
 socket.on('pod_telemetry', function (data) {

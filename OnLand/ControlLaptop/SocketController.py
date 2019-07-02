@@ -2,7 +2,6 @@ import socket
 import logging as log
 from ControlLaptop.Paradigm_pb2 import FlightConfig
 from ControlLaptop.LocalStorage.ConfigurationSotrage import DEFAULT_CONFIGURATION
-from ControlLaptop.Paradigm_pb2 import flightConfig
 from config import POD_IP, POD_CONFIG_PORT
 
 

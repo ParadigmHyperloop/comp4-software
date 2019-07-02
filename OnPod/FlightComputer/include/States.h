@@ -4,8 +4,6 @@
 #include "TelemetryManager.h"
 
 #define FLAGS_GOOD -1
-#define BRAKE_NODE_INDEX 1
-#define LVDC_NODE_INDEX 2
 
 class TelemetryManager;
 
@@ -96,6 +94,7 @@ class Acceleration : public PodState {
 public:
     Acceleration(TelemetryManager*);
     ~Acceleration();
+    float getBrakingDistance();
     bool testTransitions() override;
 };
 

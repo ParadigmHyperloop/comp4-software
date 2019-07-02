@@ -73,3 +73,15 @@ OnLand/ControlLaptop/Paradigm_pb2\.py
 OnPod/Node/BrakeNode/include
 OnPod/Node/EnclosureNode/include
 OnPod/Node/NodeTest
+
+Examples/BBSerial/build/host/
+
+Examples/BBSerial/build/target/
+
+ProtoBufs/Paradigm/py/Paradigm_pb2\.py
+
+OnPod/FlightComputer/src/Paradigm\.pb\.cc
+
+Testing/ManualCommandTesting/Paradigm_pb2\.py
+
+Testing/NodeSimulator/Paradigm_pb2\.py

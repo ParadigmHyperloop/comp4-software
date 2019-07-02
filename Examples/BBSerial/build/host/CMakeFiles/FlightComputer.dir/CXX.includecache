@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/liam/Development/comp4-software/Examples/BBSerial/main.cpp
+stdio.h
+-
+string.h
+-
+unistd.h
+-
+fcntl.h
+-
+errno.h
+-
+termios.h
+-
+
