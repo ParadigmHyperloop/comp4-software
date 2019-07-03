@@ -200,10 +200,14 @@ void TelemetryManager::setLowPressure(float value, int identifier){
     // Check if nominal for current state
     if(currentState == psStandby){
         status = inRange<float>(value, LOWPRESSURE_UNARMED_MIN, LOWPRESSURE_UNARMED_MAX);
-    } else if(currentState == psArming || currentState == psArmed || currentState == psAcceleration || currentState == psCoasting){
+    }
+
+    else if(currentState == psArming || currentState == psArmed || currentState == psAcceleration || currentState == psCoasting){
         status = inThreshold<float>(value, this->telemetry->tubePressure, PNEUMATICS_THRESHOLD);
-    }else if( currentState == psBraking ){
-        status = inThreshold<float>(value, LOWPRESSURE_ENGAGED, PNEUMATICS_THRESHOLD);
+    }
+
+    else if( currentState == psBraking ){
+        status = inRange<float>(value, LOWPRESSURE_ENGAGED_MIN, LOWPRESSURE_ENGAGED_MAX);
     }
 
     // Set sensor flag

@@ -32,47 +32,59 @@ int32_t createCommanderServerSocket(int32_t serverPortNumber) {
     return serverSock;
 }
 
+int8_t convertFlag(bool state){
+    if(state){
+        return 2;
+    } else{
+        return 0;
+    }
+}
+
 void parseOverrides(PodCommand podCommand, TelemetryManager *Pod) {
     Pod->sendUpdate("Parsing Overrides");
     // This is gross... dont look! ;)
     int32_t flag;
     for (int i = 0; i < 5; ++i) {
         if(podCommand.sensoroverrideconfiguration(i)){
-            Pod->telemetry->nodeSensorFlags[i] = 2;
+            Pod->telemetry->nodeSensorFlags[i] = convertFlag(podCommand.sensoroverrideconfiguration(i));
         }
     }
     if(podCommand.sensoroverrideconfiguration(5)){
-        Pod->setConnectionFlag(2,2);
+        Pod->setConnectionFlag(2,BMS_HEARTBEAT_INDEX);
         for(auto &flag : Pod->telemetry->bmsSensorFlags){
-            flag = 2;
+            flag = convertFlag(flag);
         }
     }
     if(podCommand.sensoroverrideconfiguration(6)){
-        Pod->setInverterHeartbeat(2);
+        int8_t mode = convertFlag(podCommand.sensoroverrideconfiguration(6));
+        Pod->setInverterHeartbeat(mode);
         for(auto &flag : Pod->telemetry->inverterSensorFlags){
-            flag = 2;
+            flag = mode;
         }
     }
     if(podCommand.sensoroverrideconfiguration(7)){
-        Pod->setConnectionFlag(2,BRAKE_NODE_HEARTBEAT_INDEX);
+        Pod->setConnectionFlag(convertFlag(podCommand.sensoroverrideconfiguration(7)),BRAKE_NODE_HEARTBEAT_INDEX);
     }
     if(podCommand.sensoroverrideconfiguration(8)){
-        Pod->setConnectionFlag(2,LVDC_NODE_HEARTBEAT_INDEX);
+        Pod->setConnectionFlag(convertFlag(podCommand.sensoroverrideconfiguration(8)),LVDC_NODE_HEARTBEAT_INDEX);
     }
     if(podCommand.sensoroverrideconfiguration(9)){
-        Pod->setConnectionFlag(2,ENCLOSURE_HEARTBEAT_INDEX);
+        Pod->setConnectionFlag(convertFlag(podCommand.sensoroverrideconfiguration(9)),ENCLOSURE_HEARTBEAT_INDEX);
     }
     if(podCommand.sensoroverrideconfiguration(10)){
-        Pod->setNodeSensorFlag(2,ENCLOSURE_PRESSURE_INDEX);
+        Pod->setNodeSensorFlag(convertFlag(podCommand.sensoroverrideconfiguration(10)),ENCLOSURE_PRESSURE_INDEX);
     }
     if(podCommand.sensoroverrideconfiguration(11)){
-        Pod->setNodeSensorFlag(2,ENCLOSURE_TEMPERATURE_INDEX);
+        Pod->setNodeSensorFlag(convertFlag(podCommand.sensoroverrideconfiguration(11)),ENCLOSURE_TEMPERATURE_INDEX);
     }
     if(podCommand.sensoroverrideconfiguration(12)){
-        Pod->setNodeSensorFlag(2,COOLING_PRESSURE_INDEX);
+        Pod->setNodeSensorFlag(convertFlag(podCommand.sensoroverrideconfiguration(12)),COOLING_PRESSURE_INDEX);
     }
     if(podCommand.sensoroverrideconfiguration(13)){
-        Pod->setNodeSensorFlag(2,COOLING_TEMPERATURE_INDEX);
+        Pod->setNodeSensorFlag(convertFlag(podCommand.sensoroverrideconfiguration(13)),COOLING_TEMPERATURE_INDEX);
+    }
+    if(podCommand.sensoroverrideconfiguration(14)){
+       Pod->telemetry->checkNodeStates = (podCommand.sensoroverrideconfiguration(14)) ? false : true;
     }
 }
 
@@ -118,7 +130,6 @@ void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
 int32_t unserializeProtoMessage(TelemetryManager *Pod, char buffer[], int32_t messageSize) {
     PodCommand pPodCommand;
     bool operationStatus;
-
     operationStatus = pPodCommand.ParseFromArray(buffer, messageSize);
     if (operationStatus) {
         parseProtoCommand(pPodCommand, Pod);

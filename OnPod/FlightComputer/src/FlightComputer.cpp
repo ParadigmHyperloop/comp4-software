@@ -20,10 +20,10 @@ using namespace std;
 
 // Factory for initializing the telemetry struct
 void initializeTelemetryStruct(PodValues &telemetry){
-    telemetry.nodeSensorFlags = std::vector<int32_t>(NODE_SENSOR_COUNT, 2);
-    telemetry.inverterSensorFlags = std::vector<int32_t>(INVERTER_SENSOR_COUNT, 2);
-    telemetry.bmsSensorFlags = std::vector<int32_t>(BMS_SENSOR_COUNT, 2);
-    telemetry.connectionFlags = std::vector<int32_t>(TOTAL_CONNECTION_COUNT,2);
+    telemetry.nodeSensorFlags = std::vector<int8_t>(NODE_SENSOR_COUNT, 0);
+    telemetry.inverterSensorFlags = std::vector<int8_t>(INVERTER_SENSOR_COUNT, 0);
+    telemetry.bmsSensorFlags = std::vector<int8_t>(BMS_SENSOR_COUNT, 0);
+    telemetry.connectionFlags = std::vector<int8_t>(TOTAL_CONNECTION_COUNT,0);
     telemetry.manualSolenoidConfiguration = std::vector<bool>(4,false);
 }
 
@@ -41,7 +41,7 @@ int main( int32_t argc, char** argv)
 	while(!configReceived){
 	    configReceived = true;
         try {
-          // flightConfigurationParameters = configurationServer->runServer(); //Comment out to use the default network values in the proto obj
+           //flightConfigurationParameters = configurationServer->runServer(); //Comment out to use the default network values in the proto obj
         } catch (exception& e)
         {
             configurationServer->closePorts();

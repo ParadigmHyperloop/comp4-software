@@ -28,8 +28,8 @@ SOCKET_SERVER = 'http://localhost:5000'
 
 
 # Pod
-# POD_IP = '127.0.0.1'
-POD_IP = '192.168.0.169'
+POD_IP = '127.0.0.1'
+#POD_IP = '192.168.0.169'
 # POD_IP = '192.168.7.2'
 POD_CONFIG_PORT = 3001
 

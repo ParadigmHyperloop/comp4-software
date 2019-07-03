@@ -18,6 +18,7 @@ class OverridesForm(FlaskForm):
     enclosure_temperature = BooleanField("Enclosure Temperature")
     cooling_pressure = BooleanField("Cooling Pressure")
     cooling_temperature = BooleanField("Cooling Temperature")
+    node_states = BooleanField("Check Node States")
 
 
 class PodConfigurationForm(FlaskForm):

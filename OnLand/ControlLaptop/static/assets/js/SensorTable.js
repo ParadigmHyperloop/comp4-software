@@ -57,7 +57,6 @@ function ParsePodState(state) {
 }
 
 
-
 $( document ).ready(function() {
     socket.emit('join_room','telemetry_updates');
     $(".telemetry-value").each(function(){ telemetry_value_elements.push(this); });

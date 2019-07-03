@@ -59,8 +59,12 @@ void readNavigationNode(int serialPort, TelemetryManager &pod){
     std::stringstream dataStream;
     char read_buffer[BUFFER_SIZE] = {};
     int  bytes_read, tachRpm, irRpm, tachSpokeCount, irStripCount = 0;
-    int total_bytes_read = 0;
-    write (serialPort, "1", 1);
+    int total_bytes_read, status = 0;
+    status = write(serialPort, "1", 1);
+    if(status < 0){
+        std::string sError = std::string("Error writing to Navnode Serial Port");
+        throw std::runtime_error(sError);
+    }
     while(total_bytes_read < BUFFER_SIZE){
         bytes_read=read(serialPort,read_buffer, sizeof(read_buffer));
         if(bytes_read > 0){
@@ -68,7 +72,6 @@ void readNavigationNode(int serialPort, TelemetryManager &pod){
             dataStream << read_buffer;
             memset(&read_buffer,0, bytes_read);
         } else{
-            pod.setConnectionFlag(0, NAVIGATION_HEARTBEAT_INDEX);
             std::string sError = std::string("Navnode timeout");
             throw std::runtime_error(sError);
         }
@@ -84,7 +87,6 @@ void readNavigationNode(int serialPort, TelemetryManager &pod){
         tachSpokeCount = std::stoi(data);
     }
     catch (std::exception &e){
-        pod.setConnectionFlag(0, NAVIGATION_HEARTBEAT_INDEX);
         std::string sError = std::string("Error Parsing Nav Node Data");
         throw std::runtime_error(sError);
     }

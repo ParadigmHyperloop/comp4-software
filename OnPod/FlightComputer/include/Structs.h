@@ -34,16 +34,17 @@ struct PodValues {
     std::vector<std::string> updates;
 
     //Manual States
+    bool checkNodeStates = true;
     PodStates manualPodState = psNone;
     BrakeNodeStates manualBrakeNodeState = bnsNone;
     LvdcNodeStates manualLvdcNodeState = lvdcNone;
     bool automaticTransitions = true;
 
     //ConnectionsArray
-    std::vector<int32_t> connectionFlags;  // brakeNode, LVDCNode, BMS, Interface
-    std::vector<int32_t> nodeSensorFlags;
-    std::vector<int32_t> inverterSensorFlags;
-    std::vector<int32_t> bmsSensorFlags;
+    std::vector<int8_t> connectionFlags;  // brakeNode, LVDCNode, BMS, Interface
+    std::vector<int8_t> nodeSensorFlags;
+    std::vector<int8_t> inverterSensorFlags;
+    std::vector<int8_t> bmsSensorFlags;
 
     // HV-BMS
     float hvBatteryPackVoltage = 0;

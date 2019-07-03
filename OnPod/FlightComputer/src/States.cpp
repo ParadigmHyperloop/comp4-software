@@ -21,18 +21,7 @@ unsigned int PodState::timeInStateSeconds() {
     return std::chrono::duration_cast<std::chrono::milliseconds>(current - this->_enterStateTime).count()/1000.0;
 }
 
-int32_t PodState::checkSensorFlags(){
-    std::vector<int32_t> flags = this->pod->telemetry->nodeSensorFlags;
-    for(std::size_t i=0; i<flags.size(); ++i){
-        if(flags[i] == 0){
-            return i;
-        }
-    }
-    return FLAGS_GOOD;
-}
-
-int32_t PodState::checkCommunicationFlags(){
-    std::vector<int32_t> flags = this->pod->telemetry->connectionFlags;
+int8_t PodState::checkFlags(std::vector<int8_t > &flags){
     for(std::size_t i=0; i<flags.size(); ++i){
         if(flags[i] == 0){
             return i;
@@ -42,6 +31,9 @@ int32_t PodState::checkCommunicationFlags(){
 }
 
 int32_t PodState::checkNodeStates(){
+    if(!this->pod->telemetry->checkNodeStates){
+        return FLAGS_GOOD;
+    }
     if(this->pod->telemetry->commandedBrakeNodeState != this->pod->telemetry->receivedBrakeNodeState){
         return BRAKE_NODE_HEARTBEAT_INDEX;
     }
@@ -50,21 +42,21 @@ int32_t PodState::checkNodeStates(){
 
 void PodState::commonChecks() {
     int32_t status;
-    status = this->checkSensorFlags();
+    status = this->checkFlags(this->pod->telemetry->nodeSensorFlags);
     if( status != FLAGS_GOOD ){
-        std::string error = "Failed on sensor : " + std::to_string(status) + " returning to standby.";
+        std::string error = "Failed on Node sensor : " + std::to_string(status);
         throw std::runtime_error(error);
     }
-    status = this->checkCommunicationFlags();
+    status = this->checkFlags(this->pod->telemetry->connectionFlags);
     if(status != FLAGS_GOOD){
-        std::string error = "Failed on communication flag : " + std::to_string(status) + " returning to standby.";
+        std::string error = "Failed on communication flag : " + std::to_string(status);
         throw std::runtime_error(error);
     }
-/*    status = this->checkNodeStates();
-    if( status != FLAGS_GOOD && (this->timeInStateMilis() > 500)){
-        std::string error = "Failed on node state agreement : " + std::to_string(status) + " returning to standby.";
+    status = this->checkNodeStates();
+    if( status != FLAGS_GOOD && (this->timeInStateSeconds() > 3)){
+        std::string error = "Failed on node state agreement : " + std::to_string(status);
         throw std::runtime_error(error);
-    }*/
+    }
 }
 
 void PodState::armedChecks(){
@@ -147,6 +139,7 @@ Standby::Standby(TelemetryManager * pod): PodState(pod) {
     this->pod->telemetry->commandedBrakeNodeState = bnsStandby;
     //_lvdcNodeState = lvdcStandby;
     this->pod->telemetry->controlsInterfaceState = ciNone; // Guard against auto transition
+    this->currentFailure = "";
 }
 
 Standby::~Standby(){
@@ -167,9 +160,18 @@ bool Standby::testTransitions() {
         this->commonChecks();
     }
     catch (const std::runtime_error &e ){
+        if(e.what() != this->currentFailure){
+            this->currentFailure = e.what();
+            pod->sendUpdate(std::string(e.what()));
+        }
+        if(this->pod->telemetry->controlsInterfaceState == ciArm){
+            this->pod->telemetry->controlsInterfaceState = ciNone;
+            pod->sendUpdate(currentFailure);
+        }
         return false;
     }
     if(this->pod->telemetry->controlsInterfaceState == ciArm){
+        this->pod->telemetry->controlsInterfaceState = ciNone;
         if(this->pod->telemetry->maxFlightTime == 0){
             this->setupTransition(psStandby, (std::string)"Need flight profile to complete Arming sequence");
             return true;

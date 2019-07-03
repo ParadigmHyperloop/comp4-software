@@ -35,9 +35,7 @@ public:
 
     void setupTransition(PodStates, const std::string&);
 
-    int32_t checkSensorFlags();
-
-    int32_t checkCommunicationFlags();
+    int8_t checkFlags(std::vector<int8_t> &flags);
 
     int32_t checkNodeStates();
 
@@ -67,6 +65,9 @@ public:
     Standby(TelemetryManager*);
     ~Standby();
     bool testTransitions() override;
+
+protected:
+    std::string currentFailure;
 };
 
 class Arming : public PodState {
