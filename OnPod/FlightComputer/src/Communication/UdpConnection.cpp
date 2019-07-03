@@ -167,7 +167,7 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_lowpressure3(pod.telemetry->lowPressure3);
     protoMessage->set_lowpressure4(pod.telemetry->lowPressure4);
     protoMessage->set_highpressure(pod.telemetry->highPressure);
-    protoMessage->set_coolanttemperature(pod.telemetry->coolingTemperature); //todo
+    protoMessage->set_coolanttemperature(pod.telemetry->coolingTemperature);
     protoMessage->set_solenoid1(pod.telemetry->solenoid1);
     protoMessage->set_solenoid2(pod.telemetry->solenoid2);
     protoMessage->set_solenoid3(pod.telemetry->solenoid3);
@@ -203,8 +203,6 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_enclosurepressure(pod.telemetry->enclosurePressure);
     protoMessage->set_enclosuretemperature(pod.telemetry->enclosureTemperature);
 
-
-    // Add Updates todo probably put this in a function with a pointer to the proto as an argument
     if(this->pod.telemetry->updates.size() > 0){
         std::lock_guard<std::mutex> lock(this->pod.telemetry->updatesLock);
         for(std::string& update : this->pod.telemetry->updates){
@@ -249,9 +247,6 @@ bool BrakeNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
         std::string strError = "Failed to parse Update from Brake Node";
         throw std::invalid_argument(strError);
     }
-/*    if(this->checkPacketId(protoMessage.packetnum())){
-        //todo
-    }*/
     this->pod.setSolenoid(protoMessage.solenoid1(),SOL1_INDEX);
     this->pod.setSolenoid(protoMessage.solenoid2(), SOL2_INDEX);
     this->pod.setSolenoid(protoMessage.solenoid3(), SOL3_INDEX);
@@ -263,8 +258,8 @@ bool BrakeNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
     this->pod.setLowPressure(protoMessage.lowpressure3(), LP3_INDEX);
     this->pod.setLowPressure(protoMessage.lowpressurecommon(), LP4_INDEX);
     this->pod.setPressureVesselTemperature(protoMessage.pneumatictemperature());
-    this->pod.telemetry->coolingTemperature = protoMessage.coolanttemperature(); //todo
-    this->pod.telemetry->receivedBrakeNodeState = protoMessage.state();
+    this->pod.setCoolantTemperature(protoMessage.coolanttemperature());
+    this->pod.setRecievedBrakeNodeState(protoMessage.state());
     return true;
 }
 
@@ -282,9 +277,6 @@ bool EnclosureNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
         std::string strError = "Failed to parse Update from Enclosure";
         throw std::invalid_argument(strError);
     }
-/*    if(this->checkPacketId(protoMessage.packetnum())){
-        return false;
-    }*/
     this->pod.setEnclosurePressure(protoMessage.enclosurepressure());
     this->pod.setEnclosureTemperature(protoMessage.enclosuretemperature());
     this->pod.setCoolantLinePressure(protoMessage.coolantpressure1());
@@ -301,5 +293,6 @@ LvdcNodeConnection::LvdcNodeConnection(TelemetryManager pod) : UdpConnection(pod
 }
 
 bool LvdcNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
+
     return true; //todo
 }

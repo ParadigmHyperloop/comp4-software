@@ -13,6 +13,7 @@
 #include <sstream>
 #include "Heartbeat.h"
 #include "Constants/Constants.h"
+#include "Constants/SensorConfig.h"
 
 
 #define BUFFER_SIZE 35
@@ -67,6 +68,7 @@ void readNavigationNode(int serialPort, TelemetryManager &pod){
             dataStream << read_buffer;
             memset(&read_buffer,0, bytes_read);
         } else{
+            pod.setConnectionFlag(0, NAVIGATION_HEARTBEAT_INDEX);
             std::string sError = std::string("Navnode timeout");
             throw std::runtime_error(sError);
         }
@@ -82,20 +84,22 @@ void readNavigationNode(int serialPort, TelemetryManager &pod){
         tachSpokeCount = std::stoi(data);
     }
     catch (std::exception &e){
+        pod.setConnectionFlag(0, NAVIGATION_HEARTBEAT_INDEX);
         std::string sError = std::string("Error Parsing Nav Node Data");
         throw std::runtime_error(sError);
     }
     dataStream >> irStripCount;
     std::stringstream().swap(dataStream);
 
-    LOG(INFO)<<"TachRPM : "<<tachRpm << " IrRPM : "<< irRpm << " Spoke : "<< tachSpokeCount << " Strip : "<<irStripCount;
+    //LOG(INFO)<<"TachRPM : "<<tachRpm << " IrRPM : "<< irRpm << " Spoke : "<< tachSpokeCount << " Strip : "<<irStripCount;
+
+    LOG(INFO)<<"TachRPM : "<<tachRpm << "  Spoke Count : "<< tachSpokeCount << " IR Strip : " << irStripCount;
 
     pod.telemetry->irRpm = irRpm;
     pod.telemetry->tachRpm = tachRpm;
     pod.telemetry->tachDistance = (tachSpokeCount/8.0)*FRONT_WHEEL_CIRCUMFERENCE;
     pod.telemetry->irDistance = irStripCount*FRONT_WHEEL_CIRCUMFERENCE;
-    LOG(INFO)<<"Tach : " << tachSpokeCount << "  IR : " << irStripCount;
-    return;
+    pod.setConnectionFlag(1, NAVIGATION_HEARTBEAT_INDEX);
 }
 
 int32_t NavigationThread(TelemetryManager Pod) {
@@ -118,7 +122,7 @@ int32_t NavigationThread(TelemetryManager Pod) {
             }
             catch (std::runtime_error &error){
                 Pod.sendUpdate(error.what());
-                //todo what now
+                Pod.setConnectionFlag(0, NAVIGATION_HEARTBEAT_INDEX);
             }
         }
         tachVelocity =  FRONT_WHEEL_RADIUS*Pod.telemetry->tachRpm*0.10472;

@@ -33,23 +33,5 @@ class CsvTelemetryLoggerTesting:
     def _format_json(self, json):
         formatted = dict()
         formatted['Time'] = int(time.time() - self._start_time)
-        formatted['Brake Node State'] = json['brakeNodeState']
-        formatted['highPressure'] = json['highPressure']
-        formatted['Module 1 Pressure'] = round(json['lowPressure1'], 2)
-        formatted['Module 2 Pressure'] = round(json['lowPressure2'], 2)
-        formatted['Module 3 Pressure'] = round(json['lowPressure3'], 2)
-        formatted['Regulated Pressure'] = round(json['lowPressure4'], 2)
-        formatted['High Pressure'] = round(json['highPressure'], 2)
-        formatted['Tank Temperature'] = round(json['pressureVesselTemperature'], 2)
-        formatted['Solenoid 1'] = json['solenoid1']
-        formatted['Solenoid 2'] = json['solenoid2']
-        formatted['Solenoid 3'] = json['solenoid3']
-        formatted['Solenoid 4'] = json['solenoid4']
-        formatted['podState'] = json['podState']
-        formatted['motorSpeed'] = json['motorSpeed']
-        formatted['motorTorque'] = json['motorTorque']
-        formatted['maxFlightTime'] = json['maxFlightTime']
-        formatted['irRpm'] = json['irRpm']
-        formatted['irDistance'] = json['irDistance']
         formatted['IR RPM'] = json['irRpm']
         return formatted

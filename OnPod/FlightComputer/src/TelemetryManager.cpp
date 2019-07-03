@@ -232,6 +232,17 @@ void TelemetryManager::setPressureVesselTemperature(float value){
     this->setNodeSensorFlag(status, HP_TEMP_INDEX);
 }
 
+void TelemetryManager::setCoolantTemperature(float value) {
+    bool status;
+    this->telemetry->coolingTemperature = value;
+    status = inRange<float>(value, COOLING_TEMP_MIN, COOLING_TEMP_MAX);
+    this->setNodeSensorFlag(status, COOLING_TEMPERATURE_INDEX);
+}
+
+void TelemetryManager::setRecievedBrakeNodeState(BrakeNodeStates value) {
+    this->telemetry->receivedBrakeNodeState = value;
+}
+
 //          Enclosure
 void TelemetryManager::setEnclosurePressure(float value) {
     bool status;

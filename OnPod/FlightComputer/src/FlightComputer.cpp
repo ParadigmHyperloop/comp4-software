@@ -44,12 +44,10 @@ int main( int32_t argc, char** argv)
           // flightConfigurationParameters = configurationServer->runServer(); //Comment out to use the default network values in the proto obj
         } catch (exception& e)
         {
-            LOG(INFO) << "Error Receiving Flight Configuration: "<< e.what(); //TODO Hardware reset?
             configurationServer->closePorts();
             configReceived = false;
         }
 	}
-
 
     // Create Shared Memory
     PodNetwork sPodNetworkValues = {};

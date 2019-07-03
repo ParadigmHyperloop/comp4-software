@@ -5,12 +5,6 @@
 #include <cstdint>
 #include "Paradigm.pb.h"
 
-#define BRAKE_NODE_HEARTBEAT_INDEX 0
-#define LVDC_NODE_HEARTBEAT_INDEX 1
-#define BMS_HEARTBEAT_INDEX 2
-#define INTERFACE_HEARTBEAT_INDEX 3
-#define ENCLOSURE_HEARTBEAT_INDEX 4
-
 class PodState;
 
 struct PodValues {
@@ -27,7 +21,6 @@ struct PodValues {
     int32_t flightDistance = 0;
     int32_t maxFlightTime = 0;
 
-
     //Navigation
     int32_t tachRpm = 0;
     int32_t irRpm = 0;
@@ -35,7 +28,6 @@ struct PodValues {
     float irDistance = 0;
     float podVelocity = 0;
     float podPosition = 0;
-
 
     // Updates
     std::mutex updatesLock;

@@ -1,5 +1,6 @@
 #include "States.h"
 #include "easylogging++.h"
+#include "Constants/SensorConfig.h"
 
 #define MIN_BRAKING_TIME 1
 #define BRAKING_DISTANCE 250
@@ -148,7 +149,18 @@ Standby::Standby(TelemetryManager * pod): PodState(pod) {
     this->pod->telemetry->controlsInterfaceState = ciNone; // Guard against auto transition
 }
 
-Standby::~Standby() = default; // todo set all sensors to a false value here
+Standby::~Standby(){
+    for(auto &flag : this->pod->telemetry->nodeSensorFlags){
+        if(flag != 2){
+            flag = 0;
+        }
+    }
+    for(auto &flag : this->pod->telemetry->bmsSensorFlags){
+        if(flag != 2){
+            flag = 0;
+        }
+    }
+}
 
 bool Standby::testTransitions() {
     try {
@@ -188,7 +200,7 @@ bool Arming::testTransitions() {
     if(this->timeInStateSeconds() < 3 ){ //Allow nodes to update sensors or timeout if not
         return false;
     }
-    if(this->timeInStateSeconds() > 30 ){
+    if(this->timeInStateSeconds() > 20 ){
         this->setupTransition(psStandby, "Arming Timout. Pod --> Standby");
         return true;
     }
@@ -200,12 +212,9 @@ bool Arming::testTransitions() {
         this->setupTransition(psStandby, error.what());
         return true;
     }
-    //todo validate that we are receiving telemetry from the inverter
-    if(true){
-        this->setupTransition(psArmed, (std::string)"Arming Passed. Pod --> Armed");
-        return true;
-    }
-    return false;
+
+    this->setupTransition(psArmed, (std::string)"Arming Passed. Pod --> Armed");
+    return true;
 }
 
 
