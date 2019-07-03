@@ -52,11 +52,11 @@
 #include <fcntl.h>
 
 #define START_DELAY_SECONDS 10
-#define FULL_TORQUE_TIME_SECONDS 20
-#define ACCELTIME 5
+#define FULL_TORQUE_TIME_SECONDS 3
+#define ACCELTIME 7
 
-#define START_TORQUE 20
-#define FINAL_TORQUE 40
+#define START_TORQUE 30
+#define FINAL_TORQUE 100
 
 #define ACCEL_TIME_INCREMENTS_MS 1000
 
@@ -82,7 +82,7 @@ void startInverterBroadcast(int bcmSocket){
     bcmMessage.msg_head.count   = 0;
 
     bcmMessage.msg_head.ival2.tv_sec = 0;
-    bcmMessage.msg_head.ival2.tv_usec = 200000;
+    bcmMessage.msg_head.ival2.tv_usec = 10000;
 
     bcmMessage.frame[0].can_id = INVERTER_FRAME_ID;
     bcmMessage.frame[0].can_dlc = 8;
