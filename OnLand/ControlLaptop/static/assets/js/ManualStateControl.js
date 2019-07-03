@@ -21,7 +21,11 @@ enablePodStates.click(function () {
 
 disablePodStates.click(function () {
     manualPodStates.attr('disabled','disabled');
-    //todo send command to set automatic transitions to 0
+    const state = btn.data('state');
+    let command = {};
+    command['target'] = 'pod';
+    command['state'] = 'psNone';
+    socket.emit('manual_state_command', JSON.stringify(command));
 });
 
 manualPodStates.click(function () {

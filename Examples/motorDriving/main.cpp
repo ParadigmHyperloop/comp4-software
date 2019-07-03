@@ -52,11 +52,11 @@
 #include <fcntl.h>
 
 #define START_DELAY_SECONDS 10
-#define FULL_TORQUE_TIME_SECONDS 10
-#define ACCELTIME 15
+#define FULL_TORQUE_TIME_SECONDS 20
+#define ACCELTIME 5
 
-#define START_TORQUE 5
-#define FINAL_TORQUE 50
+#define START_TORQUE 20
+#define FINAL_TORQUE 40
 
 #define ACCEL_TIME_INCREMENTS_MS 1000
 
@@ -146,23 +146,23 @@ void setInverterTorque(int torque, int bcmSocket){
     msg.msg_head.count   = 0;
 
     msg.msg_head.ival2.tv_sec = 0;
-    msg.msg_head.ival2.tv_usec = 100000; // If you dont set this makes sure its 0
+    msg.msg_head.ival2.tv_usec = 1000; // If you dont set this makes sure its 0
 
     msg.frame[0].can_id = 0x0C0;
     msg.frame[0].can_dlc = 8;
     for(int i = 0; i < 8 ; i++){
         msg.frame[0].data[i] = 0;
     }
-    if(torque != 0){
-        msg.frame[0].data[INVERTER_RUN_B] = 1;
-        msg.frame[0].data[DIRECTION_B] = 1;
-    }
+
+    msg.frame[0].data[INVERTER_RUN_B] = 1;
+    msg.frame[0].data[DIRECTION_B] = 1;
+
     msg.frame[0].data[TORQUE_HIGH_B] = highByte;
     msg.frame[0].data[TORQUE_LOW_B] = lowByte;
     if (write(bcmSocket, &msg, sizeof(msg)) < 0)
     {
         std::string error = std::string("Error: Setting inverter torque :") + std::strerror(errno);
-        throw std::runtime_error(error);
+        std::cout<< error;
     }
 }
 
@@ -238,8 +238,6 @@ int main()
     setInverterTorque(0, broadcastSocket);
 
     sleep(30);
-
-
 
     return 0;
 }
