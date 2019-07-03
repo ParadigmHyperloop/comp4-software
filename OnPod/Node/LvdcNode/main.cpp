@@ -8,16 +8,19 @@
 #include <pb_decode.h>
 #include <pb_encode.h>
 #include <Timer.h>
+#include <WDTZero.h>
+#include "../../pod_internal_network.h"
+#include "Paradigm.pb.h"
 
 #include "drivers/adc_ADS7953.h"
 #include "sensors/voltage_divider.h"
 #include "sensors/current_sensor_ACS711.h"
 #include "drivers/node_ethernet.h"
-#include "Paradigm.pb.h"
-#include "../../pod_internal_network.h"
 
 const NodeType NODE_TYPE = LVDC;
+
 Timer txTimer;
+WDTZero internalWatchdog;
 
 // instantiate adc and all sensors with which it interfaces
 SPIClass adcSPI(&PERIPH_SPI1, ADC_MISO, ADC_SCK, ADC_MOSI, PAD_SPI1_TX, PAD_SPI1_RX);
@@ -53,9 +56,7 @@ void sendToFlightComputer(void*) {
     pb_ostream_t outStream = pb_ostream_from_buffer(udp.uSendBuffer, sizeof(udp.uSendBuffer));
     // encode the message object and store it in the UDP buffer
     pb_encode(&outStream, LvdcNodeToFc_fields, &pLvdcNodeTelemetry);
-    if (udp.sendPacket(FC_IP, FC_LVDC_NODE_PORT, outStream.bytes_written)) {
-        txPacketNum++;
-    }
+    udp.sendPacket(FC_IP, FC_LVDC_NODE_PORT, outStream.bytes_written))
 }
 
 void setup() {
@@ -74,6 +75,7 @@ void setup() {
     pinMode(INV_CTRL, OUTPUT);
     pinMode(PUMP1_CTL, OUTPUT);
     pinMode(PUMP2_CTL, OUTPUT);
+    internalWatchdog.setup(WDT_HARDCYCLE1S);
 }
 
 void loop() {
@@ -128,4 +130,5 @@ void loop() {
 
     // send to FC is interval has expired
     txTimer.update();
+    internalWatchdog.clear();
 }
