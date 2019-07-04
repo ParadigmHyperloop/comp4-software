@@ -88,7 +88,7 @@ void readNavigationNode(int serialPort, TelemetryManager &pod){
     dataStream >> irStripCount;
     std::stringstream().swap(dataStream);
 
-    LOG(INFO)<<"TachRPM : "<<tachRpm << "     Spoke : "<< tachSpokeCount;
+   // LOG(INFO)<<"Strip Count : "<<irStripCount << "   RPM : " << irRpm;
 
     pod.telemetry->irRpm = irRpm;
     pod.telemetry->tachRpm = tachRpm;
@@ -106,7 +106,7 @@ int32_t NavigationThread(TelemetryManager Pod) {
         return -1;
     }
     LOG(INFO)<<"Starting Nav thread with FD " << serialPort;
-    Heartbeat navNodeUpdateFreq = Heartbeat(10);
+    Heartbeat navNodeUpdateFreq = Heartbeat(1000);
     float tachVelocity, motorVelocity, podVelocity;
     while(Pod.getPodStateValue() != psShutdown)
     {

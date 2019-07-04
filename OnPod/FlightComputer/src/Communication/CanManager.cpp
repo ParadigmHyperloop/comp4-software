@@ -54,7 +54,7 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
         case 0x0A5: {
             indices = {3,2};
             auto motorSpeed = extractCanValue<int>(frame.data, indices, 1);
-            if(motorSpeed == 65535 || motorSpeed == 1){
+            if(motorSpeed > 12000 || motorSpeed == 1){
                 return;
             }
             pod.setMotorSpeed(motorSpeed);
