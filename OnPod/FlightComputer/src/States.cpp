@@ -12,13 +12,6 @@ PodState::PodState(TelemetryManager* pod){
     this->_enterStateTime = std::chrono::steady_clock::now();
 }
 
-void PodState::setFailure(const std::string &failure){
-    if(this->currentFailure != failure){
-        this->currentFailure = failure;
-        pod->sendUpdate(this->currentFailure);
-    }
-}
-
 PodState::~PodState(){
     this->pod->telemetry->controlsInterfaceState = ciNone;
 }
@@ -167,24 +160,25 @@ bool Standby::testTransitions() {
         this->commonChecks();
     }
     catch (const std::runtime_error &e ){
-        setFailure(e.what());
+        if(e.what() != this->currentFailure){
+            this->currentFailure = e.what();
+            pod->sendUpdate(std::string(e.what()));
+        }
         if(this->pod->telemetry->controlsInterfaceState == ciArm){
             this->pod->telemetry->controlsInterfaceState = ciNone;
+            pod->sendUpdate(currentFailure);
         }
         return false;
     }
     if(this->pod->telemetry->controlsInterfaceState == ciArm){
         this->pod->telemetry->controlsInterfaceState = ciNone;
         if(this->pod->telemetry->maxFlightTime == 0){
-            std::string failure = "Need flight profile to complete Arming sequence";
-            setFailure(failure);
-            return false;
+            this->setupTransition(psStandby, (std::string)"Need flight profile to complete Arming sequence");
+            return true;
         }
         this->setupTransition(psArming, (std::string)"Arm Command Received. Pod --> Arming");
         return true;
     }
-    std::string failure = "Waiting for Arm Command";
-    setFailure(failure);
     return false;
 }
 
