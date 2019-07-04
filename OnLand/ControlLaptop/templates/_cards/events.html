@@ -33,7 +33,7 @@ socket.on('pod_telemetry', function (data) {
                       <td><i class="fa fa-info text-info"></i></td>
                       <td>${update}</td>
                     </tr>`;
-        updatesTable.append(row);
+        updatesTable.prepend(row);
     }
 
 });
