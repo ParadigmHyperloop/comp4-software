@@ -106,7 +106,7 @@ int32_t NavigationThread(TelemetryManager Pod) {
         return -1;
     }
     LOG(INFO)<<"Starting Nav thread with FD " << serialPort;
-    Heartbeat navNodeUpdateFreq = Heartbeat(1000);
+    Heartbeat navNodeUpdateFreq = Heartbeat(10);
     float tachVelocity, motorVelocity, podVelocity;
     while(Pod.getPodStateValue() != psShutdown)
     {

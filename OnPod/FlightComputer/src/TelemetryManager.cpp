@@ -305,21 +305,20 @@ void TelemetryManager::setMotorTemperature(float value) {
 }
 
 void TelemetryManager::setMotorSpeed(float value) {
-    typedef std::chrono::high_resolution_clock Time;
-    typedef std::chrono::milliseconds ms;
+    auto lastTime = this->telemetry->lastMotorReadTime;
+    auto thisTime = std::chrono::high_resolution_clock::now();
+    this->telemetry->lastMotorReadTime = thisTime;
 
     int32_t lastRPM = this->telemetry->motorSpeed;
     this->telemetry->motorSpeed = value;
-    float average = (value+lastRPM)/2;
-    average /= (1000*60);
+    float average = (value+lastRPM)/2.0;
+    average /= (1000.0*60.0);
 
-    auto lastTime = this->telemetry->lastMotorReadTime;
-    auto thisTime = Time::now();
-    float milliseconds = std::chrono::duration_cast<ms>(thisTime - lastTime).count();
-
+    float milliseconds = (std::chrono::duration_cast<std::chrono::microseconds>(thisTime - lastTime).count())/1000.0;
     float distance = average*milliseconds*1.867237;
     this->telemetry->motorDistance += distance;
-    LOG(INFO)<<"Total Distance : " << this->telemetry->motorDistance << "    RPM Distance : " << distance << "    RPM Time : " << milliseconds;
+
+   LOG(INFO)<<"Total Distance : " << this->telemetry->motorDistance << "    RPM Distance : " << distance << "    RPM Time : " << milliseconds;
 }
 
 void TelemetryManager::setInverterBusVoltage(int value) {
