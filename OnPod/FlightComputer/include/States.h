@@ -23,6 +23,8 @@ public:
 
     bool isTransitioning();
 
+    void setFailure(const std::string&);
+
     BrakeNodeStates getBrakeNodeState();
 
     LvdcNodeStates getLvdcNodeState();
@@ -45,6 +47,7 @@ public:
 
 
 protected:
+    std::string currentFailure;
     std::chrono::steady_clock::time_point _enterStateTime;
     bool _transitioning = false;
     std::string _transitionReason = "";
@@ -66,8 +69,6 @@ public:
     ~Standby();
     bool testTransitions() override;
 
-protected:
-    std::string currentFailure;
 };
 
 class Arming : public PodState {
