@@ -4,6 +4,7 @@
 #include <netinet/in.h>
 #include <cstdint>
 #include "Paradigm.pb.h"
+#include <chrono>
 
 #define BRAKE_NODE_HEARTBEAT_INDEX 0
 #define LVDC_NODE_HEARTBEAT_INDEX 1
@@ -33,6 +34,7 @@ struct PodValues {
     int32_t irRpm = 0;
     float tachDistance = 0;
     float irDistance = 0;
+    float motorDistance = 0;
     float podVelocity = 0;
     float podPosition = 0;
 
@@ -67,6 +69,7 @@ struct PodValues {
     int32_t inverterControlBoardTemperature = 0;
     int32_t motorTemperature = 0;
     int32_t motorSpeed = 0;
+    std::chrono::high_resolution_clock::time_point lastMotorReadTime;
     int32_t inverterBusVoltage = 0;
     int32_t commandedTorque = 0;
     int32_t inverterHeartbeat = 0;

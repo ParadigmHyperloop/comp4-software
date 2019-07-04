@@ -15,7 +15,6 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             pod.setHvBatteryPackStateOfCharge(hvBatteryPackSoc);
             pod.setHvBatteryPackCurrent(hvBatteryPackCurrent);
             pod.setHvBatteryPackVoltage(hvBatteryPackVoltage);
-            pod.setConnectionFlag(1,BMS_HEARTBEAT_INDEX);
         }
         case 0x6b2: {
             indices = {2, 3};
@@ -56,6 +55,7 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             indices = {3,2};
             auto motorSpeed = extractCanValue<int>(frame.data, indices, 1);
             pod.setMotorSpeed(motorSpeed);
+            pod.setConnectionFlag(1,BMS_HEARTBEAT_INDEX);
         }
         case 0x0A7: {
             indices = {1,0};
