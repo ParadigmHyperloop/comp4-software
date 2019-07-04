@@ -178,7 +178,7 @@ void TelemetryManager::setSolenoid(bool value, int32_t identifier){
 
 void TelemetryManager::setLowPressure(float value, int identifier){
 
-    bool status = true;
+    bool status = false;
     PodStates currentState = this->getPodStateValue();
 
     // Set Value in Memory
@@ -230,16 +230,21 @@ void TelemetryManager::setHighPressure(float value){
 }
 
 void TelemetryManager::setPressureVesselTemperature(float value){
-    bool status;
+    bool status = false;
     this->telemetry->pressureVesselTemperature = value;
     status = inRange<float>(value, PRESSURE_TEMP_MIN, PRESSURE_TEMP_MAX);
     this->setNodeSensorFlag(status, HP_TEMP_INDEX);
 }
 
 void TelemetryManager::setCoolantTemperature(float value) {
-    bool status;
+    bool status = true;
     this->telemetry->coolingTemperature = value;
-    status = inRange<float>(value, COOLING_TEMP_MIN, COOLING_TEMP_MAX);
+
+    PodStates currentState = this->getPodStateValue();
+    if(currentState == psStandby || currentState == psArming || currentState == psArmed){
+        status = inRange<float>(value, COOLING_TEMP_MIN, COOLING_TEMP_MAX);
+    }
+
     this->setNodeSensorFlag(status, COOLING_TEMPERATURE_INDEX);
 }
 
@@ -249,7 +254,7 @@ void TelemetryManager::setRecievedBrakeNodeState(BrakeNodeStates value) {
 
 //          Enclosure
 void TelemetryManager::setEnclosurePressure(float value) {
-    bool status;
+    bool status = false;
     this->telemetry->enclosurePressure = value;
     status = inRange<float>(value, ATMOSPHERE, ATMOSPHERE_THRESHOLD);
     this->setNodeSensorFlag(status, ENCLOSURE_PRESSURE_INDEX);
@@ -258,7 +263,7 @@ void TelemetryManager::setEnclosurePressure(float value) {
 void TelemetryManager::setEnclosureTemperature(float value) {
     bool status;
     this->telemetry->enclosureTemperature = value;
-    status = inRange<float>(value, ENCLOSURE_TEMP, ENCLOSURE_TEMP_THRESHOLD);
+    status = inRange<float>(value, ENCLOSURE_TEMP_MIN, ENCLOSURE_TEMP_MAX);
     this->setNodeSensorFlag(status, ENCLOSURE_TEMPERATURE_INDEX);
 }
 

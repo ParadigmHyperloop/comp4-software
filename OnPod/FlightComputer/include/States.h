@@ -23,10 +23,6 @@ public:
 
     bool isTransitioning();
 
-    BrakeNodeStates getBrakeNodeState();
-
-    LvdcNodeStates getLvdcNodeState();
-
     const std::string getTransitionReason();
 
     unsigned int timeInStateSeconds();
