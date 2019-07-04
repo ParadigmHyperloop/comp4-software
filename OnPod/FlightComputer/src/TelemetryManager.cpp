@@ -306,7 +306,7 @@ void TelemetryManager::setMotorTemperature(float value) {
 
 void TelemetryManager::setMotorSpeed(float value) {
 
-    LOG(INFO)<<"RPM Recvd :  " << value;
+    float originalRPM = value;
 
     auto lastTime = this->telemetry->lastMotorReadTime;
     auto thisTime = std::chrono::high_resolution_clock::now();
@@ -323,7 +323,7 @@ void TelemetryManager::setMotorSpeed(float value) {
     float distance = average*milliseconds*1.570796;
     this->telemetry->motorDistance += distance;
 
-    LOG(INFO)<<"RPM milli: "<< average  <<"   Total Distance : " << this->telemetry->motorDistance << "    RPM Distance : " << distance << "  Packet Time : " << milliseconds;
+    LOG(INFO)<<"Total Distance,   " << this->telemetry->motorDistance << "    ,RPM Distance," << distance << "  ,Packet Time, " << milliseconds<< ", Original RPM ,  " << originalRPM;
 }
 
 void TelemetryManager::setInverterBusVoltage(int value) {
