@@ -21,9 +21,12 @@
 #define NAVIGATION_HEARTBEAT_INDEX 5
 
 // Inverter Sensor Flag Indices
-#define INVERTER_SENSOR_COUNT 2
+#define INVERTER_SENSOR_COUNT 5
 #define MOTOR_TEMPERATURE_INDEX 0
 #define BUS_VOLTAGE_INDEX 1
+#define GATE_DRIVER_TEMP_INDEX 2
+#define CONTROL_BOARD_TEMP_INDEX 3
+#define MAX_IGBT_INDEX 4
 
 // BMS Sensor Flag Indices
 #define BMS_SENSOR_COUNT 3
@@ -52,9 +55,23 @@
 
 // Enclosure
 #define ENCLOSURE_TEMP_MIN 20
-#define ENCLOSURE_TEMP_MAX 60
-#define COOLING_ENGAGED 30
+#define ENCLOSURE_TEMP_MAX 60 //todo validate
+#define COOLING_ENGAGED_MIN 20 //TODO validate
+#define COOLING_ENGAGED_MAX 35
 #define COOLING_THRESHOLD 5
+
+
+// Inverter
+#define MOTOR_UNARMED_TEMP_MIN 10
+#define MOTOR_UNARMED_TEMP_MAX 50 //TODO
+#define MOTOR_ARMED_TEMP_MIN 10
+#define MOTOR_ARMED_TEMP_MAX 400 //TODO
+
+#define COMPONENT_TEMP_MIN 10
+#define COMPONENT_TEMP_MAX 400 //TODO
+
+
+
 
 // Pneumatics
 

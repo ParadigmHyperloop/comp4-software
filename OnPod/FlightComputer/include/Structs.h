@@ -55,14 +55,14 @@ struct PodValues {
     float hvBatteryPackMaxCellTemperature = 0;
 
     //Inverter
-    int32_t maxIgbtTemperature = 0;
-    int32_t gateDriverTemperature = 0;
-    int32_t inverterControlBoardTemperature = 0;
-    int32_t motorTemperature = 0;
-    int32_t motorSpeed = 0;
-    int32_t inverterBusVoltage = 0;
-    int32_t commandedTorque = 0;
-    int32_t inverterHeartbeat = 0;
+    float maxIgbtTemperature = 0;
+    float gateDriverTemperature = 0;
+    float inverterControlBoardTemperature = 0;
+    float motorTemperature = 0;
+    float motorSpeed = 0;
+    float inverterBusVoltage = 0;
+    float commandedTorque = 0;
+    float inverterHeartbeat = 0;
 
     // Atmosphere
     double tubePressure = 0;

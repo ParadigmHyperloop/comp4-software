@@ -243,7 +243,7 @@ void TelemetryManager::setCoolantTemperature(float value) {
     PodStates currentState = this->getPodStateValue();
     if(currentState == psStandby || currentState == psArming || currentState == psArmed){
         status = inRange<float>(value, COOLING_TEMP_MIN, COOLING_TEMP_MAX);
-    }
+    } //todo temp during run
 
     this->setNodeSensorFlag(status, COOLING_TEMPERATURE_INDEX);
 }
@@ -271,12 +271,10 @@ void TelemetryManager::setCoolantLinePressure(float value) {
 
     this->telemetry->coolingLinePressure = value;
 
-    bool status;
+    bool status = true;
     PodStates currentState = this->getPodStateValue();
     if(currentState == psArming || currentState == psArmed || currentState == psAcceleration || currentState == psCoasting){
-        status = inThreshold<float>(value, COOLING_ENGAGED, COOLING_THRESHOLD);
-    }else{
-        status = inRange<float>(value, 10, COOLING_ENGAGED + COOLING_THRESHOLD);
+        status = inRange<float>(value, COOLING_ENGAGED_MIN, COOLING_ENGAGED_MAX);
     }
     // Set sensor flag
     this->setNodeSensorFlag(status, COOLING_PRESSURE_INDEX);
@@ -286,55 +284,43 @@ void TelemetryManager::setCoolantLinePressure(float value) {
 //          Inverter
 
 void TelemetryManager::setMaxIgbtTemperature(float value) {
-    if (!this->bWriteInverter) {
-        LOG(INFO)<< "Lacking Inverter Write Permissions";
-    }
     this->telemetry->maxIgbtTemperature = value;
+    bool status = inRange<float>(value, COMPONENT_TEMP_MIN, COMPONENT_TEMP_MAX);
+    this->setInverterSensorFlag(status, MAX_IGBT_INDEX);
+
 }
 
 void TelemetryManager::setGateDriverTemperature(float value) {
-    if (!this->bWriteInverter) {
-        LOG(INFO)<< "Lacking Inverter Write Permissions";
-    }
     this->telemetry->gateDriverTemperature = value;
+    bool status = inRange<float>(value, COMPONENT_TEMP_MIN, COMPONENT_TEMP_MAX);
+    this->setInverterSensorFlag(status, GATE_DRIVER_TEMP_INDEX);
 }
 
 void TelemetryManager::setInverterControlBoardTemperature(float value) {
-    if (!this->bWriteInverter) {
-        LOG(INFO)<< "Lacking Inverter Write Permissions";
-    }
     this->telemetry->inverterControlBoardTemperature = value;
+    bool status = inRange<float>(value, COMPONENT_TEMP_MIN, COMPONENT_TEMP_MAX);
+    this->setInverterSensorFlag(status, CONTROL_BOARD_TEMP_INDEX);
 }
 
 void TelemetryManager::setMotorTemperature(float value) {
-    if (!this->bWriteInverter){
-        LOG(INFO)<< "Lacking Inverter Write Permissions";
-    }
     this->telemetry->motorTemperature = value;
 
     bool status = true;
     PodStates currentState = this->getPodStateValue();
 
     if(currentState == psArming || currentState == psArmed){
-        // status = less than todo
+        status = inRange<float>(value, MOTOR_UNARMED_TEMP_MIN, MOTOR_UNARMED_TEMP_MAX);
     }else if( currentState == psAcceleration ){
-        // status = less than todo
+        status = inRange<float>(value, MOTOR_ARMED_TEMP_MIN, MOTOR_ARMED_TEMP_MAX);
     }
-    // Set sensor flag
     this->setInverterSensorFlag(status, MOTOR_TEMPERATURE_INDEX);
 }
 
 void TelemetryManager::setMotorSpeed(float value) {
-    if (!this->bWriteInverter) {
-        LOG(INFO)<< "Lacking Inverter Write Permissions";
-    }
     this->telemetry->motorSpeed = value;
 }
 
 void TelemetryManager::setInverterBusVoltage(int value) {
-    if (!this->bWriteInverter) {
-        LOG(INFO)<< "Lacking Inverter Write Permissions";
-    }
     this->telemetry->inverterBusVoltage = value;
 
     bool status = true;
