@@ -323,7 +323,7 @@ void TelemetryManager::setMotorSpeed(float value) {
     float distance = average*milliseconds*1.570796;
     this->telemetry->motorDistance += distance;
 
-    LOG(INFO)<<"Total Distance,   " << this->telemetry->motorDistance << "    ,RPM Distance," << distance << "  ,Packet Time, " << milliseconds<< ", Original RPM ,  " << originalRPM;
+    LOG(INFO)<<", Total Distance,   " << this->telemetry->motorDistance << "    ,RPM Distance," << distance << "  ,Packet Time, " << milliseconds<< ", RPM ,  " << originalRPM << " , Max IGBT ," << telemetry->maxIgbtTemperature << ", control board ," << telemetry->inverterControlBoardTemperature << " ,Motor Temp, " << telemetry->motorTemperature;
 }
 
 void TelemetryManager::setInverterBusVoltage(int value) {

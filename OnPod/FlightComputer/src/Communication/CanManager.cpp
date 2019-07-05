@@ -38,17 +38,26 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             auto maxIgbtTemperature = std::max({igbtPhaseA, igbtPhaseB, igbtPhaseC});
             indices = {7,6};
             auto gateDriverBoard = extractCanValue<int>(frame.data, indices, 10);
-            pod.setMaxIgbtTemperature(maxIgbtTemperature);
-            pod.setGateDriverTemperature(gateDriverBoard);
+            if(gateDriverBoard > 1 && gateDriverBoard < 200){
+               // pod.setGateDriverTemperature(gateDriverBoard);
+            }
+            if(gateDriverBoard > 1 && gateDriverBoard < 200){
+               // pod.setMaxIgbtTemperature(maxIgbtTemperature);
+            }
         }
         case 0x0A1: {
             indices = {1,0};
             auto controlBoard = extractCanValue<int>(frame.data, indices, 10);
-            pod.setInverterControlBoardTemperature(controlBoard);
+            if(controlBoard > 1 && controlBoard < 200){
+                pod.setInverterControlBoardTemperature(controlBoard);
+            }
         }
         case 0x0A2: {
             indices = {5,4};
             auto motorTemp = extractCanValue<int>(frame.data, indices, 10);
+            if(motorTemp < 1 || motorTemp > 180){
+                return;
+            }
             pod.setMotorTemperature(motorTemp);
         }
         case 0x0A5: {

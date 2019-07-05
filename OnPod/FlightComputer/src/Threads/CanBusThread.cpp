@@ -50,7 +50,6 @@ int32_t getCanSocketRaw(){
 
 
 
-
     operationStatus = ::setsockopt(canSock, SOL_CAN_RAW, CAN_RAW_FILTER, &canFilter, sizeof(canFilter));
     if (operationStatus == -1) {
         std::string error = std::string("Error: Setting CAN Filter: ") + std::strerror(errno);
@@ -253,7 +252,7 @@ int canNetworkThread(TelemetryManager Pod){
         return -1;
     }
     try{
-        startInverterBroadcast(canSockBcm);
+       //  startInverterBroadcast(canSockBcm);
     }
     catch (const std::runtime_error &error){
         LOG(INFO) << error.what();
