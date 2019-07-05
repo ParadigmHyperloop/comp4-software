@@ -33,5 +33,5 @@ class CsvTelemetryLoggerTesting:
     def _format_json(self, json):
         formatted = dict()
         formatted['Time'] = int(time.time() - self._start_time)
-        formatted['IR RPM'] = json['irRpm']
+        formatted['Tach RPM'] = json['tachRpm']
         return formatted

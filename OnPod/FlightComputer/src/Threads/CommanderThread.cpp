@@ -95,9 +95,6 @@ void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
     if (podCommand.has_controlsinterfacestate()) {
         Pod->setControlsInterfaceState(podCommand.controlsinterfacestate());
     }
-    if (podCommand.has_automaticstatetransitions()) {
-        Pod->setAutomaticTransitions(podCommand.automaticstatetransitions());
-    }
     if(podCommand.has_maxflighttime()){
         Pod->telemetry->maxFlightTime = podCommand.maxflighttime();
         Pod->telemetry->motorTorque = podCommand.motortorque();
@@ -114,8 +111,11 @@ void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
         Pod->setManualLvdcNodeState(podCommand.manuallvdcnodestate());
     }
     if (podCommand.has_manualpodstate()) {
+        if(podCommand.manualpodstate() == psNone){
+            Pod->setAutomaticTransitions(true);
+            Pod->setManualPodState(psStandby);
+        }
         Pod->setManualPodState(podCommand.manualpodstate());
-        Pod->setAutomaticTransitions(false);
     }
     if (podCommand.solenoidconfiguration_size() >= 4){
         for(int i = 0 ; i < 4 ; i++){

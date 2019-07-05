@@ -4,6 +4,7 @@
 #include <netinet/in.h>
 #include <cstdint>
 #include "Paradigm.pb.h"
+#include <chrono>
 
 class PodState;
 
@@ -26,6 +27,7 @@ struct PodValues {
     int32_t irRpm = 0;
     float tachDistance = 0;
     float irDistance = 0;
+    float motorDistance = 0;
     float podVelocity = 0;
     float podPosition = 0;
 
@@ -63,6 +65,7 @@ struct PodValues {
     float inverterBusVoltage = 0;
     float commandedTorque = 0;
     float inverterHeartbeat = 0;
+    std::chrono::high_resolution_clock::time_point lastMotorReadTime;
 
     // Atmosphere
     double tubePressure = 0;

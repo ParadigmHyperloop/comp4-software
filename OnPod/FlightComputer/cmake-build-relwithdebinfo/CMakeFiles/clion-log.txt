@@ -1,4 +1,5 @@
 /snap/clion/73/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -G "CodeBlocks - Unix Makefiles" /home/paradigm/Development/comp4-software/OnPod/FlightComputer
+<<<<<<< HEAD
 -- The C compiler identification is GNU 5.4.0
 -- The CXX compiler identification is GNU 5.4.0
 -- Check for working C compiler: /usr/bin/cc
@@ -15,6 +16,8 @@
 -- Detecting CXX compile features - done
 -- Found Protobuf: /usr/local/lib/libprotobuf.so;-lpthread (found version "3.7.1") 
 -- Found Threads: TRUE  
+=======
+>>>>>>> motor_testing
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/paradigm/Development/comp4-software/OnPod/FlightComputer/cmake-build-relwithdebinfo

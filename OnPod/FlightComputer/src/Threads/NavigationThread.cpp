@@ -93,7 +93,7 @@ void readNavigationNode(int serialPort, TelemetryManager &pod){
     dataStream >> irStripCount;
     std::stringstream().swap(dataStream);
 
-    //LOG(INFO)<<"TachRPM : "<<tachRpm << " IrRPM : "<< irRpm << " Spoke : "<< tachSpokeCount << " Strip : "<<irStripCount;
+   // LOG(INFO)<<"Strip Count : "<<irStripCount << "   RPM : " << irRpm;
 
     LOG(INFO)<<"TachRPM : "<<tachRpm << "  Spoke Count : "<< tachSpokeCount << " IR Strip : " << irStripCount;
 
@@ -101,7 +101,7 @@ void readNavigationNode(int serialPort, TelemetryManager &pod){
     pod.telemetry->tachRpm = tachRpm;
     pod.telemetry->tachDistance = (tachSpokeCount/8.0)*FRONT_WHEEL_CIRCUMFERENCE;
     pod.telemetry->irDistance = irStripCount*FRONT_WHEEL_CIRCUMFERENCE;
-    pod.setConnectionFlag(1, NAVIGATION_HEARTBEAT_INDEX);
+    return;
 }
 
 int32_t NavigationThread(TelemetryManager Pod) {

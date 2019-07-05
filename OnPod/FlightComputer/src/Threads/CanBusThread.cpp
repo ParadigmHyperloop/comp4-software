@@ -28,7 +28,7 @@ int32_t getCanSocketRaw(){
     fcntl(canSock, F_SETFL, flags);
 
     // Set a receive filter so we only receive select CAN IDs
-    struct can_filter canFilter[7];
+/*    struct can_filter canFilter[7];
     canFilter[0].can_id = 0x6B2;
     canFilter[0].can_mask = CAN_SFF_MASK;
     canFilter[1].can_id = 0x0A0;
@@ -42,14 +42,20 @@ int32_t getCanSocketRaw(){
     canFilter[5].can_id = 0x0A5;
     canFilter[5].can_mask = CAN_SFF_MASK;
     canFilter[6].can_id = 0x6b3;
-    canFilter[6].can_mask = CAN_SFF_MASK;
+    canFilter[6].can_mask = CAN_SFF_MASK;*/
+
+    struct can_filter canFilter[1];
+    canFilter[0].can_id = 0x0A5;
+    canFilter[0].can_mask = CAN_SFF_MASK;
+
+
 
     operationStatus = ::setsockopt(canSock, SOL_CAN_RAW, CAN_RAW_FILTER, &canFilter, sizeof(canFilter));
     if (operationStatus == -1) {
         std::string error = std::string("Error: Setting CAN Filter: ") + std::strerror(errno);
         throw std::runtime_error(error);
     }
-    strcpy(interfaceRequest.ifr_name, "can1"); // Set Interface name
+    strcpy(interfaceRequest.ifr_name, "can0"); // Set Interface name
     operationStatus = ioctl(canSock, SIOCGIFINDEX, &interfaceRequest);
     if (operationStatus == -1) {
         strcpy(interfaceRequest.ifr_name, "can0"); // Set Interface name
@@ -89,7 +95,7 @@ int32_t getCanSocketBrodcastManager() {
     flags |= O_NONBLOCK;
     fcntl(bcmSocket, F_SETFL, flags);
 
-    strcpy(interfaceRequest.ifr_name, "can1"); // Set Interface name
+    strcpy(interfaceRequest.ifr_name, "can0"); // Set Interface name
     operationStatus = ioctl(bcmSocket, SIOCGIFINDEX, &interfaceRequest);
     if(operationStatus < 0){
         strcpy(interfaceRequest.ifr_name, "can0"); // Set Interface name
@@ -184,7 +190,7 @@ void setInverterTorque(int torque, int bcmSocket){
 }
 
 void readRawSocket(int socket, TelemetryManager& pod){
-    struct can_frame receivedCanFrame = {};
+    struct can_frame receivedCanFrame = {0};
     ssize_t receivedPacketSize;
     receivedPacketSize = read(socket, &receivedCanFrame, CAN_MTU);
     if (receivedPacketSize > 0 ) {
@@ -246,7 +252,7 @@ int canNetworkThread(TelemetryManager Pod){
         return -1;
     }
     try{
-        startInverterBroadcast(canSockBcm);
+       //  startInverterBroadcast(canSockBcm);
     }
     catch (const std::runtime_error &error){
         LOG(INFO) << error.what();

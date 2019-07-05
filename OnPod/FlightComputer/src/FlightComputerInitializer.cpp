@@ -19,11 +19,10 @@ FlightComputerInitializer* FlightComputerInitializer::GetInstance()
 void FlightComputerInitializer::importLoggerLibrary()
 {
     el::Helpers::setThreadName("main");
-    std::ifstream infile("/home/debian/logging.conf");
+    std::ifstream infile("/home/paradigm/logging.conf");
     if (infile.good())
     {
-        return;
-        el::Configurations conf("/home/debian/logging.conf");
+        el::Configurations conf("/home/paradigm/logging.conf");
         el::Loggers::reconfigureAllLoggers(conf);
     } else
     {

@@ -48,10 +48,17 @@ RM = /snap/clion/73/bin/cmake/linux/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
+<<<<<<< HEAD
+CMAKE_SOURCE_DIR = /home/liam/CLionProjects/motorDriving
+
+# The top-level build directory on which CMake was run.
+CMAKE_BINARY_DIR = /home/liam/CLionProjects/motorDriving/build/host
+=======
 CMAKE_SOURCE_DIR = /home/liam/Development/comp4-software/Examples/motorDriving
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/liam/Development/comp4-software/Examples/motorDriving/build/host
+>>>>>>> master
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +87,15 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
+<<<<<<< HEAD
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/liam/CLionProjects/motorDriving/build/host/CMakeFiles /home/liam/CLionProjects/motorDriving/build/host/CMakeFiles/progress.marks
+	$(MAKE) -f CMakeFiles/Makefile2 all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/liam/CLionProjects/motorDriving/build/host/CMakeFiles 0
+=======
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/liam/Development/comp4-software/Examples/motorDriving/build/host/CMakeFiles /home/liam/Development/comp4-software/Examples/motorDriving/build/host/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/liam/Development/comp4-software/Examples/motorDriving/build/host/CMakeFiles 0
+>>>>>>> master
 .PHONY : all
 
 # The main clean target

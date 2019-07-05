@@ -9,7 +9,10 @@ CMakeFiles/FlightComputer.dir/src/Communication/CanManager.cpp.o: ../include/Str
 CMakeFiles/FlightComputer.dir/src/Communication/CanManager.cpp.o: ../include/TelemetryManager.h
 CMakeFiles/FlightComputer.dir/src/Communication/CanManager.cpp.o: ../libs/EasyLogger/easylogging++.h
 CMakeFiles/FlightComputer.dir/src/Communication/CanManager.cpp.o: ../libs/ProtoBuffer/Paradigm.pb.h
+<<<<<<< HEAD
 CMakeFiles/FlightComputer.dir/src/Communication/CanManager.cpp.o: ../src/Constants/SensorConfig.h
+=======
+>>>>>>> motor_testing
 CMakeFiles/FlightComputer.dir/src/Communication/CanManager.cpp.o: ../src/Communication/CanManager.cpp
 
 CMakeFiles/FlightComputer.dir/src/Communication/FlightConfigServer.cpp.o: ../include/FlightConfigServer.h
@@ -83,7 +86,10 @@ CMakeFiles/FlightComputer.dir/src/States.cpp.o: ../include/Structs.h
 CMakeFiles/FlightComputer.dir/src/States.cpp.o: ../include/TelemetryManager.h
 CMakeFiles/FlightComputer.dir/src/States.cpp.o: ../libs/EasyLogger/easylogging++.h
 CMakeFiles/FlightComputer.dir/src/States.cpp.o: ../libs/ProtoBuffer/Paradigm.pb.h
+<<<<<<< HEAD
 CMakeFiles/FlightComputer.dir/src/States.cpp.o: ../src/Constants/SensorConfig.h
+=======
+>>>>>>> motor_testing
 CMakeFiles/FlightComputer.dir/src/States.cpp.o: ../src/States.cpp
 
 CMakeFiles/FlightComputer.dir/src/TelemetryManager.cpp.o: ../include/Common.h
@@ -106,7 +112,10 @@ CMakeFiles/FlightComputer.dir/src/Threads/CanBusThread.cpp.o: ../include/Structs
 CMakeFiles/FlightComputer.dir/src/Threads/CanBusThread.cpp.o: ../include/TelemetryManager.h
 CMakeFiles/FlightComputer.dir/src/Threads/CanBusThread.cpp.o: ../libs/EasyLogger/easylogging++.h
 CMakeFiles/FlightComputer.dir/src/Threads/CanBusThread.cpp.o: ../libs/ProtoBuffer/Paradigm.pb.h
+<<<<<<< HEAD
 CMakeFiles/FlightComputer.dir/src/Threads/CanBusThread.cpp.o: ../src/Constants/SensorConfig.h
+=======
+>>>>>>> motor_testing
 CMakeFiles/FlightComputer.dir/src/Threads/CanBusThread.cpp.o: ../src/Threads/CanBusThread.cpp
 
 CMakeFiles/FlightComputer.dir/src/Threads/CommanderThread.cpp.o: ../include/Common.h
@@ -138,7 +147,10 @@ CMakeFiles/FlightComputer.dir/src/Threads/NavigationThread.cpp.o: ../include/Tel
 CMakeFiles/FlightComputer.dir/src/Threads/NavigationThread.cpp.o: ../libs/EasyLogger/easylogging++.h
 CMakeFiles/FlightComputer.dir/src/Threads/NavigationThread.cpp.o: ../libs/ProtoBuffer/Paradigm.pb.h
 CMakeFiles/FlightComputer.dir/src/Threads/NavigationThread.cpp.o: ../src/Constants/Constants.h
+<<<<<<< HEAD
 CMakeFiles/FlightComputer.dir/src/Threads/NavigationThread.cpp.o: ../src/Constants/SensorConfig.h
+=======
+>>>>>>> motor_testing
 CMakeFiles/FlightComputer.dir/src/Threads/NavigationThread.cpp.o: ../src/Threads/NavigationThread.cpp
 
 CMakeFiles/FlightComputer.dir/src/Threads/UdpTelemetryThread.cpp.o: ../include/Common.h
