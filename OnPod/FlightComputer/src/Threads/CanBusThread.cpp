@@ -27,8 +27,7 @@ int32_t getCanSocketRaw(){
     flags |= O_NONBLOCK;
     fcntl(canSock, F_SETFL, flags);
 
-    // Set a receive filter so we only receive select CAN IDs
-/*    struct can_filter canFilter[7];
+    struct can_filter canFilter[7];
     canFilter[0].can_id = 0x6B2;
     canFilter[0].can_mask = CAN_SFF_MASK;
     canFilter[1].can_id = 0x0A0;
@@ -42,12 +41,7 @@ int32_t getCanSocketRaw(){
     canFilter[5].can_id = 0x0A5;
     canFilter[5].can_mask = CAN_SFF_MASK;
     canFilter[6].can_id = 0x6b3;
-    canFilter[6].can_mask = CAN_SFF_MASK;*/
-
-    struct can_filter canFilter[1];
-    canFilter[0].can_id = 0x0A5;
-    canFilter[0].can_mask = CAN_SFF_MASK;
-
+    canFilter[6].can_mask = CAN_SFF_MASK;
 
 
     operationStatus = ::setsockopt(canSock, SOL_CAN_RAW, CAN_RAW_FILTER, &canFilter, sizeof(canFilter));
