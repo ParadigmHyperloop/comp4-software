@@ -29,54 +29,29 @@ PodStates TelemetryManager::getPodStateValue() {
 
 //          State setting
 
-int32_t TelemetryManager::setPodState(PodStates newState, const std::string &reason) {
-    if (this->bWritePodState){
-        std::lock_guard<std::mutex> lock(this->telemetry->stateLock);
-        this->telemetry->podState = std::move(PodState::createState(newState, this));
-        return 1;
-    } else {
-        return 0;
-    }
+void TelemetryManager::setPodState(PodStates newState, const std::string &reason) {
+    std::lock_guard<std::mutex> lock(this->telemetry->stateLock);
+    this->telemetry->podState = std::move(PodState::createState(newState, this));
 };
 
 void TelemetryManager::setControlsInterfaceState(ControlsInterfaceStates eTerminalState) {
-    if (this->bWriteControlsInterfaceState) {
-        this->telemetry->controlsInterfaceState = eTerminalState;
-    } else {
-        LOG(INFO) << "ERROR: Permission Denied for writing Controls Interface State";
-    }
+    this->telemetry->controlsInterfaceState = eTerminalState;
 }
 
 void TelemetryManager::setAutomaticTransitions(bool val) {
-    if (this->bWriteManualStates) {
-        this->telemetry->automaticTransitions = val;
-    } else {
-        LOG(INFO) << "ERROR: Permission Denied for writing Automatic Transition";
-    }
+    this->telemetry->automaticTransitions = val;
 }
 
 void TelemetryManager::setManualBrakeNodeState(BrakeNodeStates eBrakeNodeState) {
-    if (this->bWriteManualStates) {
-        this->telemetry->manualBrakeNodeState = eBrakeNodeState;
-    } else {
-        LOG(INFO) << "ERROR: Permission Denied for writing Manual State";
-    }
+    this->telemetry->manualBrakeNodeState = eBrakeNodeState;
 }
 
 void TelemetryManager::setManualLvdcNodeState(LvdcNodeStates eLvdcNodeState) {
-    if (this->bWriteManualStates) {
-        this->telemetry->manualLvdcNodeState = eLvdcNodeState;
-    } else {
-        LOG(INFO) << "ERROR: Permission Denied for writing Manual State";
-    }
+    this->telemetry->manualLvdcNodeState = eLvdcNodeState;
 }
 
 void TelemetryManager::setManualPodState(PodStates ePodState) {
-    if (this->bWriteManualStates) {
         this->telemetry->manualPodState = ePodState;
-    } else {
-        LOG(INFO) << "ERROR: Permission Denied for writing Manual State";
-    }
 }
 
 
@@ -84,9 +59,6 @@ void TelemetryManager::setManualPodState(PodStates ePodState) {
 //          BMS
 
 void TelemetryManager::setHvBatteryPackVoltage(float value) {
-    if (!this->bWriteBms) {
-        LOG(INFO)<< "Lacking BMS Write Permissions";
-    }
     this->telemetry->hvBatteryPackVoltage = value;
 
     bool status = true;
@@ -106,30 +78,18 @@ void TelemetryManager::setHvBatteryPackVoltage(float value) {
 }
 
 void TelemetryManager::setHvBatteryPackCurrent(float value) {
-    if (!this->bWriteBms) {
-        LOG(INFO)<< "Lacking BMS Write Permissions";
-    }
     this->telemetry->hvBatteryPackCurrent = value;
 }
 
 void TelemetryManager::setHvBatteryPackMinimumCellVoltage(float value){
-    if (!this->bWriteBms) {
-        LOG(INFO)<< "Lacking BMS Write Permissions";
-    }
     this->telemetry->hvBatteryPackMinimumCellVoltage = value;
 }
 
 void TelemetryManager::setHvBatteryPackMaxCellVoltage(float value){
-    if (!this->bWriteBms) {
-        LOG(INFO)<< "Lacking BMS Write Permissions";
-    }
     this->telemetry->hvBatteryPackMaxCellVoltage = value;
 }
 
 void TelemetryManager::setHvBatteryPackMaxCellTemperature(float value) {
-    if (!this->bWriteBms) {
-        LOG(INFO)<< "Lacking BMS Write Permissions";
-    }
     this->telemetry->hvBatteryPackMaxCellTemperature = value;
 
     bool status = true;
@@ -138,9 +98,6 @@ void TelemetryManager::setHvBatteryPackMaxCellTemperature(float value) {
 }
 
 void TelemetryManager::setHvBatteryPackStateOfCharge(int value) {
-    if (!this->bWriteBms) {
-        LOG(INFO)<< "Lacking BMS Write Permissions";
-    }
     this->telemetry->hvBatteryPackStateOfCharge = value;
 
     bool status = true;
@@ -316,7 +273,7 @@ void TelemetryManager::setMotorTemperature(float value) {
     this->setInverterSensorFlag(status, MOTOR_TEMPERATURE_INDEX);
 }
 
-void TelemetryManager::setMotorSpeed(float value) {
+void TelemetryManager::setMotorSpeed(int32_t value) {
 
     float originalRPM = value;
 
@@ -333,9 +290,10 @@ void TelemetryManager::setMotorSpeed(float value) {
     float milliseconds = (std::chrono::duration_cast<std::chrono::microseconds>(thisTime - lastTime).count())/1000.0;
 
     float distance = average*milliseconds*1.570796;
-    this->telemetry->motorDistance += distance;
 
-    LOG(INFO)<<", Total Distance,   " << this->telemetry->motorDistance << "    ,RPM Distance," << distance << "  ,Packet Time, " << milliseconds<< ", RPM ,  " << originalRPM << " , Max IGBT ," << telemetry->maxIgbtTemperature << ", control board ," << telemetry->inverterControlBoardTemperature << " ,Motor Temp, " << telemetry->motorTemperature;
+    addPodDistance(distance);
+
+    //LOG(INFO)<<", Total Distance,   " << this->telemetry->motorDistance << "    ,RPM Distance," << distance << "  ,Packet Time, " << milliseconds<< ", RPM ,  " << originalRPM << " , Max IGBT ," << telemetry->maxIgbtTemperature << ", control board ," << telemetry->inverterControlBoardTemperature << " ,Motor Temp, " << telemetry->motorTemperature;
 }
 
 void TelemetryManager::setInverterBusVoltage(int value) {
@@ -351,6 +309,24 @@ void TelemetryManager::setInverterBusVoltage(int value) {
     // Set sensor flag
     this->setInverterSensorFlag(status, BUS_VOLTAGE_INDEX);
 }
+
+
+// Position
+
+void TelemetryManager::addPodDistance(float distance) {
+    std::lock_guard<std::mutex> lock(this->telemetry->positionLock);
+    telemetry->podPosition+= distance;
+}
+
+void TelemetryManager::setPodDistance(float distance) {
+    std::lock_guard<std::mutex> lock(this->telemetry->positionLock);
+    telemetry->podPosition = distance;
+}
+
+void TelemetryManager::setPodVelocity(float velocity) {
+    telemetry->podVelocity = velocity;
+}
+
 
 
 //          Flag Setting
@@ -403,6 +379,5 @@ void TelemetryManager::setInverterHeartbeat(int32_t value) {
     if(this->telemetry->inverterHeartbeat != 2){
         this->telemetry->inverterHeartbeat = value;
     }
-    return;
 }
 

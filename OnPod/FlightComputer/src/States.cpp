@@ -318,16 +318,19 @@ bool Acceleration::testTransitions() {
     // todo critical vs non critical changes
     try {
         this->commonChecks();
-        //this->armedChecks();
+        this->armedChecks();
     }
     catch (const std::runtime_error &error ){
         std::string reason = "Pod --> Braking";
         this->setupTransition(psBraking, error.what() + reason);
         return true;
     }
+
     // Navigation checks todo
+    std::unique_lock<std::mutex> lock(pod->telemetry->positionLock);
     float remainingTrack = pod->telemetry->flightDistance - (pod->telemetry->podPosition);// - BRAKING_DISTANCE;
-    //LOG(INFO)<< "Remaining Track : " << remainingTrack;
+    lock.unlock();
+
     if(remainingTrack <= 0){
         this->setupTransition(psBraking,"Braking Distance Reached. Pod --> Braking");
         return true;

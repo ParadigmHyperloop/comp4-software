@@ -59,14 +59,11 @@ int main( int32_t argc, char** argv)
 
     //Core Control Loop Thread
     TelemetryManager controlTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
-    controlTelemManager.bWritePodState = true;
     controlTelemManager.setPodState(psBooting, (std::string)"Booting..."); // Set Pod state to booting
     std::thread coreControlThread(coreControlLoopThread, controlTelemManager);
 
     //CAN Thread
     TelemetryManager canTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
-    canTelemManager.bWriteInverter = true;
-    canTelemManager.bWriteBms = true;
     std::thread canThread(canNetworkThread, canTelemManager);
 
 
@@ -81,8 +78,6 @@ int main( int32_t argc, char** argv)
 
 	// Controls Interface Connection Thread
 	TelemetryManager pCommanderThread = TelemetryManager(&sPodValues, &sPodNetworkValues);
-	pCommanderThread.bWriteManualStates = 1;
-	pCommanderThread.bWriteControlsInterfaceState = 1;
 	std::thread controlsInterfaceThread(commanderThread, pCommanderThread);
 
 	coreControlThread.join();

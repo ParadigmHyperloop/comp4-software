@@ -23,13 +23,12 @@ struct PodValues {
     int32_t maxFlightTime = 0;
 
     //Navigation
-    int32_t tachRpm = 0;
-    int32_t irRpm = 0;
-    float tachDistance = 0;
+    std::mutex positionLock;
     float irDistance = 0;
     float motorDistance = 0;
     float podVelocity = 0;
     float podPosition = 0;
+    int totalStripCount = 0;
 
     // Updates
     std::mutex updatesLock;
@@ -61,7 +60,7 @@ struct PodValues {
     float gateDriverTemperature = 0;
     float inverterControlBoardTemperature = 0;
     float motorTemperature = 0;
-    float motorSpeed = 0;
+    int32_t motorSpeed = 0;
     float inverterBusVoltage = 0;
     float commandedTorque = 0;
     float inverterHeartbeat = 0;

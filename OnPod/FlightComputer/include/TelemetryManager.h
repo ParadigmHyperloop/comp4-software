@@ -16,7 +16,7 @@ class TelemetryManager
         void sendUpdate(std::string);
 
 		// TelemetryManager States
-		int32_t setPodState(PodStates, const std::string&);
+        void setPodState(PodStates newState, const std::string &reason);
 		PodStates getPodStateValue();
 
 		// Flags Array
@@ -24,6 +24,12 @@ class TelemetryManager
         void setNodeSensorFlag(int32_t status, int32_t index);
         void setBmsSensorFlag(int32_t, int32_t);
         void setInverterSensorFlag(int32_t, int32_t);
+
+        //Navigation
+        void addPodDistance(float);
+        void setPodDistance(float);
+        void getPodDistance(float);
+        void setPodVelocity(float);
 
 		// Controls Interface
 		void setControlsInterfaceState(ControlsInterfaceStates);
@@ -44,7 +50,7 @@ class TelemetryManager
 		void setGateDriverTemperature(float);
 		void setInverterControlBoardTemperature(float);
 		void setMotorTemperature(float);
-		void setMotorSpeed(float);
+		void setMotorSpeed(int32_t value);
 		void setInverterBusVoltage(int);
         void setInverterHeartbeat(int32_t);
 
@@ -67,13 +73,6 @@ class TelemetryManager
         //Shared Memory Space
         struct PodValues* telemetry;
         struct PodNetwork* sPodNetworkValues;
-
-		// Permissions
-		bool bWritePodState = 0;
-		bool bWriteControlsInterfaceState = 0;
-		bool bWriteManualStates = 0;
-		bool bWriteBms = 0;
-		bool bWriteInverter = 0;
 };
 
 #endif //FLIGHTCOMPUTER_TELEMETRYMANAGER_H
