@@ -136,14 +136,11 @@ message Telemetry {
 
     optional float enclosurePressure = 44;
     optional float enclosureTemperature = 45;
-    optional int32 railDisplacementY = 46;
 
     // Rear Node
     optional float tubePressure = 48;
     optional float coolantPressure1 = 49;
     optional float coolantPressure2 = 50;
-    optional float coolantPressure3 = 51;
-    optional float railTemperature = 53;
 
     // Ghost Train
     optional int32 pack1Voltage = 55;

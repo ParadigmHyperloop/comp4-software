@@ -1,103 +1,202 @@
 {
-  "solenoid1": {
-    "psBooting": [0,0],
-    "psAcceleration": [0,0],
-    "psBraking": [1,1],
-    "psDisarming": [1,1],
-    "psStandby": [1,1]
-  },
-  "solenoid2": {
-    "psBooting": [0,0],
-    "psAcceleration": [0,0],
-    "psBraking": [0,0],
-    "psDisarming": [1,1],
-    "psStandby": [1,1]
-  },
-  "railTemperature": {
-    "psBooting": [0,20],
-    "psAcceleration": [0,20],
-    "psBraking": [0,450],
-    "psDisarming": [0,20],
-    "psStandby": [1,1]
-  },
   "pressureVesselTemperature": {
-    "psBooting": [-25,35],
-    "psAcceleration": [-25,35],
-    "psBraking": [-25,35],
-    "psDisarming": [-25,35],
-    "psFlight": [-25,50],
-    "psStandby": [-25,30]
+    "psBooting": [0,40],
+    "psStandby": [0,40],
+    "psArming" : [0,40],
+    "psArmed" : [0,40],
+    "psPreFlight" : [0,40],
+    "psAcceleration": [0,40],
+    "psCoasting": [0,40],
+    "psBraking" : [0,40]
   },
   "highPressure": {
-    "psBooting": [13,1750],
-    "psAcceleration": [13,1750],
-    "psBraking": [13,1750],
-    "psDisarming": [13,1750],
-    "psFlight": [13,2650],
-    "psStandby": [13,2650]
+    "psBooting": [0,20],
+    "psStandby": [0,1725],
+    "psArming" : [1550,1725],
+    "psArmed" : [1550,1725],
+    "psPreFlight" : [1550,1725],
+    "psAcceleration": [1550,1725],
+    "psCoasting": [1550,1725],
+    "psBraking" : [0,1725]
   },
   "lowPressure1": {
     "psBooting": [13,17],
+    "psStandby": [0,18],
+    "psArming" : [0,18],
+    "psArmed" : [0,18],
+    "psPreFlight" : [0,18],
     "psAcceleration": [13,17],
-    "psBraking": [270,280],
-    "psDisarming": [13,17],
-    "psStandby": [1,1]
+    "psCoasting": [13,17],
+    "psBraking" : [215,255]
+  },
+    "lowPressure2": {
+    "psBooting": [13,17],
+    "psStandby": [0,18],
+    "psArming" : [0,18],
+    "psArmed" : [0,18],
+    "psPreFlight" : [0,18],
+    "psAcceleration": [13,17],
+    "psCoasting": [13,17],
+    "psBraking" : [215,255]
+  },
+    "lowPressure3": {
+    "psBooting": [0,18],
+    "psStandby": [0,18],
+    "psArming" : [0,18],
+    "psArmed" : [0,18],
+    "psPreFlight" : [0,18],
+    "psAcceleration": [0,18],
+    "psCoasting": [0,18],
+    "psBraking" : [215,255]
+  },
+    "lowPressure4": {
+    "psBooting": [13,17],
+    "psStandby": [0,18],
+    "psArming" : [215,255],
+    "psArmed" : [215,255],
+    "psPreFlight" : [215,255],
+    "psAcceleration": [215,255],
+    "psCoasting": [215,255],
+    "psBraking" : [215,255]
   },
   "hvBatteryPackVoltage": {
-    "psBooting": [0,100],
-    "psAcceleration": [0,100],
-    "psBraking": [0,100],
-    "psDisarming": [0,100]
+    "psBooting": [0,0],
+    "psStandby": [0,0],
+    "psArming" : [780,807],
+    "psArmed" : [780,807],
+    "psPreFlight" : [780,807],
+    "psAcceleration": [537,807],
+    "psCoasting": [537,807],
+    "psBraking" : [537,807]
   },
   "hvBatteryPackCurrent": {
-    "psBooting": [0,100],
-    "psAcceleration": [0,100],
-    "psBraking": [0,100],
-    "psDisarming": [0,100]
+    "psBooting": [0,0],
+    "psStandby": [0,0],
+    "psArming" : [0,0],
+    "psArmed" : [0,0],
+    "psPreFlight" : [0,0],
+    "psAcceleration": [0,1250],
+    "psCoasting": [0,0],
+    "psBraking" : [0,0]
   },
   "hvBatteryPackMinimumCellVoltage": {
-    "psBooting": [0,100],
-    "psAcceleration": [0,100],
-    "psBraking": [0,100],
-    "psDisarming": [0,100]
+    "psBooting": [0,0],
+    "psStandby": [0,0],
+    "psArming" : [2.8,4.2],
+    "psArmed" : [2.8,4.2],
+    "psPreFlight" : [2.8,4.2],
+    "psAcceleration": [2.8,4.2],
+    "psCoasting": [2.8,4.2],
+    "psBraking" : [2.8,4.2]
   },
   "hvBatteryPackMaxCellVoltage": {
-    "psBooting": [0,100],
-    "psAcceleration": [0,100],
-    "psBraking": [0,100],
-    "psDisarming": [0,100]
+    "psBooting": [0,0],
+    "psStandby": [0,0],
+    "psArming" : [2.8,4.2],
+    "psArmed" : [2.8,4.2],
+    "psPreFlight" : [2.8,4.2],
+    "psAcceleration": [2.8,4.2],
+    "psCoasting": [2.8,4.2],
+    "psBraking" : [2.8,4.2]
   },
   "maxIgbtTemperature": {
-    "psBooting": [13,17],
-    "psAcceleration": [13,17],
-    "psBraking": [270,280],
-    "psDisarming": [13,17],
-    "psStandby": [1,1]
+    "psBooting": [0,0],
+    "psStandby": [0,0],
+    "psArming" : [2.8,4.2],
+    "psArmed" : [2.8,4.2],
+    "psPreFlight" : [2.8,4.2],
+    "psAcceleration": [2.8,4.2],
+    "psCoasting": [2.8,4.2],
+    "psBraking" : [2.8,4.2]
   },
   "gateDriverTemperature": {
-    "psBooting": [0,100],
-    "psAcceleration": [0,100],
-    "psBraking": [0,100],
-    "psDisarming": [0,100],
-    "psStandby": [1,1]
+    "psBooting": [0,0],
+    "psStandby": [0,0],
+    "psArming" : [2.8,4.2],
+    "psArmed" : [2.8,4.2],
+    "psPreFlight" : [2.8,4.2],
+    "psAcceleration": [2.8,4.2],
+    "psCoasting": [2.8,4.2],
+    "psBraking" : [2.8,4.2]
   },
   "inverterControlBoardTemperature": {
-    "psBooting": [0,100],
-    "psAcceleration": [0,100],
-    "psBraking": [0,100],
-    "psDisarming": [0,100],
-    "psStandby": [1,1]
+    "psBooting": [0,0],
+    "psStandby": [0,0],
+    "psArming" : [15,100],
+    "psArmed" : [15,100],
+    "psPreFlight" : [15,100],
+    "psAcceleration": [15,100],
+    "psCoasting": [15,100],
+    "psBraking" : [15,100]
   },
   "motorTemperature": {
-    "psBooting": [0,100],
-    "psAcceleration": [0,100],
-    "psBraking": [0,100],
-    "psDisarming": [0,100]
+    "psBooting": [0,0],
+    "psStandby": [0,0],
+    "psArming" : [0,0],
+    "psArmed" : [15,40],
+    "psPreFlight" : [15,40],
+    "psAcceleration": [15,100],
+    "psCoasting": [15,100],
+    "psBraking" : [15,100]
   },
   "inverterBusVoltage": {
-    "psBooting": [0,100],
-    "psAcceleration": [0,100],
-    "psBraking": [0,100],
-    "psDisarming": [0,100]
+    "psBooting": [0,0],
+    "psStandby": [0,0],
+    "psArming" : [780,807],
+    "psArmed" : [780,807],
+    "psPreFlight" : [780,807],
+    "psAcceleration": [537,807],
+    "psCoasting": [537,807],
+    "psBraking" : [537,807]
+  },
+  "coolantTemperature": {
+    "psBooting": [10,30],
+    "psStandby": [10,30],
+    "psArming" : [10,30],
+    "psArmed" : [10,30],
+    "psPreFlight" : [10,30],
+    "psAcceleration": [10,30],
+    "psCoasting": [10,30],
+    "psBraking" : [10,30]
+  },
+    "coolantPressure1": {
+    "psBooting": [10,30],
+    "psStandby": [10,35],
+    "psArming" : [25,35],
+    "psArmed" : [25,35],
+    "psPreFlight" : [25,35],
+    "psAcceleration": [25,35],
+    "psCoasting": [25,35],
+    "psBraking" : [25,35]
+  },
+   "coolantPressure2": {
+    "psBooting": [10,30],
+    "psStandby": [10,35],
+    "psArming" : [25,35],
+    "psArmed" : [25,35],
+    "psPreFlight" : [25,35],
+    "psAcceleration": [25,35],
+    "psCoasting": [25,35],
+    "psBraking" : [25,35]
+  },
+  "enclosurePressure": {
+    "psBooting": [10,30],
+    "psStandby": [10,30],
+    "psArming" : [10,30],
+    "psArmed" : [10,30],
+    "psPreFlight" : [10,30],
+    "psAcceleration": [10,30],
+    "psCoasting": [10,30],
+    "psBraking" : [10,30]
+  },
+  "enclosureTemperature": {
+    "psBooting": [20,40],
+    "psStandby": [20,40],
+    "psArming" : [20,40],
+    "psArmed" : [20,40],
+    "psPreFlight" : [20,40],
+    "psAcceleration": [20,60],
+    "psCoasting": [20,60],
+    "psBraking" : [20,60]
   }
 }
