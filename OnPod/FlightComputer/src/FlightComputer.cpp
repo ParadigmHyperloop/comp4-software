@@ -72,9 +72,9 @@ int main( int32_t argc, char** argv)
     std::thread canThread(canNetworkThread, canTelemManager);
 
 
-    //Navigation Thread
+/*    //Navigation Thread
     TelemetryManager navTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
-    std::thread navThread(NavigationThread, navTelemManager);
+    std::thread navThread(NavigationThread, navTelemManager);*/
 
 
     //TelemetryManager Internal Network Thread

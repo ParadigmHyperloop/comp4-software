@@ -52,12 +52,13 @@
 #include <fcntl.h>
 #define ACCEL_TIME_INCREMENTS_MS 100
 
-#define START_DELAY_SECONDS 30
-#define ACCELTIME 1
+#define START_DELAY_SECONDS 7
+#define ACCELTIME 3
 
-#define FULL_TORQUE_TIME_SECONDS 11
-#define START_TORQUE 150
-#define FINAL_TORQUE 330
+
+#define FULL_TORQUE_TIME_SECONDS 2
+#define START_TORQUE 40
+#define FINAL_TORQUE 70
 
 struct can_msg_bcm
 {

@@ -28,7 +28,7 @@ int32_t getCanSocketRaw(){
     fcntl(canSock, F_SETFL, flags);
 
     // Set a receive filter so we only receive select CAN IDs
-/*    struct can_filter canFilter[7];
+    struct can_filter canFilter[7];
     canFilter[0].can_id = 0x6B2;
     canFilter[0].can_mask = CAN_SFF_MASK;
     canFilter[1].can_id = 0x0A0;
@@ -42,11 +42,9 @@ int32_t getCanSocketRaw(){
     canFilter[5].can_id = 0x0A5;
     canFilter[5].can_mask = CAN_SFF_MASK;
     canFilter[6].can_id = 0x6b3;
-    canFilter[6].can_mask = CAN_SFF_MASK;*/
+    canFilter[6].can_mask = CAN_SFF_MASK;
 
-    struct can_filter canFilter[1];
-    canFilter[0].can_id = 0x0A5;
-    canFilter[0].can_mask = CAN_SFF_MASK;
+
 
 
 
@@ -245,7 +243,7 @@ int canNetworkThread(TelemetryManager Pod){
         return -1;
     }
     try{
-        canSockBcm = getCanSocketBrodcastManager();
+      //  canSockBcm = getCanSocketBrodcastManager();
     }
     catch (std::runtime_error &e){
         LOG(INFO) << e.what();
@@ -259,8 +257,8 @@ int canNetworkThread(TelemetryManager Pod){
         return -1;
     }
     try{
-        startCanHeartbeat(canSockBcm, INVERTER_HEARTBEAT_FRAME_ID, 2);
-        startCanHeartbeat(canSockBcm, BMS_HEARTBEAT_FRAME_ID, 1);
+       // startCanHeartbeat(canSockBcm, INVERTER_HEARTBEAT_FRAME_ID, 2);
+       // startCanHeartbeat(canSockBcm, BMS_HEARTBEAT_FRAME_ID, 1);
     }
     catch (const std::runtime_error &error){
         LOG(INFO) << error.what();
@@ -271,7 +269,7 @@ int canNetworkThread(TelemetryManager Pod){
     while ( Pod.getPodStateValue() != psShutdown) {
         try {
             readRawSocket( canSockRaw, Pod);
-            readBcmSocket( canSockBcm, Pod );
+           // readBcmSocket( canSockBcm, Pod );
         }
         catch (const std::runtime_error &error){
             LOG(INFO) << error.what();
