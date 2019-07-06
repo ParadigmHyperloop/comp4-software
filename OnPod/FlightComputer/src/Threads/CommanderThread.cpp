@@ -99,6 +99,9 @@ void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
         Pod->telemetry->maxFlightTime = podCommand.maxflighttime();
         Pod->telemetry->motorTorque = podCommand.motortorque();
         Pod->telemetry->flightDistance = podCommand.flightdistance();
+        Pod->telemetry->accelerationTime = podCommand.accelerationtime();
+        Pod->telemetry->startTorque = podCommand.starttorque();
+        Pod->telemetry->taxi = podCommand.taxi();
     }
     if (podCommand.has_manualbrakenodestate()){
         BrakeNodeStates state = podCommand.manualbrakenodestate();

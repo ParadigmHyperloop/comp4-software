@@ -37,9 +37,12 @@ class PodConfigurationForm(FlaskForm):
 
 
 class FlightProfileForm(FlaskForm):
-    max_flight_time = IntegerField('Maximum Flight Time (s)', validators=[DataRequired("Required"), NumberRange(0, 100, "0 < Flight Time < 100")])
-    motor_speed = IntegerField('Motor Torque (N/m)', validators=[DataRequired("Required"), NumberRange(0, 10000, "0  < Distance < 100 ")])
-    flight_distance = IntegerField('Flight Distance (meters)', validators=[DataRequired("Required"), NumberRange(0, 100, "0  < Flight Distance < 100 ")])
+    max_flight_time = IntegerField('Maximum Flight Time (s)', validators=[DataRequired("Required"), NumberRange(0, 60, "0 < Flight Time < 60")])
+    motor_speed = IntegerField('Motor Torque (N/m)', validators=[DataRequired("Required"), NumberRange(0, 500, " 0 < Torque < 500 ")])
+    start_speed = IntegerField('Start Torque', validators=[DataRequired("Required"), NumberRange(0, 500, " 0 < Start Torque < 500 ")])
+    acceleration_time = IntegerField('Acceleration Time', validators=[DataRequired("Required"), NumberRange(-1, 20, "0  < Acceleration Time < 20 ")])
+    flight_distance = IntegerField('Flight Distance (me)', validators=[DataRequired("Required"), NumberRange(0, 1200, "0  < Flight Distance < 1200 ")])
+    taxi = BooleanField("Taxi")
 
 
 def validate_configuration_values(configuration_form):

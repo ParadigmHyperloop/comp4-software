@@ -435,6 +435,13 @@ class PodCommand :
   bool automaticstatetransitions() const;
   void set_automaticstatetransitions(bool value);
 
+  // optional bool taxi = 16;
+  bool has_taxi() const;
+  void clear_taxi();
+  static const int kTaxiFieldNumber = 16;
+  bool taxi() const;
+  void set_taxi(bool value);
+
   // optional uint32 motorTorque = 11;
   bool has_motortorque() const;
   void clear_motortorque();
@@ -456,6 +463,20 @@ class PodCommand :
   ::google::protobuf::uint32 maxflighttime() const;
   void set_maxflighttime(::google::protobuf::uint32 value);
 
+  // optional uint32 startTorque = 14;
+  bool has_starttorque() const;
+  void clear_starttorque();
+  static const int kStartTorqueFieldNumber = 14;
+  ::google::protobuf::uint32 starttorque() const;
+  void set_starttorque(::google::protobuf::uint32 value);
+
+  // optional uint32 accelerationTime = 15;
+  bool has_accelerationtime() const;
+  void clear_accelerationtime();
+  static const int kAccelerationTimeFieldNumber = 15;
+  ::google::protobuf::uint32 accelerationtime() const;
+  void set_accelerationtime(::google::protobuf::uint32 value);
+
   // @@protoc_insertion_point(class_scope:PodCommand)
  private:
   class HasBitSetters;
@@ -473,9 +494,12 @@ class PodCommand :
   int manuallvdcnodestate_;
   bool hascommand_;
   bool automaticstatetransitions_;
+  bool taxi_;
   ::google::protobuf::uint32 motortorque_;
   ::google::protobuf::uint32 flightdistance_;
   ::google::protobuf::uint32 maxflighttime_;
+  ::google::protobuf::uint32 starttorque_;
+  ::google::protobuf::uint32 accelerationtime_;
   friend struct ::TableStruct_Paradigm_2eproto;
 };
 // -------------------------------------------------------------------
@@ -2921,56 +2945,110 @@ PodCommand::mutable_sensoroverrideconfiguration() {
 
 // optional uint32 motorTorque = 11;
 inline bool PodCommand::has_motortorque() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
+  return (_has_bits_[0] & 0x00000100u) != 0;
 }
 inline void PodCommand::clear_motortorque() {
   motortorque_ = 0u;
-  _has_bits_[0] &= ~0x00000080u;
+  _has_bits_[0] &= ~0x00000100u;
 }
 inline ::google::protobuf::uint32 PodCommand::motortorque() const {
   // @@protoc_insertion_point(field_get:PodCommand.motorTorque)
   return motortorque_;
 }
 inline void PodCommand::set_motortorque(::google::protobuf::uint32 value) {
-  _has_bits_[0] |= 0x00000080u;
+  _has_bits_[0] |= 0x00000100u;
   motortorque_ = value;
   // @@protoc_insertion_point(field_set:PodCommand.motorTorque)
 }
 
 // optional uint32 flightDistance = 12;
 inline bool PodCommand::has_flightdistance() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
+  return (_has_bits_[0] & 0x00000200u) != 0;
 }
 inline void PodCommand::clear_flightdistance() {
   flightdistance_ = 0u;
-  _has_bits_[0] &= ~0x00000100u;
+  _has_bits_[0] &= ~0x00000200u;
 }
 inline ::google::protobuf::uint32 PodCommand::flightdistance() const {
   // @@protoc_insertion_point(field_get:PodCommand.flightDistance)
   return flightdistance_;
 }
 inline void PodCommand::set_flightdistance(::google::protobuf::uint32 value) {
-  _has_bits_[0] |= 0x00000100u;
+  _has_bits_[0] |= 0x00000200u;
   flightdistance_ = value;
   // @@protoc_insertion_point(field_set:PodCommand.flightDistance)
 }
 
 // optional uint32 maxFlightTime = 13;
 inline bool PodCommand::has_maxflighttime() const {
-  return (_has_bits_[0] & 0x00000200u) != 0;
+  return (_has_bits_[0] & 0x00000400u) != 0;
 }
 inline void PodCommand::clear_maxflighttime() {
   maxflighttime_ = 0u;
-  _has_bits_[0] &= ~0x00000200u;
+  _has_bits_[0] &= ~0x00000400u;
 }
 inline ::google::protobuf::uint32 PodCommand::maxflighttime() const {
   // @@protoc_insertion_point(field_get:PodCommand.maxFlightTime)
   return maxflighttime_;
 }
 inline void PodCommand::set_maxflighttime(::google::protobuf::uint32 value) {
-  _has_bits_[0] |= 0x00000200u;
+  _has_bits_[0] |= 0x00000400u;
   maxflighttime_ = value;
   // @@protoc_insertion_point(field_set:PodCommand.maxFlightTime)
+}
+
+// optional uint32 startTorque = 14;
+inline bool PodCommand::has_starttorque() const {
+  return (_has_bits_[0] & 0x00000800u) != 0;
+}
+inline void PodCommand::clear_starttorque() {
+  starttorque_ = 0u;
+  _has_bits_[0] &= ~0x00000800u;
+}
+inline ::google::protobuf::uint32 PodCommand::starttorque() const {
+  // @@protoc_insertion_point(field_get:PodCommand.startTorque)
+  return starttorque_;
+}
+inline void PodCommand::set_starttorque(::google::protobuf::uint32 value) {
+  _has_bits_[0] |= 0x00000800u;
+  starttorque_ = value;
+  // @@protoc_insertion_point(field_set:PodCommand.startTorque)
+}
+
+// optional uint32 accelerationTime = 15;
+inline bool PodCommand::has_accelerationtime() const {
+  return (_has_bits_[0] & 0x00001000u) != 0;
+}
+inline void PodCommand::clear_accelerationtime() {
+  accelerationtime_ = 0u;
+  _has_bits_[0] &= ~0x00001000u;
+}
+inline ::google::protobuf::uint32 PodCommand::accelerationtime() const {
+  // @@protoc_insertion_point(field_get:PodCommand.accelerationTime)
+  return accelerationtime_;
+}
+inline void PodCommand::set_accelerationtime(::google::protobuf::uint32 value) {
+  _has_bits_[0] |= 0x00001000u;
+  accelerationtime_ = value;
+  // @@protoc_insertion_point(field_set:PodCommand.accelerationTime)
+}
+
+// optional bool taxi = 16;
+inline bool PodCommand::has_taxi() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+inline void PodCommand::clear_taxi() {
+  taxi_ = false;
+  _has_bits_[0] &= ~0x00000080u;
+}
+inline bool PodCommand::taxi() const {
+  // @@protoc_insertion_point(field_get:PodCommand.taxi)
+  return taxi_;
+}
+inline void PodCommand::set_taxi(bool value) {
+  _has_bits_[0] |= 0x00000080u;
+  taxi_ = value;
+  // @@protoc_insertion_point(field_set:PodCommand.taxi)
 }
 
 // -------------------------------------------------------------------

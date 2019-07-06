@@ -52,7 +52,7 @@ int32_t getCanSocketRaw(){
         std::string error = std::string("Error: Setting CAN Filter: ") + std::strerror(errno);
         throw std::runtime_error(error);
     }
-    strcpy(interfaceRequest.ifr_name, "can0"); // Set Interface name
+    strcpy(interfaceRequest.ifr_name, "can1"); // Set Interface name
     operationStatus = ioctl(canSock, SIOCGIFINDEX, &interfaceRequest);
     if (operationStatus == -1) {
         strcpy(interfaceRequest.ifr_name, "can0"); // Set Interface name
@@ -92,7 +92,7 @@ int32_t getCanSocketBrodcastManager() {
     flags |= O_NONBLOCK;
     fcntl(bcmSocket, F_SETFL, flags);
 
-    strcpy(interfaceRequest.ifr_name, "can0"); // Set Interface name
+    strcpy(interfaceRequest.ifr_name, "can1"); // Set Interface name
     operationStatus = ioctl(bcmSocket, SIOCGIFINDEX, &interfaceRequest);
     if(operationStatus < 0){
         strcpy(interfaceRequest.ifr_name, "can0"); // Set Interface name
@@ -140,11 +140,11 @@ void startInverterBroadcast(int bcmSocket){
     bcmMessage.msg_head.count   = 0;
 
     bcmMessage.msg_head.ival2.tv_sec = 0;
-    bcmMessage.msg_head.ival2.tv_usec = 200000;
+    bcmMessage.msg_head.ival2.tv_usec = 10000;
 
     bcmMessage.frame[0].can_id = INVERTER_FRAME_ID;
     bcmMessage.frame[0].can_dlc = 8;
-    for(int i = 0; i < 8 ; i++){
+    for(int i = 0; i < CAN_MAX_DLEN ; i++){
         bcmMessage.frame[0].data[i] = 0;
     }
     if (write(bcmSocket, &bcmMessage, sizeof(bcmMessage)) < 0)
