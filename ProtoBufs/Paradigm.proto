@@ -108,11 +108,6 @@ message Telemetry {
     optional int32 inverterHeartbeat = 78;
     optional int32 motorSpeed = 80;
 
-
-    optional int32 inverterVoltages = 23;
-    optional int32 inverterCurrents = 24;
-    //optional int32 inverterInternalStates = 30;
-
     // HV-BMS
     optional float hvBatteryPackVoltage = 26;
     optional float hvBatteryPackCurrent = 27;

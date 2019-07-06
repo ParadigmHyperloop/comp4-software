@@ -198,5 +198,16 @@
     "psAcceleration": [20,60],
     "psCoasting": [20,60],
     "psBraking" : [20,60]
+  },
+    "hvBatteryPackStateOfCharge": {
+    "psBooting": [0,0],
+    "psStandby": [0,0],
+    "psArming" : [30,100],
+    "psArmed" : [30,100],
+    "psPreFlight" : [30,100],
+    "psAcceleration": [30,100],
+    "psCoasting": [30,100],
+    "psBraking" : [30,100]
   }
 }
+

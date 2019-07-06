@@ -12,9 +12,15 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             auto hvBatteryPackCurrent = extractCanValue<float>(frame.data, indices, (float) 10.0);
             indices = {4};
             auto hvBatteryPackSoc = extractCanValue<int>(frame.data, indices, 2);
-            pod.setHvBatteryPackStateOfCharge(hvBatteryPackSoc);
-            pod.setHvBatteryPackCurrent(hvBatteryPackCurrent);
-            pod.setHvBatteryPackVoltage(hvBatteryPackVoltage);
+            if(hvBatteryPackSoc > 1 && hvBatteryPackSoc < 110){
+                pod.setHvBatteryPackStateOfCharge(hvBatteryPackSoc);
+            }
+            if(hvBatteryPackCurrent > 1 && hvBatteryPackCurrent < 1000 ){
+                pod.setHvBatteryPackCurrent(hvBatteryPackCurrent);
+            }
+            if(hvBatteryPackVoltage < 1500){
+                pod.setHvBatteryPackVoltage(hvBatteryPackVoltage);
+            }
             break;
         }
         case 0x6b2: {
@@ -24,9 +30,18 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             auto hvBatteryPackMaxCellVoltage = extractCanValue<float>(frame.data, indices, (float) 10000.0);
             indices = {4, 5};
             auto hvBatteryPackMinimumCellVoltage = extractCanValue<float>(frame.data, indices, (float) 10000.0);
-            pod.setHvBatteryPackMaxCellVoltage(hvBatteryPackMaxCellVoltage);
-            pod.setHvBatteryPackMinimumCellVoltage(hvBatteryPackMinimumCellVoltage);
-            pod.setHvBatteryPackMaxCellTemperature(hvBatteryPackMaxCellTemperature);
+
+            if(hvBatteryPackMinimumCellVoltage > 1 && hvBatteryPackMinimumCellVoltage < 100){
+                pod.setHvBatteryPackMinimumCellVoltage(hvBatteryPackMinimumCellVoltage);
+            }
+
+            if(hvBatteryPackMaxCellVoltage > 1 && hvBatteryPackMaxCellVoltage < 200){
+                pod.setHvBatteryPackMaxCellVoltage(hvBatteryPackMaxCellVoltage);
+            }
+
+            if(hvBatteryPackMaxCellTemperature > 1 && hvBatteryPackMaxCellTemperature < 300){
+                pod.setHvBatteryPackMaxCellTemperature(hvBatteryPackMaxCellTemperature);
+            }
             break;
 
         }

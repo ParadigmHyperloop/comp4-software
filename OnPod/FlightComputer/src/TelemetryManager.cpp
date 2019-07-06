@@ -300,7 +300,7 @@ void TelemetryManager::setMotorSpeed(int32_t value) {
 
     float milliseconds = (std::chrono::duration_cast<std::chrono::microseconds>(thisTime - lastTime).count())/1000.0;
 
-    float distance = average*milliseconds*1.570796;
+    float distance = average*milliseconds*0.933619;
 
     addPodDistance(distance);
 
