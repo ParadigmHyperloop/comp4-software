@@ -10,5 +10,5 @@ void VoltageDivider::init() {
 
 float VoltageDivider::read() {
     uint16_t uAdcConversion = adc->getuAdcData()[uAdcChannel];
-    return ((float)uAdcConversion/(1<<ADC_BITS)*ADC_RANGE) / (R2/(R1+R2));
+    return ((float)uAdcConversion/(1<<ADC_BITS)*ADC_RANGE) / ((float)R2/(R1+R2));
 }

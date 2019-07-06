@@ -6,7 +6,7 @@
 class ADS7953 {
 private:
     SPIClass spi;
-    SPISettings spiSettings = SPISettings (20000000, MSBFIRST, SPI_MODE0);
+    SPISettings spiSettings = SPISettings (500000, MSBFIRST, SPI_MODE0);
     uint8_t SS_PIN;
     uint8_t POWER_SEQ_PIN;
     bool HAS_SEQ_PIN = false;
