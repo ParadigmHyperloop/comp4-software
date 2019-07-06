@@ -4,6 +4,8 @@
 #include "comparingHelpers.h"
 #include "Constants/SensorConfig.h"
 
+#define REAR_WHEEL_CIRCUMFRENCE 0.933619f
+
 TelemetryManager::TelemetryManager()=default;
 
 TelemetryManager::TelemetryManager(PodValues *sPodValues, PodNetwork *sNetworkVals) {
@@ -274,26 +276,17 @@ void TelemetryManager::setMotorTemperature(float value) {
 }
 
 void TelemetryManager::setMotorSpeed(int32_t value) {
-
-    float originalRPM = value;
-
     auto lastTime = this->telemetry->lastMotorReadTime;
     auto thisTime = std::chrono::high_resolution_clock::now();
-
     this->telemetry->lastMotorReadTime = thisTime;
-
     int32_t lastRPM = this->telemetry->motorSpeed;
     this->telemetry->motorSpeed = value;
     float average = (value+lastRPM)/2.0;
     average /= (1000.0*60.0);
-
     float milliseconds = (std::chrono::duration_cast<std::chrono::microseconds>(thisTime - lastTime).count())/1000.0;
-
-    float distance = average*milliseconds*1.570796;
+    float distance = average*milliseconds*REAR_WHEEL_CIRCUMFRENCE;
 
     addPodDistance(distance);
-
-    //LOG(INFO)<<", Total Distance,   " << this->telemetry->motorDistance << "    ,RPM Distance," << distance << "  ,Packet Time, " << milliseconds<< ", RPM ,  " << originalRPM << " , Max IGBT ," << telemetry->maxIgbtTemperature << ", control board ," << telemetry->inverterControlBoardTemperature << " ,Motor Temp, " << telemetry->motorTemperature;
 }
 
 void TelemetryManager::setInverterBusVoltage(int value) {
