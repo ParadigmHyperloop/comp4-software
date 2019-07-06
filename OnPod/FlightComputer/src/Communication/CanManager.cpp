@@ -12,9 +12,15 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             auto hvBatteryPackCurrent = extractCanValue<float>(frame.data, indices, (float) 10.0);
             indices = {4};
             auto hvBatteryPackSoc = extractCanValue<int>(frame.data, indices, 2);
-            pod.setHvBatteryPackStateOfCharge(hvBatteryPackSoc);
-            pod.setHvBatteryPackCurrent(hvBatteryPackCurrent);
-            pod.setHvBatteryPackVoltage(hvBatteryPackVoltage);
+            if(hvBatteryPackSoc > 1 && hvBatteryPackSoc < 110){
+                pod.setHvBatteryPackStateOfCharge(hvBatteryPackSoc);
+            }
+            if(hvBatteryPackCurrent > 1 && hvBatteryPackCurrent < 1000 ){
+                pod.setHvBatteryPackCurrent(hvBatteryPackCurrent);
+            }
+            if(hvBatteryPackVoltage < 1500){
+                pod.setHvBatteryPackVoltage(hvBatteryPackVoltage);
+            }
             break;
         }
         case 0x6b2: {
@@ -37,6 +43,7 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
                 pod.setHvBatteryPackMaxCellTemperature(hvBatteryPackMaxCellTemperature);
             }
             break;
+
         }
         case 0x0A0: {
             indices = {1,0};
@@ -88,6 +95,12 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             auto dcBusVoltage = extractCanValue<int>(frame.data, indices, 10);
             pod.setInverterBusVoltage(dcBusVoltage);
             pod.setInverterHeartbeat(1);
+            break;
+        }
+        case 0x0A6:{
+            indices = {7,6};
+            auto dcBusCurrent = extractCanValue<int>(frame.data, indices, 10);
+            pod.telemetry->dcBusCurrent = dcBusCurrent;
             break;
         }
         default:

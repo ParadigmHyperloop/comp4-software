@@ -53,17 +53,18 @@
 #define ACCEL_TIME_INCREMENTS_MS 100
 
 #define START_DELAY_SECONDS 30
-#define ACCELTIME 3
+#define ACCELTIME 4
 
 
-#define FULL_TORQUE_TIME_SECONDS 9
+#define FULL_TORQUE_TIME_SECONDS 14
 #define START_TORQUE 100
-#define FINAL_TORQUE 300
+#define FINAL_TORQUE 250
+
 
 struct can_msg_bcm
 {
     struct bcm_msg_head msg_head;
-    struct can_frame frame[1];
+     struct can_frame frame[1];
 };
 
 struct broadcastManagerConfig

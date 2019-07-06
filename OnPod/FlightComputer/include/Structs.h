@@ -73,6 +73,7 @@ struct PodValues {
     int32_t inverterBusVoltage = 0;
     int32_t commandedTorque = 0;
     int32_t inverterHeartbeat = 0;
+    float dcBusCurrent = 0;
 
     // Atmosphere
     double tubePressure = 0;

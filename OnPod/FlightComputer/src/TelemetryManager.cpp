@@ -320,10 +320,10 @@ void TelemetryManager::setMotorSpeed(float value) {
 
     float milliseconds = (std::chrono::duration_cast<std::chrono::microseconds>(thisTime - lastTime).count())/1000.0;
 
-    float distance = average*milliseconds*1.570796;
+    float distance = average*milliseconds*0.933619;
     this->telemetry->motorDistance += distance;
 
-    LOG(INFO)<<", Total Distance,   " << this->telemetry->motorDistance << "    ,RPM Distance," << distance << "  ,Packet Time, " << milliseconds<< ", RPM ,  " << originalRPM << " , Max IGBT ," << telemetry->maxIgbtTemperature << ", control board ," << telemetry->inverterControlBoardTemperature << " ,Motor Temp, " << telemetry->motorTemperature << ", Pack Voltage, " << telemetry->hvBatteryPackVoltage << ", Pack Current ," << telemetry->hvBatteryPackCurrent << ", Max cell Temp," << telemetry->hvBatteryPackMaxCellTemperature << ", Bus Voltage," << telemetry->inverterBusVoltage;
+    LOG(INFO)<<", Total Distance,   " << this->telemetry->motorDistance << "    ,RPM Distance," << distance << "  ,Packet Time, " << milliseconds<< ", RPM ,  " << originalRPM << " , Max IGBT ," << telemetry->maxIgbtTemperature << ", control board ," << telemetry->inverterControlBoardTemperature << " ,Motor Temp, " << telemetry->motorTemperature << ", Pack Voltage, " << telemetry->hvBatteryPackVoltage << ", Pack Current ," << telemetry->hvBatteryPackCurrent << ", Bus Current , "<< telemetry->dcBusCurrent <<", Max cell Temp," << telemetry->hvBatteryPackMaxCellTemperature << ", Bus Voltage," << telemetry->inverterBusVoltage;
 }
 
 void TelemetryManager::setInverterBusVoltage(int value) {
