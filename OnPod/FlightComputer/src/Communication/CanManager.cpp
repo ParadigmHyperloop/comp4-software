@@ -24,9 +24,18 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             auto hvBatteryPackMaxCellVoltage = extractCanValue<float>(frame.data, indices, (float) 10000.0);
             indices = {4, 5};
             auto hvBatteryPackMinimumCellVoltage = extractCanValue<float>(frame.data, indices, (float) 10000.0);
-            pod.setHvBatteryPackMaxCellVoltage(hvBatteryPackMaxCellVoltage);
-            pod.setHvBatteryPackMinimumCellVoltage(hvBatteryPackMinimumCellVoltage);
-            pod.setHvBatteryPackMaxCellTemperature(hvBatteryPackMaxCellTemperature);
+
+            if(hvBatteryPackMinimumCellVoltage > 1 && hvBatteryPackMinimumCellVoltage < 100){
+                pod.setHvBatteryPackMinimumCellVoltage(hvBatteryPackMinimumCellVoltage);
+            }
+
+            if(hvBatteryPackMaxCellVoltage > 1 && hvBatteryPackMaxCellVoltage < 200){
+                pod.setHvBatteryPackMaxCellVoltage(hvBatteryPackMaxCellVoltage);
+            }
+
+            if(hvBatteryPackMaxCellTemperature > 1 && hvBatteryPackMaxCellTemperature < 300){
+                pod.setHvBatteryPackMaxCellTemperature(hvBatteryPackMaxCellTemperature);
+            }
             break;
         }
         case 0x0A0: {

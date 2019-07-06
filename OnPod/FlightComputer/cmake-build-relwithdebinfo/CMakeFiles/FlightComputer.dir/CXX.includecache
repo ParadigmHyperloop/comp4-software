@@ -6,44 +6,6 @@
 
 #IncludeRegexTransform: 
 
-../include/CanBusThread.h
-TelemetryManager.h
-../include/TelemetryManager.h
-
-../include/CanManager.h
-linux/can.h
--
-linux/can/raw.h
--
-linux/can/bcm.h
--
-endian.h
--
-net/if.h
--
-sys/ioctl.h
--
-sys/types.h
--
-iomanip
--
-cerrno
--
-csignal
--
-cstdint
--
-cstdio
--
-cstring
--
-NetworkHelpers.h
-../include/NetworkHelpers.h
-Common.h
-../include/Common.h
-TelemetryManager.h
-../include/TelemetryManager.h
-
 ../include/Common.h
 easylogging++.h
 ../include/easylogging++.h
@@ -56,26 +18,6 @@ string.h
 chrono
 -
 thread
--
-
-../include/Heartbeat.h
-Common.h
-../include/Common.h
-
-../include/NetworkHelpers.h
-arpa/inet.h
--
-netdb.h
--
-netinet/in.h
--
-sys/socket.h
--
-sys/types.h
--
-netinet/tcp.h
--
-fcntl.h
 -
 
 ../include/States.h
@@ -101,6 +43,8 @@ States.h
 ../include/States.h
 mutex
 -
+
+../include/comparingHelpers.h
 
 ../libs/EasyLogger/easylogging++.h
 cstddef
@@ -280,11 +224,17 @@ google/protobuf/port_def.inc
 google/protobuf/port_undef.inc
 -
 
-/home/paradigm/Development/comp4-software/OnPod/FlightComputer/src/Threads/CanBusThread.cpp
-CanManager.h
-/home/paradigm/Development/comp4-software/OnPod/FlightComputer/src/Threads/CanManager.h
-CanBusThread.h
-/home/paradigm/Development/comp4-software/OnPod/FlightComputer/src/Threads/CanBusThread.h
-Heartbeat.h
-/home/paradigm/Development/comp4-software/OnPod/FlightComputer/src/Threads/Heartbeat.h
+/home/paradigm/Development/comp4-software/OnPod/FlightComputer/src/Constants/SensorConfig.h
+
+/home/paradigm/Development/comp4-software/OnPod/FlightComputer/src/TelemetryManager.cpp
+Paradigm.pb.h
+-
+TelemetryManager.h
+/home/paradigm/Development/comp4-software/OnPod/FlightComputer/src/TelemetryManager.h
+Common.h
+/home/paradigm/Development/comp4-software/OnPod/FlightComputer/src/Common.h
+comparingHelpers.h
+/home/paradigm/Development/comp4-software/OnPod/FlightComputer/src/comparingHelpers.h
+Constants/SensorConfig.h
+/home/paradigm/Development/comp4-software/OnPod/FlightComputer/src/Constants/SensorConfig.h
 
