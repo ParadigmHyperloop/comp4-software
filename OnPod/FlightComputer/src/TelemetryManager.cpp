@@ -189,6 +189,8 @@ void TelemetryManager::setHighPressure(float value){
     PodStates currentState = this->getPodStateValue();
 
     this->telemetry->highPressure = value;
+    LOG(INFO)<<"high pressure : " << value;
+
     if(currentState == psStandby){
         status = inRange<float>(value, VACUUM, HIGHPRESSURE_ARMED_MAX);
     } else if(currentState == psArming || currentState == psArmed || currentState == psAcceleration || currentState == psCoasting){
