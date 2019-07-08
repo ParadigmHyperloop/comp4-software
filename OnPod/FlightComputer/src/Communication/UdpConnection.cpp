@@ -191,6 +191,8 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_motortorque(pod.telemetry->motorTorque);
     protoMessage->set_inverterheartbeat(pod.telemetry->inverterHeartbeat);
     protoMessage->set_motorspeed(pod.telemetry->motorSpeed);
+    protoMessage->set_podposition(pod.telemetry->podPosition);
+    protoMessage->set_podvelocity(pod.telemetry->podVelocity);
 
     protoMessage->set_irdistance(pod.telemetry->irDistance);
     protoMessage->set_lvdcnodestate(lvdcNone);

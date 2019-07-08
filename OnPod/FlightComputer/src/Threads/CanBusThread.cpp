@@ -52,7 +52,7 @@ int32_t getCanSocketRaw(){
         std::string error = std::string("Error: Setting CAN Filter: ") + std::strerror(errno);
         throw std::runtime_error(error);
     }
-    strcpy(interfaceRequest.ifr_name, "can0"); // Set Interface name
+    strcpy(interfaceRequest.ifr_name, "can1"); // Set Interface name
     operationStatus = ioctl(canSock, SIOCGIFINDEX, &interfaceRequest);
     if (operationStatus == -1) {
         strcpy(interfaceRequest.ifr_name, "can0"); // Set Interface name
@@ -92,7 +92,7 @@ int32_t getCanSocketBrodcastManager() {
     flags |= O_NONBLOCK;
     fcntl(bcmSocket, F_SETFL, flags);
 
-    strcpy(interfaceRequest.ifr_name, "can0"); // Set Interface name
+    strcpy(interfaceRequest.ifr_name, "can1"); // Set Interface name
     operationStatus = ioctl(bcmSocket, SIOCGIFINDEX, &interfaceRequest);
     if(operationStatus < 0){
         strcpy(interfaceRequest.ifr_name, "can0"); // Set Interface name
