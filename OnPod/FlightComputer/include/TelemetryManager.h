@@ -69,6 +69,7 @@ class TelemetryManager
         void setSolenoid(bool value, int32_t identifier);
         void setPressureVesselTemperature(float);
         void setCoolantTemperature(float);
+        void setLowPressure4(float, PodStates);
 
         //Shared Memory Space
         struct PodValues* telemetry;

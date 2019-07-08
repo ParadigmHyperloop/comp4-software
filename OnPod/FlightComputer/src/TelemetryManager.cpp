@@ -135,6 +135,14 @@ void TelemetryManager::setSolenoid(bool value, int32_t identifier){
     }
 }
 
+void TelemetryManager::setLowPressure4(float value, PodStates currentState) {
+    bool status = true;
+    if(currentState == psArming || currentState == psArmed || currentState == psAcceleration || currentState == psCoasting){
+        status = inRange<float>(value, LOWPRESSURE_ENGAGED_MIN, LOWPRESSURE_ENGAGED_MAX);
+    }
+    this->setNodeSensorFlag(status, LP4_INDEX);
+}
+
 void TelemetryManager::setLowPressure(float value, int identifier){
 
     bool status = false;
@@ -155,7 +163,10 @@ void TelemetryManager::setLowPressure(float value, int identifier){
         default:
             break;
     }
-
+    if(identifier == LP4_INDEX){
+        setLowPressure4(value, currentState);
+        return;
+    }
     // Check if nominal for current state
     if(currentState == psStandby){
         status = inRange<float>(value, LOWPRESSURE_UNARMED_MIN, LOWPRESSURE_UNARMED_MAX);
