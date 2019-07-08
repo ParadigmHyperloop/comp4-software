@@ -53,6 +53,7 @@ class PodCommunicator:
         flight_config.pdsTelemetryPort = int(config['telemetry_port'])
         flight_config.commandPort = int(config['command_port'])
         flight_config.heartbeatTimeout = int(config['heartbeat_timeout'])
+        flight_config.controlLaptopIpAddr = config['controlLaptopIpAddr']
         return flight_config.SerializeToString()
 
     # Disconnect from Pod/Socket
@@ -71,3 +72,12 @@ class PodCommunicator:
 
     def get_pod_address(self):
         return self._pod_address
+
+    @staticmethod
+    def get_server_address():
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        address = s.getsockname()[0]
+        s.close()
+        return address
+

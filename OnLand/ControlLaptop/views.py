@@ -52,6 +52,7 @@ def submit_configuration():
     configuration_form = PodConfigurationForm()
     flight_configuration = FlightConfig.get_flight_config_instance()
     pod_communicator = PodCommunicator.get_pod_communicator()
+    ip_addr = pod_communicator.get_server_address()
 
     if configuration_form.validate_on_submit():
         flight_configuration.update_config(
@@ -62,6 +63,7 @@ def submit_configuration():
                 'heartbeat_timeout': int(configuration_form.heartbeat_timout.data),
                 'pod_address': configuration_form.pod_ip.data,
                 'pod_driver': 'Motor' if configuration_form.pod_driver.data is True else 'Simulation',
+                'controlLaptopIpAddr': ip_addr
             }
         )
         command_sent = pod_communicator.send_configuration(configuration=flight_configuration.read_config())
