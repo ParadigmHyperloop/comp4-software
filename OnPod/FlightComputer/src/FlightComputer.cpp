@@ -54,6 +54,11 @@ int main( int32_t argc, char** argv)
     PodValues sPodValues = {};
     initializeTelemetryStruct(sPodValues);
 
+
+    // TODO:
+    //  - Instantiate ThreadMonitoringWrapper and pass to Threads, and check
+    //  - Periodically Check status in Main Thread IE: threadMWrapper.GetStatus()
+
     // Network Configs
     initializer->updatePodNetworkValues(sPodNetworkValues, flightConfigurationParameters);
 

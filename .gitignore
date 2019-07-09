@@ -81,6 +81,7 @@ Examples/BBSerial/build/target/
 ProtoBufs/Paradigm/py/Paradigm_pb2\.py
 
 OnPod/FlightComputer/src/Paradigm\.pb\.cc
+OnPod/FlightComputer/cmake-build-debug/
 
 Testing/ManualCommandTesting/Paradigm_pb2\.py
 
