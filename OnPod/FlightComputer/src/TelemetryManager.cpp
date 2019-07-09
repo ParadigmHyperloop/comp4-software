@@ -337,6 +337,45 @@ void TelemetryManager::setPodVelocity(float velocity) {
 
 //          Flag Setting
 
+void TelemetryManager::resetValues(int32_t index){
+    switch(index){
+        case ENCLOSURE_HEARTBEAT_INDEX:{
+            telemetry->enclosureTemperature = 0;
+            telemetry->enclosurePressure = 0;
+            telemetry->coolingLinePressure = 0;
+            break;
+        }
+        case LVDC_NODE_HEARTBEAT_INDEX:{
+            //todo
+        }
+        case BMS_HEARTBEAT_INDEX:{
+            telemetry->hvBatteryPackMaxCellTemperature = 0;
+            telemetry->hvBatteryPackCurrent = 0;
+            telemetry->hvBatteryPackVoltage = 0;
+            telemetry->hvBatteryPackMinimumCellVoltage = 0;
+            telemetry->hvBatteryPackStateOfCharge = 0;
+            telemetry->hvBatteryPackMaxCellVoltage = 0;
+            break;
+        }
+        case BRAKE_NODE_HEARTBEAT_INDEX:{
+            telemetry->receivedBrakeNodeState = bnsNone;
+            telemetry->lowPressure1 = 0 ;
+            telemetry->lowPressure2 = 0 ;
+            telemetry->lowPressure3 = 0 ;
+            telemetry->lowPressure4 = 0 ;
+            telemetry->highPressure = 0;
+            telemetry->pressureVesselTemperature = 0;
+            telemetry->coolingLinePressure = 0;
+            telemetry->coolingTemperature = 0;
+            break;
+        }
+        default:{
+            return;
+        }
+    }
+    sendUpdate("Lost Connection Index : " + std::to_string(index));
+}
+
 void TelemetryManager::setNodeSensorFlag(int32_t status, int32_t index){
     int32_t currentStatus = this->telemetry->nodeSensorFlags[index];
     if(currentStatus == 2){ // Manual override high
@@ -366,6 +405,9 @@ void TelemetryManager::setConnectionFlag(int32_t status, int32_t index){
     }
     if(currentStatus != status){
         this->telemetry->connectionFlags[index] = status;
+        if(currentStatus == 1 && status == 0 ){
+            resetValues(index);
+        }
         return;
     }
 }
@@ -383,6 +425,13 @@ void TelemetryManager::setInverterSensorFlag(int32_t status, int32_t index) {
 
 void TelemetryManager::setInverterHeartbeat(int32_t value) {
     if(this->telemetry->inverterHeartbeat != 2){
+        if(this->telemetry->inverterHeartbeat == 1 && value == 0){
+            telemetry->maxIgbtTemperature = 0;
+            telemetry->gateDriverTemperature = 0;
+            telemetry->inverterControlBoardTemperature = 0;
+            telemetry->motorTemperature = 0;
+            telemetry->inverterBusVoltage = 0;
+        }
         this->telemetry->inverterHeartbeat = value;
     }
 }

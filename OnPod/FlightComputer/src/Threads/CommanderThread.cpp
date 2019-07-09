@@ -182,12 +182,13 @@ int32_t commanderThread(TelemetryManager Pod) {
         while (Pod.getPodStateValue() != psShutdown) {
             messageSize = read(connectionSock, buffer, 255);
             if (messageSize < 0) {
+                if (pulse.expired()) {
+                    Pod.setConnectionFlag(0, INTERFACE_HEARTBEAT_INDEX);
+                    LOG(INFO) << "ERROR: Controls Interface Connection Timeout";
+                    break;
+                }
                 if (errno == 11) //Erno 11 means no message available on non blocking socket
                 {
-                    if (pulse.expired()) {
-                        LOG(INFO) << "ERROR: Controls Interface Connection Timeout";
-                        break;
-                    }
                 } else {
                     LOG(INFO) << "ERROR: Receveiving message : " << errno;
                 }

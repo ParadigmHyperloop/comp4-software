@@ -63,7 +63,7 @@ struct PodValues {
     int32_t motorSpeed = 0;
     float inverterBusVoltage = 0;
     float commandedTorque = 0;
-    float inverterHeartbeat = 0;
+    int32_t inverterHeartbeat = 0;
     std::chrono::high_resolution_clock::time_point lastMotorReadTime;
 
     // Atmosphere

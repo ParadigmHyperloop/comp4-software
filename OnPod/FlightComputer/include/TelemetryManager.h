@@ -24,6 +24,7 @@ class TelemetryManager
         void setNodeSensorFlag(int32_t status, int32_t index);
         void setBmsSensorFlag(int32_t, int32_t);
         void setInverterSensorFlag(int32_t, int32_t);
+        void resetValues(int32_t);
 
         //Navigation
         void addPodDistance(float);
