@@ -142,7 +142,6 @@ int32_t unserializeProtoMessage(TelemetryManager *Pod, char buffer[], int32_t me
 }
 
 
-
 int32_t commanderThread(TelemetryManager Pod) {
     //Logging
     el::Helpers::setThreadName("Commander Thread");

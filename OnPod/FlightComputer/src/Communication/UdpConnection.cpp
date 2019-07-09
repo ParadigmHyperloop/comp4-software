@@ -162,6 +162,11 @@ PdsConnection::PdsConnection(TelemetryManager pod) : UdpConnection(pod) {
 std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage() {
     std::unique_ptr<Telemetry> protoMessage (new Telemetry());
     protoMessage->set_podstate(pod.getPodStateValue());
+    protoMessage->set_brakenodestate(pod.telemetry->receivedBrakeNodeState);
+    protoMessage->set_lvdcnodestate(lvdcNone);
+
+
+    // Brake Node
     protoMessage->set_lowpressure1(pod.telemetry->lowPressure1);
     protoMessage->set_lowpressure2(pod.telemetry->lowPressure2);
     protoMessage->set_lowpressure3(pod.telemetry->lowPressure3);
@@ -174,10 +179,21 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_solenoid4(pod.telemetry->solenoid4);
     protoMessage->set_pressurevesseltemperature(pod.telemetry->pressureVesselTemperature);
 
+    // HV
     protoMessage->set_hvbatterypackvoltage(pod.telemetry->hvBatteryPackVoltage);
     protoMessage->set_hvbatterypackcurrent(pod.telemetry->hvBatteryPackCurrent);
     protoMessage->set_hvbatterypackmaxcellvoltage(pod.telemetry->hvBatteryPackMaxCellVoltage);
     protoMessage->set_hvbatterypackminimumcellvoltage(pod.telemetry->hvBatteryPackMinimumCellVoltage);
+
+    // LV
+    protoMessage->set_lv1batterypackcelltemperature(pod.telemetry->lv1BatteryPackCellTemperature);
+    protoMessage->set_lv1batterypackstateofcharge(pod.telemetry->lv1BatteryPackStateOfCharge);
+    protoMessage->set_lv1batterypackvoltage(pod.telemetry->lv1BatteryPackVoltage);
+    protoMessage->set_lv2batterypackcelltemperature(pod.telemetry->lv2BatteryPackCellTemperature);
+    protoMessage->set_lv2batterypackstateofcharge(pod.telemetry->lv2BatteryPackStateOfCharge);
+    protoMessage->set_lv2batterypackvoltage(pod.telemetry->lv2BatteryPackVoltage);
+
+    // Motor Controller
     protoMessage->set_maxigbttemperature(pod.telemetry->maxIgbtTemperature);
     protoMessage->set_gatedrivertemperature(pod.telemetry->gateDriverTemperature);
     protoMessage->set_invertercontrolboardtemperature(pod.telemetry->inverterControlBoardTemperature);
@@ -186,6 +202,7 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_hvbatterypackmaxcelltemperature(pod.telemetry->hvBatteryPackMaxCellTemperature);
     protoMessage->set_hvbatterypackstateofcharge(pod.telemetry->hvBatteryPackStateOfCharge);
 
+    // Navigation
     protoMessage->set_maxflighttime(pod.telemetry->maxFlightTime);
     protoMessage->set_flightdistance(pod.telemetry->flightDistance);
     protoMessage->set_motortorque(pod.telemetry->motorTorque);
@@ -194,15 +211,12 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_podposition(pod.telemetry->podPosition);
     protoMessage->set_podvelocity(pod.telemetry->podVelocity);
 
-    protoMessage->set_irdistance(pod.telemetry->irDistance);
-    protoMessage->set_lvdcnodestate(lvdcNone);
-    protoMessage->set_brakenodestate(pod.telemetry->receivedBrakeNodeState);
-
+    // Enclosure
     protoMessage->set_coolantpressure1(pod.telemetry->coolingLinePressure);
     protoMessage->set_enclosurepressure(pod.telemetry->enclosurePressure);
     protoMessage->set_enclosuretemperature(pod.telemetry->enclosureTemperature);
 
-    if(this->pod.telemetry->updates.size() > 0){
+    if(pod.telemetry->updates.size() > 0){
         std::lock_guard<std::mutex> lock(this->pod.telemetry->updatesLock);
         for(std::string& update : this->pod.telemetry->updates){
             protoMessage->add_updatemessages(update);

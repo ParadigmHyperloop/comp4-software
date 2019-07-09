@@ -1,15 +1,9 @@
 <div class="card ">
     <div class="header">
-        <h4 class="title">BMS Overview</h4>
+        <h4 class="title">High Voltage Overview</h4>
     </div>
     <div class="content">
         <table class="table table-hover table-striped table-condensed">
-            <thead>
-            <tr class="d-flex">
-                <th class="col-6" scope="col">Name</th>
-                <th class="col-6" scope="col">Value</th>
-            </tr>
-            </thead>
             <tbody id="bms-table-body">
             {% for key, value in bms_sensors.items() %}
                 <tr class="d-flex sensor-row">

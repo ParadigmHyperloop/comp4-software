@@ -116,6 +116,14 @@ message Telemetry {
     optional float hvBatteryPackMinimumCellVoltage = 29;
     optional int32  hvBatteryPackStateOfCharge = 79;
 
+    // LV-BMS
+    optional int32 lv1BatteryPackStateOfCharge = 85;
+    optional float lv1BatteryPackVoltage = 86;
+    optional float lv1BatteryPackCellTemperature = 87;
+    optional int32 lv2BatteryPackStateOfCharge = 88;
+    optional float lv2BatteryPackVoltage = 89;
+    optional float lv2BatteryPackCellTemperature = 90;
+
     // Brake Node
     optional bool solenoid1 = 32;
     optional bool solenoid2 = 33;

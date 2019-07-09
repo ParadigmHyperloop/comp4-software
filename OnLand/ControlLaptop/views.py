@@ -107,12 +107,14 @@ def dashboard():
     path = request.path
     title = get_page_title(path[1:])
 
-    with open('ControlLaptop/templates/tables/BmsSensors.json') as json_file:
+    with open('ControlLaptop/templates/tables/HVSensors.json') as json_file:
         bms_sensors = order_sensors(json.load(json_file))
     with open('ControlLaptop/templates/tables/InverterSensors.json') as json_file:
         inverter_sensors = order_sensors(json.load(json_file))
     with open('ControlLaptop/templates/tables/DashboardSensors.json') as json_file:
         sensors = order_sensors(json.load(json_file))
+    with open('ControlLaptop/templates/tables/LVSensors.json') as json_file:
+        lv_sensors = order_sensors(json.load(json_file))
 
     arm_form = FlightProfileForm()
     overrides_form = OverridesForm()
@@ -124,6 +126,7 @@ def dashboard():
         overridesForm=overrides_form,
         sensors=sensors,
         bms_sensors=bms_sensors,
+        lv_sensors = lv_sensors,
         inverter_sensors=inverter_sensors
     )
 
@@ -134,7 +137,7 @@ def dts():
     title = get_page_title(page)
     with open('ControlLaptop/templates/tables/DtsSensors.json') as json_file:
         sensors = order_sensors(json.load(json_file))
-    with open('ControlLaptop/templates/tables/BmsSensors.json') as json_file:
+    with open('ControlLaptop/templates/tables/HVSensors.json') as json_file:
         bms_sensors = order_sensors(json.load(json_file))
     with open('ControlLaptop/templates/tables/InverterSensors.json') as json_file:
         inverter_sensors = order_sensors(json.load(json_file))

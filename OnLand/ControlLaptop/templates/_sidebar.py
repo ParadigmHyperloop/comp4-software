@@ -28,7 +28,7 @@ NAV_BAR = [
     {
         'id': 'profile',
         'href': 'profile',
-        'title': 'Flight Profile',
+        'title': 'Connect To Pod',
         'icon': 'pe-7s-user'
     },
     {
