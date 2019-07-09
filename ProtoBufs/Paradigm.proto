@@ -179,7 +179,27 @@ message Telemetry {
     optional uint32 irRpm = 82;
     optional float tachDistance = 83;
     optional float irDistance = 84;
+
+    /* Thread Status
+    * TODO:
+    *       - Change after testing
+    */      
+     message ThreadsStatus {
+         enum ThreadStatus {
+            ACTIVE = 0;
+            BUSY = 1;
+            HANGING = 2;
+            DANGER = 3;
+            
+         }
+        optional ThreadStatus CanBusThread = 1 [default = HANGING];
+        optional ThreadStatus CommanderThread = 2 [default = HANGING];
+        optional ThreadStatus CoreControlThread = 3 [default = HANGING];
+        optional ThreadStatus NavigationThread = 4 [default = HANGING];
+        optional ThreadStatus UdpTelemetryThread = 5 [default = HANGING]; // Redundant
+    }  
 }
+
 
 // FC => NODE COMMANDS
 message FcToBrakeNode {
