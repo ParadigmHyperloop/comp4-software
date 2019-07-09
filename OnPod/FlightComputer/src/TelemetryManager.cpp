@@ -58,7 +58,7 @@ void TelemetryManager::setManualPodState(PodStates ePodState) {
 
 
 
-//          BMS
+//          HV BMS
 
 void TelemetryManager::setHvBatteryPackVoltage(float value) {
     this->telemetry->hvBatteryPackVoltage = value;
@@ -76,7 +76,7 @@ void TelemetryManager::setHvBatteryPackVoltage(float value) {
         // status = greaterThan
     }
     // Set sensor flag
-    this->setBmsSensorFlag(status, PACK_VOLTAGE_INDEX);
+    this->setBmsSensorFlag(status, HV_PACK_VOLTAGE_INDEX);
 }
 
 void TelemetryManager::setHvBatteryPackCurrent(float value) {
@@ -96,7 +96,7 @@ void TelemetryManager::setHvBatteryPackMaxCellTemperature(float value) {
 
     bool status = true;
     // status = lessThan maxx cell temp TODO
-    this->setBmsSensorFlag(status, MAX_CELL_TEMP_INDEX);
+    this->setBmsSensorFlag(status, HV_MAX_CELL_TEMP_INDEX);
 }
 
 void TelemetryManager::setHvBatteryPackStateOfCharge(int value) {
@@ -106,13 +106,76 @@ void TelemetryManager::setHvBatteryPackStateOfCharge(int value) {
     PodStates currentState = this->getPodStateValue();
     // Check if nominal for current state
     if(currentState == psArming || currentState == psArmed){
-        // status = greaterThan
+        // status = greaterThan //todo
     }
     else if(currentState == psAcceleration){
         // status = greaterThan
     }
-    this->setBmsSensorFlag(status,  SOC_INDEX);
+    this->setBmsSensorFlag(status,  HV_SOC_INDEX);
 }
+
+//          LV BMS
+void TelemetryManager::setLv1BatteryPackStateOfCharge(int value) {
+    this->telemetry->lv1BatteryPackStateOfCharge = value;
+
+    bool status = true;
+    PodStates currentState = this->getPodStateValue();
+
+    // Check if nominal for current state
+    if(currentState == psArming || currentState == psArmed ||
+    currentState == psPreFlight || currentState == psAcceleration){
+        // status = greaterThan //todo
+    }
+
+    this->setBmsSensorFlag(status,  LV1_SOC_INDEX);
+}
+
+void TelemetryManager::setLv1BatteryPackTemperature(float value) {
+    this->telemetry->lv1BatteryPackCellTemperature = value;
+
+    bool status = true;
+    // status = lessThan maxx cell temp TODO
+    this->setBmsSensorFlag(status, LV1_CELL_TEMP_INDEX);
+}
+
+void TelemetryManager::setLv1BatteryPackVoltage(float value) {
+    this->telemetry->lv1BatteryPackVoltage = value;
+    bool status = true;
+    // status = lessThan maxx cell temp TODO
+    this->setBmsSensorFlag(status, LV1_PACK_VOLTAGE_INDEX);
+}
+
+void TelemetryManager::setLv2BatteryPackStateOfCharge(int value) {
+    this->telemetry->lv2BatteryPackStateOfCharge = value;
+
+    bool status = true;
+    PodStates currentState = this->getPodStateValue();
+
+    // Check if nominal for current state
+    if(currentState == psArming || currentState == psArmed ||
+       currentState == psPreFlight || currentState == psAcceleration){
+        // status = greaterThan //todo
+    }
+
+    this->setBmsSensorFlag(status,  LV2_SOC_INDEX);
+}
+
+void TelemetryManager::setLv2BatteryPackTemperature(float value) {
+    this->telemetry->lv2BatteryPackCellTemperature = value;
+
+    bool status = true;
+    // status = lessThan maxx cell temp TODO
+    this->setBmsSensorFlag(status, LV2_CELL_TEMP_INDEX);
+}
+
+void TelemetryManager::setLv2BatteryPackVoltage(float value) {
+    this->telemetry->lv2BatteryPackVoltage = value;
+    bool status = true;
+    // status = lessThan maxx cell temp TODO
+    this->setBmsSensorFlag(status, LV2_PACK_VOLTAGE_INDEX);
+}
+
+
 
 
 //          Brake Node

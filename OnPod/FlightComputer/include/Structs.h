@@ -55,6 +55,15 @@ struct PodValues {
     int hvBatteryPackStateOfCharge = 0;
     float hvBatteryPackMaxCellTemperature = 0;
 
+    // LV-BMS
+    float lv1BatteryPackStateOfCharge = 0;
+    float lv1BatteryPackVoltage = 0;
+    int32_t lv1BatteryPackCellTemperature = 0;
+
+    int32_t lv2BatteryPackStateOfCharge = 0;
+    float lv2BatteryPackVoltage = 0;
+    float lv2BatteryPackCellTemperature = 0;
+
     //Inverter
     float maxIgbtTemperature = 0;
     float gateDriverTemperature = 0;
