@@ -15,7 +15,7 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             if(hvBatteryPackSoc > 1 && hvBatteryPackSoc < 110){
                 pod.setHvBatteryPackStateOfCharge(hvBatteryPackSoc);
             }
-            if(hvBatteryPackCurrent > 1 && hvBatteryPackCurrent < 1000 ){
+            if(hvBatteryPackCurrent > -1  && hvBatteryPackCurrent < 1500 ){
                 pod.setHvBatteryPackCurrent(hvBatteryPackCurrent);
             }
             if(hvBatteryPackVoltage < 1500){
@@ -97,6 +97,51 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             pod.setInverterHeartbeat(1);
             break;
         }
+        case 0x6B4: {
+            //todo
+            indices = {2, 3};
+            auto lv1BatteryPackVoltage = extractCanValue<float>(frame.data, indices, (float) 10.0);
+            indices = {4};
+            auto lv1BatteryPackSoc = extractCanValue<int>(frame.data, indices, 2);
+            indices = {2, 3};
+            auto lv1BatteryPackTemperature = extractCanValue<float>(frame.data, indices, (float) 1.0);
+
+
+            if(lv1BatteryPackSoc > 1 && lv1BatteryPackSoc < 110){
+                pod.setLv1BatteryPackStateOfCharge(lv1BatteryPackSoc);
+            }
+            if(lv1BatteryPackVoltage < 50){
+                pod.setLv1BatteryPackVoltage(lv1BatteryPackVoltage);
+            }
+            if(lv1BatteryPackTemperature > 1 && lv1BatteryPackTemperature < 300){
+                pod.setLv1BatteryPackTemperature(lv1BatteryPackTemperature);
+            }
+
+        }
+
+        case 0x6B5: {
+            //todo
+            indices = {2, 3};
+            auto lv2BatteryPackVoltage = extractCanValue<float>(frame.data, indices, (float) 10.0);
+
+            indices = {4};
+            auto lv2BatteryPackSoc = extractCanValue<int>(frame.data, indices, 2);
+
+            indices = {2, 3};
+            auto lv2BatteryPackTemperature = extractCanValue<float>(frame.data, indices, (float) 1.0);
+
+            if(lv2BatteryPackSoc > 1 && lv2BatteryPackSoc < 110){
+                pod.setLv2BatteryPackStateOfCharge(lv2BatteryPackSoc);
+            }
+            if(lv2BatteryPackVoltage < 50){
+                pod.setLv2BatteryPackVoltage(lv2BatteryPackVoltage);
+            }
+            if(lv2BatteryPackTemperature > 1 && lv2BatteryPackTemperature < 300){
+                pod.setLv2BatteryPackTemperature(lv2BatteryPackTemperature);
+            }
+
+        }
+
         default:
             return;
             //std::string error = "Unknown CAN ID : " + std::to_string(frame.can_id);

@@ -16,16 +16,13 @@
 #include "Constants/SensorConfig.h"
 
 #define STRIP_DISTANCE 30.48
-#define BUFFER_SIZE 35
-#define FRONT_WHEEL_RADIUS 0.09728
-#define FRONT_WHEEL_CIRCUMFERENCE 0.611228
-
+#define BUFFER_SIZE 7
 
 
 int8_t getSerialPort(){
-    int8_t serialPort = open("/dev/ttyUSB0",O_RDWR | O_NOCTTY);
+    int8_t serialPort = open("/dev/ttyO2",O_RDWR | O_NOCTTY);
     if (serialPort == -1){
-        serialPort = open("/dev/ttyO4",O_RDWR | O_NOCTTY);
+        serialPort = open("/dev/ttyUSB0",O_RDWR | O_NOCTTY);
     }
     //tcflush( serialPort, TCIFLUSH );
     struct termios SerialPortSettings = {};
@@ -44,7 +41,7 @@ int8_t getSerialPort(){
     SerialPortSettings.c_iflag &= ~(IGNBRK|BRKINT|PARMRK|ISTRIP|INLCR|IGNCR|ICRNL);
     SerialPortSettings.c_oflag &= ~ONLCR;
     SerialPortSettings.c_cc[VMIN] = 0;
-    SerialPortSettings.c_cc[VTIME] = 30;
+    SerialPortSettings.c_cc[VTIME] = 1;
     int status = tcsetattr(serialPort,TCSANOW,&SerialPortSettings);
 
     if(status < 0){
@@ -59,15 +56,17 @@ void updatePosition(int velocity, int irStripCount, TelemetryManager &pod){
     pod.telemetry->totalStripCount += irStripCount;
     float stripDistance = pod.telemetry->totalStripCount * STRIP_DISTANCE;
     pod.setPodDistance( stripDistance );
-    pod.setPodVelocity(velocity);
+    pod.setPodVelocity(velocity/100);
 }
 
 
 void readNavigationNode(int serialPort, TelemetryManager &pod){
     std::stringstream dataStream;
-    char read_buffer[BUFFER_SIZE] = {0};
+    dataStream.str(std::string());
+    char read_buffer[BUFFER_SIZE + 1] = {0};
     int  bytes_read, irStripCount, velocity = 0;
-    int total_bytes_read, status = 0;
+    int total_bytes_read = 0;
+    int status = 0;
     status = write(serialPort, "1", 1);
     if(status < 0){
         std::string sError = std::string("Error writing to Navnode Serial Port");
@@ -99,7 +98,6 @@ void readNavigationNode(int serialPort, TelemetryManager &pod){
     if(irStripCount > 0){
         updatePosition(velocity, irStripCount, pod);
     }
-    return;
 }
 
 int32_t NavigationThread(TelemetryManager Pod) {
@@ -111,7 +109,7 @@ int32_t NavigationThread(TelemetryManager Pod) {
         return -1;
     }
     LOG(INFO)<<"Starting Nav thread with FD " << serialPort;
-    Heartbeat navNodeUpdateFreq = Heartbeat(7);
+    Heartbeat navNodeUpdateFreq = Heartbeat(10);
     while(Pod.getPodStateValue() != psShutdown)
     {
         if(navNodeUpdateFreq.expired()){

@@ -24,6 +24,7 @@ class TelemetryManager
         void setNodeSensorFlag(int32_t status, int32_t index);
         void setBmsSensorFlag(int32_t, int32_t);
         void setInverterSensorFlag(int32_t, int32_t);
+        void resetValues(int32_t);
 
         //Navigation
         void addPodDistance(float);
@@ -54,15 +55,24 @@ class TelemetryManager
 		void setInverterBusVoltage(int);
         void setInverterHeartbeat(int32_t);
 
-        // BMS
-		void setHvBatteryPackVoltage(float fValue);
-        void setHvBatteryPackCurrent(float fValue);
-        void setHvBatteryPackMinimumCellVoltage(float value);
+        // HV BMS
+		void setHvBatteryPackVoltage(float);
+        void setHvBatteryPackCurrent(float);
+        void setHvBatteryPackMinimumCellVoltage(float);
         void setHvBatteryPackMaxCellVoltage(float);
         void setHvBatteryPackStateOfCharge(int);
         void setHvBatteryPackMaxCellTemperature(float);
 
-        // Brake Node
+        // LV BMS
+        void setLv1BatteryPackStateOfCharge(int);
+        void setLv1BatteryPackVoltage(float);
+        void setLv1BatteryPackTemperature(float);
+        void setLv2BatteryPackStateOfCharge(int);
+        void setLv2BatteryPackVoltage(float);
+        void setLv2BatteryPackTemperature(float);
+
+
+    // Brake Node
         void setRecievedBrakeNodeState(BrakeNodeStates);
         void setLowPressure(float, int32_t);
         void setHighPressure(float);

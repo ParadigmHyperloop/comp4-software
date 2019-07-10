@@ -27,7 +27,8 @@ int32_t getCanSocketRaw(){
     flags |= O_NONBLOCK;
     fcntl(canSock, F_SETFL, flags);
 
-    struct can_filter canFilter[7];
+    // Set a receive filter so we only receive select CAN IDs
+    struct can_filter canFilter[10];
     canFilter[0].can_id = 0x6B2;
     canFilter[0].can_mask = CAN_SFF_MASK;
     canFilter[1].can_id = 0x0A0;
@@ -42,6 +43,12 @@ int32_t getCanSocketRaw(){
     canFilter[5].can_mask = CAN_SFF_MASK;
     canFilter[6].can_id = 0x6b3;
     canFilter[6].can_mask = CAN_SFF_MASK;
+    canFilter[7].can_id = 0x0A6;
+    canFilter[7].can_mask = CAN_SFF_MASK;
+    canFilter[8].can_id = 0x6B5;
+    canFilter[8].can_mask = CAN_SFF_MASK;
+    canFilter[9].can_id = 0x6B6;
+    canFilter[9].can_mask = CAN_SFF_MASK;
 
 
     operationStatus = ::setsockopt(canSock, SOL_CAN_RAW, CAN_RAW_FILTER, &canFilter, sizeof(canFilter));
@@ -49,7 +56,7 @@ int32_t getCanSocketRaw(){
         std::string error = std::string("Error: Setting CAN Filter: ") + std::strerror(errno);
         throw std::runtime_error(error);
     }
-    strcpy(interfaceRequest.ifr_name, "can0"); // Set Interface name
+    strcpy(interfaceRequest.ifr_name, "can1"); // Set Interface name
     operationStatus = ioctl(canSock, SIOCGIFINDEX, &interfaceRequest);
     if (operationStatus == -1) {
         strcpy(interfaceRequest.ifr_name, "can0"); // Set Interface name
@@ -89,7 +96,7 @@ int32_t getCanSocketBrodcastManager() {
     flags |= O_NONBLOCK;
     fcntl(bcmSocket, F_SETFL, flags);
 
-    strcpy(interfaceRequest.ifr_name, "can0"); // Set Interface name
+    strcpy(interfaceRequest.ifr_name, "can1"); // Set Interface name
     operationStatus = ioctl(bcmSocket, SIOCGIFINDEX, &interfaceRequest);
     if(operationStatus < 0){
         strcpy(interfaceRequest.ifr_name, "can0"); // Set Interface name

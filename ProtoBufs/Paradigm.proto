@@ -116,6 +116,14 @@ message Telemetry {
     optional float hvBatteryPackMinimumCellVoltage = 29;
     optional int32  hvBatteryPackStateOfCharge = 79;
 
+    // LV-BMS
+    optional int32 lv1BatteryPackStateOfCharge = 85;
+    optional float lv1BatteryPackVoltage = 86;
+    optional float lv1BatteryPackCellTemperature = 87;
+    optional int32 lv2BatteryPackStateOfCharge = 88;
+    optional float lv2BatteryPackVoltage = 89;
+    optional float lv2BatteryPackCellTemperature = 90;
+
     // Brake Node
     optional bool solenoid1 = 32;
     optional bool solenoid2 = 33;
@@ -251,12 +259,11 @@ message FlightConfig {
     optional uint32 retrievalTimeout = 1;
     optional int32 pdsTelemetryPort = 2 [default = 7000];
     optional int32 commandPort = 3 [default = 6000];
-    optional int32 heartbeatTimeout = 4 [default = 10000];
+    optional int32 heartbeatTimeout = 4 [default = 2000];
     optional string podDriver = 5;
-    //optional string controlLaptopIpAddr = 6 [default = "192.168.0.102"];
     optional string controlLaptopIpAddr = 6 [default = "127.0.1.100"];
     optional uint64 nodePort = 7 [default = 5555];
-    optional uint64 nodeTimeout = 8 [default = 2000];
+    optional uint64 nodeTimeout = 8 [default = 1000];
     optional uint64 brakeNodeServerPort = 9 [default = 5550];
     optional int32 pdsUpdateFreq = 10 [default = 100];
     optional int32 brakeNodeUpdateFreq = 11 [default = 20];
