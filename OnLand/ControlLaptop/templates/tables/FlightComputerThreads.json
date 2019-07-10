@@ -1,0 +1,27 @@
+{
+  "CanBusThread": {
+   "name_pretty": "Can Bus",
+    "order": 1,
+    "id": "js-CanBusThread"
+  },
+  "CommanderThread": {
+   "name_pretty": "Commander",
+    "order": 2,
+    "id": "js-CommanderThread"
+  },
+  "CoreControlThread": {
+   "name_pretty": "Core Control",
+    "order": 3,
+    "id": "js-CoreControlThread"
+  },
+  "NavigationThread": {
+   "name_pretty": "Navigation",
+    "order": 4,
+    "id": "js-NavigationThread"
+  },
+  "UdpTelemetryThread": {
+   "name_pretty": "Udp Telemetry",
+    "order": 5,
+    "id": "js-UdpTelemetryThread"
+  }
+}

@@ -180,24 +180,18 @@ message Telemetry {
     optional float tachDistance = 83;
     optional float irDistance = 84;
 
-    /* Thread Status
-    * TODO:
-    *       - Change after testing
-    */      
-     message ThreadsStatus {
-         enum ThreadStatus {
-            ACTIVE = 0;
-            BUSY = 1;
-            HANGING = 2;
-            DANGER = 3;
-            
-         }
-        optional ThreadStatus CanBusThread = 1 [default = HANGING];
-        optional ThreadStatus CommanderThread = 2 [default = HANGING];
-        optional ThreadStatus CoreControlThread = 3 [default = HANGING];
-        optional ThreadStatus NavigationThread = 4 [default = HANGING];
-        optional ThreadStatus UdpTelemetryThread = 5 [default = HANGING]; // Redundant
-    }  
+    /*
+     * Thread Status:
+     *  Active = 0
+     *  Busy = 1
+     *  Hanging = 2
+     *  Danger = 3
+     */
+    optional uint32 CanBusThread = 91 [default = 1];
+    optional uint32 CommanderThread = 92 [default = 1];
+    optional uint32 CoreControlThread = 93 [default = 1];
+    optional uint32 NavigationThread = 94 [default = 1];
+    optional uint32 UdpTelemetryThread = 95 [default = 1]; // Redundant
 }
 
 

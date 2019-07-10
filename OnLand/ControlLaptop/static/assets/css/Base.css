@@ -10,6 +10,10 @@
   --darkRed:#FF0028;
   --darkYellow:#F36124;
   --lightYellow:#FFB484;
+
+  --status-success: green;
+  --status-warning: #ffc107;
+  --status-danger: #dc3545;
 }
 
 .card{
@@ -96,3 +100,12 @@
   color:var(--lightRed);
 }
 
+.status-success {
+  background-color: var(--status-success);
+}
+.status-warning {
+  background-color: var(--status-warning);
+}
+.status-danger {
+  background-color: var(--status-danger);
+}

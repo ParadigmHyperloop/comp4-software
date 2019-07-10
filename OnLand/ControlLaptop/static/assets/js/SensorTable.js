@@ -27,14 +27,13 @@ function updateRowStatus(row,min,max,actual){
 }
 
 function ParsePodState(state) {
-debugger;
     let new_min;
     let new_max;
     let success;
     let sensor_name;
     if (!sensor_ranges) {
         getSensorRanges();
-        console.log("No sensor Ranges yet")
+        console.log("No sensor Ranges yet");
         return
     }
     if (state !== pod_state) {
@@ -71,7 +70,7 @@ socket.on('pod_telemetry', function (data) {
     data = JSON.parse(data);
     const length = telemetry_value_elements.length;
 
-    current_state = data['podState']
+    current_state = data['podState'];
     ParsePodState(current_state);
 
     for (let index = 0; index < length; index++) {
@@ -91,6 +90,30 @@ socket.on('pod_telemetry', function (data) {
         else if($value_cell.hasClass('boolean')){
             value = (value === 1) ? 'True' : 'False';
             $value_cell.text(value)
+        }
+        else if($value_cell.hasClass('js-status-field'))
+        {
+            let currentThreadStatus = $($value_cell.firstChild);
+            if (currentThreadStatus.getAttribute('data-thread-status') !== value.toString())
+            {
+                currentThreadStatus.removeClass("status-success status-warning status-danger");
+                switch (value)
+                {
+                    case 0:
+                        currentThreadStatus.addClass('.status-success');
+                        currentThreadStatus.text("ACTIVE");
+                        break;
+                    case 1:
+                        currentThreadStatus.addClass('.status-warning');
+                        currentThreadStatus.text("BUSY");
+                        break;
+                    case 2:
+                    case 3:
+                        currentThreadStatus.addClass('.status-danger');
+                        currentThreadStatus.text("DANGER");
+                        break;
+                }
+            }
         }
         else{
             $value_cell.text(value.toFixed(2));

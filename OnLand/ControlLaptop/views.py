@@ -115,7 +115,8 @@ def dashboard():
         sensors = order_sensors(json.load(json_file))
     with open('ControlLaptop/templates/tables/LVSensors.json') as json_file:
         lv_sensors = order_sensors(json.load(json_file))
-
+    with open('ControlLaptop/templates/tables/FlightComputerThreads.json') as json_file:
+        flight_computer_threads = json.load(json_file)
     arm_form = FlightProfileForm()
     overrides_form = OverridesForm()
     return render_template(
@@ -127,7 +128,8 @@ def dashboard():
         sensors=sensors,
         bms_sensors=bms_sensors,
         lv_sensors = lv_sensors,
-        inverter_sensors=inverter_sensors
+        inverter_sensors=inverter_sensors,
+        flight_computer_threads=flight_computer_threads
     )
 
 

@@ -1,0 +1,26 @@
+<div class="card ">
+    <div class="header">
+        <h4 class="title">Thread Monitor</h4></span>
+    </div>
+    <div class="content">
+        <table class="table table-hover table-striped table-condensed inverter-table">
+            <thead>
+            <tr class="d-flex">
+                <th class="col-6" scope="col">Name</th>
+                <th class="col-6" scope="col">Value</th>
+            </tr>
+            </thead>
+            <tbody id="inverter-table-body">
+            {% for key, thread in flight_computer_threads.items() %}
+                <tr class="d-flex sensor-row">
+                    <th class="text-center col-6" scope="row">{{ thread['name_pretty'] }}</th>
+                    <td id="{{ thread['id'] }}" class="col-6 telemetry-value js-status-field">
+                      <span data-thread-status="" class="badge">PENDING</span>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
