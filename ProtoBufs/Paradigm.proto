@@ -113,11 +113,6 @@ message Telemetry {
     optional int32 inverterHeartbeat = 78;
     optional int32 motorSpeed = 80;
 
-
-    optional int32 inverterVoltages = 23;
-    optional int32 inverterCurrents = 24;
-    //optional int32 inverterInternalStates = 30;
-
     // HV-BMS
     optional float hvBatteryPackVoltage = 26;
     optional float hvBatteryPackCurrent = 27;
@@ -125,6 +120,14 @@ message Telemetry {
     optional float hvBatteryPackMaxCellVoltage = 30;
     optional float hvBatteryPackMinimumCellVoltage = 29;
     optional int32  hvBatteryPackStateOfCharge = 79;
+
+    // LV-BMS
+    optional int32 lv1BatteryPackStateOfCharge = 85;
+    optional float lv1BatteryPackVoltage = 86;
+    optional float lv1BatteryPackCellTemperature = 87;
+    optional int32 lv2BatteryPackStateOfCharge = 88;
+    optional float lv2BatteryPackVoltage = 89;
+    optional float lv2BatteryPackCellTemperature = 90;
 
     // Brake Node
     optional bool solenoid1 = 32;
@@ -141,14 +144,11 @@ message Telemetry {
 
     optional float enclosurePressure = 44;
     optional float enclosureTemperature = 45;
-    optional int32 railDisplacementY = 46;
 
     // Rear Node
     optional float tubePressure = 48;
     optional float coolantPressure1 = 49;
     optional float coolantPressure2 = 50;
-    optional float coolantPressure3 = 51;
-    optional float railTemperature = 53;
 
     // Ghost Train
     optional int32 pack1Voltage = 55;
@@ -264,12 +264,11 @@ message FlightConfig {
     optional uint32 retrievalTimeout = 1;
     optional int32 pdsTelemetryPort = 2 [default = 7000];
     optional int32 commandPort = 3 [default = 6000];
-    optional int32 heartbeatTimeout = 4 [default = 10000];
+    optional int32 heartbeatTimeout = 4 [default = 3000];
     optional string podDriver = 5;
-    //optional string controlLaptopIpAddr = 6 [default = "192.168.0.102"];
     optional string controlLaptopIpAddr = 6 [default = "127.0.1.100"];
     optional uint64 nodePort = 7 [default = 5555];
-    optional uint64 nodeTimeout = 8 [default = 2000];
+    optional uint64 nodeTimeout = 8 [default = 1000];
     optional uint64 brakeNodeServerPort = 9 [default = 5550];
     optional int32 pdsUpdateFreq = 10 [default = 100];
     optional int32 brakeNodeUpdateFreq = 11 [default = 20];

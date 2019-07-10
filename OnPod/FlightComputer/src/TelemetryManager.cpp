@@ -58,7 +58,7 @@ void TelemetryManager::setManualPodState(PodStates ePodState) {
 
 
 
-//          BMS
+//          HV BMS
 
 void TelemetryManager::setHvBatteryPackVoltage(float value) {
     this->telemetry->hvBatteryPackVoltage = value;
@@ -76,7 +76,7 @@ void TelemetryManager::setHvBatteryPackVoltage(float value) {
         // status = greaterThan
     }
     // Set sensor flag
-    this->setBmsSensorFlag(status, PACK_VOLTAGE_INDEX);
+    this->setBmsSensorFlag(status, HV_PACK_VOLTAGE_INDEX);
 }
 
 void TelemetryManager::setHvBatteryPackCurrent(float value) {
@@ -96,7 +96,7 @@ void TelemetryManager::setHvBatteryPackMaxCellTemperature(float value) {
 
     bool status = true;
     // status = lessThan maxx cell temp TODO
-    this->setBmsSensorFlag(status, MAX_CELL_TEMP_INDEX);
+    this->setBmsSensorFlag(status, HV_MAX_CELL_TEMP_INDEX);
 }
 
 void TelemetryManager::setHvBatteryPackStateOfCharge(int value) {
@@ -106,13 +106,76 @@ void TelemetryManager::setHvBatteryPackStateOfCharge(int value) {
     PodStates currentState = this->getPodStateValue();
     // Check if nominal for current state
     if(currentState == psArming || currentState == psArmed){
-        // status = greaterThan
+        // status = greaterThan //todo
     }
     else if(currentState == psAcceleration){
         // status = greaterThan
     }
-    this->setBmsSensorFlag(status,  SOC_INDEX);
+    this->setBmsSensorFlag(status,  HV_SOC_INDEX);
 }
+
+//          LV BMS
+void TelemetryManager::setLv1BatteryPackStateOfCharge(int value) {
+    this->telemetry->lv1BatteryPackStateOfCharge = value;
+
+    bool status = true;
+    PodStates currentState = this->getPodStateValue();
+
+    // Check if nominal for current state
+    if(currentState == psArming || currentState == psArmed ||
+    currentState == psPreFlight || currentState == psAcceleration){
+        // status = greaterThan //todo
+    }
+
+    this->setBmsSensorFlag(status,  LV1_SOC_INDEX);
+}
+
+void TelemetryManager::setLv1BatteryPackTemperature(float value) {
+    this->telemetry->lv1BatteryPackCellTemperature = value;
+
+    bool status = true;
+    // status = lessThan maxx cell temp TODO
+    this->setBmsSensorFlag(status, LV1_CELL_TEMP_INDEX);
+}
+
+void TelemetryManager::setLv1BatteryPackVoltage(float value) {
+    this->telemetry->lv1BatteryPackVoltage = value;
+    bool status = true;
+    // status = lessThan maxx cell temp TODO
+    this->setBmsSensorFlag(status, LV1_PACK_VOLTAGE_INDEX);
+}
+
+void TelemetryManager::setLv2BatteryPackStateOfCharge(int value) {
+    this->telemetry->lv2BatteryPackStateOfCharge = value;
+
+    bool status = true;
+    PodStates currentState = this->getPodStateValue();
+
+    // Check if nominal for current state
+    if(currentState == psArming || currentState == psArmed ||
+       currentState == psPreFlight || currentState == psAcceleration){
+        // status = greaterThan //todo
+    }
+
+    this->setBmsSensorFlag(status,  LV2_SOC_INDEX);
+}
+
+void TelemetryManager::setLv2BatteryPackTemperature(float value) {
+    this->telemetry->lv2BatteryPackCellTemperature = value;
+
+    bool status = true;
+    // status = lessThan maxx cell temp TODO
+    this->setBmsSensorFlag(status, LV2_CELL_TEMP_INDEX);
+}
+
+void TelemetryManager::setLv2BatteryPackVoltage(float value) {
+    this->telemetry->lv2BatteryPackVoltage = value;
+    bool status = true;
+    // status = lessThan maxx cell temp TODO
+    this->setBmsSensorFlag(status, LV2_PACK_VOLTAGE_INDEX);
+}
+
+
 
 
 //          Brake Node
@@ -135,6 +198,14 @@ void TelemetryManager::setSolenoid(bool value, int32_t identifier){
     }
 }
 
+void TelemetryManager::setLowPressure4(float value, PodStates currentState) {
+    bool status = true;
+    if(currentState == psArming || currentState == psArmed || currentState == psAcceleration || currentState == psCoasting){
+        status = inRange<float>(value, LOWPRESSURE_ENGAGED_MIN, LOWPRESSURE_ENGAGED_MAX);
+    }
+    this->setNodeSensorFlag(status, LP4_INDEX);
+}
+
 void TelemetryManager::setLowPressure(float value, int identifier){
 
     bool status = false;
@@ -155,7 +226,10 @@ void TelemetryManager::setLowPressure(float value, int identifier){
         default:
             break;
     }
-
+    if(identifier == LP4_INDEX){
+        setLowPressure4(value, currentState);
+        return;
+    }
     // Check if nominal for current state
     if(currentState == psStandby){
         status = inRange<float>(value, LOWPRESSURE_UNARMED_MIN, LOWPRESSURE_UNARMED_MAX);
@@ -178,6 +252,8 @@ void TelemetryManager::setHighPressure(float value){
     PodStates currentState = this->getPodStateValue();
 
     this->telemetry->highPressure = value;
+    LOG(INFO)<<"high pressure : " << value;
+
     if(currentState == psStandby){
         status = inRange<float>(value, VACUUM, HIGHPRESSURE_ARMED_MAX);
     } else if(currentState == psArming || currentState == psArmed || currentState == psAcceleration || currentState == psCoasting){
@@ -324,6 +400,45 @@ void TelemetryManager::setPodVelocity(float velocity) {
 
 //          Flag Setting
 
+void TelemetryManager::resetValues(int32_t index){
+    switch(index){
+        case ENCLOSURE_HEARTBEAT_INDEX:{
+            telemetry->enclosureTemperature = 0;
+            telemetry->enclosurePressure = 0;
+            telemetry->coolingLinePressure = 0;
+            break;
+        }
+        case LVDC_NODE_HEARTBEAT_INDEX:{
+            //todo
+        }
+        case BMS_HEARTBEAT_INDEX:{
+            telemetry->hvBatteryPackMaxCellTemperature = 0;
+            telemetry->hvBatteryPackCurrent = 0;
+            telemetry->hvBatteryPackVoltage = 0;
+            telemetry->hvBatteryPackMinimumCellVoltage = 0;
+            telemetry->hvBatteryPackStateOfCharge = 0;
+            telemetry->hvBatteryPackMaxCellVoltage = 0;
+            break;
+        }
+        case BRAKE_NODE_HEARTBEAT_INDEX:{
+            telemetry->receivedBrakeNodeState = bnsNone;
+            telemetry->lowPressure1 = 0 ;
+            telemetry->lowPressure2 = 0 ;
+            telemetry->lowPressure3 = 0 ;
+            telemetry->lowPressure4 = 0 ;
+            telemetry->highPressure = 0;
+            telemetry->pressureVesselTemperature = 0;
+            telemetry->coolingLinePressure = 0;
+            telemetry->coolingTemperature = 0;
+            break;
+        }
+        default:{
+            return;
+        }
+    }
+    sendUpdate("Lost Connection Index : " + std::to_string(index));
+}
+
 void TelemetryManager::setNodeSensorFlag(int32_t status, int32_t index){
     int32_t currentStatus = this->telemetry->nodeSensorFlags[index];
     if(currentStatus == 2){ // Manual override high
@@ -353,6 +468,9 @@ void TelemetryManager::setConnectionFlag(int32_t status, int32_t index){
     }
     if(currentStatus != status){
         this->telemetry->connectionFlags[index] = status;
+        if(currentStatus == 1 && status == 0 ){
+            resetValues(index);
+        }
         return;
     }
 }
@@ -370,6 +488,13 @@ void TelemetryManager::setInverterSensorFlag(int32_t status, int32_t index) {
 
 void TelemetryManager::setInverterHeartbeat(int32_t value) {
     if(this->telemetry->inverterHeartbeat != 2){
+        if(this->telemetry->inverterHeartbeat == 1 && value == 0){
+            telemetry->maxIgbtTemperature = 0;
+            telemetry->gateDriverTemperature = 0;
+            telemetry->inverterControlBoardTemperature = 0;
+            telemetry->motorTemperature = 0;
+            telemetry->inverterBusVoltage = 0;
+        }
         this->telemetry->inverterHeartbeat = value;
     }
 }

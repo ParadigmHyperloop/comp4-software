@@ -8,35 +8,11 @@ NAV_BAR = [
         'icon': 'pe-7s-rocket'
     },
     {
-        'id': 'dts',
-        'href': 'dts',
-        'title': 'Dynamic Test Stand',
-        'icon': 'pe-7s-joy'
-    },
-    {
-        'id': 'proofTest',
-        'href': 'proofTest',
-        'title': 'Proof Test',
-        'icon': 'pe-7s-gym'
-    },
-    {
-        'id': 'battery',
-        'href': 'ui/battery',
-        'title': 'Batteries',
-        'icon': 'pe-7s-battery'
-    },
-    {
         'id': 'profile',
         'href': 'profile',
-        'title': 'Flight Profile',
+        'title': 'Connect To Pod',
         'icon': 'pe-7s-user'
-    },
-    {
-        'id': 'feeds',
-        'href': 'ui/feeds',
-        'title': 'Live Streams',
-        'icon': 'pe-7s-video'
-    },
+    }
 ]
 NAV_IDS = [x['id'] for x in NAV_BAR]
 
