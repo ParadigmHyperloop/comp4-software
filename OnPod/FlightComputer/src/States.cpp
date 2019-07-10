@@ -163,6 +163,12 @@ Standby::~Standby(){
 }
 
 bool Standby::testTransitions() {
+    if(this->pod->telemetry->controlsInterfaceState == ciStandby){
+        this->pod->telemetry->controlsInterfaceState = ciNone;
+        pod->telemetry->motorDistance = 0;
+        pod->telemetry->podPosition = 0;
+        pod->telemetry->irDistance = 0;
+    }
     try {
         this->commonChecks();
     }
