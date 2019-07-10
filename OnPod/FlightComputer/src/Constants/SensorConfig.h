@@ -3,7 +3,7 @@
 
 // Count
 
-#define TOTAL_CONNECTION_COUNT 10
+
 
 // Constants
 
@@ -12,7 +12,9 @@
 #define CLOSED 0
 #define OPEN 1
 
+
 // Connection Status Flags
+#define TOTAL_CONNECTION_COUNT 6 // BE SURE TO UDPATE
 #define BRAKE_NODE_HEARTBEAT_INDEX 0
 #define LVDC_NODE_HEARTBEAT_INDEX 1
 #define BMS_HEARTBEAT_INDEX 2
@@ -48,13 +50,13 @@
 #define LP1_INDEX 0
 #define LP2_INDEX 1
 #define LP3_INDEX 2
-#define LP4_INDEX 4
-#define HP_INDEX  5
-#define HP_TEMP_INDEX 6
-#define ENCLOSURE_PRESSURE_INDEX 7
-#define ENCLOSURE_TEMPERATURE_INDEX 8
-#define COOLING_PRESSURE_INDEX 9
-#define COOLING_TEMPERATURE_INDEX 10
+#define LP4_INDEX 3
+#define HP_INDEX  4
+#define HP_TEMP_INDEX 5
+#define ENCLOSURE_PRESSURE_INDEX 6
+#define ENCLOSURE_TEMPERATURE_INDEX 7
+#define COOLING_PRESSURE_INDEX 8
+#define COOLING_TEMPERATURE_INDEX 9
 
 // Solenoid Status indices
 #define SOL1_INDEX 0
