@@ -201,12 +201,18 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_inverterbusvoltage(pod.telemetry->inverterBusVoltage);
     protoMessage->set_hvbatterypackmaxcelltemperature(pod.telemetry->hvBatteryPackMaxCellTemperature);
     protoMessage->set_hvbatterypackstateofcharge(pod.telemetry->hvBatteryPackStateOfCharge);
+    protoMessage->set_inverterheartbeat(pod.telemetry->inverterHeartbeat);
 
-    // Navigation
+
+    // Flight Profile
     protoMessage->set_maxflighttime(pod.telemetry->maxFlightTime);
     protoMessage->set_flightdistance(pod.telemetry->flightDistance);
+    protoMessage->set_starttorque(pod.telemetry->startTorque);
     protoMessage->set_motortorque(pod.telemetry->motorTorque);
-    protoMessage->set_inverterheartbeat(pod.telemetry->inverterHeartbeat);
+    protoMessage->set_accelerationtime(pod.telemetry->accelerationTime);
+    protoMessage->set_taxi(pod.telemetry->taxi);
+
+    // Navigation
     protoMessage->set_motorspeed(pod.telemetry->motorSpeed);
     protoMessage->set_podposition(pod.telemetry->podPosition);
     protoMessage->set_podvelocity(pod.telemetry->podVelocity);

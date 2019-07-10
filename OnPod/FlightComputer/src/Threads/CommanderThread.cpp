@@ -117,8 +117,10 @@ void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
         if(podCommand.manualpodstate() == psNone){
             Pod->setAutomaticTransitions(true);
             Pod->setManualPodState(psStandby);
+        } else{
+            Pod->setManualPodState(podCommand.manualpodstate());
+            Pod->setAutomaticTransitions(false);
         }
-        Pod->setManualPodState(podCommand.manualpodstate());
     }
     if (podCommand.solenoidconfiguration_size() >= 4){
         for(int i = 0 ; i < 4 ; i++){
