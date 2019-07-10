@@ -259,7 +259,7 @@ message FlightConfig {
     optional uint32 retrievalTimeout = 1;
     optional int32 pdsTelemetryPort = 2 [default = 7000];
     optional int32 commandPort = 3 [default = 6000];
-    optional int32 heartbeatTimeout = 4 [default = 2000];
+    optional int32 heartbeatTimeout = 4 [default = 3000];
     optional string podDriver = 5;
     optional string controlLaptopIpAddr = 6 [default = "127.0.1.100"];
     optional uint64 nodePort = 7 [default = 5555];

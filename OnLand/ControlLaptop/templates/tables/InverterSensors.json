@@ -18,9 +18,5 @@
   "motorTemperature": {
    "name_pretty": "Motor Temperature",
     "order": 1
-  },
-    "motorSpeed": {
-   "name_pretty": "Motor Speed",
-    "order": 0
   }
 }

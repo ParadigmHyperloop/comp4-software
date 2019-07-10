@@ -208,6 +208,74 @@
     "psAcceleration": [30,100],
     "psCoasting": [30,100],
     "psBraking" : [30,100]
+  },
+  "hvBatteryPackMaxCellTemperature": {
+    "psBooting": [10,40],
+    "psStandby": [10,40],
+    "psArming" : [10,40],
+    "psArmed" : [10,40],
+    "psPreFlight" : [10,40],
+    "psAcceleration": [10,100],
+    "psCoasting": [10,100],
+    "psBraking" : [10,100]
+  },  "lv1BatteryPackStateOfCharge": {
+    "psBooting": [0,0],
+    "psStandby": [0,0],
+    "psArming" : [0,0],
+    "psArmed" : [0,0],
+    "psPreFlight" : [0,0],
+    "psAcceleration": [0,0],
+    "psCoasting": [0,0],
+    "psBraking" : [0,0]
+  },
+    "lv1BatteryPackVoltage": {
+    "psBooting": [0,0],
+    "psStandby": [0,0],
+    "psArming" : [0,0],
+    "psArmed" : [0,0],
+    "psPreFlight" : [0,0],
+    "psAcceleration": [0,0],
+    "psCoasting": [0,0],
+    "psBraking" : [0,0]
+  },
+    "lv1BatteryPackCellTemperature": {
+    "psBooting": [0,0],
+    "psStandby": [0,0],
+    "psArming" : [0,0],
+    "psArmed" : [0,0],
+    "psPreFlight" : [0,0],
+    "psAcceleration": [0,0],
+    "psCoasting": [0,0],
+    "psBraking" : [0,0]
+  },
+    "lv2BatteryPackStateOfCharge": {
+    "psBooting": [0,0],
+    "psStandby": [0,0],
+    "psArming" : [0,0],
+    "psArmed" : [0,0],
+    "psPreFlight" : [0,0],
+    "psAcceleration": [0,0],
+    "psCoasting": [0,0],
+    "psBraking" : [0,0]
+  },
+    "lv2BatteryPackVoltage": {
+    "psBooting": [0,0],
+    "psStandby": [0,0],
+    "psArming" : [0,0],
+    "psArmed" : [0,0],
+    "psPreFlight" : [0,0],
+    "psAcceleration": [0,0],
+    "psCoasting": [0,0],
+    "psBraking" : [0,0]
+  },
+    "lv2BatteryPackCellTemperature": {
+    "psBooting": [0,0],
+    "psStandby": [0,0],
+    "psArming" : [0,0],
+    "psArmed" : [0,0],
+    "psPreFlight" : [0,0],
+    "psAcceleration": [0,0],
+    "psCoasting": [0,0],
+    "psBraking" : [0,0]
   }
 }
-
