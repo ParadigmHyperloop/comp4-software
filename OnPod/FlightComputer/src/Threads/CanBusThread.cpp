@@ -144,11 +144,11 @@ void startInverterBroadcast(int bcmSocket){
     bcmMessage.msg_head.count   = 0;
 
     bcmMessage.msg_head.ival2.tv_sec = 0;
-    bcmMessage.msg_head.ival2.tv_usec = 200000;
+    bcmMessage.msg_head.ival2.tv_usec = 10000;
 
     bcmMessage.frame[0].can_id = INVERTER_FRAME_ID;
     bcmMessage.frame[0].can_dlc = 8;
-    for(int i = 0; i < 8 ; i++){
+    for(int i = 0; i < CAN_MAX_DLEN ; i++){
         bcmMessage.frame[0].data[i] = 0;
     }
     if (write(bcmSocket, &bcmMessage, sizeof(bcmMessage)) < 0)

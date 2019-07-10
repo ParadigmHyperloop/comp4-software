@@ -57,6 +57,7 @@ enum LvdcNodeStates {
 
 // CONTROL LAPTOP COMMAND
 message PodCommand {
+
     optional bool hasCommand = 7 [default = false];
     optional ControlsInterfaceStates controlsInterfaceState = 1;
     optional PodStates manualPodState = 2;
@@ -70,6 +71,10 @@ message PodCommand {
     optional uint32 motorTorque = 11;
     optional uint32 flightDistance = 12;
     optional uint32 maxFlightTime = 13;
+    optional uint32 startTorque = 14;
+    optional uint32 accelerationTime = 15;
+    optional bool taxi  = 16;
+
 }
 
 // POD TELEMETRY
@@ -166,12 +171,15 @@ message Telemetry {
     optional int32 railCurrentSensor8 = 70;
     optional int32 railCurrentFlag = 73;
 
-    //Flight Profile
-    optional uint32 motorTorque = 74;
-    optional uint32 flightDistance = 75;
-    optional uint32 maxFlightTime = 76;
+    // Flight Profile
+    optional uint32 motorTorque = 91;
+    optional float flightDistance = 92;
+    optional uint32 maxFlightTime = 93;
+    optional uint32 startTorque = 94;
+    optional uint32 accelerationTime = 95;
+    optional bool taxi  = 96;
 
-    //Updates
+    // Updates
     repeated string updateMessages = 77;
 
     // Navigation Testing

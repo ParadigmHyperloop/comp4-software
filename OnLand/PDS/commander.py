@@ -73,6 +73,9 @@ def on_arm_command(profile):
     new_pod_command.motorTorque = profile['motor_speed']
     new_pod_command.flightDistance = profile['flight_distance']
     new_pod_command.maxFlightTime = profile['max_flight_time']
+    new_pod_command.startTorque = profile['start_speed']
+    new_pod_command.accelerationTime = profile['acceleration_time']
+    new_pod_command.taxi = profile['taxi']
     pod.send_packet(new_pod_command.SerializeToString())
 
 

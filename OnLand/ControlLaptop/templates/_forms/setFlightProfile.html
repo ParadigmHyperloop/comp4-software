@@ -8,17 +8,46 @@
                <div class="form-group">
                    {{ armForm.csrf_token }}
                    <div class="row">
-                       <div class="col-md-4">
-                            {{ armForm.flight_distance.label }}<br>
-                            {{ armForm.flight_distance(class_="form-control") }}
+                       <div class="col-md-6">
+                           <div class="row">
+                                <div class="col-md-12">
+                                    {{ armForm.flight_distance.label }}<br>
+                                    {{ armForm.flight_distance(class_="form-control") }}
+                                </div>
+                           </div>
+                           <div class="row">
+                                <div class="col-md-12">
+                                    {{ armForm.max_flight_time.label }}<br>
+                                    {{ armForm.max_flight_time(class_="form-control") }}
+                                </div>
+                           </div>
+                           <div class="row">
+                                <div class="col-md-12">
+                                    {{ armForm.taxi.label }}<br>
+                                    {{ armForm.taxi(class_="form-control", onchange="check_it()") }}
+                                </div>
+                           </div>
                        </div>
-                       <div class="col-md-4">
-                            {{ armForm.max_flight_time.label }}<br>
-                            {{ armForm.max_flight_time(class_="form-control") }}
+                       <div class="col-md-6">
+                           <div class="row">
+                                <div class="col-md-12">
+                                    {{ armForm.motor_speed.label }}<br>
+                                    {{ armForm.motor_speed(class_="form-control") }}
+                                </div>
+                           </div>
+                           <div class="row">
+                                <div class="col-md-12">
+                                    {{ armForm.start_speed.label }}<br>
+                                    {{ armForm.start_speed(class_="form-control") }}
+                                </div>
+                           </div>
+                           <div class="row">
+                                <div class="col-md-12">
+                                    {{ armForm.acceleration_time.label }}<br>
+                                    {{ armForm.acceleration_time(class_="form-control") }}
+                                </div>
+                           </div>
                        </div>
-                       <div class="col-md-4">
-                            {{ armForm.motor_speed.label }}<br>
-                            {{ armForm.motor_speed(class_="form-control") }}
                        </div>
                    </div>
                    <div class="row text-center">
@@ -36,6 +65,22 @@
         font-size: 17px;
     }
 </style>
+
+<script>
+     function check_it() {
+        //  If checkbox resolves to checked, disable and set to 0, otherwise enable it back
+        if (document.getElementById('taxi').checked) {
+            document.getElementById("start_speed").value = "0";
+            document.getElementById("acceleration_time").value = "0";
+            document.getElementById("start_speed").disabled = true;
+            document.getElementById("acceleration_time").disabled = true;
+        }
+        else {
+            document.getElementById("start_speed").disabled = false;
+            document.getElementById("acceleration_time").disabled = false;
+        }
+    }
+</script>
 
 
 <script>
