@@ -29,10 +29,19 @@
 #define MAX_IGBT_INDEX 4
 
 // BMS Sensor Flag Indices
-#define BMS_SENSOR_COUNT 3
-#define PACK_VOLTAGE_INDEX 0
-#define MAX_CELL_TEMP_INDEX 1
-#define SOC_INDEX 2
+#define BMS_SENSOR_COUNT 9
+#define HV_PACK_VOLTAGE_INDEX 0
+#define HV_MAX_CELL_TEMP_INDEX 1
+#define HV_SOC_INDEX 2
+
+#define LV1_PACK_VOLTAGE_INDEX 3
+#define LV1_CELL_TEMP_INDEX 4
+#define LV1_SOC_INDEX 5
+
+#define LV2_PACK_VOLTAGE_INDEX 6
+#define LV2_CELL_TEMP_INDEX 7
+#define LV2_SOC_INDEX 8
+
 
 // Node Sensor Flag indices
 #define NODE_SENSOR_COUNT 10

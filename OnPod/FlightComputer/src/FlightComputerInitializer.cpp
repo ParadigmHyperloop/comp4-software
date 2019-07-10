@@ -19,10 +19,10 @@ FlightComputerInitializer* FlightComputerInitializer::GetInstance()
 void FlightComputerInitializer::importLoggerLibrary()
 {
     el::Helpers::setThreadName("main");
-    std::ifstream infile("/home/paradigm/logging.conf");
+    std::ifstream infile("/home/debian/logging.conf");
     if (infile.good())
     {
-        el::Configurations conf("/home/paradigm/logging.conf");
+        el::Configurations conf("/home/debian/logging.conf");
         el::Loggers::reconfigureAllLoggers(conf);
     } else
     {
@@ -34,7 +34,7 @@ void FlightComputerInitializer::importLoggerLibrary()
 
 void FlightComputerInitializer::updatePodNetworkValues(PodNetwork& podNetworkValues, FlightConfig& config)
 {
-    std::string cNodeIpAddrs[] = {"192.168.0.30","192.168.0.31"};
+    std::string cNodeIpAddrs[] = {"192.168.0.30","192.168.0.31","192.168.0.32"}; // Brake , LVDC, Enclosure
     podNetworkValues.cNodeIpAddrs.assign(begin(cNodeIpAddrs), end(cNodeIpAddrs)); // Node IPs
     podNetworkValues.strPdsIpAddr = config.controllaptopipaddr(); // Ip Addr of PDS.
 
@@ -50,5 +50,4 @@ void FlightComputerInitializer::updatePodNetworkValues(PodNetwork& podNetworkVal
     podNetworkValues.brakeNodeUpdateFreq = config.brakenodeupdatefreq();
     podNetworkValues.pdsUpdateFreq = config.pdsupdatefreq();
     podNetworkValues.pdsTelemeteryPort = config.pdstelemetryport(); // Port # to send telemetry
-
 }
