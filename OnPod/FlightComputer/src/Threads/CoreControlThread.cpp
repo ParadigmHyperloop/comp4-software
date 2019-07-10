@@ -20,10 +20,10 @@ void coreControlLoopThread(TelemetryManager pod){
                 pod.setPodState(newState, reason);
                 pod.sendUpdate(reason);
             }
-            const std::string reason = "Leaving Manual Control Mode. Pod --> Standby";
-            PodStates newState = psStandby;
-            pod.setPodState(newState, reason);
         }
+        const std::string reason = "Leaving Manual Control Mode. Pod --> Standby";
+        PodStates newState = psStandby;
+        pod.setPodState(newState, reason);
     }
 }
 

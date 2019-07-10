@@ -21,7 +21,6 @@ enablePodStates.click(function () {
 
 disablePodStates.click(function () {
     manualPodStates.attr('disabled','disabled');
-    const state = btn.data('state');
     let command = {};
     command['target'] = 'pod';
     command['state'] = 'psNone';
