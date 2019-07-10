@@ -24,7 +24,7 @@
                            <div class="row">
                                 <div class="col-md-12">
                                     {{ armForm.taxi.label }}<br>
-                                    {{ armForm.taxi(class_="form-control") }}
+                                    {{ armForm.taxi(class_="form-control", onchange="check_it()") }}
                                 </div>
                            </div>
                        </div>
@@ -65,6 +65,22 @@
         font-size: 17px;
     }
 </style>
+
+<script>
+     function check_it() {
+        //  If checkbox resolves to checked, disable and set to 0, otherwise enable it back
+        if (document.getElementById('taxi').checked) {
+            document.getElementById("start_speed").value = "0";
+            document.getElementById("acceleration_time").value = "0";
+            document.getElementById("start_speed").disabled = true;
+            document.getElementById("acceleration_time").disabled = true;
+        }
+        else {
+            document.getElementById("start_speed").disabled = false;
+            document.getElementById("acceleration_time").disabled = false;
+        }
+    }
+</script>
 
 
 <script>
