@@ -6,6 +6,14 @@ void coreControlLoopThread(TelemetryManager pod, std::unique_ptr<ThreadMonitorMa
 
   auto threadMonitorManager = std::move(thrdMonitorManager);
 
+  int testLength = 1;
+  while ( testLength < (1000* 26 ))
+  {
+    auto status = threadMonitorManager->GetCanThreadStatus();
+    testLength *= 2;
+  }
+  return;
+
   auto canThreadStatus = threadMonitorManager->GetCanThreadStatus();
   // do stuff with status.
 

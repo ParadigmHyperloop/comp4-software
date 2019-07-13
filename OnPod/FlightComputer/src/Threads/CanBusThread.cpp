@@ -232,8 +232,20 @@ void readBcmSocket(int socket, TelemetryManager& pod) {
     }
 }
 
-int canNetworkThread(TelemetryManager Pod, std::shared_ptr<ThreadMonitorWrapper>& threadStatusMonitor){
+int canNetworkThread(TelemetryManager Pod, std::shared_ptr<ThreadMonitorWrapper>& threadStatusMonitor) {
 
+  int timeToWait = 1;
+  while (1)
+  {
+    std::this_thread::sleep_for (std::chrono::milliseconds(timeToWait));
+    timeToWait *= 2;
+    if (timeToWait > 2000)
+      break;
+
+    // Feed Thread Monitor
+    threadStatusMonitor->Feed();
+  }
+  return 0;
 
   //Logging
     el::Helpers::setThreadName("CAN Thread");
@@ -290,8 +302,6 @@ int canNetworkThread(TelemetryManager Pod, std::shared_ptr<ThreadMonitorWrapper>
             setInverterTorque(currentTorque, canSockBcm);
         }
 
-        // Feed Thread Monitor
-        threadStatusMonitor->Feed();
     }
     close(canSockRaw);
 }

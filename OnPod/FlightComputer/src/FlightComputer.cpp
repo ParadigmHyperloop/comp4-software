@@ -80,11 +80,11 @@ int main( int32_t argc, char** argv)
   //  - Periodically Check status in Main Thread IE: threadMWrapper.GetStatus()
 
 
-//    std::shared_ptr<ThreadMonitorWrapper> canTelemetryThreadMonitorWrapper =
-//        std::make_shared<ThreadMonitorWrapper>(ThreadMonitorFactory());
-//
-//    std::unique_ptr<ThreadMonitorManager> threadMonitorManagerInstance =
-//        std::make_unique<ThreadMonitorManager>(canTelemetryThreadMonitorWrapper);
+    std::shared_ptr<ThreadMonitorWrapper> canTelemetryThreadMonitorWrapper =
+        std::make_shared<ThreadMonitorWrapper>(ThreadMonitorFactory());
+
+    std::unique_ptr<ThreadMonitorManager> threadMonitorManagerInstance =
+        std::make_unique<ThreadMonitorManager>(canTelemetryThreadMonitorWrapper);
 
   /*
    * Use std::ref for refs b/c:
@@ -92,17 +92,18 @@ int main( int32_t argc, char** argv)
    */
 
   //Core Control Loop Thread
-//    TelemetryManager controlTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
-//    controlTelemManager.setPodState(psBooting, (std::string)"Booting..."); // Set Pod state to booting
+    TelemetryManager controlTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
+    controlTelemManager.setPodState(psBooting, (std::string)"Booting..."); // Set Pod state to booting
 //    std::thread coreControlThread(coreControlLoopThread, std::ref(threadMonitorManagerInstance));
+    std::thread coreControlThreadX(coreControlLoopThread, controlTelemManager, nullptr);
 
-    //CAN Thread
-//    TelemetryManager canTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
-//    std::thread canThread(canNetworkThread, canTelemManager, std::ref(canTelemetryThreadMonitorWrapper));
+    //  CAN Thread
+    TelemetryManager canTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
+    //std::thread canThread(canNetworkThread, canTelemManager, std::ref(canTelemetryThreadMonitorWrapper));
 //
 //    try {
 //      canThread.detach();
-//      coreControlThread.join();
+      //coreControlThread.join();
 //    } catch (const std::exception& e)
 //    {
 //
