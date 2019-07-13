@@ -237,11 +237,11 @@ int canNetworkThread(TelemetryManager Pod, std::shared_ptr<ThreadMonitorWrapper>
   int timeToWait = 1;
   while (1)
   {
+    LOG(INFO) << "Starting Can network Thread";
     std::this_thread::sleep_for (std::chrono::milliseconds(timeToWait));
     timeToWait *= 2;
     if (timeToWait > 2000)
       break;
-
     // Feed Thread Monitor
     threadStatusMonitor->Feed();
   }

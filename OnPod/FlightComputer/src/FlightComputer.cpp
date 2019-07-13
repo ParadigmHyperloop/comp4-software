@@ -94,20 +94,20 @@ int main( int32_t argc, char** argv)
   //Core Control Loop Thread
     TelemetryManager controlTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
     controlTelemManager.setPodState(psBooting, (std::string)"Booting..."); // Set Pod state to booting
-//    std::thread coreControlThread(coreControlLoopThread, std::ref(threadMonitorManagerInstance));
-    std::thread coreControlThreadX(coreControlLoopThread, controlTelemManager, nullptr);
+    std::thread coreControlThread(coreControlLoopThread, controlTelemManager, std::ref(threadMonitorManagerInstance) );
+//    std::thread coreControlThreadX(coreControlLoopThread, controlTelemManager, );
 
     //  CAN Thread
     TelemetryManager canTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
-    //std::thread canThread(canNetworkThread, canTelemManager, std::ref(canTelemetryThreadMonitorWrapper));
+    std::thread canThread(canNetworkThread, canTelemManager, std::ref(canTelemetryThreadMonitorWrapper));
 //
-//    try {
-//      canThread.detach();
-      //coreControlThread.join();
-//    } catch (const std::exception& e)
-//    {
-//
-//    }
+    try {
+      canThread.detach();
+      coreControlThread.join();
+    } catch (const std::exception& e)
+    {
+      LOG(ERROR) << "... waht?";
+    }
 
     //==================================================================================
     //==================================================================================
