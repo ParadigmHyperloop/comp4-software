@@ -444,6 +444,7 @@ bool Coasting::testTransitions() {
     return false;
 }
 
+Coasting::~Coasting() = default;
 
  // *  ******************** BRAKING ***********************
 
