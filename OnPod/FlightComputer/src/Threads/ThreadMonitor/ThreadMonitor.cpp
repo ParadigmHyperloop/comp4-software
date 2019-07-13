@@ -4,7 +4,7 @@
 #include <ThreadMonitorStatus.h>
 #include "ThreadMonitor.h"
 
-ThreadMonitor::ThreadMonitor(long long safeThreshold, long long busyThreshold)
+ThreadMonitor::ThreadMonitor(const long long safeThreshold, const long long busyThreshold)
 : _safeThreshold(safeThreshold), _busyThreshold(busyThreshold)
 {
   this->_timeStamp = std::chrono::steady_clock::now();

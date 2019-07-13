@@ -16,7 +16,7 @@ private:
   const long long _safeThreshold, _busyThreshold; // duration count() method returns a long long for milliseconds
   std::chrono::steady_clock::time_point _timeStamp;
 public:
-  explicit ThreadMonitor(long long safeThreshold = 200, long long busyThreshold = 500);
+  explicit ThreadMonitor(const long long safeThreshold = 200, const long long busyThreshold = 500);
   ThreadMonitorStats GetStatus();
   void Feed();
 };

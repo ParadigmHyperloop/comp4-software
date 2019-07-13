@@ -55,6 +55,7 @@ int main( int32_t argc, char** argv)
     initializeTelemetryStruct(sPodValues);
 
 
+
     // TODO:
     //  - Instantiate ThreadMonitoringWrapper and pass to Threads, and check
     //  - Periodically Check status in Main Thread IE: threadMWrapper.GetStatus()
@@ -81,9 +82,9 @@ int main( int32_t argc, char** argv)
     TelemetryManager pinTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
     std::thread pinThread(udpTelemetryThread, pinTelemManager);
 
-	// Controls Interface Connection Thread
-	TelemetryManager pCommanderThread = TelemetryManager(&sPodValues, &sPodNetworkValues);
-	std::thread controlsInterfaceThread(commanderThread, pCommanderThread);
+    // Controls Interface Connection Thread
+    TelemetryManager pCommanderThread = TelemetryManager(&sPodValues, &sPodNetworkValues);
+    std::thread controlsInterfaceThread(commanderThread, pCommanderThread);
 
 	coreControlThread.join();
     canThread.join();
