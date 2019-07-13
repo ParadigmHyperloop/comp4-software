@@ -13,7 +13,6 @@
  */
 class ThreadMonitor {
 private:
-//  const std::chrono::duration<std::chrono::milliseconds> _safeThreshold, _busyThreshold;
   const long long _safeThreshold, _busyThreshold; // duration count() method returns a long long for milliseconds
   std::chrono::steady_clock::time_point _timeStamp;
 public:

@@ -2,10 +2,8 @@
 
 
 ThreadMonitorWrapper::ThreadMonitorWrapper(ThreadMonitorFactory threadMonitorFactory)
-  :_threadMonitor(std::move( ThreadMonitorFactory::createThreadMonitor())) 
 {
-  _threadMonitor;
-
+  _threadMonitor = std::move(threadMonitorFactory.CreateInstance());
 }
 
 ThreadMonitorStats ThreadMonitorWrapper::GetStatus()

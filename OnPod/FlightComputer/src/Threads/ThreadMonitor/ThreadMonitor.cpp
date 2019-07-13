@@ -7,8 +7,6 @@
 ThreadMonitor::ThreadMonitor(long long safeThreshold, long long busyThreshold)
 : _safeThreshold(safeThreshold), _busyThreshold(busyThreshold)
 {
-//  this->_busyThreshold = std::chrono::microseconds(busyThreshold);
-//  this->_safeThreshold = std::chrono::microseconds(safeThreshold);
   this->_timeStamp = std::chrono::steady_clock::now();
 }
 
@@ -25,13 +23,10 @@ ThreadMonitorStats ThreadMonitor::GetStatus() {
   {
     return ThreadMonitorStats::Busy;
   }
-  else
-  {
-    return ThreadMonitorStats::Danger;
-  }
+
+  return ThreadMonitorStats::Danger;
 }
 
 void ThreadMonitor::Feed() {
-  // TODO: wrapper.
   this->_timeStamp = std::chrono::steady_clock::now();
 }
