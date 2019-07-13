@@ -195,11 +195,11 @@ message Telemetry {
      *  Hanging = 2
      *  Danger = 3
      */
-    optional uint32 CanBusThread = 91 [default = 1];
-    optional uint32 CommanderThread = 92 [default = 1];
-    optional uint32 CoreControlThread = 93 [default = 1];
-    optional uint32 NavigationThread = 94 [default = 1];
-    optional uint32 UdpTelemetryThread = 95 [default = 1]; // Redundant
+    optional uint32 CanBusThread = 97 [default = 1];
+    optional uint32 CommanderThread = 98 [default = 1];
+    optional uint32 CoreControlThread = 99 [default = 1];
+    optional uint32 NavigationThread = 100 [default = 1];
+    optional uint32 UdpTelemetryThread = 101 [default = 1]; // Redundant
 }
 
 

@@ -17,7 +17,7 @@ public:
 
     PodStates getStateValue();
 
-    virtual bool testTransitions();
+    virtual bool testTransitions() = 0;
 
     bool isNodeSensorCritical(int);
 
