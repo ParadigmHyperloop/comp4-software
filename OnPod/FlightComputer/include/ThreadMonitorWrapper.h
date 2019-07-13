@@ -9,13 +9,23 @@
 class ThreadMonitorWrapper {
 
 private:
-  ThreadMonitor* _threadMonitor;
-  std::mutex* _mutex;
+  //ThreadMonitor _threadMonitor;
+  std::shared_ptr<ThreadMonitor> _threadMonitor;
+  std::unique_ptr<std::mutex> _mutex; //TODO: make unique pointer.
 public:
-  ThreadMonitorWrapper(ThreadMonitor* threadMonitor);
+  ThreadMonitorWrapper(ThreadMonitorFactory threadMonitorFactory);
   ThreadMonitorStats GetStatus();
   void Feed();
 };
 
+class ThreadMonitorFactory
+{
+  public:
+    static std::unique_ptr<ThreadMonitor> createThreadMonitor()
+    {
+      return std::make_unique<ThreadMonitor>();
+    }
+
+};
 
 #endif //FLIGHTCOMPUTER_THREADMONITORWRAPPER_H

@@ -1,9 +1,10 @@
 #include "ThreadMonitorWrapper.h"
 
 
-ThreadMonitorWrapper::ThreadMonitorWrapper(ThreadMonitor* threadMonitor)
-:_threadMonitor(threadMonitor)
+ThreadMonitorWrapper::ThreadMonitorWrapper(ThreadMonitorFactory threadMonitorFactory)
+  :_threadMonitor(std::move( ThreadMonitorFactory::createThreadMonitor())) 
 {
+  _threadMonitor;
 
 }
 

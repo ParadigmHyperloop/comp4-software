@@ -1,4 +1,5 @@
 #include <ThreadMonitor.h>
+#include <memory>
 #include <chrono>
 #include <ThreadMonitorStatus.h>
 #include "ThreadMonitor.h"
@@ -31,5 +32,6 @@ ThreadMonitorStats ThreadMonitor::GetStatus() {
 }
 
 void ThreadMonitor::Feed() {
+  // TODO: wrapper.
   this->_timeStamp = std::chrono::steady_clock::now();
 }
