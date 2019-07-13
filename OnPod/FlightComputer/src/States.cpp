@@ -2,8 +2,23 @@
 #include "easylogging++.h"
 #include "Constants/SensorConfig.h"
 
-#define MIN_BRAKING_TIME 1
+#define MIN_BRAKING_TIME 20
 #define BRAKING_DISTANCE 250
+
+class CriticalSensorException : public std::runtime_error{
+public:
+    explicit CriticalSensorException(std::string error): std::runtime_error(error){
+        this->error = std::move(error);
+    };
+
+    const char * what () const throw ()
+    {
+        return error.c_str();
+    }
+
+protected:
+    std::string error;
+};
 
 PodState::PodState() = default;
 
@@ -13,9 +28,9 @@ PodState::PodState(TelemetryManager* pod){
 }
 
 void PodState::setFailure(const std::string &failure){
-    if(this->currentFailure != failure){
-        this->currentFailure = failure;
-        pod->sendUpdate(this->currentFailure);
+    if(this->_currentFailure != failure){
+        this->_currentFailure = failure;
+        pod->sendUpdate(this->_currentFailure);
     }
 }
 
@@ -23,9 +38,30 @@ PodState::~PodState(){
     this->pod->telemetry->controlsInterfaceState = ciNone;
 }
 
-unsigned int PodState::timeInStateSeconds() {
+float PodState::timeInStateSeconds() {
     std::chrono::steady_clock::time_point current = std::chrono::steady_clock::now();
     return std::chrono::duration_cast<std::chrono::milliseconds>(current - this->_enterStateTime).count()/1000.0;
+}
+
+float PodState::timeInFlightSeconds() {
+    std::chrono::steady_clock::time_point current = std::chrono::steady_clock::now();
+    return std::chrono::duration_cast<std::chrono::milliseconds>(current - this->_flightStartTime).count()/1000.0;
+}
+
+bool PodState::isNodeSensorCritical(int sensorIndex) {
+    std::vector<int> criticalSensors = {HP_INDEX, LP1_INDEX, LP2_INDEX, LP3_INDEX, LP4_INDEX,
+                                        ENCLOSURE_TEMPERATURE_INDEX, ENCLOSURE_PRESSURE_INDEX};
+    return std::find(criticalSensors.begin(), criticalSensors.end(), sensorIndex) != criticalSensors.end();
+}
+
+bool PodState::isConnectionFlagCritical(int sensorIndex) {
+    std::vector<int> criticalSensors = {};
+    return std::find(criticalSensors.begin(), criticalSensors.end(), sensorIndex) != criticalSensors.end();
+}
+
+bool PodState::isInverterSensorCritical(int sensorIndex) {
+    std::vector<int> criticalSensors = {};
+    return std::find(criticalSensors.begin(), criticalSensors.end(), sensorIndex) != criticalSensors.end();
 }
 
 int8_t PodState::checkFlags(std::vector<int8_t > &flags){
@@ -51,19 +87,23 @@ void PodState::commonChecks() {
     int32_t status;
     status = this->checkFlags(this->pod->telemetry->nodeSensorFlags);
     if( status != FLAGS_GOOD ){
+        if(isNodeSensorCritical(status)){
+            std::string error = "Failed on Critical Node sensor : " + std::to_string(status);
+            throw CriticalSensorException(error);
+        }
         std::string error = "Failed on Node sensor : " + std::to_string(status);
         throw std::runtime_error(error);
     }
     status = this->checkFlags(this->pod->telemetry->connectionFlags);
     if(status != FLAGS_GOOD){
+        if(isConnectionFlagCritical(status)){
+            std::string error = "Failed on critical communication flag : " + std::to_string(status);
+            throw CriticalSensorException(error);
+        }
         std::string error = "Failed on communication flag : " + std::to_string(status);
         throw std::runtime_error(error);
     }
     status = this->checkNodeStates();
-    if( status != FLAGS_GOOD && (this->timeInStateSeconds() > 3)){
-        std::string error = "Failed on node state agreement : " + std::to_string(status);
-        throw std::runtime_error(error);
-    }
 }
 
 void PodState::armedChecks(){
@@ -72,6 +112,23 @@ void PodState::armedChecks(){
         throw std::runtime_error(error);
     }
     //todo check array for inverter values
+   /* int status = this->checkNodeStates();
+    if(isInverterSensorCritical(status)){
+        std::string error = "Failed on critical Inverter Sensor : " + std::to_string(status);
+        throw CriticalSensorException(error);
+    }
+    std::string error = "Failed on inverter sensor : " + std::to_string(status);
+    throw std::runtime_error(error);*/
+}
+
+bool PodState::brakingCriteriaMet() {
+    // Navigation checks todo
+    std::unique_lock<std::mutex> lock(pod->telemetry->positionLock);
+    float remainingTrack = pod->telemetry->flightDistance - (pod->telemetry->podPosition);// - BRAKING_DISTANCE;
+    lock.unlock();
+    if(remainingTrack <= 0){
+        return true;
+    }
 }
 
 void PodState::setupTransition(PodStates nextState, const std::string& reason){
@@ -146,7 +203,7 @@ Standby::Standby(TelemetryManager * pod): PodState(pod) {
     this->pod->telemetry->commandedBrakeNodeState = bnsStandby;
     //_lvdcNodeState = lvdcStandby;
     this->pod->telemetry->controlsInterfaceState = ciNone; // Guard against auto transition
-    this->currentFailure = "";
+    this->_currentFailure = "";
 }
 
 Standby::~Standby(){
@@ -163,8 +220,7 @@ Standby::~Standby(){
 }
 
 bool Standby::testTransitions() {
-    if(this->pod->telemetry->controlsInterfaceState == ciStandby){
-        this->pod->telemetry->controlsInterfaceState = ciNone;
+    if(this->pod->getControlsInterfaceState() == ciStandby){
         pod->telemetry->motorDistance = 0;
         pod->telemetry->podPosition = 0;
         pod->telemetry->irDistance = 0;
@@ -174,13 +230,12 @@ bool Standby::testTransitions() {
     }
     catch (const std::runtime_error &e ){
         setFailure(e.what());
-        if(this->pod->telemetry->controlsInterfaceState == ciArm){
+        if(this->pod->getControlsInterfaceState() == ciArm){
             this->pod->telemetry->controlsInterfaceState = ciNone;
         }
         return false;
     }
-    if(this->pod->telemetry->controlsInterfaceState == ciArm){
-        this->pod->telemetry->controlsInterfaceState = ciNone;
+    if(this->pod->getControlsInterfaceState() == ciArm){
         if(this->pod->telemetry->maxFlightTime == 0){
             std::string failure = "Need flight profile to complete Arming sequence";
             setFailure(failure);
@@ -207,7 +262,7 @@ Arming::Arming(TelemetryManager * pod ): PodState(pod) {
 Arming::~Arming() = default;
 
 bool Arming::testTransitions() {
-    if(this->pod->telemetry->controlsInterfaceState == ciEmergencyStop || this->pod->telemetry->controlsInterfaceState == ciStandby ){
+    if(this->pod->getControlsInterfaceState() == ciEmergencyStop || this->pod->getControlsInterfaceState() == ciStandby ){
         this->setupTransition(psStandby, "Emergency Stop. Pod --> Standby");
         return true;
     }
@@ -246,7 +301,7 @@ Armed::~Armed() {
 }
 
 bool Armed::testTransitions() {
-    if(this->pod->telemetry->controlsInterfaceState == ciEmergencyStop || this->pod->telemetry->controlsInterfaceState == ciStandby ){
+    if(this->pod->getControlsInterfaceState() == ciEmergencyStop || this->pod->getControlsInterfaceState() == ciStandby ){
         this->setupTransition(psStandby, "Emergency Stop. Pod --> Standby");
         return true;
     }
@@ -260,8 +315,7 @@ bool Armed::testTransitions() {
     }
 
     // todo inverter comms
-    if(this->pod->telemetry->controlsInterfaceState == ciFlight){
-        this->pod->telemetry->controlsInterfaceState = ciNone; // Use up command
+    if(this->pod->getControlsInterfaceState() == ciFlight){
         this->setupTransition(psPreFlight, (std::string)"Flight Command Received. Pod --> Pre-flight");
         return true;
     }
@@ -281,7 +335,7 @@ PreFlight::PreFlight(TelemetryManager* pod) : PodState(pod) {
 PreFlight::~PreFlight() = default;
 
 bool PreFlight::testTransitions() {
-    if(this->pod->telemetry->controlsInterfaceState == ciEmergencyStop){
+    if(this->pod->getControlsInterfaceState() == ciEmergencyStop){
         this->setupTransition(psBraking, "Emergency Stop. Pod --> Braking");
         return true;
     }
@@ -309,10 +363,10 @@ bool PreFlight::testTransitions() {
 
 Acceleration::Acceleration(TelemetryManager * pod) : PodState(pod) {
     _stateIdentifier = psAcceleration;
+    this->_flightStartTime = std::chrono::steady_clock::now();
     this->pod->telemetry->commandedBrakeNodeState = bnsFlight;
     //_lvdcNodeState = lvdcFlight;
     this->pod->telemetry->commandedTorque = this->pod->telemetry->motorTorque;
-    LOG(INFO)<<this->pod->telemetry->commandedTorque;
 }
 
 Acceleration::~Acceleration() {
@@ -323,31 +377,67 @@ Acceleration::~Acceleration() {
 }
 
 bool Acceleration::testTransitions() {
-    if(this->pod->telemetry->controlsInterfaceState == ciEmergencyStop){
+    if(this->pod->getControlsInterfaceState() == ciEmergencyStop){
         this->setupTransition(psBraking, "Emergency Stop. Pod --> Braking");
         return true;
     }
-    // todo critical vs non critical changes
     try {
         this->commonChecks();
         this->armedChecks();
     }
-    catch (const std::runtime_error &error ){
+    catch (CriticalSensorException &error){
         std::string reason = "Pod --> Braking";
         this->setupTransition(psBraking, error.what() + reason);
         return true;
     }
+    catch (const std::runtime_error &error ){
+        std::string reason = "Pod --> Coasting";
+        this->setupTransition(psCoasting, error.what() + reason);
+        return true;
+    }
 
-    // Navigation checks todo
-    std::unique_lock<std::mutex> lock(pod->telemetry->positionLock);
-    float remainingTrack = pod->telemetry->flightDistance - (pod->telemetry->podPosition);// - BRAKING_DISTANCE;
-    lock.unlock();
-
-    if(remainingTrack <= 0){
+    if(brakingCriteriaMet()){
         this->setupTransition(psBraking,"Braking Distance Reached. Pod --> Braking");
         return true;
     }
-    if(this->timeInStateSeconds() > this->pod->telemetry->maxFlightTime ){
+
+    if(this->timeInFlightSeconds() > this->pod->telemetry->maxFlightTime ){
+        this->setupTransition(psBraking, (std::string)" Flight Timout of " + std::to_string(this->timeInStateSeconds()) + " reached. Pod --> Braking");
+        return true;
+    }
+    return false;
+}
+
+// *  ******************** COASTING ***********************
+Coasting::Coasting(TelemetryManager* pod) : PodState(pod) {
+    _stateIdentifier = psCoasting;
+    this->pod->telemetry->commandedTorque = 0;
+}
+
+bool Coasting::testTransitions() {
+    if(this->pod->getControlsInterfaceState() == ciEmergencyStop){
+        this->setupTransition(psBraking, "Emergency Stop. Pod --> Braking");
+        return true;
+    }
+    try {
+        this->commonChecks();
+        this->armedChecks();
+    }
+    catch (CriticalSensorException &error){
+        std::string reason = "Pod --> Braking";
+        this->setupTransition(psBraking, error.what() + reason);
+        return true;
+    }
+    catch (const std::runtime_error &error ){
+        // Ignore Non critical fault :  Already Coasting
+    }
+
+    if(brakingCriteriaMet()){
+        this->setupTransition(psBraking,"Braking Distance Reached. Pod --> Braking");
+        return true;
+    }
+
+    if(this->timeInFlightSeconds() > this->pod->telemetry->maxFlightTime ){
         this->setupTransition(psBraking, (std::string)" Flight Timout of " + std::to_string(this->timeInStateSeconds()) + " reached. Pod --> Braking");
         return true;
     }
@@ -355,9 +445,7 @@ bool Acceleration::testTransitions() {
 }
 
 
-
  // *  ******************** BRAKING ***********************
-
 
 Braking::Braking(TelemetryManager* pod) : PodState(pod) {
     _stateIdentifier = psBraking;
@@ -368,18 +456,17 @@ Braking::Braking(TelemetryManager* pod) : PodState(pod) {
 Braking::~Braking() = default;
 
 bool Braking::testTransitions() {
-    if(!(this->timeInStateSeconds() > MIN_BRAKING_TIME)){
+    if(this->timeInStateSeconds() < MIN_BRAKING_TIME){
         return false;
     }
-    else if(this->pod->telemetry->controlsInterfaceState == ciStandby){
-        this->pod->telemetry->controlsInterfaceState = ciNone; // Use up command
+    else if(this->pod->getControlsInterfaceState() == ciStandby){
         this->setupTransition(psStandby, (std::string)"Disarm Command Received. Pod --> Standby");
         return true;
     }
-    else if(this->pod->telemetry->controlsInterfaceState == ciArm){
-        this->pod->telemetry->controlsInterfaceState = ciNone; // Use up command
+    else if(this->pod->getControlsInterfaceState() == ciArm){
         this->setupTransition(psArming, (std::string)"Arm Command Received. Pod --> Arming");
         return true;
     }
     return false;
 }
+

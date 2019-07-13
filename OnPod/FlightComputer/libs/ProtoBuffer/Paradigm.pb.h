@@ -1170,12 +1170,12 @@ class Telemetry :
   ::google::protobuf::uint32 motortorque() const;
   void set_motortorque(::google::protobuf::uint32 value);
 
-  // optional uint32 flightDistance = 92;
+  // optional float flightDistance = 92;
   bool has_flightdistance() const;
   void clear_flightdistance();
   static const int kFlightDistanceFieldNumber = 92;
-  ::google::protobuf::uint32 flightdistance() const;
-  void set_flightdistance(::google::protobuf::uint32 value);
+  float flightdistance() const;
+  void set_flightdistance(float value);
 
   // optional uint32 maxFlightTime = 93;
   bool has_maxflighttime() const;
@@ -1282,7 +1282,7 @@ class Telemetry :
   float lv2batterypackvoltage_;
   float lv2batterypackcelltemperature_;
   ::google::protobuf::uint32 motortorque_;
-  ::google::protobuf::uint32 flightdistance_;
+  float flightdistance_;
   ::google::protobuf::uint32 maxflighttime_;
   ::google::protobuf::uint32 starttorque_;
   ::google::protobuf::uint32 accelerationtime_;
@@ -4397,19 +4397,19 @@ inline void Telemetry::set_motortorque(::google::protobuf::uint32 value) {
   // @@protoc_insertion_point(field_set:Telemetry.motorTorque)
 }
 
-// optional uint32 flightDistance = 92;
+// optional float flightDistance = 92;
 inline bool Telemetry::has_flightdistance() const {
   return (_has_bits_[2] & 0x00000400u) != 0;
 }
 inline void Telemetry::clear_flightdistance() {
-  flightdistance_ = 0u;
+  flightdistance_ = 0;
   _has_bits_[2] &= ~0x00000400u;
 }
-inline ::google::protobuf::uint32 Telemetry::flightdistance() const {
+inline float Telemetry::flightdistance() const {
   // @@protoc_insertion_point(field_get:Telemetry.flightDistance)
   return flightdistance_;
 }
-inline void Telemetry::set_flightdistance(::google::protobuf::uint32 value) {
+inline void Telemetry::set_flightdistance(float value) {
   _has_bits_[2] |= 0x00000400u;
   flightdistance_ = value;
   // @@protoc_insertion_point(field_set:Telemetry.flightDistance)
