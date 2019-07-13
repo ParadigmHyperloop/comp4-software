@@ -64,29 +64,45 @@ int main( int32_t argc, char** argv)
 
 
 
+  //==================================================================================
+  //==================================================================================
+  //==================================================================================
   // TODO:
   //  - Instantiate ThreadMonitoringWrapper and pass to Threads
   //  - Periodically Check status in Main Thread IE: threadMWrapper.GetStatus()
 
 
-    std::shared_ptr<ThreadMonitorWrapper> canTelemetryThreadMonitorWrapper =
-        std::make_shared<ThreadMonitorWrapper>(ThreadMonitorFactory());
-
-    std::unique_ptr<ThreadMonitorManager> threadMonitorManagerInstance =
-        std::make_unique<ThreadMonitorManager>(canTelemetryThreadMonitorWrapper);
+//    std::shared_ptr<ThreadMonitorWrapper> canTelemetryThreadMonitorWrapper =
+//        std::make_shared<ThreadMonitorWrapper>(ThreadMonitorFactory());
+//
+//    std::unique_ptr<ThreadMonitorManager> threadMonitorManagerInstance =
+//        std::make_unique<ThreadMonitorManager>(canTelemetryThreadMonitorWrapper);
 
   /*
    * Use std::ref for refs b/c:
    *    - https://stackoverflow.com/questions/5116756/difference-between-pointer-and-reference-as-thread-parameter
    */
-    //Core Control Loop Thread
-    TelemetryManager controlTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
-    controlTelemManager.setPodState(psBooting, (std::string)"Booting..."); // Set Pod state to booting
-    std::thread coreControlThread(coreControlLoopThread, std::ref(threadMonitorManagerInstance));
+
+  //Core Control Loop Thread
+//    TelemetryManager controlTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
+//    controlTelemManager.setPodState(psBooting, (std::string)"Booting..."); // Set Pod state to booting
+//    std::thread coreControlThread(coreControlLoopThread, std::ref(threadMonitorManagerInstance));
 
     //CAN Thread
-    TelemetryManager canTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
-    std::thread canThread(canNetworkThread, canTelemManager, std::ref(canTelemetryThreadMonitorWrapper));
+//    TelemetryManager canTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
+//    std::thread canThread(canNetworkThread, canTelemManager, std::ref(canTelemetryThreadMonitorWrapper));
+//
+//    try {
+//      canThread.detach();
+//      coreControlThread.join();
+//    } catch (const std::exception& e)
+//    {
+//
+//    }
+
+    //==================================================================================
+    //==================================================================================
+    //==================================================================================
 
 
     /*
@@ -107,10 +123,8 @@ int main( int32_t argc, char** argv)
     canThread.join();
     pinThread.join();
     controlsInterfaceThread.join();
-
    */
 
 
-    coreControlThread.join();
-    return 0;
+  return 0;
 }

@@ -7,6 +7,8 @@ void coreControlLoopThread(TelemetryManager pod, std::unique_ptr<ThreadMonitorMa
   auto threadMonitorManager = std::move(thrdMonitorManager);
 
   auto canThreadStatus = threadMonitorManager->GetCanThreadStatus();
+  // do stuff with status.
+
     el::Helpers::setThreadName("Core Control Thread");
     while(pod.getPodStateValue() != psShutdown){
         while(pod.telemetry->automaticTransitions && pod.getPodStateValue() != psShutdown){
