@@ -3,7 +3,8 @@
 
 #include "Common.h"
 #include "TelemetryManager.h"
+#include "ThreadMonitorManager.h"
 
-void coreControlLoopThread(TelemetryManager);
+void coreControlLoopThread(TelemetryManager, std::unique_ptr<ThreadMonitorManager>&);
 
 #endif

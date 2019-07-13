@@ -1,7 +1,12 @@
+#include <ThreadMonitorWrapper.h>
 #include "CoreControlThread.h"
 #include "States.h"
 
-void coreControlLoopThread(TelemetryManager pod){
+void coreControlLoopThread(TelemetryManager pod, std::unique_ptr<ThreadMonitorManager>& thrdMonitorManager){
+
+  auto threadMonitorManager = std::move(thrdMonitorManager);
+
+  auto canThreadStatus = threadMonitorManager->GetCanThreadStatus();
     el::Helpers::setThreadName("Core Control Thread");
     while(pod.getPodStateValue() != psShutdown){
         while(pod.telemetry->automaticTransitions && pod.getPodStateValue() != psShutdown){

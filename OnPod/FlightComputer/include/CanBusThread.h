@@ -2,6 +2,7 @@
 #define FLIGHTCOMPUTER_CANBUSTHREAD_H
 
 #include "TelemetryManager.h"
+#include "ThreadMonitorWrapper.h"
 
 #define TORQUE_LOW_B 0
 #define TORQUE_HIGH_B 1
@@ -14,6 +15,6 @@
 #define ON 1
 #define OFF 0
 
-int canNetworkThread(TelemetryManager Pod);
+int canNetworkThread(TelemetryManager Pod, std::shared_ptr<ThreadMonitorWrapper>&);
 
 #endif //FLIGHTCOMPUTER_CANBUSTHREAD_H

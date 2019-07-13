@@ -34,7 +34,7 @@ if (THREADS_HAVE_PTHREAD_ARG)
     target_compile_options(FlightComputer PUBLIC "-pthread")
 endif ()
 
-add_executable(FlightComputer ${SOURCES}  ${PROTO_HDRS} include/ThreadMonitor.h include/ThreadMonitorStatus.h src/Threads/ThreadMonitor/ThreadMonitor.cpp src/Threads/ThreadMonitor/ThreadMonitor.cpp include/ThreadMonitor.h src/Threads/ThreadMonitor/ThreadMonitorWrapper.cpp include/ThreadMonitorWrapper.h src/Threads/ThreadMonitor/ThreadMonitorFactory.cpp include/ThreadMonitorFactory.h)
+add_executable(FlightComputer ${SOURCES}  ${PROTO_HDRS} include/ThreadMonitor.h include/ThreadMonitorStatus.h src/Threads/ThreadMonitor/ThreadMonitor.cpp src/Threads/ThreadMonitor/ThreadMonitor.cpp include/ThreadMonitor.h src/Threads/ThreadMonitor/ThreadMonitorWrapper.cpp include/ThreadMonitorWrapper.h src/Threads/ThreadMonitor/ThreadMonitorFactory.cpp include/ThreadMonitorFactory.h src/Threads/ThreadMonitor/ThreadMonitorManager.cpp include/ThreadMonitorManager.h include/IThreadMonitorManager.h)
 
 target_link_libraries(FlightComputer ${Protobuf_LIBRARIES})
 
