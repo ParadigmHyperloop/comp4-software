@@ -26,10 +26,11 @@ void coreControlLoopThread(TelemetryManager pod, std::unique_ptr<ThreadMonitorMa
                 PodStates newState = pod.telemetry->manualPodState;
                 pod.setPodState(newState, reason);
                 pod.sendUpdate(reason);
-                LOG(INFO)<<reason;
-                //TODO Update All nodes?
             }
         }
+        const std::string reason = "Leaving Manual Control Mode. Pod --> Standby";
+        PodStates newState = psStandby;
+        pod.setPodState(newState, reason);
     }
 }
 

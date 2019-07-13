@@ -1,7 +1,7 @@
 
-let sensor_ranges = false;
-let table_sensors = [];
-let pod_state = ""
+var sensor_ranges = false;
+var table_sensors = [];
+var pod_state = ""
 
 $( document ).ready(function() {
     socket.emit('join_room','telemetry_updates');
@@ -15,14 +15,22 @@ function getSensorRanges() {
     });
 }
 
-function updateRowStatus(row,min,max,actual){
-    if(actual > max || actual < min){
-        row.addClass('danger');
-        row.removeClass('success');
+function updateRowStatus( value_name ,$value_cell, value){
+    let min,max;
+    min = sensor_ranges[value_name][pod_state][0]
+    max = sensor_ranges[value_name][pod_state][1]
+
+    if(!sensor_ranges.hasOwnProperty(value_name)){
+        console.log(value_name + " not found in sensor ranges")
+        return
+    }
+    if(value > max || value < min){
+        $value_cell.addClass('danger');
+        $value_cell.removeClass('success');
     }
     else{
-        row.addClass('success');
-        row.removeClass('danger');
+        $value_cell.addClass('success');
+        $value_cell.removeClass('danger');
     }
 }
 
@@ -36,7 +44,7 @@ function ParsePodState(state) {
         console.log("No sensor Ranges yet");
         return
     }
-    if (state !== pod_state) {
+    if (state !== pod_state){
         pod_state = state;
         $(".max-min-value").each(function (index) {
              sensor_name = $(this).attr('id');
@@ -57,14 +65,13 @@ function ParsePodState(state) {
     }
 }
 
-
+var telemetry_value_elements = [];
 $( document ).ready(function() {
     socket.emit('join_room','telemetry_updates');
     $(".telemetry-value").each(function(){ telemetry_value_elements.push(this); });
 });
 
 
-let telemetry_value_elements = [];
 socket.on('pod_telemetry', function (data) {
     let value, value_cell, value_name, current_state;
     data = JSON.parse(data);
@@ -77,9 +84,9 @@ socket.on('pod_telemetry', function (data) {
 
         value_cell = telemetry_value_elements[index];
         value_name = value_cell.id;
-
         if(!data.hasOwnProperty(value_name)){
             console.log(value_name + " not found in packet")
+            continue;
         }
         value = data[value_name];
         let $value_cell = $('#'+value_name);
@@ -117,6 +124,9 @@ socket.on('pod_telemetry', function (data) {
         }
         else{
             $value_cell.text(value.toFixed(2));
+            if($value_cell.hasClass('max-min-value')){
+                updateRowStatus(value_name, $value_cell, value);
+            }
         }
     }
 });

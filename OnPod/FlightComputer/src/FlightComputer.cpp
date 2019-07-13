@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <thread>
 #include <fstream>
+#include <signal.h>
 #include <iostream>
 #include <ThreadMonitorWrapper.h>
 #include "Common.h"
@@ -21,6 +22,11 @@ INITIALIZE_EASYLOGGINGPP
 
 using namespace std;
 
+void signal_callback_handler(int signum){
+
+    LOG(INFO) << "Caught signal SIGPIPE ";
+}
+
 // Factory for initializing the telemetry struct
 void initializeTelemetryStruct(PodValues &telemetry){
     telemetry.nodeSensorFlags = std::vector<int8_t>(NODE_SENSOR_COUNT, 0);
@@ -33,7 +39,9 @@ void initializeTelemetryStruct(PodValues &telemetry){
 
 int main( int32_t argc, char** argv)
 {
-	// Initialize Logger Logger;
+    signal(SIGPIPE, signal_callback_handler);
+
+    // Initialize Logger Logger;
 	FlightComputerInitializer* initializer = FlightComputerInitializer::GetInstance();
 	initializer->importLoggerLibrary();
 
@@ -44,7 +52,7 @@ int main( int32_t argc, char** argv)
 	while(!configReceived){
 	    configReceived = true;
         try {
-           flightConfigurationParameters = configurationServer->runServer(); //Comment out to use the default network values in the proto obj
+          // flightConfigurationParameters = configurationServer->runServer(); //Comment out to use the default network values in the proto obj
         } catch (exception& e)
         {
             configurationServer->closePorts();

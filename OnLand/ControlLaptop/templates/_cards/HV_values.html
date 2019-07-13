@@ -4,11 +4,21 @@
     </div>
     <div class="content">
         <table class="table table-hover table-striped table-condensed">
+            <thead>
+            <tr class="d-flex">
+                <th class="col-5" scope="col">Name</th>
+                <th class="col-2" scope="col">min</th>
+                <th class="col-3" scope="col">Value</th>
+                <th class="col-2" scope="col">max</th>
+            </tr>
+            </thead>
             <tbody id="bms-table-body">
             {% for key, value in bms_sensors.items() %}
                 <tr class="d-flex sensor-row">
-                    <th class="text-center col-6" scope="row">{{ value['name_pretty'] }}</th>
-                    <td id="{{ key }}" class="col-6 telemetry-value"></td>
+                    <th class="text-center col-5" scope="row">{{ value['name_pretty'] }}</th>
+                    <td id="{{key}}-min" class="col-2"></td>
+                    <td id="{{ key }}" class="max-min-value col-3 telemetry-value"></td>
+                    <td id="{{key}}-max" class="col-2"></td>
                 </tr>
             {% endfor %}
             </tbody>

@@ -19,13 +19,24 @@ public:
 
     virtual bool testTransitions();
 
+    bool isNodeSensorCritical(int);
+
+    bool isConnectionFlagCritical(int);
+
+    bool isInverterSensorCritical(int);
+
+    bool brakingCriteriaMet();
+
     PodStates getNewState();
 
     bool isTransitioning();
 
+    void setFailure(const std::string&);
     const std::string getTransitionReason();
 
-    unsigned int timeInStateSeconds();
+    float timeInStateSeconds();
+
+    float timeInFlightSeconds();
 
     static std::unique_ptr<PodState> createState(PodStates, TelemetryManager* );
 
@@ -41,7 +52,9 @@ public:
 
 
 protected:
+    std::string _currentFailure;
     std::chrono::steady_clock::time_point _enterStateTime;
+    std::chrono::steady_clock::time_point _flightStartTime;
     bool _transitioning = false;
     std::string _transitionReason = "";
     PodStates _stateIdentifier = psBooting;
@@ -62,8 +75,6 @@ public:
     ~Standby();
     bool testTransitions() override;
 
-protected:
-    std::string currentFailure;
 };
 
 class Arming : public PodState {
@@ -92,6 +103,12 @@ public:
     Acceleration(TelemetryManager*);
     ~Acceleration();
     float getBrakingDistance();
+    bool testTransitions() override;
+};
+
+class Coasting : public PodState{
+    Coasting(TelemetryManager*);
+    ~Coasting();
     bool testTransitions() override;
 };
 
