@@ -28,6 +28,12 @@ PodStates TelemetryManager::getPodStateValue() {
     return this->telemetry->podState->getStateValue();
 }
 
+ControlsInterfaceStates TelemetryManager::getControlsInterfaceState() {
+    ControlsInterfaceStates state = telemetry->controlsInterfaceState;
+    telemetry->controlsInterfaceState = ciNone;
+    return state;
+}
+
 
 //          State setting
 

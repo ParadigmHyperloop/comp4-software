@@ -2,7 +2,7 @@
 #include "easylogging++.h"
 #include "Constants/SensorConfig.h"
 
-#define MIN_BRAKING_TIME 1
+#define MIN_BRAKING_TIME 20
 #define BRAKING_DISTANCE 250
 
 class CriticalSensorException : public std::runtime_error{
@@ -220,8 +220,7 @@ Standby::~Standby(){
 }
 
 bool Standby::testTransitions() {
-    if(this->pod->telemetry->controlsInterfaceState == ciStandby){
-        this->pod->telemetry->controlsInterfaceState = ciNone;
+    if(this->pod->getControlsInterfaceState() == ciStandby){
         pod->telemetry->motorDistance = 0;
         pod->telemetry->podPosition = 0;
         pod->telemetry->irDistance = 0;
@@ -231,13 +230,12 @@ bool Standby::testTransitions() {
     }
     catch (const std::runtime_error &e ){
         setFailure(e.what());
-        if(this->pod->telemetry->controlsInterfaceState == ciArm){
+        if(this->pod->getControlsInterfaceState() == ciArm){
             this->pod->telemetry->controlsInterfaceState = ciNone;
         }
         return false;
     }
-    if(this->pod->telemetry->controlsInterfaceState == ciArm){
-        this->pod->telemetry->controlsInterfaceState = ciNone;
+    if(this->pod->getControlsInterfaceState() == ciArm){
         if(this->pod->telemetry->maxFlightTime == 0){
             std::string failure = "Need flight profile to complete Arming sequence";
             setFailure(failure);
@@ -264,7 +262,7 @@ Arming::Arming(TelemetryManager * pod ): PodState(pod) {
 Arming::~Arming() = default;
 
 bool Arming::testTransitions() {
-    if(this->pod->telemetry->controlsInterfaceState == ciEmergencyStop || this->pod->telemetry->controlsInterfaceState == ciStandby ){
+    if(this->pod->getControlsInterfaceState() == ciEmergencyStop || this->pod->getControlsInterfaceState() == ciStandby ){
         this->setupTransition(psStandby, "Emergency Stop. Pod --> Standby");
         return true;
     }
@@ -303,7 +301,7 @@ Armed::~Armed() {
 }
 
 bool Armed::testTransitions() {
-    if(this->pod->telemetry->controlsInterfaceState == ciEmergencyStop || this->pod->telemetry->controlsInterfaceState == ciStandby ){
+    if(this->pod->getControlsInterfaceState() == ciEmergencyStop || this->pod->getControlsInterfaceState() == ciStandby ){
         this->setupTransition(psStandby, "Emergency Stop. Pod --> Standby");
         return true;
     }
@@ -317,8 +315,7 @@ bool Armed::testTransitions() {
     }
 
     // todo inverter comms
-    if(this->pod->telemetry->controlsInterfaceState == ciFlight){
-        this->pod->telemetry->controlsInterfaceState = ciNone; // Use up command
+    if(this->pod->getControlsInterfaceState() == ciFlight){
         this->setupTransition(psPreFlight, (std::string)"Flight Command Received. Pod --> Pre-flight");
         return true;
     }
@@ -338,7 +335,7 @@ PreFlight::PreFlight(TelemetryManager* pod) : PodState(pod) {
 PreFlight::~PreFlight() = default;
 
 bool PreFlight::testTransitions() {
-    if(this->pod->telemetry->controlsInterfaceState == ciEmergencyStop){
+    if(this->pod->getControlsInterfaceState() == ciEmergencyStop){
         this->setupTransition(psBraking, "Emergency Stop. Pod --> Braking");
         return true;
     }
@@ -380,11 +377,10 @@ Acceleration::~Acceleration() {
 }
 
 bool Acceleration::testTransitions() {
-    if(this->pod->telemetry->controlsInterfaceState == ciEmergencyStop){
+    if(this->pod->getControlsInterfaceState() == ciEmergencyStop){
         this->setupTransition(psBraking, "Emergency Stop. Pod --> Braking");
         return true;
     }
-    // todo critical vs non critical changes fffff
     try {
         this->commonChecks();
         this->armedChecks();
@@ -419,11 +415,10 @@ Coasting::Coasting(TelemetryManager* pod) : PodState(pod) {
 }
 
 bool Coasting::testTransitions() {
-    if(this->pod->telemetry->controlsInterfaceState == ciEmergencyStop){
+    if(this->pod->getControlsInterfaceState() == ciEmergencyStop){
         this->setupTransition(psBraking, "Emergency Stop. Pod --> Braking");
         return true;
     }
-    // todo critical vs non critical changes
     try {
         this->commonChecks();
         this->armedChecks();
@@ -452,7 +447,6 @@ bool Coasting::testTransitions() {
 
  // *  ******************** BRAKING ***********************
 
-
 Braking::Braking(TelemetryManager* pod) : PodState(pod) {
     _stateIdentifier = psBraking;
     this->pod->telemetry->commandedBrakeNodeState = bnsBraking;
@@ -462,16 +456,14 @@ Braking::Braking(TelemetryManager* pod) : PodState(pod) {
 Braking::~Braking() = default;
 
 bool Braking::testTransitions() {
-    if(!(this->timeInStateSeconds() > MIN_BRAKING_TIME)){
+    if(this->timeInStateSeconds() < MIN_BRAKING_TIME){
         return false;
     }
-    else if(this->pod->telemetry->controlsInterfaceState == ciStandby){
-        this->pod->telemetry->controlsInterfaceState = ciNone; // Use up command
+    else if(this->pod->getControlsInterfaceState() == ciStandby){
         this->setupTransition(psStandby, (std::string)"Disarm Command Received. Pod --> Standby");
         return true;
     }
-    else if(this->pod->telemetry->controlsInterfaceState == ciArm){
-        this->pod->telemetry->controlsInterfaceState = ciNone; // Use up command
+    else if(this->pod->getControlsInterfaceState() == ciArm){
         this->setupTransition(psArming, (std::string)"Arm Command Received. Pod --> Arming");
         return true;
     }

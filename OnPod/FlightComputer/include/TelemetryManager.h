@@ -18,6 +18,7 @@ class TelemetryManager
 		// TelemetryManager States
         void setPodState(PodStates newState, const std::string &reason);
 		PodStates getPodStateValue();
+		ControlsInterfaceStates getControlsInterfaceState();
 
 		// Flags Array
         void setConnectionFlag(int32_t, int32_t);
