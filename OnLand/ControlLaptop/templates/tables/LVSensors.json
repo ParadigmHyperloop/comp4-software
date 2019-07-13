@@ -1,14 +1,14 @@
 {
   "lv1BatteryPackStateOfCharge": {
-    "name_pretty": "Pack 1 State of Charge",
+    "name_pretty": "LP State of Charge",
     "order": 0
   },
   "lv1BatteryPackVoltage": {
-    "name_pretty": "Pack 1 Pack Voltage",
+    "name_pretty": "LP Pack Voltage",
     "order": 1
   },
     "lv1BatteryPackCellTemperature": {
-    "name_pretty": "Pack 1 Temperature",
+    "name_pretty": "LP Temperature",
       "order": 2
   },
   "lv2BatteryPackStateOfCharge": {

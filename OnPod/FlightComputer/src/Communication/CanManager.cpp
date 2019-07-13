@@ -97,13 +97,13 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             pod.setInverterHeartbeat(1);
             break;
         }
-        case 0x6B4: {
+        case 0x6B4: { // lp1
             //todo
-            indices = {2, 3};
+            indices = {0, 1};
             auto lv1BatteryPackVoltage = extractCanValue<float>(frame.data, indices, (float) 10.0);
-            indices = {4};
+            indices = {2};
             auto lv1BatteryPackSoc = extractCanValue<int>(frame.data, indices, 2);
-            indices = {2, 3};
+            indices = {3, 4};
             auto lv1BatteryPackTemperature = extractCanValue<float>(frame.data, indices, (float) 1.0);
 
 
@@ -119,15 +119,15 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
 
         }
 
-        case 0x6B5: {
+        case 0x6B5: {  //hp
             //todo
-            indices = {2, 3};
+            indices = {0, 1};
             auto lv2BatteryPackVoltage = extractCanValue<float>(frame.data, indices, (float) 10.0);
 
-            indices = {4};
+            indices = {2};
             auto lv2BatteryPackSoc = extractCanValue<int>(frame.data, indices, 2);
 
-            indices = {2, 3};
+            indices = {3, 4};
             auto lv2BatteryPackTemperature = extractCanValue<float>(frame.data, indices, (float) 1.0);
 
             if(lv2BatteryPackSoc > 1 && lv2BatteryPackSoc < 110){
