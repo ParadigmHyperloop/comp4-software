@@ -82,7 +82,7 @@ void TelemetryManager::setHvBatteryPackVoltage(float value) {
         // status = greaterThan
     }
     // Set sensor flag
-    this->setBmsSensorFlag(status, HV_PACK_VOLTAGE_INDEX);
+    this->setBmsSensorFlag(status, BMS_FLAGS::HV_PACK_VOLTAGE_INDEX);
 }
 
 void TelemetryManager::setHvBatteryPackCurrent(float value) {
@@ -102,7 +102,7 @@ void TelemetryManager::setHvBatteryPackMaxCellTemperature(float value) {
 
     bool status = true;
     // status = lessThan maxx cell temp TODO
-    this->setBmsSensorFlag(status, HV_MAX_CELL_TEMP_INDEX);
+    this->setBmsSensorFlag(status, BMS_FLAGS::HV_MAX_CELL_TEMP_INDEX);
 }
 
 void TelemetryManager::setHvBatteryPackStateOfCharge(int value) {
@@ -117,7 +117,7 @@ void TelemetryManager::setHvBatteryPackStateOfCharge(int value) {
     else if(currentState == psAcceleration){
         // status = greaterThan
     }
-    this->setBmsSensorFlag(status,  HV_SOC_INDEX);
+    this->setBmsSensorFlag(status,  BMS_FLAGS::HV_SOC_INDEX);
 }
 
 //          LV BMS
@@ -133,7 +133,7 @@ void TelemetryManager::setLv1BatteryPackStateOfCharge(int value) {
         // status = greaterThan //todo
     }
 
-    this->setBmsSensorFlag(status,  LV1_SOC_INDEX);
+    this->setBmsSensorFlag(status,  BMS_FLAGS::LV1_SOC_INDEX);
 }
 
 void TelemetryManager::setLv1BatteryPackTemperature(float value) {
@@ -141,14 +141,14 @@ void TelemetryManager::setLv1BatteryPackTemperature(float value) {
 
     bool status = true;
     // status = lessThan maxx cell temp TODO
-    this->setBmsSensorFlag(status, LV1_CELL_TEMP_INDEX);
+    this->setBmsSensorFlag(status, BMS_FLAGS::LV1_CELL_TEMP_INDEX);
 }
 
 void TelemetryManager::setLv1BatteryPackVoltage(float value) {
     this->telemetry->lv1BatteryPackVoltage = value;
     bool status = true;
     // status = lessThan maxx cell temp TODO
-    this->setBmsSensorFlag(status, LV1_PACK_VOLTAGE_INDEX);
+    this->setBmsSensorFlag(status, BMS_FLAGS::LV1_PACK_VOLTAGE_INDEX);
 }
 
 void TelemetryManager::setLv2BatteryPackStateOfCharge(int value) {
@@ -163,7 +163,7 @@ void TelemetryManager::setLv2BatteryPackStateOfCharge(int value) {
         // status = greaterThan //todo
     }
 
-    this->setBmsSensorFlag(status,  LV2_SOC_INDEX);
+    this->setBmsSensorFlag(status,  BMS_FLAGS::LV2_SOC_INDEX);
 }
 
 void TelemetryManager::setLv2BatteryPackTemperature(float value) {
@@ -171,33 +171,29 @@ void TelemetryManager::setLv2BatteryPackTemperature(float value) {
 
     bool status = true;
     // status = lessThan maxx cell temp TODO
-    this->setBmsSensorFlag(status, LV2_CELL_TEMP_INDEX);
+    this->setBmsSensorFlag(status, BMS_FLAGS::LV2_CELL_TEMP_INDEX);
 }
 
 void TelemetryManager::setLv2BatteryPackVoltage(float value) {
     this->telemetry->lv2BatteryPackVoltage = value;
     bool status = true;
     // status = lessThan maxx cell temp TODO
-    this->setBmsSensorFlag(status, LV2_PACK_VOLTAGE_INDEX);
+    this->setBmsSensorFlag(status, BMS_FLAGS::LV2_PACK_VOLTAGE_INDEX);
 }
 
-
-
-
 //          Brake Node
-
 void TelemetryManager::setSolenoid(bool value, int32_t identifier){
     // Set Value in Memory
     switch(identifier){
-        case SOL1_INDEX:
+        case SOLENOID_INDEX::SOL1:
             this->telemetry->solenoid1 = value;
             break;
-        case SOL2_INDEX:
+        case SOLENOID_INDEX::SOL2:
             this->telemetry->solenoid2 = value;
             break;
-        case SOL3_INDEX:
+        case SOLENOID_INDEX::SOL3:
             this->telemetry->solenoid3 = value;
-        case SOL4_INDEX:
+        case SOLENOID_INDEX::SOL4:
             this->telemetry->solenoid4 = value;
         default:
             break;
@@ -207,9 +203,9 @@ void TelemetryManager::setSolenoid(bool value, int32_t identifier){
 void TelemetryManager::setLowPressure4(float value, PodStates currentState) {
     bool status = true;
     if(currentState == psArming || currentState == psArmed || currentState == psAcceleration || currentState == psCoasting){
-        status = inRange<float>(value, LOWPRESSURE_ENGAGED_MIN, LOWPRESSURE_ENGAGED_MAX);
+        status = inRange<float>(value, PNEUMATICS_LIMITs::LOWPRESSURE_ENGAGED_MIN, LOWPRESSURE_ENGAGED_MAX);
     }
-    this->setNodeSensorFlag(status, LP4_INDEX);
+    this->setNodeSensorFlag(status, NODE_FLAGS::LP4_INDEX);
 }
 
 void TelemetryManager::setLowPressure(float value, int identifier){
@@ -219,15 +215,15 @@ void TelemetryManager::setLowPressure(float value, int identifier){
 
     // Set Value in Memory
     switch(identifier){
-        case LP1_INDEX:
+        case NODE_FLAGS::LP1_INDEX:
             this->telemetry->lowPressure1 = value;
             break;
-        case LP2_INDEX:
+        case NODE_FLAGS::LP2_INDEX:
             this->telemetry->lowPressure2 = value;
             break;
-        case LP3_INDEX:
+        case NODE_FLAGS::LP3_INDEX:
             this->telemetry->lowPressure3 = value;
-        case LP4_INDEX:
+        case NODE_FLAGS::LP4_INDEX:
             this->telemetry->lowPressure4 = value;
         default:
             break;

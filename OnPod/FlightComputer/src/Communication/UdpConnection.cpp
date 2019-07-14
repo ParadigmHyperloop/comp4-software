@@ -238,7 +238,7 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
 
 BrakeNodeConnection::BrakeNodeConnection(TelemetryManager pod) : UdpConnection(pod) {
     this->_connectionName = "Brake Node : ";
-    this->_connectionStatusIndex = BRAKE_NODE_HEARTBEAT_INDEX;
+    this->_connectionStatusIndex = CONNECTION_FLAGS::BRAKE_NODE_HEARTBEAT_INDEX;
 }
 
 std::unique_ptr<google::protobuf::Message> BrakeNodeConnection::getProtoUpdateMessage() {
