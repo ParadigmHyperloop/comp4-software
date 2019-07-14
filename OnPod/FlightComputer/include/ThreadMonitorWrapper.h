@@ -6,15 +6,16 @@
 #include "ThreadMonitor.h"
 #include "ThreadMonitorFactory.h"
 
-// Acts as ThreadMonitor Manager that manages safe access to resource
+// Acts as ThreadMonitor Manager that manages safe access to resource fo 1 Thread Monitor
 class ThreadMonitorWrapper {
 
 private:
-  std::shared_ptr<ThreadMonitor> _threadMonitor;
-  std::unique_ptr<std::mutex> _mutex;
+  ThreadMonitor* _threadMonitor;
+  std::mutex _mutex;
 
 public:
   ThreadMonitorWrapper(ThreadMonitorFactory threadMonitorFactory);
+  ~ThreadMonitorWrapper();
   ThreadMonitorStats GetStatus();
   void Feed();
 };

@@ -1,18 +1,19 @@
 #ifndef FLIGHTCOMPUTER_THREADMONITORMANAGER_H
 #define FLIGHTCOMPUTER_THREADMONITORMANAGER_H
 
-
 #include <memory>
-#include <ThreadMonitorWrapper.h>
 #include "IThreadMonitorManager.h"
+#include "ThreadMonitorWrapper.h"
 
 class ThreadMonitorManager : IThreadMonitorManager {
 
 public:
-  ThreadMonitorManager(std::shared_ptr<ThreadMonitorWrapper> canThreadWrapper);
-  void SetCanTelemetryThreadManager(std::shared_ptr<ThreadMonitorWrapper> canThreadMonitorWrapper);
+  ThreadMonitorManager(ThreadMonitorWrapper* canThreadWrapper);
+  ~ThreadMonitorManager();
+  void SetCanTelemetryThreadManager(ThreadMonitorWrapper* canThreadMonitorWrapper);
   ThreadMonitorStats GetCanThreadStatus();
-  std::shared_ptr<ThreadMonitorWrapper>& GetCanThreadMonitorWrapper();
+  ThreadMonitorWrapper*& GetCanThreadMonitorWrapper();
+  void TEMP_FeedCanThreadMonitor();
 };
 
 #endif //FLIGHTCOMPUTER_THREADMONITORMANAGER_H

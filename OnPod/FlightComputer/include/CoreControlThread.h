@@ -5,6 +5,6 @@
 #include "TelemetryManager.h"
 #include "ThreadMonitorManager.h"
 
-void coreControlLoopThread(TelemetryManager, std::unique_ptr<ThreadMonitorManager>&);
+void coreControlLoopThread(TelemetryManager, ThreadMonitorManager*&);
 
 #endif

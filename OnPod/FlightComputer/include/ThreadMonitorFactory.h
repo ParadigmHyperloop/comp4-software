@@ -7,7 +7,7 @@
 
 class ThreadMonitorFactory {
 public:
-  static std::unique_ptr<ThreadMonitor> CreateInstance();
+  static ThreadMonitor* CreateInstance();
 };
 
 #endif //FLIGHTCOMPUTER_THREADMONITORFACTORY_H

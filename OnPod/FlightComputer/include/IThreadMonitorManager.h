@@ -9,10 +9,10 @@
 class IThreadMonitorManager
 {
 public:
-  virtual void SetCanTelemetryThreadManager(std::shared_ptr<ThreadMonitorWrapper> canThreadMonitor) = 0;
   virtual ThreadMonitorStats GetCanThreadStatus() = 0;
-  virtual std::shared_ptr<ThreadMonitorWrapper>& GetCanThreadMonitorWrapper() = 0;
+  virtual ThreadMonitorWrapper*& GetCanThreadMonitorWrapper() = 0;
+  virtual void SetCanTelemetryThreadManager(ThreadMonitorWrapper* canThreadMonitor) = 0;
 protected:
-  std::shared_ptr<ThreadMonitorWrapper> _canThreadMonitorWrapper;
+  ThreadMonitorWrapper* _canThreadMonitorWrapper;
 };
 #endif //FLIGHTCOMPUTER_ITHREADMONITORMANAGER_H

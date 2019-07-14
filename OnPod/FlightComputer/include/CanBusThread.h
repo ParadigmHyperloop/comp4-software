@@ -15,6 +15,6 @@
 #define ON 1
 #define OFF 0
 
-int canNetworkThread(TelemetryManager Pod, std::shared_ptr<ThreadMonitorWrapper>&);
+int canNetworkThread(TelemetryManager Pod, ThreadMonitorWrapper*);
 
 #endif //FLIGHTCOMPUTER_CANBUSTHREAD_H
