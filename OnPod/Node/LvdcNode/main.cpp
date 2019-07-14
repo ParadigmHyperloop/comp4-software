@@ -111,7 +111,7 @@ void loop() {
 
     // update sensor values and hold them in the pBrakeNodeTelemetry message object
 
-//    adc.readActiveChannels();
+    adc.readActiveChannels();
     pLvdcNodeTelemetry.highPowerPackVoltage = hpBatVSense.read();
     pLvdcNodeTelemetry.lowPowerPackVoltage = lpBatVSense.read();
     pLvdcNodeTelemetry.highPowerPackCurrent = hpBatCurrentSensor.read();
@@ -126,6 +126,7 @@ void loop() {
     pLvdcNodeTelemetry.inverterCurrent = inverterCurrentSensor.read();
     pLvdcNodeTelemetry.cooling1Current = coolingCurrentSensor1.read();
     pLvdcNodeTelemetry.cooling2Current = coolingCurrentSensor2.read();
+    Serial.println(pLvdcNodeTelemetry.lowPowerPackVoltage);
 
     // perform state-specific operations
     switch (pLvdcNodeTelemetry.state) {
