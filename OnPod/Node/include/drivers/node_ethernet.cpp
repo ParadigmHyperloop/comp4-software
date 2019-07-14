@@ -30,7 +30,7 @@ bool UDPClass::sendPacket(IPAddress ipDestinationIP, uint16_t uDestinationPort,
         return false; // return false if there was an error resolving the IP or port
     }
     Udp.write(uSendBuffer, uMessageLength);
-    memset(uSendBuffer, 0, TX_BUFFER_SIZE);
+    memset(uSendBuffer, 0, TX_BUFFER_SIZE); // zero the transmit buffer
     if (!Udp.endPacket()) {
         return false; // return false if there was an error sending the packet
     }

@@ -1,0 +1,13 @@
+#include <Arduino.h>
+#include "sensors/lp_transducer_PX250P_arduino.h"
+
+ArduinoPX250P pressure(1);
+
+void setup() {
+    Serial.begin(9600);
+}
+
+void loop() {
+    Serial.println(pressure.read());
+    delay(200);
+}
