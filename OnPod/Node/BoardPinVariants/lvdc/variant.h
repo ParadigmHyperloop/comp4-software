@@ -82,7 +82,7 @@ static const uint8_t W5500_SCK  = PIN_SPI_SCK;
 #define PIN_SPI1_SCK  	 	 14
 #define PIN_SPI1_SS   	 	 17
 #define PERIPH_SPI1   	     sercom0
-#define PAD_SPI1_TX   	 	 SPI_PAD_0_SCK_3
+#define PAD_SPI1_TX   	 	 SPI_PAD_3_SCK_1
 #define PAD_SPI1_RX   		 SERCOM_RX_PAD_2
 static const uint8_t ADC_SS   = PIN_SPI1_SS;
 static const uint8_t ADC_MOSI = PIN_SPI1_MOSI;

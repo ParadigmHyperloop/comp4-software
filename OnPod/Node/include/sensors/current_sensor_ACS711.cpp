@@ -10,5 +10,5 @@ void ACS711::init() {
 
 float ACS711::read() {
     uint16_t uAdcConversion = adc->getuAdcData()[uAdcChannel];
-    return ((float)uAdcConversion/(1<<ADC_BITS)) * ADC_MAX_VOLTAGE * MV_PER_V / MV_PER_AMP;
+    return ((float)uAdcConversion/(1<<ADC_BITS))*ADC_MAX_VOLTAGE*MV_PER_V/MV_PER_AMP-31;
 }

@@ -1,0 +1,13 @@
+#include <Arduino.h>
+#include <sensors/lp_transducer_PX250P_arduino.h>
+
+PX250P pt(1);
+
+void setup() {
+    Serial.begin(9600);
+}
+
+void loop() {
+    Serial.println(pt.read());
+    delay(200);
+}

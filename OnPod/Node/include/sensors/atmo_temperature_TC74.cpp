@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "atmo_temperature_TC74.h"
 
- TC74::TC74(uint8_t uAddress) : uAddress(uAddress) {
+TC74::TC74(uint8_t uAddress) : uAddress(uAddress) {
     Wire.begin();
 }
 

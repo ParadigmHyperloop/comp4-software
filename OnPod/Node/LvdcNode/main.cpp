@@ -5,6 +5,7 @@
  * transmits back LVDC sensor values over UDP.
  */
 #include <Arduino.h>
+
 #include <pb_decode.h>
 #include <pb_encode.h>
 #include <Timer.h>
@@ -56,13 +57,29 @@ void sendToFlightComputer(void*) {
     pb_ostream_t outStream = pb_ostream_from_buffer(udp.uSendBuffer, sizeof(udp.uSendBuffer));
     // encode the message object and store it in the UDP buffer
     pb_encode(&outStream, LvdcNodeToFc_fields, &pLvdcNodeTelemetry);
-    udp.sendPacket(FC_IP, FC_LVDC_NODE_PORT, outStream.bytes_written))
+    udp.sendPacket(FC_IP, FC_LVDC_NODE_PORT, outStream.bytes_written);
+    Serial.println(pLvdcNodeTelemetry.highPowerPackVoltage);
 }
 
-void setup() {
+void setup() {    
     // initialize hardware
     adc.init();
     udp.init();
+
+    hpBatVSense.init();
+    lpBatVSense.init();
+    lp24VSense.init();
+    hp12VSense.init();
+    lp12VSense.init();
+    lp5VSense.init();
+    hpBatCurrentSensor.init();
+    lpBatCurrentSensor.init();
+    lp12VCurrentSensor.init();
+    nodeCurrentSensor.init();
+    lp5VCurrentSensor.init();
+    coolingCurrentSensor1.init();
+    coolingCurrentSensor2.init();
+    inverterCurrentSensor.init();
 
     pinMode(LP5V_EN, OUTPUT);
     pinMode(LP12V_EN, OUTPUT);
@@ -72,10 +89,12 @@ void setup() {
     digitalWrite(LP12V_EN, true);
     digitalWrite(HP12V_EN, true);
     digitalWrite(LP24V_EN, true);
-    pinMode(INV_CTRL, OUTPUT);
+    pinMode(INV_CTL, OUTPUT);
     pinMode(PUMP1_CTL, OUTPUT);
     pinMode(PUMP2_CTL, OUTPUT);
-    internalWatchdog.setup(WDT_HARDCYCLE1S);
+    //internalWatchdog.setup(WDT_HARDCYCLE1S);
+
+    txTimer.every(LVDC_NODE_TO_FC_INTERVAL, sendToFlightComputer, (void*)0);
 }
 
 void loop() {
@@ -90,6 +109,7 @@ void loop() {
     }
 
     // update sensor values and hold them in the pBrakeNodeTelemetry message object
+
     adc.readActiveChannels();
     pLvdcNodeTelemetry.highPowerPackVoltage = hpBatVSense.read();
     pLvdcNodeTelemetry.lowPowerPackVoltage = lpBatVSense.read();
@@ -105,23 +125,24 @@ void loop() {
     pLvdcNodeTelemetry.inverterCurrent = inverterCurrentSensor.read();
     pLvdcNodeTelemetry.cooling1Current = coolingCurrentSensor1.read();
     pLvdcNodeTelemetry.cooling2Current = coolingCurrentSensor2.read();
+    Serial.println(pLvdcNodeTelemetry.lowPowerPackVoltage);
 
     // perform state-specific operations
     switch (pLvdcNodeTelemetry.state) {
         case LvdcNodeStates_lvdcBooting: {
-            digitalWrite(INV_CTRL, false);
+            digitalWrite(INV_CTL, false);
             digitalWrite(PUMP1_CTL, false);
             digitalWrite(PUMP2_CTL, false);
             break;
         }
         case LvdcNodeStates_lvdcStandby: {
-            digitalWrite(INV_CTRL, false);
+            digitalWrite(INV_CTL, false);
             digitalWrite(PUMP1_CTL, false);
             digitalWrite(PUMP2_CTL, false);
             break;
         }
         case LvdcNodeStates_lvdcFlight: {
-            digitalWrite(INV_CTRL, true);
+            digitalWrite(INV_CTL, true);
             digitalWrite(PUMP1_CTL, true);
             digitalWrite(PUMP2_CTL, true);
             break;
@@ -130,5 +151,6 @@ void loop() {
 
     // send to FC is interval has expired
     txTimer.update();
-    internalWatchdog.clear();
+    //internalWatchdog.clear();
+    delay(100);
 }
