@@ -99,14 +99,14 @@ int main( int32_t argc, char** argv)
 
     //  CAN Thread
     TelemetryManager canTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
-    std::thread canThread(canNetworkThread, canTelemManager, std::ref(canTelemetryThreadMonitorWrapper));
+    //std::thread canThread(canNetworkThread, canTelemManager, std::ref(canTelemetryThreadMonitorWrapper));
 //
     try {
-      canThread.detach();
+//      canThread.join();
       coreControlThread.join();
     } catch (const std::exception& e)
     {
-      LOG(ERROR) << "... waht?";
+      LOG(ERROR) << "... what?";
     }
 
     //==================================================================================
