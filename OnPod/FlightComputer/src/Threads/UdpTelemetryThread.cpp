@@ -58,7 +58,7 @@ UdpConnection *getPdsConnection(TelemetryManager Pod){
 /**
  *Wait on socket, parse the received message into a protobuf and hand it off.
  */
-int32_t udpTelemetryThread(TelemetryManager Pod) {
+int32_t udpTelemetryThread(TelemetryManager Pod, ThreadMonitorWrapper* threadStatusMonitor) {
 
     //Logging
     el::Helpers::setThreadName("UDP");
@@ -88,6 +88,9 @@ int32_t udpTelemetryThread(TelemetryManager Pod) {
     }
 
     while (Pod.getPodStateValue() != psShutdown) {
+
+      threadStatusMonitor->Feed();
+
         // Give and get update for each node
         for (auto &&node: nodes) {
             try {

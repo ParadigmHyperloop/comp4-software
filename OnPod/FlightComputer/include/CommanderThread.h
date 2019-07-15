@@ -11,4 +11,4 @@ void parseProtoCommand(PodCommand pPodCommand, TelemetryManager *Pod);
 
 int32_t unserializeProtoMessage(TelemetryManager *Pod, char cBuffer[], int32_t iMessageSize);
 
-int32_t commanderThread(TelemetryManager Pod);
+int32_t commanderThread(TelemetryManager Pod, ThreadMonitorWrapper*);

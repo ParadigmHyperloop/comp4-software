@@ -51,3 +51,21 @@ void FlightComputerInitializer::updatePodNetworkValues(PodNetwork& podNetworkVal
     podNetworkValues.pdsUpdateFreq = config.pdsupdatefreq();
     podNetworkValues.pdsTelemeteryPort = config.pdstelemetryport(); // Port # to send telemetry
 }
+
+
+ThreadMonitorManager* FlightComputerInitializer::GetInitializedThreadMonitorManager()
+{
+  //
+  ThreadMonitorWrapper* canTelemetryMonitorWrapper = new ThreadMonitorWrapper(ThreadMonitorFactory());
+  ThreadMonitorWrapper* navTelemetryMonitorWrapper = new ThreadMonitorWrapper(ThreadMonitorFactory());
+  ThreadMonitorWrapper* pinThreadMonitorWrapper = new ThreadMonitorWrapper(ThreadMonitorFactory());
+  ThreadMonitorWrapper* controlsInterfaceThreadMonitorWrapper = new ThreadMonitorWrapper(ThreadMonitorFactory());
+
+  ThreadMonitorManager* threadMonitorManager = new ThreadMonitorManager(
+      canTelemetryMonitorWrapper,
+      navTelemetryMonitorWrapper,
+      pinThreadMonitorWrapper,
+      controlsInterfaceThreadMonitorWrapper);
+
+  return threadMonitorManager;
+}

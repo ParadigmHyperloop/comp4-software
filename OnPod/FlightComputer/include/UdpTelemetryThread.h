@@ -3,6 +3,7 @@
 
 #include "Common.h"
 #include "UdpConnection.h"
+#include "ThreadMonitorWrapper.h"
 #include <NetworkHelpers.h>
 
 /**
@@ -17,6 +18,6 @@ UdpConnection *getRearNodeConnection(TelemetryManager);
 
 
 
-int32_t udpTelemetryThread(TelemetryManager Pod);
+int32_t udpTelemetryThread(TelemetryManager Pod, ThreadMonitorWrapper*);
 
 #endif //FLIGHTCOMPUTER_UDPTELEMETRYTHREAD_H

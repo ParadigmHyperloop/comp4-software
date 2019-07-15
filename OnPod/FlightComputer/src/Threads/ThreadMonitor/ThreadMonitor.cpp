@@ -10,21 +10,21 @@ ThreadMonitor::ThreadMonitor(const long long safeThreshold, const long long busy
   this->_timeStamp = std::chrono::steady_clock::now();
 }
 
-ThreadMonitorStats ThreadMonitor::GetStatus() {
+ThreadMonitorStatus ThreadMonitor::GetStatus() {
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(
       std::chrono::steady_clock::now() - this->_timeStamp).count();
 
   // TODO: Evaluate comparing long long to milliseconds comparison.
   if (duration < _safeThreshold)
   {
-    return ThreadMonitorStats::Active;
+    return ThreadMonitorStatus::Active;
   }
   else if (duration < _busyThreshold)
   {
-    return ThreadMonitorStats::Busy;
+    return ThreadMonitorStatus::Busy;
   }
 
-  return ThreadMonitorStats::Danger;
+  return ThreadMonitorStatus::Danger;
 }
 
 void ThreadMonitor::Feed() {

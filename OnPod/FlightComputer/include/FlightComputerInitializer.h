@@ -2,6 +2,8 @@
 #define FLIGHTCOMPUTER_FLIGHTCOMPUTERINITIALIZER_H
 
 #include "Structs.h"
+#include "ThreadMonitorManager.h"
+
 class FlightComputerInitializer {
 
 private:
@@ -13,6 +15,7 @@ public:
     static FlightComputerInitializer* GetInstance();
     void importLoggerLibrary();
     void updatePodNetworkValues(PodNetwork&, FlightConfig& config);
+    ThreadMonitorManager* GetInitializedThreadMonitorManager();
 
 
 

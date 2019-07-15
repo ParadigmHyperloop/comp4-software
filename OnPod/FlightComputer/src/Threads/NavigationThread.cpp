@@ -100,7 +100,7 @@ void readNavigationNode(int serialPort, TelemetryManager &pod){
     }
 }
 
-int32_t NavigationThread(TelemetryManager Pod) {
+int32_t NavigationThread(TelemetryManager Pod, ThreadMonitorWrapper* threadStatusMonitor) {
     el::Helpers::setThreadName("Navigation Thread");
     const int serialPort = getSerialPort();
     if(serialPort == -1) {
@@ -112,7 +112,10 @@ int32_t NavigationThread(TelemetryManager Pod) {
     Heartbeat navNodeUpdateFreq = Heartbeat(10);
     while(Pod.getPodStateValue() != psShutdown)
     {
-        if(navNodeUpdateFreq.expired()){
+
+      threadStatusMonitor->Feed();
+
+      if(navNodeUpdateFreq.expired()){
             navNodeUpdateFreq.feed();
             try {
                 readNavigationNode(serialPort,Pod);

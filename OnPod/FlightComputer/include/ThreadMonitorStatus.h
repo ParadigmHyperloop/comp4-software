@@ -1,7 +1,7 @@
 #ifndef FLIGHTCOMPUTER_THREADMONITORSTATUS_H
 #define FLIGHTCOMPUTER_THREADMONITORSTATUS_H
 
-enum class ThreadMonitorStats
+enum class ThreadMonitorStatus
 {
   Active,
   Busy,

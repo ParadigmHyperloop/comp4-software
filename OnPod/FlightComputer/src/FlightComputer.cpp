@@ -79,15 +79,15 @@ int main( int32_t argc, char** argv)
   //  - Instantiate ThreadMonitoringWrapper and pass to Threads
   //  - Periodically Check status in Main Thread IE: threadMWrapper.GetStatus()
 
-  
     ThreadMonitorWrapper* canTelemetryMonitorWrapper = new ThreadMonitorWrapper(ThreadMonitorFactory());
-    ThreadMonitorManager* threadMonitorManagerInstance = new ThreadMonitorManager(canTelemetryMonitorWrapper);
+//    ThreadMonitorManager* threadMonitorManagerInstance = new ThreadMonitorManager(canTelemetryMonitorWrapper);
 
+    auto threadMonitorManagerInstance = initializer->GetInitializedThreadMonitorManager();
 
-    /*
-   * Use std::ref for refs b/c:
-   *    - https://stackoverflow.com/questions/5116756/difference-between-pointer-and-reference-as-thread-parameter
-   */
+  /*
+ * Use std::ref for refs b/c:
+ *    - https://stackoverflow.com/questions/5116756/difference-between-pointer-and-reference-as-thread-parameter
+ */
 
 
   //Core Control Loop Thread
@@ -97,14 +97,11 @@ int main( int32_t argc, char** argv)
                                   std::ref(threadMonitorManagerInstance)
                                   );
 
-    //  CAN Thread
+    // CAN Thread
     TelemetryManager canTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
     std::thread canThread(canNetworkThread, controlTelemManager,
                           std::ref(threadMonitorManagerInstance->GetCanThreadMonitorWrapper()
                           ));
-//      canThread.join();
-//      coreControlThread.join();
-
     //==================================================================================
     //==================================================================================
     //==================================================================================
@@ -112,16 +109,22 @@ int main( int32_t argc, char** argv)
 
     //Navigation Thread
     TelemetryManager navTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
-    std::thread navThread(NavigationThread, navTelemManager);
+    std::thread navThread(NavigationThread, navTelemManager,
+        std::ref(threadMonitorManagerInstance->GetNavThreadMonitorWrapper())
+        );
 
 
     //TelemetryManager Internal Network Thread
     TelemetryManager pinTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
-    std::thread pinThread(udpTelemetryThread, pinTelemManager);
+    std::thread pinThread(udpTelemetryThread, pinTelemManager,
+        std::ref(threadMonitorManagerInstance->GetPinThreadMonitorWrapper()
+        ));
 
     // Controls Interface Connection Thread
     TelemetryManager pCommanderThread = TelemetryManager(&sPodValues, &sPodNetworkValues);
-    std::thread controlsInterfaceThread(commanderThread, pCommanderThread);
+    std::thread controlsInterfaceThread(commanderThread, pCommanderThread,
+        std::ref(threadMonitorManagerInstance->GetControlInterfaceThreadMonitorWrapper())
+        );
 
 	  coreControlThread.join();
     canThread.join();

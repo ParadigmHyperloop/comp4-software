@@ -11,7 +11,7 @@ ThreadMonitorWrapper::~ThreadMonitorWrapper() {
 //  delete this-> _mutex;
 }
 
-ThreadMonitorStats ThreadMonitorWrapper::GetStatus()
+ThreadMonitorStatus ThreadMonitorWrapper::GetStatus()
 {
   std::lock_guard<std::mutex> lck(this->_mutex);
   return this->_threadMonitor->GetStatus();

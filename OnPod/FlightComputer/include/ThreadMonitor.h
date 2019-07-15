@@ -17,7 +17,7 @@ private:
   std::chrono::steady_clock::time_point _timeStamp;
 public:
   explicit ThreadMonitor(const long long safeThreshold = 200, const long long busyThreshold = 500);
-  ThreadMonitorStats GetStatus();
+  ThreadMonitorStatus GetStatus();
   void Feed();
 };
 

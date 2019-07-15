@@ -16,7 +16,7 @@ private:
 public:
   ThreadMonitorWrapper(ThreadMonitorFactory threadMonitorFactory);
   ~ThreadMonitorWrapper();
-  ThreadMonitorStats GetStatus();
+  ThreadMonitorStatus GetStatus();
   void Feed();
 };
 

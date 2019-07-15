@@ -1,4 +1,5 @@
 #include <cerrno>
+#include <ThreadMonitorWrapper.h>
 
 #include "NetworkHelpers.h"
 #include "Common.h"
@@ -139,8 +140,9 @@ int32_t unserializeProtoMessage(TelemetryManager *Pod, char buffer[], int32_t me
 }
 
 
-int32_t commanderThread(TelemetryManager Pod) {
-    //Logging
+int32_t commanderThread(TelemetryManager Pod, ThreadMonitorWrapper* threadStatusMonitor) {
+
+  //Logging
     el::Helpers::setThreadName("Commander Thread");
     LOG(INFO) << "Starting Commander Thread";
 
@@ -176,6 +178,9 @@ int32_t commanderThread(TelemetryManager Pod) {
         LOG(INFO) << "Controls Interface Connected";
         pulse.feed();
         while (Pod.getPodStateValue() != psShutdown) {
+          
+          threadStatusMonitor->Feed();
+
             messageSize = read(connectionSock, buffer, 255);
             if (messageSize < 0) {
                 if (pulse.expired()) {
