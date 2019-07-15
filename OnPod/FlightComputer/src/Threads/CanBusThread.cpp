@@ -269,26 +269,28 @@ int canNetworkThread(TelemetryManager Pod){
         return -1;
     }
 
+    std::string threadLabel = "NetworkThread";
     int32_t currentTorque, newTorque = 0;
     while ( Pod.getPodStateValue() != psShutdown) {
-      TIMED_SCOPE(timeBlkObj, "NetworkThreadLoop, VALUE: current torque");
-        try {
-            readRawSocket( canSockRaw, Pod);
-            readBcmSocket( canSockBcm, Pod );
-        }
-        catch (const std::runtime_error &error){
-            LOG(INFO) << error.what();
-        }
-        catch (const std::exception &error){
-            LOG(INFO) << error.what();
-            return -1;
-        }
+      threadLabel = "NetworkThread - Torque: " + std::to_string(currentTorque);
+      TIMED_SCOPE(timeBlkObj, threadLabel);
+      try {
+          readRawSocket( canSockRaw, Pod);
+          readBcmSocket( canSockBcm, Pod );
+      }
+      catch (const std::runtime_error &error){
+          LOG(INFO) << error.what();
+      }
+      catch (const std::exception &error){
+          LOG(INFO) << error.what();
+          return -1;
+      }
 
-        newTorque = Pod.telemetry->commandedTorque;
-        if(currentTorque != newTorque) {
-            currentTorque = newTorque;
-            setInverterTorque(currentTorque, canSockBcm);
-        }
+      newTorque = Pod.telemetry->commandedTorque;
+      if(currentTorque != newTorque) {
+          currentTorque = newTorque;
+          setInverterTorque(currentTorque, canSockBcm);
+      }
     }
     close(canSockRaw);
 }
