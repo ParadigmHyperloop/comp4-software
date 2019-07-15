@@ -2,8 +2,7 @@
 #define FLIGHTCOMPUTER_STATES_H
 
 #include "TelemetryManager.h"
-
-#define FLAGS_GOOD -1
+#include "Constants/Constants.h"
 
 class TelemetryManager;
 
