@@ -5,9 +5,9 @@
 #define MIN_BRAKING_TIME 20
 #define BRAKING_DISTANCE 250
 
-class CriticalSensorException : public std::runtime_error{
+class CriticalErrorException : public std::runtime_error{
 public:
-    explicit CriticalSensorException(std::string error): std::runtime_error(error){
+    explicit CriticalErrorException(std::string error): std::runtime_error(error){
         this->error = std::move(error);
     };
 
@@ -80,6 +80,7 @@ int32_t PodState::checkNodeStates(){
     if(this->pod->telemetry->commandedBrakeNodeState != this->pod->telemetry->receivedBrakeNodeState){
         return BRAKE_NODE_HEARTBEAT_INDEX;
     }
+    //todo ghost train
     return FLAGS_GOOD;
 }
 
@@ -89,7 +90,7 @@ void PodState::commonChecks() {
     if( status != FLAGS_GOOD ){
         if(isNodeSensorCritical(status)){
             std::string error = "Failed on Critical Node sensor : " + std::to_string(status);
-            throw CriticalSensorException(error);
+            throw CriticalErrorException(error);
         }
         std::string error = "Failed on Node sensor : " + std::to_string(status);
         throw std::runtime_error(error);
@@ -98,27 +99,30 @@ void PodState::commonChecks() {
     if(status != FLAGS_GOOD){
         if(isConnectionFlagCritical(status)){
             std::string error = "Failed on critical communication flag : " + std::to_string(status);
-            throw CriticalSensorException(error);
+            throw CriticalErrorException(error);
         }
         std::string error = "Failed on communication flag : " + std::to_string(status);
         throw std::runtime_error(error);
     }
     status = this->checkNodeStates();
+    if(status != FLAGS_GOOD){
+        std::string error = "Failed on Node state agreement : " + std::to_string(status);
+        throw CriticalErrorException(error);
+    }
 }
 
 void PodState::armedChecks(){
     if(!this->pod->telemetry->inverterHeartbeat){
         std::string error = "Inverter Heartbeat Expired.";
+        throw CriticalErrorException(error);
+    }
+
+    int status = checkFlags(pod->telemetry->inverterSensorFlags);
+    if(status != FLAGS_GOOD){
+        std::string error = "Failed on inverter sensor flag : " + std::to_string(status);
         throw std::runtime_error(error);
     }
-    //todo check array for inverter values
-   /* int status = this->checkNodeStates();
-    if(isInverterSensorCritical(status)){
-        std::string error = "Failed on critical Inverter Sensor : " + std::to_string(status);
-        throw CriticalSensorException(error);
-    }
-    std::string error = "Failed on inverter sensor : " + std::to_string(status);
-    throw std::runtime_error(error);*/
+
 }
 
 bool PodState::brakingCriteriaMet() {
@@ -127,6 +131,7 @@ bool PodState::brakingCriteriaMet() {
     float remainingTrack = pod->telemetry->flightDistance - (pod->telemetry->podPosition);// - BRAKING_DISTANCE;
     lock.unlock();
     if(remainingTrack <= 0){
+        pod->sendUpdate("Braking at : " + std::to_string(pod->telemetry->podPosition));
         return true;
     }
 }
@@ -269,10 +274,6 @@ bool Arming::testTransitions() {
     if(this->timeInStateSeconds() < 3 ){ //Allow nodes to update sensors or timeout if not
         return false;
     }
-    if(this->timeInStateSeconds() > 20 ){
-        this->setupTransition(psStandby, "Arming Timout. Pod --> Standby");
-        return true;
-    }
     try {
         this->commonChecks();
         this->armedChecks();
@@ -385,7 +386,7 @@ bool Acceleration::testTransitions() {
         this->commonChecks();
         this->armedChecks();
     }
-    catch (CriticalSensorException &error){
+    catch (CriticalErrorException &error){
         std::string reason = "Pod --> Braking";
         this->setupTransition(psBraking, error.what() + reason);
         return true;
@@ -423,7 +424,7 @@ bool Coasting::testTransitions() {
         this->commonChecks();
         this->armedChecks();
     }
-    catch (CriticalSensorException &error){
+    catch (CriticalErrorException &error){
         std::string reason = "Pod --> Braking";
         this->setupTransition(psBraking, error.what() + reason);
         return true;
