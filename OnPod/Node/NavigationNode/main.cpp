@@ -8,6 +8,8 @@
 
 #include <Arduino.h>
 #include <Timer.h>
+#include <math.h>
+#include "sensors/atmo_transducer_HSC60P.h"
 
 const uint8_t LEFT_IR_INT_PIN = 18;   // interrupt pin for left IR sensor
 const uint8_t RIGHT_IR_INT_PIN = 2;    // interrupt pin for right IR sensor
@@ -19,6 +21,9 @@ bool strip_detected = false;
 uint32_t strip_time = 0;
 uint32_t last_strip_time = 0;
 uint32_t velocity = 0;
+uint8_t pressure = 0;
+
+HSC60P pressureTransducer(0x38);
 
 // called on IR interrupt
 void irISR() {
@@ -33,7 +38,8 @@ void printData() {
         velocity = DISTANCE_BEWTEEN_STRIPS * MILLIS_PER_SEC / (strip_time-last_strip_time);
         strip_detected = false;
     }
-    sprintf(data_buffer, "%u,%05lu", strip_detected, velocity);
+    pressure = round(pressureTransducer.read());
+    sprintf(data_buffer, "%01u,%05lu,%02u", strip_detected, velocity, pressure);
     Serial.print(data_buffer);
     last_strip_time = strip_time;
     memset(data_buffer, 0, sizeof(data_buffer));
