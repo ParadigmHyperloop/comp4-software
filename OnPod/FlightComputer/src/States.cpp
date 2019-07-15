@@ -316,7 +316,6 @@ bool Armed::testTransitions() {
         return true;
     }
 
-    // todo inverter comms
     if(this->pod->getControlsInterfaceState() == ciFlight){
         this->setupTransition(psPreFlight, (std::string)"Flight Command Received. Pod --> Pre-flight");
         return true;
@@ -348,12 +347,8 @@ bool PreFlight::testTransitions() {
     catch (const std::runtime_error &error ){
         this->setupTransition(psStandby, error.what());
     }
-
-    // todo inverter comms
     this->setupTransition(psAcceleration, (std::string)"Pre-flight Passed. Pod --> Acceleration");
     return true;
-
-    return false;
 }
 
 
