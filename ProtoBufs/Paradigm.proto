@@ -200,9 +200,7 @@ message FcToBrakeNode {
 }
 
 message FcToLvdcNode {
-    optional int32 packetNum = 1;
-    optional PodStates podState = 2;
-    optional LvdcNodeStates manualNodeState = 3;
+    optional LvdcNodeStates nodeState = 2;
 }
 
 // NODE => FC TELEMETRY
@@ -269,7 +267,7 @@ message FlightConfig {
     optional int32 commandPort = 3 [default = 6000];
     optional int32 heartbeatTimeout = 4 [default = 3000];
     optional string podDriver = 5;
-    optional string controlLaptopIpAddr = 6 [default = "127.0.1.100"];
+    optional string controlLaptopIpAddr = 6 [default = "127.0.0.1"];
     optional uint64 nodePort = 7 [default = 5555];
     optional uint64 nodeTimeout = 8 [default = 1000];
     optional uint64 brakeNodeServerPort = 9 [default = 5550];
