@@ -128,6 +128,7 @@ message Telemetry {
     optional int32 lv2BatteryPackStateOfCharge = 88;
     optional float lv2BatteryPackVoltage = 89;
     optional float lv2BatteryPackCellTemperature = 90;
+    optional int32 bmsFault = 97;
 
     // Brake Node
     optional bool solenoid1 = 32;
