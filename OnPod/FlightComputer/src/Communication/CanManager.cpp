@@ -21,6 +21,16 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             if(hvBatteryPackVoltage < 1500){
                 pod.setHvBatteryPackVoltage(hvBatteryPackVoltage);
             }
+
+            indices = {5};
+            auto faultCode1 = extractCanValue<int>(frame.data, indices,1);
+
+            indices = {6};
+            auto faultCode2 = extractCanValue<int>(frame.data, indices,1);
+
+            pod.telemetry->hvFaultCode1 = faultCode1;
+            pod.telemetry->hvFaultCode2 = faultCode2;
+
             break;
         }
         case 0x6b2: {

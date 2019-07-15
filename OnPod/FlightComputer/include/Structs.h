@@ -59,6 +59,8 @@ struct PodValues {
     float hvBatteryPackMaxCellVoltage = 0;
     int hvBatteryPackStateOfCharge = 0;
     float hvBatteryPackMaxCellTemperature = 0;
+    int hvFaultCode1 = 0;
+    int hvFaultCode2 = 0;
 
     // LV-BMS
     float lv1BatteryPackStateOfCharge = 0;

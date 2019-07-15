@@ -22,6 +22,14 @@
   "hvBatteryPackMaxCellTemperature": {
     "name_pretty": "Max Cell Temp",
       "order": 5
+  },
+    "hvFaultCode1": {
+    "name_pretty": "Fault Message 1",
+      "order": 6
+  },
+    "hvFaultCode2": {
+    "name_pretty": "Fault Message 2",
+      "order": 7
   }
 }
 

@@ -277,5 +277,25 @@
     "psAcceleration": [0,0],
     "psCoasting": [0,0],
     "psBraking" : [0,0]
+  },
+      "hvFaultCode2": {
+    "psBooting": [0,0],
+    "psStandby": [0,0],
+    "psArming" : [0,0],
+    "psArmed" : [0,0],
+    "psPreFlight" : [0,0],
+    "psAcceleration": [0,0],
+    "psCoasting": [0,0],
+    "psBraking" : [0,0]
+  },
+      "hvFaultCode1": {
+    "psBooting": [0,0],
+    "psStandby": [0,0],
+    "psArming" : [0,0],
+    "psArmed" : [0,0],
+    "psPreFlight" : [0,0],
+    "psAcceleration": [0,0],
+    "psCoasting": [0,0],
+    "psBraking" : [0,0]
   }
 }
