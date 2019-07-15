@@ -22,9 +22,13 @@
                                 </div>
                            </div>
                            <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     {{ armForm.taxi.label }}<br>
                                     {{ armForm.taxi(class_="form-control", onchange="check_it()") }}
+                                </div>
+                               <div class="col-md-6">
+                                    {{ armForm.tube_pressure.label }}<br>
+                                    {{ armForm.tube_pressure(class_="form-control", onchange="check_it()") }}
                                 </div>
                            </div>
                        </div>

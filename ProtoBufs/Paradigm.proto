@@ -23,13 +23,6 @@ enum PodStates {
     psNone          = 9;
 }
 
-enum MotorStates {
-    msOff       = 0;
-    msCharging  = 1;
-    msIdle      = 2;
-    msEngaged   = 3;
-}
-
 enum ControlsInterfaceStates {
     ciStandby = 0;
     ciArm = 1;
@@ -37,15 +30,6 @@ enum ControlsInterfaceStates {
     ciEmergencyStop = 3;
     ciNone = 4;
     ciRestart = 5;
-}
-
-enum InverterStates {
-    isNone = 0;
-    isConnected = 1;
-}
-
-enum BatteryManagementStates {
-    bmsNominal = 0;
 }
 
 enum LvdcNodeStates {
@@ -62,7 +46,6 @@ message PodCommand {
     optional ControlsInterfaceStates controlsInterfaceState = 1;
     optional PodStates manualPodState = 2;
     optional BrakeNodeStates manualBrakeNodeState = 3;
-    optional MotorStates manualMotorState = 4;
     optional LvdcNodeStates manualLvdcNodeState = 5;
     optional bool automaticStateTransitions = 6;
     repeated int32 solenoidConfiguration = 8;
@@ -74,7 +57,7 @@ message PodCommand {
     optional uint32 startTorque = 14;
     optional uint32 accelerationTime = 15;
     optional bool taxi  = 16;
-
+    optional uint32 expectedTubePressure = 17;
 }
 
 // POD TELEMETRY
@@ -82,15 +65,11 @@ message Telemetry {
     // States
     optional PodStates podState = 1;
     optional BrakeNodeStates brakeNodeState = 2;
-    optional MotorStates motorState = 3;
     optional ControlsInterfaceStates controlsInterfaceState = 4;
-    optional InverterStates inverterState = 5;
     optional LvdcNodeStates lvdcNodeState = 54;
-    optional BatteryManagementStates batteryManagementState = 25;
     optional PodStates breakNodePerceivedPodState = 31;
 
     // Time
-    optional int32 missionTime = 6;
     optional int32 flightTime = 7;
 
     // HeatBeats
@@ -112,6 +91,8 @@ message Telemetry {
     optional int32 inverterBusVoltage = 22;
     optional int32 inverterHeartbeat = 78;
     optional int32 motorSpeed = 80;
+    optional int32 inverterFaultBitLo = 24;
+    optional int32 inverterFaultBitHi = 25;
 
     // HV-BMS
     optional float hvBatteryPackVoltage = 26;
@@ -179,6 +160,7 @@ message Telemetry {
     optional uint32 startTorque = 94;
     optional uint32 accelerationTime = 95;
     optional bool taxi  = 96;
+    optional uint32 expectedTubePressure = 12;
 
     // Updates
     repeated string updateMessages = 77;
@@ -201,9 +183,7 @@ message FcToBrakeNode {
 }
 
 message FcToLvdcNode {
-    optional int32 packetNum = 1;
-    optional PodStates podState = 2;
-    optional LvdcNodeStates manualNodeState = 3;
+    optional LvdcNodeStates nodeState = 2;
 }
 
 // NODE => FC TELEMETRY
@@ -270,7 +250,7 @@ message FlightConfig {
     optional int32 commandPort = 3 [default = 6000];
     optional int32 heartbeatTimeout = 4 [default = 3000];
     optional string podDriver = 5;
-    optional string controlLaptopIpAddr = 6 [default = "127.0.1.100"];
+    optional string controlLaptopIpAddr = 6 [default = "127.0.0.1"];
     optional uint64 nodePort = 7 [default = 5555];
     optional uint64 nodeTimeout = 8 [default = 1000];
     optional uint64 brakeNodeServerPort = 9 [default = 5550];

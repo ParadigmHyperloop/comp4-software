@@ -87,7 +87,7 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
                 return;
             }
             pod.setMotorSpeed(motorSpeed);
-            pod.setConnectionFlag(1,BMS_HEARTBEAT_INDEX);
+            pod.setConnectionFlag(1,CONNECTION_FLAGS::BMS_HEARTBEAT_INDEX);
             break;
         }
         case 0x0A7: {
