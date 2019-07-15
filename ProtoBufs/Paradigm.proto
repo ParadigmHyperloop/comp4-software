@@ -57,7 +57,7 @@ message PodCommand {
     optional uint32 startTorque = 14;
     optional uint32 accelerationTime = 15;
     optional bool taxi  = 16;
-
+    optional uint32 expectedTubePressure = 17;
 }
 
 // POD TELEMETRY
@@ -158,6 +158,7 @@ message Telemetry {
     optional uint32 startTorque = 94;
     optional uint32 accelerationTime = 95;
     optional bool taxi  = 96;
+    optional uint32 expectedTubePressure = 12;
 
     // Updates
     repeated string updateMessages = 77;

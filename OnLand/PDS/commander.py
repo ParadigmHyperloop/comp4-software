@@ -76,6 +76,7 @@ def on_arm_command(profile):
     new_pod_command.startTorque = profile['start_speed']
     new_pod_command.accelerationTime = profile['acceleration_time']
     new_pod_command.taxi = profile['taxi']
+    new_pod_command.expectedTubePressure = profile['tube_pressure']
     pod.send_packet(new_pod_command.SerializeToString())
 
 

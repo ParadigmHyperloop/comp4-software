@@ -93,6 +93,7 @@ void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
         Pod->telemetry->accelerationTime = podCommand.accelerationtime();
         Pod->telemetry->startTorque = podCommand.starttorque();
         Pod->telemetry->taxi = podCommand.taxi();
+        Pod->telemetry->expectedTubePressure = podCommand.expectedtubepressure();
     }
     if (podCommand.has_manualbrakenodestate()){
         BrakeNodeStates state = podCommand.manualbrakenodestate();

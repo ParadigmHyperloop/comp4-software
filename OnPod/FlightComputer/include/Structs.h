@@ -24,6 +24,7 @@ struct PodValues {
     int32_t maxFlightTime = 0;
     int32_t startTorque = 0;
     int32_t accelerationTime = 0;
+    int32_t expectedTubePressure = 0;
     bool taxi  = false;
 
     //Navigation
