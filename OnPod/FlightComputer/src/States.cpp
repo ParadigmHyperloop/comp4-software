@@ -104,7 +104,7 @@ void PodState::commonChecks() {
         throw std::runtime_error(error);
     }
     status = this->checkNodeStates();
-    if(status != FLAGS_GOOD){
+    if(status != GENERAL_CONSTANTS::FLAGS_GOOD){
         std::string error = "Failed on Node state agreement : " + std::to_string(status);
         throw CriticalErrorException(error);
     }
@@ -117,7 +117,7 @@ void PodState::armedChecks(){
     }
 
     int status = checkFlags(pod->telemetry->inverterSensorFlags);
-    if(status != FLAGS_GOOD){
+    if(status != GENERAL_CONSTANTS::FLAGS_GOOD){
         std::string error = "Failed on inverter sensor flag : " + std::to_string(status);
         throw std::runtime_error(error);
     }
