@@ -272,7 +272,6 @@ int canNetworkThread(TelemetryManager Pod){
     std::string threadLabel = "NetworkThread";
     int32_t currentTorque, newTorque = 0;
     while ( Pod.getPodStateValue() != psShutdown) {
-      threadLabel = "NetworkThread - Torque: " + std::to_string(currentTorque);
       TIMED_SCOPE(timeBlkObj, threadLabel);
       try {
           readRawSocket( canSockRaw, Pod);

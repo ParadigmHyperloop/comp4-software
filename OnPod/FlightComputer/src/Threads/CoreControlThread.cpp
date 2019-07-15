@@ -4,10 +4,10 @@
 void coreControlLoopThread(TelemetryManager pod){
 
   TIMED_FUNC(timeObj);
-
+  std::string threadLable("Core Control Thread");
     el::Helpers::setThreadName("Core Control Thread");
     while(pod.getPodStateValue() != psShutdown){
-      TIMED_SCOPE(timeBlkObj, "Control Loop");
+      TIMED_SCOPE(timeBlkObj, threadLable);
       while(pod.telemetry->automaticTransitions && pod.getPodStateValue() != psShutdown){
         pod.telemetry->podState->testTransitions();
         if (pod.telemetry->podState->isTransitioning()) {
@@ -30,7 +30,3 @@ void coreControlLoopThread(TelemetryManager pod){
       pod.setPodState(newState, reason);
     }
 }
-
-
-
-

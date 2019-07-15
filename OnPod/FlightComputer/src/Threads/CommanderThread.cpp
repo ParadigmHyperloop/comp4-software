@@ -48,7 +48,7 @@ void parseOverrides(PodCommand podCommand, TelemetryManager *Pod) {
         Pod->telemetry->nodeSensorFlags[i] = convertFlag(podCommand.sensoroverrideconfiguration(i));
     }
 
-    Pod->setConnectionFlag(convertFlag(podCommand.sensoroverrideconfiguration(6)),BMS_HEARTBEAT_INDEX);
+    Pod->setConnectionFlag(convertFlag(podCommand.sensoroverrideconfiguration(6)), CONNECTION_FLAGS::BMS_HEARTBEAT_INDEX);
     for(auto &flag : Pod->telemetry->bmsSensorFlags){
         flag = convertFlag(podCommand.sensoroverrideconfiguration(6));
     }
@@ -60,23 +60,22 @@ void parseOverrides(PodCommand podCommand, TelemetryManager *Pod) {
     }
 
 
-    Pod->setConnectionFlag(convertFlag(podCommand.sensoroverrideconfiguration(8)),BRAKE_NODE_HEARTBEAT_INDEX);
+    Pod->setConnectionFlag(convertFlag(podCommand.sensoroverrideconfiguration(8)), CONNECTION_FLAGS::BRAKE_NODE_HEARTBEAT_INDEX);
 
-    Pod->setConnectionFlag(convertFlag(podCommand.sensoroverrideconfiguration(9)),LVDC_NODE_HEARTBEAT_INDEX);
+    Pod->setConnectionFlag(convertFlag(podCommand.sensoroverrideconfiguration(9)), CONNECTION_FLAGS::LVDC_NODE_HEARTBEAT_INDEX);
 
-    Pod->setConnectionFlag(convertFlag(podCommand.sensoroverrideconfiguration(10)),ENCLOSURE_HEARTBEAT_INDEX);
+    Pod->setConnectionFlag(convertFlag(podCommand.sensoroverrideconfiguration(10)), CONNECTION_FLAGS::ENCLOSURE_HEARTBEAT_INDEX);
 
-    Pod->setNodeSensorFlag(convertFlag(podCommand.sensoroverrideconfiguration(11)),ENCLOSURE_PRESSURE_INDEX);
-    LOG(INFO)<<convertFlag(podCommand.sensoroverrideconfiguration(11));
-    Pod->setNodeSensorFlag(convertFlag(podCommand.sensoroverrideconfiguration(12)),ENCLOSURE_TEMPERATURE_INDEX);
+    Pod->setNodeSensorFlag(convertFlag(podCommand.sensoroverrideconfiguration(11)), NODE_FLAGS::ENCLOSURE_PRESSURE_INDEX);
+    Pod->setNodeSensorFlag(convertFlag(podCommand.sensoroverrideconfiguration(12)), NODE_FLAGS::ENCLOSURE_TEMPERATURE_INDEX);
 
-    Pod->setNodeSensorFlag(convertFlag(podCommand.sensoroverrideconfiguration(13)),COOLING_PRESSURE_INDEX);
+    Pod->setNodeSensorFlag(convertFlag(podCommand.sensoroverrideconfiguration(13)), NODE_FLAGS::COOLING_PRESSURE_INDEX);
 
-    Pod->setNodeSensorFlag(convertFlag(podCommand.sensoroverrideconfiguration(14)),COOLING_TEMPERATURE_INDEX);
+    Pod->setNodeSensorFlag(convertFlag(podCommand.sensoroverrideconfiguration(14)), NODE_FLAGS::COOLING_TEMPERATURE_INDEX);
 
     Pod->telemetry->checkNodeStates = !podCommand.sensoroverrideconfiguration(15);
 
-    Pod->setConnectionFlag(convertFlag(podCommand.sensoroverrideconfiguration(16)), NAVIGATION_HEARTBEAT_INDEX);
+    Pod->setConnectionFlag(convertFlag(podCommand.sensoroverrideconfiguration(16)), CONNECTION_FLAGS::NAVIGATION_HEARTBEAT_INDEX);
 
 }
 
@@ -94,6 +93,7 @@ void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
         Pod->telemetry->accelerationTime = podCommand.accelerationtime();
         Pod->telemetry->startTorque = podCommand.starttorque();
         Pod->telemetry->taxi = podCommand.taxi();
+        Pod->telemetry->expectedTubePressure = podCommand.expectedtubepressure();
     }
     if (podCommand.has_manualbrakenodestate()){
         BrakeNodeStates state = podCommand.manualbrakenodestate();
@@ -176,55 +176,54 @@ int32_t commanderThread(TelemetryManager Pod) {
             LOG(INFO) << (std::string)"ERROR on making commander socket non-blocking : " + std::strerror(errno);
         }
 
-      std::string threadLabel = "CommanderThread";
-      LOG(INFO) << "Controls Interface Connected";
-      pulse.feed();
-      while (Pod.getPodStateValue() != psShutdown) {
-        messageSize = read(connectionSock, buffer, 255);
-        threadLabel = "CommanderThread - messageSize" + std::to_string(messageSize);
-        TIMED_SCOPE(timeBlkObj, threadLabel);
+        LOG(INFO) << "Controls Interface Connected";
+        pulse.feed();
+        std::string threadLabel = "CommanderThread";
+        while (Pod.getPodStateValue() != psShutdown) {
+            messageSize = read(connectionSock, buffer, 255);
+            TIMED_SCOPE(timeBlkObj, threadLabel);
 
-        if (messageSize < 0) {
-              if (pulse.expired()) {
-                  Pod.setConnectionFlag(0, INTERFACE_HEARTBEAT_INDEX);
-                  LOG(INFO) << "ERROR: Controls Interface Connection Timeout";
-                  break;
-              }
-              if (errno == 11) //Erno 11 means no message available on non blocking socket
-              {
-              } else {
-                  LOG(INFO) << "ERROR: Receveiving message : " << errno;
-              }
-          }
-          if (messageSize == 0) {
-              LOG(INFO) << "Controls Interface Connection Closed";
-              Pod.setConnectionFlag(0, INTERFACE_HEARTBEAT_INDEX);
-              break;
-          } else if (messageSize > 0) {
-              pulse.feed();
-              Pod.setConnectionFlag(1, INTERFACE_HEARTBEAT_INDEX);
-              operationStatus = unserializeProtoMessage(&Pod, buffer, messageSize);
-              memset(buffer, 0, sizeof buffer);
-              if (operationStatus) {
-                  //Return 1 to confirm reception
-                  messageSize = write(connectionSock, "1", 1);
-              } else {
-                  //Return 0 indicating bad message
-                  messageSize = write(connectionSock, "0", 1);
-              }
-              if (messageSize < 0) {
-                  if (errno == 104) {
-                      Pod.setConnectionFlag(0, INTERFACE_HEARTBEAT_INDEX);
-                      LOG(INFO) << "Controls Interface Connection Closed";
-                  } else {
-                      Pod.setConnectionFlag(0, INTERFACE_HEARTBEAT_INDEX);
-                      LOG(INFO) << "ERROR writing to socket: " << errno;
-                  }
-                  break;
-              }
-          }
-      }
-      close(connectionSock);
+          if (messageSize < 0) {
+                if (pulse.expired()) {
+                    Pod.setConnectionFlag(0, CONNECTION_FLAGS::INTERFACE_HEARTBEAT_INDEX);
+                    LOG(INFO) << "ERROR: Controls Interface Connection Timeout";
+                    break;
+                }
+                if (errno == 11) //Erno 11 means no message available on non blocking socket
+                {
+                } else {
+                    LOG(INFO) << "ERROR: Receveiving message : " << errno;
+                }
+            }
+            if (messageSize == 0) {
+                LOG(INFO) << "Controls Interface Connection Closed";
+                Pod.setConnectionFlag(0, CONNECTION_FLAGS::INTERFACE_HEARTBEAT_INDEX);
+                break;
+            } else if (messageSize > 0) {
+                pulse.feed();
+                Pod.setConnectionFlag(1, CONNECTION_FLAGS::INTERFACE_HEARTBEAT_INDEX);
+                operationStatus = unserializeProtoMessage(&Pod, buffer, messageSize);
+                memset(buffer, 0, sizeof buffer);
+                if (operationStatus) {
+                    //Return 1 to confirm reception
+                    messageSize = write(connectionSock, "1", 1);
+                } else {
+                    //Return 0 indicating bad message
+                    messageSize = write(connectionSock, "0", 1);
+                }
+                if (messageSize < 0) {
+                    if (errno == 104) {
+                        Pod.setConnectionFlag(0, CONNECTION_FLAGS::INTERFACE_HEARTBEAT_INDEX);
+                        LOG(INFO) << "Controls Interface Connection Closed";
+                    } else {
+                        Pod.setConnectionFlag(0, CONNECTION_FLAGS::INTERFACE_HEARTBEAT_INDEX);
+                        LOG(INFO) << "ERROR writing to socket: " << errno;
+                    }
+                    break;
+                }
+            }
+        }
+        close(connectionSock);
     }
     close(serverSock);
 }

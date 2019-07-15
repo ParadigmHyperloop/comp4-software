@@ -3,111 +3,54 @@
 
 // Count
 
-
-
-// Constants
-
-#define VACUUM 0
-#define ATMOSPHERE 15
-#define CLOSED 0
-#define OPEN 1
-
-
 // Connection Status Flags
-#define TOTAL_CONNECTION_COUNT 6 // BE SURE TO UDPATE
-#define BRAKE_NODE_HEARTBEAT_INDEX 0
-#define LVDC_NODE_HEARTBEAT_INDEX 1
-#define BMS_HEARTBEAT_INDEX 2
-#define INTERFACE_HEARTBEAT_INDEX 3
-#define ENCLOSURE_HEARTBEAT_INDEX 4
-#define NAVIGATION_HEARTBEAT_INDEX 5
-
-// Inverter Sensor Flag Indices
-#define INVERTER_SENSOR_COUNT 5
-#define MOTOR_TEMPERATURE_INDEX 0
-#define BUS_VOLTAGE_INDEX 1
-#define GATE_DRIVER_TEMP_INDEX 2
-#define CONTROL_BOARD_TEMP_INDEX 3
-#define MAX_IGBT_INDEX 4
-
-// BMS Sensor Flag Indices
-#define BMS_SENSOR_COUNT 9
-#define HV_PACK_VOLTAGE_INDEX 0
-#define HV_MAX_CELL_TEMP_INDEX 1
-#define HV_SOC_INDEX 2
-
-#define LV1_PACK_VOLTAGE_INDEX 3
-#define LV1_CELL_TEMP_INDEX 4
-#define LV1_SOC_INDEX 5
-
-#define LV2_PACK_VOLTAGE_INDEX 6
-#define LV2_CELL_TEMP_INDEX 7
-#define LV2_SOC_INDEX 8
-
-
-// Node Sensor Flag indices
-#define NODE_SENSOR_COUNT 10
-#define LP1_INDEX 0
-#define LP2_INDEX 1
-#define LP3_INDEX 2
-#define LP4_INDEX 3
-#define HP_INDEX  4
-#define HP_TEMP_INDEX 5
-#define ENCLOSURE_PRESSURE_INDEX 6
-#define ENCLOSURE_TEMPERATURE_INDEX 7
-#define COOLING_PRESSURE_INDEX 8
-#define COOLING_TEMPERATURE_INDEX 9
-
-// Solenoid Status indices
-#define SOL1_INDEX 0
-#define SOL2_INDEX 1
-#define SOL3_INDEX 2
-#define SOL4_INDEX 3
 
 // Enclosure
-#define ENCLOSURE_TEMP_MIN 20
-#define ENCLOSURE_TEMP_MAX 60 //todo validate
-#define COOLING_ENGAGED_MIN 20 //TODO validate
-#define COOLING_ENGAGED_MAX 35
-#define COOLING_THRESHOLD 5
+ namespace ENCLOSURE_LIMITS
+{
+    static int32_t ENCLOSURE_TEMP_MIN = 20;
+    static int32_t ENCLOSURE_TEMP_MAX = 60; //todo validate
+
+    static int32_t COOLING_ENGAGED_MIN = 20; //TODO validate
+    static int32_t COOLING_ENGAGED_MAX = 35;
+
+    static int32_t COOLING_THRESHOLD = 5;
+
+    static float ATMOSPHERE_THRESHOLD = 5.0f;
+};
 
 
 // Inverter
-#define MOTOR_UNARMED_TEMP_MIN 10
-#define MOTOR_UNARMED_TEMP_MAX 50 //TODO
-#define MOTOR_ARMED_TEMP_MIN 10
-#define MOTOR_ARMED_TEMP_MAX 400 //TODO
+ namespace INVERTER_LIMITS
+{
+    static int32_t MOTOR_UNARMED_TEMP_MIN = 10;
+    static int32_t MOTOR_UNARMED_TEMP_MAX = 50; //TODO
 
-#define COMPONENT_TEMP_MIN 10
-#define COMPONENT_TEMP_MAX 400 //TODO
+    static int32_t MOTOR_ARMED_TEMP_MIN = 10;
+    static int32_t MOTOR_ARMED_TEMP_MAX = 400; //TODO
 
-
-
+    static int32_t COMPONENT_TEMP_MIN = 10;
+    static int32_t COMPONENT_TEMP_MAX = 400; //TODO
+};
 
 // Pneumatics
+ namespace PNEUMATICS_LIMITS
+{
+    static int32_t PNEUMATICS_THRESHOLD = 3; // Margin of acceptable error on ideal value
 
-#define PNEUMATICS_THRESHOLD 3 // Margin of acceptable error on ideal value
+    static int32_t LOWPRESSURE_UNARMED_MIN = 0;
+    static int32_t LOWPRESSURE_UNARMED_MAX = 18;
+    static int32_t LOWPRESSURE_ENGAGED_MIN = 215;
+    static int32_t LOWPRESSURE_ENGAGED_MAX = 255;
 
-#define LOWPRESSURE_UNARMED_MIN 0.0
-#define LOWPRESSURE_UNARMED_MAX 18
-#define LOWPRESSURE_ENGAGED_MIN 215
-#define LOWPRESSURE_ENGAGED_MAX 255
+    static int32_t HIGHPRESSURE_ARMED_MAX = 1725;
+    static int32_t HIGHPRESSURE_ARMED_MIN = 1550;
 
-#define HIGHPRESSURE_ARMED_MAX 1725
-#define HIGHPRESSURE_ARMED_MIN 1550
+    static int32_t PRESSURE_TEMP_MIN = 0;
+    static int32_t PRESSURE_TEMP_MAX = 60; //C
 
-#define PRESSURE_TEMP_MIN 0
-#define PRESSURE_TEMP_MAX 60 //C
-
-#define COOLING_TEMP_MIN 10
-#define COOLING_TEMP_MAX 30
-
-
-
-//
-
-
-#define ATMOSPHERE_THRESHOLD 5.0f
-
+    static int32_t COOLING_TEMP_MIN = 10;
+    static int32_t COOLING_TEMP_MAX = 30;
+};
 
 #endif //FLIGHTCOMPUTER_SENSORCONFIG_H

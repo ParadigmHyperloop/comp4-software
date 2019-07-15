@@ -43,8 +43,10 @@ class FlightProfileForm(FlaskForm):
     motor_speed = IntegerField('Motor Torque (N/m)', validators=[DataRequired("Required"), NumberRange(0, 500, " 0 < Torque < 500 ")])
     start_speed = IntegerField('Start Torque', validators=[DataRequired("Required"), NumberRange(0, 500, " 0 < Start Torque < 500 ")])
     acceleration_time = IntegerField('Acceleration Time', validators=[DataRequired("Required"), NumberRange(-1, 20, "0  < Acceleration Time < 20 ")])
-    flight_distance = IntegerField('Flight Distance (me)', validators=[DataRequired("Required"), NumberRange(0, 1200, "0  < Flight Distance < 1200 ")])
+    flight_distance = IntegerField('Flight Distance (m)', validators=[DataRequired("Required"), NumberRange(0, 1200, "0  < Flight Distance < 1200 ")])
     taxi = BooleanField("Taxi")
+    tube_pressure = IntegerField(' Tube Pressure ', validators=[DataRequired("Required"), NumberRange(0, 40, " Set tube pressure ")])
+
 
 
 def validate_configuration_values(configuration_form):

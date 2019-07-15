@@ -4,6 +4,8 @@
 #include <mutex>
 #include "Structs.h"
 #include "States.h"
+#include "Constants/SensorConfig.h"
+#include "Constants/Constants.h"
 #include <mutex>
 
 class TelemetryManager

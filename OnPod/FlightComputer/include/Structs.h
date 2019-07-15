@@ -15,7 +15,8 @@ struct PodValues {
     ControlsInterfaceStates controlsInterfaceState = ciNone;
     BrakeNodeStates receivedBrakeNodeState = bnsNone;
     BrakeNodeStates commandedBrakeNodeState = bnsNone;
-    LvdcNodeStates lvdcNodeState = lvdcNone;
+    LvdcNodeStates receivedLvdcNodeState = lvdcNone;
+    LvdcNodeStates commandedLvdcNodeState = lvdcNone;
 
     // Flight Profile
     int32_t motorTorque = 0;
@@ -23,6 +24,7 @@ struct PodValues {
     int32_t maxFlightTime = 0;
     int32_t startTorque = 0;
     int32_t accelerationTime = 0;
+    int32_t expectedTubePressure = 0;
     bool taxi  = false;
 
     //Navigation
