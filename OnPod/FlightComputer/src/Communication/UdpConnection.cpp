@@ -184,6 +184,8 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_hvbatterypackcurrent(pod.telemetry->hvBatteryPackCurrent);
     protoMessage->set_hvbatterypackmaxcellvoltage(pod.telemetry->hvBatteryPackMaxCellVoltage);
     protoMessage->set_hvbatterypackminimumcellvoltage(pod.telemetry->hvBatteryPackMinimumCellVoltage);
+    protoMessage->set_hvfaultcode1(pod.telemetry->hvFaultCode1);
+    protoMessage->set_hvfaultcode2(pod.telemetry->hvFaultCode2);
 
     // LV
     protoMessage->set_lv1batterypackcelltemperature(pod.telemetry->lv1BatteryPackCellTemperature);

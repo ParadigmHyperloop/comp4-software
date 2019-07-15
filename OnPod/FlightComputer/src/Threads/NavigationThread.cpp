@@ -123,7 +123,6 @@ int32_t NavigationThread(TelemetryManager Pod) {
                 readNavigationNode(serialPort,Pod);
             }
             catch (std::runtime_error &error){
-                Pod.sendUpdate(error.what());
                 success = false;
             }
             if(success){

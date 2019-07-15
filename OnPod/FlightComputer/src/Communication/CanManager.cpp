@@ -21,6 +21,16 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             if(hvBatteryPackVoltage < 1500){
                 pod.setHvBatteryPackVoltage(hvBatteryPackVoltage);
             }
+
+            indices = {5};
+            auto faultCode1 = extractCanValue<int>(frame.data, indices,1);
+
+            indices = {6};
+            auto faultCode2 = extractCanValue<int>(frame.data, indices,1);
+
+            pod.telemetry->hvFaultCode1 = faultCode1;
+            pod.telemetry->hvFaultCode2 = faultCode2;
+
             break;
         }
         case 0x6b2: {
@@ -97,15 +107,14 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             pod.setInverterHeartbeat(1);
             break;
         }
-        case 0x6B4: {
+        case 0x6B4: { // lp1
             //todo
-            indices = {2, 3};
+            indices = {0, 1};
             auto lv1BatteryPackVoltage = extractCanValue<float>(frame.data, indices, (float) 10.0);
-            indices = {4};
+            indices = {2};
             auto lv1BatteryPackSoc = extractCanValue<int>(frame.data, indices, 2);
-            indices = {2, 3};
+            indices = {3, 4};
             auto lv1BatteryPackTemperature = extractCanValue<float>(frame.data, indices, (float) 1.0);
-
 
             if(lv1BatteryPackSoc > 1 && lv1BatteryPackSoc < 110){
                 pod.setLv1BatteryPackStateOfCharge(lv1BatteryPackSoc);
@@ -116,18 +125,16 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             if(lv1BatteryPackTemperature > 1 && lv1BatteryPackTemperature < 300){
                 pod.setLv1BatteryPackTemperature(lv1BatteryPackTemperature);
             }
-
         }
-
-        case 0x6B5: {
+        case 0x6B5: {  //hp
             //todo
-            indices = {2, 3};
+            indices = {0, 1};
             auto lv2BatteryPackVoltage = extractCanValue<float>(frame.data, indices, (float) 10.0);
 
-            indices = {4};
+            indices = {2};
             auto lv2BatteryPackSoc = extractCanValue<int>(frame.data, indices, 2);
 
-            indices = {2, 3};
+            indices = {3, 4};
             auto lv2BatteryPackTemperature = extractCanValue<float>(frame.data, indices, (float) 1.0);
 
             if(lv2BatteryPackSoc > 1 && lv2BatteryPackSoc < 110){
@@ -139,7 +146,9 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             if(lv2BatteryPackTemperature > 1 && lv2BatteryPackTemperature < 300){
                 pod.setLv2BatteryPackTemperature(lv2BatteryPackTemperature);
             }
-
+        }
+        case 0x700: {  //hp
+            // fault
         }
 
         default:
