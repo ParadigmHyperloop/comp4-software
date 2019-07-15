@@ -15,7 +15,7 @@ namespace GENERAL_CONSTANTS
     static const float   REAR_WHEEL_CIRCUMFRENCE = 0.933619f;
     static const float   STRIP_DISTANCE = 30.48;
 
-    static const int32_t NAV_SERIAL_MESSAGE_SIZE = 7;
+    static const int32_t NAV_SERIAL_MESSAGE_SIZE = 10;
 };
 
 namespace CONNECTION_FLAGS
