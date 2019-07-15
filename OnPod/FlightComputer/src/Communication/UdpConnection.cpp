@@ -163,7 +163,7 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     std::unique_ptr<Telemetry> protoMessage (new Telemetry());
     protoMessage->set_podstate(pod.getPodStateValue());
     protoMessage->set_brakenodestate(pod.telemetry->receivedBrakeNodeState);
-    protoMessage->set_lvdcnodestate(lvdcNone);
+    protoMessage->set_lvdcnodestate(pod.telemetry->receivedLvdcNodeState);
 
 
     // Brake Node
@@ -323,6 +323,12 @@ std::unique_ptr<google::protobuf::Message> LvdcNodeConnection::getProtoUpdateMes
 }
 
 bool LvdcNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
-
-    return true; //todo
+    LvdcNodeToFc protoMessage = LvdcNodeToFc();
+    if (!protoMessage.ParseFromArray(buffer, messageSize)) {
+        std::string strError = "Failed to parse Update from LvDC";
+        throw std::invalid_argument(strError);
+    }
+    this->pod.telemetry->receivedLvdcNodeState = protoMessage.state();
+    LOG(INFO)<<protoMessage.state();
+    return true;
 }
