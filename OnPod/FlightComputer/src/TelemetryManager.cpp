@@ -54,8 +54,8 @@ void TelemetryManager::setManualBrakeNodeState(BrakeNodeStates eBrakeNodeState) 
     this->telemetry->manualBrakeNodeState = eBrakeNodeState;
 }
 
-void TelemetryManager::setManualLvdcNodeState(LvdcNodeStates eLvdcNodeState) {
-    this->telemetry->manualLvdcNodeState = eLvdcNodeState;
+void TelemetryManager::setManualLvdcNodeState(LvdcNodeStates lvdcNodeState) {
+    this->telemetry->manualLvdcNodeState = lvdcNodeState;
 }
 
 void TelemetryManager::setManualPodState(PodStates ePodState) {

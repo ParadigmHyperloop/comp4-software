@@ -48,6 +48,8 @@ OnPod/FlightComputer/BeagleBone/
 
 OnPod/FlightComputer/Host/src/
 
+OnPod/FlightComputer/cmake-build-relwithdebinfo/
+
 OnPod/FlightComputer/myeasylog\.log
 OnLand/pyvenv.cfg
 *.log

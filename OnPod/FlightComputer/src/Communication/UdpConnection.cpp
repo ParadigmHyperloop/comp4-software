@@ -243,7 +243,6 @@ BrakeNodeConnection::BrakeNodeConnection(TelemetryManager pod) : UdpConnection(p
 
 std::unique_ptr<google::protobuf::Message> BrakeNodeConnection::getProtoUpdateMessage() {
     std::unique_ptr<FcToBrakeNode> protoMessage (new FcToBrakeNode());
-    protoMessage->set_packetnum(this->getNewPacketId());
     BrakeNodeStates manualState = this->pod.telemetry->manualBrakeNodeState;
     if(manualState == bnsNone){
         protoMessage->set_nodestate(this->pod.telemetry->commandedBrakeNodeState);
@@ -309,6 +308,18 @@ bool EnclosureNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
 LvdcNodeConnection::LvdcNodeConnection(TelemetryManager pod) : UdpConnection(pod) {
     this->_connectionName = "Lvdc Node : ";
     this->_connectionStatusIndex = LVDC_NODE_HEARTBEAT_INDEX;
+}
+
+std::unique_ptr<google::protobuf::Message> LvdcNodeConnection::getProtoUpdateMessage() {
+    std::unique_ptr<FcToLvdcNode> protoMessage (new FcToLvdcNode());
+    LvdcNodeStates manualState = this->pod.telemetry->manualLvdcNodeState;
+    if(manualState == lvdcNone){
+        protoMessage->set_nodestate(this->pod.telemetry->commandedLvdcNodeState);
+        return protoMessage;
+    }
+    protoMessage->set_nodestate(this->pod.telemetry->manualLvdcNodeState);
+    LOG(INFO)<<protoMessage->DebugString();
+    return protoMessage;
 }
 
 bool LvdcNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
