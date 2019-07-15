@@ -69,14 +69,16 @@ void TelemetryManager::setHvBatteryPackVoltage(float value) {
     bool status = true;
     PodStates currentState = this->getPodStateValue();
 
-    //todo ranges
 
-    // Check if nominal for current state
-    if(currentState == psArming || currentState == psArmed){
-        // status = inRange()
+
+    if(currentState == psStandby){
+        status = inRange<float>(value, HV_LIMITS::VOLTAGE_ABSOLUTE_MIN, HV_LIMITS::VOLTAGE_MAX);
     }
-    else if(currentState == psAcceleration){
-        // status = greaterThan
+
+    //Ignore BMS in acceleration, only read bus voltage
+
+    else if(currentState == psArming || currentState == psArmed ||currentState == psBraking){
+        status = inRange<float>(value, HV_LIMITS::VOLTAGE_ARMED_MIN, HV_LIMITS::VOLTAGE_MAX);
     }
     // Set sensor flag
     this->setBmsSensorFlag(status, BMS_FLAGS::HV_PACK_VOLTAGE_INDEX);
@@ -97,8 +99,9 @@ void TelemetryManager::setHvBatteryPackMaxCellVoltage(float value){
 void TelemetryManager::setHvBatteryPackMaxCellTemperature(float value) {
     this->telemetry->hvBatteryPackMaxCellTemperature = value;
 
-    bool status = true;
-    // status = lessThan maxx cell temp TODO
+    bool status;
+    status = inRange<float>(value, HV_LIMITS::CELL_TEMP_MIN, HV_LIMITS::CELL_TEMP_MAX);
+
     this->setBmsSensorFlag(status, BMS_FLAGS::HV_MAX_CELL_TEMP_INDEX);
 }
 
@@ -107,12 +110,8 @@ void TelemetryManager::setHvBatteryPackStateOfCharge(int value) {
 
     bool status = true;
     PodStates currentState = this->getPodStateValue();
-    // Check if nominal for current state
     if(currentState == psArming || currentState == psArmed){
-        // status = greaterThan //todo
-    }
-    else if(currentState == psAcceleration){
-        // status = greaterThan
+        status = inRange<int>(value, HV_LIMITS::SOC_MIN, HV_LIMITS::SOC_MAX);
     }
     this->setBmsSensorFlag(status,  BMS_FLAGS::HV_SOC_INDEX);
 }
@@ -127,7 +126,7 @@ void TelemetryManager::setLv1BatteryPackStateOfCharge(int value) {
     // Check if nominal for current state
     if(currentState == psArming || currentState == psArmed ||
     currentState == psPreFlight || currentState == psAcceleration){
-        // status = greaterThan //todo
+        status = inRange<int>(value, LV_LIMITS::SOC_MIN, LV_LIMITS::SOC_MAX);
     }
 
     this->setBmsSensorFlag(status,  BMS_FLAGS::LV1_SOC_INDEX);
@@ -136,15 +135,15 @@ void TelemetryManager::setLv1BatteryPackStateOfCharge(int value) {
 void TelemetryManager::setLv1BatteryPackTemperature(float value) {
     this->telemetry->lv1BatteryPackCellTemperature = value;
 
-    bool status = true;
-    // status = lessThan maxx cell temp TODO
+    bool status;
+    status = inRange<float>(value, LV_LIMITS::CELL_TEMP_MIN, LV_LIMITS::CELL_TEMP_MAX);
     this->setBmsSensorFlag(status, BMS_FLAGS::LV1_CELL_TEMP_INDEX);
 }
 
 void TelemetryManager::setLv1BatteryPackVoltage(float value) {
     this->telemetry->lv1BatteryPackVoltage = value;
-    bool status = true;
-    // status = lessThan maxx cell temp TODO
+    bool status;
+    status = inRange<float>(value, LV_LIMITS::VOLTAGE_ABSOLUTE_MIN, LV_LIMITS::VOLTAGE_MAX);
     this->setBmsSensorFlag(status, BMS_FLAGS::LV1_PACK_VOLTAGE_INDEX);
 }
 
@@ -154,10 +153,9 @@ void TelemetryManager::setLv2BatteryPackStateOfCharge(int value) {
     bool status = true;
     PodStates currentState = this->getPodStateValue();
 
-    // Check if nominal for current state
     if(currentState == psArming || currentState == psArmed ||
        currentState == psPreFlight || currentState == psAcceleration){
-        // status = greaterThan //todo
+        status = inRange<int>(value, LV_LIMITS::SOC_MIN, LV_LIMITS::SOC_MAX);
     }
 
     this->setBmsSensorFlag(status,  BMS_FLAGS::LV2_SOC_INDEX);
@@ -166,15 +164,15 @@ void TelemetryManager::setLv2BatteryPackStateOfCharge(int value) {
 void TelemetryManager::setLv2BatteryPackTemperature(float value) {
     this->telemetry->lv2BatteryPackCellTemperature = value;
 
-    bool status = true;
-    // status = lessThan maxx cell temp TODO
+    bool status;
+    status = inRange<float>(value, LV_LIMITS::CELL_TEMP_MIN, LV_LIMITS::CELL_TEMP_MAX);
     this->setBmsSensorFlag(status, BMS_FLAGS::LV2_CELL_TEMP_INDEX);
 }
 
 void TelemetryManager::setLv2BatteryPackVoltage(float value) {
     this->telemetry->lv2BatteryPackVoltage = value;
-    bool status = true;
-    // status = lessThan maxx cell temp TODO
+    bool status;
+    status = inRange<float>(value, LV_LIMITS::VOLTAGE_ABSOLUTE_MIN, LV_LIMITS::VOLTAGE_MAX);
     this->setBmsSensorFlag(status, BMS_FLAGS::LV2_PACK_VOLTAGE_INDEX);
 }
 

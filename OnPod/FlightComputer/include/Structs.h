@@ -63,9 +63,9 @@ struct PodValues {
     int hvFaultCode2 = 0;
 
     // LV-BMS
-    float lv1BatteryPackStateOfCharge = 0;
+    int32_t lv1BatteryPackStateOfCharge = 0;
     float lv1BatteryPackVoltage = 0;
-    int32_t lv1BatteryPackCellTemperature = 0;
+    float lv1BatteryPackCellTemperature = 0;
 
     int32_t lv2BatteryPackStateOfCharge = 0;
     float lv2BatteryPackVoltage = 0;
