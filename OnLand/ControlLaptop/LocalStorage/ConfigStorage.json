@@ -1,1 +1,1 @@
-{"heartbeat_timeout": 5000, "controlLaptopIpAddr": "192.168.0.2", "retrieval_timeout": 60000, "command_port": 6000, "telemetry_port": 7000, "pod_address": "127.0.0.1", "pod_driver": "Simulation"}
+{"pod_driver": "Simulation", "telemetry_port": 7000, "command_port": 6000, "pod_address": "127.0.0.1", "controlLaptopIpAddr": "192.168.0.128", "heartbeat_timeout": 5000, "retrieval_timeout": 60000}

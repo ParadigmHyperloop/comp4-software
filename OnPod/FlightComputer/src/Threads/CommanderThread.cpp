@@ -67,7 +67,7 @@ void parseOverrides(PodCommand podCommand, TelemetryManager *Pod) {
     Pod->setConnectionFlag(convertFlag(podCommand.sensoroverrideconfiguration(10)),ENCLOSURE_HEARTBEAT_INDEX);
 
     Pod->setNodeSensorFlag(convertFlag(podCommand.sensoroverrideconfiguration(11)),ENCLOSURE_PRESSURE_INDEX);
-
+    LOG(INFO)<<convertFlag(podCommand.sensoroverrideconfiguration(11));
     Pod->setNodeSensorFlag(convertFlag(podCommand.sensoroverrideconfiguration(12)),ENCLOSURE_TEMPERATURE_INDEX);
 
     Pod->setNodeSensorFlag(convertFlag(podCommand.sensoroverrideconfiguration(13)),COOLING_PRESSURE_INDEX);

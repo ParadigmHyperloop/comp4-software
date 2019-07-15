@@ -1553,12 +1553,26 @@ class FcToLvdcNode :
 
   // accessors -------------------------------------------------------
 
-  // optional .LvdcNodeStates nodeState = 2;
-  bool has_nodestate() const;
-  void clear_nodestate();
-  static const int kNodeStateFieldNumber = 2;
-  ::LvdcNodeStates nodestate() const;
-  void set_nodestate(::LvdcNodeStates value);
+  // optional int32 packetNum = 1;
+  bool has_packetnum() const;
+  void clear_packetnum();
+  static const int kPacketNumFieldNumber = 1;
+  ::google::protobuf::int32 packetnum() const;
+  void set_packetnum(::google::protobuf::int32 value);
+
+  // optional .PodStates podState = 2;
+  bool has_podstate() const;
+  void clear_podstate();
+  static const int kPodStateFieldNumber = 2;
+  ::PodStates podstate() const;
+  void set_podstate(::PodStates value);
+
+  // optional .LvdcNodeStates manualNodeState = 3;
+  bool has_manualnodestate() const;
+  void clear_manualnodestate();
+  static const int kManualNodeStateFieldNumber = 3;
+  ::LvdcNodeStates manualnodestate() const;
+  void set_manualnodestate(::LvdcNodeStates value);
 
   // @@protoc_insertion_point(class_scope:FcToLvdcNode)
  private:
@@ -1567,7 +1581,9 @@ class FcToLvdcNode :
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
-  int nodestate_;
+  ::google::protobuf::int32 packetnum_;
+  int podstate_;
+  int manualnodestate_;
   friend struct ::TableStruct_Paradigm_2eproto;
 };
 // -------------------------------------------------------------------
@@ -2489,7 +2505,7 @@ class FlightConfig :
   ::std::string* release_poddriver();
   void set_allocated_poddriver(::std::string* poddriver);
 
-  // optional string controlLaptopIpAddr = 6 [default = "127.0.0.1"];
+  // optional string controlLaptopIpAddr = 6 [default = "127.0.1.100"];
   bool has_controllaptopipaddr() const;
   void clear_controllaptopipaddr();
   static const int kControlLaptopIpAddrFieldNumber = 6;
@@ -4729,23 +4745,60 @@ inline void FcToBrakeNode::set_solenoid4config(bool value) {
 
 // FcToLvdcNode
 
-// optional .LvdcNodeStates nodeState = 2;
-inline bool FcToLvdcNode::has_nodestate() const {
+// optional int32 packetNum = 1;
+inline bool FcToLvdcNode::has_packetnum() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void FcToLvdcNode::clear_nodestate() {
-  nodestate_ = 0;
+inline void FcToLvdcNode::clear_packetnum() {
+  packetnum_ = 0;
   _has_bits_[0] &= ~0x00000001u;
 }
-inline ::LvdcNodeStates FcToLvdcNode::nodestate() const {
-  // @@protoc_insertion_point(field_get:FcToLvdcNode.nodeState)
-  return static_cast< ::LvdcNodeStates >(nodestate_);
+inline ::google::protobuf::int32 FcToLvdcNode::packetnum() const {
+  // @@protoc_insertion_point(field_get:FcToLvdcNode.packetNum)
+  return packetnum_;
 }
-inline void FcToLvdcNode::set_nodestate(::LvdcNodeStates value) {
-  assert(::LvdcNodeStates_IsValid(value));
+inline void FcToLvdcNode::set_packetnum(::google::protobuf::int32 value) {
   _has_bits_[0] |= 0x00000001u;
-  nodestate_ = value;
-  // @@protoc_insertion_point(field_set:FcToLvdcNode.nodeState)
+  packetnum_ = value;
+  // @@protoc_insertion_point(field_set:FcToLvdcNode.packetNum)
+}
+
+// optional .PodStates podState = 2;
+inline bool FcToLvdcNode::has_podstate() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void FcToLvdcNode::clear_podstate() {
+  podstate_ = 0;
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline ::PodStates FcToLvdcNode::podstate() const {
+  // @@protoc_insertion_point(field_get:FcToLvdcNode.podState)
+  return static_cast< ::PodStates >(podstate_);
+}
+inline void FcToLvdcNode::set_podstate(::PodStates value) {
+  assert(::PodStates_IsValid(value));
+  _has_bits_[0] |= 0x00000002u;
+  podstate_ = value;
+  // @@protoc_insertion_point(field_set:FcToLvdcNode.podState)
+}
+
+// optional .LvdcNodeStates manualNodeState = 3;
+inline bool FcToLvdcNode::has_manualnodestate() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void FcToLvdcNode::clear_manualnodestate() {
+  manualnodestate_ = 0;
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline ::LvdcNodeStates FcToLvdcNode::manualnodestate() const {
+  // @@protoc_insertion_point(field_get:FcToLvdcNode.manualNodeState)
+  return static_cast< ::LvdcNodeStates >(manualnodestate_);
+}
+inline void FcToLvdcNode::set_manualnodestate(::LvdcNodeStates value) {
+  assert(::LvdcNodeStates_IsValid(value));
+  _has_bits_[0] |= 0x00000004u;
+  manualnodestate_ = value;
+  // @@protoc_insertion_point(field_set:FcToLvdcNode.manualNodeState)
 }
 
 // -------------------------------------------------------------------
@@ -5659,7 +5712,7 @@ inline void FlightConfig::set_allocated_poddriver(::std::string* poddriver) {
   // @@protoc_insertion_point(field_set_allocated:FlightConfig.podDriver)
 }
 
-// optional string controlLaptopIpAddr = 6 [default = "127.0.0.1"];
+// optional string controlLaptopIpAddr = 6 [default = "127.0.1.100"];
 inline bool FlightConfig::has_controllaptopipaddr() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }

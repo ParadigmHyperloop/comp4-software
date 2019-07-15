@@ -15,8 +15,7 @@ struct PodValues {
     ControlsInterfaceStates controlsInterfaceState = ciNone;
     BrakeNodeStates receivedBrakeNodeState = bnsNone;
     BrakeNodeStates commandedBrakeNodeState = bnsNone;
-    LvdcNodeStates receivedLvdcNodeState = lvdcNone;
-    LvdcNodeStates commandedLvdcNodeState = lvdcNone;
+    LvdcNodeStates lvdcNodeState = lvdcNone;
 
     // Flight Profile
     int32_t motorTorque = 0;

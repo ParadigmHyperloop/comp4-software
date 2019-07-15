@@ -54,8 +54,8 @@ void TelemetryManager::setManualBrakeNodeState(BrakeNodeStates eBrakeNodeState) 
     this->telemetry->manualBrakeNodeState = eBrakeNodeState;
 }
 
-void TelemetryManager::setManualLvdcNodeState(LvdcNodeStates lvdcNodeState) {
-    this->telemetry->manualLvdcNodeState = lvdcNodeState;
+void TelemetryManager::setManualLvdcNodeState(LvdcNodeStates eLvdcNodeState) {
+    this->telemetry->manualLvdcNodeState = eLvdcNodeState;
 }
 
 void TelemetryManager::setManualPodState(PodStates ePodState) {
@@ -386,7 +386,7 @@ void TelemetryManager::setInverterBusVoltage(int value) {
 }
 
 
-//          Position
+// Position
 
 void TelemetryManager::addPodDistance(float distance) {
     std::lock_guard<std::mutex> lock(this->telemetry->positionLock);
@@ -404,7 +404,7 @@ void TelemetryManager::setPodVelocity(float velocity) {
 
 
 
-//         Flag Setting
+//          Flag Setting
 
 void TelemetryManager::resetValues(int32_t index){
     switch(index){

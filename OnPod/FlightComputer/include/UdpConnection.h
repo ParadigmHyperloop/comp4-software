@@ -118,6 +118,7 @@ public:
     std::unique_ptr<google::protobuf::Message> getProtoUpdateMessage() override;
 };
 
+
 class BrakeNodeConnection : public UdpConnection {
 public:
 
@@ -148,8 +149,6 @@ public:
     ~LvdcNodeConnection() override = default;
 
     explicit LvdcNodeConnection(TelemetryManager pod);
-
-    std::unique_ptr<google::protobuf::Message> getProtoUpdateMessage() override;
 
     bool parseUpdate(char buffer[], int32_t messageSize) override;
 

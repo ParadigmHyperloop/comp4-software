@@ -107,7 +107,6 @@ public:
 };
 
 class Coasting : public PodState{
-public:
     Coasting(TelemetryManager*);
     ~Coasting();
     bool testTransitions() override;
