@@ -163,7 +163,7 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     std::unique_ptr<Telemetry> protoMessage (new Telemetry());
     protoMessage->set_podstate(pod.getPodStateValue());
     protoMessage->set_brakenodestate(pod.telemetry->receivedBrakeNodeState);
-    protoMessage->set_lvdcnodestate(lvdcNone);
+    protoMessage->set_lvdcnodestate(pod.telemetry->receivedLvdcNodeState);
 
 
     // Brake Node
@@ -243,7 +243,6 @@ BrakeNodeConnection::BrakeNodeConnection(TelemetryManager pod) : UdpConnection(p
 
 std::unique_ptr<google::protobuf::Message> BrakeNodeConnection::getProtoUpdateMessage() {
     std::unique_ptr<FcToBrakeNode> protoMessage (new FcToBrakeNode());
-    protoMessage->set_packetnum(this->getNewPacketId());
     BrakeNodeStates manualState = this->pod.telemetry->manualBrakeNodeState;
     if(manualState == bnsNone){
         protoMessage->set_nodestate(this->pod.telemetry->commandedBrakeNodeState);
@@ -311,7 +310,25 @@ LvdcNodeConnection::LvdcNodeConnection(TelemetryManager pod) : UdpConnection(pod
     this->_connectionStatusIndex = LVDC_NODE_HEARTBEAT_INDEX;
 }
 
-bool LvdcNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
+std::unique_ptr<google::protobuf::Message> LvdcNodeConnection::getProtoUpdateMessage() {
+    std::unique_ptr<FcToLvdcNode> protoMessage (new FcToLvdcNode());
+    LvdcNodeStates manualState = this->pod.telemetry->manualLvdcNodeState;
+    if(manualState == lvdcNone){
+        protoMessage->set_nodestate(this->pod.telemetry->commandedLvdcNodeState);
+        return protoMessage;
+    }
+    protoMessage->set_nodestate(this->pod.telemetry->manualLvdcNodeState);
+    LOG(INFO)<<protoMessage->DebugString();
+    return protoMessage;
+}
 
-    return true; //todo
+bool LvdcNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
+    LvdcNodeToFc protoMessage = LvdcNodeToFc();
+    if (!protoMessage.ParseFromArray(buffer, messageSize)) {
+        std::string strError = "Failed to parse Update from LvDC";
+        throw std::invalid_argument(strError);
+    }
+    this->pod.telemetry->receivedLvdcNodeState = protoMessage.state();
+    LOG(INFO)<<protoMessage.state();
+    return true;
 }

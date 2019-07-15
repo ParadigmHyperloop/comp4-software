@@ -34,6 +34,10 @@ UdpConnection *getLvdcNodeConnection(TelemetryManager Pod) {
     try {
         lvdcNode->configureServer(Pod.sPodNetworkValues->lvdcNodeServerNumber,
                                        Pod.sPodNetworkValues->nodeTimeoutMili);
+
+        lvdcNode->configureClient(Pod.sPodNetworkValues->cNodeIpAddrs[1], Pod.sPodNetworkValues->nodePort,
+                                   Pod.sPodNetworkValues->nodeClientSocket, Pod.sPodNetworkValues->brakeNodeUpdateFreq);
+
         lvdcNode->setRecvBufferSize(100); // Small recv buffer keeps parsed data fresh.
     }
     catch (std::runtime_error &e) {
@@ -41,8 +45,6 @@ UdpConnection *getLvdcNodeConnection(TelemetryManager Pod) {
     }
     return lvdcNode;
 }
-
-
 
 UdpConnection *getPdsConnection(TelemetryManager Pod){
     auto connection = new PdsConnection(Pod);
