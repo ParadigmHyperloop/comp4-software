@@ -26,8 +26,8 @@ int8_t getSerialPort(){
     //tcflush( serialPort, TCIFLUSH );
     struct termios SerialPortSettings = {};
     tcgetattr(serialPort, &SerialPortSettings);
-    cfsetispeed(&SerialPortSettings,B9600);
-    cfsetospeed(&SerialPortSettings,B9600);
+    cfsetispeed(&SerialPortSettings,B115200);
+    cfsetospeed(&SerialPortSettings,B115200);
     SerialPortSettings.c_cflag &= ~PARENB;
     SerialPortSettings.c_cflag &= ~CSTOPB;
     SerialPortSettings.c_cflag &= ~CSIZE;
@@ -63,7 +63,7 @@ void readNavigationNode(int serialPort, TelemetryManager &pod){
     std::stringstream dataStream;
     dataStream.str(std::string());
     char read_buffer[GENERAL_CONSTANTS::NAV_SERIAL_MESSAGE_SIZE + 1] = {0};
-    int  bytes_read, irStripCount, velocity = 0;
+    int  bytes_read, irStripCount, velocity, tubePressure = 0;
     int total_bytes_read = 0;
     int status = 0;
     status = write(serialPort, "1", 1);
@@ -86,17 +86,21 @@ void readNavigationNode(int serialPort, TelemetryManager &pod){
     std::getline(dataStream, data, ',');
     try {
         irStripCount = std::stoi(data);
+        std::getline(dataStream, data, ',');
+        velocity = std::stoi(data);
     }
     catch (std::exception &e){
         std::string sError = std::string("Error Parsing Nav Node Data");
         throw std::runtime_error(sError);
     }
-    dataStream >> velocity;
+    dataStream >> tubePressure;
     std::stringstream().swap(dataStream);
 
     if(irStripCount > 0){
         updatePosition(velocity, irStripCount, pod);
     }
+    pod.telemetry->tubePressure = tubePressure;
+    LOG(INFO)<<"string : "<< irStripCount << " velocity : "<< velocity << "  pressure : " << tubePressure;
 }
 
 int32_t NavigationThread(TelemetryManager Pod) {
