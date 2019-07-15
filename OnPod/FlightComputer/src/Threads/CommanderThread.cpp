@@ -144,7 +144,10 @@ int32_t commanderThread(TelemetryManager Pod) {
     el::Helpers::setThreadName("Commander Thread");
     LOG(INFO) << "Starting Commander Thread";
 
-    //Sockets and buffers
+
+  TIMED_FUNC(timeObj);
+
+  //Sockets and buffers
     int32_t connectionSock, operationStatus;
     ssize_t messageSize;
     int32_t serverSock = createCommanderServerSocket(Pod.sPodNetworkValues->commanderPortNumber);
@@ -176,6 +179,8 @@ int32_t commanderThread(TelemetryManager Pod) {
         LOG(INFO) << "Controls Interface Connected";
         pulse.feed();
         while (Pod.getPodStateValue() != psShutdown) {
+
+          TIMED_SCOPE(timeObj, "CommanderThread");
             messageSize = read(connectionSock, buffer, 255);
             if (messageSize < 0) {
                 if (pulse.expired()) {

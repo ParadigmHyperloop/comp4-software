@@ -60,6 +60,7 @@ UdpConnection *getPdsConnection(TelemetryManager Pod){
  */
 int32_t udpTelemetryThread(TelemetryManager Pod) {
 
+  TIMED_FUNC(timeObj);
     //Logging
     el::Helpers::setThreadName("UDP");
     LOG(INFO) << "Starting TelemetryManager Internal Network Thread";
@@ -88,15 +89,17 @@ int32_t udpTelemetryThread(TelemetryManager Pod) {
     }
 
     while (Pod.getPodStateValue() != psShutdown) {
+
+      TIMED_SCOPE(timeObj, "UdpTelemetryThread");
         // Give and get update for each node
         for (auto &&node: nodes) {
-            try {
-                node->giveUpdate();
-                node->getUpdate();
-            }
-            catch (std::runtime_error &e) {
-                LOG(INFO) << e.what();
-            }
+          try {
+              node->giveUpdate();
+              node->getUpdate();
+          }
+          catch (std::runtime_error &e) {
+              LOG(INFO) << e.what();
+          }
         }
     }
     for (auto &&node: nodes) {
@@ -108,5 +111,3 @@ int32_t udpTelemetryThread(TelemetryManager Pod) {
 }
 
 #pragma clang diagnostic pop
-
-

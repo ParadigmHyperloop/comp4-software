@@ -233,6 +233,7 @@ void readBcmSocket(int socket, TelemetryManager& pod) {
 }
 
 int canNetworkThread(TelemetryManager Pod){
+  TIMED_FUNC(timerObj);
     //Logging
     el::Helpers::setThreadName("CAN Thread");
     LOG(INFO) << "Starting CAN Thread on ";
@@ -270,6 +271,7 @@ int canNetworkThread(TelemetryManager Pod){
 
     int32_t currentTorque, newTorque = 0;
     while ( Pod.getPodStateValue() != psShutdown) {
+      TIMED_SCOPE(timeObj, "NetworkThreadLoop");
         try {
             readRawSocket( canSockRaw, Pod);
             readBcmSocket( canSockBcm, Pod );
