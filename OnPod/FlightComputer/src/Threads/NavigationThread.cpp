@@ -114,7 +114,7 @@ int32_t NavigationThread(TelemetryManager Pod) {
     Heartbeat navNodeUpdateFreq = Heartbeat(10);
     while(Pod.getPodStateValue() != psShutdown)
     {
-      TIMED_SCOPE(timeObj, "Navigation Thread");
+      TIMED_SCOPE(timeBlkObj, "Navigation Thread");
         if(navNodeUpdateFreq.expired()){
             navNodeUpdateFreq.feed();
             try {

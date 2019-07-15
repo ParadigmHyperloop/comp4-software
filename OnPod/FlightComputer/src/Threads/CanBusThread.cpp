@@ -271,7 +271,7 @@ int canNetworkThread(TelemetryManager Pod){
 
     int32_t currentTorque, newTorque = 0;
     while ( Pod.getPodStateValue() != psShutdown) {
-      TIMED_SCOPE(timeObj, "NetworkThreadLoop");
+      TIMED_SCOPE(timeBlkObj, "NetworkThreadLoop, VALUE: current torque");
         try {
             readRawSocket( canSockRaw, Pod);
             readBcmSocket( canSockBcm, Pod );

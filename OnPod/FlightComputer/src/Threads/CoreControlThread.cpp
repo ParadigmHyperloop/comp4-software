@@ -7,7 +7,7 @@ void coreControlLoopThread(TelemetryManager pod){
 
     el::Helpers::setThreadName("Core Control Thread");
     while(pod.getPodStateValue() != psShutdown){
-      TIMED_SCOPE(timeObj, "Control Loop");
+      TIMED_SCOPE(timeBlkObj, "Control Loop");
       while(pod.telemetry->automaticTransitions && pod.getPodStateValue() != psShutdown){
         pod.telemetry->podState->testTransitions();
         if (pod.telemetry->podState->isTransitioning()) {

@@ -90,7 +90,7 @@ int32_t udpTelemetryThread(TelemetryManager Pod) {
 
     while (Pod.getPodStateValue() != psShutdown) {
 
-      TIMED_SCOPE(timeObj, "UdpTelemetryThread");
+      TIMED_SCOPE(timeBlkObj, "UdpTelemetryThread");
         // Give and get update for each node
         for (auto &&node: nodes) {
           try {

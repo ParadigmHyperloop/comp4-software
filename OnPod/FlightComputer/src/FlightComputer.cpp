@@ -39,26 +39,27 @@ void initializeTelemetryStruct(PodValues &telemetry){
 int main( int32_t argc, char** argv)
 {
   TIMED_FUNC(timeObj);
-    signal(SIGPIPE, signal_callback_handler);
+  signal(SIGPIPE, signal_callback_handler);
 
-    // Initialize Logger Logger;
+  // Initialize Logger Logger;
 	FlightComputerInitializer* initializer = FlightComputerInitializer::GetInstance();
 	initializer->importLoggerLibrary();
 
 	LOG(INFO)<<"Main Thread is Started";
-    std::unique_ptr<FlightConfigServer> configurationServer(FlightConfigServer::getServer(NetworkConstants::iCONFIG_SERVER_PORT));
+  std::unique_ptr<FlightConfigServer> configurationServer(FlightConfigServer::getServer(NetworkConstants::iCONFIG_SERVER_PORT));
 	FlightConfig flightConfigurationParameters;
-    bool configReceived = false;
+  bool configReceived = false;
 	while(!configReceived){
-	  TIMED_SCOPE(timeObj, "Waiting For Config");
-	    configReceived = true;
-        try {
-          // flightConfigurationParameters = configurationServer->runServer(); //Comment out to use the default network values in the proto obj
-        } catch (exception& e)
-        {
-            configurationServer->closePorts();
-            configReceived = false;
-        }
+	  TIMED_SCOPE(timeBlkObj, "Waiting For Config");
+
+    configReceived = true;
+    try {
+      // flightConfigurationParameters = configurationServer->runServer(); //Comment out to use the default network values in the proto obj
+    } catch (exception& e)
+    {
+        configurationServer->closePorts();
+        configReceived = false;
+    }
 	}
 
   // Create Shared Memory
