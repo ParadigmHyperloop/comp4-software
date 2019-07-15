@@ -50,6 +50,10 @@ public:
 
     void armedChecks();
 
+    void setSevenSeg(uint8_t state);
+
+    void writeGPIO(uint8_t pin, bool value);
+
 
 protected:
     std::string _currentFailure;

@@ -1,3 +1,5 @@
+#include <iostream>
+#include <string>
 #include "States.h"
 #include "easylogging++.h"
 #include "Constants/SensorConfig.h"
@@ -178,6 +180,91 @@ std::unique_ptr<PodState> PodState::createState(PodStates newState, TelemetryMan
     }
 }
 
+void setSevenSeg(uint8_t state) {
+    switch (state) {
+        case 0: {
+            writeGPIO(26, true);
+            writeGPIO(44, false);
+            writeGPIO(45, false);
+            writeGPIO(47, false);
+            writeGPIO(69, false);
+        }
+        case 1: {
+            writeGPIO(26, true);
+            writeGPIO(44, false);
+            writeGPIO(45, false);
+            writeGPIO(47, false);
+            writeGPIO(69, true);
+        }
+        case 2: {
+            writeGPIO(26, true);
+            writeGPIO(44, false);
+            writeGPIO(45, false);
+            writeGPIO(47, true);
+            writeGPIO(69, false);
+        }
+        case 3: {
+            writeGPIO(26, true);
+            writeGPIO(44, true);
+            writeGPIO(45, false);
+            writeGPIO(47, true);
+            writeGPIO(69, false);
+        }
+        case 4: {
+            writeGPIO(26, true);
+            writeGPIO(44, false);
+            writeGPIO(45, true);
+            writeGPIO(47, false);
+            writeGPIO(69, false);
+        }
+        case 5: {
+            writeGPIO(26, true);
+            writeGPIO(44, false);
+            writeGPIO(45, true);
+            writeGPIO(47, false);
+            writeGPIO(69, true);
+        }
+        case 6: {
+            writeGPIO(26, true);
+            writeGPIO(44, false);
+            writeGPIO(45, true);
+            writeGPIO(47, true);
+            writeGPIO(69, false);
+        }
+        case 7: {
+            writeGPIO(26, true);
+            writeGPIO(44, false);
+            writeGPIO(45, true);
+            writeGPIO(47, true);
+            writeGPIO(69, true);
+        }
+    }
+}
+
+void writeGPIO(uint8_t pin, bool value) {
+    std::fstream fs;
+    std::string pinStr = std::to_string(pin);
+    fs.open("/sys/kernel/debug/omap_mux/gpmc_ad4");
+    fs << "7";
+    fs.close();
+    fs.open("/sys/class/gpio/export");
+    fs << pinStr;
+    fs.close();
+    std::string pinDirectionFile = "/sys/class/gpio/gpio" + pinStr + "/direction"
+    fs.open(pinDirectionFile);
+    fs << "out";
+    fs.close();
+    std::string pinValueFile = "/sys/class/gpio/gpio" + pinStr + "/value"
+    fs.open(pinValueFile);
+    // writing 0 turns the LED on, writing 1 turns it off
+    if (value) {
+        fs << "0";
+    }
+    else {
+        fs << "1";
+    }
+    fs.close();
+}
 
  // *  ******************** BOOTING ***********************8
 
@@ -186,6 +273,7 @@ Booting::Booting(TelemetryManager* pod): PodState(pod) {
     _stateIdentifier = psBooting;
     this->pod->telemetry->commandedBrakeNodeState = bnsBooting;
     //_lvdcNodeState = lvdcBooting;
+    setSevenSeg(0);
 }
 
 Booting::~Booting() = default;
@@ -204,6 +292,7 @@ Standby::Standby(TelemetryManager * pod): PodState(pod) {
     //_lvdcNodeState = lvdcStandby;
     this->pod->telemetry->controlsInterfaceState = ciNone; // Guard against auto transition
     this->_currentFailure = "";
+    setSevenSeg(1);
 }
 
 Standby::~Standby(){
@@ -257,6 +346,7 @@ Arming::Arming(TelemetryManager * pod ): PodState(pod) {
     _stateIdentifier = psArming;
     this->pod->telemetry->commandedBrakeNodeState = bnsStandby;
     //_lvdcNodeState = lvdcFlight;
+    setSevenSeg(2);
 }
 
 Arming::~Arming() = default;
@@ -294,6 +384,7 @@ Armed::Armed(TelemetryManager * pod) : PodState(pod) {
     _stateIdentifier = psArmed;
     this->pod->telemetry->commandedBrakeNodeState = bnsStandby;
     //_lvdcNodeState = lvdcFlight;
+    setSevenSeg(3);
 }
 
 Armed::~Armed() {
@@ -330,6 +421,7 @@ PreFlight::PreFlight(TelemetryManager* pod) : PodState(pod) {
     _stateIdentifier = psPreFlight;
     this->pod->telemetry->commandedBrakeNodeState = bnsFlight;
     //_lvdcNodeState = lvdcFlight;
+    setSevenSeg(4);
 }
 
 PreFlight::~PreFlight() = default;
@@ -367,6 +459,7 @@ Acceleration::Acceleration(TelemetryManager * pod) : PodState(pod) {
     this->pod->telemetry->commandedBrakeNodeState = bnsFlight;
     //_lvdcNodeState = lvdcFlight;
     this->pod->telemetry->commandedTorque = this->pod->telemetry->motorTorque;
+    setSevenSeg(5);
 }
 
 Acceleration::~Acceleration() {
@@ -412,6 +505,7 @@ bool Acceleration::testTransitions() {
 Coasting::Coasting(TelemetryManager* pod) : PodState(pod) {
     _stateIdentifier = psCoasting;
     this->pod->telemetry->commandedTorque = 0;
+    setSevenSeg(6);
 }
 
 bool Coasting::testTransitions() {
@@ -452,6 +546,7 @@ Braking::Braking(TelemetryManager* pod) : PodState(pod) {
     _stateIdentifier = psBraking;
     this->pod->telemetry->commandedBrakeNodeState = bnsBraking;
     //_lvdcNodeState = lvdcFlight;
+    setSevenSeg(7);
 }
 
 Braking::~Braking() = default;
@@ -470,4 +565,3 @@ bool Braking::testTransitions() {
     }
     return false;
 }
-
