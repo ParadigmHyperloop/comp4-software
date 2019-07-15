@@ -15,8 +15,7 @@
 #include "Constants/Constants.h"
 #include "Constants/SensorConfig.h"
 
-#define STRIP_DISTANCE 30.48
-#define BUFFER_SIZE 7
+
 
 
 int8_t getSerialPort(){
@@ -54,7 +53,7 @@ int8_t getSerialPort(){
 
 void updatePosition(int velocity, int irStripCount, TelemetryManager &pod){
     pod.telemetry->totalStripCount += irStripCount;
-    float stripDistance = pod.telemetry->totalStripCount * STRIP_DISTANCE;
+    float stripDistance = pod.telemetry->totalStripCount * GENERAL_CONSTANTS::STRIP_DISTANCE;
     pod.setPodDistance( stripDistance );
     pod.setPodVelocity(velocity/100);
 }
@@ -63,7 +62,7 @@ void updatePosition(int velocity, int irStripCount, TelemetryManager &pod){
 void readNavigationNode(int serialPort, TelemetryManager &pod){
     std::stringstream dataStream;
     dataStream.str(std::string());
-    char read_buffer[BUFFER_SIZE + 1] = {0};
+    char read_buffer[GENERAL_CONSTANTS::NAV_SERIAL_MESSAGE_SIZE + 1] = {0};
     int  bytes_read, irStripCount, velocity = 0;
     int total_bytes_read = 0;
     int status = 0;
@@ -72,7 +71,7 @@ void readNavigationNode(int serialPort, TelemetryManager &pod){
         std::string sError = std::string("Error writing to Navnode Serial Port");
         throw std::runtime_error(sError);
     }
-    while(total_bytes_read < BUFFER_SIZE){
+    while(total_bytes_read < GENERAL_CONSTANTS::NAV_SERIAL_MESSAGE_SIZE){
         bytes_read=read(serialPort,read_buffer, sizeof(read_buffer));
         if(bytes_read > 0){
             total_bytes_read += bytes_read;
@@ -119,7 +118,7 @@ int32_t NavigationThread(TelemetryManager Pod) {
             }
             catch (std::runtime_error &error){
                 Pod.sendUpdate(error.what());
-                Pod.setConnectionFlag(0, NAVIGATION_HEARTBEAT_INDEX);
+                Pod.setConnectionFlag(0, CONNECTION_FLAGS::NAVIGATION_HEARTBEAT_INDEX);
             }
         }
     }

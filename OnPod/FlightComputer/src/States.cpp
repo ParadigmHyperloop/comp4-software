@@ -49,8 +49,8 @@ float PodState::timeInFlightSeconds() {
 }
 
 bool PodState::isNodeSensorCritical(int sensorIndex) {
-    std::vector<int> criticalSensors = {HP_INDEX, LP1_INDEX, LP2_INDEX, LP3_INDEX, LP4_INDEX,
-                                        ENCLOSURE_TEMPERATURE_INDEX, ENCLOSURE_PRESSURE_INDEX};
+    std::vector<int> criticalSensors = {NODE_FLAGS::HP_INDEX, NODE_FLAGS::LP1_INDEX, NODE_FLAGS::LP2_INDEX, NODE_FLAGS::LP3_INDEX, NODE_FLAGS::LP4_INDEX,
+                                        NODE_FLAGS::ENCLOSURE_TEMPERATURE_INDEX, NODE_FLAGS::ENCLOSURE_PRESSURE_INDEX};
     return std::find(criticalSensors.begin(), criticalSensors.end(), sensorIndex) != criticalSensors.end();
 }
 
@@ -70,23 +70,23 @@ int8_t PodState::checkFlags(std::vector<int8_t > &flags){
             return i;
         }
     }
-    return FLAGS_GOOD;
+    return GENERAL_CONSTANTS::FLAGS_GOOD;
 }
 
 int32_t PodState::checkNodeStates(){
     if(!this->pod->telemetry->checkNodeStates){
-        return FLAGS_GOOD;
+        return GENERAL_CONSTANTS::FLAGS_GOOD;
     }
     if(this->pod->telemetry->commandedBrakeNodeState != this->pod->telemetry->receivedBrakeNodeState){
-        return BRAKE_NODE_HEARTBEAT_INDEX;
+        return CONNECTION_FLAGS::BRAKE_NODE_HEARTBEAT_INDEX;
     }
-    return FLAGS_GOOD;
+    return GENERAL_CONSTANTS::FLAGS_GOOD;
 }
 
 void PodState::commonChecks() {
     int32_t status;
     status = this->checkFlags(this->pod->telemetry->nodeSensorFlags);
-    if( status != FLAGS_GOOD ){
+    if( status != GENERAL_CONSTANTS::FLAGS_GOOD ){
         if(isNodeSensorCritical(status)){
             std::string error = "Failed on Critical Node sensor : " + std::to_string(status);
             throw CriticalSensorException(error);
@@ -95,7 +95,7 @@ void PodState::commonChecks() {
         throw std::runtime_error(error);
     }
     status = this->checkFlags(this->pod->telemetry->connectionFlags);
-    if(status != FLAGS_GOOD){
+    if(status != GENERAL_CONSTANTS::FLAGS_GOOD){
         if(isConnectionFlagCritical(status)){
             std::string error = "Failed on critical communication flag : " + std::to_string(status);
             throw CriticalSensorException(error);

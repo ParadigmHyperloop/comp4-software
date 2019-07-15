@@ -266,16 +266,16 @@ bool BrakeNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
         std::string strError = "Failed to parse Update from Brake Node";
         throw std::invalid_argument(strError);
     }
-    this->pod.setSolenoid(protoMessage.solenoid1(),SOL1_INDEX);
-    this->pod.setSolenoid(protoMessage.solenoid2(), SOL2_INDEX);
-    this->pod.setSolenoid(protoMessage.solenoid3(), SOL3_INDEX);
-    this->pod.setSolenoid(protoMessage.solenoid4(), SOL4_INDEX);
+    this->pod.setSolenoid(protoMessage.solenoid1(), SOLENOID_INDEX::SOL1);
+    this->pod.setSolenoid(protoMessage.solenoid2(), SOLENOID_INDEX::SOL2);
+    this->pod.setSolenoid(protoMessage.solenoid3(), SOLENOID_INDEX::SOL3);
+    this->pod.setSolenoid(protoMessage.solenoid4(), SOLENOID_INDEX::SOL4);
     this->pod.setPressureVesselTemperature(protoMessage.pneumatictemperature());
     this->pod.setHighPressure(protoMessage.highpressure());
-    this->pod.setLowPressure(protoMessage.lowpressure1(), LP1_INDEX);
-    this->pod.setLowPressure(protoMessage.lowpressure2(), LP2_INDEX);
-    this->pod.setLowPressure(protoMessage.lowpressure3(), LP3_INDEX);
-    this->pod.setLowPressure(protoMessage.lowpressurecommon(), LP4_INDEX);
+    this->pod.setLowPressure(protoMessage.lowpressure1(), NODE_FLAGS::LP1_INDEX);
+    this->pod.setLowPressure(protoMessage.lowpressure2(), NODE_FLAGS::LP2_INDEX);
+    this->pod.setLowPressure(protoMessage.lowpressure3(), NODE_FLAGS::LP3_INDEX);
+    this->pod.setLowPressure(protoMessage.lowpressurecommon(), NODE_FLAGS::LP4_INDEX);
     this->pod.setPressureVesselTemperature(protoMessage.pneumatictemperature());
     this->pod.setCoolantTemperature(protoMessage.coolanttemperature());
     this->pod.setRecievedBrakeNodeState(protoMessage.state());
@@ -287,7 +287,7 @@ bool BrakeNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
 
 EnclosureNodeConnection::EnclosureNodeConnection(TelemetryManager pod) : UdpConnection(pod) {
     this->_connectionName = "Enclosure Node : ";
-    this->_connectionStatusIndex = ENCLOSURE_HEARTBEAT_INDEX;
+    this->_connectionStatusIndex = CONNECTION_FLAGS::ENCLOSURE_HEARTBEAT_INDEX;
 }
 
 bool EnclosureNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
@@ -308,7 +308,7 @@ bool EnclosureNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
 
 LvdcNodeConnection::LvdcNodeConnection(TelemetryManager pod) : UdpConnection(pod) {
     this->_connectionName = "Lvdc Node : ";
-    this->_connectionStatusIndex = LVDC_NODE_HEARTBEAT_INDEX;
+    this->_connectionStatusIndex = CONNECTION_FLAGS::LVDC_NODE_HEARTBEAT_INDEX;
 }
 
 bool LvdcNodeConnection::parseUpdate(char buffer[], int32_t messageSize){

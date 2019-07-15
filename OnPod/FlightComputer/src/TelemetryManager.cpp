@@ -2,9 +2,6 @@
 #include "TelemetryManager.h"
 #include "Common.h"
 #include "comparingHelpers.h"
-#include "Constants/SensorConfig.h"
-
-#define REAR_WHEEL_CIRCUMFRENCE 0.933619f
 
 TelemetryManager::TelemetryManager()=default;
 
@@ -203,7 +200,7 @@ void TelemetryManager::setSolenoid(bool value, int32_t identifier){
 void TelemetryManager::setLowPressure4(float value, PodStates currentState) {
     bool status = true;
     if(currentState == psArming || currentState == psArmed || currentState == psAcceleration || currentState == psCoasting){
-        status = inRange<float>(value, PNEUMATICS_LIMITs::LOWPRESSURE_ENGAGED_MIN, LOWPRESSURE_ENGAGED_MAX);
+        status = inRange<float>(value, PNEUMATICS_LIMITS::LOWPRESSURE_ENGAGED_MIN, PNEUMATICS_LIMITS::LOWPRESSURE_ENGAGED_MAX);
     }
     this->setNodeSensorFlag(status, NODE_FLAGS::LP4_INDEX);
 }
@@ -228,21 +225,21 @@ void TelemetryManager::setLowPressure(float value, int identifier){
         default:
             break;
     }
-    if(identifier == LP4_INDEX){
+    if(identifier == NODE_FLAGS::LP4_INDEX){
         setLowPressure4(value, currentState);
         return;
     }
     // Check if nominal for current state
     if(currentState == psStandby){
-        status = inRange<float>(value, LOWPRESSURE_UNARMED_MIN, LOWPRESSURE_UNARMED_MAX);
+        status = inRange<float>(value, PNEUMATICS_LIMITS::LOWPRESSURE_UNARMED_MIN, PNEUMATICS_LIMITS::LOWPRESSURE_UNARMED_MAX);
     }
 
     else if(currentState == psArming || currentState == psArmed || currentState == psAcceleration || currentState == psCoasting){
-        status = inThreshold<float>(value, this->telemetry->tubePressure, PNEUMATICS_THRESHOLD);
+        status = inThreshold<float>(value, this->telemetry->tubePressure, PNEUMATICS_LIMITS::PNEUMATICS_THRESHOLD);
     }
 
     else if( currentState == psBraking ){
-        status = inRange<float>(value, LOWPRESSURE_ENGAGED_MIN, LOWPRESSURE_ENGAGED_MAX);
+        status = inRange<float>(value, PNEUMATICS_LIMITS::LOWPRESSURE_ENGAGED_MIN, PNEUMATICS_LIMITS::LOWPRESSURE_ENGAGED_MAX);
     }
 
     // Set sensor flag
@@ -257,20 +254,20 @@ void TelemetryManager::setHighPressure(float value){
     LOG(INFO)<<"high pressure : " << value;
 
     if(currentState == psStandby){
-        status = inRange<float>(value, VACUUM, HIGHPRESSURE_ARMED_MAX);
+        status = inRange<float>(value, GENERAL_CONSTANTS::VACUUM, PNEUMATICS_LIMITS::HIGHPRESSURE_ARMED_MAX);
     } else if(currentState == psArming || currentState == psArmed || currentState == psAcceleration || currentState == psCoasting){
-        status = inRange<float>(value, HIGHPRESSURE_ARMED_MIN, HIGHPRESSURE_ARMED_MAX);
+        status = inRange<float>(value, PNEUMATICS_LIMITS::HIGHPRESSURE_ARMED_MIN, PNEUMATICS_LIMITS::HIGHPRESSURE_ARMED_MAX);
     }else if( currentState == psBraking ){
-        status = inRange<float>(value, VACUUM, HIGHPRESSURE_ARMED_MAX); //TODO confirm this
+        status = inRange<float>(value, GENERAL_CONSTANTS::VACUUM, PNEUMATICS_LIMITS::HIGHPRESSURE_ARMED_MAX); //TODO confirm this
     }
-    this->setNodeSensorFlag(status, HP_INDEX);
+    this->setNodeSensorFlag(status, NODE_FLAGS::HP_INDEX);
 }
 
 void TelemetryManager::setPressureVesselTemperature(float value){
     bool status = false;
     this->telemetry->pressureVesselTemperature = value;
-    status = inRange<float>(value, PRESSURE_TEMP_MIN, PRESSURE_TEMP_MAX);
-    this->setNodeSensorFlag(status, HP_TEMP_INDEX);
+    status = inRange<float>(value, PNEUMATICS_LIMITS::PRESSURE_TEMP_MIN, PNEUMATICS_LIMITS::PRESSURE_TEMP_MAX);
+    this->setNodeSensorFlag(status, NODE_FLAGS::HP_TEMP_INDEX);
 }
 
 void TelemetryManager::setCoolantTemperature(float value) {
@@ -279,10 +276,10 @@ void TelemetryManager::setCoolantTemperature(float value) {
 
     PodStates currentState = this->getPodStateValue();
     if(currentState == psStandby || currentState == psArming || currentState == psArmed){
-        status = inRange<float>(value, COOLING_TEMP_MIN, COOLING_TEMP_MAX);
+        status = inRange<float>(value, PNEUMATICS_LIMITS::COOLING_TEMP_MIN, PNEUMATICS_LIMITS::COOLING_TEMP_MAX);
     } //todo temp during run
 
-    this->setNodeSensorFlag(status, COOLING_TEMPERATURE_INDEX);
+    this->setNodeSensorFlag(status, NODE_FLAGS::COOLING_TEMPERATURE_INDEX);
 }
 
 void TelemetryManager::setRecievedBrakeNodeState(BrakeNodeStates value) {
@@ -293,15 +290,15 @@ void TelemetryManager::setRecievedBrakeNodeState(BrakeNodeStates value) {
 void TelemetryManager::setEnclosurePressure(float value) {
     bool status = false;
     this->telemetry->enclosurePressure = value;
-    status = inRange<float>(value, ATMOSPHERE, ATMOSPHERE_THRESHOLD);
-    this->setNodeSensorFlag(status, ENCLOSURE_PRESSURE_INDEX);
+    status = inRange<float>(value, GENERAL_CONSTANTS::ATMOSPHERE, ENCLOSURE_LIMITS::ATMOSPHERE_THRESHOLD);
+    this->setNodeSensorFlag(status, NODE_FLAGS::ENCLOSURE_PRESSURE_INDEX);
 }
 
 void TelemetryManager::setEnclosureTemperature(float value) {
     bool status;
     this->telemetry->enclosureTemperature = value;
-    status = inRange<float>(value, ENCLOSURE_TEMP_MIN, ENCLOSURE_TEMP_MAX);
-    this->setNodeSensorFlag(status, ENCLOSURE_TEMPERATURE_INDEX);
+    status = inRange<float>(value, ENCLOSURE_LIMITS::ENCLOSURE_TEMP_MIN, ENCLOSURE_LIMITS::ENCLOSURE_TEMP_MAX);
+    this->setNodeSensorFlag(status, NODE_FLAGS::ENCLOSURE_TEMPERATURE_INDEX);
 }
 
 void TelemetryManager::setCoolantLinePressure(float value) {
@@ -311,10 +308,10 @@ void TelemetryManager::setCoolantLinePressure(float value) {
     bool status = true;
     PodStates currentState = this->getPodStateValue();
     if(currentState == psArming || currentState == psArmed || currentState == psAcceleration || currentState == psCoasting){
-        status = inRange<float>(value, COOLING_ENGAGED_MIN, COOLING_ENGAGED_MAX);
+        status = inRange<float>(value, ENCLOSURE_LIMITS::COOLING_ENGAGED_MIN, ENCLOSURE_LIMITS::COOLING_ENGAGED_MAX);
     }
     // Set sensor flag
-    this->setNodeSensorFlag(status, COOLING_PRESSURE_INDEX);
+    this->setNodeSensorFlag(status, NODE_FLAGS::COOLING_PRESSURE_INDEX);
 }
 
 
@@ -322,21 +319,21 @@ void TelemetryManager::setCoolantLinePressure(float value) {
 
 void TelemetryManager::setMaxIgbtTemperature(float value) {
     this->telemetry->maxIgbtTemperature = value;
-    bool status = inRange<float>(value, COMPONENT_TEMP_MIN, COMPONENT_TEMP_MAX);
-    this->setInverterSensorFlag(status, MAX_IGBT_INDEX);
+    bool status = inRange<float>(value, INVERTER_LIMITS::COMPONENT_TEMP_MIN, INVERTER_LIMITS::COMPONENT_TEMP_MAX);
+    this->setInverterSensorFlag(status, INVERTER_FLAGS::MAX_IGBT_INDEX);
 
 }
 
 void TelemetryManager::setGateDriverTemperature(float value) {
     this->telemetry->gateDriverTemperature = value;
-    bool status = inRange<float>(value, COMPONENT_TEMP_MIN, COMPONENT_TEMP_MAX);
-    this->setInverterSensorFlag(status, GATE_DRIVER_TEMP_INDEX);
+    bool status = inRange<float>(value, INVERTER_LIMITS::COMPONENT_TEMP_MIN, INVERTER_LIMITS::COMPONENT_TEMP_MAX);
+    this->setInverterSensorFlag(status, INVERTER_FLAGS::GATE_DRIVER_TEMP_INDEX);
 }
 
 void TelemetryManager::setInverterControlBoardTemperature(float value) {
     this->telemetry->inverterControlBoardTemperature = value;
-    bool status = inRange<float>(value, COMPONENT_TEMP_MIN, COMPONENT_TEMP_MAX);
-    this->setInverterSensorFlag(status, CONTROL_BOARD_TEMP_INDEX);
+    bool status = inRange<float>(value, INVERTER_LIMITS::COMPONENT_TEMP_MIN, INVERTER_LIMITS::COMPONENT_TEMP_MAX);
+    this->setInverterSensorFlag(status, INVERTER_FLAGS::CONTROL_BOARD_TEMP_INDEX);
 }
 
 void TelemetryManager::setMotorTemperature(float value) {
@@ -346,11 +343,11 @@ void TelemetryManager::setMotorTemperature(float value) {
     PodStates currentState = this->getPodStateValue();
 
     if(currentState == psArming || currentState == psArmed){
-        status = inRange<float>(value, MOTOR_UNARMED_TEMP_MIN, MOTOR_UNARMED_TEMP_MAX);
+        status = inRange<float>(value, INVERTER_LIMITS::MOTOR_UNARMED_TEMP_MIN, INVERTER_LIMITS::MOTOR_UNARMED_TEMP_MAX);
     }else if( currentState == psAcceleration ){
-        status = inRange<float>(value, MOTOR_ARMED_TEMP_MIN, MOTOR_ARMED_TEMP_MAX);
+        status = inRange<float>(value, INVERTER_LIMITS::MOTOR_ARMED_TEMP_MIN, INVERTER_LIMITS::MOTOR_ARMED_TEMP_MAX);
     }
-    this->setInverterSensorFlag(status, MOTOR_TEMPERATURE_INDEX);
+    this->setInverterSensorFlag(status, INVERTER_FLAGS::MOTOR_TEMPERATURE_INDEX);
 }
 
 void TelemetryManager::setMotorSpeed(int32_t value) {
@@ -362,7 +359,7 @@ void TelemetryManager::setMotorSpeed(int32_t value) {
     float average = (value+lastRPM)/2.0;
     average /= (1000.0*60.0);
     float milliseconds = (std::chrono::duration_cast<std::chrono::microseconds>(thisTime - lastTime).count())/1000.0;
-    float distance = average*milliseconds*REAR_WHEEL_CIRCUMFRENCE;
+    float distance = average*milliseconds * GENERAL_CONSTANTS::REAR_WHEEL_CIRCUMFRENCE;
 
     addPodDistance(distance);
 }
@@ -378,7 +375,7 @@ void TelemetryManager::setInverterBusVoltage(int value) {
         // status = less than todo
     }
     // Set sensor flag
-    this->setInverterSensorFlag(status, BUS_VOLTAGE_INDEX);
+    this->setInverterSensorFlag(status, INVERTER_FLAGS::BUS_VOLTAGE_INDEX);
 }
 
 
@@ -404,16 +401,16 @@ void TelemetryManager::setPodVelocity(float velocity) {
 
 void TelemetryManager::resetValues(int32_t index){
     switch(index){
-        case ENCLOSURE_HEARTBEAT_INDEX:{
+        case CONNECTION_FLAGS::ENCLOSURE_HEARTBEAT_INDEX:{
             telemetry->enclosureTemperature = 0;
             telemetry->enclosurePressure = 0;
             telemetry->coolingLinePressure = 0;
             break;
         }
-        case LVDC_NODE_HEARTBEAT_INDEX:{
+        case CONNECTION_FLAGS::LVDC_NODE_HEARTBEAT_INDEX:{
             //todo
         }
-        case BMS_HEARTBEAT_INDEX:{
+        case CONNECTION_FLAGS::BMS_HEARTBEAT_INDEX:{
             telemetry->hvBatteryPackMaxCellTemperature = 0;
             telemetry->hvBatteryPackCurrent = 0;
             telemetry->hvBatteryPackVoltage = 0;
@@ -422,7 +419,7 @@ void TelemetryManager::resetValues(int32_t index){
             telemetry->hvBatteryPackMaxCellVoltage = 0;
             break;
         }
-        case BRAKE_NODE_HEARTBEAT_INDEX:{
+        case CONNECTION_FLAGS::BRAKE_NODE_HEARTBEAT_INDEX:{
             telemetry->receivedBrakeNodeState = bnsNone;
             telemetry->lowPressure1 = 0 ;
             telemetry->lowPressure2 = 0 ;
