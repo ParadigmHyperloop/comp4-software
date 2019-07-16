@@ -297,5 +297,15 @@
     "psAcceleration": [0,0],
     "psCoasting": [0,0],
     "psBraking" : [0,0]
+  },
+      "inverterFaultBit": {
+    "psBooting": [0,0],
+    "psStandby": [0,0],
+    "psArming" : [0,0],
+    "psArmed" : [0,0],
+    "psPreFlight" : [0,0],
+    "psAcceleration": [0,0],
+    "psCoasting": [0,0],
+    "psBraking" : [0,0]
   }
 }
