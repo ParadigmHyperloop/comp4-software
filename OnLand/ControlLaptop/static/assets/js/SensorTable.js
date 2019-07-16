@@ -98,6 +98,19 @@ socket.on('pod_telemetry', function (data) {
             }
         }
 
+        //TODO: change back to white color when not None
+        if(value_name === 'podState' && value=='psNone') {
+            console.log(value)
+            $("#podState").css( "background-color", "#f2dede");
+        }
+        if(value_name === 'brakeNodeState' && value > 4) {
+            $("#brakeNodeState").css( "background-color", "#f2dede");
+        }
+        if(value_name === 'lvdcNodeState' && value > 2) {
+            $("#lvdcNodeState").css( "background-color", "#f2dede");
+        }
+
+
         if(typeof(data[value_name]) == "boolean" || isNaN(data[value_name])){
             $value_cell.text(value)
         }
@@ -152,10 +165,10 @@ function addErrorsToUpdatesTable(errors) {
             }
         });
         if (flag === 0) {
-            let row = `<tr>
-                      <td><i class="fa fa-info text-info"></i></td>
-                      <td>${error}</td>
-                    </tr>`;
+            let row = ` <tr>
+                          <td><i class="fa fa-info text-info"></i></td>
+                          <td>${error}</td>
+                        </tr>`;
 
             $('#events-table-body').prepend(row);
         }
