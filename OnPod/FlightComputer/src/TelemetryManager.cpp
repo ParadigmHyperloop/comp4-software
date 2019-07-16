@@ -384,6 +384,13 @@ void TelemetryManager::addPodDistance(float distance) {
     telemetry->podPosition+= distance;
 }
 
+void TelemetryManager::countIrTape() {
+    if(telemetry->totalStripCount == 0){
+        setPodDistance(GENERAL_CONSTANTS::STRIP_DISTANCE);
+    }
+    telemetry->totalStripCount++;
+}
+
 void TelemetryManager::setPodDistance(float distance) {
     std::lock_guard<std::mutex> lock(this->telemetry->positionLock);
     telemetry->podPosition = distance;
@@ -391,6 +398,11 @@ void TelemetryManager::setPodDistance(float distance) {
 
 void TelemetryManager::setPodVelocity(float velocity) {
     telemetry->podVelocity = velocity;
+}
+
+float TelemetryManager::getPodDistance() {
+    std::lock_guard<std::mutex> lock(telemetry->positionLock);
+    return telemetry->podPosition;
 }
 
 

@@ -125,12 +125,15 @@ void PodState::armedChecks(){
 }
 
 bool PodState::brakingCriteriaMet() {
-    // Navigation checks todo
-    std::unique_lock<std::mutex> lock(pod->telemetry->positionLock);
-    float remainingTrack = pod->telemetry->flightDistance - (pod->telemetry->podPosition);// - BRAKING_DISTANCE;
-    lock.unlock();
+    float position = pod->getPodDistance();
+    float remainingTrack = pod->telemetry->flightDistance - position - pod->telemetry->brakeDistance;
     if(remainingTrack <= 0){
         pod->sendUpdate("Braking at : " + std::to_string(pod->telemetry->podPosition));
+        return true;
+    }
+    
+    if(pod->telemetry->totalStripCount >= pod->telemetry->maxStripCount){
+        pod->sendUpdate("Braking at maximum strip count");
         return true;
     }
 }
@@ -229,7 +232,7 @@ bool Standby::testTransitions() {
     if(this->pod->getControlsInterfaceState() == ciStandby){
         pod->telemetry->motorDistance = 0;
         pod->telemetry->podPosition = 0;
-        pod->telemetry->irDistance = 0;
+        pod->telemetry->totalStripCount = 0;
     }
     try {
         this->commonChecks();
@@ -371,6 +374,11 @@ Acceleration::~Acceleration() {
     this->pod->telemetry->maxFlightTime = 0;
     this->pod->telemetry->flightDistance = 0;
     this->pod->telemetry->commandedTorque = 0;
+    this->pod->telemetry->brakeDistance = 0;
+    this->pod->telemetry->maxVelocity = 0;
+    this->pod->telemetry->startTorque = 0;
+    this->pod->telemetry->accelerationTime = 0;
+    this->pod->telemetry->expectedTubePressure = 0;
 }
 
 bool Acceleration::testTransitions() {

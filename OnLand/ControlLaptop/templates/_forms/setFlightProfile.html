@@ -26,7 +26,9 @@
                                     {{ armForm.taxi.label }}<br>
                                     {{ armForm.taxi(class_="form-control", onchange="check_it()") }}
                                 </div>
-                               <div class="col-md-6">
+                           </div>
+                           <div class="row">
+                                <div class="col-md-6">
                                     {{ armForm.tube_pressure.label }}<br>
                                     {{ armForm.tube_pressure(class_="form-control", onchange="check_it()") }}
                                 </div>
@@ -49,6 +51,18 @@
                                 <div class="col-md-12">
                                     {{ armForm.acceleration_time.label }}<br>
                                     {{ armForm.acceleration_time(class_="form-control") }}
+                                </div>
+                           </div>
+                           <div class="row">
+                                <div class="col-md-12">
+                                    {{ armForm.max_velocity.label }}<br>
+                                    {{ armForm.max_velocity(class_="form-control") }}
+                                </div>
+                           </div>
+                           <div class="row">
+                                <div class="col-md-12">
+                                    {{ armForm.brake_distance.label }}<br>
+                                    {{ armForm.brake_distance(class_="form-control") }}
                                 </div>
                            </div>
                        </div>
