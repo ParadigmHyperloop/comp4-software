@@ -75,7 +75,6 @@ $( document ).ready(function() {
 socket.on('pod_telemetry', function (data) {
     let value, value_cell, value_name, current_state;
     data = JSON.parse(data);
-    console.log(data)
     const length = telemetry_value_elements.length;
 
     current_state = data['podState']
@@ -125,10 +124,12 @@ function convertFaultCode(value_name, value) {
         console.error(`INVERTER FAULTS: ${errors}`)
     }
     else if(value_name === 'hvFaultCode1') {
-        console.log(value)
+        errors = convertHvFaultCode1(value)
+        console.error(`HV: Faults: ${errors}`)  
     }
     else if(value_name === 'hvFaultCode2') {
-        console.log(value)
+        errors = convertHvFaultCode2(value)
+        console.error(`HV: Faults: ${errors}`)  
     }
     else {
         console.error(`COULD NOT CONVERT ERROR CODE FOR ${value_name}`)
@@ -139,7 +140,6 @@ function convertFaultCode(value_name, value) {
 function addErrorsToUpdatesTable(errors) {
     // if error not in tabke add it
     for (const error of errors) {
-        console.log(updatesTable)
         var flag = 0
 
         $('#events-table-body').find("tr").each(function () {
@@ -149,7 +149,6 @@ function addErrorsToUpdatesTable(errors) {
                 flag = 1; 
             }
         });
-        console.log(flag)
         if (flag === 0) {
             let row = `<tr>
                       <td><i class="fa fa-info text-info"></i></td>
@@ -217,6 +216,96 @@ function converInverterFaultCodeHi(value) {
     }
     if(value & 2) {
         errors.push('Inverter: Brake Input Open Fault')
+    }
+
+    addErrorsToUpdatesTable(errors)
+    return errors
+}
+
+
+function convertHvFaultCode1(value) {
+    let errors = []
+
+    if(value & 1) {
+        errors.push('HV: Discharge Limit Enforcement Fault')   
+    }
+    if(value & 2) {
+        errors.push('HV: Charger Safety Relay Fault')
+    }
+    if(value & 4) {
+        errors.push('HV: Internal Hardware Fault')
+    }
+    if(value & 8) {
+        errors.push('HV: Internal Heatsink Thermistor Fault')
+    }
+    if(value & 10) {
+        errors.push('HV: Internal Software Fault')
+    }
+    if(value & 32) {
+        errors.push('HV: Highest Cell Voltage Too High Fault')   
+    }
+    if(value & 64) {
+        errors.push('HV: Lowest Cell Voltage Too High Fault')
+    }
+    if(value & 128) {
+        errors.push('HV: Pack Too Hot Fault')
+    }
+
+    addErrorsToUpdatesTable(errors)
+    return errors
+}
+
+
+function convertHvFaultCode2(value) {
+    let errors = []
+
+    if(value & 1) {
+        errors.push('HV: Internal Communication Fault')   
+    }
+    if(value & 2) {
+        errors.push('HV: Cell Balancing Stuck Off Fault')
+    }
+    if(value & 4) {
+        errors.push('HV: Weak Cell Fault')
+    }
+    if(value & 8) {
+        errors.push('HV: Low Cell Voltage Fault')
+    }
+    if(value & 10) {
+        errors.push('HV: Open Wiring Fault')
+    }
+    if(value & 32) {
+        errors.push('HV: Current Sensor Fault')   
+    }
+    if(value & 64) {
+        errors.push('HV: Highest Cell Voltage Over 5V Fault')
+    }
+    if(value & 128) {
+        errors.push('HV: Cell ASIC Fault')
+    }
+    if(value & 256) {
+        errors.push('HV: Weak Pack Fault')
+    }
+    if(value & 512) {
+        errors.push('HV: Fan Monitor Fault')
+    }
+    if(value & 1024) {
+        errors.push('HV: Thermistor Fault')
+    }
+    if(value & 2048) {
+        errors.push('HV: External Communication Fault')
+    }
+    if(value & 4096) {
+        errors.push('HV: Redundant Power Supply Fault')
+    }
+    if(value & 8192) {
+        errors.push('HV: High Voltage Isolation Fault')
+    }
+    if(value & 16384) {
+        errors.push('HV: Input Power Supply Fault')
+    }
+    if(value & 32768) {
+        errors.push('HV: Charge Limit Enforcement Fault')
     }
 
     addErrorsToUpdatesTable(errors)
