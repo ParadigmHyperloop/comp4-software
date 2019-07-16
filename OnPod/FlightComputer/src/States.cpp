@@ -66,6 +66,9 @@ bool PodState::isInverterSensorCritical(int sensorIndex) {
 
 int8_t PodState::checkFlags(std::vector<int8_t > &flags){
     for(std::size_t i=0; i<flags.size(); ++i){
+        if(flags[i] == 2){
+            continue;
+        }
         if(flags[i] == 0){
             return i;
         }
