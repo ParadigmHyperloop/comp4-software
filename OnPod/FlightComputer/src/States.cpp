@@ -402,7 +402,6 @@ bool Acceleration::testTransitions() {
         this->setupTransition(psBraking,"Braking Distance Reached. Pod --> Braking");
         return true;
     }
-    if(pod->telemetry.vel)
 
     if(this->timeInFlightSeconds() > this->pod->telemetry->maxFlightTime ){
         this->setupTransition(psBraking, (std::string)" Flight Timout of " + std::to_string(this->timeInStateSeconds()) + " reached. Pod --> Braking");
