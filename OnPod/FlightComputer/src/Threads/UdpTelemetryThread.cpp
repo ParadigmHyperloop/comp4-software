@@ -91,19 +91,23 @@ int32_t udpTelemetryThread(TelemetryManager Pod) {
     }
 
     std::string threadLabel("UpdTelemetry Thread");
+    Heartbeat loggerBeat = Heartbeat(800);
     while (Pod.getPodStateValue() != psShutdown) {
 
-      TIMED_SCOPE(timeBlkObj, threadLabel);
-        // Give and get update for each node
-        for (auto &&node: nodes) {
-          try {
-              node->giveUpdate();
-              node->getUpdate();
-          }
-          catch (std::runtime_error &e) {
-              LOG(INFO) << e.what();
-          }
+      TIMED_FUNC_IF(timeBlkObj, loggerBeat.expired());
+      if (loggerBeat.expired())
+        loggerBeat.feed();
+
+//      Give and get update for each node
+      for (auto &&node: nodes) {
+        try {
+            node->giveUpdate();
+            node->getUpdate();
         }
+        catch (std::runtime_error &e) {
+            LOG(INFO) << e.what();
+        }
+      }
     }
     for (auto &&node: nodes) {
         node->closeConnection();

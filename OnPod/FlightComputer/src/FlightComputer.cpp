@@ -6,8 +6,10 @@
 #include "Common.h"
 INITIALIZE_EASYLOGGINGPP
 
-// define for Performance
-#define ELPP_FEATURE_PERFORMANCE_TRACKING
+
+#ifndef ELPP_DEFAULT_PERFORMANCE_LOGGER
+#   define ELPP_DEFAULT_PERFORMANCE_LOGGER ELPP_DEFAULT_LOGGER
+#endif
 
 #include "CoreControlThread.h"
 #include "FlightComputerInitializer.h"

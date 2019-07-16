@@ -117,29 +117,33 @@ int32_t NavigationThread(TelemetryManager Pod) {
     std::string threadLabel("Navigation Thread");
     Heartbeat navNodeUpdateFreq = Heartbeat(10);
     Heartbeat navNodeHeartbeat = Heartbeat(45);
+    Heartbeat loggerBeat = Heartbeat(500);
     bool success;
     while(Pod.getPodStateValue() != psShutdown)
     {
-      TIMED_SCOPE(timeBlkObj, threadLabel);
-        if(navNodeUpdateFreq.expired()){
-            success = true;
-            try {
-                readNavigationNode(serialPort,Pod);
-            }
-            catch (std::runtime_error &error){
-                Pod.sendUpdate(error.what());
-                success = false;
-            }
-            if(success){
-                navNodeUpdateFreq.feed();
-                navNodeHeartbeat.feed();
-            }
-            else{
-                if(navNodeHeartbeat.expired()){
-                    Pod.setConnectionFlag(0, CONNECTION_FLAGS::NAVIGATION_HEARTBEAT_INDEX);
-                }
-            }
-        }
+      TIMED_FUNC_IF(timeBlkObj, loggerBeat.expired());
+      if (loggerBeat.expired())
+        loggerBeat.feed();
+
+      if(navNodeUpdateFreq.expired()){
+          success = true;
+          try {
+              readNavigationNode(serialPort,Pod);
+          }
+          catch (std::runtime_error &error){
+              Pod.sendUpdate(error.what());
+              success = false;
+          }
+          if(success){
+              navNodeUpdateFreq.feed();
+              navNodeHeartbeat.feed();
+          }
+          else{
+              if(navNodeHeartbeat.expired()){
+                  Pod.setConnectionFlag(0, CONNECTION_FLAGS::NAVIGATION_HEARTBEAT_INDEX);
+              }
+          }
+      }
     }
     close(serialPort);
 }

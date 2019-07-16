@@ -161,6 +161,7 @@ int32_t commanderThread(TelemetryManager Pod) {
     //Watchdog
     Heartbeat pulse = Heartbeat(Pod.sPodNetworkValues->commaderTimeoutMili);
 
+    Heartbeat loggerBeat = Heartbeat(5000);
     //pod state != shutdown
     while (Pod.getPodStateValue() != psShutdown) {
 
@@ -180,48 +181,51 @@ int32_t commanderThread(TelemetryManager Pod) {
         pulse.feed();
         std::string threadLabel = "CommanderThread";
         while (Pod.getPodStateValue() != psShutdown) {
-            messageSize = read(connectionSock, buffer, 255);
-            TIMED_SCOPE(timeBlkObj, threadLabel);
+          messageSize = read(connectionSock, buffer, 255);
+
+          TIMED_FUNC_IF(timeBlkObj, loggerBeat.expired());
+          if (loggerBeat.expired())
+            loggerBeat.feed();
 
           if (messageSize < 0) {
-                if (pulse.expired()) {
-                    Pod.setConnectionFlag(0, CONNECTION_FLAGS::INTERFACE_HEARTBEAT_INDEX);
-                    LOG(INFO) << "ERROR: Controls Interface Connection Timeout";
-                    break;
-                }
-                if (errno == 11) //Erno 11 means no message available on non blocking socket
-                {
-                } else {
-                    LOG(INFO) << "ERROR: Receveiving message : " << errno;
-                }
-            }
-            if (messageSize == 0) {
-                LOG(INFO) << "Controls Interface Connection Closed";
+            if (pulse.expired()) {
                 Pod.setConnectionFlag(0, CONNECTION_FLAGS::INTERFACE_HEARTBEAT_INDEX);
+                LOG(INFO) << "ERROR: Controls Interface Connection Timeout";
                 break;
-            } else if (messageSize > 0) {
-                pulse.feed();
-                Pod.setConnectionFlag(1, CONNECTION_FLAGS::INTERFACE_HEARTBEAT_INDEX);
-                operationStatus = unserializeProtoMessage(&Pod, buffer, messageSize);
-                memset(buffer, 0, sizeof buffer);
-                if (operationStatus) {
-                    //Return 1 to confirm reception
-                    messageSize = write(connectionSock, "1", 1);
-                } else {
-                    //Return 0 indicating bad message
-                    messageSize = write(connectionSock, "0", 1);
-                }
-                if (messageSize < 0) {
-                    if (errno == 104) {
-                        Pod.setConnectionFlag(0, CONNECTION_FLAGS::INTERFACE_HEARTBEAT_INDEX);
-                        LOG(INFO) << "Controls Interface Connection Closed";
-                    } else {
-                        Pod.setConnectionFlag(0, CONNECTION_FLAGS::INTERFACE_HEARTBEAT_INDEX);
-                        LOG(INFO) << "ERROR writing to socket: " << errno;
-                    }
-                    break;
-                }
             }
+            if (errno == 11) //Erno 11 means no message available on non blocking socket
+            {
+            } else {
+                LOG(INFO) << "ERROR: Receveiving message : " << errno;
+            }
+          }
+          if (messageSize == 0) {
+              LOG(INFO) << "Controls Interface Connection Closed";
+              Pod.setConnectionFlag(0, CONNECTION_FLAGS::INTERFACE_HEARTBEAT_INDEX);
+              break;
+          } else if (messageSize > 0) {
+            pulse.feed();
+            Pod.setConnectionFlag(1, CONNECTION_FLAGS::INTERFACE_HEARTBEAT_INDEX);
+            operationStatus = unserializeProtoMessage(&Pod, buffer, messageSize);
+            memset(buffer, 0, sizeof buffer);
+            if (operationStatus) {
+                //Return 1 to confirm reception
+                messageSize = write(connectionSock, "1", 1);
+            } else {
+                //Return 0 indicating bad message
+                messageSize = write(connectionSock, "0", 1);
+            }
+            if (messageSize < 0) {
+              if (errno == 104) {
+                  Pod.setConnectionFlag(0, CONNECTION_FLAGS::INTERFACE_HEARTBEAT_INDEX);
+                  LOG(INFO) << "Controls Interface Connection Closed";
+              } else {
+                  Pod.setConnectionFlag(0, CONNECTION_FLAGS::INTERFACE_HEARTBEAT_INDEX);
+                  LOG(INFO) << "ERROR writing to socket: " << errno;
+              }
+              break;
+            }
+          }
         }
         close(connectionSock);
     }

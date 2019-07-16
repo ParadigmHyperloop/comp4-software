@@ -271,8 +271,13 @@ int canNetworkThread(TelemetryManager Pod){
 
     std::string threadLabel = "NetworkThread";
     int32_t currentTorque, newTorque = 0;
+    Heartbeat loggerBeat = Heartbeat(400);
     while ( Pod.getPodStateValue() != psShutdown) {
-      TIMED_SCOPE(timeBlkObj, threadLabel);
+//      TIMED_SCOPE(timeBlkObj, threadLabel);
+      TIMED_FUNC_IF(timeBlkObj, loggerBeat.expired());
+      if (loggerBeat.expired())
+        loggerBeat.feed();
+
       try {
           readRawSocket( canSockRaw, Pod);
           readBcmSocket( canSockBcm, Pod );
