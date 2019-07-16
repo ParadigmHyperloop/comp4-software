@@ -1,13 +1,13 @@
 {
   "pressureVesselTemperature": {
-    "psBooting": [0,40],
-    "psStandby": [0,40],
-    "psArming" : [0,40],
-    "psArmed" : [0,40],
-    "psPreFlight" : [0,40],
-    "psAcceleration": [0,40],
-    "psCoasting": [0,40],
-    "psBraking" : [0,40]
+    "psBooting": [0,50],
+    "psStandby": [0,50],
+    "psArming" : [0,50],
+    "psArmed" : [0,50],
+    "psPreFlight" : [0,50],
+    "psAcceleration": [0,50],
+    "psCoasting": [0,50],
+    "psBraking" : [0,50]
   },
   "highPressure": {
     "psBooting": [0,20],
@@ -20,7 +20,7 @@
     "psBraking" : [0,1725]
   },
   "lowPressure1": {
-    "psBooting": [13,17],
+    "psBooting": [0,18],
     "psStandby": [0,18],
     "psArming" : [0,18],
     "psArmed" : [0,18],

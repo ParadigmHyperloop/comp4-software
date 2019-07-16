@@ -165,7 +165,7 @@ message Telemetry {
     optional uint32 expectedTubePressure = 12;
     optional uint32 maxVelocity = 98;
     optional uint32 brakingDistance = 99;
-
+    optional uint32 maxStripCount = 100;
 
     // Updates
     repeated string updateMessages = 77;

@@ -27,15 +27,16 @@ struct PodValues {
     uint32_t expectedTubePressure = 0;
     uint32_t maxVelocity = 0;
     uint32_t brakeDistance = 0;
+    uint32_t maxStripCount = 0;
     bool taxi  = false;
 
     //Navigation
     std::mutex positionLock;
-    float irDistance = 0;
     float motorDistance = 0;
     float podVelocity = 0;
     float podPosition = 0;
     int totalStripCount = 0;
+    float stripVelocity = 0;
 
     // Updates
     std::mutex updatesLock;
