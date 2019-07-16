@@ -77,6 +77,8 @@ def on_arm_command(profile):
     new_pod_command.accelerationTime = profile['acceleration_time']
     new_pod_command.taxi = profile['taxi']
     new_pod_command.expectedTubePressure = profile['tube_pressure']
+    new_pod_command.maxVelocity = profile['max_velocity']
+    new_pod_command.brakingDistance = profile['brake_distance']
     pod.send_packet(new_pod_command.SerializeToString())
 
 

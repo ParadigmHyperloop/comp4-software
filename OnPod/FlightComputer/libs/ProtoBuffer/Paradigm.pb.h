@@ -419,6 +419,20 @@ class PodCommand :
   ::google::protobuf::uint32 expectedtubepressure() const;
   void set_expectedtubepressure(::google::protobuf::uint32 value);
 
+  // optional uint32 maxVelocity = 18;
+  bool has_maxvelocity() const;
+  void clear_maxvelocity();
+  static const int kMaxVelocityFieldNumber = 18;
+  ::google::protobuf::uint32 maxvelocity() const;
+  void set_maxvelocity(::google::protobuf::uint32 value);
+
+  // optional uint32 brakingDistance = 19;
+  bool has_brakingdistance() const;
+  void clear_brakingdistance();
+  static const int kBrakingDistanceFieldNumber = 19;
+  ::google::protobuf::uint32 brakingdistance() const;
+  void set_brakingdistance(::google::protobuf::uint32 value);
+
   // @@protoc_insertion_point(class_scope:PodCommand)
  private:
   class HasBitSetters;
@@ -442,6 +456,8 @@ class PodCommand :
   ::google::protobuf::uint32 starttorque_;
   ::google::protobuf::uint32 accelerationtime_;
   ::google::protobuf::uint32 expectedtubepressure_;
+  ::google::protobuf::uint32 maxvelocity_;
+  ::google::protobuf::uint32 brakingdistance_;
   friend struct ::TableStruct_Paradigm_2eproto;
 };
 // -------------------------------------------------------------------
@@ -1147,6 +1163,20 @@ class Telemetry :
   ::google::protobuf::int32 hvfaultcode1() const;
   void set_hvfaultcode1(::google::protobuf::int32 value);
 
+  // optional uint32 maxVelocity = 98;
+  bool has_maxvelocity() const;
+  void clear_maxvelocity();
+  static const int kMaxVelocityFieldNumber = 98;
+  ::google::protobuf::uint32 maxvelocity() const;
+  void set_maxvelocity(::google::protobuf::uint32 value);
+
+  // optional uint32 brakingDistance = 99;
+  bool has_brakingdistance() const;
+  void clear_brakingdistance();
+  static const int kBrakingDistanceFieldNumber = 99;
+  ::google::protobuf::uint32 brakingdistance() const;
+  void set_brakingdistance(::google::protobuf::uint32 value);
+
   // @@protoc_insertion_point(class_scope:Telemetry)
  private:
   class HasBitSetters;
@@ -1236,6 +1266,8 @@ class Telemetry :
   ::google::protobuf::uint32 accelerationtime_;
   bool taxi_;
   ::google::protobuf::int32 hvfaultcode1_;
+  ::google::protobuf::uint32 maxvelocity_;
+  ::google::protobuf::uint32 brakingdistance_;
   friend struct ::TableStruct_Paradigm_2eproto;
 };
 // -------------------------------------------------------------------
@@ -3016,6 +3048,42 @@ inline void PodCommand::set_expectedtubepressure(::google::protobuf::uint32 valu
   // @@protoc_insertion_point(field_set:PodCommand.expectedTubePressure)
 }
 
+// optional uint32 maxVelocity = 18;
+inline bool PodCommand::has_maxvelocity() const {
+  return (_has_bits_[0] & 0x00002000u) != 0;
+}
+inline void PodCommand::clear_maxvelocity() {
+  maxvelocity_ = 0u;
+  _has_bits_[0] &= ~0x00002000u;
+}
+inline ::google::protobuf::uint32 PodCommand::maxvelocity() const {
+  // @@protoc_insertion_point(field_get:PodCommand.maxVelocity)
+  return maxvelocity_;
+}
+inline void PodCommand::set_maxvelocity(::google::protobuf::uint32 value) {
+  _has_bits_[0] |= 0x00002000u;
+  maxvelocity_ = value;
+  // @@protoc_insertion_point(field_set:PodCommand.maxVelocity)
+}
+
+// optional uint32 brakingDistance = 19;
+inline bool PodCommand::has_brakingdistance() const {
+  return (_has_bits_[0] & 0x00004000u) != 0;
+}
+inline void PodCommand::clear_brakingdistance() {
+  brakingdistance_ = 0u;
+  _has_bits_[0] &= ~0x00004000u;
+}
+inline ::google::protobuf::uint32 PodCommand::brakingdistance() const {
+  // @@protoc_insertion_point(field_get:PodCommand.brakingDistance)
+  return brakingdistance_;
+}
+inline void PodCommand::set_brakingdistance(::google::protobuf::uint32 value) {
+  _has_bits_[0] |= 0x00004000u;
+  brakingdistance_ = value;
+  // @@protoc_insertion_point(field_set:PodCommand.brakingDistance)
+}
+
 // -------------------------------------------------------------------
 
 // Telemetry
@@ -4433,6 +4501,42 @@ inline void Telemetry::set_expectedtubepressure(::google::protobuf::uint32 value
   _has_bits_[0] |= 0x00000080u;
   expectedtubepressure_ = value;
   // @@protoc_insertion_point(field_set:Telemetry.expectedTubePressure)
+}
+
+// optional uint32 maxVelocity = 98;
+inline bool Telemetry::has_maxvelocity() const {
+  return (_has_bits_[2] & 0x00008000u) != 0;
+}
+inline void Telemetry::clear_maxvelocity() {
+  maxvelocity_ = 0u;
+  _has_bits_[2] &= ~0x00008000u;
+}
+inline ::google::protobuf::uint32 Telemetry::maxvelocity() const {
+  // @@protoc_insertion_point(field_get:Telemetry.maxVelocity)
+  return maxvelocity_;
+}
+inline void Telemetry::set_maxvelocity(::google::protobuf::uint32 value) {
+  _has_bits_[2] |= 0x00008000u;
+  maxvelocity_ = value;
+  // @@protoc_insertion_point(field_set:Telemetry.maxVelocity)
+}
+
+// optional uint32 brakingDistance = 99;
+inline bool Telemetry::has_brakingdistance() const {
+  return (_has_bits_[2] & 0x00010000u) != 0;
+}
+inline void Telemetry::clear_brakingdistance() {
+  brakingdistance_ = 0u;
+  _has_bits_[2] &= ~0x00010000u;
+}
+inline ::google::protobuf::uint32 Telemetry::brakingdistance() const {
+  // @@protoc_insertion_point(field_get:Telemetry.brakingDistance)
+  return brakingdistance_;
+}
+inline void Telemetry::set_brakingdistance(::google::protobuf::uint32 value) {
+  _has_bits_[2] |= 0x00010000u;
+  brakingdistance_ = value;
+  // @@protoc_insertion_point(field_set:Telemetry.brakingDistance)
 }
 
 // repeated string updateMessages = 77;

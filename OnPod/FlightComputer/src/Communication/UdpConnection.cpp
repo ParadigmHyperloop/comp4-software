@@ -214,6 +214,8 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_accelerationtime(pod.telemetry->accelerationTime);
     protoMessage->set_taxi(pod.telemetry->taxi);
     protoMessage->set_expectedtubepressure(pod.telemetry->expectedTubePressure);
+    protoMessage->set_maxvelocity(pod.telemetry->maxVelocity);
+    protoMessage->set_brakingdistance(pod.telemetry->brakeDistance);
 
     // Navigation
     protoMessage->set_motorspeed(pod.telemetry->motorSpeed);

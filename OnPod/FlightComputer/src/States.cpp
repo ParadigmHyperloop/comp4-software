@@ -371,6 +371,11 @@ Acceleration::~Acceleration() {
     this->pod->telemetry->maxFlightTime = 0;
     this->pod->telemetry->flightDistance = 0;
     this->pod->telemetry->commandedTorque = 0;
+    this->pod->telemetry->brakeDistance = 0;
+    this->pod->telemetry->maxVelocity = 0;
+    this->pod->telemetry->startTorque = 0;
+    this->pod->telemetry->accelerationTime = 0;
+    this->pod->telemetry->expectedTubePressure = 0;
 }
 
 bool Acceleration::testTransitions() {
@@ -397,6 +402,7 @@ bool Acceleration::testTransitions() {
         this->setupTransition(psBraking,"Braking Distance Reached. Pod --> Braking");
         return true;
     }
+    if(pod->telemetry.vel)
 
     if(this->timeInFlightSeconds() > this->pod->telemetry->maxFlightTime ){
         this->setupTransition(psBraking, (std::string)" Flight Timout of " + std::to_string(this->timeInStateSeconds()) + " reached. Pod --> Braking");

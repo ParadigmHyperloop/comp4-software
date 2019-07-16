@@ -19,12 +19,14 @@ struct PodValues {
     LvdcNodeStates commandedLvdcNodeState = lvdcNone;
 
     // Flight Profile
-    int32_t motorTorque = 0;
-    int32_t flightDistance = 0;
-    int32_t maxFlightTime = 0;
-    int32_t startTorque = 0;
-    int32_t accelerationTime = 0;
-    int32_t expectedTubePressure = 0;
+    uint32_t motorTorque = 0;
+    uint32_t flightDistance = 0;
+    uint32_t maxFlightTime = 0;
+    uint32_t startTorque = 0;
+    uint32_t accelerationTime = 0;
+    uint32_t expectedTubePressure = 0;
+    uint32_t maxVelocity = 0;
+    uint32_t brakeDistance = 0;
     bool taxi  = false;
 
     //Navigation
