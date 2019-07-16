@@ -91,7 +91,8 @@ message Telemetry {
     optional int32 inverterBusVoltage = 22;
     optional int32 inverterHeartbeat = 78;
     optional int32 motorSpeed = 80;
-    optional int32 inverterFaultBit = 25;
+    optional int32 inverterFaultBitLo = 24;
+    optional int32 inverterFaultBitHi = 25;
 
     // HV-BMS
     optional float hvBatteryPackVoltage = 26;
@@ -99,7 +100,7 @@ message Telemetry {
     optional float hvBatteryPackMaxCellTemperature = 28;
     optional float hvBatteryPackMaxCellVoltage = 30;
     optional float hvBatteryPackMinimumCellVoltage = 29;
-    optional int32  hvBatteryPackStateOfCharge = 79;
+    optional int32 hvBatteryPackStateOfCharge = 79;
 
     // LV-BMS
     optional int32 lv1BatteryPackStateOfCharge = 85;
