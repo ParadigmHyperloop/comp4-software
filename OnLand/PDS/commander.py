@@ -129,7 +129,6 @@ def main():
         sio.emit('connection_updates', json.dumps(connection_status))
         log.info("Heartbeat : Connection Lost")
 
-
 if __name__ == "__main__":
     try:
         main()
