@@ -91,9 +91,8 @@ int32_t udpTelemetryThread(TelemetryManager Pod) {
     }
 
     std::string threadLabel("UpdTelemetry Thread");
-    Heartbeat loggerBeat = Heartbeat(800);
+    Heartbeat loggerBeat = Heartbeat(1000);
     while (Pod.getPodStateValue() != psShutdown) {
-
       TIMED_FUNC_IF(timeBlkObj, loggerBeat.expired());
       if (loggerBeat.expired())
         loggerBeat.feed();
