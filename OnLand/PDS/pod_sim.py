@@ -5,10 +5,10 @@ from config import POD_COMMANDER_PORT, UDP_TELEM_PORT
 from Paradigm_pb2 import Telemetry
 
 def create_telem(packet):
-    packet.podState = random.randint(0, 7)
+    packet.podState = random.randint(0, 8)
     packet.controlsInterfaceState = random.randint(0, 5)
     packet.lvdcNodeState = 2
-    packet.breakNodePerceivedPodState = random.randint(0, 9)
+    packet.breakNodePerceivedPodState = random.randint(0, 7)
     packet.brakeNodeState = random.randint(0, 5)
 
     packet.flightTime = random.randint(0, 101)
