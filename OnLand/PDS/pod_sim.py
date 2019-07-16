@@ -25,8 +25,8 @@ def create_telem(packet):
     packet.inverterBusVoltage = random.randint(0, 101)
     packet.inverterHeartbeat = random.randint(0, 101)
     packet.motorSpeed = random.randint(0, 101)
-    packet.inverterFaultBitLo = 15 # random.randint(0, 101)
-    packet.inverterFaultBitHi = 8 # random.randint(0, 101)
+    packet.inverterFaultBitLo = 0 # random.randint(0, 101)
+    packet.inverterFaultBitHi = 0 # random.randint(0, 101)
 
     packet.hvBatteryPackVoltage = random.randint(0, 101)
     packet.hvBatteryPackCurrent = random.randint(0, 101)
@@ -41,8 +41,8 @@ def create_telem(packet):
     packet.lv2BatteryPackStateOfCharge = random.randint(0, 101)
     packet.lv2BatteryPackVoltage = random.randint(0, 101)
     packet.lv2BatteryPackCellTemperature = random.randint(0, 101)
-    packet.hvFaultCode1 = random.randint(0, 101)
-    packet.hvFaultCode2 = random.randint(0, 101)
+    packet.hvFaultCode1 = 0 # random.randint(0, 101)
+    packet.hvFaultCode2 = 0 # random.randint(0, 101)
 
     packet.solenoid1 = random.randint(0, 101)
     packet.solenoid2 = random.randint(0, 101)

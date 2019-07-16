@@ -92,8 +92,10 @@ socket.on('pod_telemetry', function (data) {
         value = data[value_name];
         let $value_cell = $('#'+value_name);
 
-        if(value_name === 'inverterFaultBitHi' || value_name === 'inverterFaultBitLo' || value_name === 'hvFaultCode1' || value_name === 'hvFaultCode2') {
-            convertFaultCode(value_name, value)
+        if(value > 0) {
+            if(value_name === 'inverterFaultBitHi' || value_name === 'inverterFaultBitLo' || value_name === 'hvFaultCode1' || value_name === 'hvFaultCode2') {
+                convertFaultCode(value_name, value)
+            }
         }
 
         if(typeof(data[value_name]) == "boolean" || isNaN(data[value_name])){
@@ -119,7 +121,7 @@ function convertFaultCode(value_name, value) {
         console.error(`INVERTER FAULTS: ${errors}`)
 
     }
-    if(value_name === 'inverterFaultBitLo') {
+    if(value_name === 'inverterFaultBitHi') {
         errors = converInverterFaultCodeHi(value)
         console.error(`INVERTER FAULTS: ${errors}`)
     }
