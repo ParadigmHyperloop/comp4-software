@@ -102,7 +102,7 @@ void readNavigationNode(int serialPort, TelemetryManager &pod){
     pod.telemetry->tubePressure = tubePressure;
     pod.telemetry->stripVelocity = velocity;
 
-    LOG(INFO)<<"string : "<< stripCount << " velocity : "<< velocity << "  pressure : " << tubePressure;
+    //LOG(INFO)<<"string : "<< stripCount << " velocity : "<< velocity << "  pressure : " << tubePressure;
 }
 
 int32_t NavigationThread(TelemetryManager Pod) {

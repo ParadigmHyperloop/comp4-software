@@ -334,6 +334,5 @@ bool LvdcNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
         throw std::invalid_argument(strError);
     }
     this->pod.telemetry->receivedLvdcNodeState = protoMessage.state();
-    LOG(INFO)<<protoMessage.state();
     return true;
 }

@@ -13,7 +13,7 @@ void coreControlLoopThread(TelemetryManager pod){
                 pod.sendUpdate(reason);
             }
         }
-        while(!pod.telemetry->automaticTransitions && pod.getPodStateValue() != psShutdown){
+        while(!pod.telemetry->automaticTransitions && pod.getPodStateValue() != psShutdown && pod.telemetry->connectionFlags[CONNECTION_FLAGS::INTERFACE_HEARTBEAT_INDEX] == 1){
             if(pod.getControlsInterfaceState() == ciEmergencyStop){
                 pod.telemetry->manualPodState = psStandby;
                 const std::string reason = "E-stop command. Pod --> Standby";
