@@ -33,7 +33,7 @@ if (THREADS_HAVE_PTHREAD_ARG)
     target_compile_options(FlightComputer PUBLIC "-pthread")
 endif ()
 
-add_executable(FlightComputer ${SOURCES}  ${PROTO_HDRS} )
+add_executable(FlightComputer ${SOURCES}  ${PROTO_HDRS} src/IStateDisplay.hpp src/Helpers/SevenSegStateDisplay.cpp src/Helpers/SevenSegStateDisplay.hpp)
 
 target_link_libraries(FlightComputer ${Protobuf_LIBRARIES})
 
