@@ -33,7 +33,3 @@ void coreControlLoopThread(TelemetryManager pod){
         pod.setPodState(newState, reason);
     }
 }
-
-
-
-

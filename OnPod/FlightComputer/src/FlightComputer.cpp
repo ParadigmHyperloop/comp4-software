@@ -34,7 +34,7 @@ void initializeTelemetryStruct(PodValues &telemetry){
 }
 
 
-int main( int32_t argc, char** argv)
+int main(int32_t argc, char** argv)
 {
     signal(SIGPIPE, signal_callback_handler);
 

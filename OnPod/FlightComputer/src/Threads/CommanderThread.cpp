@@ -1,4 +1,5 @@
 #include <cerrno>
+#include <cmath>
 
 #include "NetworkHelpers.h"
 #include "Common.h"
