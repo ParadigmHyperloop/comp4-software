@@ -27,7 +27,6 @@ PodStates TelemetryManager::getPodStateValue() {
 
 ControlsInterfaceStates TelemetryManager::getControlsInterfaceState() {
     ControlsInterfaceStates state = telemetry->controlsInterfaceState;
-    telemetry->controlsInterfaceState = ciNone;
     return state;
 }
 
@@ -41,6 +40,11 @@ void TelemetryManager::setPodState(PodStates newState, const std::string &reason
 
 void TelemetryManager::setControlsInterfaceState(ControlsInterfaceStates eTerminalState) {
     this->telemetry->controlsInterfaceState = eTerminalState;
+    if(eTerminalState == ciEmergencyStop){
+        telemetry->automaticTransitions = true;
+        telemetry->manualLvdcNodeState = lvdcNone;
+        telemetry->manualBrakeNodeState = bnsNone;
+    }
 }
 
 void TelemetryManager::setAutomaticTransitions(bool val) {

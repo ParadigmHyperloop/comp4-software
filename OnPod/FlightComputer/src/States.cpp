@@ -139,6 +139,7 @@ bool PodState::brakingCriteriaMet() {
         pod->sendUpdate("Braking at maximum strip count");
         return true;
     }
+    return false;
 }
 
 void PodState::setupTransition(PodStates nextState, const std::string& reason){
