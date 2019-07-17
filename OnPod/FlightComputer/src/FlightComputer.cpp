@@ -62,11 +62,22 @@ int main(int32_t argc, char** argv)
     PodValues sPodValues = {};
     initializeTelemetryStruct(sPodValues);
 
+
     // Network Configs
     initializer->updatePodNetworkValues(sPodNetworkValues, flightConfigurationParameters);
 
     //Core Control Loop Thread
     TelemetryManager controlTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
+    auto stateDisplay = initializer -> GetSevenSegStateDisplay(&controlTelemManager);
+
+    for (int i = 0; i < 10; i++)
+    {
+      stateDisplay->TestDisplay(i);
+
+      std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+    }
+    /*
+
     controlTelemManager.setPodState(psBooting, (std::string)"Booting..."); // Set Pod state to booting
     std::thread coreControlThread(coreControlLoopThread, controlTelemManager);
 
@@ -93,5 +104,6 @@ int main(int32_t argc, char** argv)
     pinThread.join();
     controlsInterfaceThread.join();
 
+   */
     return 0;
 }

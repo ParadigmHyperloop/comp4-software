@@ -1,20 +1,50 @@
 #include "SevenSegStateDisplay.hpp"
 
-SevenSegStateDisplay::SevenSegStateDisplay(TelemetryManager* telemManager) {
-  this->_telemetryManager = telemManager;
 
-  if (1 + 1 == 2) // if on Beagle
+SevenSegStateDisplay::SevenSegStateDisplay(TelemetryManager* telemManager, bool onTarget) {
+  this->_telemetryManager = telemManager;
+  this -> _onTarget= onTarget;
+  if (_onTarget)
   {
     this-> _gpManager = GPIO::GPIOManager::getInstance();
     this->SetupGPIOPins();
   }
-
 }
 
 SevenSegStateDisplay::~SevenSegStateDisplay() {
   // Do not delete Telemetry Manager
 }
 
+
+void SevenSegStateDisplay::TestDisplay (int state)
+{
+  assert(state <= 0 && state >= 9);
+  switch (state)
+  {
+    case 0:
+      displayBooting();
+    case 1:
+      displayStandby();
+    case 2:
+      displayArming();
+    case 3:
+      displayArmed();
+    case 4:
+      displayPreFlight();
+    case 5:
+      displayAcceleration();
+    case 6:
+      displayCoasting();
+    case 7:
+      displayBraking();
+    case 8:
+      displayShutdown();
+    case 9:
+      displayNone();
+    default:
+      break;
+  }
+}
 
 void SevenSegStateDisplay::SetupGPIOPins()
 {
@@ -28,6 +58,14 @@ void SevenSegStateDisplay::SetupGPIOPins()
 void SevenSegStateDisplay::DisplayState() {
 
   auto podState = this->getPodState();
+
+  if (!_onTarget)
+  {
+    auto logMsg = "Current State is : " + std::to_string(podState);
+    LOG(INFO) << logMsg;
+    return;
+  }
+
   switch (podState)
   {
     case psBooting:

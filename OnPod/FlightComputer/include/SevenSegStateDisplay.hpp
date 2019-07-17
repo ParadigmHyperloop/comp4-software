@@ -10,10 +10,11 @@
 class SevenSegStateDisplay : public IStateDisplay{
 
 public:
-  SevenSegStateDisplay(TelemetryManager*);
+  SevenSegStateDisplay(TelemetryManager*, bool);
   ~SevenSegStateDisplay();
 
   void DisplayState();
+  void TestDisplay(int);
   void SetupGPIOPins();
   void WriteToGPIO(int16_t pin, bool value);
   void ClearDsiplay();
@@ -34,6 +35,7 @@ protected:
 private:
 
   GPIO::GPIOManager* _gpManager = nullptr;
+  bool _onTarget = false;
   const TelemetryManager* _telemetryManager;
   const int8_t _seg1 = 69;
   const int8_t _seg2 = 44;

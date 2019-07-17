@@ -33,7 +33,7 @@ if (THREADS_HAVE_PTHREAD_ARG)
     target_compile_options(FlightComputer PUBLIC "-pthread")
 endif ()
 
-add_executable(FlightComputer ${SOURCES}  ${PROTO_HDRS} src/IStateDisplay.hpp src/Helpers/SevenSegStateDisplay.cpp src/Helpers/SevenSegStateDisplay.hpp src/Helpers/GPIOManager.cpp include/GPIOManager.hpp src/Helpers/GPIOConst.cpp include/GPIOConst.hpp)
+add_executable(FlightComputer ${SOURCES}  ${PROTO_HDRS})
 
 target_link_libraries(FlightComputer ${Protobuf_LIBRARIES})
 
