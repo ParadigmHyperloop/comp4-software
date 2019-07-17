@@ -62,8 +62,8 @@ struct PodValues {
     float hvBatteryPackMaxCellVoltage = 0;
     int hvBatteryPackStateOfCharge = 0;
     float hvBatteryPackMaxCellTemperature = 0;
-    int hvFaultCode1 = 0;
-    int hvFaultCode2 = 0;
+    int32_t hvFaultCode1 = 11;
+    int32_t hvFaultCode2 = 753;
 
     // LV-BMS
     int32_t lv1BatteryPackStateOfCharge = 0;
@@ -83,6 +83,8 @@ struct PodValues {
     float inverterBusVoltage = 0;
     float commandedTorque = 0;
     int32_t inverterHeartbeat = 0;
+    int32_t inverterFaultBitLo = 12;
+    int32_t inverterFaultBitHi = 8;
     std::chrono::high_resolution_clock::time_point lastMotorReadTime;
 
     // Atmosphere

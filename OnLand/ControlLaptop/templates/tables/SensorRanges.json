@@ -1,5 +1,6 @@
 {
   "pressureVesselTemperature": {
+    "psNone" : [0,0],
     "psBooting": [0,50],
     "psStandby": [5,50],
     "psArming" : [5,50],
@@ -17,6 +18,7 @@
     "psPreFlight" : [1550,1725],
     "psAcceleration": [1550,1725],
     "psCoasting": [1550,1725],
+    "psNone" : [0,0],
     "psBraking" : [1,1725]
   },
   "lowPressure1": {
@@ -27,7 +29,8 @@
     "psPreFlight" : [0,18],
     "psAcceleration": [13,17],
     "psCoasting": [13,17],
-    "psBraking" : [215,255]
+    "psBraking" : [215,255],
+    "psNone" : [0,0]
   },
     "lowPressure2": {
     "psBooting": [13,17],
@@ -37,7 +40,8 @@
     "psPreFlight" : [0,18],
     "psAcceleration": [13,17],
     "psCoasting": [13,17],
-    "psBraking" : [215,255]
+    "psBraking" : [215,255],
+    "psNone" : [0,0]
   },
     "lowPressure3": {
     "psBooting": [1,18],
@@ -47,7 +51,8 @@
     "psPreFlight" : [1,18],
     "psAcceleration": [1,18],
     "psCoasting": [1,18],
-    "psBraking" : [215,255]
+    "psBraking" : [215,255],
+    "psNone" : [0,0]
   },
     "lowPressure4": {
     "psBooting": [13,17],
@@ -57,17 +62,19 @@
     "psPreFlight" : [215,255],
     "psAcceleration": [215,255],
     "psCoasting": [215,255],
-    "psBraking" : [215,255]
+    "psBraking" : [215,255],
+    "psNone" : [0,0]
   },
   "hvBatteryPackVoltage": {
     "psBooting": [0,0],
-    "psStandby": [780,807],
-    "psArming" : [780,807],
-    "psArmed" : [780,807],
-    "psPreFlight" : [780,807],
-    "psAcceleration": [537,807],
-    "psCoasting": [537,807],
-    "psBraking" : [537,807]
+    "psStandby": [716,806],
+    "psArming" : [777,806],
+    "psArmed" : [777,806],
+    "psPreFlight" : [777,806],
+    "psAcceleration": [777,806],
+    "psCoasting": [716,806],
+    "psBraking" : [716,806],
+    "psNone" : [0,0]
   },
   "hvBatteryPackCurrent": {
     "psBooting": [0,0],
@@ -75,9 +82,10 @@
     "psArming" : [0,0],
     "psArmed" : [0,0],
     "psPreFlight" : [0,0],
-    "psAcceleration": [1,620],
+    "psAcceleration": [1,400],
     "psCoasting": [0,0],
-    "psBraking" : [0,0]
+    "psBraking" : [0,0],
+    "psNone" : [0,0]
   },
   "hvBatteryPackMinimumCellVoltage": {
     "psBooting": [0,0],
@@ -87,7 +95,8 @@
     "psPreFlight" : [2.8,4.2],
     "psAcceleration": [2.8,4.2],
     "psCoasting": [2.8,4.2],
-    "psBraking" : [2.8,4.2]
+    "psBraking" : [2.8,4.2],
+    "psNone" : [0,0]
   },
   "hvBatteryPackMaxCellVoltage": {
     "psBooting": [0,0],
@@ -97,7 +106,8 @@
     "psPreFlight" : [2.8,4.2],
     "psAcceleration": [2.8,4.2],
     "psCoasting": [2.8,4.2],
-    "psBraking" : [2.8,4.2]
+    "psBraking" : [2.8,4.2],
+    "psNone" : [0,0]
   },
   "maxIgbtTemperature": {
     "psBooting": [0,0],
@@ -107,7 +117,8 @@
     "psPreFlight" : [10,100],
     "psAcceleration": [10,100],
     "psCoasting": [10,100],
-    "psBraking" : [10,100]
+    "psBraking" : [10,100],
+    "psNone" : [0,0]
   },
   "gateDriverTemperature": {
     "psBooting": [0,0],
@@ -117,7 +128,8 @@
     "psPreFlight" : [10,80],
     "psAcceleration": [10,80],
     "psCoasting": [10,80],
-    "psBraking" : [10,80]
+    "psBraking" : [10,80],
+    "psNone" : [0,0]
   },
   "inverterControlBoardTemperature": {
     "psBooting": [0,0],
@@ -127,7 +139,8 @@
     "psPreFlight" : [10,80],
     "psAcceleration": [10,80],
     "psCoasting": [10,80],
-    "psBraking" : [10,80]
+    "psBraking" : [10,80],
+    "psNone" : [0,0]
   },
   "motorTemperature": {
     "psBooting": [0,0],
@@ -137,7 +150,8 @@
     "psPreFlight" : [15,40],
     "psAcceleration": [15,100],
     "psCoasting": [15,100],
-    "psBraking" : [15,100]
+    "psBraking" : [15,100],
+    "psNone" : [0,0]
   },
   "inverterBusVoltage": {
     "psBooting": [0,0],
@@ -147,7 +161,8 @@
     "psPreFlight" : [780,807],
     "psAcceleration": [537,807],
     "psCoasting": [537,807],
-    "psBraking" : [537,807]
+    "psBraking" : [537,807],
+    "psNone" : [0,0]
   },
   "coolantTemperature": {
     "psBooting": [10,30],
@@ -157,7 +172,8 @@
     "psPreFlight" : [10,30],
     "psAcceleration": [10,30],
     "psCoasting": [10,30],
-    "psBraking" : [10,30]
+    "psBraking" : [10,30],
+    "psNone" : [0,0]
   },
     "coolantPressure1": {
     "psBooting": [10,20],
@@ -167,7 +183,8 @@
     "psPreFlight" : [21,30],
     "psAcceleration": [21,30],
     "psCoasting": [21,30],
-    "psBraking" : [21,30]
+    "psBraking" : [21,30],
+    "psNone" : [0,0]
   },
    "coolantPressure2": {
     "psBooting": [10,20],
@@ -177,7 +194,8 @@
     "psPreFlight" : [21,30],
     "psAcceleration": [21,30],
     "psCoasting": [21,30],
-    "psBraking" : [21,30]
+    "psBraking" : [21,30],
+    "psNone" : [0,0]
   },
   "enclosurePressure": {
     "psBooting": [10,20],
@@ -187,7 +205,8 @@
     "psPreFlight" : [10,20],
     "psAcceleration": [10,20],
     "psCoasting": [10,20],
-    "psBraking" : [10,20]
+    "psBraking" : [10,20],
+    "psNone" : [0,0]
   },
   "enclosureTemperature": {
     "psBooting": [20,40],
@@ -197,17 +216,19 @@
     "psPreFlight" : [20,40],
     "psAcceleration": [20,60],
     "psCoasting": [20,60],
-    "psBraking" : [20,60]
+    "psBraking" : [20,60],
+    "psNone" : [0,0]
   },
     "hvBatteryPackStateOfCharge": {
-    "psBooting": [30,100],
-    "psStandby": [30,100],
-    "psArming" : [30,100],
-    "psArmed" : [30,100],
-    "psPreFlight" : [30,100],
-    "psAcceleration": [30,100],
-    "psCoasting": [30,100],
-    "psBraking" : [30,100]
+    "psBooting": [20,100],
+    "psStandby": [20,100],
+    "psArming" : [75,100],
+    "psArmed" : [75,100],
+    "psPreFlight" : [75,100],
+    "psAcceleration": [75,100],
+    "psCoasting": [20,100],
+    "psBraking" : [20,100],
+    "psNone" : [0,0]
   },
   "hvBatteryPackMaxCellTemperature": {
     "psBooting": [10,40],
@@ -217,7 +238,8 @@
     "psPreFlight" : [10,40],
     "psAcceleration": [10,100],
     "psCoasting": [10,100],
-    "psBraking" : [10,100]
+    "psBraking" : [10,100],
+    "psNone" : [0,0]
   },  "lv1BatteryPackStateOfCharge": {
     "psBooting": [80,100],
     "psStandby": [80,100],
@@ -226,7 +248,8 @@
     "psPreFlight" : [80,100],
     "psAcceleration": [40,100],
     "psCoasting": [40,100],
-    "psBraking" : [40,100]
+    "psBraking" : [40,100],
+    "psNone" : [0,0]
   },
     "lv1BatteryPackVoltage": {
     "psBooting": [28.6,34],
@@ -236,7 +259,8 @@
     "psPreFlight" : [28.6,34],
     "psAcceleration": [28.6,34],
     "psCoasting": [28.6,34],
-    "psBraking" : [28.6,34]
+    "psBraking" : [28.6,34],
+    "psNone" : [0,0]
   },
     "lv1BatteryPackCellTemperature": {
     "psBooting": [10,40],
@@ -246,7 +270,8 @@
     "psPreFlight" : [10,40],
     "psAcceleration": [10,70],
     "psCoasting": [10,70],
-    "psBraking" : [10,70]
+    "psBraking" : [10,70],
+    "psNone" : [0,0]
   },
     "lv2BatteryPackStateOfCharge": {
     "psBooting": [80,100],
@@ -256,7 +281,8 @@
     "psPreFlight" : [80,100],
     "psAcceleration": [40,100],
     "psCoasting": [40,100],
-    "psBraking" : [40,100]
+    "psBraking" : [40,100],
+    "psNone" : [0,0]
   },
     "lv2BatteryPackVoltage": {
     "psBooting": [28.6,34],
@@ -266,7 +292,8 @@
     "psPreFlight" : [28.6,34],
     "psAcceleration": [28.6,34],
     "psCoasting": [28.6,34],
-    "psBraking" : [28.6,34]
+    "psBraking" : [28.6,34],
+    "psNone" : [0,0]
   },
     "lv2BatteryPackCellTemperature": {
     "psBooting": [10,40],
@@ -276,7 +303,8 @@
     "psPreFlight" : [10,40],
     "psAcceleration": [10,70],
     "psCoasting": [10,70],
-    "psBraking" : [10,70]
+    "psBraking" : [10,70],
+    "psNone" : [0,0]
   },
       "hvFaultCode2": {
     "psBooting": [0,0],
@@ -286,7 +314,8 @@
     "psPreFlight" : [0,0],
     "psAcceleration": [0,0],
     "psCoasting": [0,0],
-    "psBraking" : [0,0]
+    "psBraking" : [0,0],
+    "psNone" : [0,0]
   },
       "hvFaultCode1": {
     "psBooting": [0,0],
@@ -296,6 +325,29 @@
     "psPreFlight" : [0,0],
     "psAcceleration": [0,0],
     "psCoasting": [0,0],
-    "psBraking" : [0,0]
+    "psBraking" : [0,0],
+    "psNone" : [0,0]
+  },
+      "inverterFaultBitLo": {
+    "psBooting": [0,0],
+    "psStandby": [0,0],
+    "psArming" : [0,0],
+    "psArmed" : [0,0],
+    "psPreFlight" : [0,0],
+    "psAcceleration": [0,0],
+    "psCoasting": [0,0],
+    "psBraking" : [0,0],
+    "psNone" : [0,0]
+  },
+  "inverterFaultBitHi": {
+    "psBooting": [0,0],
+    "psStandby": [0,0],
+    "psArming" : [0,0],
+    "psArmed" : [0,0],
+    "psPreFlight" : [0,0],
+    "psAcceleration": [0,0],
+    "psCoasting": [0,0],
+    "psBraking" : [0,0],
+    "psNone" : [0,0]
   }
 }

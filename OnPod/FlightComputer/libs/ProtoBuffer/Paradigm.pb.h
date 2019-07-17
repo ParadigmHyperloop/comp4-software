@@ -126,12 +126,12 @@ enum PodStates {
   psAcceleration = 5,
   psCoasting = 6,
   psBraking = 7,
-  psShutdown = 8,
-  psNone = 9
+  psNone = 8,
+  psShutdown = 9
 };
 bool PodStates_IsValid(int value);
 const PodStates PodStates_MIN = psBooting;
-const PodStates PodStates_MAX = psNone;
+const PodStates PodStates_MAX = psShutdown;
 const int PodStates_ARRAYSIZE = PodStates_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* PodStates_descriptor();

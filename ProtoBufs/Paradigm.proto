@@ -19,8 +19,8 @@ enum PodStates {
     psAcceleration  = 5;
     psCoasting      = 6;
     psBraking       = 7;
-    psShutdown      = 8;
-    psNone          = 9;
+    psNone          = 8;
+    psShutdown      = 9;
 }
 
 enum ControlsInterfaceStates {
@@ -101,7 +101,7 @@ message Telemetry {
     optional float hvBatteryPackMaxCellTemperature = 28;
     optional float hvBatteryPackMaxCellVoltage = 30;
     optional float hvBatteryPackMinimumCellVoltage = 29;
-    optional int32  hvBatteryPackStateOfCharge = 79;
+    optional int32 hvBatteryPackStateOfCharge = 79;
 
     // LV-BMS
     optional int32 lv1BatteryPackStateOfCharge = 85;

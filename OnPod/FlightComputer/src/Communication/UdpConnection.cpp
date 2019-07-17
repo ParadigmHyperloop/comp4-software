@@ -204,6 +204,8 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_hvbatterypackmaxcelltemperature(pod.telemetry->hvBatteryPackMaxCellTemperature);
     protoMessage->set_hvbatterypackstateofcharge(pod.telemetry->hvBatteryPackStateOfCharge);
     protoMessage->set_inverterheartbeat(pod.telemetry->inverterHeartbeat);
+    protoMessage->set_inverterfaultbitlo(pod.telemetry->inverterFaultBitLo);
+    protoMessage->set_inverterfaultbithi(pod.telemetry->inverterFaultBitHi);
 
     // Flight Profile
     protoMessage->set_maxflighttime(pod.telemetry->maxFlightTime);
