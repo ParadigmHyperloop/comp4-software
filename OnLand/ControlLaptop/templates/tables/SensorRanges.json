@@ -114,8 +114,8 @@
     "psStandby": [10,100],
     "psArming" : [10,100],
     "psArmed" : [10,100],
-    "psPreFlight" : [10,100],
-    "psAcceleration": [10,100],
+    "psPreFlight" : [10,150],
+    "psAcceleration": [10,150],
     "psCoasting": [10,100],
     "psBraking" : [10,100],
     "psNone" : [0,0]

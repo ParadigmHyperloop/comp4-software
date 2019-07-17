@@ -24,13 +24,13 @@
  namespace INVERTER_LIMITS
 {
     static int32_t MOTOR_UNARMED_TEMP_MIN = 10;
-    static int32_t MOTOR_UNARMED_TEMP_MAX = 50; //TODO
+    static int32_t MOTOR_UNARMED_TEMP_MAX = 50;
 
     static int32_t MOTOR_ARMED_TEMP_MIN = 10;
-    static int32_t MOTOR_ARMED_TEMP_MAX = 400; //TODO
+    static int32_t MOTOR_ARMED_TEMP_MAX = 150;
 
     static int32_t COMPONENT_TEMP_MIN = 10;
-    static int32_t COMPONENT_TEMP_MAX = 400; //TODO
+    static int32_t COMPONENT_TEMP_MAX = 150;
 };
 
 // High Voltage
