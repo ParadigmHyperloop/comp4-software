@@ -20,6 +20,7 @@ enum PodStates {
     psCoasting      = 6;
     psBraking       = 7;
     psNone          = 8;
+    psShutdown      = 9;
 }
 
 enum ControlsInterfaceStates {
