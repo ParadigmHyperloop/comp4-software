@@ -204,8 +204,10 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_hvbatterypackmaxcelltemperature(pod.telemetry->hvBatteryPackMaxCellTemperature);
     protoMessage->set_hvbatterypackstateofcharge(pod.telemetry->hvBatteryPackStateOfCharge);
     protoMessage->set_inverterheartbeat(pod.telemetry->inverterHeartbeat);
-    protoMessage->set_inverterfaultbitlo(pod.telemetry->inverterFaultBitLo);
-    protoMessage->set_inverterfaultbithi(pod.telemetry->inverterFaultBitHi);
+    protoMessage->set_inverterrunfaultlo(pod.telemetry->inverterRunFaultLo);
+    protoMessage->set_inverterrunfaulthi(pod.telemetry->inverterRunFaultHi);
+    protoMessage->set_inverterpostfaulthi(pod.telemetry->inverterPostFaultHi);
+    protoMessage->set_inverterpostfaultlo(pod.telemetry->inverterPostFaultLo);
 
     // Flight Profile
     protoMessage->set_maxflighttime(pod.telemetry->maxFlightTime);
@@ -228,6 +230,16 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_coolantpressure1(pod.telemetry->coolingLinePressure);
     protoMessage->set_enclosurepressure(pod.telemetry->enclosurePressure);
     protoMessage->set_enclosuretemperature(pod.telemetry->enclosureTemperature);
+
+    // Ghost Train
+    protoMessage->set_gtinvertercurrent(pod.telemetry->gtInverterCurrent);
+    protoMessage->set_gtlp5current(pod.telemetry->gtLp5Current);
+    protoMessage->set_gtlp12current(pod.telemetry->gtLp12Current);
+    protoMessage->set_gtnodecurrent(pod.telemetry->gtNodeCurrent);
+    protoMessage->set_gtpack1current(pod.telemetry->gtPack1Current);
+    protoMessage->set_gtpack1voltage(pod.telemetry->gtPack1Voltage);
+    protoMessage->set_gtpack2current(pod.telemetry->gtPack1Current);
+    protoMessage->set_gtpack2voltage(pod.telemetry->gtPack2Voltage);
 
     if(pod.telemetry->updates.size() > 0){
         std::lock_guard<std::mutex> lock(this->pod.telemetry->updatesLock);
@@ -336,5 +348,14 @@ bool LvdcNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
         throw std::invalid_argument(strError);
     }
     this->pod.telemetry->receivedLvdcNodeState = protoMessage.state();
+    this->pod.telemetry->gtPack1Current = protoMessage.lowpowerpackcurrent();
+    this->pod.telemetry->gtPack1Voltage = protoMessage.lowpowerpackvoltage();
+    this->pod.telemetry->gtPack2Current = protoMessage.highpowerpackcurrent();
+    this->pod.telemetry->gtPack2Voltage = protoMessage.highpowerpackvoltage();
+    this->pod.telemetry->gtLp5Current = protoMessage.lowpower5current();
+    this->pod.telemetry->gtLp12Current = protoMessage.lowpower12current();
+    this->pod.telemetry->gtNodeCurrent = protoMessage.nodecurrent();
+    this->pod.telemetry->gtInverterCurrent = protoMessage.invertercurrent();
+
     return true;
 }

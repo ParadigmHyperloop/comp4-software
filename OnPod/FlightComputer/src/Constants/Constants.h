@@ -38,6 +38,14 @@ namespace CONNECTION_FLAGS
     static const int32_t GATE_DRIVER_TEMP_INDEX = 2;
     static const int32_t CONTROL_BOARD_TEMP_INDEX = 3;
     static const int32_t MAX_IGBT_INDEX = 4;
+
+
+    static const int32_t INVERTER_FAULT_COUNT = 4;
+    static const int32_t POST_FAULT_LO_INDEX = 0;
+    static const int32_t POST_FAULT_HI_INDEX = 1;
+    static const int32_t RUN_FAULT_LO_INDEX = 2;
+    static const int32_t RUN_FAULT_HI_INDEX = 3;
+
 };
 
 // BMS Sensor Flag Indices

@@ -58,6 +58,11 @@ class TelemetryManager
 		void setMotorSpeed(int32_t value);
 		void setInverterBusVoltage(int);
         void setInverterHeartbeat(int32_t);
+        void setPostFaultLo(int32_t);
+        void setPostFaultHi(int32_t);
+        void setRunFaultLo(int32_t);
+        void setRunFaultHi(int32_t);
+
 
         // HV BMS
 		void setHvBatteryPackVoltage(float);

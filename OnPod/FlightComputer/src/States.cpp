@@ -69,7 +69,7 @@ int8_t PodState::checkFlags(std::vector<int8_t > &flags){
         if(flags[i] == 2){
             continue;
         }
-        if(flags[i] == 0){
+        if(flags[i] != 1){
             return i;
         }
     }
@@ -122,6 +122,12 @@ void PodState::armedChecks(){
     int status = checkFlags(pod->telemetry->inverterSensorFlags);
     if(status != GENERAL_CONSTANTS::FLAGS_GOOD){
         std::string error = "Failed on inverter sensor flag : " + std::to_string(status);
+        throw std::runtime_error(error);
+    }
+
+    status = checkFlags(pod->telemetry->inverterFaults);
+    if(status != GENERAL_CONSTANTS::FLAGS_GOOD){
+        std::string error = "Failed on inverter fault, see pod messages";
         throw std::runtime_error(error);
     }
 

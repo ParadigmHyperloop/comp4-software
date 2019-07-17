@@ -385,6 +385,26 @@ void TelemetryManager::setInverterBusVoltage(int value) {
     this->setInverterSensorFlag(status, INVERTER_FLAGS::BUS_VOLTAGE_INDEX);
 }
 
+void TelemetryManager::setPostFaultHi(int32_t fault) {
+    telemetry->inverterPostFaultHi = fault;
+    telemetry->inverterFaults[INVERTER_FLAGS::POST_FAULT_HI_INDEX];
+}
+
+void TelemetryManager::setPostFaultLo(int32_t fault) {
+    telemetry->inverterPostFaultLo = fault;
+    telemetry->inverterFaults[INVERTER_FLAGS::POST_FAULT_LO_INDEX];
+}
+
+void TelemetryManager::setRunFaultHi(int32_t fault) {
+    telemetry->inverterRunFaultHi = fault;
+    telemetry->inverterFaults[INVERTER_FLAGS::RUN_FAULT_HI_INDEX];
+}
+
+void TelemetryManager::setRunFaultLo(int32_t fault) {
+    telemetry->inverterRunFaultLo = fault;
+    telemetry->inverterFaults[INVERTER_FLAGS::POST_FAULT_LO_INDEX];
+}
+
 
 //          Position
 
@@ -427,7 +447,15 @@ void TelemetryManager::resetValues(int32_t index){
             break;
         }
         case CONNECTION_FLAGS::LVDC_NODE_HEARTBEAT_INDEX:{
-            //todo
+            telemetry->gtPack1Current = 0;
+            telemetry->gtPack2Voltage = 0;
+            telemetry->gtPack1Voltage = 0;
+            telemetry->gtPack2Current = 0;
+            telemetry->gtNodeCurrent = 0;
+            telemetry->gtLp5Current = 0;
+            telemetry->gtLp12Current = 0;
+            telemetry->gtInverterCurrent = 0;
+            break;
         }
         case CONNECTION_FLAGS::BMS_HEARTBEAT_INDEX:{
             telemetry->hvBatteryPackMaxCellTemperature = 0;
