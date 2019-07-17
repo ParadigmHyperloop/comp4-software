@@ -5,9 +5,9 @@ from config import POD_COMMANDER_PORT, UDP_TELEM_PORT
 from Paradigm_pb2 import Telemetry
 
 def create_telem(packet):
-    packet.podState = 8 #random.randint(0, 8)
+    packet.podState = random.randint(0, 8)
     packet.controlsInterfaceState = random.randint(0, 5)
-    packet.lvdcNodeState = 2
+    packet.lvdcNodeState = random.randint(0, 3)
     packet.breakNodePerceivedPodState = random.randint(0, 7)
     packet.brakeNodeState = random.randint(0, 5)
 
@@ -63,7 +63,6 @@ def create_telem(packet):
     packet.coolantPressure1 = random.randint(0, 101)
     packet.coolantPressure2 = random.randint(0, 101)
 
-
     packet.pack1Voltage = random.randint(0, 101)
     packet.pack2Voltage = random.randint(0, 101)
     packet.pack1Current = random.randint(0, 101)
@@ -83,7 +82,6 @@ def create_telem(packet):
     packet.railCurrentSensor7 = random.randint(0, 101)
     packet.railCurrentSensor8 = random.randint(0, 101)
     packet.railCurrentFlag = random.randint(0, 101)
-
 
     packet.motorTorque = random.randint(0, 101)
     packet.flightDistance = random.randint(0, 101)
