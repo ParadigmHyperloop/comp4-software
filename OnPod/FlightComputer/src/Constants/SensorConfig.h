@@ -36,27 +36,29 @@
 // High Voltage
 namespace HV_LIMITS
 {
-    static int32_t VOLTAGE_ABSOLUTE_MIN = 0;
-    static int32_t VOLTAGE_ARMED_MIN = 0; //todo
-    static int32_t VOLTAGE_MAX = 0;
+    static int32_t VOLTAGE_ABSOLUTE_MIN = 716;
+    static int32_t VOLTAGE_ARMED_MIN = 777;
+    static int32_t VOLTAGE_MAX = 807;
 
     static int32_t CELL_TEMP_MIN = 10;
-    static int32_t CELL_TEMP_MAX = 70; //TODO
+    static int32_t CELL_TEMP_MAX = 100;
 
-    static int32_t SOC_MIN = 60; //TODO
+    static int32_t SOC_ABSOLUTE_MIN = 20;
+    static int32_t SOC_ARMED_MIN = 75;
     static int32_t SOC_MAX = 100;
 }
 
 // High Voltage
 namespace LV_LIMITS
 {
-    static int32_t VOLTAGE_ABSOLUTE_MIN = 0;
-    static int32_t VOLTAGE_MAX = 0;
+    static float VOLTAGE_ABSOLUTE_MIN = 28.6;  //todo
+    static float VOLTAGE_MAX = 34;
 
     static int32_t CELL_TEMP_MIN = 10;
-    static int32_t CELL_TEMP_MAX = 70; //TODO
+    static int32_t CELL_TEMP_MAX = 70;
 
-    static int32_t SOC_MIN = 60; //TODO
+    static int32_t SOC_ABSOLUTE_MIN = 25;
+    static int32_t SOC_ARMED_MIN = 75;
     static int32_t SOC_MAX = 100;
 }
 

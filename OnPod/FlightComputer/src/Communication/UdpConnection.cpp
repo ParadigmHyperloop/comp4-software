@@ -284,7 +284,7 @@ bool BrakeNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
     this->pod.setLowPressure(protoMessage.lowpressurecommon(), NODE_FLAGS::LP4_INDEX);
     this->pod.setPressureVesselTemperature(protoMessage.pneumatictemperature());
     this->pod.setCoolantTemperature(protoMessage.coolanttemperature());
-    this->pod.setRecievedBrakeNodeState(protoMessage.state());
+    this->pod.setReceivedBrakeNodeState(protoMessage.state());
     return true;
 }
 

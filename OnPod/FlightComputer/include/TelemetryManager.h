@@ -77,7 +77,7 @@ class TelemetryManager
 
 
     // Brake Node
-        void setRecievedBrakeNodeState(BrakeNodeStates);
+        void setReceivedBrakeNodeState(BrakeNodeStates value);
         void setLowPressure(float, int32_t);
         void setHighPressure(float);
         void setSolenoid(bool value, int32_t identifier);

@@ -105,7 +105,6 @@ void TelemetryManager::setHvBatteryPackMaxCellTemperature(float value) {
 
     bool status;
     status = inRange<float>(value, HV_LIMITS::CELL_TEMP_MIN, HV_LIMITS::CELL_TEMP_MAX);
-
     this->setBmsSensorFlag(status, BMS_FLAGS::HV_MAX_CELL_TEMP_INDEX);
 }
 
@@ -115,7 +114,10 @@ void TelemetryManager::setHvBatteryPackStateOfCharge(int value) {
     bool status = true;
     PodStates currentState = this->getPodStateValue();
     if(currentState == psArming || currentState == psArmed){
-        status = inRange<int>(value, HV_LIMITS::SOC_MIN, HV_LIMITS::SOC_MAX);
+        status = inRange<int>(value, HV_LIMITS::SOC_ARMED_MIN, HV_LIMITS::SOC_MAX);
+    }
+    if(currentState == psStandby){
+        status = inRange<int>(value, HV_LIMITS::SOC_ABSOLUTE_MIN, HV_LIMITS::SOC_MAX);
     }
     this->setBmsSensorFlag(status,  BMS_FLAGS::HV_SOC_INDEX);
 }
@@ -124,13 +126,14 @@ void TelemetryManager::setHvBatteryPackStateOfCharge(int value) {
 void TelemetryManager::setLv1BatteryPackStateOfCharge(int value) {
     this->telemetry->lv1BatteryPackStateOfCharge = value;
 
-    bool status = true;
+    bool status;
     PodStates currentState = this->getPodStateValue();
 
-    // Check if nominal for current state
-    if(currentState == psArming || currentState == psArmed ||
-    currentState == psPreFlight || currentState == psAcceleration){
-        status = inRange<int>(value, LV_LIMITS::SOC_MIN, LV_LIMITS::SOC_MAX);
+    if(currentState == psArming || currentState == psArmed){
+        status = inRange<int>(value, LV_LIMITS::SOC_ARMED_MIN, LV_LIMITS::SOC_MAX);
+    }
+    else{
+        status = inRange<int>(value, LV_LIMITS::SOC_ABSOLUTE_MIN, LV_LIMITS::SOC_MAX);
     }
 
     this->setBmsSensorFlag(status,  BMS_FLAGS::LV1_SOC_INDEX);
@@ -154,12 +157,14 @@ void TelemetryManager::setLv1BatteryPackVoltage(float value) {
 void TelemetryManager::setLv2BatteryPackStateOfCharge(int value) {
     this->telemetry->lv2BatteryPackStateOfCharge = value;
 
-    bool status = true;
+    bool status;
     PodStates currentState = this->getPodStateValue();
 
-    if(currentState == psArming || currentState == psArmed ||
-       currentState == psPreFlight || currentState == psAcceleration){
-        status = inRange<int>(value, LV_LIMITS::SOC_MIN, LV_LIMITS::SOC_MAX);
+    if(currentState == psArming || currentState == psArmed){
+        status = inRange<int>(value, LV_LIMITS::SOC_ARMED_MIN, LV_LIMITS::SOC_MAX);
+    }
+    else{
+        status = inRange<int>(value, LV_LIMITS::SOC_ABSOLUTE_MIN, LV_LIMITS::SOC_MAX);
     }
 
     this->setBmsSensorFlag(status,  BMS_FLAGS::LV2_SOC_INDEX);
@@ -284,7 +289,7 @@ void TelemetryManager::setCoolantTemperature(float value) {
     this->setNodeSensorFlag(status, NODE_FLAGS::COOLING_TEMPERATURE_INDEX);
 }
 
-void TelemetryManager::setRecievedBrakeNodeState(BrakeNodeStates value) {
+void TelemetryManager::setReceivedBrakeNodeState(BrakeNodeStates value) {
     this->telemetry->receivedBrakeNodeState = value;
 }
 
