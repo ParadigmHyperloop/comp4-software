@@ -21,7 +21,7 @@ function updateRowStatus( value_name ,$value_cell, value){
     max = sensor_ranges[value_name][pod_state][1]
 
     if(!sensor_ranges.hasOwnProperty(value_name)){
-        console.log(value_name + " not found in sensor ranges")
+        console.error(value_name + " not found in sensor ranges")
         return
     }
     if(value > max || value < min){
@@ -41,7 +41,7 @@ function ParsePodState(state) {
     let sensor_name;
     if (!sensor_ranges) {
         getSensorRanges();
-        console.log("No sensor Ranges yet")
+        console.error("No sensor Ranges yet")
         return
     }
     if (state !== pod_state){
@@ -86,7 +86,7 @@ socket.on('pod_telemetry', function (data) {
         value_name = value_cell.id;
 
         if(!data.hasOwnProperty(value_name)){
-            console.log(value_name + " not found in packet")
+            console.error(value_name + " not found in packet")
             continue;
         }
         value = data[value_name];
@@ -102,11 +102,9 @@ socket.on('pod_telemetry', function (data) {
         // highlight pod states when they are none
         if(value_name === 'podState') {
             if(value === 'psNone') {
-                console.log('None')
                 $("#podState").css("background-color", "#F2DEDE");
             }
             else {
-                console.log('Good')
                 $("#podState").css("background-color", "#FFFFFF");
             }
         }
