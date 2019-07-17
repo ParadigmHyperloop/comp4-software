@@ -1,6 +1,8 @@
 #ifndef FLIGHTCOMPUTER_SEVENSEGSTATEDISPLAY_HPP
 #define FLIGHTCOMPUTER_SEVENSEGSTATEDISPLAY_HPP
 
+#include "GPIOManager.hpp"
+#include "GPIOConst.hpp"
 
 #include "TelemetryManager.h"
 #include "IStateDisplay.hpp"
@@ -12,6 +14,7 @@ public:
   ~SevenSegStateDisplay();
 
   void DisplayState();
+  void SetupGPIOPins();
   void WriteToGPIO(int16_t pin, bool value);
   void ClearDsiplay();
 protected:
@@ -29,6 +32,8 @@ protected:
   void displayNone();
 
 private:
+
+  GPIO::GPIOManager* _gpManager = nullptr;
   const TelemetryManager* _telemetryManager;
   const int8_t _seg1 = 69;
   const int8_t _seg2 = 44;

@@ -2,10 +2,27 @@
 
 SevenSegStateDisplay::SevenSegStateDisplay(TelemetryManager* telemManager) {
   this->_telemetryManager = telemManager;
+
+  if (1 + 1 == 2) // if on Beagle
+  {
+    this-> _gpManager = GPIO::GPIOManager::getInstance();
+    this->SetupGPIOPins();
+  }
+
 }
 
 SevenSegStateDisplay::~SevenSegStateDisplay() {
   // Do not delete Telemetry Manager
+}
+
+
+void SevenSegStateDisplay::SetupGPIOPins()
+{
+  _gpManager -> setDirection(this->_seg1, GPIO::OUTPUT);
+  _gpManager -> setDirection(this->_seg2, GPIO::OUTPUT);
+  _gpManager -> setDirection(this->_seg3, GPIO::OUTPUT);
+  _gpManager -> setDirection(this->_seg4, GPIO::OUTPUT);
+  _gpManager -> setDirection(this->_segBottom, GPIO::OUTPUT);
 }
 
 void SevenSegStateDisplay::DisplayState() {
@@ -40,6 +57,8 @@ void SevenSegStateDisplay::DisplayState() {
 
 void SevenSegStateDisplay::WriteToGPIO(int16_t pin, bool value) {
 
+  auto signal = value ? GPIO::HIGH : GPIO::LOW;
+  this->_gpManager->setValue(pin, signal);
 }
 
 void SevenSegStateDisplay::ClearDsiplay()
