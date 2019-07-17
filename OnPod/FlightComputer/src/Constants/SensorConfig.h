@@ -33,6 +33,35 @@
     static int32_t COMPONENT_TEMP_MAX = 400; //TODO
 };
 
+// High Voltage
+namespace HV_LIMITS
+{
+    static int32_t VOLTAGE_ABSOLUTE_MIN = 0;
+    static int32_t VOLTAGE_ARMED_MIN = 0; //todo
+    static int32_t VOLTAGE_MAX = 0;
+
+    static int32_t CELL_TEMP_MIN = 10;
+    static int32_t CELL_TEMP_MAX = 70; //TODO
+
+    static int32_t SOC_MIN = 60; //TODO
+    static int32_t SOC_MAX = 100;
+}
+
+// High Voltage
+namespace LV_LIMITS
+{
+    static int32_t VOLTAGE_ABSOLUTE_MIN = 0;
+    static int32_t VOLTAGE_MAX = 0;
+
+    static int32_t CELL_TEMP_MIN = 10;
+    static int32_t CELL_TEMP_MAX = 70; //TODO
+
+    static int32_t SOC_MIN = 60; //TODO
+    static int32_t SOC_MAX = 100;
+}
+
+
+
 // Pneumatics
  namespace PNEUMATICS_LIMITS
 {

@@ -12,7 +12,7 @@
   },
   "highPressure": {
     "psBooting": [0,20],
-    "psStandby": [0,1725],
+    "psStandby": [1,1725],
     "psArming" : [1550,1725],
     "psArmed" : [1550,1725],
     "psPreFlight" : [1550,1725],
@@ -22,10 +22,10 @@
     "psNone" : [0,0]
   },
   "lowPressure1": {
-    "psBooting": [13,17],
-    "psStandby": [0,18],
-    "psArming" : [0,18],
-    "psArmed" : [0,18],
+    "psBooting": [0,18],
+    "psStandby": [1,18],
+    "psArming" : [1,18],
+    "psArmed" : [1,18],
     "psPreFlight" : [0,18],
     "psAcceleration": [13,17],
     "psCoasting": [13,17],
@@ -34,9 +34,9 @@
   },
     "lowPressure2": {
     "psBooting": [13,17],
-    "psStandby": [0,18],
-    "psArming" : [0,18],
-    "psArmed" : [0,18],
+    "psStandby": [1,18],
+    "psArming" : [1,18],
+    "psArmed" : [1,18],
     "psPreFlight" : [0,18],
     "psAcceleration": [13,17],
     "psCoasting": [13,17],
@@ -56,7 +56,7 @@
   },
     "lowPressure4": {
     "psBooting": [13,17],
-    "psStandby": [0,18],
+    "psStandby": [1,18],
     "psArming" : [215,255],
     "psArmed" : [215,255],
     "psPreFlight" : [215,255],
@@ -67,7 +67,7 @@
   },
   "hvBatteryPackVoltage": {
     "psBooting": [0,0],
-    "psStandby": [0,0],
+    "psStandby": [780,807],
     "psArming" : [780,807],
     "psArmed" : [780,807],
     "psPreFlight" : [780,807],
@@ -82,14 +82,14 @@
     "psArming" : [0,0],
     "psArmed" : [0,0],
     "psPreFlight" : [0,0],
-    "psAcceleration": [0,1250],
+    "psAcceleration": [1,620],
     "psCoasting": [0,0],
     "psBraking" : [0,0],
     "psNone" : [0,0]
   },
   "hvBatteryPackMinimumCellVoltage": {
     "psBooting": [0,0],
-    "psStandby": [0,0],
+    "psStandby": [2.8,4.2],
     "psArming" : [2.8,4.2],
     "psArmed" : [2.8,4.2],
     "psPreFlight" : [2.8,4.2],
@@ -100,7 +100,7 @@
   },
   "hvBatteryPackMaxCellVoltage": {
     "psBooting": [0,0],
-    "psStandby": [0,0],
+    "psStandby": [2.8,4.2],
     "psArming" : [2.8,4.2],
     "psArmed" : [2.8,4.2],
     "psPreFlight" : [2.8,4.2],
@@ -144,8 +144,8 @@
   },
   "motorTemperature": {
     "psBooting": [0,0],
-    "psStandby": [0,0],
-    "psArming" : [0,0],
+    "psStandby": [15,40],
+    "psArming" : [15,40],
     "psArmed" : [15,40],
     "psPreFlight" : [15,40],
     "psAcceleration": [15,100],
@@ -220,8 +220,8 @@
     "psNone" : [0,0]
   },
     "hvBatteryPackStateOfCharge": {
-    "psBooting": [0,0],
-    "psStandby": [0,0],
+    "psBooting": [30,100],
+    "psStandby": [30,100],
     "psArming" : [30,100],
     "psArmed" : [30,100],
     "psPreFlight" : [30,100],

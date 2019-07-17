@@ -205,7 +205,6 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_hvbatterypackstateofcharge(pod.telemetry->hvBatteryPackStateOfCharge);
     protoMessage->set_inverterheartbeat(pod.telemetry->inverterHeartbeat);
 
-
     // Flight Profile
     protoMessage->set_maxflighttime(pod.telemetry->maxFlightTime);
     protoMessage->set_flightdistance(pod.telemetry->flightDistance);
@@ -214,6 +213,9 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_accelerationtime(pod.telemetry->accelerationTime);
     protoMessage->set_taxi(pod.telemetry->taxi);
     protoMessage->set_expectedtubepressure(pod.telemetry->expectedTubePressure);
+    protoMessage->set_maxvelocity(pod.telemetry->maxVelocity);
+    protoMessage->set_brakingdistance(pod.telemetry->brakeDistance);
+    protoMessage->set_maxstripcount(pod.telemetry->maxStripCount);
 
     // Navigation
     protoMessage->set_motorspeed(pod.telemetry->motorSpeed);
@@ -332,6 +334,5 @@ bool LvdcNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
         throw std::invalid_argument(strError);
     }
     this->pod.telemetry->receivedLvdcNodeState = protoMessage.state();
-    LOG(INFO)<<protoMessage.state();
     return true;
 }

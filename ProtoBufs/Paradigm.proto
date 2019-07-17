@@ -40,7 +40,6 @@ enum LvdcNodeStates {
 
 // CONTROL LAPTOP COMMAND
 message PodCommand {
-
     optional bool hasCommand = 7 [default = false];
     optional ControlsInterfaceStates controlsInterfaceState = 1;
     optional PodStates manualPodState = 2;
@@ -57,6 +56,8 @@ message PodCommand {
     optional uint32 accelerationTime = 15;
     optional bool taxi  = 16;
     optional uint32 expectedTubePressure = 17;
+    optional uint32 maxVelocity = 18;
+    optional uint32 brakingDistance = 19;
 }
 
 // POD TELEMETRY
@@ -161,6 +162,9 @@ message Telemetry {
     optional uint32 accelerationTime = 95;
     optional bool taxi  = 96;
     optional uint32 expectedTubePressure = 12;
+    optional uint32 maxVelocity = 98;
+    optional uint32 brakingDistance = 99;
+    optional uint32 maxStripCount = 100;
 
     // Updates
     repeated string updateMessages = 77;

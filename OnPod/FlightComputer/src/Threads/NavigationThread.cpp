@@ -63,7 +63,7 @@ void readNavigationNode(int serialPort, TelemetryManager &pod){
     std::stringstream dataStream;
     dataStream.str(std::string());
     char read_buffer[GENERAL_CONSTANTS::NAV_SERIAL_MESSAGE_SIZE + 1] = {0};
-    int  bytes_read, irStripCount, velocity, tubePressure = 0;
+    int  bytes_read, stripCount, velocity, tubePressure = 0;
     int total_bytes_read = 0;
     int status = 0;
     status = write(serialPort, "1", 1);
@@ -85,7 +85,7 @@ void readNavigationNode(int serialPort, TelemetryManager &pod){
     std::string data;
     std::getline(dataStream, data, ',');
     try {
-        irStripCount = std::stoi(data);
+        stripCount = std::stoi(data);
         std::getline(dataStream, data, ',');
         velocity = std::stoi(data);
     }
@@ -96,11 +96,13 @@ void readNavigationNode(int serialPort, TelemetryManager &pod){
     dataStream >> tubePressure;
     std::stringstream().swap(dataStream);
 
-    if(irStripCount > 0){
-        updatePosition(velocity, irStripCount, pod);
+    if(stripCount > 0){  //strip count    velocity   pressure
+        pod.countIrTape();
     }
     pod.telemetry->tubePressure = tubePressure;
-    LOG(INFO)<<"string : "<< irStripCount << " velocity : "<< velocity << "  pressure : " << tubePressure;
+    pod.telemetry->stripVelocity = velocity;
+
+    //LOG(INFO)<<"string : "<< stripCount << " velocity : "<< velocity << "  pressure : " << tubePressure;
 }
 
 int32_t NavigationThread(TelemetryManager Pod) {
