@@ -94,7 +94,7 @@ socket.on('pod_telemetry', function (data) {
 
         // parse faults
         if(value > 0) {
-            if(value_name === 'inverterFaultBitHi' || value_name === 'inverterFaultBitLo' || value_name === 'hvFaultCode1' || value_name === 'hvFaultCode2') {
+            if(value_name.includes("Fault")) {
                 convertFaultCode(value_name, value)
             }
         }
@@ -144,11 +144,17 @@ socket.on('pod_telemetry', function (data) {
 
 
 function convertFaultCode(value_name, value) {
-    if(value_name === 'inverterFaultBitLo') {
-        errors = converInverterFaultCodeLo(value)
+    if(value_name === 'inverterRunFaultLo') {
+        errors = convertInverterRunFaultCodeLo(value)
     }
-    else if(value_name === 'inverterFaultBitHi') {
-        errors = converInverterFaultCodeHi(value)
+    else if(value_name === 'inverterRunFaultHi') {
+        errors = convertInverterRunFaultCodeHi(value)
+    }
+    else if(value_name === 'inverterPostFaultLo') {
+        errors = convertInverterPostFaultCodeLo(value)
+    }
+    else if(value_name === 'inverterPostFaultHi') {
+        errors = convertInverterPostFaultCodeHi(value)
     }
     else if(value_name === 'hvFaultCode1') {
         errors = convertHvFaultCode1(value)
@@ -186,61 +192,196 @@ function addErrorsToUpdatesTable(errors) {
 }
 
 
-function converInverterFaultCodeLo(value) {
+function convertInverterRunFaultCodeLo(value) {
     let errors = []
 
     if(value & 1) {
-        errors.push('Inverter: Motor Over-speed Fault')   
+        errors.push('Inverter (Run): Motor Over-speed Fault')   
     }
     if(value & 2) {
-        errors.push('Inverter: Over-current Fault')
+        errors.push('Inverter (Run): Over-current Fault')
     }
     if(value & 4) {
-        errors.push('Inverter: Over-voltage Fault')
+        errors.push('Inverter (Run): Over-voltage Fault')
     }
     if(value & 8) {
-        errors.push('Inverter: Inverter Over-temperature Fault')
+        errors.push('Inverter (Run): Inverter Over-temperature Fault')
     }
     if(value & 10) {
-        errors.push('Inverter: Accelerator Input Shorted Fault')
+        errors.push('Inverter (Run): Accelerator Input Shorted Fault')
     }
     if(value & 32) {
-        errors.push('Inverter: Accelerator Input Open Fault')   
+        errors.push('Inverter (Run): Accelerator Input Open Fault')   
     }
     if(value & 64) {
-        errors.push('Inverter: Direction Command Fault (Both directions active at the same time)')
+        errors.push('Inverter (Run): Direction Command Fault (Both directions active at the same time)')
     }
     if(value & 128) {
-        errors.push('Inverter: Inverter Response Time-out Fault')
+        errors.push('Inverter (Run): Inverter Response Time-out Fault')
     }
     if(value & 256) {
-        errors.push('Inverter: Hardware Desaturation Fault')
+        errors.push('Inverter (Run): Hardware Desaturation Fault')
     }
     if(value & 512) {
-        errors.push('Inverter: Hardware Over-current Fault')
+        errors.push('Inverter (Run): Hardware Over-current Fault')
     }
     if(value & 1024) {
-        errors.push('Inverter: Under-voltage Fault')
+        errors.push('Inverter (Run): Under-voltage Fault')
     }
     if(value & 2048) {
-        errors.push('Inverter: CAN Command Message Lost Fault')
+        errors.push('Inverter (Run): CAN Command Message Lost Fault')
     }
     if(value & 4096) {
-        errors.push('Inverter: Motor Over-temperature Fault')
+        errors.push('Inverter (Run): Motor Over-temperature Fault')
     }
 
     addErrorsToUpdatesTable(errors)
     return errors
 }
 
-function converInverterFaultCodeHi(value) {
+function convertInverterRunFaultCodeHi(value) {
     let errors = []
 
     if(value & 1) {
-        errors.push('Inverter: Brake Input Shorted Fault')
+        errors.push('Inverter (Run): Brake Input Shorted Fault')
     }
     if(value & 2) {
-        errors.push('Inverter: Brake Input Open Fault')
+        errors.push('Inverter (Run): Brake Input Open Fault')
+    }
+    if(value & 4) {
+        errors.push('Inverter (Run): Module A Over-temperature Fault')
+    }
+    if(value & 8) {
+        errors.push('Inverter (Run): Module B Over-temperature Fault')
+    }
+    if(value & 10) {
+        errors.push('Inverter (Run): Module C Over-temperature Fault')
+    }
+    if(value & 32) {
+        errors.push('Inverter (Run): PCB Over-temperature Fault')   
+    }
+    if(value & 64) {
+        errors.push('Inverter (Run): Gate Drive Board 1 Over-temperature Fault')
+    }
+    if(value & 128) {
+        errors.push('Inverter (Run): Gate Drive Board 2 Over-temperature Fault')
+    }
+    if(value & 256) {
+        errors.push('Inverter (Run): Gate Drive Board 3 Over-temperature Fault')
+    }
+    if(value & 512) {
+        errors.push('Inverter (Run): Current Sensor Fault')
+    }
+    if(value & 16384) {
+        errors.push('Inverter (Run): Resolver Not Connected')
+    }
+    if(value & 32768) {
+        errors.push('Inverter (Run): Inverter Discharge Active')
+    }
+
+    addErrorsToUpdatesTable(errors)
+    return errors
+}
+
+
+function convertInverterPostFaultCodeLo(value) {
+    let errors = []
+
+    if(value & 1) {
+        errors.push('Inverter (Post): Hardware Gate/ Desaturation Fault')   
+    }
+    if(value & 2) {
+        errors.push('Inverter (Post): HW Over-current Fault')
+    }
+    if(value & 4) {
+        errors.push('Inverter (Post): Accelerator Shorted')
+    }
+    if(value & 8) {
+        errors.push('Inverter (Post): Accelerator Open')
+    }
+    if(value & 10) {
+        errors.push('Inverter (Post): Current Sensor Low')
+    }
+    if(value & 32) {
+        errors.push('Inverter (Post): Current Sensor High')   
+    }
+    if(value & 64) {
+        errors.push('Inverter (Post): Module Temperature Low')
+    }
+    if(value & 128) {
+        errors.push('Inverter (Post): Module Temperature High')
+    }
+    if(value & 256) {
+        errors.push('Inverter (Post): Control PCB Temperature Low')
+    }
+    if(value & 512) {
+        errors.push('Inverter (Post): Control PCB Temperature High')
+    }
+    if(value & 1024) {
+        errors.push('Inverter (Post): Gate Drive PCB Temperature Low')
+    }
+    if(value & 2048) {
+        errors.push('Inverter (Post): Gate Drive PCB Temperature High')
+    }
+    if(value & 4096) {
+        errors.push('Inverter (Post): 5V Sense Voltage Low')
+    }
+    if(value & 8192) {
+        errors.push('Inverter (Post): 5V Sense Voltage High')
+    }
+    if(value & 16384) {
+        errors.push('Inverter (Post): 12V Sense Voltage Low')
+    }
+    if(value & 32768) {
+        errors.push('Inverter (Post): 12V Sense Voltage High')
+    }
+
+    addErrorsToUpdatesTable(errors)
+    return errors
+}
+
+
+function convertInverterPostFaultCodeHi(value) {
+    let errors = []
+
+    if(value & 1) {
+        errors.push('Inverter (Post): 2.5V Sense Voltage Low')   
+    }
+    if(value & 2) {
+        errors.push('Inverter (Post): 2.5V Sense Voltage High')
+    }
+    if(value & 4) {
+        errors.push('Inverter (Post): 1.5V Sense Voltage Low')
+    }
+    if(value & 8) {
+        errors.push('Inverter (Post): 1.5V Sense Voltage High')
+    }
+    if(value & 10) {
+        errors.push('Inverter (Post): DC Bus Voltage High')
+    }
+    if(value & 32) {
+        errors.push('Inverter (Post): DC Bus Voltage Low')   
+    }
+    if(value & 64) {
+        errors.push('Inverter (Post): Pre-Charge Timeout')
+    }
+    if(value & 128) {
+        errors.push('Inverter (Post): Pre-Charge Voltage Failure')
+    }
+    if(value & 256) {
+        errors.push('Inverter (Post): EEPROM Checksum Invalid')
+    }
+    if(value & 512) {
+        errors.push('Inverter (Post): EEPROM Data Out of Range')
+    }
+    if(value & 1024) {
+        errors.push('Inverter (Post): EEPROM Update Required')
+    }
+    if(value & 16384) {
+        errors.push('Inverter (Post): Brake Shorted')
+    }
+    if(value & 32768) {
+        errors.push('Inverter (Post): Brake Open')
     }
 
     addErrorsToUpdatesTable(errors)

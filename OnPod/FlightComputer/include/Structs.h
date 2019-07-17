@@ -60,10 +60,10 @@ struct PodValues {
     bool automaticTransitions = true;
 
     //ConnectionsArray
-    std::vector<int8_t> connectionFlags;  // brakeNode, LVDCNode, BMS, Interface
-    std::vector<int8_t> nodeSensorFlags;
-    std::vector<int8_t> inverterSensorFlags;
-    std::vector<int8_t> bmsSensorFlags;
+    std::vector<int32_t> connectionFlags;  // brakeNode, LVDCNode, BMS, Interface
+    std::vector<int32_t> nodeSensorFlags;
+    std::vector<int32_t> inverterSensorFlags;
+    std::vector<int32_t> bmsSensorFlags;
 
     // HV-BMS
     float hvBatteryPackVoltage = 0;
@@ -93,8 +93,11 @@ struct PodValues {
     float inverterBusVoltage = 0;
     float commandedTorque = 0;
     int32_t inverterHeartbeat = 0;
-    int32_t inverterFaultBitLo = 0;
-    int32_t inverterFaultBitHi = 0;
+    int32_t inverterRunFaultLo = 0;
+    int32_t inverterRunFaultHi = 0;
+    int32_t inverterPostFaultLo = 0;
+    int32_t inverterPostFaultHi = 0;
+    std::vector<int32_t> inverterFaults;
     std::chrono::high_resolution_clock::time_point lastMotorReadTime;
 
     // Atmosphere

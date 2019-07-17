@@ -19,12 +19,20 @@
    "name_pretty": "Control Board Temp [C]",
     "order": 4
   },
-  "inverterFaultBitLo": {
-   "name_pretty": "Inverter Fault Code Lo",
+  "inverterRunFaultLo": {
+   "name_pretty": "Inverter Run Fault Code Lo",
     "order": 5
   },
-    "inverterFaultBitHi": {
-   "name_pretty": "Inverter Fault Code Lo",
+    "inverterRunFaultHi": {
+   "name_pretty": "Inverter Run Fault Code Hi",
     "order": 6
+  },
+    "inverterPostFaultLo": {
+   "name_pretty": "Inverter Post Fault Code Lo",
+    "order": 7
+  },
+    "inverterPostFaultHi": {
+   "name_pretty": "Inverter Post Fault Code Hi",
+    "order": 8
   }
 }

@@ -385,6 +385,26 @@ void TelemetryManager::setInverterBusVoltage(int value) {
     this->setInverterSensorFlag(status, INVERTER_FLAGS::BUS_VOLTAGE_INDEX);
 }
 
+void TelemetryManager::setPostFaultHi(int32_t fault) {
+    telemetry->inverterPostFaultHi = fault;
+    telemetry->inverterFaults[INVERTER_FLAGS::POST_FAULT_HI_INDEX];
+}
+
+void TelemetryManager::setPostFaultLo(int32_t fault) {
+    telemetry->inverterPostFaultLo = fault;
+    telemetry->inverterFaults[INVERTER_FLAGS::POST_FAULT_LO_INDEX];
+}
+
+void TelemetryManager::setRunFaultHi(int32_t fault) {
+    telemetry->inverterRunFaultHi = fault;
+    telemetry->inverterFaults[INVERTER_FLAGS::RUN_FAULT_HI_INDEX];
+}
+
+void TelemetryManager::setRunFaultLo(int32_t fault) {
+    telemetry->inverterRunFaultLo = fault;
+    telemetry->inverterFaults[INVERTER_FLAGS::POST_FAULT_LO_INDEX];
+}
+
 
 //          Position
 
