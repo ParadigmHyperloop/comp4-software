@@ -30,6 +30,16 @@ struct PodValues {
     uint32_t maxStripCount = 0;
     bool taxi  = false;
 
+    // Ghost Train
+     float gtPack1Voltage = 0;
+     float gtPack2Voltage = 0;
+     float gtPack1Current = 0;
+     float gtPack2Current = 0;
+     float gtLp5Current = 0;
+     float gtLp12Current = 0;
+     float gtNodeCurrent = 0;
+     float gtInverterCurrent = 0;
+
     //Navigation
     std::mutex positionLock;
     float motorDistance = 0;

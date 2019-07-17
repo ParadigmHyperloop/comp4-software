@@ -427,7 +427,15 @@ void TelemetryManager::resetValues(int32_t index){
             break;
         }
         case CONNECTION_FLAGS::LVDC_NODE_HEARTBEAT_INDEX:{
-            //todo
+            telemetry->gtPack1Current = 0;
+            telemetry->gtPack2Voltage = 0;
+            telemetry->gtPack1Voltage = 0;
+            telemetry->gtPack2Current = 0;
+            telemetry->gtNodeCurrent = 0;
+            telemetry->gtLp5Current = 0;
+            telemetry->gtLp12Current = 0;
+            telemetry->gtInverterCurrent = 0;
+            break;
         }
         case CONNECTION_FLAGS::BMS_HEARTBEAT_INDEX:{
             telemetry->hvBatteryPackMaxCellTemperature = 0;
