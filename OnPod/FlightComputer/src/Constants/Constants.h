@@ -82,6 +82,17 @@ namespace CONNECTION_FLAGS
     static const int32_t SOL4 = 3;
 };
 
+namespace CAN_IDS 
+{
+    static const int32_t TEMP1_10HZ = 0x0A0;
+    static const int32_t TEMP2_10HZ = 0x0A1;
+    static const int32_t TEMP3_10HZ = 0x0A2;
+    static const int32_t MOTOR_POS_100HZ = 0x0A5;
+    static const int32_t CURRENT_100HZ = 0x0A6;
+    static const int32_t VOLTAGE_100HZ = 0x0A7;
+    static const int32_t TEMP1_10HZ = 0x0A0;
+    static const int32_t TEMP1_10HZ = 0x0A0;
+};
 
 namespace NetworkConstants
 {

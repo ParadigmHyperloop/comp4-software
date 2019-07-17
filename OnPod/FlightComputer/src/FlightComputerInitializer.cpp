@@ -26,7 +26,7 @@ void FlightComputerInitializer::importLoggerLibrary()
         el::Loggers::reconfigureAllLoggers(conf);
     } else
     {
-        std::string loggerLibraryImportPath = FileHelper::GetCurrentDirectory() +"/../../libs/EasyLogger/logging.conf";
+        std::string loggerLibraryImportPath = FileHelper::GetCurrentDirectory() + "/libs/EasyLogger/logging.conf";
         el::Configurations conf(loggerLibraryImportPath);
         el::Loggers::reconfigureAllLoggers(conf);
     }
