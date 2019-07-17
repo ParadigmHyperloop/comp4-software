@@ -155,7 +155,15 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             auto runFaultLo = extractCanValue<int>(frame.data, indices, 1);
             indices = {7,6};
             auto runFaultHi = extractCanValue<int>(frame.data, indices, 1);
-
+            indices = {3,2};
+            auto postFaultHi = extractCanValue<int>(frame.data, indices, 1);
+            indices = {1,0};
+            auto postFaultLo = extractCanValue<int>(frame.data, indices, 1);
+            pod.setPostFaultHi(postFaultHi);
+            pod.setPostFaultLo(postFaultLo);
+            pod.setRunFaultHi(runFaultHi);
+            pod.setRunFaultLo(runFaultLo);
+            break;
         }
 
         default:
