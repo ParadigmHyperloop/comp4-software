@@ -41,7 +41,7 @@ public:
 
     void setupTransition(PodStates, const std::string&);
 
-    int8_t checkFlags(std::vector<int8_t> &flags);
+    int8_t checkFlags(std::vector<int32_t> &flags);
 
     int32_t checkNodeStates();
 
