@@ -92,22 +92,39 @@ socket.on('pod_telemetry', function (data) {
         value = data[value_name];
         let $value_cell = $('#'+value_name);
 
+        // parse faults
         if(value > 0) {
             if(value_name === 'inverterFaultBitHi' || value_name === 'inverterFaultBitLo' || value_name === 'hvFaultCode1' || value_name === 'hvFaultCode2') {
                 convertFaultCode(value_name, value)
             }
         }
 
-        //TODO: change back to white color when not None
-        if(value_name === 'podState' && value=='psNone') {
-            console.log(value)
-            $("#podState").css( "background-color", "#f2dede");
+        // highlight pod states when they are none
+        if(value_name === 'podState') {
+            if(value === 'psNone') {
+                console.log('None')
+                $("#podState").css("background-color", "#F2DEDE");
+            }
+            else {
+                console.log('Good')
+                $("#podState").css("background-color", "#FFFFFF");
+            }
         }
-        if(value_name === 'brakeNodeState' && value > 4) {
-            $("#brakeNodeState").css( "background-color", "#f2dede");
+        if(value_name === 'brakeNodeState') {
+            if(value === 'bnsNone') {
+                $("#brakeNodeState").css("background-color", "#F2DEDE");
+            }
+            else {
+                $("#brakeNodeState").css("background-color", "#FFFFFF");
+            }
         }
-        if(value_name === 'lvdcNodeState' && value > 2) {
-            $("#lvdcNodeState").css( "background-color", "#f2dede");
+        if(value_name === 'lvdcNodeState') {
+            if(value === 'lvdcNone') {
+                $("#lvdcNodeState").css("background-color", "#F2DEDE");
+            }
+            else {
+                $("#lvdcNodeState").css("background-color", "#FFFFFF");
+            }
         }
 
 
@@ -131,20 +148,15 @@ socket.on('pod_telemetry', function (data) {
 function convertFaultCode(value_name, value) {
     if(value_name === 'inverterFaultBitLo') {
         errors = converInverterFaultCodeLo(value)
-        console.error(`INVERTER FAULTS: ${errors}`)
-
     }
-    if(value_name === 'inverterFaultBitHi') {
+    else if(value_name === 'inverterFaultBitHi') {
         errors = converInverterFaultCodeHi(value)
-        console.error(`INVERTER FAULTS: ${errors}`)
     }
     else if(value_name === 'hvFaultCode1') {
         errors = convertHvFaultCode1(value)
-        console.error(`HV: Faults: ${errors}`)  
     }
     else if(value_name === 'hvFaultCode2') {
         errors = convertHvFaultCode2(value)
-        console.error(`HV: Faults: ${errors}`)  
     }
     else {
         console.error(`COULD NOT CONVERT ERROR CODE FOR ${value_name}`)
