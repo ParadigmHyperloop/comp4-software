@@ -151,12 +151,10 @@ function convertFaultCode(value_name, value) {
         errors = convertInverterRunFaultCodeHi(value)
     }
     else if(value_name === 'inverterPostFaultLo') {
-        // PARSE ME
-        //errors = converInverterFaultCodeLo(value)
+        errors = convertInverterPostFaultCodeLo(value)
     }
     else if(value_name === 'inverterPostFaultHi') {
-        // PARSE ME
-        //errors = converInverterFaultCodeHi(value)
+        errors = convertInverterPostFaultCodeHi(value)
     }
     else if(value_name === 'hvFaultCode1') {
         errors = convertHvFaultCode1(value)
@@ -279,6 +277,111 @@ function convertInverterRunFaultCodeHi(value) {
     }
     if(value & 32768) {
         errors.push('Inverter (Run): Inverter Discharge Active')
+    }
+
+    addErrorsToUpdatesTable(errors)
+    return errors
+}
+
+
+function convertInverterPostFaultCodeLo(value) {
+    let errors = []
+
+    if(value & 1) {
+        errors.push('Inverter (Post): Hardware Gate/ Desaturation Fault')   
+    }
+    if(value & 2) {
+        errors.push('Inverter (Post): HW Over-current Fault')
+    }
+    if(value & 4) {
+        errors.push('Inverter (Post): Accelerator Shorted')
+    }
+    if(value & 8) {
+        errors.push('Inverter (Post): Accelerator Open')
+    }
+    if(value & 10) {
+        errors.push('Inverter (Post): Current Sensor Low')
+    }
+    if(value & 32) {
+        errors.push('Inverter (Post): Current Sensor High')   
+    }
+    if(value & 64) {
+        errors.push('Inverter (Post): Module Temperature Low')
+    }
+    if(value & 128) {
+        errors.push('Inverter (Post): Module Temperature High')
+    }
+    if(value & 256) {
+        errors.push('Inverter (Post): Control PCB Temperature Low')
+    }
+    if(value & 512) {
+        errors.push('Inverter (Post): Control PCB Temperature High')
+    }
+    if(value & 1024) {
+        errors.push('Inverter (Post): Gate Drive PCB Temperature Low')
+    }
+    if(value & 2048) {
+        errors.push('Inverter (Post): Gate Drive PCB Temperature High')
+    }
+    if(value & 4096) {
+        errors.push('Inverter (Post): 5V Sense Voltage Low')
+    }
+    if(value & 8192) {
+        errors.push('Inverter (Post): 5V Sense Voltage High')
+    }
+    if(value & 16384) {
+        errors.push('Inverter (Post): 12V Sense Voltage Low')
+    }
+    if(value & 32768) {
+        errors.push('Inverter (Post): 12V Sense Voltage High')
+    }
+
+    addErrorsToUpdatesTable(errors)
+    return errors
+}
+
+
+function convertInverterPostFaultCodeHi(value) {
+    let errors = []
+
+    if(value & 1) {
+        errors.push('Inverter (Post): 2.5V Sense Voltage Low')   
+    }
+    if(value & 2) {
+        errors.push('Inverter (Post): 2.5V Sense Voltage High')
+    }
+    if(value & 4) {
+        errors.push('Inverter (Post): 1.5V Sense Voltage Low')
+    }
+    if(value & 8) {
+        errors.push('Inverter (Post): 1.5V Sense Voltage High')
+    }
+    if(value & 10) {
+        errors.push('Inverter (Post): DC Bus Voltage High')
+    }
+    if(value & 32) {
+        errors.push('Inverter (Post): DC Bus Voltage Low')   
+    }
+    if(value & 64) {
+        errors.push('Inverter (Post): Pre-Charge Timeout')
+    }
+    if(value & 128) {
+        errors.push('Inverter (Post): Pre-Charge Voltage Failure')
+    }
+    if(value & 256) {
+        errors.push('Inverter (Post): EEPROM Checksum Invalid')
+    }
+    if(value & 512) {
+        errors.push('Inverter (Post): EEPROM Data Out of Range')
+    }
+    if(value & 1024) {
+        errors.push('Inverter (Post): EEPROM Update Required')
+    }
+    if(value & 16384) {
+        errors.push('Inverter (Post): Brake Shorted')
+    }
+    if(value & 32768) {
+        errors.push('Inverter (Post): Brake Open')
     }
 
     addErrorsToUpdatesTable(errors)
