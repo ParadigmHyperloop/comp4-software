@@ -19,21 +19,24 @@ struct PodValues {
     LvdcNodeStates commandedLvdcNodeState = lvdcNone;
 
     // Flight Profile
-    int32_t motorTorque = 0;
-    int32_t flightDistance = 0;
-    int32_t maxFlightTime = 0;
-    int32_t startTorque = 0;
-    int32_t accelerationTime = 0;
-    int32_t expectedTubePressure = 0;
+    uint32_t motorTorque = 0;
+    uint32_t flightDistance = 0;
+    uint32_t maxFlightTime = 0;
+    uint32_t startTorque = 0;
+    uint32_t accelerationTime = 0;
+    uint32_t expectedTubePressure = 0;
+    uint32_t maxVelocity = 0;
+    uint32_t brakeDistance = 0;
+    uint32_t maxStripCount = 0;
     bool taxi  = false;
 
     //Navigation
     std::mutex positionLock;
-    float irDistance = 0;
     float motorDistance = 0;
     float podVelocity = 0;
     float podPosition = 0;
     int totalStripCount = 0;
+    float stripVelocity = 0;
 
     // Updates
     std::mutex updatesLock;
@@ -63,9 +66,9 @@ struct PodValues {
     int hvFaultCode2 = 0;
 
     // LV-BMS
-    float lv1BatteryPackStateOfCharge = 0;
+    int32_t lv1BatteryPackStateOfCharge = 0;
     float lv1BatteryPackVoltage = 0;
-    int32_t lv1BatteryPackCellTemperature = 0;
+    float lv1BatteryPackCellTemperature = 0;
 
     int32_t lv2BatteryPackStateOfCharge = 0;
     float lv2BatteryPackVoltage = 0;

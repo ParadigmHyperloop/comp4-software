@@ -32,8 +32,9 @@ class TelemetryManager
         //Navigation
         void addPodDistance(float);
         void setPodDistance(float);
-        void getPodDistance(float);
+        float getPodDistance();
         void setPodVelocity(float);
+        void countIrTape();
 
 		// Controls Interface
 		void setControlsInterfaceState(ControlsInterfaceStates);

@@ -419,6 +419,20 @@ class PodCommand :
   ::google::protobuf::uint32 expectedtubepressure() const;
   void set_expectedtubepressure(::google::protobuf::uint32 value);
 
+  // optional uint32 maxVelocity = 18;
+  bool has_maxvelocity() const;
+  void clear_maxvelocity();
+  static const int kMaxVelocityFieldNumber = 18;
+  ::google::protobuf::uint32 maxvelocity() const;
+  void set_maxvelocity(::google::protobuf::uint32 value);
+
+  // optional uint32 brakingDistance = 19;
+  bool has_brakingdistance() const;
+  void clear_brakingdistance();
+  static const int kBrakingDistanceFieldNumber = 19;
+  ::google::protobuf::uint32 brakingdistance() const;
+  void set_brakingdistance(::google::protobuf::uint32 value);
+
   // @@protoc_insertion_point(class_scope:PodCommand)
  private:
   class HasBitSetters;
@@ -442,6 +456,8 @@ class PodCommand :
   ::google::protobuf::uint32 starttorque_;
   ::google::protobuf::uint32 accelerationtime_;
   ::google::protobuf::uint32 expectedtubepressure_;
+  ::google::protobuf::uint32 maxvelocity_;
+  ::google::protobuf::uint32 brakingdistance_;
   friend struct ::TableStruct_Paradigm_2eproto;
 };
 // -------------------------------------------------------------------
@@ -1063,6 +1079,13 @@ class Telemetry :
   ::google::protobuf::int32 lv1batterypackstateofcharge() const;
   void set_lv1batterypackstateofcharge(::google::protobuf::int32 value);
 
+  // optional uint32 maxStripCount = 100;
+  bool has_maxstripcount() const;
+  void clear_maxstripcount();
+  static const int kMaxStripCountFieldNumber = 100;
+  ::google::protobuf::uint32 maxstripcount() const;
+  void set_maxstripcount(::google::protobuf::uint32 value);
+
   // optional float lv1BatteryPackVoltage = 86;
   bool has_lv1batterypackvoltage() const;
   void clear_lv1batterypackvoltage();
@@ -1147,6 +1170,20 @@ class Telemetry :
   ::google::protobuf::int32 hvfaultcode1() const;
   void set_hvfaultcode1(::google::protobuf::int32 value);
 
+  // optional uint32 maxVelocity = 98;
+  bool has_maxvelocity() const;
+  void clear_maxvelocity();
+  static const int kMaxVelocityFieldNumber = 98;
+  ::google::protobuf::uint32 maxvelocity() const;
+  void set_maxvelocity(::google::protobuf::uint32 value);
+
+  // optional uint32 brakingDistance = 99;
+  bool has_brakingdistance() const;
+  void clear_brakingdistance();
+  static const int kBrakingDistanceFieldNumber = 99;
+  ::google::protobuf::uint32 brakingdistance() const;
+  void set_brakingdistance(::google::protobuf::uint32 value);
+
   // @@protoc_insertion_point(class_scope:Telemetry)
  private:
   class HasBitSetters;
@@ -1224,6 +1261,7 @@ class Telemetry :
   float tachdistance_;
   float irdistance_;
   ::google::protobuf::int32 lv1batterypackstateofcharge_;
+  ::google::protobuf::uint32 maxstripcount_;
   float lv1batterypackvoltage_;
   float lv1batterypackcelltemperature_;
   ::google::protobuf::int32 lv2batterypackstateofcharge_;
@@ -1236,6 +1274,8 @@ class Telemetry :
   ::google::protobuf::uint32 accelerationtime_;
   bool taxi_;
   ::google::protobuf::int32 hvfaultcode1_;
+  ::google::protobuf::uint32 maxvelocity_;
+  ::google::protobuf::uint32 brakingdistance_;
   friend struct ::TableStruct_Paradigm_2eproto;
 };
 // -------------------------------------------------------------------
@@ -3016,6 +3056,42 @@ inline void PodCommand::set_expectedtubepressure(::google::protobuf::uint32 valu
   // @@protoc_insertion_point(field_set:PodCommand.expectedTubePressure)
 }
 
+// optional uint32 maxVelocity = 18;
+inline bool PodCommand::has_maxvelocity() const {
+  return (_has_bits_[0] & 0x00002000u) != 0;
+}
+inline void PodCommand::clear_maxvelocity() {
+  maxvelocity_ = 0u;
+  _has_bits_[0] &= ~0x00002000u;
+}
+inline ::google::protobuf::uint32 PodCommand::maxvelocity() const {
+  // @@protoc_insertion_point(field_get:PodCommand.maxVelocity)
+  return maxvelocity_;
+}
+inline void PodCommand::set_maxvelocity(::google::protobuf::uint32 value) {
+  _has_bits_[0] |= 0x00002000u;
+  maxvelocity_ = value;
+  // @@protoc_insertion_point(field_set:PodCommand.maxVelocity)
+}
+
+// optional uint32 brakingDistance = 19;
+inline bool PodCommand::has_brakingdistance() const {
+  return (_has_bits_[0] & 0x00004000u) != 0;
+}
+inline void PodCommand::clear_brakingdistance() {
+  brakingdistance_ = 0u;
+  _has_bits_[0] &= ~0x00004000u;
+}
+inline ::google::protobuf::uint32 PodCommand::brakingdistance() const {
+  // @@protoc_insertion_point(field_get:PodCommand.brakingDistance)
+  return brakingdistance_;
+}
+inline void PodCommand::set_brakingdistance(::google::protobuf::uint32 value) {
+  _has_bits_[0] |= 0x00004000u;
+  brakingdistance_ = value;
+  // @@protoc_insertion_point(field_set:PodCommand.brakingDistance)
+}
+
 // -------------------------------------------------------------------
 
 // Telemetry
@@ -3573,108 +3649,108 @@ inline void Telemetry::set_lv1batterypackstateofcharge(::google::protobuf::int32
 
 // optional float lv1BatteryPackVoltage = 86;
 inline bool Telemetry::has_lv1batterypackvoltage() const {
-  return (_has_bits_[2] & 0x00000008u) != 0;
+  return (_has_bits_[2] & 0x00000010u) != 0;
 }
 inline void Telemetry::clear_lv1batterypackvoltage() {
   lv1batterypackvoltage_ = 0;
-  _has_bits_[2] &= ~0x00000008u;
+  _has_bits_[2] &= ~0x00000010u;
 }
 inline float Telemetry::lv1batterypackvoltage() const {
   // @@protoc_insertion_point(field_get:Telemetry.lv1BatteryPackVoltage)
   return lv1batterypackvoltage_;
 }
 inline void Telemetry::set_lv1batterypackvoltage(float value) {
-  _has_bits_[2] |= 0x00000008u;
+  _has_bits_[2] |= 0x00000010u;
   lv1batterypackvoltage_ = value;
   // @@protoc_insertion_point(field_set:Telemetry.lv1BatteryPackVoltage)
 }
 
 // optional float lv1BatteryPackCellTemperature = 87;
 inline bool Telemetry::has_lv1batterypackcelltemperature() const {
-  return (_has_bits_[2] & 0x00000010u) != 0;
+  return (_has_bits_[2] & 0x00000020u) != 0;
 }
 inline void Telemetry::clear_lv1batterypackcelltemperature() {
   lv1batterypackcelltemperature_ = 0;
-  _has_bits_[2] &= ~0x00000010u;
+  _has_bits_[2] &= ~0x00000020u;
 }
 inline float Telemetry::lv1batterypackcelltemperature() const {
   // @@protoc_insertion_point(field_get:Telemetry.lv1BatteryPackCellTemperature)
   return lv1batterypackcelltemperature_;
 }
 inline void Telemetry::set_lv1batterypackcelltemperature(float value) {
-  _has_bits_[2] |= 0x00000010u;
+  _has_bits_[2] |= 0x00000020u;
   lv1batterypackcelltemperature_ = value;
   // @@protoc_insertion_point(field_set:Telemetry.lv1BatteryPackCellTemperature)
 }
 
 // optional int32 lv2BatteryPackStateOfCharge = 88;
 inline bool Telemetry::has_lv2batterypackstateofcharge() const {
-  return (_has_bits_[2] & 0x00000020u) != 0;
+  return (_has_bits_[2] & 0x00000040u) != 0;
 }
 inline void Telemetry::clear_lv2batterypackstateofcharge() {
   lv2batterypackstateofcharge_ = 0;
-  _has_bits_[2] &= ~0x00000020u;
+  _has_bits_[2] &= ~0x00000040u;
 }
 inline ::google::protobuf::int32 Telemetry::lv2batterypackstateofcharge() const {
   // @@protoc_insertion_point(field_get:Telemetry.lv2BatteryPackStateOfCharge)
   return lv2batterypackstateofcharge_;
 }
 inline void Telemetry::set_lv2batterypackstateofcharge(::google::protobuf::int32 value) {
-  _has_bits_[2] |= 0x00000020u;
+  _has_bits_[2] |= 0x00000040u;
   lv2batterypackstateofcharge_ = value;
   // @@protoc_insertion_point(field_set:Telemetry.lv2BatteryPackStateOfCharge)
 }
 
 // optional float lv2BatteryPackVoltage = 89;
 inline bool Telemetry::has_lv2batterypackvoltage() const {
-  return (_has_bits_[2] & 0x00000040u) != 0;
+  return (_has_bits_[2] & 0x00000080u) != 0;
 }
 inline void Telemetry::clear_lv2batterypackvoltage() {
   lv2batterypackvoltage_ = 0;
-  _has_bits_[2] &= ~0x00000040u;
+  _has_bits_[2] &= ~0x00000080u;
 }
 inline float Telemetry::lv2batterypackvoltage() const {
   // @@protoc_insertion_point(field_get:Telemetry.lv2BatteryPackVoltage)
   return lv2batterypackvoltage_;
 }
 inline void Telemetry::set_lv2batterypackvoltage(float value) {
-  _has_bits_[2] |= 0x00000040u;
+  _has_bits_[2] |= 0x00000080u;
   lv2batterypackvoltage_ = value;
   // @@protoc_insertion_point(field_set:Telemetry.lv2BatteryPackVoltage)
 }
 
 // optional float lv2BatteryPackCellTemperature = 90;
 inline bool Telemetry::has_lv2batterypackcelltemperature() const {
-  return (_has_bits_[2] & 0x00000080u) != 0;
+  return (_has_bits_[2] & 0x00000100u) != 0;
 }
 inline void Telemetry::clear_lv2batterypackcelltemperature() {
   lv2batterypackcelltemperature_ = 0;
-  _has_bits_[2] &= ~0x00000080u;
+  _has_bits_[2] &= ~0x00000100u;
 }
 inline float Telemetry::lv2batterypackcelltemperature() const {
   // @@protoc_insertion_point(field_get:Telemetry.lv2BatteryPackCellTemperature)
   return lv2batterypackcelltemperature_;
 }
 inline void Telemetry::set_lv2batterypackcelltemperature(float value) {
-  _has_bits_[2] |= 0x00000080u;
+  _has_bits_[2] |= 0x00000100u;
   lv2batterypackcelltemperature_ = value;
   // @@protoc_insertion_point(field_set:Telemetry.lv2BatteryPackCellTemperature)
 }
 
 // optional int32 hvFaultCode1 = 97;
 inline bool Telemetry::has_hvfaultcode1() const {
-  return (_has_bits_[2] & 0x00004000u) != 0;
+  return (_has_bits_[2] & 0x00008000u) != 0;
 }
 inline void Telemetry::clear_hvfaultcode1() {
   hvfaultcode1_ = 0;
-  _has_bits_[2] &= ~0x00004000u;
+  _has_bits_[2] &= ~0x00008000u;
 }
 inline ::google::protobuf::int32 Telemetry::hvfaultcode1() const {
   // @@protoc_insertion_point(field_get:Telemetry.hvFaultCode1)
   return hvfaultcode1_;
 }
 inline void Telemetry::set_hvfaultcode1(::google::protobuf::int32 value) {
-  _has_bits_[2] |= 0x00004000u;
+  _has_bits_[2] |= 0x00008000u;
   hvfaultcode1_ = value;
   // @@protoc_insertion_point(field_set:Telemetry.hvFaultCode1)
 }
@@ -4311,108 +4387,108 @@ inline void Telemetry::set_railcurrentflag(::google::protobuf::int32 value) {
 
 // optional uint32 motorTorque = 91;
 inline bool Telemetry::has_motortorque() const {
-  return (_has_bits_[2] & 0x00000100u) != 0;
+  return (_has_bits_[2] & 0x00000200u) != 0;
 }
 inline void Telemetry::clear_motortorque() {
   motortorque_ = 0u;
-  _has_bits_[2] &= ~0x00000100u;
+  _has_bits_[2] &= ~0x00000200u;
 }
 inline ::google::protobuf::uint32 Telemetry::motortorque() const {
   // @@protoc_insertion_point(field_get:Telemetry.motorTorque)
   return motortorque_;
 }
 inline void Telemetry::set_motortorque(::google::protobuf::uint32 value) {
-  _has_bits_[2] |= 0x00000100u;
+  _has_bits_[2] |= 0x00000200u;
   motortorque_ = value;
   // @@protoc_insertion_point(field_set:Telemetry.motorTorque)
 }
 
 // optional float flightDistance = 92;
 inline bool Telemetry::has_flightdistance() const {
-  return (_has_bits_[2] & 0x00000200u) != 0;
+  return (_has_bits_[2] & 0x00000400u) != 0;
 }
 inline void Telemetry::clear_flightdistance() {
   flightdistance_ = 0;
-  _has_bits_[2] &= ~0x00000200u;
+  _has_bits_[2] &= ~0x00000400u;
 }
 inline float Telemetry::flightdistance() const {
   // @@protoc_insertion_point(field_get:Telemetry.flightDistance)
   return flightdistance_;
 }
 inline void Telemetry::set_flightdistance(float value) {
-  _has_bits_[2] |= 0x00000200u;
+  _has_bits_[2] |= 0x00000400u;
   flightdistance_ = value;
   // @@protoc_insertion_point(field_set:Telemetry.flightDistance)
 }
 
 // optional uint32 maxFlightTime = 93;
 inline bool Telemetry::has_maxflighttime() const {
-  return (_has_bits_[2] & 0x00000400u) != 0;
+  return (_has_bits_[2] & 0x00000800u) != 0;
 }
 inline void Telemetry::clear_maxflighttime() {
   maxflighttime_ = 0u;
-  _has_bits_[2] &= ~0x00000400u;
+  _has_bits_[2] &= ~0x00000800u;
 }
 inline ::google::protobuf::uint32 Telemetry::maxflighttime() const {
   // @@protoc_insertion_point(field_get:Telemetry.maxFlightTime)
   return maxflighttime_;
 }
 inline void Telemetry::set_maxflighttime(::google::protobuf::uint32 value) {
-  _has_bits_[2] |= 0x00000400u;
+  _has_bits_[2] |= 0x00000800u;
   maxflighttime_ = value;
   // @@protoc_insertion_point(field_set:Telemetry.maxFlightTime)
 }
 
 // optional uint32 startTorque = 94;
 inline bool Telemetry::has_starttorque() const {
-  return (_has_bits_[2] & 0x00000800u) != 0;
+  return (_has_bits_[2] & 0x00001000u) != 0;
 }
 inline void Telemetry::clear_starttorque() {
   starttorque_ = 0u;
-  _has_bits_[2] &= ~0x00000800u;
+  _has_bits_[2] &= ~0x00001000u;
 }
 inline ::google::protobuf::uint32 Telemetry::starttorque() const {
   // @@protoc_insertion_point(field_get:Telemetry.startTorque)
   return starttorque_;
 }
 inline void Telemetry::set_starttorque(::google::protobuf::uint32 value) {
-  _has_bits_[2] |= 0x00000800u;
+  _has_bits_[2] |= 0x00001000u;
   starttorque_ = value;
   // @@protoc_insertion_point(field_set:Telemetry.startTorque)
 }
 
 // optional uint32 accelerationTime = 95;
 inline bool Telemetry::has_accelerationtime() const {
-  return (_has_bits_[2] & 0x00001000u) != 0;
+  return (_has_bits_[2] & 0x00002000u) != 0;
 }
 inline void Telemetry::clear_accelerationtime() {
   accelerationtime_ = 0u;
-  _has_bits_[2] &= ~0x00001000u;
+  _has_bits_[2] &= ~0x00002000u;
 }
 inline ::google::protobuf::uint32 Telemetry::accelerationtime() const {
   // @@protoc_insertion_point(field_get:Telemetry.accelerationTime)
   return accelerationtime_;
 }
 inline void Telemetry::set_accelerationtime(::google::protobuf::uint32 value) {
-  _has_bits_[2] |= 0x00001000u;
+  _has_bits_[2] |= 0x00002000u;
   accelerationtime_ = value;
   // @@protoc_insertion_point(field_set:Telemetry.accelerationTime)
 }
 
 // optional bool taxi = 96;
 inline bool Telemetry::has_taxi() const {
-  return (_has_bits_[2] & 0x00002000u) != 0;
+  return (_has_bits_[2] & 0x00004000u) != 0;
 }
 inline void Telemetry::clear_taxi() {
   taxi_ = false;
-  _has_bits_[2] &= ~0x00002000u;
+  _has_bits_[2] &= ~0x00004000u;
 }
 inline bool Telemetry::taxi() const {
   // @@protoc_insertion_point(field_get:Telemetry.taxi)
   return taxi_;
 }
 inline void Telemetry::set_taxi(bool value) {
-  _has_bits_[2] |= 0x00002000u;
+  _has_bits_[2] |= 0x00004000u;
   taxi_ = value;
   // @@protoc_insertion_point(field_set:Telemetry.taxi)
 }
@@ -4433,6 +4509,60 @@ inline void Telemetry::set_expectedtubepressure(::google::protobuf::uint32 value
   _has_bits_[0] |= 0x00000080u;
   expectedtubepressure_ = value;
   // @@protoc_insertion_point(field_set:Telemetry.expectedTubePressure)
+}
+
+// optional uint32 maxVelocity = 98;
+inline bool Telemetry::has_maxvelocity() const {
+  return (_has_bits_[2] & 0x00010000u) != 0;
+}
+inline void Telemetry::clear_maxvelocity() {
+  maxvelocity_ = 0u;
+  _has_bits_[2] &= ~0x00010000u;
+}
+inline ::google::protobuf::uint32 Telemetry::maxvelocity() const {
+  // @@protoc_insertion_point(field_get:Telemetry.maxVelocity)
+  return maxvelocity_;
+}
+inline void Telemetry::set_maxvelocity(::google::protobuf::uint32 value) {
+  _has_bits_[2] |= 0x00010000u;
+  maxvelocity_ = value;
+  // @@protoc_insertion_point(field_set:Telemetry.maxVelocity)
+}
+
+// optional uint32 brakingDistance = 99;
+inline bool Telemetry::has_brakingdistance() const {
+  return (_has_bits_[2] & 0x00020000u) != 0;
+}
+inline void Telemetry::clear_brakingdistance() {
+  brakingdistance_ = 0u;
+  _has_bits_[2] &= ~0x00020000u;
+}
+inline ::google::protobuf::uint32 Telemetry::brakingdistance() const {
+  // @@protoc_insertion_point(field_get:Telemetry.brakingDistance)
+  return brakingdistance_;
+}
+inline void Telemetry::set_brakingdistance(::google::protobuf::uint32 value) {
+  _has_bits_[2] |= 0x00020000u;
+  brakingdistance_ = value;
+  // @@protoc_insertion_point(field_set:Telemetry.brakingDistance)
+}
+
+// optional uint32 maxStripCount = 100;
+inline bool Telemetry::has_maxstripcount() const {
+  return (_has_bits_[2] & 0x00000008u) != 0;
+}
+inline void Telemetry::clear_maxstripcount() {
+  maxstripcount_ = 0u;
+  _has_bits_[2] &= ~0x00000008u;
+}
+inline ::google::protobuf::uint32 Telemetry::maxstripcount() const {
+  // @@protoc_insertion_point(field_get:Telemetry.maxStripCount)
+  return maxstripcount_;
+}
+inline void Telemetry::set_maxstripcount(::google::protobuf::uint32 value) {
+  _has_bits_[2] |= 0x00000008u;
+  maxstripcount_ = value;
+  // @@protoc_insertion_point(field_set:Telemetry.maxStripCount)
 }
 
 // repeated string updateMessages = 77;
