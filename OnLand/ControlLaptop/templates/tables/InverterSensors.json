@@ -1,22 +1,22 @@
 {
   "inverterBusVoltage": {
-   "name_pretty": "Bus Voltage",
+   "name_pretty": "Bus Voltage (V)",
     "order": 2
   },
   "maxIgbtTemperature": {
-   "name_pretty": "Max IGBT Temp.",
+   "name_pretty": "Max IGBT Temp. (C)",
     "order": 3
   },
   "gateDriverTemperature": {
-   "name_pretty": "Gate Driver Temp.",
+   "name_pretty": "Gate Driver Temp. (C",
     "order": 4
   },
   "inverterControlBoardTemperature": {
-   "name_pretty": "Control Board Temp",
+   "name_pretty": "Control Board Temp (C)",
     "order": 5
   },
   "motorTemperature": {
-   "name_pretty": "Motor Temperature",
+   "name_pretty": "Motor Temperature (C)",
     "order": 1
   }
 }
