@@ -74,7 +74,7 @@ int main(int32_t argc, char** argv)
     {
       stateDisplay->TestDisplay(i);
 
-      std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+      std::this_thread::sleep_for(std::chrono::milliseconds(10000));
     }
     /*
 
