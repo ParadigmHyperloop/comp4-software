@@ -13,16 +13,21 @@ void coreControlLoopThread(TelemetryManager pod){
                 pod.sendUpdate(reason);
             }
         }
-        while(!pod.telemetry->automaticTransitions && pod.getPodStateValue() != psShutdown){
+        while(!pod.telemetry->automaticTransitions && pod.getPodStateValue() != psShutdown && pod.telemetry->connectionFlags[CONNECTION_FLAGS::INTERFACE_HEARTBEAT_INDEX] == 1){
+            if(pod.telemetry->controlsInterfaceState == ciEmergencyStop){
+                pod.telemetry->automaticTransitions = true;
+                continue;
+            }
             if(pod.getPodStateValue() != pod.telemetry->manualPodState){
                 const std::string reason = "Manual State Change";
                 PodStates newState = pod.telemetry->manualPodState;
                 pod.setPodState(newState, reason);
                 pod.sendUpdate(reason);
-                LOG(INFO)<<reason;
-                //TODO Update All nodes?
             }
         }
+        const std::string reason = "Leaving Manual Control Mode. Pod --> Standby";
+        PodStates newState = psStandby;
+        pod.setPodState(newState, reason);
     }
 }
 

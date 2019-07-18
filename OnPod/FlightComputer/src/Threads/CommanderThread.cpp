@@ -32,48 +32,51 @@ int32_t createCommanderServerSocket(int32_t serverPortNumber) {
     return serverSock;
 }
 
+int32_t convertFlag(bool state){
+    if(state){
+        return 2;
+    } else{
+        return 0;
+    }
+}
+
 void parseOverrides(PodCommand podCommand, TelemetryManager *Pod) {
     Pod->sendUpdate("Parsing Overrides");
     // This is gross... dont look! ;)
     int32_t flag;
-    for (int i = 0; i < 5; ++i) {
-        if(podCommand.sensoroverrideconfiguration(i)){
-            Pod->telemetry->nodeSensorFlags[i] = 2;
-        }
+    for (int i = 0; i <= 5; ++i) {
+        Pod->telemetry->nodeSensorFlags[i] = convertFlag(podCommand.sensoroverrideconfiguration(i));
     }
-    if(podCommand.sensoroverrideconfiguration(5)){
-        Pod->setConnectionFlag(2,2);
-        for(auto &flag : Pod->telemetry->bmsSensorFlags){
-            flag = 2;
-        }
+
+    Pod->setConnectionFlag(convertFlag(podCommand.sensoroverrideconfiguration(6)), CONNECTION_FLAGS::BMS_HEARTBEAT_INDEX);
+    for(auto &flag : Pod->telemetry->bmsSensorFlags){
+        flag = convertFlag(podCommand.sensoroverrideconfiguration(6));
     }
-    if(podCommand.sensoroverrideconfiguration(6)){
-        Pod->setInverterHeartbeat(2);
-        for(auto &flag : Pod->telemetry->inverterSensorFlags){
-            flag = 2;
-        }
+
+    int8_t mode = convertFlag(podCommand.sensoroverrideconfiguration(7));
+    Pod->setInverterHeartbeat(mode);
+    for(auto &flag : Pod->telemetry->inverterSensorFlags){
+        flag = mode;
     }
-    if(podCommand.sensoroverrideconfiguration(7)){
-        Pod->setConnectionFlag(2,BRAKE_NODE_HEARTBEAT_INDEX);
-    }
-    if(podCommand.sensoroverrideconfiguration(8)){
-        Pod->setConnectionFlag(2,LVDC_NODE_HEARTBEAT_INDEX);
-    }
-    if(podCommand.sensoroverrideconfiguration(9)){
-        Pod->setConnectionFlag(2,ENCLOSURE_HEARTBEAT_INDEX);
-    }
-    if(podCommand.sensoroverrideconfiguration(10)){
-        Pod->setNodeSensorFlag(2,ENCLOSURE_PRESSURE_INDEX);
-    }
-    if(podCommand.sensoroverrideconfiguration(11)){
-        Pod->setNodeSensorFlag(2,ENCLOSURE_TEMPERATURE_INDEX);
-    }
-    if(podCommand.sensoroverrideconfiguration(12)){
-        Pod->setNodeSensorFlag(2,COOLING_PRESSURE_INDEX);
-    }
-    if(podCommand.sensoroverrideconfiguration(13)){
-        Pod->setNodeSensorFlag(2,COOLING_TEMPERATURE_INDEX);
-    }
+
+
+    Pod->setConnectionFlag(convertFlag(podCommand.sensoroverrideconfiguration(8)), CONNECTION_FLAGS::BRAKE_NODE_HEARTBEAT_INDEX);
+
+    Pod->setConnectionFlag(convertFlag(podCommand.sensoroverrideconfiguration(9)), CONNECTION_FLAGS::LVDC_NODE_HEARTBEAT_INDEX);
+
+    Pod->setConnectionFlag(convertFlag(podCommand.sensoroverrideconfiguration(10)), CONNECTION_FLAGS::ENCLOSURE_HEARTBEAT_INDEX);
+
+    Pod->setNodeSensorFlag(convertFlag(podCommand.sensoroverrideconfiguration(11)), NODE_FLAGS::ENCLOSURE_PRESSURE_INDEX);
+    Pod->setNodeSensorFlag(convertFlag(podCommand.sensoroverrideconfiguration(12)), NODE_FLAGS::ENCLOSURE_TEMPERATURE_INDEX);
+
+    Pod->setNodeSensorFlag(convertFlag(podCommand.sensoroverrideconfiguration(13)), NODE_FLAGS::COOLING_PRESSURE_INDEX);
+
+    Pod->setNodeSensorFlag(convertFlag(podCommand.sensoroverrideconfiguration(14)), NODE_FLAGS::COOLING_TEMPERATURE_INDEX);
+
+    Pod->telemetry->checkNodeStates = !podCommand.sensoroverrideconfiguration(15);
+
+    Pod->setConnectionFlag(convertFlag(podCommand.sensoroverrideconfiguration(16)), CONNECTION_FLAGS::NAVIGATION_HEARTBEAT_INDEX);
+
 }
 
 void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
@@ -83,13 +86,25 @@ void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
     if (podCommand.has_controlsinterfacestate()) {
         Pod->setControlsInterfaceState(podCommand.controlsinterfacestate());
     }
-    if (podCommand.has_automaticstatetransitions()) {
-        Pod->setAutomaticTransitions(podCommand.automaticstatetransitions());
-    }
     if(podCommand.has_maxflighttime()){
+
         Pod->telemetry->maxFlightTime = podCommand.maxflighttime();
         Pod->telemetry->motorTorque = podCommand.motortorque();
         Pod->telemetry->flightDistance = podCommand.flightdistance();
+        Pod->telemetry->accelerationTime = podCommand.accelerationtime();
+        Pod->telemetry->startTorque = podCommand.starttorque();
+        Pod->telemetry->taxi = podCommand.taxi();
+        Pod->telemetry->expectedTubePressure = podCommand.expectedtubepressure();
+        Pod->telemetry->maxVelocity = podCommand.maxvelocity();
+        Pod->telemetry->brakeDistance = podCommand.brakingdistance();
+        if(!podCommand.taxi()) {
+            float maxStripCount = (Pod->telemetry->flightDistance - Pod->telemetry->brakeDistance) /
+                                  GENERAL_CONSTANTS::STRIP_DISTANCE;
+            Pod->telemetry->maxStripCount = int32_t(ceil(maxStripCount));
+        }
+        else{
+            Pod->telemetry->maxStripCount = 999;
+        }
     }
     if (podCommand.has_manualbrakenodestate()){
         BrakeNodeStates state = podCommand.manualbrakenodestate();
@@ -102,8 +117,13 @@ void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
         Pod->setManualLvdcNodeState(podCommand.manuallvdcnodestate());
     }
     if (podCommand.has_manualpodstate()) {
-        Pod->setManualPodState(podCommand.manualpodstate());
-        Pod->setAutomaticTransitions(false);
+        if(podCommand.manualpodstate() == psNone){
+            Pod->setAutomaticTransitions(true);
+            Pod->setManualPodState(psStandby);
+        } else{
+            Pod->setManualPodState(podCommand.manualpodstate());
+            Pod->setAutomaticTransitions(false);
+        }
     }
     if (podCommand.solenoidconfiguration_size() >= 4){
         for(int i = 0 ; i < 4 ; i++){
@@ -118,7 +138,6 @@ void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
 int32_t unserializeProtoMessage(TelemetryManager *Pod, char buffer[], int32_t messageSize) {
     PodCommand pPodCommand;
     bool operationStatus;
-
     operationStatus = pPodCommand.ParseFromArray(buffer, messageSize);
     if (operationStatus) {
         parseProtoCommand(pPodCommand, Pod);
@@ -129,7 +148,6 @@ int32_t unserializeProtoMessage(TelemetryManager *Pod, char buffer[], int32_t me
         return operationStatus;
     }
 }
-
 
 
 int32_t commanderThread(TelemetryManager Pod) {
@@ -171,21 +189,24 @@ int32_t commanderThread(TelemetryManager Pod) {
         while (Pod.getPodStateValue() != psShutdown) {
             messageSize = read(connectionSock, buffer, 255);
             if (messageSize < 0) {
+                if (pulse.expired()) {
+                    Pod.setConnectionFlag(0, CONNECTION_FLAGS::INTERFACE_HEARTBEAT_INDEX);
+                    LOG(INFO) << "ERROR: Controls Interface Connection Timeout";
+                    break;
+                }
                 if (errno == 11) //Erno 11 means no message available on non blocking socket
                 {
-                    if (pulse.expired()) {
-                        LOG(INFO) << "ERROR: Controls Interface Connection Timeout";
-                        break;
-                    }
                 } else {
                     LOG(INFO) << "ERROR: Receveiving message : " << errno;
                 }
             }
             if (messageSize == 0) {
                 LOG(INFO) << "Controls Interface Connection Closed";
+                Pod.setConnectionFlag(0, CONNECTION_FLAGS::INTERFACE_HEARTBEAT_INDEX);
                 break;
             } else if (messageSize > 0) {
                 pulse.feed();
+                Pod.setConnectionFlag(1, CONNECTION_FLAGS::INTERFACE_HEARTBEAT_INDEX);
                 operationStatus = unserializeProtoMessage(&Pod, buffer, messageSize);
                 memset(buffer, 0, sizeof buffer);
                 if (operationStatus) {
@@ -197,8 +218,10 @@ int32_t commanderThread(TelemetryManager Pod) {
                 }
                 if (messageSize < 0) {
                     if (errno == 104) {
+                        Pod.setConnectionFlag(0, CONNECTION_FLAGS::INTERFACE_HEARTBEAT_INDEX);
                         LOG(INFO) << "Controls Interface Connection Closed";
                     } else {
+                        Pod.setConnectionFlag(0, CONNECTION_FLAGS::INTERFACE_HEARTBEAT_INDEX);
                         LOG(INFO) << "ERROR writing to socket: " << errno;
                     }
                     break;

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <thread>
 #include <fstream>
+#include <signal.h>
 #include <iostream>
 #include "Common.h"
 INITIALIZE_EASYLOGGINGPP
@@ -18,19 +19,26 @@ INITIALIZE_EASYLOGGINGPP
 
 using namespace std;
 
+void signal_callback_handler(int signum){
+
+    LOG(INFO) << "Caught signal SIGPIPE ";
+}
+
 // Factory for initializing the telemetry struct
 void initializeTelemetryStruct(PodValues &telemetry){
-    telemetry.nodeSensorFlags = std::vector<int32_t>(NODE_SENSOR_COUNT, 2);
-    telemetry.inverterSensorFlags = std::vector<int32_t>(INVERTER_SENSOR_COUNT, 2);
-    telemetry.bmsSensorFlags = std::vector<int32_t>(BMS_SENSOR_COUNT, 2);
-    telemetry.connectionFlags = std::vector<int32_t>(TOTAL_CONNECTION_COUNT,2);
+    telemetry.nodeSensorFlags = std::vector<int32_t>(NODE_FLAGS::NODE_SENSOR_COUNT, 0);
+    telemetry.inverterSensorFlags = std::vector<int32_t>(INVERTER_FLAGS::INVERTER_SENSOR_COUNT, 0);
+    telemetry.bmsSensorFlags = std::vector<int32_t>(BMS_FLAGS::BMS_SENSOR_COUNT, 0);
+    telemetry.connectionFlags = std::vector<int32_t>(CONNECTION_FLAGS::TOTAL_CONNECTION_COUNT,0);
     telemetry.manualSolenoidConfiguration = std::vector<bool>(4,false);
 }
 
 
 int main( int32_t argc, char** argv)
 {
-	// Initialize Logger Logger;
+    signal(SIGPIPE, signal_callback_handler);
+
+    // Initialize Logger Logger;
 	FlightComputerInitializer* initializer = FlightComputerInitializer::GetInstance();
 	initializer->importLoggerLibrary();
 
@@ -41,15 +49,13 @@ int main( int32_t argc, char** argv)
 	while(!configReceived){
 	    configReceived = true;
         try {
-          // flightConfigurationParameters = configurationServer->runServer(); //Comment out to use the default network values in the proto obj
+           flightConfigurationParameters = configurationServer->runServer(); //Comment out to use the default network values in the proto obj
         } catch (exception& e)
         {
-            LOG(INFO) << "Error Receiving Flight Configuration: "<< e.what(); //TODO Hardware reset?
             configurationServer->closePorts();
             configReceived = false;
         }
 	}
-
 
     // Create Shared Memory
     PodNetwork sPodNetworkValues = {};
@@ -61,14 +67,11 @@ int main( int32_t argc, char** argv)
 
     //Core Control Loop Thread
     TelemetryManager controlTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
-    controlTelemManager.bWritePodState = true;
     controlTelemManager.setPodState(psBooting, (std::string)"Booting..."); // Set Pod state to booting
     std::thread coreControlThread(coreControlLoopThread, controlTelemManager);
 
     //CAN Thread
     TelemetryManager canTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
-    canTelemManager.bWriteInverter = true;
-    canTelemManager.bWriteBms = true;
     std::thread canThread(canNetworkThread, canTelemManager);
 
 
@@ -83,8 +86,6 @@ int main( int32_t argc, char** argv)
 
 	// Controls Interface Connection Thread
 	TelemetryManager pCommanderThread = TelemetryManager(&sPodValues, &sPodNetworkValues);
-	pCommanderThread.bWriteManualStates = 1;
-	pCommanderThread.bWriteControlsInterfaceState = 1;
 	std::thread controlsInterfaceThread(commanderThread, pCommanderThread);
 
 	coreControlThread.join();

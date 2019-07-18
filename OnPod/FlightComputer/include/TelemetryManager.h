@@ -4,6 +4,8 @@
 #include <mutex>
 #include "Structs.h"
 #include "States.h"
+#include "Constants/SensorConfig.h"
+#include "Constants/Constants.h"
 #include <mutex>
 
 class TelemetryManager
@@ -16,14 +18,23 @@ class TelemetryManager
         void sendUpdate(std::string);
 
 		// TelemetryManager States
-		int32_t setPodState(PodStates, const std::string&);
+        void setPodState(PodStates newState, const std::string &reason);
 		PodStates getPodStateValue();
+		ControlsInterfaceStates getControlsInterfaceState();
 
 		// Flags Array
         void setConnectionFlag(int32_t, int32_t);
         void setNodeSensorFlag(int32_t status, int32_t index);
         void setBmsSensorFlag(int32_t, int32_t);
         void setInverterSensorFlag(int32_t, int32_t);
+        void resetValues(int32_t);
+
+        //Navigation
+        void addPodDistance(float);
+        void setPodDistance(float);
+        float getPodDistance();
+        void setPodVelocity(float);
+        void countIrTape();
 
 		// Controls Interface
 		void setControlsInterfaceState(ControlsInterfaceStates);
@@ -44,34 +55,44 @@ class TelemetryManager
 		void setGateDriverTemperature(float);
 		void setInverterControlBoardTemperature(float);
 		void setMotorTemperature(float);
-		void setMotorSpeed(float);
+		void setMotorSpeed(int32_t value);
 		void setInverterBusVoltage(int);
         void setInverterHeartbeat(int32_t);
+        void setPostFaultLo(int32_t);
+        void setPostFaultHi(int32_t);
+        void setRunFaultLo(int32_t);
+        void setRunFaultHi(int32_t);
 
-        // BMS
-		void setHvBatteryPackVoltage(float fValue);
-        void setHvBatteryPackCurrent(float fValue);
-        void setHvBatteryPackMinimumCellVoltage(float value);
+
+        // HV BMS
+		void setHvBatteryPackVoltage(float);
+        void setHvBatteryPackCurrent(float);
+        void setHvBatteryPackMinimumCellVoltage(float);
         void setHvBatteryPackMaxCellVoltage(float);
         void setHvBatteryPackStateOfCharge(int);
         void setHvBatteryPackMaxCellTemperature(float);
 
-        // Brake Node
+        // LV BMS
+        void setLv1BatteryPackStateOfCharge(int);
+        void setLv1BatteryPackVoltage(float);
+        void setLv1BatteryPackTemperature(float);
+        void setLv2BatteryPackStateOfCharge(int);
+        void setLv2BatteryPackVoltage(float);
+        void setLv2BatteryPackTemperature(float);
+
+
+    // Brake Node
+        void setReceivedBrakeNodeState(BrakeNodeStates value);
         void setLowPressure(float, int32_t);
         void setHighPressure(float);
         void setSolenoid(bool value, int32_t identifier);
         void setPressureVesselTemperature(float);
+        void setCoolantTemperature(float);
+        void setLowPressure4(float, PodStates);
 
         //Shared Memory Space
         struct PodValues* telemetry;
         struct PodNetwork* sPodNetworkValues;
-
-		// Permissions
-		bool bWritePodState = 0;
-		bool bWriteControlsInterfaceState = 0;
-		bool bWriteManualStates = 0;
-		bool bWriteBms = 0;
-		bool bWriteInverter = 0;
 };
 
 #endif //FLIGHTCOMPUTER_TELEMETRYMANAGER_H

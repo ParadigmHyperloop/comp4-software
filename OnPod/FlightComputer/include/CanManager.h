@@ -18,6 +18,7 @@
 
 #include "NetworkHelpers.h"
 #include "Common.h"
+#include "Constants/SensorConfig.h"
 #include "TelemetryManager.h"
 
 struct broadcastManagerConfig

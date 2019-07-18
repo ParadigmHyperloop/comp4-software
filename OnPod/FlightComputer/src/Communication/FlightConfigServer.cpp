@@ -104,8 +104,6 @@ FlightConfig FlightConfigServer::runServer() {
          SUCCESS_RECEIVE_CONFIG_RESPONSE,
          strlen(SUCCESS_RECEIVE_CONFIG_RESPONSE),
          0);
-    std::string laptopAddress(controlLaptopAddr);
-    config.set_controllaptopipaddr(laptopAddress);
     close(clientSocket);
     return config;
 }

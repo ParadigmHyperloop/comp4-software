@@ -4,12 +4,7 @@
 #include <netinet/in.h>
 #include <cstdint>
 #include "Paradigm.pb.h"
-
-#define BRAKE_NODE_HEARTBEAT_INDEX 0
-#define LVDC_NODE_HEARTBEAT_INDEX 1
-#define BMS_HEARTBEAT_INDEX 2
-#define INTERFACE_HEARTBEAT_INDEX 3
-#define ENCLOSURE_HEARTBEAT_INDEX 4
+#include <chrono>
 
 class PodState;
 
@@ -20,28 +15,45 @@ struct PodValues {
     ControlsInterfaceStates controlsInterfaceState = ciNone;
     BrakeNodeStates receivedBrakeNodeState = bnsNone;
     BrakeNodeStates commandedBrakeNodeState = bnsNone;
-    LvdcNodeStates lvdcNodeState = lvdcNone;
+    LvdcNodeStates receivedLvdcNodeState = lvdcNone;
+    LvdcNodeStates commandedLvdcNodeState = lvdcNone;
 
     // Flight Profile
-    int32_t motorTorque = 0;
-    int32_t flightDistance = 0;
-    int32_t maxFlightTime = 0;
+    uint32_t motorTorque = 0;
+    uint32_t flightDistance = 0;
+    uint32_t maxFlightTime = 0;
+    uint32_t startTorque = 0;
+    uint32_t accelerationTime = 0;
+    uint32_t expectedTubePressure = 0;
+    uint32_t maxVelocity = 0;
+    uint32_t brakeDistance = 0;
+    uint32_t maxStripCount = 0;
+    bool taxi  = false;
 
+    // Ghost Train
+     float gtPack1Voltage = 0;
+     float gtPack2Voltage = 0;
+     float gtPack1Current = 0;
+     float gtPack2Current = 0;
+     float gtLp5Current = 0;
+     float gtLp12Current = 0;
+     float gtNodeCurrent = 0;
+     float gtInverterCurrent = 0;
 
     //Navigation
-    int32_t tachRpm = 0;
-    int32_t irRpm = 0;
-    float tachDistance = 0;
-    float irDistance = 0;
+    std::mutex positionLock;
+    float motorDistance = 0;
     float podVelocity = 0;
     float podPosition = 0;
-
+    int totalStripCount = 0;
+    float stripVelocity = 0;
 
     // Updates
     std::mutex updatesLock;
     std::vector<std::string> updates;
 
     //Manual States
+    bool checkNodeStates = true;
     PodStates manualPodState = psNone;
     BrakeNodeStates manualBrakeNodeState = bnsNone;
     LvdcNodeStates manualLvdcNodeState = lvdcNone;
@@ -60,16 +72,33 @@ struct PodValues {
     float hvBatteryPackMaxCellVoltage = 0;
     int hvBatteryPackStateOfCharge = 0;
     float hvBatteryPackMaxCellTemperature = 0;
+    int32_t hvFaultCode1 = 0;
+    int32_t hvFaultCode2 = 0;
+
+    // LV-BMS
+    int32_t lv1BatteryPackStateOfCharge = 0;
+    float lv1BatteryPackVoltage = 0;
+    float lv1BatteryPackCellTemperature = 0;
+
+    int32_t lv2BatteryPackStateOfCharge = 0;
+    float lv2BatteryPackVoltage = 0;
+    float lv2BatteryPackCellTemperature = 0;
 
     //Inverter
-    int32_t maxIgbtTemperature = 0;
-    int32_t gateDriverTemperature = 0;
-    int32_t inverterControlBoardTemperature = 0;
-    int32_t motorTemperature = 0;
+    float maxIgbtTemperature = 0;
+    float gateDriverTemperature = 0;
+    float inverterControlBoardTemperature = 0;
+    float motorTemperature = 0;
     int32_t motorSpeed = 0;
-    int32_t inverterBusVoltage = 0;
-    int32_t commandedTorque = 0;
+    float inverterBusVoltage = 0;
+    float commandedTorque = 0;
     int32_t inverterHeartbeat = 0;
+    int32_t inverterRunFaultLo = 0;
+    int32_t inverterRunFaultHi = 0;
+    int32_t inverterPostFaultLo = 0;
+    int32_t inverterPostFaultHi = 0;
+    std::vector<int32_t> inverterFaults;
+    std::chrono::high_resolution_clock::time_point lastMotorReadTime;
 
     // Atmosphere
     double tubePressure = 0;

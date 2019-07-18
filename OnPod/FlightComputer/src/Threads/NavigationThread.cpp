@@ -13,25 +13,21 @@
 #include <sstream>
 #include "Heartbeat.h"
 #include "Constants/Constants.h"
+#include "Constants/SensorConfig.h"
 
 
-#define BUFFER_SIZE 35
-#define FRONT_WHEEL_RADIUS 0.09728
-#define FRONT_WHEEL_CIRCUMFERENCE 0.611228
-#define STRIP_DISTANCE 1.570796
-#define REAR_WHEEL_RADIUS 0.29718
 
 
 int8_t getSerialPort(){
-    int8_t serialPort = open("/dev/ttyUSB0",O_RDWR | O_NOCTTY);
+    int8_t serialPort = open("/dev/ttyO2",O_RDWR | O_NOCTTY);
     if (serialPort == -1){
-        serialPort = open("/dev/ttyO4",O_RDWR | O_NOCTTY);
+        serialPort = open("/dev/ttyUSB0",O_RDWR | O_NOCTTY);
     }
     //tcflush( serialPort, TCIFLUSH );
     struct termios SerialPortSettings = {};
     tcgetattr(serialPort, &SerialPortSettings);
-    cfsetispeed(&SerialPortSettings,B9600);
-    cfsetospeed(&SerialPortSettings,B9600);
+    cfsetispeed(&SerialPortSettings,B115200);
+    cfsetospeed(&SerialPortSettings,B115200);
     SerialPortSettings.c_cflag &= ~PARENB;
     SerialPortSettings.c_cflag &= ~CSTOPB;
     SerialPortSettings.c_cflag &= ~CSIZE;
@@ -44,7 +40,7 @@ int8_t getSerialPort(){
     SerialPortSettings.c_iflag &= ~(IGNBRK|BRKINT|PARMRK|ISTRIP|INLCR|IGNCR|ICRNL);
     SerialPortSettings.c_oflag &= ~ONLCR;
     SerialPortSettings.c_cc[VMIN] = 0;
-    SerialPortSettings.c_cc[VTIME] = 30;
+    SerialPortSettings.c_cc[VTIME] = 1;
     int status = tcsetattr(serialPort,TCSANOW,&SerialPortSettings);
 
     if(status < 0){
@@ -54,13 +50,28 @@ int8_t getSerialPort(){
     return serialPort;
 }
 
+
+void updatePosition(int velocity, int irStripCount, TelemetryManager &pod){
+    pod.telemetry->totalStripCount += irStripCount;
+    float stripDistance = pod.telemetry->totalStripCount * GENERAL_CONSTANTS::STRIP_DISTANCE;
+    pod.setPodDistance( stripDistance );
+    pod.setPodVelocity(velocity/100);
+}
+
+
 void readNavigationNode(int serialPort, TelemetryManager &pod){
     std::stringstream dataStream;
-    char read_buffer[BUFFER_SIZE] = {};
-    int  bytes_read, tachRpm, irRpm, tachSpokeCount, irStripCount = 0;
+    dataStream.str(std::string());
+    char read_buffer[GENERAL_CONSTANTS::NAV_SERIAL_MESSAGE_SIZE + 1] = {0};
+    int  bytes_read, stripCount, velocity, tubePressure = 0;
     int total_bytes_read = 0;
-    write (serialPort, "1", 1);
-    while(total_bytes_read < BUFFER_SIZE){
+    int status = 0;
+    status = write(serialPort, "1", 1);
+    if(status < 0){
+        std::string sError = std::string("Error writing to Navnode Serial Port");
+        throw std::runtime_error(sError);
+    }
+    while(total_bytes_read < GENERAL_CONSTANTS::NAV_SERIAL_MESSAGE_SIZE){
         bytes_read=read(serialPort,read_buffer, sizeof(read_buffer));
         if(bytes_read > 0){
             total_bytes_read += bytes_read;
@@ -71,31 +82,27 @@ void readNavigationNode(int serialPort, TelemetryManager &pod){
             throw std::runtime_error(sError);
         }
     }
-    total_bytes_read = 0;
     std::string data;
     std::getline(dataStream, data, ',');
     try {
-        tachRpm = std::stoi(data);
+        stripCount = std::stoi(data);
         std::getline(dataStream, data, ',');
-        irRpm = std::stoi(data);
-        std::getline(dataStream, data, ',');
-        tachSpokeCount = std::stoi(data);
+        velocity = std::stoi(data);
     }
     catch (std::exception &e){
         std::string sError = std::string("Error Parsing Nav Node Data");
         throw std::runtime_error(sError);
     }
-    dataStream >> irStripCount;
+    dataStream >> tubePressure;
     std::stringstream().swap(dataStream);
 
-    LOG(INFO)<<"TachRPM : "<<tachRpm << " IrRPM : "<< irRpm << " Spoke : "<< tachSpokeCount << " Strip : "<<irStripCount;
+    if(stripCount > 0){  //strip count    velocity   pressure
+        pod.countIrTape();
+    }
+    pod.telemetry->tubePressure = tubePressure;
+    pod.telemetry->stripVelocity = velocity;
 
-    pod.telemetry->irRpm = irRpm;
-    pod.telemetry->tachRpm = tachRpm;
-    pod.telemetry->tachDistance = (tachSpokeCount/8.0)*FRONT_WHEEL_CIRCUMFERENCE;
-    pod.telemetry->irDistance = irStripCount*FRONT_WHEEL_CIRCUMFERENCE;
-    LOG(INFO)<<"Tach : " << tachSpokeCount << "  IR : " << irStripCount;
-    return;
+    //LOG(INFO)<<"string : "<< stripCount << " velocity : "<< velocity << "  pressure : " << tubePressure;
 }
 
 int32_t NavigationThread(TelemetryManager Pod) {
@@ -107,25 +114,29 @@ int32_t NavigationThread(TelemetryManager Pod) {
         return -1;
     }
     LOG(INFO)<<"Starting Nav thread with FD " << serialPort;
-    Heartbeat navNodeUpdateFreq = Heartbeat(1000);
-    float tachVelocity, motorVelocity, podVelocity;
+    Heartbeat navNodeUpdateFreq = Heartbeat(10);
+    Heartbeat navNodeHeartbeat = Heartbeat(45);
+    bool success;
     while(Pod.getPodStateValue() != psShutdown)
     {
         if(navNodeUpdateFreq.expired()){
-            navNodeUpdateFreq.feed();
+            success = true;
             try {
                 readNavigationNode(serialPort,Pod);
             }
             catch (std::runtime_error &error){
-                Pod.sendUpdate(error.what());
-                //todo what now
+                success = false;
+            }
+            if(success){
+                navNodeUpdateFreq.feed();
+                navNodeHeartbeat.feed();
+            }
+            else{
+                if(navNodeHeartbeat.expired()){
+                    Pod.setConnectionFlag(0, CONNECTION_FLAGS::NAVIGATION_HEARTBEAT_INDEX);
+                }
             }
         }
-        tachVelocity =  FRONT_WHEEL_RADIUS*Pod.telemetry->tachRpm*0.10472;
-        motorVelocity = REAR_WHEEL_RADIUS*Pod.telemetry->motorSpeed*0.10472;
-        podVelocity = (motorVelocity > tachVelocity) ? motorVelocity : tachVelocity;
-        Pod.telemetry->podVelocity = podVelocity; //todo setter
-        Pod.telemetry->podPosition = ( Pod.telemetry->tachDistance > Pod.telemetry->irDistance ) ? Pod.telemetry->tachDistance : Pod.telemetry->irDistance;
     }
     close(serialPort);
 }

@@ -2,8 +2,7 @@
 #define FLIGHTCOMPUTER_STATES_H
 
 #include "TelemetryManager.h"
-
-#define FLAGS_GOOD -1
+#include "Constants/Constants.h"
 
 class TelemetryManager;
 
@@ -19,25 +18,30 @@ public:
 
     virtual bool testTransitions();
 
+    bool isNodeSensorCritical(uint32_t);
+
+    bool isConnectionFlagCritical(uint32_t);
+
+    bool isInverterSensorCritical(uint32_t);
+
+    bool brakingCriteriaMet();
+
     PodStates getNewState();
 
     bool isTransitioning();
 
-    BrakeNodeStates getBrakeNodeState();
-
-    LvdcNodeStates getLvdcNodeState();
-
+    void setFailure(const std::string&);
     const std::string getTransitionReason();
 
-    unsigned int timeInStateSeconds();
+    float timeInStateSeconds();
+
+    float timeInFlightSeconds();
 
     static std::unique_ptr<PodState> createState(PodStates, TelemetryManager* );
 
     void setupTransition(PodStates, const std::string&);
 
-    int32_t checkSensorFlags();
-
-    int32_t checkCommunicationFlags();
+    int8_t checkFlags(std::vector<int32_t> &flags);
 
     int32_t checkNodeStates();
 
@@ -47,7 +51,9 @@ public:
 
 
 protected:
+    std::string _currentFailure;
     std::chrono::steady_clock::time_point _enterStateTime;
+    std::chrono::steady_clock::time_point _flightStartTime;
     bool _transitioning = false;
     std::string _transitionReason = "";
     PodStates _stateIdentifier = psBooting;
@@ -67,6 +73,7 @@ public:
     Standby(TelemetryManager*);
     ~Standby();
     bool testTransitions() override;
+
 };
 
 class Arming : public PodState {
@@ -95,6 +102,13 @@ public:
     Acceleration(TelemetryManager*);
     ~Acceleration();
     float getBrakingDistance();
+    bool testTransitions() override;
+};
+
+class Coasting : public PodState{
+public:
+    Coasting(TelemetryManager*);
+    ~Coasting();
     bool testTransitions() override;
 };
 

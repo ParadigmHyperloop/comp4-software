@@ -52,6 +52,7 @@ def submit_configuration():
     configuration_form = PodConfigurationForm()
     flight_configuration = FlightConfig.get_flight_config_instance()
     pod_communicator = PodCommunicator.get_pod_communicator()
+    ip_addr = pod_communicator.get_server_address()
 
     if configuration_form.validate_on_submit():
         flight_configuration.update_config(
@@ -62,6 +63,7 @@ def submit_configuration():
                 'heartbeat_timeout': int(configuration_form.heartbeat_timout.data),
                 'pod_address': configuration_form.pod_ip.data,
                 'pod_driver': 'Motor' if configuration_form.pod_driver.data is True else 'Simulation',
+                'controlLaptopIpAddr': ip_addr
             }
         )
         command_sent = pod_communicator.send_configuration(configuration=flight_configuration.read_config())
@@ -105,12 +107,14 @@ def dashboard():
     path = request.path
     title = get_page_title(path[1:])
 
-    with open('ControlLaptop/templates/tables/BmsSensors.json') as json_file:
+    with open('ControlLaptop/templates/tables/HVSensors.json') as json_file:
         bms_sensors = order_sensors(json.load(json_file))
     with open('ControlLaptop/templates/tables/InverterSensors.json') as json_file:
         inverter_sensors = order_sensors(json.load(json_file))
     with open('ControlLaptop/templates/tables/DashboardSensors.json') as json_file:
         sensors = order_sensors(json.load(json_file))
+    with open('ControlLaptop/templates/tables/LVSensors.json') as json_file:
+        lv_sensors = order_sensors(json.load(json_file))
 
     arm_form = FlightProfileForm()
     overrides_form = OverridesForm()
@@ -122,6 +126,7 @@ def dashboard():
         overridesForm=overrides_form,
         sensors=sensors,
         bms_sensors=bms_sensors,
+        lv_sensors = lv_sensors,
         inverter_sensors=inverter_sensors
     )
 
@@ -132,7 +137,7 @@ def dts():
     title = get_page_title(page)
     with open('ControlLaptop/templates/tables/DtsSensors.json') as json_file:
         sensors = order_sensors(json.load(json_file))
-    with open('ControlLaptop/templates/tables/BmsSensors.json') as json_file:
+    with open('ControlLaptop/templates/tables/HVSensors.json') as json_file:
         bms_sensors = order_sensors(json.load(json_file))
     with open('ControlLaptop/templates/tables/InverterSensors.json') as json_file:
         inverter_sensors = order_sensors(json.load(json_file))
@@ -195,21 +200,24 @@ def parse_overrdies():
     form = OverridesForm()
     if form.validate_on_submit():
         data = form.data
-        profile = [None] * 14
+        profile = [None] * 17
         profile[0] = data['lp_1']
         profile[1] = data['lp_2']
         profile[2] = data['lp_3']
-        profile[3] = data['hp']
-        profile[4] = data['hp_temp']
-        profile[5] = data['bms_values']
-        profile[6] = data['inverter_values']
-        profile[7] = data['brake_node_heartbeat']
-        profile[8] = data['lvdc_node_heartbeat']
-        profile[9] = data['enclosure_node_heartbeat']
-        profile[10] = data['enclosure_pressure']
-        profile[11] = data['enclosure_temperature']
-        profile[12] = data['cooling_pressure']
-        profile[13] = data['cooling_temperature']
+        profile[3] = data['lp_4']
+        profile[4] = data['hp']
+        profile[5] = data['hp_temp']
+        profile[6] = data['bms_values']
+        profile[7] = data['inverter_values']
+        profile[8] = data['brake_node_heartbeat']
+        profile[9] = data['lvdc_node_heartbeat']
+        profile[10] = data['enclosure_node_heartbeat']
+        profile[11] = data['enclosure_pressure']
+        profile[12] = data['enclosure_temperature']
+        profile[13] = data['cooling_pressure']
+        profile[14] = data['cooling_temperature']
+        profile[15] = data['node_states']
+        profile[16] = data['navigation_heartbeat']
         payload = dict()
         payload['target'] = 'pod'
         payload['configuration'] = profile

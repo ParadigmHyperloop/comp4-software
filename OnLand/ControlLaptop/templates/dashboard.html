@@ -4,7 +4,7 @@
 {% endblock %}
 {% block content %}
     <div class="row">
-       <div class="col-lg-2">
+       <div class="col-lg-4">
           {% include '_cards/flightProfile.html' %}
        </div>
        <div class="col-lg-2">
@@ -13,7 +13,7 @@
         <div class="col-lg-2">
           {% include '_cards/states.html' %}
        </div>
-        <div class="col-lg-4">
+        <div class="col-lg-2">
           {% include '_cards/commands.html' %}
        </div>
         {% include '_cards/connectionCards.html' %}
@@ -24,17 +24,23 @@
     {% include '_forms/setOverrides.html' %}
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-lg-3">
           {% include '_cards/sensor_values.html' %}
        </div>
-       <div class="col-md-3">
+       <div class="col-lg-3">
            {% include '_cards/inverter_values.html' %}
        </div>
-       <div class="col-md-3">
-               {% include '_cards/bms_values.html' %}
+        <div class="col-lg-3">
+           {% include '_cards/HV_values.html' %}
        </div>
-       <div class="col-md-2">
-          {% include '_cards/events.html' %}
+       <div class="col-lg-3">
+           {% include '_cards/LV_values.html' %}
        </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        {% include '_cards/events.html' %}
+      </div>
     </div>
 {% endblock %}

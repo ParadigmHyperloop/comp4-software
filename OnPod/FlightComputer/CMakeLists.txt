@@ -9,11 +9,11 @@ include_directories(include)
 include_directories(src)
 include_directories(include/ProtoBuffer)
 
-
 file(GLOB_RECURSE HEADERS "libs/*.h")
 file(GLOB_RECURSE SOURCES "src/*.*")
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
+
 
 if (${CMAKE_CXX_COMPILER} MATCHES ".arm")
     set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc  -static-libstdc++")

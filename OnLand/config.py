@@ -28,17 +28,17 @@ SOCKET_SERVER = 'http://localhost:5000'
 
 
 # Pod
-# POD_IP = '127.0.0.1'
-POD_IP = '192.168.0.169'
-# POD_IP = '192.168.7.2'
+#POD_IP = '127.0.0.1'
+POD_IP = '192.168.0.10'
+#POD_IP = '192.168.7.2'
 POD_CONFIG_PORT = 3001
 
 
 # Heartbeat & Commander
 POD_COMMANDER_PORT = 6000
-COMMANDER_PULSE_SPEED = 2000  # Time to wait before sending ping to pod
-COMMANDER_BACKUP_PULSE = 2500  # Time to wait without hearing back before sending another ping to the pod
-COMMANDER_TIMEOUT_TIME = 5000  # How long do we wait to hear back from the pod before we decided its lost
+COMMANDER_PULSE_SPEED = 1000  # Time to wait before sending ping to pod
+COMMANDER_BACKUP_PULSE = 1500  # Time to wait without hearing back before sending another ping to the pod
+COMMANDER_TIMEOUT_TIME = 4000  # How long do we wait to hear back from the pod before we decided its lost
 COMMANDER_BROADCAST_FREQUENCY = 4000  # How often it alerts the front end the connection is still good.
 
 

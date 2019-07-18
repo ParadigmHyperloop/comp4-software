@@ -4,7 +4,11 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+<<<<<<< HEAD
+  "/home/liam/CLionProjects/motorDriving/main.cpp" "/home/liam/CLionProjects/motorDriving/build/host/CMakeFiles/motorDriving.dir/main.cpp.o"
+=======
   "/home/liam/Development/comp4-software/Examples/motorDriving/main.cpp" "/home/liam/Development/comp4-software/Examples/motorDriving/build/host/CMakeFiles/motorDriving.dir/main.cpp.o"
+>>>>>>> master
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

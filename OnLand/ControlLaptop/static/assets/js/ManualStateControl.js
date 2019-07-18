@@ -21,7 +21,10 @@ enablePodStates.click(function () {
 
 disablePodStates.click(function () {
     manualPodStates.attr('disabled','disabled');
-    //todo send command to set automatic transitions to 0
+    let command = {};
+    command['target'] = 'pod';
+    command['state'] = 'psNone';
+    socket.emit('manual_state_command', JSON.stringify(command));
 });
 
 manualPodStates.click(function () {
@@ -84,21 +87,31 @@ $('#send-solenoid-configuration').click(function () {
 });
 
 
-
-
-
 ///////// LVDC NODE STATES ////////
 
 enableLvdcNodeStates.click(function () {
     manualLvdcNodeStates.removeAttr('disabled').removeClass('active')
 });
 
+manualLvdcNodeStates.click(function(){
+    const btn = $(this);
+    if (isDisabled($(this))){
+       return null;
+    }
+    const state = btn.data('state');
+    let command = {};
+    command['target'] = 'lvdc_node';
+    command['state'] = state;
+    socket.emit('manual_state_command', JSON.stringify(command));
+});
+
+
 disableLvdcNodeStates.click(function () {
     manualLvdcNodeStates.attr('disabled','disabled');
     let command = {};
     command['target'] = 'lvdc_node';
-    command['configuration'] = 'lvdcNone';
-    socket.emit('manual_configuration_command', JSON.stringify(command))
+    command['state'] = 'lvdcNone';
+    socket.emit('manual_state_command', JSON.stringify(command));
 });
 
 

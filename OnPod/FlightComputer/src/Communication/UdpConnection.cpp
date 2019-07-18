@@ -162,22 +162,40 @@ PdsConnection::PdsConnection(TelemetryManager pod) : UdpConnection(pod) {
 std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage() {
     std::unique_ptr<Telemetry> protoMessage (new Telemetry());
     protoMessage->set_podstate(pod.getPodStateValue());
+    protoMessage->set_brakenodestate(pod.telemetry->receivedBrakeNodeState);
+    protoMessage->set_lvdcnodestate(pod.telemetry->receivedLvdcNodeState);
+
+
+    // Brake Node
     protoMessage->set_lowpressure1(pod.telemetry->lowPressure1);
     protoMessage->set_lowpressure2(pod.telemetry->lowPressure2);
     protoMessage->set_lowpressure3(pod.telemetry->lowPressure3);
     protoMessage->set_lowpressure4(pod.telemetry->lowPressure4);
     protoMessage->set_highpressure(pod.telemetry->highPressure);
-    protoMessage->set_coolanttemperature(pod.telemetry->coolingTemperature); //todo
+    protoMessage->set_coolanttemperature(pod.telemetry->coolingTemperature);
     protoMessage->set_solenoid1(pod.telemetry->solenoid1);
     protoMessage->set_solenoid2(pod.telemetry->solenoid2);
     protoMessage->set_solenoid3(pod.telemetry->solenoid3);
     protoMessage->set_solenoid4(pod.telemetry->solenoid4);
     protoMessage->set_pressurevesseltemperature(pod.telemetry->pressureVesselTemperature);
 
+    // HV
     protoMessage->set_hvbatterypackvoltage(pod.telemetry->hvBatteryPackVoltage);
     protoMessage->set_hvbatterypackcurrent(pod.telemetry->hvBatteryPackCurrent);
     protoMessage->set_hvbatterypackmaxcellvoltage(pod.telemetry->hvBatteryPackMaxCellVoltage);
     protoMessage->set_hvbatterypackminimumcellvoltage(pod.telemetry->hvBatteryPackMinimumCellVoltage);
+    protoMessage->set_hvfaultcode1(pod.telemetry->hvFaultCode1);
+    protoMessage->set_hvfaultcode2(pod.telemetry->hvFaultCode2);
+
+    // LV
+    protoMessage->set_lv1batterypackcelltemperature(pod.telemetry->lv1BatteryPackCellTemperature);
+    protoMessage->set_lv1batterypackstateofcharge(pod.telemetry->lv1BatteryPackStateOfCharge);
+    protoMessage->set_lv1batterypackvoltage(pod.telemetry->lv1BatteryPackVoltage);
+    protoMessage->set_lv2batterypackcelltemperature(pod.telemetry->lv2BatteryPackCellTemperature);
+    protoMessage->set_lv2batterypackstateofcharge(pod.telemetry->lv2BatteryPackStateOfCharge);
+    protoMessage->set_lv2batterypackvoltage(pod.telemetry->lv2BatteryPackVoltage);
+
+    // Motor Controller
     protoMessage->set_maxigbttemperature(pod.telemetry->maxIgbtTemperature);
     protoMessage->set_gatedrivertemperature(pod.telemetry->gateDriverTemperature);
     protoMessage->set_invertercontrolboardtemperature(pod.telemetry->inverterControlBoardTemperature);
@@ -185,27 +203,45 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_inverterbusvoltage(pod.telemetry->inverterBusVoltage);
     protoMessage->set_hvbatterypackmaxcelltemperature(pod.telemetry->hvBatteryPackMaxCellTemperature);
     protoMessage->set_hvbatterypackstateofcharge(pod.telemetry->hvBatteryPackStateOfCharge);
+    protoMessage->set_inverterheartbeat(pod.telemetry->inverterHeartbeat);
+    protoMessage->set_inverterrunfaultlo(pod.telemetry->inverterRunFaultLo);
+    protoMessage->set_inverterrunfaulthi(pod.telemetry->inverterRunFaultHi);
+    protoMessage->set_inverterpostfaulthi(pod.telemetry->inverterPostFaultHi);
+    protoMessage->set_inverterpostfaultlo(pod.telemetry->inverterPostFaultLo);
 
+    // Flight Profile
     protoMessage->set_maxflighttime(pod.telemetry->maxFlightTime);
     protoMessage->set_flightdistance(pod.telemetry->flightDistance);
+    protoMessage->set_starttorque(pod.telemetry->startTorque);
     protoMessage->set_motortorque(pod.telemetry->motorTorque);
-    protoMessage->set_inverterheartbeat(pod.telemetry->inverterHeartbeat);
+    protoMessage->set_accelerationtime(pod.telemetry->accelerationTime);
+    protoMessage->set_taxi(pod.telemetry->taxi);
+    protoMessage->set_expectedtubepressure(pod.telemetry->expectedTubePressure);
+    protoMessage->set_maxvelocity(pod.telemetry->maxVelocity);
+    protoMessage->set_brakingdistance(pod.telemetry->brakeDistance);
+    protoMessage->set_maxstripcount(pod.telemetry->maxStripCount);
+
+    // Navigation
     protoMessage->set_motorspeed(pod.telemetry->motorSpeed);
+    protoMessage->set_podposition(pod.telemetry->podPosition);
+    protoMessage->set_podvelocity(pod.telemetry->podVelocity);
 
-    protoMessage->set_irdistance(pod.telemetry->irDistance);
-    protoMessage->set_irrpm(pod.telemetry->irRpm);
-    protoMessage->set_tachdistance(pod.telemetry->tachDistance);
-    protoMessage->set_tachrpm(pod.telemetry->tachRpm);
-    protoMessage->set_lvdcnodestate(lvdcNone);
-    protoMessage->set_brakenodestate(pod.telemetry->receivedBrakeNodeState);
-
+    // Enclosure
     protoMessage->set_coolantpressure1(pod.telemetry->coolingLinePressure);
     protoMessage->set_enclosurepressure(pod.telemetry->enclosurePressure);
     protoMessage->set_enclosuretemperature(pod.telemetry->enclosureTemperature);
 
+    // Ghost Train
+    protoMessage->set_gtinvertercurrent(pod.telemetry->gtInverterCurrent);
+    protoMessage->set_gtlp5current(pod.telemetry->gtLp5Current);
+    protoMessage->set_gtlp12current(pod.telemetry->gtLp12Current);
+    protoMessage->set_gtnodecurrent(pod.telemetry->gtNodeCurrent);
+    protoMessage->set_gtpack1current(pod.telemetry->gtPack1Current);
+    protoMessage->set_gtpack1voltage(pod.telemetry->gtPack1Voltage);
+    protoMessage->set_gtpack2current(pod.telemetry->gtPack1Current);
+    protoMessage->set_gtpack2voltage(pod.telemetry->gtPack2Voltage);
 
-    // Add Updates todo probably put this in a function with a pointer to the proto as an argument
-    if(this->pod.telemetry->updates.size() > 0){
+    if(pod.telemetry->updates.size() > 0){
         std::lock_guard<std::mutex> lock(this->pod.telemetry->updatesLock);
         for(std::string& update : this->pod.telemetry->updates){
             protoMessage->add_updatemessages(update);
@@ -221,12 +257,11 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
 
 BrakeNodeConnection::BrakeNodeConnection(TelemetryManager pod) : UdpConnection(pod) {
     this->_connectionName = "Brake Node : ";
-    this->_connectionStatusIndex = BRAKE_NODE_HEARTBEAT_INDEX;
+    this->_connectionStatusIndex = CONNECTION_FLAGS::BRAKE_NODE_HEARTBEAT_INDEX;
 }
 
 std::unique_ptr<google::protobuf::Message> BrakeNodeConnection::getProtoUpdateMessage() {
     std::unique_ptr<FcToBrakeNode> protoMessage (new FcToBrakeNode());
-    protoMessage->set_packetnum(this->getNewPacketId());
     BrakeNodeStates manualState = this->pod.telemetry->manualBrakeNodeState;
     if(manualState == bnsNone){
         protoMessage->set_nodestate(this->pod.telemetry->commandedBrakeNodeState);
@@ -249,22 +284,19 @@ bool BrakeNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
         std::string strError = "Failed to parse Update from Brake Node";
         throw std::invalid_argument(strError);
     }
-/*    if(this->checkPacketId(protoMessage.packetnum())){
-        //todo
-    }*/
-    this->pod.setSolenoid(protoMessage.solenoid1(),SOL1_INDEX);
-    this->pod.setSolenoid(protoMessage.solenoid2(), SOL2_INDEX);
-    this->pod.setSolenoid(protoMessage.solenoid3(), SOL3_INDEX);
-    this->pod.setSolenoid(protoMessage.solenoid4(), SOL4_INDEX);
+    this->pod.setSolenoid(protoMessage.solenoid1(), SOLENOID_INDEX::SOL1);
+    this->pod.setSolenoid(protoMessage.solenoid2(), SOLENOID_INDEX::SOL2);
+    this->pod.setSolenoid(protoMessage.solenoid3(), SOLENOID_INDEX::SOL3);
+    this->pod.setSolenoid(protoMessage.solenoid4(), SOLENOID_INDEX::SOL4);
     this->pod.setPressureVesselTemperature(protoMessage.pneumatictemperature());
     this->pod.setHighPressure(protoMessage.highpressure());
-    this->pod.setLowPressure(protoMessage.lowpressure1(), LP1_INDEX);
-    this->pod.setLowPressure(protoMessage.lowpressure2(), LP2_INDEX);
-    this->pod.setLowPressure(protoMessage.lowpressure3(), LP3_INDEX);
-    this->pod.setLowPressure(protoMessage.lowpressurecommon(), LP4_INDEX);
+    this->pod.setLowPressure(protoMessage.lowpressure1(), NODE_FLAGS::LP1_INDEX);
+    this->pod.setLowPressure(protoMessage.lowpressure2(), NODE_FLAGS::LP2_INDEX);
+    this->pod.setLowPressure(protoMessage.lowpressure3(), NODE_FLAGS::LP3_INDEX);
+    this->pod.setLowPressure(protoMessage.lowpressurecommon(), NODE_FLAGS::LP4_INDEX);
     this->pod.setPressureVesselTemperature(protoMessage.pneumatictemperature());
-    this->pod.telemetry->coolingTemperature = protoMessage.coolanttemperature(); //todo
-    this->pod.telemetry->receivedBrakeNodeState = protoMessage.state();
+    this->pod.setCoolantTemperature(protoMessage.coolanttemperature());
+    this->pod.setReceivedBrakeNodeState(protoMessage.state());
     return true;
 }
 
@@ -273,7 +305,7 @@ bool BrakeNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
 
 EnclosureNodeConnection::EnclosureNodeConnection(TelemetryManager pod) : UdpConnection(pod) {
     this->_connectionName = "Enclosure Node : ";
-    this->_connectionStatusIndex = ENCLOSURE_HEARTBEAT_INDEX;
+    this->_connectionStatusIndex = CONNECTION_FLAGS::ENCLOSURE_HEARTBEAT_INDEX;
 }
 
 bool EnclosureNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
@@ -282,9 +314,6 @@ bool EnclosureNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
         std::string strError = "Failed to parse Update from Enclosure";
         throw std::invalid_argument(strError);
     }
-/*    if(this->checkPacketId(protoMessage.packetnum())){
-        return false;
-    }*/
     this->pod.setEnclosurePressure(protoMessage.enclosurepressure());
     this->pod.setEnclosureTemperature(protoMessage.enclosuretemperature());
     this->pod.setCoolantLinePressure(protoMessage.coolantpressure1());
@@ -297,9 +326,35 @@ bool EnclosureNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
 
 LvdcNodeConnection::LvdcNodeConnection(TelemetryManager pod) : UdpConnection(pod) {
     this->_connectionName = "Lvdc Node : ";
-    this->_connectionStatusIndex = LVDC_NODE_HEARTBEAT_INDEX;
+    this->_connectionStatusIndex = CONNECTION_FLAGS::LVDC_NODE_HEARTBEAT_INDEX;
+}
+
+std::unique_ptr<google::protobuf::Message> LvdcNodeConnection::getProtoUpdateMessage() {
+    std::unique_ptr<FcToLvdcNode> protoMessage (new FcToLvdcNode());
+    LvdcNodeStates manualState = this->pod.telemetry->manualLvdcNodeState;
+    if(manualState == lvdcNone){
+        protoMessage->set_nodestate(this->pod.telemetry->commandedLvdcNodeState);
+        return protoMessage;
+    }
+    protoMessage->set_nodestate(this->pod.telemetry->manualLvdcNodeState);
+    return protoMessage;
 }
 
 bool LvdcNodeConnection::parseUpdate(char buffer[], int32_t messageSize){
-    return true; //todo
+    LvdcNodeToFc protoMessage = LvdcNodeToFc();
+    if (!protoMessage.ParseFromArray(buffer, messageSize)) {
+        std::string strError = "Failed to parse Update from LvDC";
+        throw std::invalid_argument(strError);
+    }
+    this->pod.telemetry->receivedLvdcNodeState = protoMessage.state();
+    this->pod.telemetry->gtPack1Current = protoMessage.lowpowerpackcurrent();
+    this->pod.telemetry->gtPack1Voltage = protoMessage.lowpowerpackvoltage();
+    this->pod.telemetry->gtPack2Current = protoMessage.highpowerpackcurrent();
+    this->pod.telemetry->gtPack2Voltage = protoMessage.highpowerpackvoltage();
+    this->pod.telemetry->gtLp5Current = protoMessage.lowpower5current();
+    this->pod.telemetry->gtLp12Current = protoMessage.lowpower12current();
+    this->pod.telemetry->gtNodeCurrent = protoMessage.nodecurrent();
+    this->pod.telemetry->gtInverterCurrent = protoMessage.invertercurrent();
+
+    return true;
 }

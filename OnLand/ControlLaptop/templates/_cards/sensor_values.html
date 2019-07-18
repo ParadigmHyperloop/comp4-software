@@ -1,4 +1,4 @@
-<div class="card ">
+<div class="card " style="height:53%;">
     <div class="header">
         <h4 class="title">Sensor Overview</h4>
     </div>
@@ -7,17 +7,20 @@
             <thead>
             <tr class="d-flex">
                 <th class="col-5" scope="col">Name</th>
+                <th class="col-2" scope="col">min</th>
                 <th class="col-3" scope="col">Actual</th>
+                <th class="col-2" scope="col">max</th>
             </tr>
             </thead>
             <tbody>
             {% for key, value in sensors.items() %}
                 <tr class="d-flex sensor-row">
                     <th class="text-center col-5" scope="row">{{ value['name_pretty'] }}</th>
-                    <td id="{{ key }}" class="col-3 telemetry-value"></td>
+                    <td id="{{key}}-min" class="col-3"></td>
+                    <td id="{{key}}" class="max-min-value col-3 telemetry-value"></td>
+                    <td id="{{key}}-max" class="col-3"></td>
                 </tr>
             {% endfor %}
-
             </tbody>
         </table>
     </div>

@@ -37,10 +37,8 @@ def on_state_command(command):
     command = json.loads(command)
     new_pod_command = PodCommand()
     new_pod_command.hasCommand = True
-
     target = command['target']
     state = command['state']
-
     if target == 'brake_node':
         new_pod_command.manualBrakeNodeState = BrakeNodeStates.Value(state)
     elif target == 'pod':
@@ -49,8 +47,6 @@ def on_state_command(command):
         new_pod_command.manualLvdcNodeState = LvdcNodeStates.Value(state)
     elif target == 'interface_state':
         new_pod_command.controlsInterfaceState = ControlsInterfaceStates.Value(state)
-        print(state)
-
     pod.send_packet(new_pod_command.SerializeToString())
 
 
@@ -59,17 +55,14 @@ def on_state_command(command):
     command = json.loads(command)
     new_pod_command = PodCommand()
     new_pod_command.hasCommand = True
-
     target = command['target']
     configuration = command['configuration']
-
     if target == 'brake_node':
         new_pod_command.solenoidConfiguration.extend(configuration)
     elif target == 'pod':
         new_pod_command.sensorOverrideConfiguration.extend(configuration)
     elif target == 'lvdc_node':
         new_pod_command.powerRailConfiguration.extend(configuration)
-
     pod.send_packet(new_pod_command.SerializeToString())
 
 
@@ -80,25 +73,17 @@ def on_arm_command(profile):
     new_pod_command.motorTorque = profile['motor_speed']
     new_pod_command.flightDistance = profile['flight_distance']
     new_pod_command.maxFlightTime = profile['max_flight_time']
-    pod.send_packet(new_pod_command.SerializeToString())
-
-
-@sio.on('command')
-def on_command(command):
-    new_pod_command = PodCommand()
-    new_pod_command.hasCommand = True
-    if command is '1':
-        new_pod_command.manualBrakeNodeState = bnsBraking
-        log.info("vent")
-    else:
-        new_pod_command.manualBrakeNodeState = bnsFlight
-        log.info("Flight")
+    new_pod_command.startTorque = profile['start_speed']
+    new_pod_command.accelerationTime = profile['acceleration_time']
+    new_pod_command.taxi = profile['taxi']
+    new_pod_command.expectedTubePressure = profile['tube_pressure']
+    new_pod_command.maxVelocity = profile['max_velocity']
+    new_pod_command.brakingDistance = profile['brake_distance']
     pod.send_packet(new_pod_command.SerializeToString())
 
 
 def main():
     log.info("Heartbeat Thread Started")
-
     global pod_command
     global connection_status
     connected = False
@@ -118,7 +103,7 @@ def main():
         time.sleep(1)
         if pod.connect():
             pod_heartbeat.pulse()
-
+        log.warning("Connected")
         while pod.is_connected():
             pod_command.controlsInterfaceState = interface_state
             if pod_heartbeat.time_since_pulse() > COMMANDER_PULSE_SPEED:
