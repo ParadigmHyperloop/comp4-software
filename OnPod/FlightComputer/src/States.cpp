@@ -48,20 +48,25 @@ float PodState::timeInFlightSeconds() {
     return std::chrono::duration_cast<std::chrono::milliseconds>(current - this->_flightStartTime).count()/1000.0;
 }
 
-bool PodState::isNodeSensorCritical(int sensorIndex) {
+bool PodState::isNodeSensorCritical(uint32_t sensorIndex) {
     std::vector<int> criticalSensors = {NODE_FLAGS::HP_INDEX, NODE_FLAGS::LP1_INDEX, NODE_FLAGS::LP2_INDEX, NODE_FLAGS::LP3_INDEX, NODE_FLAGS::LP4_INDEX,
                                         NODE_FLAGS::ENCLOSURE_TEMPERATURE_INDEX, NODE_FLAGS::ENCLOSURE_PRESSURE_INDEX};
     return std::find(criticalSensors.begin(), criticalSensors.end(), sensorIndex) != criticalSensors.end();
 }
 
-bool PodState::isConnectionFlagCritical(int sensorIndex) {
-    std::vector<int> criticalSensors = {};
-    return std::find(criticalSensors.begin(), criticalSensors.end(), sensorIndex) != criticalSensors.end();
+bool PodState::isConnectionFlagCritical(uint32_t sensorIndex) {
+    uint32_t criticalMask = CONNECTION_FLAGS::BRAKE_NODE_HEARTBEAT_INDEX |
+                            CONNECTION_FLAGS::LVDC_NODE_HEARTBEAT_INDEX |
+                            CONNECTION_FLAGS::BMS_HEARTBEAT_INDEX |
+                            CONNECTION_FLAGS::INTERFACE_HEARTBEAT_INDEX |
+                            CONNECTION_FLAGS::ENCLOSURE_HEARTBEAT_INDEX |
+                            CONNECTION_FLAGS::NAVIGATION_HEARTBEAT_INDEX;
+    return sensorIndex & criticalMask;
 }
 
-bool PodState::isInverterSensorCritical(int sensorIndex) {
-    std::vector<int> criticalSensors = {};
-    return std::find(criticalSensors.begin(), criticalSensors.end(), sensorIndex) != criticalSensors.end();
+bool PodState::isInverterSensorCritical(uint32_t sensorIndex) {
+    uint32_t criticalMask = INVERTER_RUN_FAULT_HI::RESOLVER_NOT_CONNECTED;
+    return sensorIndex & criticalMask;
 }
 
 int8_t PodState::checkFlags(std::vector<int32_t > &flags){
@@ -88,35 +93,48 @@ int32_t PodState::checkNodeStates(){
 
 void PodState::commonChecks() {
     int32_t status;
+    std::string nonCriticalError = "";
+
     status = this->checkFlags(this->pod->telemetry->nodeSensorFlags);
-    if( status != GENERAL_CONSTANTS::FLAGS_GOOD ){
+    if (status != GENERAL_CONSTANTS::FLAGS_GOOD ){
         if(isNodeSensorCritical(status)){
-            std::string error = "Failed on Critical Node sensor : " + std::to_string(status);
-            throw CriticalErrorException(error);
+            throw CriticalErrorException("Node sensor = " + std::to_string(status));
         }
-        std::string error = "Failed on Node sensor : " + std::to_string(status);
-        throw std::runtime_error(error);
+        else {
+            nonCriticalError += "Node sensor = " + std::to_string(status) + ", ";
+        }
     }
+
     status = this->checkFlags(this->pod->telemetry->connectionFlags);
-    if(status != GENERAL_CONSTANTS::FLAGS_GOOD){
+    if (status != GENERAL_CONSTANTS::FLAGS_GOOD){
         if(isConnectionFlagCritical(status)){
-            std::string error = "Failed on critical communication flag : " + std::to_string(status);
-            throw CriticalErrorException(error);
+            throw CriticalErrorException("Communication Flag = " + std::to_string(status));
         }
-        std::string error = "Failed on communication flag : " + std::to_string(status);
-        throw std::runtime_error(error);
+        else {
+            nonCriticalError += "Node sensor = " + std::to_string(status) + ", ";
+        }
     }
+
     status = this->checkNodeStates();
-    if(status != GENERAL_CONSTANTS::FLAGS_GOOD){
-        std::string error = "Failed on Node state agreement : " + std::to_string(status);
-        throw CriticalErrorException(error);
+    if (status != GENERAL_CONSTANTS::FLAGS_GOOD){
+        throw CriticalErrorException("Node State Disagreement = " + std::to_string(status));
     }
+
+    if (this->pod->telemetry->inverterRunFaultHi){
+        nonCriticalError += "Inverter Non-critical Error HI-bytes = " + std::to_string(this->pod->telemetry->inverterRunFaultHi) + ", ";
+    }
+
+    if (nonCriticalError != "")
+        throw std::runtime_error("Non Critical Error: " + nonCriticalError);
 }
 
 void PodState::armedChecks(){
     if(!this->pod->telemetry->inverterHeartbeat){
-        std::string error = "Inverter Heartbeat Expired.";
-        throw CriticalErrorException(error);
+        throw CriticalErrorException("Inverter Heartbeat Expired.");
+    }
+
+    if (isInverterSensorCritical(this->pod->telemetry->inverterRunFaultHi)){
+        throw CriticalErrorException("Inverter Resolver Lost.");
     }
 
     int status = checkFlags(pod->telemetry->inverterSensorFlags);
