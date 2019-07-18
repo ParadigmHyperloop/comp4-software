@@ -108,7 +108,7 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             break;
         }
         case 0x6B4: { // lp1
-            //todo
+
             indices = {0, 1};
             auto lv1BatteryPackVoltage = extractCanValue<float>(frame.data, indices, (float) 10.0);
             indices = {2};
@@ -128,7 +128,7 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             break;
         }
         case 0x6B5: {  //hp
-            //todo
+
             indices = {0, 1};
             auto lv2BatteryPackVoltage = extractCanValue<float>(frame.data, indices, (float) 10.0);
 
