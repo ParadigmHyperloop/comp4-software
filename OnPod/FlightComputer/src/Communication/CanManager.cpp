@@ -125,6 +125,7 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             if(lv1BatteryPackTemperature > 1 && lv1BatteryPackTemperature < 300){
                 pod.setLv1BatteryPackTemperature(lv1BatteryPackTemperature);
             }
+            break;
         }
         case 0x6B5: {  //hp
             //todo
@@ -146,9 +147,7 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             if(lv2BatteryPackTemperature > 1 && lv2BatteryPackTemperature < 300){
                 pod.setLv2BatteryPackTemperature(lv2BatteryPackTemperature);
             }
-        }
-        case 0x700: {  //hp
-            // fault
+            break;
         }
         case 0x0AB:{
             indices = {5,4};

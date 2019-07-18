@@ -337,7 +337,6 @@ std::unique_ptr<google::protobuf::Message> LvdcNodeConnection::getProtoUpdateMes
         return protoMessage;
     }
     protoMessage->set_nodestate(this->pod.telemetry->manualLvdcNodeState);
-    LOG(INFO)<<protoMessage->DebugString();
     return protoMessage;
 }
 
