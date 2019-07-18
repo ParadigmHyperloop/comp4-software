@@ -38,21 +38,5 @@
       "gtPack2Current": {
     "name_pretty": "GT HP Current [A]",
       "order": 9
-  },
-      "gtLp5Current": {
-    "name_pretty": "LP 5V Rail Current [A]",
-      "order": 10
-  },
-      "gtLp12Current": {
-    "name_pretty": "LP 12V Rail Current [A]",
-      "order": 11
-  },
-      "gtNodeCurrent": {
-    "name_pretty": "Brake Node Current [A]",
-      "order": 12
-  },
-      "gtInverterCurrent": {
-    "name_pretty": "Inverter Current [A]",
-      "order": 13
   }
 }

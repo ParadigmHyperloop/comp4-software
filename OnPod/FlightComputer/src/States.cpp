@@ -240,6 +240,7 @@ Standby::~Standby(){
 
 bool Standby::testTransitions() {
     if(this->pod->getControlsInterfaceState() == ciStandby){
+        pod->telemetry->controlsInterfaceState = ciNone;
         pod->telemetry->motorDistance = 0;
         pod->telemetry->podPosition = 0;
         pod->telemetry->totalStripCount = 0;

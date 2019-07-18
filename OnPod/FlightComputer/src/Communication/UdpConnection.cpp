@@ -244,7 +244,7 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_gtpack2current(pod.telemetry->gtPack1Current);
     protoMessage->set_gtpack2voltage(pod.telemetry->gtPack2Voltage);
 
-    LOG(INFO)<< pod.telemetry->manualLvdcNodeState << " , " << pod.telemetry->gtPack2Current << ", " << pod.telemetry->gtPack1Current;
+   // LOG(INFO)<< pod.telemetry->manualLvdcNodeState << " , " << pod.telemetry->gtPack2Current << ", " << pod.telemetry->gtPack1Current;
 
     if(pod.telemetry->updates.size() > 0){
         std::lock_guard<std::mutex> lock(this->pod.telemetry->updatesLock);
