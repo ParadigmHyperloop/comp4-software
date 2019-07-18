@@ -129,6 +129,7 @@ enum PodStates {
   psShutdown = 8,
   psNone = 9
 };
+
 bool PodStates_IsValid(int value);
 const PodStates PodStates_MIN = psBooting;
 const PodStates PodStates_MAX = psNone;
