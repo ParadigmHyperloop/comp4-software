@@ -164,6 +164,7 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_podstate(pod.getPodStateValue());
     protoMessage->set_brakenodestate(pod.telemetry->receivedBrakeNodeState);
     protoMessage->set_lvdcnodestate(pod.telemetry->receivedLvdcNodeState);
+    protoMessage->set_navnodestate(pod.telemetry->navNodeState);
 
 
     // Brake Node

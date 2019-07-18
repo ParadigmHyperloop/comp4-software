@@ -130,11 +130,12 @@ int32_t NavigationThread(TelemetryManager Pod) {
             if(success){
                 navNodeUpdateFreq.feed();
                 navNodeHeartbeat.feed();
+                Pod.telemetry->navNodeState = navConnected;
             }
             else{
                 if(navNodeHeartbeat.expired()){
                     Pod.setConnectionFlag(0, CONNECTION_FLAGS::NAVIGATION_HEARTBEAT_INDEX);
-                    pod
+                    Pod.telemetry->navNodeState = navNone;
                 }
             }
         }

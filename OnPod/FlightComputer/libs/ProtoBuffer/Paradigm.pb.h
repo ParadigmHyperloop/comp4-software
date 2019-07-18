@@ -117,6 +117,25 @@ inline bool BrakeNodeStates_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<BrakeNodeStates>(
     BrakeNodeStates_descriptor(), name, value);
 }
+enum NavigationNodeStates {
+  navNone = 0,
+  navConnected = 1
+};
+bool NavigationNodeStates_IsValid(int value);
+const NavigationNodeStates NavigationNodeStates_MIN = navNone;
+const NavigationNodeStates NavigationNodeStates_MAX = navConnected;
+const int NavigationNodeStates_ARRAYSIZE = NavigationNodeStates_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* NavigationNodeStates_descriptor();
+inline const ::std::string& NavigationNodeStates_Name(NavigationNodeStates value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    NavigationNodeStates_descriptor(), value);
+}
+inline bool NavigationNodeStates_Parse(
+    const ::std::string& name, NavigationNodeStates* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<NavigationNodeStates>(
+    NavigationNodeStates_descriptor(), name, value);
+}
 enum PodStates {
   psBooting = 0,
   psStandby = 1,
@@ -967,12 +986,12 @@ class Telemetry :
   ::google::protobuf::int32 totalstripcount() const;
   void set_totalstripcount(::google::protobuf::int32 value);
 
-  // optional uint32 maxStripCount = 100;
-  bool has_maxstripcount() const;
-  void clear_maxstripcount();
-  static const int kMaxStripCountFieldNumber = 100;
-  ::google::protobuf::uint32 maxstripcount() const;
-  void set_maxstripcount(::google::protobuf::uint32 value);
+  // optional .NavigationNodeStates navNodeState = 64;
+  bool has_navnodestate() const;
+  void clear_navnodestate();
+  static const int kNavNodeStateFieldNumber = 64;
+  ::NavigationNodeStates navnodestate() const;
+  void set_navnodestate(::NavigationNodeStates value);
 
   // optional int32 inverterHeartbeat = 78;
   bool has_inverterheartbeat() const;
@@ -1128,6 +1147,13 @@ class Telemetry :
   ::google::protobuf::uint32 brakingdistance() const;
   void set_brakingdistance(::google::protobuf::uint32 value);
 
+  // optional uint32 maxStripCount = 100;
+  bool has_maxstripcount() const;
+  void clear_maxstripcount();
+  static const int kMaxStripCountFieldNumber = 100;
+  ::google::protobuf::uint32 maxstripcount() const;
+  void set_maxstripcount(::google::protobuf::uint32 value);
+
   // @@protoc_insertion_point(class_scope:Telemetry)
  private:
   class HasBitSetters;
@@ -1189,7 +1215,7 @@ class Telemetry :
   float gtnodecurrent_;
   float gtinvertercurrent_;
   ::google::protobuf::int32 totalstripcount_;
-  ::google::protobuf::uint32 maxstripcount_;
+  int navnodestate_;
   ::google::protobuf::int32 inverterheartbeat_;
   ::google::protobuf::int32 hvbatterypackstateofcharge_;
   ::google::protobuf::int32 motorspeed_;
@@ -1212,6 +1238,7 @@ class Telemetry :
   ::google::protobuf::int32 hvfaultcode1_;
   ::google::protobuf::uint32 maxvelocity_;
   ::google::protobuf::uint32 brakingdistance_;
+  ::google::protobuf::uint32 maxstripcount_;
   friend struct ::TableStruct_Paradigm_2eproto;
 };
 // -------------------------------------------------------------------
@@ -3127,6 +3154,25 @@ inline void Telemetry::set_breaknodeperceivedpodstate(::PodStates value) {
   // @@protoc_insertion_point(field_set:Telemetry.breakNodePerceivedPodState)
 }
 
+// optional .NavigationNodeStates navNodeState = 64;
+inline bool Telemetry::has_navnodestate() const {
+  return (_has_bits_[1] & 0x00080000u) != 0;
+}
+inline void Telemetry::clear_navnodestate() {
+  navnodestate_ = 0;
+  _has_bits_[1] &= ~0x00080000u;
+}
+inline ::NavigationNodeStates Telemetry::navnodestate() const {
+  // @@protoc_insertion_point(field_get:Telemetry.navNodeState)
+  return static_cast< ::NavigationNodeStates >(navnodestate_);
+}
+inline void Telemetry::set_navnodestate(::NavigationNodeStates value) {
+  assert(::NavigationNodeStates_IsValid(value));
+  _has_bits_[1] |= 0x00080000u;
+  navnodestate_ = value;
+  // @@protoc_insertion_point(field_set:Telemetry.navNodeState)
+}
+
 // optional int32 flightTime = 7;
 inline bool Telemetry::has_flighttime() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
@@ -4341,18 +4387,18 @@ inline void Telemetry::set_brakingdistance(::google::protobuf::uint32 value) {
 
 // optional uint32 maxStripCount = 100;
 inline bool Telemetry::has_maxstripcount() const {
-  return (_has_bits_[1] & 0x00080000u) != 0;
+  return (_has_bits_[2] & 0x00000400u) != 0;
 }
 inline void Telemetry::clear_maxstripcount() {
   maxstripcount_ = 0u;
-  _has_bits_[1] &= ~0x00080000u;
+  _has_bits_[2] &= ~0x00000400u;
 }
 inline ::google::protobuf::uint32 Telemetry::maxstripcount() const {
   // @@protoc_insertion_point(field_get:Telemetry.maxStripCount)
   return maxstripcount_;
 }
 inline void Telemetry::set_maxstripcount(::google::protobuf::uint32 value) {
-  _has_bits_[1] |= 0x00080000u;
+  _has_bits_[2] |= 0x00000400u;
   maxstripcount_ = value;
   // @@protoc_insertion_point(field_set:Telemetry.maxStripCount)
 }
@@ -5786,6 +5832,11 @@ template <> struct is_proto_enum< ::BrakeNodeStates> : ::std::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::BrakeNodeStates>() {
   return ::BrakeNodeStates_descriptor();
+}
+template <> struct is_proto_enum< ::NavigationNodeStates> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NavigationNodeStates>() {
+  return ::NavigationNodeStates_descriptor();
 }
 template <> struct is_proto_enum< ::PodStates> : ::std::true_type {};
 template <>

@@ -10,7 +10,10 @@ enum BrakeNodeStates {
     bnsNone            = 5;
 }
 
-enum
+enum NavigationNodeStates{
+    navNone = 0;
+    navConnected = 1;
+}
 
 enum PodStates {
     psBooting       = 0;
@@ -71,6 +74,7 @@ message Telemetry {
     optional ControlsInterfaceStates controlsInterfaceState = 4;
     optional LvdcNodeStates lvdcNodeState = 54;
     optional PodStates breakNodePerceivedPodState = 31;
+    optional NavigationNodeStates navNodeState = 64;
 
     // Time
     optional int32 flightTime = 7;
