@@ -21,6 +21,10 @@
 const NodeType NODE_TYPE = LVDC;
 
 Timer txTimer;
+Timer fcHeartbeatTimer;
+bool heartBeatExpired = false;
+const uint16_t HEARTBEAT_INTERVAL = 100;
+int8_t timerEventNumber = 0;
 WDTZero internalWatchdog;
 
 // instantiate adc and all sensors with which it interfaces
@@ -43,17 +47,28 @@ ACS711 inverterCurrentSensor(&adc, 6);
 
 // instantiate a UDP class
 UDPClass udp (W5500_SS, LVDC_NODE_IP, BRAKE_NODE_PORT, NODE_TYPE);
-uint32_t txPacketNum = 0;
-uint32_t rxPacketNum = 0;
 
 // instantiate protobuf objects
-FcToLvdcNode    pFcCommand          = FcToLvdcNode_init_default;
-LvdcNodeToFc    pLvdcNodeTelemetry  = LvdcNodeToFc_init_default;
-LvdcNodeStates  lvdcNodeState       = LvdcNodeStates_lvdcBooting;
+FcToLvdcNode   pFcCommand         = FcToLvdcNode_init_default;
+LvdcNodeToFc   pLvdcNodeTelemetry = LvdcNodeToFc_init_default;
+LvdcNodeStates lvdcNodeState      = LvdcNodeStates_lvdcBooting;
+
+void expireHeartbeatTimer(void*) {
+    heartBeatExpired = true;
+}
 
 void sendToFlightComputer(void*) {
-    Serial.println(adc.readSingleChannel(8), BIN);
-    pLvdcNodeTelemetry.packetNum = txPacketNum;
+
+    // update sensor values and hold them in the pBrakeNodeTelemetry message object
+    pLvdcNodeTelemetry.highPowerPackVoltage = (float)analogRead(AIN_3)/1023*33;
+    pLvdcNodeTelemetry.lowPowerPackVoltage = (float)analogRead(AIN_2)/1023*33;
+    if (((float)analogRead(AIN_1)/1023*3.267-1.633)/1.633*31-0.1 < 0.3) {
+        pLvdcNodeTelemetry.highPowerPackCurrent = 0;
+    }
+    else {
+        pLvdcNodeTelemetry.highPowerPackCurrent = ((float)analogRead(AIN_1)/1023*3.267-1.633)/1.633*31-0.1;
+    }
+    pLvdcNodeTelemetry.lowPowerPackCurrent = ((float)analogRead(AIN_0)/1023*3.267-1.633)/1.633*31;
     // create an output stream that writes to the UDP buffer
     pb_ostream_t outStream = pb_ostream_from_buffer(udp.uSendBuffer, sizeof(udp.uSendBuffer));
     // encode the message object and store it in the UDP buffer
@@ -62,7 +77,6 @@ void sendToFlightComputer(void*) {
 }
 
 void setup() {
-    while (!Serial) {}
     // initialize hardware
     adc.init();
     udp.init();
@@ -82,6 +96,11 @@ void setup() {
     coolingCurrentSensor2.init();
     inverterCurrentSensor.init();
 
+    pinMode(AIN_0, INPUT);
+    pinMode(AIN_1, INPUT);
+    pinMode(AIN_2, INPUT);
+    pinMode(AIN_3, INPUT);
+
     pinMode(LP5V_EN, OUTPUT);
     pinMode(LP12V_EN, OUTPUT);
     pinMode(HP12V_EN, OUTPUT);
@@ -93,40 +112,23 @@ void setup() {
     pinMode(INV_CTL, OUTPUT);
     pinMode(PUMP1_CTL, OUTPUT);
     pinMode(PUMP2_CTL, OUTPUT);
-    //internalWatchdog.setup(WDT_HARDCYCLE1S);
 
+    //internalWatchdog.setup(WDT_HARDCYCLE1S);
+    pLvdcNodeTelemetry.state = LvdcNodeStates_lvdcBooting;
     txTimer.every(LVDC_NODE_TO_FC_INTERVAL, sendToFlightComputer, (void*)0);
 }
 
 void loop() {
     // check for incoming telemetry and set the state accordingly (unless error)
     if (udp.readPacket()) {
+        heartBeatExpired = false;
+        fcHeartbeatTimer.stop(timerEventNumber);
         pb_istream_t inStream = pb_istream_from_buffer(udp.uRecvBuffer, sizeof(udp.uRecvBuffer));
         pb_decode(&inStream, FcToLvdcNode_fields, &pFcCommand);
-        if ((uint32_t)pFcCommand.packetNum > rxPacketNum) {
-            pLvdcNodeTelemetry.state = pFcCommand.manualNodeState;
-            rxPacketNum = pFcCommand.packetNum;
-        }
+        pLvdcNodeTelemetry.state = pFcCommand.nodeState;
+        timerEventNumber = fcHeartbeatTimer.after(HEARTBEAT_INTERVAL, expireHeartbeatTimer, (void*)0);
     }
 
-    // update sensor values and hold them in the pBrakeNodeTelemetry message object
-
-    adc.readActiveChannels();
-    pLvdcNodeTelemetry.highPowerPackVoltage = hpBatVSense.read();
-    pLvdcNodeTelemetry.lowPowerPackVoltage = lpBatVSense.read();
-    pLvdcNodeTelemetry.highPowerPackCurrent = hpBatCurrentSensor.read();
-    pLvdcNodeTelemetry.lowPowerPackCurrent = lpBatCurrentSensor.read();
-    pLvdcNodeTelemetry.lowPower5Voltage = lp5VSense.read();
-    pLvdcNodeTelemetry.lowPower12Voltage = lp12VSense.read();
-    pLvdcNodeTelemetry.highPower12Voltage = hp12VSense.read();
-    pLvdcNodeTelemetry.lowPower24Voltage = lp24VSense.read();
-    pLvdcNodeTelemetry.lowPower5Current = lp5VCurrentSensor.read();
-    pLvdcNodeTelemetry.lowPower12Current = lp12VCurrentSensor.read();
-    pLvdcNodeTelemetry.nodeCurrent = nodeCurrentSensor.read();
-    pLvdcNodeTelemetry.inverterCurrent = inverterCurrentSensor.read();
-    pLvdcNodeTelemetry.cooling1Current = coolingCurrentSensor1.read();
-    pLvdcNodeTelemetry.cooling2Current = coolingCurrentSensor2.read();
-    Serial.println(pLvdcNodeTelemetry.lowPowerPackVoltage);
 
     // perform state-specific operations
     switch (pLvdcNodeTelemetry.state) {
@@ -146,12 +148,14 @@ void loop() {
             digitalWrite(INV_CTL, true);
             digitalWrite(PUMP1_CTL, true);
             digitalWrite(PUMP2_CTL, true);
+            if (heartBeatExpired) {
+                pLvdcNodeTelemetry.state = LvdcNodeStates_lvdcStandby;
+            }
             break;
         }
     }
-
     // send to FC is interval has expired
     txTimer.update();
+    fcHeartbeatTimer.update();
     //internalWatchdog.clear();
-    delay(100);
 }
