@@ -37,7 +37,7 @@ uint16_t ADS7953::readSingleChannel(uint8_t uChannel) {
     // send two data requests before we start to read
     transfer(uReadCommand);
     transfer(uReadCommand);
-    return transfer(uReadCommand);
+    return transfer(uReadCommand) & 0x0FFF;
 }
 
 void ADS7953::readActiveChannels() {
