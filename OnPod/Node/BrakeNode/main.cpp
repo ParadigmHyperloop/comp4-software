@@ -26,7 +26,11 @@
 const NodeType NODE_TYPE = BRAKE;
 WDTZero internalWatchdog;
 Timer txTimer;
+Timer brakingToStandbyTimer;
+bool brakingToStandbyTimerActive = false;
 const uint16_t HEARTBEAT_INTERVAL = 100;
+const uint16_t MINIMUM_BRAKE_TIMER = 25000;
+const uint16_t BRAKING_TO_STANDBY_INTERVAL = 30000;
 Timer fcHeartbeatTimer;
 bool heartBeatExpired = false;
 int8_t timerEventNumber = 0;
@@ -39,9 +43,9 @@ SPIClass adcSPI (&PERIPH_SPI1, MISO1, SCK1, MOSI1, PAD_SPI1_TX, PAD_SPI1_RX);
 ADS7953 adc(adcSPI, SS1, POWER_SEQ_ADC);
 U5374 hpTransducer(&adc, 6);
 PX2300P lpTransducer1(&adc, 8);
-PX2300P lpTransducer2(&adc, 9);
+PX2300P lpTransducer2(&adc, 11);
 PX2300P lpTransducer3(&adc, 10);
-PX2300P lpTransducerCommon(&adc, 11);
+PX2300P lpTransducerCommon(&adc, 9);
 TypeKThermo pneumaticThermo(&adc, 1);
 TypeKThermo coolingThermo(&adc, 0);
 
@@ -67,13 +71,17 @@ void expireBrakeTimer(void*) {
     brakingTimerActive = false;
 }
 
+void expireStandbyTimer(void*) {
+    brakingToStandbyTimerActive = false;
+    pBrakeNodeTelemetry.state = BrakeNodeStates_bnsStandby;
+}
+
 void sendToFlightComputer(void*) {
     // create an output stream that writes to the UDP buffer
     pb_ostream_t outStream = pb_ostream_from_buffer(udp.uSendBuffer, sizeof(udp.uSendBuffer));
     // encode the message object and store it in the UDP buffer
     pb_encode(&outStream, BrakeNodeToFc_fields, &pBrakeNodeTelemetry);
     udp.sendPacket(FC_IP, FC_BRAKE_NODE_PORT, outStream.bytes_written);
-    Serial.println(pBrakeNodeTelemetry.highPressure);
 }
 
 void setup() {
@@ -97,7 +105,6 @@ void setup() {
 }
 
 void loop() {
-
     // check for incoming telemetry and set the state accordingly (unless error)
     if (udp.readPacket()) {
         heartBeatExpired = false;
@@ -158,6 +165,7 @@ void loop() {
             ventSolenoid.close();
             break;
         }
+
         case BrakeNodeStates_bnsStandby: {
             firstTimeBraking = true;
             pinMode(INVERTER_EN, INPUT);
@@ -188,6 +196,7 @@ void loop() {
             }
             break;
         }
+
         case BrakeNodeStates_bnsBraking: {
             if (firstTimeBraking) {
                 minimumBrakeTimer.after(5000, expireBrakeTimer, (void*)0);
@@ -201,8 +210,13 @@ void loop() {
             branch2Solenoid.open();
             branch3Solenoid.open();
             ventSolenoid.close();
+            if (heartBeatExpired && !brakingToStandbyTimerActive) {
+                brakingToStandbyTimerActive = true;
+                brakingToStandbyTimer.after(BRAKING_TO_STANDBY_INTERVAL, expireStandbyTimer, (void*)0);
+            }
             break;
         }
+
         case BrakeNodeStates_bnsSolenoidControl: {
             pinMode(INVERTER_EN, OUTPUT);
             digitalWrite(INVERTER_EN, false);
@@ -249,5 +263,6 @@ void loop() {
     txTimer.update(); // send to FC if interval has expired
     fcHeartbeatTimer.update(); // expire heartbeat if no UDP
     minimumBrakeTimer.update();
+    brakingToStandbyTimer.update();
     //internalWatchdog.clear();
 }
