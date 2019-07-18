@@ -1,1 +1,1 @@
-{"controlLaptopIpAddr": "192.168.0.2", "telemetry_port": 7000, "command_port": 6000, "pod_driver": "Simulation", "retrieval_timeout": 60000, "heartbeat_timeout": 5000, "pod_address": "127.0.0.1"}
+{"telemetry_port": 7000, "pod_address": "127.0.0.1", "heartbeat_timeout": 5000, "command_port": 6000, "pod_driver": "Simulation", "controlLaptopIpAddr": "192.168.0.2", "retrieval_timeout": 60000}

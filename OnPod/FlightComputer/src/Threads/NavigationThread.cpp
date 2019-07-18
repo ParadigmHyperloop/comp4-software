@@ -98,6 +98,7 @@ void readNavigationNode(int serialPort, TelemetryManager &pod){
 
     if(stripCount > 0){  //strip count    velocity   pressure
         pod.countIrTape();
+        LOG(INFO)<<"strip : "<< stripCount << " velocity : "<< velocity << "  pressure : " << tubePressure;
     }
     pod.telemetry->tubePressure = tubePressure;
     pod.telemetry->stripVelocity = velocity;
