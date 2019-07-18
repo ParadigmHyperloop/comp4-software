@@ -413,6 +413,10 @@ void TelemetryManager::addPodDistance(float distance) {
 }
 
 void TelemetryManager::countIrTape() {
+    float difference = getPodDistance() - GENERAL_CONSTANTS::STRIP_DISTANCE;
+
+    LOG(INFO) << "Difference : " << difference;
+
     if(telemetry->totalStripCount == 0){
         setPodDistance(GENERAL_CONSTANTS::STRIP_DISTANCE);
     }
@@ -454,6 +458,7 @@ void TelemetryManager::resetValues(int32_t index){
             telemetry->gtLp5Current = 0;
             telemetry->gtLp12Current = 0;
             telemetry->gtInverterCurrent = 0;
+            telemetry->receivedLvdcNodeState = lvdcNone;
             break;
         }
         case CONNECTION_FLAGS::BMS_HEARTBEAT_INDEX:{

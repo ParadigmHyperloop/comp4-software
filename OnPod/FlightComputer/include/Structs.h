@@ -18,6 +18,7 @@ struct PodValues {
     LvdcNodeStates receivedLvdcNodeState = lvdcNone;
     LvdcNodeStates commandedLvdcNodeState = lvdcNone;
 
+
     // Flight Profile
     uint32_t motorTorque = 0;
     uint32_t flightDistance = 0;
