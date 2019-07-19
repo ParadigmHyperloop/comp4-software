@@ -51,14 +51,6 @@ int8_t getSerialPort(){
 }
 
 
-void updatePosition(int velocity, int irStripCount, TelemetryManager &pod){
-    pod.telemetry->totalStripCount += irStripCount;
-    float stripDistance = pod.telemetry->totalStripCount * GENERAL_CONSTANTS::STRIP_DISTANCE;
-    pod.setPodDistance( stripDistance );
-    pod.setPodVelocity(velocity/100);
-}
-
-
 void readNavigationNode(int serialPort, TelemetryManager &pod){
     std::stringstream dataStream;
     dataStream.str(std::string());

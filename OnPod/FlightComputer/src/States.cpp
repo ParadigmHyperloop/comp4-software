@@ -45,7 +45,7 @@ float PodState::timeInStateSeconds() {
 
 float PodState::timeInFlightSeconds() {
     std::chrono::steady_clock::time_point current = std::chrono::steady_clock::now();
-    return std::chrono::duration_cast<std::chrono::milliseconds>(current - this->_flightStartTime).count()/1000.0;
+    return std::chrono::duration_cast<std::chrono::milliseconds>(current - pod->telemetry->flightStartTime).count()/1000.0;
 }
 
 bool PodState::isNodeSensorCritical(uint32_t sensorIndex) {
@@ -302,6 +302,7 @@ Arming::Arming(TelemetryManager * pod ): PodState(pod) {
     this->pod->telemetry->commandedBrakeNodeState = bnsStandby;
     this->pod->telemetry->commandedLvdcNodeState = lvdcFlight;
     this->pod->telemetry->podPosition = 0.0f;
+    this->pod->telemetry->totalStripCount = 0;
 }
 
 Arming::~Arming() = default;
@@ -410,10 +411,15 @@ bool PreFlight::testTransitions() {
 
 Acceleration::Acceleration(TelemetryManager * pod) : PodState(pod) {
     _stateIdentifier = psAcceleration;
-    this->_flightStartTime = std::chrono::steady_clock::now();
+    pod->telemetry->flightStartTime = std::chrono::steady_clock::now();
     this->pod->telemetry->commandedBrakeNodeState = bnsFlight;
     this->pod->telemetry->commandedLvdcNodeState = lvdcFlight;
     this->pod->telemetry->commandedTorque = this->pod->telemetry->motorTorque;
+
+    volatile uint32_t flightDistance = pod->telemetry->flightDistance;
+    volatile uint32_t brakeDistance = pod->telemetry->brakeDistance;
+
+    LOG(INFO)<< flightDistance << " " << "ACCEL CONSTRUCT" << "  " << brakeDistance;
 }
 
 Acceleration::~Acceleration() {
@@ -487,7 +493,7 @@ bool Coasting::testTransitions() {
     }
 
     if(this->timeInFlightSeconds() > this->pod->telemetry->maxFlightTime ){
-        this->setupTransition(psBraking, (std::string)" Flight Timout of " + std::to_string(this->timeInStateSeconds()) + " reached. Pod --> Braking");
+        this->setupTransition(psBraking, (std::string)" Flight Timout of " + std::to_string(this->timeInFlightSeconds()) + " reached. Pod --> Braking");
         return true;
     }
     return false;
@@ -497,7 +503,7 @@ Coasting::~Coasting() = default;
 
  // *  ******************** BRAKING ***********************
 
-Braking::Braking(TelemetryManager* pod) : PodState(pod) {
+Braking::Braking(TelemetryManager* pod) : PodState(pod){
     _stateIdentifier = psBraking;
     this->pod->telemetry->commandedBrakeNodeState = bnsBraking;
     this->pod->telemetry->commandedLvdcNodeState = lvdcFlight;

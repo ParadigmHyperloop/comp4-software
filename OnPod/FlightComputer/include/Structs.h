@@ -22,14 +22,14 @@ struct PodValues {
 
     // Flight Profile
     uint32_t motorTorque = 0;
-    uint32_t flightDistance = 0;
+    volatile uint32_t flightDistance = 0;
     uint32_t maxFlightTime = 0;
     uint32_t startTorque = 0;
     uint32_t accelerationTime = 0;
     uint32_t expectedTubePressure = 0;
     uint32_t maxVelocity = 0;
     uint32_t maxRPM = 0;
-    uint32_t brakeDistance = 0;
+    volatile uint32_t brakeDistance = 0;
     uint32_t maxStripCount = 0;
     bool taxi  = false;
 
@@ -47,9 +47,10 @@ struct PodValues {
     std::mutex positionLock;
     float motorDistance = 0;
     float podVelocity = 0;
-    float podPosition = 0;
+    volatile float podPosition = 0;
     int totalStripCount = 0;
     float stripVelocity = 0;
+    std::chrono::steady_clock::time_point flightStartTime;
 
     // Updates
     std::mutex updatesLock;
