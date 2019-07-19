@@ -28,6 +28,7 @@ struct PodValues {
     uint32_t accelerationTime = 0;
     uint32_t expectedTubePressure = 0;
     uint32_t maxVelocity = 0;
+    uint32_t maxRPM = 0;
     uint32_t brakeDistance = 0;
     uint32_t maxStripCount = 0;
     bool taxi  = false;

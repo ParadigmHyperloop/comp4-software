@@ -295,6 +295,7 @@ Arming::Arming(TelemetryManager * pod ): PodState(pod) {
     _stateIdentifier = psArming;
     this->pod->telemetry->commandedBrakeNodeState = bnsStandby;
     this->pod->telemetry->commandedLvdcNodeState = lvdcFlight;
+    this->pod->telemetry->podPosition = 0.0f;
 }
 
 Arming::~Arming() = default;
