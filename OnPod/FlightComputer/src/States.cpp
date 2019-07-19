@@ -428,8 +428,8 @@ bool Acceleration::testTransitions() {
         return true;
     }
     try {
-        this->commonChecks();
         this->armedChecks();
+        this->commonChecks();
     }
     catch (CriticalErrorException &error){
         std::string reason = " Critical Pod --> Braking ";
