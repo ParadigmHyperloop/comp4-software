@@ -18,11 +18,11 @@ public:
 
     virtual bool testTransitions();
 
-    bool isNodeSensorCritical(int);
+    bool isNodeSensorCritical(uint32_t);
 
-    bool isConnectionFlagCritical(int);
+    bool isConnectionFlagCritical(uint32_t);
 
-    bool isInverterSensorCritical(int);
+    bool isInverterSensorCritical(uint32_t);
 
     bool brakingCriteriaMet();
 
