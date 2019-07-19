@@ -311,6 +311,10 @@ bool Arming::testTransitions() {
         this->setupTransition(psStandby, "Emergency Stop. Pod --> Standby");
         return true;
     }
+    if(pod->getPodDistance() > GENERAL_CONSTANTS::STATIONARY_THRSHOLD_M){
+        this->setupTransition(psBraking,"Unexpected Movement Pod-->Braking");
+        return true;
+    }
     if(this->timeInStateSeconds() < 10 ){ //Allow nodes to update sensors or timeout if not
         return false;
     }
@@ -322,6 +326,7 @@ bool Arming::testTransitions() {
         this->setupTransition(psStandby, error.what());
         return true;
     }
+
 
     this->setupTransition(psArmed, (std::string)"Arming Passed. Pod --> Armed");
     return true;
@@ -346,6 +351,10 @@ bool Armed::testTransitions() {
         this->setupTransition(psStandby, "Emergency Stop. Pod --> Standby");
         return true;
     }
+    if(pod->getPodDistance() > GENERAL_CONSTANTS::STATIONARY_THRSHOLD_M){
+        this->setupTransition(psBraking,"Unexpected Movement Pod-->Braking");
+        return true;
+    }
     try {
         this->commonChecks();
         this->armedChecks();
@@ -354,7 +363,6 @@ bool Armed::testTransitions() {
         this->setupTransition(psStandby, error.what());
         return true;
     }
-
     if(this->pod->getControlsInterfaceState() == ciFlight){
         this->setupTransition(psPreFlight, (std::string)"Flight Command Received. Pod --> Pre-flight");
         return true;
