@@ -159,11 +159,11 @@ void startInverterBroadcast(int bcmSocket){
     }
 }
 
-void setInverterTorque(int torque, int bcmSocket){
+void setInverterTorque(int32_t torque, int bcmSocket){
     struct broadcastManagerConfig msg = {};
     torque *=10;
-    int32_t highByte = torque/256;
-    int32_t lowByte = torque%256;
+    uint16_t highByte = torque/256;
+    uint16_t lowByte = torque%256;
     msg.msg_head.opcode  = TX_SETUP;
     msg.msg_head.can_id  = 0;
     msg.msg_head.flags   = SETTIMER | STARTTIMER;
@@ -239,6 +239,7 @@ int canNetworkThread(TelemetryManager Pod){
     LOG(INFO) << "Starting CAN Thread on ";
     int32_t canSockRaw = 0;
     int32_t canSockBcm = 0;
+    BroadcastManager manager = BroadcastManager();
     try{
         canSockRaw = getCanSocketRaw();
     }
@@ -248,13 +249,14 @@ int canNetworkThread(TelemetryManager Pod){
     }
     try{
         canSockBcm = getCanSocketBrodcastManager();
+        manager.addBroadcast(canSockBcm);
     }
     catch (std::runtime_error &e){
         LOG(INFO) << e.what();
         return -1;
     }
     try{
-       //  startInverterBroadcast(canSockBcm);
+       ;//  startInverterBroadcast(canSockBcm);
     }
     catch (const std::runtime_error &error){
         LOG(INFO) << error.what();

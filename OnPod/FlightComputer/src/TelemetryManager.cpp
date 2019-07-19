@@ -361,12 +361,12 @@ void TelemetryManager::setMotorSpeed(int32_t value) {
     auto thisTime = std::chrono::high_resolution_clock::now();
     this->telemetry->lastMotorReadTime = thisTime;
     int32_t lastRPM = this->telemetry->motorSpeed;
-    this->telemetry->motorSpeed = value;
+    this->telemetry->motorSpeed = value; 
     float average = (value+lastRPM)/2.0;
     average /= (1000.0*60.0);
+
     float milliseconds = (std::chrono::duration_cast<std::chrono::microseconds>(thisTime - lastTime).count())/1000.0;
     float distance = average*milliseconds * GENERAL_CONSTANTS::REAR_WHEEL_CIRCUMFRENCE;
-
     addPodDistance(distance);
 }
 
