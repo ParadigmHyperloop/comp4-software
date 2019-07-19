@@ -49,7 +49,7 @@ int main( int32_t argc, char** argv)
 	while(!configReceived){
 	    configReceived = true;
         try {
-          // flightConfigurationParameters = configurationServer->runServer(); //Comment out to use the default network values in the proto obj
+          flightConfigurationParameters = configurationServer->runServer(); //Comment out to use the default network values in the proto obj
         } catch (exception& e)
         {
             configurationServer->closePorts();
