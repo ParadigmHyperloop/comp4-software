@@ -239,6 +239,7 @@ int canNetworkThread(TelemetryManager Pod){
     LOG(INFO) << "Starting CAN Thread on ";
     int32_t canSockRaw = 0;
     int32_t canSockBcm = 0;
+    BroadcastManager manager = BroadcastManager();
     try{
         canSockRaw = getCanSocketRaw();
     }
@@ -248,6 +249,7 @@ int canNetworkThread(TelemetryManager Pod){
     }
     try{
         canSockBcm = getCanSocketBrodcastManager();
+        manager.addBroadcast(canSockBcm);
     }
     catch (std::runtime_error &e){
         LOG(INFO) << e.what();

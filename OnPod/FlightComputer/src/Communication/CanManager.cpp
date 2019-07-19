@@ -2,6 +2,19 @@
 #include <algorithm>
 #include <initializer_list>
 
+
+BroadcastManager::BroadcastManager() = default;
+
+void BroadcastManager::addBroadcast(int socket) {
+    this->_broadcastSockts.push_back(socket);
+}
+
+BroadcastManager::~BroadcastManager() {
+    for(auto socket : _broadcastSockts){
+        close(socket);
+    }
+}
+
 void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
     std::vector<int> indices = {0, 1};
     switch (frame.can_id) {
