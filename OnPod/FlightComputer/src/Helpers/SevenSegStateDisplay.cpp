@@ -1,8 +1,8 @@
 #include "SevenSegStateDisplay.hpp"
 
 
-SevenSegStateDisplay::SevenSegStateDisplay(TelemetryManager* telemManager, bool onTarget) {
-  this->_telemetryManager = telemManager;
+SevenSegStateDisplay::SevenSegStateDisplay(bool onTarget) {
+
   this -> _onTarget= onTarget;
   if (_onTarget)
   {
@@ -13,6 +13,7 @@ SevenSegStateDisplay::SevenSegStateDisplay(TelemetryManager* telemManager, bool 
 
 SevenSegStateDisplay::~SevenSegStateDisplay() {
   // Do not delete Telemetry Manager
+  delete this->_gpManager;
 }
 
 
@@ -23,24 +24,34 @@ void SevenSegStateDisplay::TestDisplay (int state)
   {
     case 0:
       displayBooting();
+      break;
     case 1:
       displayStandby();
+      break;
     case 2:
       displayArming();
+      break;
     case 3:
       displayArmed();
+      break;
     case 4:
       displayPreFlight();
+      break;
     case 5:
       displayAcceleration();
+      break;
     case 6:
       displayCoasting();
+      break;
     case 7:
       displayBraking();
+      break;
     case 8:
       displayShutdown();
+      break;
     case 9:
       displayNone();
+      break;
     default:
       break;
   }
@@ -55,42 +66,48 @@ void SevenSegStateDisplay::SetupGPIOPins()
   _gpManager -> setDirection(this->_segBottom, GPIO::OUTPUT);
 }
 
-void SevenSegStateDisplay::DisplayState() {
-
-  auto podState = this->getPodState();
-
-  if (!_onTarget)
+void SevenSegStateDisplay::DisplayState(PodStates state) {
+  if (_onTarget)
   {
-    auto logMsg = "Current State is : " + std::to_string(podState);
-    LOG(INFO) << logMsg;
-    return;
+    switch (state)
+    {
+      case psBooting:
+        displayBooting();
+        break;
+      case psStandby:
+        displayStandby();
+        break;
+      case psArming:
+        displayArming();
+        break;
+      case psArmed:
+        displayArmed();
+        break;
+      case psPreFlight:
+        displayPreFlight();
+        break;
+      case psAcceleration:
+        displayAcceleration();
+        break;
+      case psCoasting:
+        displayCoasting();
+        break;
+      case psBraking:
+        displayBraking();
+        break;
+      case psShutdown:
+        displayShutdown();
+        break;
+      case psNone:
+        displayNone();
+        break;
+      default:
+        break;
+    }
   }
 
-  switch (podState)
-  {
-    case psBooting:
-      displayBooting();
-    case psStandby:
-      displayStandby();
-    case psArming:
-      displayArming();
-    case psArmed:
-      displayArmed();
-    case psPreFlight:
-      displayPreFlight();
-    case psAcceleration:
-      displayAcceleration();
-    case psCoasting:
-      displayCoasting();
-    case psBraking:
-      displayBraking();
-    case psShutdown:
-      displayShutdown();
-    case psNone:
-      displayNone();
-    default:
-      break;
-  }
+  auto logMsg = "Current State is : " + std::to_string(state);
+  LOG(INFO) << logMsg;
 }
 
 void SevenSegStateDisplay::WriteToGPIO(int16_t pin, bool value) {
@@ -108,10 +125,6 @@ void SevenSegStateDisplay::ClearDsiplay()
   WriteToGPIO(this->_segBottom, true);
 }
 
-PodStates SevenSegStateDisplay::getPodState() {
-  std::lock_guard<std::mutex> lock(this->_telemetryManager->telemetry->stateLock);
-  return this->_telemetryManager->telemetry->podState->getStateValue();
-}
 
 // 0
 void SevenSegStateDisplay::displayBooting() {

@@ -15,7 +15,7 @@ public:
   static FlightComputerInitializer* GetInstance();
   void importLoggerLibrary();
   void updatePodNetworkValues(PodNetwork&, FlightConfig& config);
-  SevenSegStateDisplay* GetSevenSegStateDisplay(TelemetryManager*);
+  SevenSegStateDisplay* GetSevenSegStateDisplay();
 };
 
 

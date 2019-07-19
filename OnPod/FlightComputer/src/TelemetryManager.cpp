@@ -1,13 +1,17 @@
 #include <Paradigm.pb.h>
+
 #include "TelemetryManager.h"
 #include "Common.h"
 #include "comparingHelpers.h"
 
 TelemetryManager::TelemetryManager()=default;
 
-TelemetryManager::TelemetryManager(PodValues *sPodValues, PodNetwork *sNetworkVals) {
+TelemetryManager::TelemetryManager(PodValues *sPodValues, PodNetwork *sNetworkVals,
+    SevenSegStateDisplay* sevenSegStateDisplay) {
     this->telemetry = sPodValues;
     this->sPodNetworkValues = sNetworkVals;
+
+    this->_sevenSegmentDisplay = sevenSegStateDisplay;
 }
 
 
@@ -31,12 +35,14 @@ ControlsInterfaceStates TelemetryManager::getControlsInterfaceState() {
     return state;
 }
 
-
 //          State setting
 
 void TelemetryManager::setPodState(PodStates newState, const std::string &reason) {
     std::lock_guard<std::mutex> lock(this->telemetry->stateLock);
     this->telemetry->podState = std::move(PodState::createState(newState, this));
+
+    this->_sevenSegmentDisplay->ClearDsiplay();
+    this->_sevenSegmentDisplay->DisplayState(newState);
 };
 
 void TelemetryManager::setControlsInterfaceState(ControlsInterfaceStates eTerminalState) {
