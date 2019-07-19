@@ -31,6 +31,7 @@ void initializeTelemetryStruct(PodValues &telemetry){
     telemetry.bmsSensorFlags = std::vector<int32_t>(BMS_FLAGS::BMS_SENSOR_COUNT, 0);
     telemetry.connectionFlags = std::vector<int32_t>(CONNECTION_FLAGS::TOTAL_CONNECTION_COUNT,0);
     telemetry.manualSolenoidConfiguration = std::vector<bool>(4,false);
+    telemetry.cellVoltages = std::vector<float>(GENERAL_CONSTANTS::HV_CELL_COUNT, 0);
 }
 
 

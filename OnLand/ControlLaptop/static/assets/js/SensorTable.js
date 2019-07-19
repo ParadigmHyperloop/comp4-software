@@ -102,34 +102,42 @@ socket.on('pod_telemetry', function (data) {
         // highlight pod states when they are none
         if(value_name === 'podState') {
             if(value === 'psNone') {
-                $("#podState").css("background-color", "#F2DEDE");
+                $(".podState").addClass("danger");
+                $(".podState").removeClass("success");
             }
             else {
-                $("#podState").css("background-color", "#FFFFFF");
+                $(".podState").addClass("success");
+                $(".podState").removeClass("danger");
             }
         }
         if(value_name === 'brakeNodeState') {
             if(value === 'bnsNone') {
-                $("#brakeNodeState").css("background-color", "#F2DEDE");
+                $(".brakeNodeState").addClass("danger");
+                $(".brakeNodeState").removeClass("success");
             }
             else {
-                $("#brakeNodeState").css("background-color", "#FFFFFF");
+                $(".brakeNodeState").addClass("success");
+                $(".brakeNodeState").removeClass("danger");
             }
         }
         if(value_name === 'lvdcNodeState') {
             if(value === 'lvdcNone') {
-                $("#lvdcNodeState").css("background-color", "#F2DEDE");
+                $(".lvdcNodeState").addClass("danger");
+                $(".lvdcNodeState").removeClass("success");
             }
             else {
-                $("#lvdcNodeState").css("background-color", "#FFFFFF");
+                $(".lvdcNodeState").addClass("success");
+                $(".lvdcNodeState").removeClass("danger");
             }
         }
         if(value_name === 'navNodeState') {
             if(value === 'navNone') {
-                $("#navNodeState").css("background-color", "#F2DEDE");
+                $(".navNodeState").addClass("danger");
+                $(".navNodeState").removeClass("success");
             }
             else {
-                $("#navNodeState").css("background-color", "#FFFFFF");
+                $(".navNodeState").addClass("success");
+                $(".navNodeState").removeClass("danger");
             }
         }
 

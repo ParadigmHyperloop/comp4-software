@@ -13,7 +13,7 @@ spaceX_IP = "something"
 spaceX_PORT = "something"
 
 team_name = "ParaHyp"
-MAX_MESSAGE_SIZE = 1024
+MAX_MESSAGE_SIZE = 4024
 UDP_RECV_BUFFER_SIZE = 50
 
 

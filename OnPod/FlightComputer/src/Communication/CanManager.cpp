@@ -178,7 +178,18 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             pod.setRunFaultLo(runFaultLo);
             break;
         }
+        case 0xFF:{  //todo add cell broadcast id
+            indices = {0};
+            auto cellId = extractCanValue<int32_t >(frame.data, indices, 1 );
 
+            if(cellId > 96){
+                cellId-=11;
+            }
+            indices = {1,2};
+            auto voltage = extractCanValue<float>(frame.data, indices, 10000);
+            pod.updateCellVoltage(cellId, voltage);
+            break;
+        }
         default:
             return;
             //std::string error = "Unknown CAN ID : " + std::to_string(frame.can_id);

@@ -595,6 +595,18 @@ class Telemetry :
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
       mutable_heartbeatflags();
 
+  // repeated float hvBatteryCellVoltages = 67;
+  int hvbatterycellvoltages_size() const;
+  void clear_hvbatterycellvoltages();
+  static const int kHvBatteryCellVoltagesFieldNumber = 67;
+  float hvbatterycellvoltages(int index) const;
+  void set_hvbatterycellvoltages(int index, float value);
+  void add_hvbatterycellvoltages(float value);
+  const ::google::protobuf::RepeatedField< float >&
+      hvbatterycellvoltages() const;
+  ::google::protobuf::RepeatedField< float >*
+      mutable_hvbatterycellvoltages();
+
   // repeated int32 heartbeatValues = 71;
   int heartbeatvalues_size() const;
   void clear_heartbeatvalues();
@@ -1162,6 +1174,7 @@ class Telemetry :
   ::google::protobuf::internal::HasBits<3> _has_bits_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > heartbeatflags_;
+  ::google::protobuf::RepeatedField< float > hvbatterycellvoltages_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > heartbeatvalues_;
   ::google::protobuf::RepeatedPtrField<::std::string> updatemessages_;
   int podstate_;
@@ -3645,6 +3658,36 @@ inline void Telemetry::set_hvbatterypackstateofcharge(::google::protobuf::int32 
   _has_bits_[1] |= 0x00200000u;
   hvbatterypackstateofcharge_ = value;
   // @@protoc_insertion_point(field_set:Telemetry.hvBatteryPackStateOfCharge)
+}
+
+// repeated float hvBatteryCellVoltages = 67;
+inline int Telemetry::hvbatterycellvoltages_size() const {
+  return hvbatterycellvoltages_.size();
+}
+inline void Telemetry::clear_hvbatterycellvoltages() {
+  hvbatterycellvoltages_.Clear();
+}
+inline float Telemetry::hvbatterycellvoltages(int index) const {
+  // @@protoc_insertion_point(field_get:Telemetry.hvBatteryCellVoltages)
+  return hvbatterycellvoltages_.Get(index);
+}
+inline void Telemetry::set_hvbatterycellvoltages(int index, float value) {
+  hvbatterycellvoltages_.Set(index, value);
+  // @@protoc_insertion_point(field_set:Telemetry.hvBatteryCellVoltages)
+}
+inline void Telemetry::add_hvbatterycellvoltages(float value) {
+  hvbatterycellvoltages_.Add(value);
+  // @@protoc_insertion_point(field_add:Telemetry.hvBatteryCellVoltages)
+}
+inline const ::google::protobuf::RepeatedField< float >&
+Telemetry::hvbatterycellvoltages() const {
+  // @@protoc_insertion_point(field_list:Telemetry.hvBatteryCellVoltages)
+  return hvbatterycellvoltages_;
+}
+inline ::google::protobuf::RepeatedField< float >*
+Telemetry::mutable_hvbatterycellvoltages() {
+  // @@protoc_insertion_point(field_mutable_list:Telemetry.hvBatteryCellVoltages)
+  return &hvbatterycellvoltages_;
 }
 
 // optional int32 lv1BatteryPackStateOfCharge = 85;
