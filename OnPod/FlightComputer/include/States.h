@@ -103,6 +103,7 @@ public:
     ~Acceleration();
     float getBrakingDistance();
     bool testTransitions() override;
+//    TaxiBrakingCriteria* _brakingCriteria = nullptr;
 };
 
 class Coasting : public PodState{

@@ -5,7 +5,7 @@
 #include "Heartbeat.h"
 #include "TelemetryManager.h"
 #include "Constants/SensorConfig.h"
-
+#include <math.h>
 
 // Get manual state change commands. Get Estop command
 

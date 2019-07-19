@@ -1,10 +1,11 @@
 #ifndef FLIGHTCOMPUTER_ITAXIBRAKINGCRITERIA_HPP
 #define FLIGHTCOMPUTER_ITAXIBRAKINGCRITERIA_HPP
 
-#include "States.h"
+//#include "Paradigm.pb.h"
 
 class ITaxiBrakingCriteria
 {
+public:
   ITaxiBrakingCriteria();
   virtual ~ITaxiBrakingCriteria() = default;
   virtual bool ShouldEndTaxi() = 0;

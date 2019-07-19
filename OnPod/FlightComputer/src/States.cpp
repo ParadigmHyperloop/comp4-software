@@ -1,3 +1,4 @@
+#include <TaxiBrakingCriteria.hpp>
 #include "States.h"
 #include "easylogging++.h"
 #include "Constants/SensorConfig.h"
@@ -370,6 +371,19 @@ Acceleration::Acceleration(TelemetryManager * pod) : PodState(pod) {
     this->pod->telemetry->commandedBrakeNodeState = bnsFlight;
     this->pod->telemetry->commandedLvdcNodeState = lvdcFlight;
     this->pod->telemetry->commandedTorque = this->pod->telemetry->motorTorque;
+//
+//    if (pod->telemetry->taxi)
+//    {
+//      this->_brakingCriteria = new TaxiBrakingCriteria(
+//          this->pod->telemetry->flightDistance,
+//          this->pod->telemetry->maxVelocity,
+//          pod,
+//      );
+//      break;
+//    } else{
+//      _brakingCriteria = nullptr;
+//    }
+
 }
 
 Acceleration::~Acceleration() {
@@ -413,6 +427,7 @@ bool Acceleration::testTransitions() {
         this->setupTransition(psBraking, (std::string)" Flight Timout of " + std::to_string(this->timeInStateSeconds()) + " reached. Pod --> Braking");
         return true;
     }
+//     TODO - Add Taxi Checks, if there is Taxi.
     return false;
 }
 
