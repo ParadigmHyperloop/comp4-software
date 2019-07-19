@@ -440,7 +440,6 @@ bool Acceleration::testTransitions() {
         this->setupTransition(psBraking, (std::string)" Flight Timout of " + std::to_string(this->timeInStateSeconds()) + " reached. Pod --> Braking");
         return true;
     }
-
     if(this->pod->telemetry->motorSpeed >= pod->telemetry->maxRPM){
         this->setupTransition(psCoasting, "Acceleration->Coasting from maximum speed");
     }
