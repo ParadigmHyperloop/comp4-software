@@ -13,6 +13,7 @@ NAV_BAR = [
         'title': 'BMS Overview',
         'icon': 'pe-7s-battery'
     },
+    {
         'id': 'profile',
         'href': 'profile',
         'title': 'Connect To Pod',

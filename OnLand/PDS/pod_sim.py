@@ -13,12 +13,11 @@ def create_telem(packet):
     packet.brakingDistance = random.randint(0, 101)
     packet.maxStripCount = random.randint(0, 101)
     packet.maxVelocity = random.randint(0, 101)
+    packet.navNodeState = random.randint(0, 1)
 
     packet.flightTime = random.randint(0, 101)
     packet.podPosition = random.randint(0, 101)
     packet.podVelocity = random.randint(0, 101)
-    packet.podAccelerationX = random.randint(0, 101)
-    packet.tachometerVelocity = random.randint(0, 101)
     packet.resolverVelocity = random.randint(0, 101)
 
     packet.maxIgbtTemperature = random.randint(0, 101)
@@ -82,13 +81,18 @@ def create_telem(packet):
     packet.maxFlightTime = random.randint(0, 101)
     packet.startTorque = random.randint(0, 101)
     packet.accelerationTime = random.randint(0, 101)
-    packet.taxi  = random.randint(0, 101)
+    packet.taxi = random.randint(0, 101)
     packet.expectedTubePressure = random.randint(0, 101)
 
     packet.tachRpm = random.randint(0, 101)
     packet.irRpm = random.randint(0, 101)
     packet.tachDistance = random.randint(0, 101)
     packet.irDistance = random.randint(0, 101)
+
+    packet.totalStripCount = random.randint(0, 101)
+
+    for i in range(0, 192):
+        packet.hvBatteryCellVoltages.extend([random.randint(0, 200)])
 
     return packet
 
@@ -102,9 +106,8 @@ def main():
     conn, addr = stcp.accept()
     print(conn, addr)
 
-    pod_data = Telemetry()
-
     while(1):
+        pod_data = Telemetry()
         create_telem(pod_data)
         sudp.sendto(pod_data.SerializeToString(), ("127.0.0.1", UDP_TELEM_PORT))
 

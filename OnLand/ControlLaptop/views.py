@@ -182,11 +182,7 @@ def get_flight_profile_template():
 def batteries():
     page = 'battery'
     title = get_page_title(page)
-    return render_template(
-        "battery.html",
-        active_page=page,
-        title=title
-    )
+    return render_template("battery.html")
 
 @app.route('/sensor_ranges')
 def add_numbers():
