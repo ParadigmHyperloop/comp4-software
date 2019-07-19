@@ -374,6 +374,9 @@ void TelemetryManager::setMotorSpeed(int32_t value) {
     float milliseconds = (std::chrono::duration_cast<std::chrono::microseconds>(thisTime - lastTime).count())/1000.0;
     float distance = average*milliseconds * GENERAL_CONSTANTS::REAR_WHEEL_CIRCUMFRENCE;
     addPodDistance(distance);
+    
+    telemetry->podVelocity = (value*GENERAL_CONSTANTS::REAR_WHEEL_CIRCUMFRENCE)/60.0;
+    
 }
 
 void TelemetryManager::setInverterBusVoltage(int value) {
