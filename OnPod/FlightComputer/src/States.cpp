@@ -417,16 +417,7 @@ Acceleration::Acceleration(TelemetryManager * pod) : PodState(pod) {
 }
 
 Acceleration::~Acceleration() {
-    this->pod->telemetry->motorTorque = 0;
-    this->pod->telemetry->maxFlightTime = 0;
-    this->pod->telemetry->flightDistance = 0;
-    this->pod->telemetry->commandedTorque = 0;
-    this->pod->telemetry->brakeDistance = 0;
-    this->pod->telemetry->maxVelocity = 0;
-    this->pod->telemetry->startTorque = 0;
-    this->pod->telemetry->accelerationTime = 0;
-    this->pod->telemetry->expectedTubePressure = 0;
-    this->pod->telemetry->maxStripCount = 0;
+
 }
 
 bool Acceleration::testTransitions() {
@@ -510,6 +501,16 @@ Braking::Braking(TelemetryManager* pod) : PodState(pod) {
     _stateIdentifier = psBraking;
     this->pod->telemetry->commandedBrakeNodeState = bnsBraking;
     this->pod->telemetry->commandedLvdcNodeState = lvdcFlight;
+    this->pod->telemetry->motorTorque = 0;
+    this->pod->telemetry->maxFlightTime = 0;
+    this->pod->telemetry->flightDistance = 0;
+    this->pod->telemetry->commandedTorque = 0;
+    this->pod->telemetry->brakeDistance = 0;
+    this->pod->telemetry->maxVelocity = 0;
+    this->pod->telemetry->startTorque = 0;
+    this->pod->telemetry->accelerationTime = 0;
+    this->pod->telemetry->expectedTubePressure = 0;
+    this->pod->telemetry->maxStripCount = 0;
 }
 
 Braking::~Braking() = default;
