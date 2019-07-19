@@ -12,11 +12,13 @@ namespace GENERAL_CONSTANTS
 
     static const int32_t FLAGS_GOOD = -1;
 
+    static const int32_t HV_CELL_COUNT = 194;
+
     static const float   REAR_WHEEL_CIRCUMFRENCE = 0.933619f;
     static const float   STRIP_DISTANCE = 30.48;
     static const float   DEFAULT_MAX_STRIP_COUNT = 80;
 
-    static const int32_t NAV_SERIAL_MESSAGE_SIZE = 10;
+    static const int32_t NAV_SERIAL_MESSAGE_SIZE = 11;
     static const float   STATIONARY_THRSHOLD_M = 0.5f;
 };
 

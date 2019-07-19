@@ -16,6 +16,9 @@
 
     static int32_t COOLING_THRESHOLD = 5;
 
+    static int32_t PRESSURE_MIN = 10;
+    static int32_t PRESSURE_MAX = 19;
+
     static float ATMOSPHERE_THRESHOLD = 5.0f;
 };
 
@@ -70,9 +73,9 @@ namespace LV_LIMITS
     static int32_t PNEUMATICS_THRESHOLD = 3; // Margin of acceptable error on ideal value
 
     static int32_t LOWPRESSURE_UNARMED_MIN = 0;
-    static int32_t LOWPRESSURE_UNARMED_MAX = 20;
-    static int32_t LOWPRESSURE_ENGAGED_MIN = 215;
-    static int32_t LOWPRESSURE_ENGAGED_MAX = 255;
+    static int32_t LOWPRESSURE_UNARMED_MAX = 25;
+    static int32_t LOWPRESSURE_ENGAGED_MIN = 190;
+    static int32_t LOWPRESSURE_ENGAGED_MAX = 240;
 
     static int32_t HIGHPRESSURE_ARMED_MAX = 1725;
     static int32_t HIGHPRESSURE_ARMED_MIN = 1550;
@@ -81,7 +84,7 @@ namespace LV_LIMITS
     static int32_t PRESSURE_TEMP_MAX = 60; //C
 
     static int32_t COOLING_TEMP_MIN = 10;
-    static int32_t COOLING_TEMP_MAX = 30;
+    static int32_t COOLING_TEMP_MAX = 40;
 };
 
 #endif //FLIGHTCOMPUTER_SENSORCONFIG_H

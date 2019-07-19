@@ -166,6 +166,8 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_lvdcnodestate(pod.telemetry->receivedLvdcNodeState);
     protoMessage->set_navnodestate(pod.telemetry->navNodeState);
 
+    protoMessage->set_tubepressure(pod.telemetry->tubePressure);
+
     // Brake Node
     protoMessage->set_lowpressure1(pod.telemetry->lowPressure1);
     protoMessage->set_lowpressure2(pod.telemetry->lowPressure2);
@@ -243,7 +245,9 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_gtpack2current(pod.telemetry->gtPack2Current);
     protoMessage->set_gtpack2voltage(pod.telemetry->gtPack2Voltage);
 
-   // LOG(INFO)<< pod.telemetry->manualLvdcNodeState << " , " << pod.telemetry->gtPack2Current << ", " << pod.telemetry->gtPack1Current;
+    for(auto &cell : pod.telemetry->cellVoltages){
+        protoMessage->add_hvbatterycellvoltages(cell);
+    }
 
     if(pod.telemetry->updates.size() > 0){
         std::lock_guard<std::mutex> lock(this->pod.telemetry->updatesLock);

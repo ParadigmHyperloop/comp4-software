@@ -84,6 +84,7 @@ void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
         return;
     }
     if (podCommand.has_controlsinterfacestate()) {
+        LOG(INFO)<<podCommand.controlsinterfacestate();
         Pod->setControlsInterfaceState(podCommand.controlsinterfacestate());
     }
     if(podCommand.has_maxflighttime()){
@@ -96,7 +97,8 @@ void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
         Pod->telemetry->taxi = podCommand.taxi();
         Pod->telemetry->expectedTubePressure = podCommand.expectedtubepressure();
         Pod->telemetry->maxVelocity = podCommand.maxvelocity();
-        Pod->telemetry->maxRPM = podCommand.maxvelocity() / GENERAL_CONSTANTS::REAR_WHEEL_CIRCUMFRENCE;
+        Pod->telemetry->maxRPM = (podCommand.maxvelocity() * 60)/GENERAL_CONSTANTS::REAR_WHEEL_CIRCUMFRENCE;
+        LOG(INFO)<<Pod->telemetry->maxRPM;
         Pod->telemetry->brakeDistance = podCommand.brakingdistance();
         if(!podCommand.taxi()) {
             Pod->telemetry->maxStripCount = ( (Pod->telemetry->flightDistance - Pod->telemetry->brakeDistance) /

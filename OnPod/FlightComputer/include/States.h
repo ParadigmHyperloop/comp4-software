@@ -49,11 +49,9 @@ public:
 
     void armedChecks();
 
-
 protected:
     std::string _currentFailure;
     std::chrono::steady_clock::time_point _enterStateTime;
-    std::chrono::steady_clock::time_point _flightStartTime;
     bool _transitioning = false;
     std::string _transitionReason = "";
     PodStates _stateIdentifier = psBooting;

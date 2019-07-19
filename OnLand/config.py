@@ -13,7 +13,7 @@ spaceX_IP = "something"
 spaceX_PORT = "something"
 
 team_name = "ParaHyp"
-MAX_MESSAGE_SIZE = 1024
+MAX_MESSAGE_SIZE = 4024
 UDP_RECV_BUFFER_SIZE = 50
 
 
@@ -28,7 +28,7 @@ SOCKET_SERVER = 'http://localhost:5000'
 
 
 # Pod
-#POD_IP = '127.0.0.1'
+# POD_IP = '127.0.0.1'
 POD_IP = '192.168.0.10'
 #POD_IP = '192.168.7.2'
 POD_CONFIG_PORT = 3001

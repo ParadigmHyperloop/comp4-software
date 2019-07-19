@@ -595,6 +595,18 @@ class Telemetry :
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
       mutable_heartbeatflags();
 
+  // repeated float hvBatteryCellVoltages = 67;
+  int hvbatterycellvoltages_size() const;
+  void clear_hvbatterycellvoltages();
+  static const int kHvBatteryCellVoltagesFieldNumber = 67;
+  float hvbatterycellvoltages(int index) const;
+  void set_hvbatterycellvoltages(int index, float value);
+  void add_hvbatterycellvoltages(float value);
+  const ::google::protobuf::RepeatedField< float >&
+      hvbatterycellvoltages() const;
+  ::google::protobuf::RepeatedField< float >*
+      mutable_hvbatterycellvoltages();
+
   // repeated int32 heartbeatValues = 71;
   int heartbeatvalues_size() const;
   void clear_heartbeatvalues();
@@ -657,19 +669,19 @@ class Telemetry :
   ::google::protobuf::int32 flighttime() const;
   void set_flighttime(::google::protobuf::int32 value);
 
-  // optional int32 podPosition = 9;
+  // optional float podPosition = 9;
   bool has_podposition() const;
   void clear_podposition();
   static const int kPodPositionFieldNumber = 9;
-  ::google::protobuf::int32 podposition() const;
-  void set_podposition(::google::protobuf::int32 value);
+  float podposition() const;
+  void set_podposition(float value);
 
-  // optional int32 podVelocity = 10;
+  // optional float podVelocity = 10;
   bool has_podvelocity() const;
   void clear_podvelocity();
   static const int kPodVelocityFieldNumber = 10;
-  ::google::protobuf::int32 podvelocity() const;
-  void set_podvelocity(::google::protobuf::int32 value);
+  float podvelocity() const;
+  void set_podvelocity(float value);
 
   // optional uint32 expectedTubePressure = 12;
   bool has_expectedtubepressure() const;
@@ -678,19 +690,19 @@ class Telemetry :
   ::google::protobuf::uint32 expectedtubepressure() const;
   void set_expectedtubepressure(::google::protobuf::uint32 value);
 
-  // optional int32 stripVelocity = 16;
+  // optional float stripVelocity = 16;
   bool has_stripvelocity() const;
   void clear_stripvelocity();
   static const int kStripVelocityFieldNumber = 16;
-  ::google::protobuf::int32 stripvelocity() const;
-  void set_stripvelocity(::google::protobuf::int32 value);
+  float stripvelocity() const;
+  void set_stripvelocity(float value);
 
-  // optional int32 resolverVelocity = 17;
+  // optional float resolverVelocity = 17;
   bool has_resolvervelocity() const;
   void clear_resolvervelocity();
   static const int kResolverVelocityFieldNumber = 17;
-  ::google::protobuf::int32 resolvervelocity() const;
-  void set_resolvervelocity(::google::protobuf::int32 value);
+  float resolvervelocity() const;
+  void set_resolvervelocity(float value);
 
   // optional int32 maxIgbtTemperature = 18;
   bool has_maxigbttemperature() const;
@@ -979,12 +991,12 @@ class Telemetry :
   float gtinvertercurrent() const;
   void set_gtinvertercurrent(float value);
 
-  // optional int32 totalStripCount = 63;
+  // optional float totalStripCount = 63;
   bool has_totalstripcount() const;
   void clear_totalstripcount();
   static const int kTotalStripCountFieldNumber = 63;
-  ::google::protobuf::int32 totalstripcount() const;
-  void set_totalstripcount(::google::protobuf::int32 value);
+  float totalstripcount() const;
+  void set_totalstripcount(float value);
 
   // optional .NavigationNodeStates navNodeState = 64;
   bool has_navnodestate() const;
@@ -1162,17 +1174,18 @@ class Telemetry :
   ::google::protobuf::internal::HasBits<3> _has_bits_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > heartbeatflags_;
+  ::google::protobuf::RepeatedField< float > hvbatterycellvoltages_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > heartbeatvalues_;
   ::google::protobuf::RepeatedPtrField<::std::string> updatemessages_;
   int podstate_;
   int brakenodestate_;
   int controlsinterfacestate_;
   ::google::protobuf::int32 flighttime_;
-  ::google::protobuf::int32 podposition_;
-  ::google::protobuf::int32 podvelocity_;
+  float podposition_;
+  float podvelocity_;
   ::google::protobuf::uint32 expectedtubepressure_;
-  ::google::protobuf::int32 stripvelocity_;
-  ::google::protobuf::int32 resolvervelocity_;
+  float stripvelocity_;
+  float resolvervelocity_;
   ::google::protobuf::int32 maxigbttemperature_;
   ::google::protobuf::int32 gatedrivertemperature_;
   ::google::protobuf::int32 invertercontrolboardtemperature_;
@@ -1214,7 +1227,7 @@ class Telemetry :
   float gtlp12current_;
   float gtnodecurrent_;
   float gtinvertercurrent_;
-  ::google::protobuf::int32 totalstripcount_;
+  float totalstripcount_;
   int navnodestate_;
   ::google::protobuf::int32 inverterheartbeat_;
   ::google::protobuf::int32 hvbatterypackstateofcharge_;
@@ -3251,7 +3264,7 @@ Telemetry::mutable_heartbeatvalues() {
   return &heartbeatvalues_;
 }
 
-// optional int32 podPosition = 9;
+// optional float podPosition = 9;
 inline bool Telemetry::has_podposition() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
@@ -3259,17 +3272,17 @@ inline void Telemetry::clear_podposition() {
   podposition_ = 0;
   _has_bits_[0] &= ~0x00000010u;
 }
-inline ::google::protobuf::int32 Telemetry::podposition() const {
+inline float Telemetry::podposition() const {
   // @@protoc_insertion_point(field_get:Telemetry.podPosition)
   return podposition_;
 }
-inline void Telemetry::set_podposition(::google::protobuf::int32 value) {
+inline void Telemetry::set_podposition(float value) {
   _has_bits_[0] |= 0x00000010u;
   podposition_ = value;
   // @@protoc_insertion_point(field_set:Telemetry.podPosition)
 }
 
-// optional int32 podVelocity = 10;
+// optional float podVelocity = 10;
 inline bool Telemetry::has_podvelocity() const {
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
@@ -3277,17 +3290,17 @@ inline void Telemetry::clear_podvelocity() {
   podvelocity_ = 0;
   _has_bits_[0] &= ~0x00000020u;
 }
-inline ::google::protobuf::int32 Telemetry::podvelocity() const {
+inline float Telemetry::podvelocity() const {
   // @@protoc_insertion_point(field_get:Telemetry.podVelocity)
   return podvelocity_;
 }
-inline void Telemetry::set_podvelocity(::google::protobuf::int32 value) {
+inline void Telemetry::set_podvelocity(float value) {
   _has_bits_[0] |= 0x00000020u;
   podvelocity_ = value;
   // @@protoc_insertion_point(field_set:Telemetry.podVelocity)
 }
 
-// optional int32 stripVelocity = 16;
+// optional float stripVelocity = 16;
 inline bool Telemetry::has_stripvelocity() const {
   return (_has_bits_[0] & 0x00000080u) != 0;
 }
@@ -3295,17 +3308,17 @@ inline void Telemetry::clear_stripvelocity() {
   stripvelocity_ = 0;
   _has_bits_[0] &= ~0x00000080u;
 }
-inline ::google::protobuf::int32 Telemetry::stripvelocity() const {
+inline float Telemetry::stripvelocity() const {
   // @@protoc_insertion_point(field_get:Telemetry.stripVelocity)
   return stripvelocity_;
 }
-inline void Telemetry::set_stripvelocity(::google::protobuf::int32 value) {
+inline void Telemetry::set_stripvelocity(float value) {
   _has_bits_[0] |= 0x00000080u;
   stripvelocity_ = value;
   // @@protoc_insertion_point(field_set:Telemetry.stripVelocity)
 }
 
-// optional int32 resolverVelocity = 17;
+// optional float resolverVelocity = 17;
 inline bool Telemetry::has_resolvervelocity() const {
   return (_has_bits_[0] & 0x00000100u) != 0;
 }
@@ -3313,17 +3326,17 @@ inline void Telemetry::clear_resolvervelocity() {
   resolvervelocity_ = 0;
   _has_bits_[0] &= ~0x00000100u;
 }
-inline ::google::protobuf::int32 Telemetry::resolvervelocity() const {
+inline float Telemetry::resolvervelocity() const {
   // @@protoc_insertion_point(field_get:Telemetry.resolverVelocity)
   return resolvervelocity_;
 }
-inline void Telemetry::set_resolvervelocity(::google::protobuf::int32 value) {
+inline void Telemetry::set_resolvervelocity(float value) {
   _has_bits_[0] |= 0x00000100u;
   resolvervelocity_ = value;
   // @@protoc_insertion_point(field_set:Telemetry.resolverVelocity)
 }
 
-// optional int32 totalStripCount = 63;
+// optional float totalStripCount = 63;
 inline bool Telemetry::has_totalstripcount() const {
   return (_has_bits_[1] & 0x00040000u) != 0;
 }
@@ -3331,11 +3344,11 @@ inline void Telemetry::clear_totalstripcount() {
   totalstripcount_ = 0;
   _has_bits_[1] &= ~0x00040000u;
 }
-inline ::google::protobuf::int32 Telemetry::totalstripcount() const {
+inline float Telemetry::totalstripcount() const {
   // @@protoc_insertion_point(field_get:Telemetry.totalStripCount)
   return totalstripcount_;
 }
-inline void Telemetry::set_totalstripcount(::google::protobuf::int32 value) {
+inline void Telemetry::set_totalstripcount(float value) {
   _has_bits_[1] |= 0x00040000u;
   totalstripcount_ = value;
   // @@protoc_insertion_point(field_set:Telemetry.totalStripCount)
@@ -3645,6 +3658,36 @@ inline void Telemetry::set_hvbatterypackstateofcharge(::google::protobuf::int32 
   _has_bits_[1] |= 0x00200000u;
   hvbatterypackstateofcharge_ = value;
   // @@protoc_insertion_point(field_set:Telemetry.hvBatteryPackStateOfCharge)
+}
+
+// repeated float hvBatteryCellVoltages = 67;
+inline int Telemetry::hvbatterycellvoltages_size() const {
+  return hvbatterycellvoltages_.size();
+}
+inline void Telemetry::clear_hvbatterycellvoltages() {
+  hvbatterycellvoltages_.Clear();
+}
+inline float Telemetry::hvbatterycellvoltages(int index) const {
+  // @@protoc_insertion_point(field_get:Telemetry.hvBatteryCellVoltages)
+  return hvbatterycellvoltages_.Get(index);
+}
+inline void Telemetry::set_hvbatterycellvoltages(int index, float value) {
+  hvbatterycellvoltages_.Set(index, value);
+  // @@protoc_insertion_point(field_set:Telemetry.hvBatteryCellVoltages)
+}
+inline void Telemetry::add_hvbatterycellvoltages(float value) {
+  hvbatterycellvoltages_.Add(value);
+  // @@protoc_insertion_point(field_add:Telemetry.hvBatteryCellVoltages)
+}
+inline const ::google::protobuf::RepeatedField< float >&
+Telemetry::hvbatterycellvoltages() const {
+  // @@protoc_insertion_point(field_list:Telemetry.hvBatteryCellVoltages)
+  return hvbatterycellvoltages_;
+}
+inline ::google::protobuf::RepeatedField< float >*
+Telemetry::mutable_hvbatterycellvoltages() {
+  // @@protoc_insertion_point(field_mutable_list:Telemetry.hvBatteryCellVoltages)
+  return &hvbatterycellvoltages_;
 }
 
 // optional int32 lv1BatteryPackStateOfCharge = 85;

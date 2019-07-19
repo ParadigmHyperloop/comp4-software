@@ -44,6 +44,7 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             pod.telemetry->hvFaultCode1 = faultCode1;
             pod.telemetry->hvFaultCode2 = faultCode2;
 
+            pod.setConnectionFlag(1,CONNECTION_FLAGS::BMS_HEARTBEAT_INDEX);
             break;
         }
         case 0x6b2: {
@@ -110,7 +111,7 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
                 return;
             }
             pod.setMotorSpeed(motorSpeed);
-            pod.setConnectionFlag(1,CONNECTION_FLAGS::BMS_HEARTBEAT_INDEX);
+            pod.telemetry->inverterHeartbeat = 1;
             break;
         }
         case 0x0A7: {
@@ -177,7 +178,18 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             pod.setRunFaultLo(runFaultLo);
             break;
         }
+        case 0xFF:{  //todo add cell broadcast id
+            indices = {0};
+            auto cellId = extractCanValue<int32_t >(frame.data, indices, 1 );
 
+            if(cellId > 96){
+                cellId-=12;
+            }
+            indices = {1,2};
+            auto voltage = extractCanValue<float>(frame.data, indices, 10000);
+            pod.updateCellVoltage(cellId, voltage);
+            break;
+        }
         default:
             return;
             //std::string error = "Unknown CAN ID : " + std::to_string(frame.can_id);
