@@ -96,7 +96,7 @@ void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
         Pod->telemetry->taxi = podCommand.taxi();
         Pod->telemetry->expectedTubePressure = podCommand.expectedtubepressure();
         Pod->telemetry->maxVelocity = podCommand.maxvelocity();
-        Pod->telemetry->maxRPM = Pod->telemetry->maxVelocity / GENERAL_CONSTANTS::REAR_WHEEL_CIRCUMFRENCE;
+        Pod->telemetry->maxRPM = podCommand.maxvelocity() / GENERAL_CONSTANTS::REAR_WHEEL_CIRCUMFRENCE;
         Pod->telemetry->brakeDistance = podCommand.brakingdistance();
         if(!podCommand.taxi()) {
             Pod->telemetry->maxStripCount = ( (Pod->telemetry->flightDistance - Pod->telemetry->brakeDistance) /

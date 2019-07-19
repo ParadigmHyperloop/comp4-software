@@ -55,13 +55,13 @@ bool PodState::isNodeSensorCritical(uint32_t sensorIndex) {
 }
 
 bool PodState::isConnectionFlagCritical(uint32_t sensorIndex) {
-    uint32_t criticalMask = CONNECTION_FLAGS::BRAKE_NODE_HEARTBEAT_INDEX |
-                            CONNECTION_FLAGS::LVDC_NODE_HEARTBEAT_INDEX |
-                            CONNECTION_FLAGS::BMS_HEARTBEAT_INDEX |
-                            CONNECTION_FLAGS::INTERFACE_HEARTBEAT_INDEX |
-                            CONNECTION_FLAGS::ENCLOSURE_HEARTBEAT_INDEX |
-                            CONNECTION_FLAGS::NAVIGATION_HEARTBEAT_INDEX;
-    return sensorIndex & criticalMask;
+    std::vector<int> criticalSensors = {CONNECTION_FLAGS::BRAKE_NODE_HEARTBEAT_INDEX,
+                                        CONNECTION_FLAGS::LVDC_NODE_HEARTBEAT_INDEX,
+                                        CONNECTION_FLAGS::BMS_HEARTBEAT_INDEX,
+                                        CONNECTION_FLAGS::INTERFACE_HEARTBEAT_INDEX,
+                                        CONNECTION_FLAGS::ENCLOSURE_HEARTBEAT_INDEX,
+                                        CONNECTION_FLAGS::NAVIGATION_HEARTBEAT_INDEX};
+    return std::find(criticalSensors.begin(), criticalSensors.end(), sensorIndex) != criticalSensors.end();
 }
 
 bool PodState::isInverterSensorCritical(uint32_t sensorIndex) {
@@ -148,7 +148,6 @@ void PodState::armedChecks(){
         std::string error = "Failed on inverter fault, see pod messages";
         throw std::runtime_error(error);
     }
-
 }
 
 bool PodState::brakingCriteriaMet() {
@@ -163,6 +162,7 @@ bool PodState::brakingCriteriaMet() {
         pod->sendUpdate("Braking at maximum strip count");
         return true;
     }
+
     return false;
 }
 
@@ -440,6 +440,10 @@ bool Acceleration::testTransitions() {
         this->setupTransition(psBraking, (std::string)" Flight Timout of " + std::to_string(this->timeInStateSeconds()) + " reached. Pod --> Braking");
         return true;
     }
+
+    if(this->pod->telemetry->motorSpeed >= pod->telemetry->maxRPM){
+        this->setupTransition(psCoasting, "Acceleration->Coasting from maximum speed");
+    }
     return false;
 }
 
@@ -450,7 +454,8 @@ Coasting::Coasting(TelemetryManager* pod) : PodState(pod) {
     this->pod->telemetry->commandedTorque = 0;
 }
 
-bool Coasting::testTransitions() {
+bool Coasting::testTransitions() {   
+    this->pod->telemetry->commandedTorque = 0;
     if(this->pod->getControlsInterfaceState() == ciEmergencyStop){
         this->setupTransition(psBraking, "Emergency Stop. Pod --> Braking");
         return true;
