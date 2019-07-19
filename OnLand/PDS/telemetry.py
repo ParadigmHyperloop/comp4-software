@@ -2,12 +2,14 @@ import socketio
 import time
 import logging as log
 import time
-from datetime import timedelta
-
+import socket
 import socketio
+
+from datetime import timedelta
 from google.protobuf import json_format
 from google.protobuf.json_format import MessageToDict
 
+from PDS.spacexPacket import spacex_packet
 from PDS.UDP.PodUdpConnection import PodUdpConnection
 from PDS.helpers.heartbeat_timer import HeartbeatTimer
 from Paradigm_pb2 import Telemetry
@@ -17,6 +19,12 @@ import sys
 import json
 broadcast_timer = HeartbeatTimer()
 log.basicConfig(stream=sys.stdout, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+
+# SpaceX Packet connection, only to be turned on during Competition run
+SEND_SPACEX_PACKET = False
+if SEND_SPACEX_PACKET:
+    server = ('127.0.0.1', 3000)
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 # Create socket to connect to server
 sio = socketio.Client()
@@ -64,6 +72,9 @@ def main():
                 sio.emit('pod_telemetry', json_pod_data)
                 pod_data = MessageToDict(pod_data)
                 log.warning("Telemetry: {}".format(pod_data))
+                if SEND_SPACEX_PACKET:
+                    packet = spacex_packet(pod_data)
+                    sock.sendto(packet, server)
         else:
             connection_status['status'] = 0
             sio.emit('connection_updates', json.dumps(connection_status))
