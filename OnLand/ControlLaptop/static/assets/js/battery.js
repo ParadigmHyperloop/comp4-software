@@ -11,7 +11,7 @@ socket.on('pod_telemetry', function (data) {
 
     for (let id = 0; id <= 191; id++) {
         temp = cells[id]
-        document.getElementById(id).innerHTML = temp
+        document.getElementById(id).innerHTML = temp.toFixed(4)
 
         if (temp > 175) {
             $(`.${id}`).addClass("danger")
