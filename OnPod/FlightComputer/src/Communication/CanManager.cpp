@@ -44,6 +44,7 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             pod.telemetry->hvFaultCode1 = faultCode1;
             pod.telemetry->hvFaultCode2 = faultCode2;
 
+            pod.setConnectionFlag(1,CONNECTION_FLAGS::BMS_HEARTBEAT_INDEX);
             break;
         }
         case 0x6b2: {
@@ -110,7 +111,7 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
                 return;
             }
             pod.setMotorSpeed(motorSpeed);
-            pod.setConnectionFlag(1,CONNECTION_FLAGS::BMS_HEARTBEAT_INDEX);
+            pod.telemetry->inverterHeartbeat = 1;
             break;
         }
         case 0x0A7: {

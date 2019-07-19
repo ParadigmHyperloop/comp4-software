@@ -166,6 +166,8 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_lvdcnodestate(pod.telemetry->receivedLvdcNodeState);
     protoMessage->set_navnodestate(pod.telemetry->navNodeState);
 
+    protoMessage->set_tubepressure(pod.telemetry->tubePressure);
+
     // Brake Node
     protoMessage->set_lowpressure1(pod.telemetry->lowPressure1);
     protoMessage->set_lowpressure2(pod.telemetry->lowPressure2);

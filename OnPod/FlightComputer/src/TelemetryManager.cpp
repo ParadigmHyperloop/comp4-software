@@ -227,8 +227,10 @@ void TelemetryManager::setLowPressure(float value, int identifier){
             break;
         case NODE_FLAGS::LP3_INDEX:
             this->telemetry->lowPressure3 = value;
+            break;
         case NODE_FLAGS::LP4_INDEX:
             this->telemetry->lowPressure4 = value;
+            break;
         default:
             break;
     }
@@ -241,8 +243,8 @@ void TelemetryManager::setLowPressure(float value, int identifier){
         status = inRange<float>(value, PNEUMATICS_LIMITS::LOWPRESSURE_UNARMED_MIN, PNEUMATICS_LIMITS::LOWPRESSURE_UNARMED_MAX);
     }
 
-    else if(currentState == psArming || currentState == psArmed || currentState == psAcceleration || currentState == psCoasting){
-        status = inThreshold<float>(value, this->telemetry->tubePressure, PNEUMATICS_LIMITS::PNEUMATICS_THRESHOLD);
+    else if(currentState == psArming || currentState == psArmed || currentState == psAcceleration || currentState == psCoasting || currentState == psPreFlight){
+        status =  inRange<float>(value, PNEUMATICS_LIMITS::LOWPRESSURE_UNARMED_MIN, PNEUMATICS_LIMITS::LOWPRESSURE_UNARMED_MAX);
     }
 
     else if( currentState == psBraking ){
@@ -294,9 +296,9 @@ void TelemetryManager::setReceivedBrakeNodeState(BrakeNodeStates value) {
 
 //          Enclosure
 void TelemetryManager::setEnclosurePressure(float value) {
-    bool status = false;
+    bool status;
     this->telemetry->enclosurePressure = value;
-    status = inRange<float>(value, GENERAL_CONSTANTS::ATMOSPHERE, ENCLOSURE_LIMITS::ATMOSPHERE_THRESHOLD);
+    status = inRange<float>(value, ENCLOSURE_LIMITS::PRESSURE_MIN, ENCLOSURE_LIMITS::PRESSURE_MAX);
     this->setNodeSensorFlag(status, NODE_FLAGS::ENCLOSURE_PRESSURE_INDEX);
 }
 

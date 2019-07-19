@@ -16,6 +16,9 @@
 
     static int32_t COOLING_THRESHOLD = 5;
 
+    static int32_t PRESSURE_MIN = 10;
+    static int32_t PRESSURE_MAX = 19;
+
     static float ATMOSPHERE_THRESHOLD = 5.0f;
 };
 

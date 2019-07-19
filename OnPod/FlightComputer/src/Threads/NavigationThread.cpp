@@ -26,8 +26,8 @@ int8_t getSerialPort(){
     //tcflush( serialPort, TCIFLUSH );
     struct termios SerialPortSettings = {};
     tcgetattr(serialPort, &SerialPortSettings);
-    cfsetispeed(&SerialPortSettings,B115200);
-    cfsetospeed(&SerialPortSettings,B115200);
+    cfsetispeed(&SerialPortSettings,B9600);
+    cfsetospeed(&SerialPortSettings,B9600);
     SerialPortSettings.c_cflag &= ~PARENB;
     SerialPortSettings.c_cflag &= ~CSTOPB;
     SerialPortSettings.c_cflag &= ~CSIZE;
@@ -131,6 +131,7 @@ int32_t NavigationThread(TelemetryManager Pod) {
                 navNodeUpdateFreq.feed();
                 navNodeHeartbeat.feed();
                 Pod.telemetry->navNodeState = navConnected;
+                Pod.setConnectionFlag(1, CONNECTION_FLAGS::NAVIGATION_HEARTBEAT_INDEX);
             }
             else{
                 if(navNodeHeartbeat.expired()){

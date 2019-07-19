@@ -111,7 +111,7 @@ void PodState::commonChecks() {
             throw CriticalErrorException("Communication Flag = " + std::to_string(status));
         }
         else {
-            nonCriticalError += "Node sensor = " + std::to_string(status) + ", ";
+            nonCriticalError += "Communication sensor = " + std::to_string(status) + ", ";
         }
     }
 
@@ -152,7 +152,12 @@ void PodState::armedChecks(){
 
 bool PodState::brakingCriteriaMet() {
     float position = pod->getPodDistance();
-    float remainingTrack = pod->telemetry->flightDistance - position - pod->telemetry->brakeDistance;
+    volatile uint32_t flightDistance = pod->telemetry->flightDistance;
+    volatile uint32_t brakeDistance = pod->telemetry->brakeDistance;
+
+    LOG(INFO)<< flightDistance << " " << position << "  " << brakeDistance;
+
+    float remainingTrack = flightDistance - position -brakeDistance;
     if(remainingTrack <= 0){
         pod->sendUpdate("Braking at : " + std::to_string(pod->telemetry->podPosition));
         return true;
@@ -275,6 +280,7 @@ bool Standby::testTransitions() {
     }
     if(this->pod->getControlsInterfaceState() == ciArm){
         if(this->pod->telemetry->maxFlightTime == 0){
+            this->pod->telemetry->controlsInterfaceState = ciNone;
             std::string failure = "Need flight profile to complete Arming sequence";
             setFailure(failure);
             return false;
@@ -305,7 +311,7 @@ bool Arming::testTransitions() {
         this->setupTransition(psStandby, "Emergency Stop. Pod --> Standby");
         return true;
     }
-    if(this->timeInStateSeconds() < 3 ){ //Allow nodes to update sensors or timeout if not
+    if(this->timeInStateSeconds() < 10 ){ //Allow nodes to update sensors or timeout if not
         return false;
     }
     try {
@@ -373,6 +379,9 @@ bool PreFlight::testTransitions() {
         this->setupTransition(psBraking, "Emergency Stop. Pod --> Braking");
         return true;
     }
+    if(this->timeInStateSeconds() < 2 ){ //Allow nodes
+        return false;
+    }
     try {
         this->commonChecks();
         this->armedChecks();
@@ -409,6 +418,7 @@ Acceleration::~Acceleration() {
     this->pod->telemetry->startTorque = 0;
     this->pod->telemetry->accelerationTime = 0;
     this->pod->telemetry->expectedTubePressure = 0;
+    this->pod->telemetry->maxStripCount = 0;
 }
 
 bool Acceleration::testTransitions() {
@@ -421,8 +431,8 @@ bool Acceleration::testTransitions() {
         this->armedChecks();
     }
     catch (CriticalErrorException &error){
-        std::string reason = "Pod --> Braking";
-        this->setupTransition(psBraking, error.what() + reason);
+        std::string reason = " Critical Pod --> Braking ";
+        this->setupTransition(psBraking, reason + error.what());
         return true;
     }
     catch (const std::runtime_error &error ){

@@ -84,11 +84,11 @@ message Telemetry {
     repeated int32 heartbeatValues = 71;
 
     // Navigation
-    optional int32 podPosition = 9;
-    optional int32 podVelocity = 10;
-    optional int32 stripVelocity = 16;
-    optional int32 resolverVelocity = 17;
-    optional int32 totalStripCount = 63;
+    optional float podPosition = 9;
+    optional float podVelocity = 10;
+    optional float stripVelocity = 16;
+    optional float resolverVelocity = 17;
+    optional float totalStripCount = 63;
 
     // Inverter
     optional int32 maxIgbtTemperature = 18;
