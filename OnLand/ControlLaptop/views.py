@@ -178,6 +178,16 @@ def get_flight_profile_template():
     )
 
 
+@app.route('/battery')
+def batteries():
+    page = 'battery'
+    title = get_page_title(page)
+    return render_template(
+        "battery.html",
+        active_page=page,
+        title=title
+    )
+
 @app.route('/sensor_ranges')
 def add_numbers():
     with open('ControlLaptop/templates/tables/SensorRanges.json') as json_file:

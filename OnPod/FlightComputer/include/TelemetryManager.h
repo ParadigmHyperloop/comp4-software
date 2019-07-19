@@ -71,6 +71,7 @@ class TelemetryManager
         void setHvBatteryPackMaxCellVoltage(float);
         void setHvBatteryPackStateOfCharge(int);
         void setHvBatteryPackMaxCellTemperature(float);
+        void updateCellVoltage(int32_t ,float);
 
         // LV BMS
         void setLv1BatteryPackStateOfCharge(int);

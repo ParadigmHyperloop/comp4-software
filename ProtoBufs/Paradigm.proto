@@ -110,6 +110,7 @@ message Telemetry {
     optional float hvBatteryPackMaxCellVoltage = 30;
     optional float hvBatteryPackMinimumCellVoltage = 29;
     optional int32 hvBatteryPackStateOfCharge = 79;
+    repeated float hvBatteryCellVoltages = 67;
 
     // LV-BMS
     optional int32 lv1BatteryPackStateOfCharge = 85;

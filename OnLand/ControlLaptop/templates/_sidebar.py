@@ -8,6 +8,11 @@ NAV_BAR = [
         'icon': 'pe-7s-rocket'
     },
     {
+        'id': 'battery',
+        'href': 'battery',
+        'title': 'BMS Overview',
+        'icon': 'pe-7s-battery'
+    },
         'id': 'profile',
         'href': 'profile',
         'title': 'Connect To Pod',

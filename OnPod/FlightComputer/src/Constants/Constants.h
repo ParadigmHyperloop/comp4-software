@@ -12,6 +12,8 @@ namespace GENERAL_CONSTANTS
 
     static const int32_t FLAGS_GOOD = -1;
 
+    static const int32_t HV_CELL_COUNT = 194;
+
     static const float   REAR_WHEEL_CIRCUMFRENCE = 0.933619f;
     static const float   STRIP_DISTANCE = 30.48;
 

@@ -76,6 +76,7 @@ struct PodValues {
     float hvBatteryPackMaxCellTemperature = 0;
     int32_t hvFaultCode1 = 0;
     int32_t hvFaultCode2 = 0;
+    std::vector<float> cellVoltages = {};
 
     // LV-BMS
     int32_t lv1BatteryPackStateOfCharge = 0;

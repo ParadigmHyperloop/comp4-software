@@ -122,6 +122,10 @@ void TelemetryManager::setHvBatteryPackStateOfCharge(int value) {
     this->setBmsSensorFlag(status,  BMS_FLAGS::HV_SOC_INDEX);
 }
 
+void TelemetryManager::updateCellVoltage(int32_t cellId,float voltage) {
+    telemetry->cellVoltages[cellId] = voltage;
+}
+
 //          LV BMS
 void TelemetryManager::setLv1BatteryPackStateOfCharge(int value) {
     this->telemetry->lv1BatteryPackStateOfCharge = value;
