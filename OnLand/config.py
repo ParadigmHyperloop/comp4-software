@@ -9,8 +9,8 @@ influx_pw = "hyperloop"
 LOCAL_HOST = '127.0.0.1'
 
 # Space X Packet
-spaceX_IP = "something"
-spaceX_PORT = "something"
+SPACEX_IP = "127.0.0.1"
+SPACEX_PORT = 8888
 
 team_name = "ParaHyp"
 MAX_MESSAGE_SIZE = 4024

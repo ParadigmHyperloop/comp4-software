@@ -14,16 +14,17 @@ from PDS.UDP.PodUdpConnection import PodUdpConnection
 from PDS.helpers.heartbeat_timer import HeartbeatTimer
 from Paradigm_pb2 import Telemetry
 from config import SOCKET_SERVER, POD_IP, UDP_TELEM_PORT, MAX_MESSAGE_SIZE, UDP_TELEM_TIMEOUT, \
-    TELEMETRY_BROADCAST_FREQUENCY
+    TELEMETRY_BROADCAST_FREQUENCY, SPACEX_IP, SPACEX_PORT
+
 import sys
 import json
 broadcast_timer = HeartbeatTimer()
 log.basicConfig(stream=sys.stdout, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
 # SpaceX Packet connection, only to be turned on during Competition run
-SEND_SPACEX_PACKET = False
+SEND_SPACEX_PACKET = True
 if SEND_SPACEX_PACKET:
-    server = ('127.0.0.1', 3000)
+    server = (SPACEX_IP, SPACEX_PORT)
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 # Create socket to connect to server
@@ -47,6 +48,7 @@ def on_disconnect():
 def main():
     log.warning("Telemetry Thread Started")
     connected = False
+    start_time = None
     while not connected:
         try:
             sio.connect(SOCKET_SERVER) # Default namespace only
@@ -73,11 +75,18 @@ def main():
                 pod_data = MessageToDict(pod_data)
                 log.warning("Telemetry: {}".format(pod_data))
                 if SEND_SPACEX_PACKET:
-                    packet = spacex_packet(pod_data)
+                    if pod_data['podState'] == 5:
+                        if accel_time == None:
+                            start_time = time()
+
+                    packet = spacex_packet(pod_data, start_time)
                     sock.sendto(packet, server)
         else:
             connection_status['status'] = 0
             sio.emit('connection_updates', json.dumps(connection_status))
+            if SEND_SPACEX_PACKET:
+                    packet = spacex_packet(None, None)
+                    sock.sendto(packet, server)
             time.sleep(5)
     udp_socket.close()
     connection_status['status'] = 0
