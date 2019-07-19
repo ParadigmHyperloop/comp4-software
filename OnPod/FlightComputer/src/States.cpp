@@ -155,8 +155,6 @@ bool PodState::brakingCriteriaMet() {
     volatile uint32_t flightDistance = pod->telemetry->flightDistance;
     volatile uint32_t brakeDistance = pod->telemetry->brakeDistance;
 
-    LOG(INFO)<< flightDistance << " " << position << "  " << brakeDistance;
-
     float remainingTrack = flightDistance - position -brakeDistance;
     if(remainingTrack <= 0){
         pod->sendUpdate("Braking at : " + std::to_string(pod->telemetry->podPosition));
@@ -418,8 +416,6 @@ Acceleration::Acceleration(TelemetryManager * pod) : PodState(pod) {
 
     volatile uint32_t flightDistance = pod->telemetry->flightDistance;
     volatile uint32_t brakeDistance = pod->telemetry->brakeDistance;
-
-    LOG(INFO)<< flightDistance << " " << "ACCEL CONSTRUCT" << "  " << brakeDistance;
 }
 
 Acceleration::~Acceleration() {
