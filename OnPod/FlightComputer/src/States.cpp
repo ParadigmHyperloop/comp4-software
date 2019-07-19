@@ -386,7 +386,7 @@ bool PreFlight::testTransitions() {
         this->setupTransition(psBraking, "Emergency Stop. Pod --> Braking");
         return true;
     }
-    if(this->timeInStateSeconds() < 2 ){ //Allow nodes
+    if(this->timeInStateSeconds() < 3 ){ //Allow nodes
         return false;
     }
     try {
@@ -419,7 +419,7 @@ Acceleration::Acceleration(TelemetryManager * pod) : PodState(pod) {
 }
 
 Acceleration::~Acceleration() {
-
+    this->pod->telemetry->motorTorque = 0;
 }
 
 bool Acceleration::testTransitions() {

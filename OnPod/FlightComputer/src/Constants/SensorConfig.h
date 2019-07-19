@@ -84,7 +84,7 @@ namespace LV_LIMITS
     static int32_t PRESSURE_TEMP_MAX = 60; //C
 
     static int32_t COOLING_TEMP_MIN = 10;
-    static int32_t COOLING_TEMP_MAX = 30;
+    static int32_t COOLING_TEMP_MAX = 40;
 };
 
 #endif //FLIGHTCOMPUTER_SENSORCONFIG_H

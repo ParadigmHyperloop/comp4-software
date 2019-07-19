@@ -267,7 +267,7 @@ void TelemetryManager::setHighPressure(float value){
 
     if(currentState == psStandby){
         status = inRange<float>(value, GENERAL_CONSTANTS::VACUUM, PNEUMATICS_LIMITS::HIGHPRESSURE_ARMED_MAX);
-    } else if(currentState == psArming || currentState == psArmed || currentState == psAcceleration || currentState == psCoasting){
+    } else if(currentState == psArming || currentState == psArmed || currentState == psAcceleration || currentState == psCoasting || currentState == psPreFlight){
         status = inRange<float>(value, PNEUMATICS_LIMITS::HIGHPRESSURE_ARMED_MIN, PNEUMATICS_LIMITS::HIGHPRESSURE_ARMED_MAX);
     }else if( currentState == psBraking ){
         status = inRange<float>(value, GENERAL_CONSTANTS::VACUUM, PNEUMATICS_LIMITS::HIGHPRESSURE_ARMED_MAX); //TODO confirm this

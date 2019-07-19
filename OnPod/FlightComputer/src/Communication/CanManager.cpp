@@ -183,7 +183,7 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             auto cellId = extractCanValue<int32_t >(frame.data, indices, 1 );
 
             if(cellId > 96){
-                cellId-=11;
+                cellId-=12;
             }
             indices = {1,2};
             auto voltage = extractCanValue<float>(frame.data, indices, 10000);

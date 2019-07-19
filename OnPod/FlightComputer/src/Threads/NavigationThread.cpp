@@ -90,7 +90,7 @@ void readNavigationNode(int serialPort, TelemetryManager &pod){
     std::stringstream().swap(dataStream);
     if(stripCount == "aa"){  //strip count    velocity   pressure
         pod.countIrTape();
-        LOG(INFO)<<"strip : "<< stripCount << " velocity : "<< velocity << "  pressure : " << tubePressure;
+        //LOG(INFO)<<"strip : "<< stripCount << " velocity : "<< velocity << "  pressure : " << tubePressure;
     }
     pod.telemetry->tubePressure = tubePressure;
     pod.telemetry->stripVelocity = velocity;
