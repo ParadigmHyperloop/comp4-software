@@ -98,11 +98,11 @@ void readNavigationNode(int serialPort, TelemetryManager &pod){
 
     if(stripCount > 0){  //strip count    velocity   pressure
         pod.countIrTape();
+        LOG(INFO)<<"strip : "<< stripCount << " velocity : "<< velocity << "  pressure : " << tubePressure;
     }
     pod.telemetry->tubePressure = tubePressure;
     pod.telemetry->stripVelocity = velocity;
 
-    //LOG(INFO)<<"string : "<< stripCount << " velocity : "<< velocity << "  pressure : " << tubePressure;
 }
 
 int32_t NavigationThread(TelemetryManager Pod) {
@@ -130,10 +130,12 @@ int32_t NavigationThread(TelemetryManager Pod) {
             if(success){
                 navNodeUpdateFreq.feed();
                 navNodeHeartbeat.feed();
+                Pod.telemetry->navNodeState = navConnected;
             }
             else{
                 if(navNodeHeartbeat.expired()){
                     Pod.setConnectionFlag(0, CONNECTION_FLAGS::NAVIGATION_HEARTBEAT_INDEX);
+                    Pod.telemetry->navNodeState = navNone;
                 }
             }
         }

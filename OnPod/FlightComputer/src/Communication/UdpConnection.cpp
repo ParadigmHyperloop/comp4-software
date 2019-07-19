@@ -164,7 +164,7 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_podstate(pod.getPodStateValue());
     protoMessage->set_brakenodestate(pod.telemetry->receivedBrakeNodeState);
     protoMessage->set_lvdcnodestate(pod.telemetry->receivedLvdcNodeState);
-
+    protoMessage->set_navnodestate(pod.telemetry->navNodeState);
 
     // Brake Node
     protoMessage->set_lowpressure1(pod.telemetry->lowPressure1);
@@ -225,6 +225,8 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_motorspeed(pod.telemetry->motorSpeed);
     protoMessage->set_podposition(pod.telemetry->podPosition);
     protoMessage->set_podvelocity(pod.telemetry->podVelocity);
+    protoMessage->set_totalstripcount(pod.telemetry->totalStripCount);
+    protoMessage->set_stripvelocity(pod.telemetry->stripVelocity);
 
     // Enclosure
     protoMessage->set_coolantpressure1(pod.telemetry->coolingLinePressure);
@@ -238,8 +240,10 @@ std::unique_ptr<google::protobuf::Message> PdsConnection::getProtoUpdateMessage(
     protoMessage->set_gtnodecurrent(pod.telemetry->gtNodeCurrent);
     protoMessage->set_gtpack1current(pod.telemetry->gtPack1Current);
     protoMessage->set_gtpack1voltage(pod.telemetry->gtPack1Voltage);
-    protoMessage->set_gtpack2current(pod.telemetry->gtPack1Current);
+    protoMessage->set_gtpack2current(pod.telemetry->gtPack2Current);
     protoMessage->set_gtpack2voltage(pod.telemetry->gtPack2Voltage);
+
+   // LOG(INFO)<< pod.telemetry->manualLvdcNodeState << " , " << pod.telemetry->gtPack2Current << ", " << pod.telemetry->gtPack1Current;
 
     if(pod.telemetry->updates.size() > 0){
         std::lock_guard<std::mutex> lock(this->pod.telemetry->updatesLock);

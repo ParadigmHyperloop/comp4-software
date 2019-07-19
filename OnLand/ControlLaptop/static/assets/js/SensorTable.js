@@ -124,6 +124,17 @@ socket.on('pod_telemetry', function (data) {
                 $("#lvdcNodeState").css("background-color", "#FFFFFF");
             }
         }
+        if(value_name === 'navNodeState') {
+            if(value === 'navNone') {
+                $("#navNodeState").css("background-color", "#F2DEDE");
+            }
+            else {
+                $("#navNodeState").css("background-color", "#FFFFFF");
+            }
+        }
+
+
+
 
 
         if(typeof(data[value_name]) == "boolean" || isNaN(data[value_name])){

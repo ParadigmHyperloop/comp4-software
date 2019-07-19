@@ -11,18 +11,6 @@
     "name_pretty": "LP Temperature [C]",
       "order": 2
   },
-  "lv2BatteryPackStateOfCharge": {
-    "name_pretty": "HP State of Charge [%]",
-    "order": 3
-  },
-  "lv2BatteryPackVoltage": {
-    "name_pretty": "HP Pack Voltage [V]",
-    "order": 4
-  },
-    "lv2BatteryPackCellTemperature": {
-    "name_pretty": "HP Temperature [C]",
-      "order": 5
-  },
   "gtPack1Voltage": {
     "name_pretty": "GT LP Voltage [V]",
       "order": 6
@@ -38,21 +26,5 @@
       "gtPack2Current": {
     "name_pretty": "GT HP Current [A]",
       "order": 9
-  },
-      "gtLp5Current": {
-    "name_pretty": "LP 5V Rail Current [A]",
-      "order": 10
-  },
-      "gtLp12Current": {
-    "name_pretty": "LP 12V Rail Current [A]",
-      "order": 11
-  },
-      "gtNodeCurrent": {
-    "name_pretty": "Brake Node Current [A]",
-      "order": 12
-  },
-      "gtInverterCurrent": {
-    "name_pretty": "Inverter Current [A]",
-      "order": 13
   }
 }
