@@ -1,12 +1,15 @@
 #include <math.h>
-
 #include "TaxiBrakingCriteria.hpp"
 
 
-TaxiBrakingCriteria::TaxiBrakingCriteria(){}
+//TaxiBrakingCriteria::TaxiBrakingCriteria(){}
 
-TaxiBrakingCriteria::TaxiBrakingCriteria(uint32_t targetDistance, uint32_t targetVelocity, TelemetryManager* telemetryManager, bool shouldBrakeAfter)
-:_targetDistance(targetDistance), _telemManager(telemetryManager)
+TaxiBrakingCriteria::TaxiBrakingCriteria(
+    uint32_t targetDistance,
+    uint32_t targetVelocity,
+//    TelemetryManager* telemetryManager,
+    bool shouldBrakeAfter)
+    :_targetDistance(targetDistance)//, _telemManager(telemetryManager)
 {
   _targetVelocityInRPM = 0; //convertTargetSpeedToRPM(targetVelocity);
   _brakingMethod = shouldBrakeAfter ? BrakingMethod::BRAKES : BrakingMethod::COASTING;
@@ -18,19 +21,21 @@ TaxiBrakingCriteria::~TaxiBrakingCriteria() {}
 
 bool TaxiBrakingCriteria::ShouldEndTaxi() {
   this->updateMotorProfile();
-  return _motorDistanceToBrake >= _telemManager->telemetry->motorDistance;
+  //return _motorDistanceToBrake >= _telemManager->telemetry->motorDistance;
 }
 
 void TaxiBrakingCriteria::updateMotorProfile()
 {
   uint32_t offset = 5;
+  /*
   if (_targetVelocityInRPM  < (this->_telemManager->telemetry->motorSpeed - offset))
   {
-    // TODO Motor Speed to increase
+    break;// TODO Motor Speed to increase
   } else if (_targetVelocityInRPM >= (this->_telemManager->telemetry->motorSpeed + offset ))
   {
-    // TODO Turn Motor off
+    break;// TODO Turn Motor off
   }
+   */
 }
 
 
@@ -55,6 +60,7 @@ int32_t TaxiBrakingCriteria::convertTargetSpeedToRPM(uint32_t targetSpeed) {
 
 uint32_t TaxiBrakingCriteria::getTargetDistanceToBrake(uint32_t targetVelocity) {
   uint32_t decelerationRate = this->_brakingMethod == BrakingMethod::BRAKES ? 1: 2;
+
   uint32_t distanceToBrake = (pow(targetVelocity, 2) / (2 * decelerationRate));
   uint32_t totalTargetDistance = _targetDistance - distanceToBrake;
   return totalTargetDistance;

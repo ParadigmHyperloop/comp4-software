@@ -1,8 +1,11 @@
 #ifndef FLIGHTCOMPUTER_STATES_H
 #define FLIGHTCOMPUTER_STATES_H
 
+//#include "TaxiBrakingCriteria.hpp"
 #include "TelemetryManager.h"
 #include "Constants/Constants.h"
+#include "TaxiBrakingCriteria.hpp"
+//#include "TaxiBrakingCriteria.hpp"
 
 class TelemetryManager;
 
@@ -103,7 +106,15 @@ public:
     ~Acceleration();
     float getBrakingDistance();
     bool testTransitions() override;
-//    TaxiBrakingCriteria* _brakingCriteria = nullptr;
+
+    PodStates NextStateToTransitionTo();
+    bool ShouldEndTaxi();
+    void updateMotorProfile();
+    int32_t convertTargetSpeedToRpm();
+    uint32_t getTargetDistanceToBrake();
+private:
+  uint32_t _motorDistanceToBrake;
+//  TaxiBrakingCriteria* _brakingCriteria = nullptr;
 };
 
 class Coasting : public PodState{

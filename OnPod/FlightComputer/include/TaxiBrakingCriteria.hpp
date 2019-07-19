@@ -1,8 +1,8 @@
 #ifndef FLIGHTCOMPUTER_TAXIBRAKINGCRITERIA_HPP
 #define FLIGHTCOMPUTER_TAXIBRAKINGCRITERIA_HPP
 
+
 #include "TelemetryManager.h"
-#include "easylogging++.h"
 #include "ITaxiBrakingCriteria.hpp"
 
 class TaxiBrakingCriteria: ITaxiBrakingCriteria {
@@ -22,9 +22,9 @@ public:
 public:
   TaxiBrakingCriteria();
   TaxiBrakingCriteria(uint32_t targetDistance,
-      uint32_t targetSpeed,
-      TelemetryManager* telemetryManager,
-      bool shouldBrakeAfter);
+                      uint32_t targetSpeed,
+//                      TelemetryManager* telemetryManager,
+                      bool shouldBrakeAfter);
   ~TaxiBrakingCriteria();
   bool ShouldEndTaxi();
   PodStates NextStateToTransitionTo();
@@ -37,7 +37,7 @@ protected:
   uint32_t getTargetDistanceToBrake(uint32_t targetVelocity);
 
 private:
-  TelemetryManager* _telemManager;
+//  TelemetryManager* _telemManager;
   BrakingMethod _brakingMethod;
   uint32_t _motorDistanceToBrake;
 
@@ -45,5 +45,7 @@ private:
   int32_t _targetVelocityInRPM;  // RPM
 
 };
+
+
 
 #endif //FLIGHTCOMPUTER_TAXIBRAKINGCRITERIA_HPP

@@ -1,3 +1,4 @@
+//#include <TaxiBrakingCriteria.hpp>
 #include <TaxiBrakingCriteria.hpp>
 #include "States.h"
 #include "easylogging++.h"
@@ -378,8 +379,8 @@ Acceleration::Acceleration(TelemetryManager * pod) : PodState(pod) {
 //          this->pod->telemetry->flightDistance,
 //          this->pod->telemetry->maxVelocity,
 //          pod,
+//          false
 //      );
-//      break;
 //    } else{
 //      _brakingCriteria = nullptr;
 //    }
@@ -429,6 +430,38 @@ bool Acceleration::testTransitions() {
     }
 //     TODO - Add Taxi Checks, if there is Taxi.
     return false;
+}
+
+PodStates Acceleration::NextStateToTransitionTo()
+{
+  // TODO, decide to brake or coast.
+  return PodStates::psBraking;
+}
+
+bool Acceleration::ShouldEndTaxi()
+{
+  // TODO
+  // updateMotorProfile();
+
+  // return _motorDistanceToBrake >= _telemManager->telemetry->motorDistance;
+
+  return false;
+}
+
+void Acceleration::updateMotorProfile()
+{
+
+}
+
+int32_t Acceleration::convertTargetSpeedToRpm()
+{
+
+}
+
+uint32_t Acceleration::getTargetDistanceToBrake()
+{
+
+
 }
 
 // *  ******************** COASTING ***********************

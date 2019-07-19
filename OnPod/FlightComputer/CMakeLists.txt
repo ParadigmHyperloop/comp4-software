@@ -33,7 +33,7 @@ if (THREADS_HAVE_PTHREAD_ARG)
     target_compile_options(FlightComputer PUBLIC "-pthread")
 endif ()
 
-add_executable(FlightComputer ${SOURCES}  ${PROTO_HDRS} src/Helpers/TaxiBrakingCriteria.cpp include/TaxiBrakingCriteria.hpp)
+add_executable(FlightComputer ${SOURCES}  ${PROTO_HDRS})
 
 target_link_libraries(FlightComputer ${Protobuf_LIBRARIES})
 
