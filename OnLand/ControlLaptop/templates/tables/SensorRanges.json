@@ -111,7 +111,7 @@
   },
   "maxIgbtTemperature": {
     "psBooting": [0,0],
-    "psStandby": [10,100],
+    "psStandby": [0,0],
     "psArming" : [10,100],
     "psArmed" : [10,100],
     "psPreFlight" : [10,150],
@@ -122,7 +122,7 @@
   },
   "gateDriverTemperature": {
     "psBooting": [0,0],
-    "psStandby": [10,80],
+    "psStandby": [0,0],
     "psArming" : [10,80],
     "psArmed" : [10,80],
     "psPreFlight" : [10,80],
@@ -133,7 +133,7 @@
   },
   "inverterControlBoardTemperature": {
     "psBooting": [0,0],
-    "psStandby": [10,80],
+    "psStandby": [0,0],
     "psArming" : [10,80],
     "psArmed" : [10,80],
     "psPreFlight" : [10,80],
@@ -144,7 +144,7 @@
   },
   "motorTemperature": {
     "psBooting": [0,0],
-    "psStandby": [15,40],
+    "psStandby": [0,0],
     "psArming" : [15,40],
     "psArmed" : [15,40],
     "psPreFlight" : [15,40],
@@ -406,14 +406,14 @@
     "psNone" : [0,0]
   },
     "gtPack2Current": {
-    "psBooting": [0,0],
-    "psStandby": [0,0],
-    "psArming" : [0,0],
-    "psArmed" : [0,0],
-    "psPreFlight" : [0,0],
-    "psAcceleration": [0,0],
-    "psCoasting": [0,0],
-    "psBraking" : [0,0],
+    "psBooting": [0.1,1],
+    "psStandby": [0,2],
+    "psArming" : [0,2],
+    "psArmed" : [0,2],
+    "psPreFlight" : [0.1,2],
+    "psAcceleration": [0.1,10],
+    "psCoasting": [0.1,10],
+    "psBraking" : [0,10],
     "psNone" : [0,0]
   }
 }

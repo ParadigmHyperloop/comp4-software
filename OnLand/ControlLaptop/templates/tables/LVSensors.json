@@ -13,18 +13,18 @@
   },
   "gtPack1Voltage": {
     "name_pretty": "GT LP Voltage [V]",
-      "order": 6
+      "order": 3
   },
       "gtPack2Voltage": {
     "name_pretty": "GT HP Voltage [V]",
-      "order": 8
+      "order": 4
   },
       "gtPack1Current": {
     "name_pretty": "GT LP Current [A]",
-      "order": 7
+      "order": 5
   },
       "gtPack2Current": {
     "name_pretty": "GT HP Current [A]",
-      "order": 9
+      "order": 6
   }
 }
