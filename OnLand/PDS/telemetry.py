@@ -26,6 +26,7 @@ SEND_SPACEX_PACKET = True
 if SEND_SPACEX_PACKET:
     server = (SPACEX_IP, SPACEX_PORT)
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    spacex_timer = HeartbeatTimer()
 
 # Create socket to connect to server
 sio = socketio.Client()
@@ -68,12 +69,15 @@ def main():
         if data is not None:
             pod_data = Telemetry()
             pod_data.ParseFromString(data)
+
             if SEND_SPACEX_PACKET:
-                if MessageToDict(pod_data)['podState'] == 5:
-                    if start_time == None:
-                        start_time = datetime.datetime.now()
-                packet = spacex_packet(MessageToDict(pod_data), start_time)
-                sock.sendto(packet, server)
+                if (MessageToDict(pod_data)['podState'] == 5) and (start_time == None):
+                    start_time = datetime.datetime.now()
+                if spacex_timer.time_since_pulse() >= 0.04 or pod_data.updateMessages:
+                    spacex_timer.pulse()
+                    packet = spacex_packet(MessageToDict(pod_data), start_time)
+                    sock.sendto(packet, server)
+            
             if broadcast_timer.time_since_pulse() > TELEMETRY_BROADCAST_FREQUENCY or pod_data.updateMessages:
                 broadcast_timer.pulse()
                 json_pod_data = json_format.MessageToJson(pod_data)
