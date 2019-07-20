@@ -9,7 +9,7 @@ influx_pw = "hyperloop"
 LOCAL_HOST = '127.0.0.1'
 
 # Space X Packet
-SPACEX_IP = "127.0.0.1"
+SPACEX_IP = "192.168.0.4"
 SPACEX_PORT = 8888
 
 team_name = "ParaHyp"
@@ -28,7 +28,7 @@ SOCKET_SERVER = 'http://localhost:5000'
 
 
 # Pod
-# POD_IP = '127.0.0.1'
+#POD_IP = '127.0.0.1'
 POD_IP = '192.168.0.10'
 #POD_IP = '192.168.7.2'
 POD_CONFIG_PORT = 3001

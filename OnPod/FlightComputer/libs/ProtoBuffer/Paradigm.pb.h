@@ -2512,7 +2512,7 @@ class FlightConfig :
   ::google::protobuf::int32 heartbeattimeout() const;
   void set_heartbeattimeout(::google::protobuf::int32 value);
 
-  // optional int32 pdsUpdateFreq = 10 [default = 100];
+  // optional int32 pdsUpdateFreq = 10 [default = 50];
   bool has_pdsupdatefreq() const;
   void clear_pdsupdatefreq();
   static const int kPdsUpdateFreqFieldNumber = 10;
@@ -5748,12 +5748,12 @@ inline void FlightConfig::set_brakenodeserverport(::google::protobuf::uint64 val
   // @@protoc_insertion_point(field_set:FlightConfig.brakeNodeServerPort)
 }
 
-// optional int32 pdsUpdateFreq = 10 [default = 100];
+// optional int32 pdsUpdateFreq = 10 [default = 50];
 inline bool FlightConfig::has_pdsupdatefreq() const {
   return (_has_bits_[0] & 0x00000100u) != 0;
 }
 inline void FlightConfig::clear_pdsupdatefreq() {
-  pdsupdatefreq_ = 100;
+  pdsupdatefreq_ = 50;
   _has_bits_[0] &= ~0x00000100u;
 }
 inline ::google::protobuf::int32 FlightConfig::pdsupdatefreq() const {

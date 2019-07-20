@@ -1,7 +1,7 @@
 import socketio
 import time
 import logging as log
-import time
+import datetime
 import socket
 import socketio
 
@@ -68,19 +68,19 @@ def main():
         if data is not None:
             pod_data = Telemetry()
             pod_data.ParseFromString(data)
+            if SEND_SPACEX_PACKET:
+                if MessageToDict(pod_data)['podState'] == 5:
+                    if start_time == None:
+                        start_time = datetime.datetime.now()
+                packet = spacex_packet(MessageToDict(pod_data), start_time)
+                sock.sendto(packet, server)
             if broadcast_timer.time_since_pulse() > TELEMETRY_BROADCAST_FREQUENCY or pod_data.updateMessages:
                 broadcast_timer.pulse()
                 json_pod_data = json_format.MessageToJson(pod_data)
                 sio.emit('pod_telemetry', json_pod_data)
                 pod_data = MessageToDict(pod_data)
                 log.warning("Telemetry: {}".format(pod_data))
-                if SEND_SPACEX_PACKET:
-                    if pod_data['podState'] == 5:
-                        if accel_time == None:
-                            start_time = time()
 
-                    packet = spacex_packet(pod_data, start_time)
-                    sock.sendto(packet, server)
         else:
             connection_status['status'] = 0
             sio.emit('connection_updates', json.dumps(connection_status))
