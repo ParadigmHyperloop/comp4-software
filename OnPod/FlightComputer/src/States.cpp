@@ -164,7 +164,7 @@ bool PodState::brakingCriteriaMet() {
     
     if(pod->telemetry->totalStripCount >= pod->telemetry->maxStripCount){
         pod->sendUpdate("Braking at maximum strip count");
-        return true;
+       // return true;
     }
 
     return false;
