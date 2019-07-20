@@ -8,11 +8,11 @@
 // Enclosure
  namespace ENCLOSURE_LIMITS
 {
-    static int32_t ENCLOSURE_TEMP_MIN = 20;
-    static int32_t ENCLOSURE_TEMP_MAX = 60; //todo validate
+    static int32_t ENCLOSURE_TEMP_MIN = 10;
+    static int32_t ENCLOSURE_TEMP_MAX = 60;
 
-    static int32_t COOLING_ENGAGED_MIN = 20; //TODO validate
-    static int32_t COOLING_ENGAGED_MAX = 35;
+    static int32_t COOLING_ENGAGED_MIN = 18;
+    static int32_t COOLING_ENGAGED_MAX = 40;
 
     static int32_t COOLING_THRESHOLD = 5;
 

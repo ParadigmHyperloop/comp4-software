@@ -1,13 +1,17 @@
 #include <Paradigm.pb.h>
+
 #include "TelemetryManager.h"
 #include "Common.h"
 #include "comparingHelpers.h"
 
 TelemetryManager::TelemetryManager()=default;
 
-TelemetryManager::TelemetryManager(PodValues *sPodValues, PodNetwork *sNetworkVals) {
+TelemetryManager::TelemetryManager(PodValues *sPodValues, PodNetwork *sNetworkVals,
+    SevenSegStateDisplay* sevenSegStateDisplay) {
     this->telemetry = sPodValues;
     this->sPodNetworkValues = sNetworkVals;
+
+    this->_sevenSegmentDisplay = sevenSegStateDisplay;
 }
 
 
@@ -30,12 +34,14 @@ ControlsInterfaceStates TelemetryManager::getControlsInterfaceState() {
     return state;
 }
 
-
 //          State setting
 
 void TelemetryManager::setPodState(PodStates newState, const std::string &reason) {
     std::lock_guard<std::mutex> lock(this->telemetry->stateLock);
     this->telemetry->podState = std::move(PodState::createState(newState, this));
+
+    this->_sevenSegmentDisplay->ClearDsiplay();
+    this->_sevenSegmentDisplay->DisplayState(newState);
 };
 
 void TelemetryManager::setControlsInterfaceState(ControlsInterfaceStates eTerminalState) {
@@ -424,9 +430,7 @@ void TelemetryManager::addPodDistance(float distance) {
 void TelemetryManager::countIrTape() {
     float difference = getPodDistance() - GENERAL_CONSTANTS::STRIP_DISTANCE;
 
-    LOG(INFO) << "Difference : " << difference;
-
-    if(telemetry->totalStripCount == 0){
+    if(telemetry->totalStripCount == 0 && difference <= 5){
         setPodDistance(GENERAL_CONSTANTS::STRIP_DISTANCE);
     }
     telemetry->totalStripCount++;

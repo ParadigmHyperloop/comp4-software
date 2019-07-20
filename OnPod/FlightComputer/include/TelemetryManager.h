@@ -6,6 +6,7 @@
 #include "States.h"
 #include "Constants/SensorConfig.h"
 #include "Constants/Constants.h"
+#include "SevenSegStateDisplay.hpp"
 #include <mutex>
 
 class TelemetryManager
@@ -13,7 +14,7 @@ class TelemetryManager
 	public:
 		TelemetryManager();
 
-		TelemetryManager(PodValues*, PodNetwork*);
+		TelemetryManager(PodValues*, PodNetwork*, SevenSegStateDisplay*);
         // Send Updates
         void sendUpdate(std::string);
 
@@ -33,7 +34,6 @@ class TelemetryManager
         void addPodDistance(float);
         void setPodDistance(float);
         float getPodDistance();
-        void setPodVelocity(float);
         void countIrTape();
 
 		// Controls Interface
@@ -94,6 +94,9 @@ class TelemetryManager
         //Shared Memory Space
         struct PodValues* telemetry;
         struct PodNetwork* sPodNetworkValues;
+
+        // SevenSeg Display
+        SevenSegStateDisplay* _sevenSegmentDisplay;
 };
 
 #endif //FLIGHTCOMPUTER_TELEMETRYMANAGER_H

@@ -15,6 +15,7 @@ INITIALIZE_EASYLOGGINGPP
 #include "CanBusThread.h"
 #include "Constants/Constants.h"
 #include "Constants/SensorConfig.h"
+#include "SevenSegStateDisplay.hpp"
 #include "NavigationThread.h"
 
 using namespace std;
@@ -34,8 +35,19 @@ void initializeTelemetryStruct(PodValues &telemetry){
     telemetry.cellVoltages = std::vector<float>(GENERAL_CONSTANTS::HV_CELL_COUNT, 0);
 }
 
+void TestSevenSegment(SevenSegStateDisplay* stateDisplay)
+{
+  for (int i = 0; i < 10; i++)
+  {
+    stateDisplay->TestDisplay(i);
 
-int main( int32_t argc, char** argv)
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+  }
+
+}
+
+
+int main(int32_t argc, char** argv)
 {
     signal(SIGPIPE, signal_callback_handler);
 
@@ -50,7 +62,7 @@ int main( int32_t argc, char** argv)
 	while(!configReceived){
 	    configReceived = true;
         try {
-          flightConfigurationParameters = configurationServer->runServer(); //Comment out to use the default network values in the proto obj
+            flightConfigurationParameters = configurationServer->runServer(); //Comment out to use the default network values in the proto obj
         } catch (exception& e)
         {
             configurationServer->closePorts();
@@ -63,28 +75,38 @@ int main( int32_t argc, char** argv)
     PodValues sPodValues = {};
     initializeTelemetryStruct(sPodValues);
 
+
     // Network Configs
     initializer->updatePodNetworkValues(sPodNetworkValues, flightConfigurationParameters);
 
     //Core Control Loop Thread
-    TelemetryManager controlTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
+
+    SevenSegStateDisplay* stateDisplay = initializer -> GetSevenSegStateDisplay();
+    TestSevenSegment(stateDisplay); // TODO: remove after testing.
+  TelemetryManager controlTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues, stateDisplay );
+
+//    sPodValues.stateDisplay = std::move(stateDisplay);
+
+
+    // Initiate Threads.
     controlTelemManager.setPodState(psBooting, (std::string)"Booting..."); // Set Pod state to booting
     std::thread coreControlThread(coreControlLoopThread, controlTelemManager);
 
     //CAN Thread
-    TelemetryManager canTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
+    TelemetryManager canTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues, stateDisplay);
     std::thread canThread(canNetworkThread, canTelemManager);
 
-    //Navigation Thread
-    TelemetryManager navTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
+
+   // Navigation Thread
+    TelemetryManager navTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues, stateDisplay);
     std::thread navThread(NavigationThread, navTelemManager);
 
     //TelemetryManager Internal Network Thread
-    TelemetryManager pinTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues);
+    TelemetryManager pinTelemManager = TelemetryManager(&sPodValues, &sPodNetworkValues, stateDisplay);
     std::thread pinThread(udpTelemetryThread, pinTelemManager);
 
 	// Controls Interface Connection Thread
-	TelemetryManager pCommanderThread = TelemetryManager(&sPodValues, &sPodNetworkValues);
+	TelemetryManager pCommanderThread = TelemetryManager(&sPodValues, &sPodNetworkValues, stateDisplay);
 	std::thread controlsInterfaceThread(commanderThread, pCommanderThread);
 
 	coreControlThread.join();

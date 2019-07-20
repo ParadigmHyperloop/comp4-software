@@ -51,3 +51,17 @@ void FlightComputerInitializer::updatePodNetworkValues(PodNetwork& podNetworkVal
     podNetworkValues.pdsUpdateFreq = config.pdsupdatefreq();
     podNetworkValues.pdsTelemeteryPort = config.pdstelemetryport(); // Port # to send telemetry
 }
+
+SevenSegStateDisplay* FlightComputerInitializer::GetSevenSegStateDisplay()
+{
+  el::Helpers::setThreadName("main");
+  std::ifstream infile("/home/debian/logging.conf");
+  bool onBeagle = false;
+  if (infile.good())
+  {
+    onBeagle = true;
+  }
+
+  return new SevenSegStateDisplay(onBeagle);
+}
+
