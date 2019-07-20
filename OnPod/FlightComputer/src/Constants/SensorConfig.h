@@ -81,7 +81,7 @@ namespace LV_LIMITS
     static int32_t HIGHPRESSURE_ARMED_MIN = 1550;
 
     static int32_t PRESSURE_TEMP_MIN = 0;
-    static int32_t PRESSURE_TEMP_MAX = 60; //C
+    static int32_t PRESSURE_TEMP_MAX = 60;
 
     static int32_t COOLING_TEMP_MIN = 10;
     static int32_t COOLING_TEMP_MAX = 40;

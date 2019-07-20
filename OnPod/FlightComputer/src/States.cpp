@@ -157,7 +157,8 @@ bool PodState::brakingCriteriaMet() {
 
     float remainingTrack = flightDistance - position -brakeDistance;
     if(remainingTrack <= 0){
-        pod->sendUpdate("Braking at : " + std::to_string(pod->telemetry->podPosition));
+        pod->sendUpdate("Braking at : " + std::to_string(pod->telemetry->podPosition);
+        LOG(INFO)<<" Braking at distance : flight distance : " <<flightDistance << "   Brake Distance : " << brakeDistance;
         return true;
     }
     

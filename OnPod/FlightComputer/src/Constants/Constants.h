@@ -2,6 +2,12 @@
 #ifndef FLIGHTCOMPUTER_CONSTANTS_H
 #define FLIGHTCOMPUTER_CONSTANTS_H
 
+namespace HEARTBEAT_TIMEOUTS
+{
+    static const uint32_t INVERTER_TIMEOUT = 2;
+    static const uint32_t BMS_TIMEOUT = 2;
+}
+
 namespace GENERAL_CONSTANTS
 {
     static const uint32_t VACUUM = 0;

@@ -64,7 +64,7 @@ struct PodValues {
     bool automaticTransitions = true;
 
     //ConnectionsArray
-    std::vector<int32_t> connectionFlags;  // brakeNode, LVDCNode, BMS, Interface
+    std::vector<int32_t> connectionFlags;
     std::vector<int32_t> nodeSensorFlags;
     std::vector<int32_t> inverterSensorFlags;
     std::vector<int32_t> bmsSensorFlags;

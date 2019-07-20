@@ -210,7 +210,7 @@ void TelemetryManager::setSolenoid(bool value, int32_t identifier){
 
 void TelemetryManager::setLowPressure4(float value, PodStates currentState) {
     bool status = true;
-    if(currentState == psArming || currentState == psArmed || currentState == psAcceleration || currentState == psCoasting){
+    if(currentState == psArming || currentState == psArmed || currentState == psAcceleration || currentState == psCoasting || currentState == psPreFlight){
         status = inRange<float>(value, PNEUMATICS_LIMITS::LOWPRESSURE_ENGAGED_MIN, PNEUMATICS_LIMITS::LOWPRESSURE_ENGAGED_MAX);
     }
     this->setNodeSensorFlag(status, NODE_FLAGS::LP4_INDEX);
@@ -218,7 +218,7 @@ void TelemetryManager::setLowPressure4(float value, PodStates currentState) {
 
 void TelemetryManager::setLowPressure(float value, int identifier){
 
-    bool status = false;
+    bool status = true;
     PodStates currentState = this->getPodStateValue();
 
     // Set Value in Memory
@@ -384,8 +384,8 @@ void TelemetryManager::setInverterBusVoltage(int value) {
 
     bool status = true;
     PodStates currentState = this->getPodStateValue();
-    if(currentState == psArming || currentState == psArmed){
-        // status = less than todo
+    if(currentState == psArming || currentState == psArmed || currentState == psPreFlight){
+
     }else if( currentState == psAcceleration ){
         // status = less than todo
     }
@@ -435,10 +435,6 @@ void TelemetryManager::countIrTape() {
 void TelemetryManager::setPodDistance(float distance) {
     std::lock_guard<std::mutex> lock(this->telemetry->positionLock);
     telemetry->podPosition = distance;
-}
-
-void TelemetryManager::setPodVelocity(float velocity) {
-    telemetry->podVelocity = velocity;
 }
 
 float TelemetryManager::getPodDistance() {
@@ -500,12 +496,14 @@ void TelemetryManager::resetValues(int32_t index){
 
 void TelemetryManager::setNodeSensorFlag(int32_t status, int32_t index){
     int32_t currentStatus = this->telemetry->nodeSensorFlags[index];
-    if(currentStatus == 2){ // Manual override high
+    if(currentStatus == 2){
         return;
     }
     if(currentStatus != status){
         this->telemetry->nodeSensorFlags[index] = status;
-        return;
+    }
+    if(currentStatus == 1 && status == 0){
+        LOG(INFO) << "Setting node " << index <<" to zero";
     }
 }
 

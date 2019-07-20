@@ -258,7 +258,7 @@ int canNetworkThread(TelemetryManager Pod){
         return -1;
     }
     try{
-       ;//  startInverterBroadcast(canSockBcm);
+        startInverterBroadcast(canSockBcm);
     }
     catch (const std::runtime_error &error){
         LOG(INFO) << error.what();
