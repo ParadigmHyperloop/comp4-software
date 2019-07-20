@@ -254,7 +254,7 @@ void TelemetryManager::setLowPressure(float value, int identifier){
     }
 
     else if(currentState == psArming || currentState == psArmed || currentState == psAcceleration || currentState == psCoasting || currentState == psPreFlight){
-        status =  inRange<float>(value, PNEUMATICS_LIMITS::LOWPRESSURE_UNARMED_MIN, PNEUMATICS_LIMITS::LOWPRESSURE_UNARMED_MAX);
+        ;//status =  inRange<float>(value, PNEUMATICS_LIMITS::LOWPRESSURE_UNARMED_MIN, PNEUMATICS_LIMITS::LOWPRESSURE_UNARMED_MAX);
     }
 
     else if( currentState == psBraking ){
@@ -379,6 +379,7 @@ void TelemetryManager::setMotorSpeed(int32_t value) {
 
     float milliseconds = (std::chrono::duration_cast<std::chrono::microseconds>(thisTime - lastTime).count())/1000.0;
     float distance = average*milliseconds * GENERAL_CONSTANTS::REAR_WHEEL_CIRCUMFRENCE;
+    LOG(INFO)<< "Distance : " << distance <<"   Average : " << average;
     addPodDistance(distance);
     
     telemetry->podVelocity = (value*GENERAL_CONSTANTS::REAR_WHEEL_CIRCUMFRENCE)/60.0;

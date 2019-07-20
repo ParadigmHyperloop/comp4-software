@@ -292,6 +292,7 @@ int canNetworkThread(TelemetryManager Pod){
             currentTorque = newTorque;
             setInverterTorque(currentTorque, canSockBcm);
         }
+        std::this_thread::sleep_for(std::chrono::milliseconds(2));
     }
     close(canSockRaw);
 }

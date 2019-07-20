@@ -9,7 +9,7 @@ influx_pw = "hyperloop"
 LOCAL_HOST = '127.0.0.1'
 
 # Space X Packet
-SPACEX_IP = "192.168.0.4"
+SPACEX_IP = "192.168.0.2"
 SPACEX_PORT = 8888
 
 team_name = "ParaHyp"

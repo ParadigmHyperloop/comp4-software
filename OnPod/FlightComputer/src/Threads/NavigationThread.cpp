@@ -111,6 +111,7 @@ int32_t NavigationThread(TelemetryManager Pod) {
     bool success;
     while(Pod.getPodStateValue() != psShutdown)
     {
+        std::this_thread::sleep_for(std::chrono::milliseconds(2));
         if(navNodeUpdateFreq.expired()){
             success = true;
             try {

@@ -5,6 +5,7 @@ void coreControlLoopThread(TelemetryManager pod){
     el::Helpers::setThreadName("Core Control Thread");
     while(pod.getPodStateValue() != psShutdown){
         while(pod.telemetry->automaticTransitions && pod.getPodStateValue() != psShutdown){
+            std::this_thread::sleep_for(std::chrono::milliseconds(1));
             pod.telemetry->podState->testTransitions();
             if (pod.telemetry->podState->isTransitioning()) {
                 const std::string reason = pod.telemetry->podState->getTransitionReason();
@@ -14,6 +15,7 @@ void coreControlLoopThread(TelemetryManager pod){
             }
         }
         while(!pod.telemetry->automaticTransitions && pod.getPodStateValue() != psShutdown && pod.telemetry->connectionFlags[CONNECTION_FLAGS::INTERFACE_HEARTBEAT_INDEX] == 1){
+            std::this_thread::sleep_for(std::chrono::milliseconds(1));
             if(pod.telemetry->controlsInterfaceState == ciEmergencyStop){
                 pod.telemetry->automaticTransitions = true;
                 continue;

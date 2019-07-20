@@ -90,6 +90,7 @@ int32_t udpTelemetryThread(TelemetryManager Pod) {
     }
 
     while (Pod.getPodStateValue() != psShutdown) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(2));
         // Give and get update for each node
         for (auto &&node: nodes) {
             try {

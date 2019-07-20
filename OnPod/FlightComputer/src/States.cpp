@@ -155,10 +155,10 @@ bool PodState::brakingCriteriaMet() {
     volatile uint32_t flightDistance = pod->telemetry->flightDistance;
     volatile uint32_t brakeDistance = pod->telemetry->brakeDistance;
 
-    float remainingTrack = flightDistance - position -brakeDistance;
+    float remainingTrack = flightDistance - position - brakeDistance;
     if(remainingTrack <= 0){
         pod->sendUpdate("Braking at : " + std::to_string(pod->telemetry->podPosition));
-        LOG(INFO)<<" Braking at distance : flight distance : " <<flightDistance << "   Brake Distance : " << brakeDistance;
+        LOG(INFO)<<" Braking at distance : flight distance : " <<flightDistance << "   Brake Distance : " << brakeDistance << "  Position : "<< position;
         return true;
     }
     
@@ -311,10 +311,6 @@ bool Arming::testTransitions() {
         this->setupTransition(psStandby, "Emergency Stop. Pod --> Standby");
         return true;
     }
-    if(pod->getPodDistance() > GENERAL_CONSTANTS::STATIONARY_THRSHOLD_M){
-        this->setupTransition(psBraking,"Unexpected Movement Pod-->Braking");
-        return true;
-    }
     if(this->timeInStateSeconds() < 10 ){ //Allow nodes to update sensors or timeout if not
         return false;
     }
@@ -340,6 +336,8 @@ Armed::Armed(TelemetryManager * pod) : PodState(pod) {
     _stateIdentifier = psArmed;
     this->pod->telemetry->commandedBrakeNodeState = bnsStandby;
     this->pod->telemetry->commandedLvdcNodeState = lvdcFlight;
+    pod->telemetry->podPosition = 0;
+    pod->telemetry->totalStripCount = 0;
 }
 
 Armed::~Armed() {

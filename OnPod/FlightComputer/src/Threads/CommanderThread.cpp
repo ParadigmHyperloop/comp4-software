@@ -190,6 +190,7 @@ int32_t commanderThread(TelemetryManager Pod) {
         LOG(INFO) << "Controls Interface Connected";
         pulse.feed();
         while (Pod.getPodStateValue() != psShutdown) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(2));
             messageSize = read(connectionSock, buffer, 255);
             if (messageSize < 0) {
                 if (pulse.expired()) {
