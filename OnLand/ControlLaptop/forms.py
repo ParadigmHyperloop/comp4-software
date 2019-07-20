@@ -7,7 +7,7 @@ class OverridesForm(FlaskForm):
     lp_1 = BooleanField("N0 : Low Pressure 1")
     lp_2 = BooleanField("N1 : Low Pressure 2")
     lp_3 = BooleanField("N2 : Low Pressure 3")
-    lp_4 = BooleanField("N3 : Low Pressure 3")
+    lp_4 = BooleanField("N3 : Regulated Pressure")
     hp = BooleanField("N4 : High Pressure")
     hp_temp = BooleanField("N5 : Tank Temperature")
     bms_values = BooleanField("C2: BMS Values")
@@ -46,7 +46,7 @@ class FlightProfileForm(FlaskForm):
     flight_distance = IntegerField('Flight Distance (m)', validators=[DataRequired("Required"), NumberRange(0, 2300, "0  < Flight Distance < 2300 ")])
     taxi = BooleanField("Taxi")
     tube_pressure = IntegerField(' Tube Pressure ', default=0)
-    max_velocity = IntegerField('Max Velocity', validators=[DataRequired("Required"), NumberRange(-1, 200, " 0  < Max velocity < 200 ")])
+    max_velocity = IntegerField('Max Velocity', validators=[DataRequired("Required"), NumberRange(-1, 500, " 0  < Max velocity < 200 ")])
     brake_distance = IntegerField('Braking Distance', validators=[DataRequired("Required"), NumberRange(-1, 500, " 0  < Braking Distance < 500 ")])
 
 

@@ -31,7 +31,6 @@ PodStates TelemetryManager::getPodStateValue() {
 
 ControlsInterfaceStates TelemetryManager::getControlsInterfaceState() {
     ControlsInterfaceStates state = telemetry->controlsInterfaceState;
-    telemetry->controlsInterfaceState = ciNone;
     return state;
 }
 
@@ -47,6 +46,11 @@ void TelemetryManager::setPodState(PodStates newState, const std::string &reason
 
 void TelemetryManager::setControlsInterfaceState(ControlsInterfaceStates eTerminalState) {
     this->telemetry->controlsInterfaceState = eTerminalState;
+    if(eTerminalState == ciEmergencyStop){
+        telemetry->automaticTransitions = true;
+        telemetry->manualLvdcNodeState = lvdcNone;
+        telemetry->manualBrakeNodeState = bnsNone;
+    }
 }
 
 void TelemetryManager::setAutomaticTransitions(bool val) {
@@ -107,7 +111,6 @@ void TelemetryManager::setHvBatteryPackMaxCellTemperature(float value) {
 
     bool status;
     status = inRange<float>(value, HV_LIMITS::CELL_TEMP_MIN, HV_LIMITS::CELL_TEMP_MAX);
-
     this->setBmsSensorFlag(status, BMS_FLAGS::HV_MAX_CELL_TEMP_INDEX);
 }
 
@@ -117,22 +120,30 @@ void TelemetryManager::setHvBatteryPackStateOfCharge(int value) {
     bool status = true;
     PodStates currentState = this->getPodStateValue();
     if(currentState == psArming || currentState == psArmed){
-        status = inRange<int>(value, HV_LIMITS::SOC_MIN, HV_LIMITS::SOC_MAX);
+        status = inRange<int>(value, HV_LIMITS::SOC_ARMED_MIN, HV_LIMITS::SOC_MAX);
+    }
+    if(currentState == psStandby){
+        status = inRange<int>(value, HV_LIMITS::SOC_ABSOLUTE_MIN, HV_LIMITS::SOC_MAX);
     }
     this->setBmsSensorFlag(status,  BMS_FLAGS::HV_SOC_INDEX);
+}
+
+void TelemetryManager::updateCellVoltage(int32_t cellId,float voltage) {
+    telemetry->cellVoltages[cellId] = voltage;
 }
 
 //          LV BMS
 void TelemetryManager::setLv1BatteryPackStateOfCharge(int value) {
     this->telemetry->lv1BatteryPackStateOfCharge = value;
 
-    bool status = true;
+    bool status;
     PodStates currentState = this->getPodStateValue();
 
-    // Check if nominal for current state
-    if(currentState == psArming || currentState == psArmed ||
-    currentState == psPreFlight || currentState == psAcceleration){
-        status = inRange<int>(value, LV_LIMITS::SOC_MIN, LV_LIMITS::SOC_MAX);
+    if(currentState == psArming || currentState == psArmed){
+        status = inRange<int>(value, LV_LIMITS::SOC_ARMED_MIN, LV_LIMITS::SOC_MAX);
+    }
+    else{
+        status = inRange<int>(value, LV_LIMITS::SOC_ABSOLUTE_MIN, LV_LIMITS::SOC_MAX);
     }
 
     this->setBmsSensorFlag(status,  BMS_FLAGS::LV1_SOC_INDEX);
@@ -156,12 +167,14 @@ void TelemetryManager::setLv1BatteryPackVoltage(float value) {
 void TelemetryManager::setLv2BatteryPackStateOfCharge(int value) {
     this->telemetry->lv2BatteryPackStateOfCharge = value;
 
-    bool status = true;
+    bool status;
     PodStates currentState = this->getPodStateValue();
 
-    if(currentState == psArming || currentState == psArmed ||
-       currentState == psPreFlight || currentState == psAcceleration){
-        status = inRange<int>(value, LV_LIMITS::SOC_MIN, LV_LIMITS::SOC_MAX);
+    if(currentState == psArming || currentState == psArmed){
+        status = inRange<int>(value, LV_LIMITS::SOC_ARMED_MIN, LV_LIMITS::SOC_MAX);
+    }
+    else{
+        status = inRange<int>(value, LV_LIMITS::SOC_ABSOLUTE_MIN, LV_LIMITS::SOC_MAX);
     }
 
     this->setBmsSensorFlag(status,  BMS_FLAGS::LV2_SOC_INDEX);
@@ -224,8 +237,10 @@ void TelemetryManager::setLowPressure(float value, int identifier){
             break;
         case NODE_FLAGS::LP3_INDEX:
             this->telemetry->lowPressure3 = value;
+            break;
         case NODE_FLAGS::LP4_INDEX:
             this->telemetry->lowPressure4 = value;
+            break;
         default:
             break;
     }
@@ -238,8 +253,8 @@ void TelemetryManager::setLowPressure(float value, int identifier){
         status = inRange<float>(value, PNEUMATICS_LIMITS::LOWPRESSURE_UNARMED_MIN, PNEUMATICS_LIMITS::LOWPRESSURE_UNARMED_MAX);
     }
 
-    else if(currentState == psArming || currentState == psArmed || currentState == psAcceleration || currentState == psCoasting){
-        status = inThreshold<float>(value, this->telemetry->tubePressure, PNEUMATICS_LIMITS::PNEUMATICS_THRESHOLD);
+    else if(currentState == psArming || currentState == psArmed || currentState == psAcceleration || currentState == psCoasting || currentState == psPreFlight){
+        status =  inRange<float>(value, PNEUMATICS_LIMITS::LOWPRESSURE_UNARMED_MIN, PNEUMATICS_LIMITS::LOWPRESSURE_UNARMED_MAX);
     }
 
     else if( currentState == psBraking ){
@@ -255,11 +270,10 @@ void TelemetryManager::setHighPressure(float value){
     PodStates currentState = this->getPodStateValue();
 
     this->telemetry->highPressure = value;
-    LOG(INFO)<<"high pressure : " << value;
 
     if(currentState == psStandby){
         status = inRange<float>(value, GENERAL_CONSTANTS::VACUUM, PNEUMATICS_LIMITS::HIGHPRESSURE_ARMED_MAX);
-    } else if(currentState == psArming || currentState == psArmed || currentState == psAcceleration || currentState == psCoasting){
+    } else if(currentState == psArming || currentState == psArmed || currentState == psAcceleration || currentState == psCoasting || currentState == psPreFlight){
         status = inRange<float>(value, PNEUMATICS_LIMITS::HIGHPRESSURE_ARMED_MIN, PNEUMATICS_LIMITS::HIGHPRESSURE_ARMED_MAX);
     }else if( currentState == psBraking ){
         status = inRange<float>(value, GENERAL_CONSTANTS::VACUUM, PNEUMATICS_LIMITS::HIGHPRESSURE_ARMED_MAX); //TODO confirm this
@@ -286,15 +300,15 @@ void TelemetryManager::setCoolantTemperature(float value) {
     this->setNodeSensorFlag(status, NODE_FLAGS::COOLING_TEMPERATURE_INDEX);
 }
 
-void TelemetryManager::setRecievedBrakeNodeState(BrakeNodeStates value) {
+void TelemetryManager::setReceivedBrakeNodeState(BrakeNodeStates value) {
     this->telemetry->receivedBrakeNodeState = value;
 }
 
 //          Enclosure
 void TelemetryManager::setEnclosurePressure(float value) {
-    bool status = false;
+    bool status;
     this->telemetry->enclosurePressure = value;
-    status = inRange<float>(value, GENERAL_CONSTANTS::ATMOSPHERE, ENCLOSURE_LIMITS::ATMOSPHERE_THRESHOLD);
+    status = inRange<float>(value, ENCLOSURE_LIMITS::PRESSURE_MIN, ENCLOSURE_LIMITS::PRESSURE_MAX);
     this->setNodeSensorFlag(status, NODE_FLAGS::ENCLOSURE_PRESSURE_INDEX);
 }
 
@@ -359,13 +373,16 @@ void TelemetryManager::setMotorSpeed(int32_t value) {
     auto thisTime = std::chrono::high_resolution_clock::now();
     this->telemetry->lastMotorReadTime = thisTime;
     int32_t lastRPM = this->telemetry->motorSpeed;
-    this->telemetry->motorSpeed = value;
+    this->telemetry->motorSpeed = value; 
     float average = (value+lastRPM)/2.0;
     average /= (1000.0*60.0);
+
     float milliseconds = (std::chrono::duration_cast<std::chrono::microseconds>(thisTime - lastTime).count())/1000.0;
     float distance = average*milliseconds * GENERAL_CONSTANTS::REAR_WHEEL_CIRCUMFRENCE;
-
     addPodDistance(distance);
+    
+    telemetry->podVelocity = (value*GENERAL_CONSTANTS::REAR_WHEEL_CIRCUMFRENCE)/60.0;
+    
 }
 
 void TelemetryManager::setInverterBusVoltage(int value) {
@@ -382,6 +399,26 @@ void TelemetryManager::setInverterBusVoltage(int value) {
     this->setInverterSensorFlag(status, INVERTER_FLAGS::BUS_VOLTAGE_INDEX);
 }
 
+void TelemetryManager::setPostFaultHi(int32_t fault) {
+    telemetry->inverterPostFaultHi = fault;
+    telemetry->inverterFaults[INVERTER_FLAGS::POST_FAULT_HI_INDEX];
+}
+
+void TelemetryManager::setPostFaultLo(int32_t fault) {
+    telemetry->inverterPostFaultLo = fault;
+    telemetry->inverterFaults[INVERTER_FLAGS::POST_FAULT_LO_INDEX];
+}
+
+void TelemetryManager::setRunFaultHi(int32_t fault) {
+    telemetry->inverterRunFaultHi = fault;
+    telemetry->inverterFaults[INVERTER_FLAGS::RUN_FAULT_HI_INDEX];
+}
+
+void TelemetryManager::setRunFaultLo(int32_t fault) {
+    telemetry->inverterRunFaultLo = fault;
+    telemetry->inverterFaults[INVERTER_FLAGS::POST_FAULT_LO_INDEX];
+}
+
 
 //          Position
 
@@ -391,6 +428,10 @@ void TelemetryManager::addPodDistance(float distance) {
 }
 
 void TelemetryManager::countIrTape() {
+    float difference = getPodDistance() - GENERAL_CONSTANTS::STRIP_DISTANCE;
+
+    LOG(INFO) << "Difference : " << difference;
+
     if(telemetry->totalStripCount == 0){
         setPodDistance(GENERAL_CONSTANTS::STRIP_DISTANCE);
     }
@@ -424,7 +465,16 @@ void TelemetryManager::resetValues(int32_t index){
             break;
         }
         case CONNECTION_FLAGS::LVDC_NODE_HEARTBEAT_INDEX:{
-            //todo
+            telemetry->gtPack1Current = 0;
+            telemetry->gtPack2Voltage = 0;
+            telemetry->gtPack1Voltage = 0;
+            telemetry->gtPack2Current = 0;
+            telemetry->gtNodeCurrent = 0;
+            telemetry->gtLp5Current = 0;
+            telemetry->gtLp12Current = 0;
+            telemetry->gtInverterCurrent = 0;
+            telemetry->receivedLvdcNodeState = lvdcNone;
+            break;
         }
         case CONNECTION_FLAGS::BMS_HEARTBEAT_INDEX:{
             telemetry->hvBatteryPackMaxCellTemperature = 0;

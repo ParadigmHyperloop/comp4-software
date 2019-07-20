@@ -85,6 +85,7 @@ void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
         return;
     }
     if (podCommand.has_controlsinterfacestate()) {
+        LOG(INFO)<<podCommand.controlsinterfacestate();
         Pod->setControlsInterfaceState(podCommand.controlsinterfacestate());
     }
     if(podCommand.has_maxflighttime()){
@@ -97,14 +98,15 @@ void parseProtoCommand(PodCommand podCommand, TelemetryManager *Pod) {
         Pod->telemetry->taxi = podCommand.taxi();
         Pod->telemetry->expectedTubePressure = podCommand.expectedtubepressure();
         Pod->telemetry->maxVelocity = podCommand.maxvelocity();
+        Pod->telemetry->maxRPM = (podCommand.maxvelocity() * 60)/GENERAL_CONSTANTS::REAR_WHEEL_CIRCUMFRENCE;
+        LOG(INFO)<<Pod->telemetry->maxRPM;
         Pod->telemetry->brakeDistance = podCommand.brakingdistance();
         if(!podCommand.taxi()) {
-            float maxStripCount = (Pod->telemetry->flightDistance - Pod->telemetry->brakeDistance) /
-                                  GENERAL_CONSTANTS::STRIP_DISTANCE;
-            Pod->telemetry->maxStripCount = int32_t(ceil(maxStripCount));
+            Pod->telemetry->maxStripCount = ( (Pod->telemetry->flightDistance - Pod->telemetry->brakeDistance) /
+                                  GENERAL_CONSTANTS::STRIP_DISTANCE ) + 1;
         }
         else{
-            Pod->telemetry->maxStripCount = 999;
+            Pod->telemetry->maxStripCount = GENERAL_CONSTANTS::DEFAULT_MAX_STRIP_COUNT; 
         }
     }
     if (podCommand.has_manualbrakenodestate()){

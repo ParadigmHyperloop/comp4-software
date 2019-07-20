@@ -2,6 +2,19 @@
 #include <algorithm>
 #include <initializer_list>
 
+
+BroadcastManager::BroadcastManager() = default;
+
+void BroadcastManager::addBroadcast(int socket) {
+    this->_broadcastSockts.push_back(socket);
+}
+
+BroadcastManager::~BroadcastManager() {
+    for(auto socket : _broadcastSockts){
+        close(socket);
+    }
+}
+
 void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
     std::vector<int> indices = {0, 1};
     switch (frame.can_id) {
@@ -31,6 +44,7 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             pod.telemetry->hvFaultCode1 = faultCode1;
             pod.telemetry->hvFaultCode2 = faultCode2;
 
+            pod.setConnectionFlag(1,CONNECTION_FLAGS::BMS_HEARTBEAT_INDEX);
             break;
         }
         case 0x6b2: {
@@ -97,7 +111,7 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
                 return;
             }
             pod.setMotorSpeed(motorSpeed);
-            pod.setConnectionFlag(1,CONNECTION_FLAGS::BMS_HEARTBEAT_INDEX);
+            pod.telemetry->inverterHeartbeat = 1;
             break;
         }
         case 0x0A7: {
@@ -108,7 +122,7 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             break;
         }
         case 0x6B4: { // lp1
-            //todo
+
             indices = {0, 1};
             auto lv1BatteryPackVoltage = extractCanValue<float>(frame.data, indices, (float) 10.0);
             indices = {2};
@@ -125,9 +139,10 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             if(lv1BatteryPackTemperature > 1 && lv1BatteryPackTemperature < 300){
                 pod.setLv1BatteryPackTemperature(lv1BatteryPackTemperature);
             }
+            break;
         }
         case 0x6B5: {  //hp
-            //todo
+
             indices = {0, 1};
             auto lv2BatteryPackVoltage = extractCanValue<float>(frame.data, indices, (float) 10.0);
 
@@ -146,11 +161,35 @@ void processFrame(const struct can_frame &frame, TelemetryManager &pod) {
             if(lv2BatteryPackTemperature > 1 && lv2BatteryPackTemperature < 300){
                 pod.setLv2BatteryPackTemperature(lv2BatteryPackTemperature);
             }
+            break;
         }
-        case 0x700: {  //hp
-            // fault
+        case 0x0AB:{
+            indices = {5,4};
+            auto runFaultLo = extractCanValue<int>(frame.data, indices, 1);
+            indices = {7,6};
+            auto runFaultHi = extractCanValue<int>(frame.data, indices, 1);
+            indices = {3,2};
+            auto postFaultHi = extractCanValue<int>(frame.data, indices, 1);
+            indices = {1,0};
+            auto postFaultLo = extractCanValue<int>(frame.data, indices, 1);
+            pod.setPostFaultHi(postFaultHi);
+            pod.setPostFaultLo(postFaultLo);
+            pod.setRunFaultHi(runFaultHi);
+            pod.setRunFaultLo(runFaultLo);
+            break;
         }
+        case 0xFF:{  //todo add cell broadcast id
+            indices = {0};
+            auto cellId = extractCanValue<int32_t >(frame.data, indices, 1 );
 
+            if(cellId > 96){
+                cellId-=12;
+            }
+            indices = {1,2};
+            auto voltage = extractCanValue<float>(frame.data, indices, 10000);
+            pod.updateCellVoltage(cellId, voltage);
+            break;
+        }
         default:
             return;
             //std::string error = "Unknown CAN ID : " + std::to_string(frame.can_id);

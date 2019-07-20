@@ -1,10 +1,11 @@
-<div class="card card-top" style="overflow:scroll">
+<div class="card card-top">
    <div class="header">
       <h4 class="title">Flight Profile</h4>
    </div>
-   <div class="content row0">
+   <div class="content row">
+      <div class="col-lg-6">
         <table class="table" id="flight-profile-values">
-          <tbody>
+          <tbody> 
                <tr>
                   <th scope="row"></th>
                   <td><b>Start Torque</b></td>
@@ -30,6 +31,12 @@
                   <td><b>Braking Distance</b></td>
                   <td><span id="brakingDistance" class="telemetry-value">-</span> m</td>
                </tr>
+            </tbody>
+         </table>
+      </div>
+      <div class="col-lg-6">
+         <table class="table" id="flight-profile-values">
+            <tbody>
                <tr>
                   <th scope="row"></th>
                   <td><b>Maximum Strip Count</b></td>
@@ -52,6 +59,7 @@
                </tr>
           </tbody>
         </table>
+      </div>
    </div>
 </div>
 

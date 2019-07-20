@@ -18,11 +18,11 @@ public:
 
     virtual bool testTransitions();
 
-    bool isNodeSensorCritical(int);
+    bool isNodeSensorCritical(uint32_t);
 
-    bool isConnectionFlagCritical(int);
+    bool isConnectionFlagCritical(uint32_t);
 
-    bool isInverterSensorCritical(int);
+    bool isInverterSensorCritical(uint32_t);
 
     bool brakingCriteriaMet();
 
@@ -41,7 +41,7 @@ public:
 
     void setupTransition(PodStates, const std::string&);
 
-    int8_t checkFlags(std::vector<int8_t> &flags);
+    int8_t checkFlags(std::vector<int32_t> &flags);
 
     int32_t checkNodeStates();
 
@@ -49,11 +49,9 @@ public:
 
     void armedChecks();
 
-
 protected:
     std::string _currentFailure;
     std::chrono::steady_clock::time_point _enterStateTime;
-    std::chrono::steady_clock::time_point _flightStartTime;
     bool _transitioning = false;
     std::string _transitionReason = "";
     PodStates _stateIdentifier = psBooting;

@@ -27,11 +27,12 @@ void signal_callback_handler(int signum){
 
 // Factory for initializing the telemetry struct
 void initializeTelemetryStruct(PodValues &telemetry){
-    telemetry.nodeSensorFlags = std::vector<int8_t>(NODE_FLAGS::NODE_SENSOR_COUNT, 0);
-    telemetry.inverterSensorFlags = std::vector<int8_t>(INVERTER_FLAGS::INVERTER_SENSOR_COUNT, 0);
-    telemetry.bmsSensorFlags = std::vector<int8_t>(BMS_FLAGS::BMS_SENSOR_COUNT, 0);
-    telemetry.connectionFlags = std::vector<int8_t>(CONNECTION_FLAGS::TOTAL_CONNECTION_COUNT,0);
+    telemetry.nodeSensorFlags = std::vector<int32_t>(NODE_FLAGS::NODE_SENSOR_COUNT, 0);
+    telemetry.inverterSensorFlags = std::vector<int32_t>(INVERTER_FLAGS::INVERTER_SENSOR_COUNT, 0);
+    telemetry.bmsSensorFlags = std::vector<int32_t>(BMS_FLAGS::BMS_SENSOR_COUNT, 0);
+    telemetry.connectionFlags = std::vector<int32_t>(CONNECTION_FLAGS::TOTAL_CONNECTION_COUNT,0);
     telemetry.manualSolenoidConfiguration = std::vector<bool>(4,false);
+    telemetry.cellVoltages = std::vector<float>(GENERAL_CONSTANTS::HV_CELL_COUNT, 0);
 }
 
 void TestSevenSegment(SevenSegStateDisplay* stateDisplay)
@@ -61,7 +62,7 @@ int main(int32_t argc, char** argv)
 	while(!configReceived){
 	    configReceived = true;
         try {
-           flightConfigurationParameters = configurationServer->runServer(); //Comment out to use the default network values in the proto obj
+          flightConfigurationParameters = configurationServer->runServer(); //Comment out to use the default network values in the proto obj
         } catch (exception& e)
         {
             configurationServer->closePorts();

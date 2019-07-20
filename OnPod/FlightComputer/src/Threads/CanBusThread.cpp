@@ -28,7 +28,7 @@ int32_t getCanSocketRaw(){
     fcntl(canSock, F_SETFL, flags);
 
     // Set a receive filter so we only receive select CAN IDs
-    struct can_filter canFilter[11];
+    struct can_filter canFilter[12];
     canFilter[0].can_id = 0x6B2;
     canFilter[0].can_mask = CAN_SFF_MASK;
     canFilter[1].can_id = 0x0A0;
@@ -45,12 +45,14 @@ int32_t getCanSocketRaw(){
     canFilter[6].can_mask = CAN_SFF_MASK;
     canFilter[7].can_id = 0x0A6;
     canFilter[7].can_mask = CAN_SFF_MASK;
-    canFilter[8].can_id = 0x6B5;
+    canFilter[8].can_id = 0x6B4;
     canFilter[8].can_mask = CAN_SFF_MASK;
-    canFilter[9].can_id = 0x6B6;
+    canFilter[9].can_id = 0x6B5;
     canFilter[9].can_mask = CAN_SFF_MASK;
-    canFilter[10].can_id = 0x700;
+    canFilter[10].can_id = 0x0AB;
     canFilter[10].can_mask = CAN_SFF_MASK;
+    canFilter[11].can_id = 0xFF;
+    canFilter[11].can_mask = CAN_SFF_MASK;
 
     operationStatus = ::setsockopt(canSock, SOL_CAN_RAW, CAN_RAW_FILTER, &canFilter, sizeof(canFilter));
     if (operationStatus == -1) {
@@ -159,11 +161,11 @@ void startInverterBroadcast(int bcmSocket){
     }
 }
 
-void setInverterTorque(int torque, int bcmSocket){
+void setInverterTorque(int32_t torque, int bcmSocket){
     struct broadcastManagerConfig msg = {};
     torque *=10;
-    int32_t highByte = torque/256;
-    int32_t lowByte = torque%256;
+    uint16_t highByte = torque/256;
+    uint16_t lowByte = torque%256;
     msg.msg_head.opcode  = TX_SETUP;
     msg.msg_head.can_id  = 0;
     msg.msg_head.flags   = SETTIMER | STARTTIMER;
@@ -239,6 +241,7 @@ int canNetworkThread(TelemetryManager Pod){
     LOG(INFO) << "Starting CAN Thread on ";
     int32_t canSockRaw = 0;
     int32_t canSockBcm = 0;
+    BroadcastManager manager = BroadcastManager();
     try{
         canSockRaw = getCanSocketRaw();
     }
@@ -248,13 +251,14 @@ int canNetworkThread(TelemetryManager Pod){
     }
     try{
         canSockBcm = getCanSocketBrodcastManager();
+        manager.addBroadcast(canSockBcm);
     }
     catch (std::runtime_error &e){
         LOG(INFO) << e.what();
         return -1;
     }
     try{
-       //  startInverterBroadcast(canSockBcm);
+       ;//  startInverterBroadcast(canSockBcm);
     }
     catch (const std::runtime_error &error){
         LOG(INFO) << error.what();

@@ -17,26 +17,40 @@ struct PodValues {
     BrakeNodeStates commandedBrakeNodeState = bnsNone;
     LvdcNodeStates receivedLvdcNodeState = lvdcNone;
     LvdcNodeStates commandedLvdcNodeState = lvdcNone;
+    NavigationNodeStates  navNodeState = navNone;
+
 
     // Flight Profile
     uint32_t motorTorque = 0;
-    uint32_t flightDistance = 0;
+    volatile uint32_t flightDistance = 0;
     uint32_t maxFlightTime = 0;
     uint32_t startTorque = 0;
     uint32_t accelerationTime = 0;
     uint32_t expectedTubePressure = 0;
     uint32_t maxVelocity = 0;
-    uint32_t brakeDistance = 0;
+    uint32_t maxRPM = 0;
+    volatile uint32_t brakeDistance = 0;
     uint32_t maxStripCount = 0;
     bool taxi  = false;
+
+    // Ghost Train
+     float gtPack1Voltage = 0;
+     float gtPack2Voltage = 0;
+     float gtPack1Current = 0;
+     float gtPack2Current = 0;
+     float gtLp5Current = 0;
+     float gtLp12Current = 0;
+     float gtNodeCurrent = 0;
+     float gtInverterCurrent = 0;
 
     //Navigation
     std::mutex positionLock;
     float motorDistance = 0;
     float podVelocity = 0;
-    float podPosition = 0;
+    volatile float podPosition = 0;
     int totalStripCount = 0;
     float stripVelocity = 0;
+    std::chrono::steady_clock::time_point flightStartTime;
 
     // Updates
     std::mutex updatesLock;
@@ -50,10 +64,10 @@ struct PodValues {
     bool automaticTransitions = true;
 
     //ConnectionsArray
-    std::vector<int8_t> connectionFlags;  // brakeNode, LVDCNode, BMS, Interface
-    std::vector<int8_t> nodeSensorFlags;
-    std::vector<int8_t> inverterSensorFlags;
-    std::vector<int8_t> bmsSensorFlags;
+    std::vector<int32_t> connectionFlags;  // brakeNode, LVDCNode, BMS, Interface
+    std::vector<int32_t> nodeSensorFlags;
+    std::vector<int32_t> inverterSensorFlags;
+    std::vector<int32_t> bmsSensorFlags;
 
     // HV-BMS
     float hvBatteryPackVoltage = 0;
@@ -62,8 +76,9 @@ struct PodValues {
     float hvBatteryPackMaxCellVoltage = 0;
     int hvBatteryPackStateOfCharge = 0;
     float hvBatteryPackMaxCellTemperature = 0;
-    int hvFaultCode1 = 0;
-    int hvFaultCode2 = 0;
+    int32_t hvFaultCode1 = 0;
+    int32_t hvFaultCode2 = 0;
+    std::vector<float> cellVoltages = {};
 
     // LV-BMS
     int32_t lv1BatteryPackStateOfCharge = 0;
@@ -83,6 +98,11 @@ struct PodValues {
     float inverterBusVoltage = 0;
     float commandedTorque = 0;
     int32_t inverterHeartbeat = 0;
+    int32_t inverterRunFaultLo = 0;
+    int32_t inverterRunFaultHi = 0;
+    int32_t inverterPostFaultLo = 0;
+    int32_t inverterPostFaultHi = 0;
+    std::vector<int32_t> inverterFaults;
     std::chrono::high_resolution_clock::time_point lastMotorReadTime;
 
     // Atmosphere

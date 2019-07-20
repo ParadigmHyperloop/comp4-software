@@ -1,26 +1,30 @@
 {
   "lv1BatteryPackStateOfCharge": {
-    "name_pretty": "LP State of Charge",
+    "name_pretty": "LP State of Charge [%]",
     "order": 0
   },
   "lv1BatteryPackVoltage": {
-    "name_pretty": "LP Pack Voltage",
+    "name_pretty": "LP Pack Voltage [V]",
     "order": 1
   },
     "lv1BatteryPackCellTemperature": {
-    "name_pretty": "LP Temperature",
+    "name_pretty": "LP Temperature [C]",
       "order": 2
   },
-  "lv2BatteryPackStateOfCharge": {
-    "name_pretty": "Pack 2 State of Charge",
-    "order": 3
+  "gtPack1Voltage": {
+    "name_pretty": "GT LP Voltage [V]",
+      "order": 3
   },
-  "lv2BatteryPackVoltage": {
-    "name_pretty": "Pack 2 Pack Voltage",
-    "order": 4
+      "gtPack2Voltage": {
+    "name_pretty": "GT HP Voltage [V]",
+      "order": 4
   },
-    "lv2BatteryPackCellTemperature": {
-    "name_pretty": "Pack 1 Temperature",
+      "gtPack1Current": {
+    "name_pretty": "GT LP Current [A]",
       "order": 5
+  },
+      "gtPack2Current": {
+    "name_pretty": "GT HP Current [A]",
+      "order": 6
   }
 }

@@ -1,22 +1,38 @@
 {
+  "motorTemperature": {
+   "name_pretty": "Motor Temperature [C]",
+    "order": 0
+  },
   "inverterBusVoltage": {
-   "name_pretty": "Bus Voltage",
-    "order": 2
+   "name_pretty": "Bus Voltage [V]",
+    "order": 1
   },
   "maxIgbtTemperature": {
-   "name_pretty": "Max IGBT Temp.",
-    "order": 3
+   "name_pretty": "Max IGBT Temp. [C]",
+    "order": 2
   },
   "gateDriverTemperature": {
-   "name_pretty": "Gate Driver Temp.",
-    "order": 4
+   "name_pretty": "Gate Driver Temp. [C]",
+    "order": 3
   },
   "inverterControlBoardTemperature": {
-   "name_pretty": "Control Board Temp",
+   "name_pretty": "Control Board Temp [C]",
+    "order": 4
+  },
+  "inverterRunFaultLo": {
+   "name_pretty": "Inverter Run Fault Code Lo",
     "order": 5
   },
-  "motorTemperature": {
-   "name_pretty": "Motor Temperature",
-    "order": 1
+    "inverterRunFaultHi": {
+   "name_pretty": "Inverter Run Fault Code Hi",
+    "order": 6
+  },
+    "inverterPostFaultLo": {
+   "name_pretty": "Inverter Post Fault Code Lo",
+    "order": 7
+  },
+    "inverterPostFaultHi": {
+   "name_pretty": "Inverter Post Fault Code Hi",
+    "order": 8
   }
 }

@@ -59,6 +59,11 @@ class TelemetryManager
 		void setMotorSpeed(int32_t value);
 		void setInverterBusVoltage(int);
         void setInverterHeartbeat(int32_t);
+        void setPostFaultLo(int32_t);
+        void setPostFaultHi(int32_t);
+        void setRunFaultLo(int32_t);
+        void setRunFaultHi(int32_t);
+
 
         // HV BMS
 		void setHvBatteryPackVoltage(float);
@@ -67,6 +72,7 @@ class TelemetryManager
         void setHvBatteryPackMaxCellVoltage(float);
         void setHvBatteryPackStateOfCharge(int);
         void setHvBatteryPackMaxCellTemperature(float);
+        void updateCellVoltage(int32_t ,float);
 
         // LV BMS
         void setLv1BatteryPackStateOfCharge(int);
@@ -78,7 +84,7 @@ class TelemetryManager
 
 
     // Brake Node
-        void setRecievedBrakeNodeState(BrakeNodeStates);
+        void setReceivedBrakeNodeState(BrakeNodeStates value);
         void setLowPressure(float, int32_t);
         void setHighPressure(float);
         void setSolenoid(bool value, int32_t identifier);

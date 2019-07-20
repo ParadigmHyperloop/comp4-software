@@ -10,6 +10,11 @@ enum BrakeNodeStates {
     bnsNone            = 5;
 }
 
+enum NavigationNodeStates{
+    navNone = 0;
+    navConnected = 1;
+}
+
 enum PodStates {
     psBooting       = 0;
     psStandby       = 1;
@@ -19,8 +24,8 @@ enum PodStates {
     psAcceleration  = 5;
     psCoasting      = 6;
     psBraking       = 7;
-    psShutdown      = 8;
-    psNone          = 9;
+    psNone          = 8;
+    psShutdown      = 9;
 }
 
 enum ControlsInterfaceStates {
@@ -69,6 +74,7 @@ message Telemetry {
     optional ControlsInterfaceStates controlsInterfaceState = 4;
     optional LvdcNodeStates lvdcNodeState = 54;
     optional PodStates breakNodePerceivedPodState = 31;
+    optional NavigationNodeStates navNodeState = 64;
 
     // Time
     optional int32 flightTime = 7;
@@ -78,11 +84,11 @@ message Telemetry {
     repeated int32 heartbeatValues = 71;
 
     // Navigation
-    optional int32 podPosition = 9;
-    optional int32 podVelocity = 10;
-    optional int32 podAccelerationX = 11;
-    optional int32 tachometerVelocity = 16;
-    optional int32 resolverVelocity = 17;
+    optional float podPosition = 9;
+    optional float podVelocity = 10;
+    optional float stripVelocity = 16;
+    optional float resolverVelocity = 17;
+    optional float totalStripCount = 63;
 
     // Inverter
     optional int32 maxIgbtTemperature = 18;
@@ -92,8 +98,10 @@ message Telemetry {
     optional int32 inverterBusVoltage = 22;
     optional int32 inverterHeartbeat = 78;
     optional int32 motorSpeed = 80;
-    optional int32 inverterFaultBitLo = 24;
-    optional int32 inverterFaultBitHi = 25;
+    optional int32 inverterRunFaultLo = 24;
+    optional int32 inverterRunFaultHi = 25;
+    optional int32 inverterPostFaultLo = 36;
+    optional int32 inverterPostFaultHi = 37;
 
     // HV-BMS
     optional float hvBatteryPackVoltage = 26;
@@ -101,7 +109,8 @@ message Telemetry {
     optional float hvBatteryPackMaxCellTemperature = 28;
     optional float hvBatteryPackMaxCellVoltage = 30;
     optional float hvBatteryPackMinimumCellVoltage = 29;
-    optional int32  hvBatteryPackStateOfCharge = 79;
+    optional int32 hvBatteryPackStateOfCharge = 79;
+    repeated float hvBatteryCellVoltages = 67;
 
     // LV-BMS
     optional int32 lv1BatteryPackStateOfCharge = 85;
@@ -135,25 +144,17 @@ message Telemetry {
     optional float coolantPressure2 = 50;
 
     // Ghost Train
-    optional int32 pack1Voltage = 55;
-    optional int32 pack2Voltage = 56;
-    optional int32 pack1Current = 57;
-    optional int32 pack2Current = 58;
-    optional int32 rail1Voltage = 59;
-    optional int32 rail2Voltage = 60;
-    optional int32 rail3Voltage = 61;
-    optional int32 rail4Voltage = 62;
-    optional int32 railVoltageFlag = 72;
+    optional float gtPack1Voltage = 55;
+    optional float gtPack2Voltage = 56;
+    optional float gtPack1Current = 57;
+    optional float gtPack2Current = 58;
+    optional float gtLp5Current = 59;
+    optional float gtLp12Current = 60;
+    optional float gtNodeCurrent = 61;
+    optional float gtInverterCurrent = 62;
 
-    optional int32 railCurrentSensor1 = 63;
-    optional int32 railCurrentSensor2 = 64;
-    optional int32 railCurrentSensor3 = 65;
-    optional int32 railCurrentSensor4 = 66;
-    optional int32 railCurrentSensor5 = 67;
-    optional int32 railCurrentSensor6 = 68;
-    optional int32 railCurrentSensor7 = 69;
-    optional int32 railCurrentSensor8 = 70;
-    optional int32 railCurrentFlag = 73;
+
+
 
     // Flight Profile
     optional uint32 motorTorque = 91;

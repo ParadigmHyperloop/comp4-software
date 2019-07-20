@@ -26,8 +26,8 @@ int8_t getSerialPort(){
     //tcflush( serialPort, TCIFLUSH );
     struct termios SerialPortSettings = {};
     tcgetattr(serialPort, &SerialPortSettings);
-    cfsetispeed(&SerialPortSettings,B115200);
-    cfsetospeed(&SerialPortSettings,B115200);
+    cfsetispeed(&SerialPortSettings,B9600);
+    cfsetospeed(&SerialPortSettings,B9600);
     SerialPortSettings.c_cflag &= ~PARENB;
     SerialPortSettings.c_cflag &= ~CSTOPB;
     SerialPortSettings.c_cflag &= ~CSIZE;
@@ -51,19 +51,12 @@ int8_t getSerialPort(){
 }
 
 
-void updatePosition(int velocity, int irStripCount, TelemetryManager &pod){
-    pod.telemetry->totalStripCount += irStripCount;
-    float stripDistance = pod.telemetry->totalStripCount * GENERAL_CONSTANTS::STRIP_DISTANCE;
-    pod.setPodDistance( stripDistance );
-    pod.setPodVelocity(velocity/100);
-}
-
-
 void readNavigationNode(int serialPort, TelemetryManager &pod){
     std::stringstream dataStream;
     dataStream.str(std::string());
     char read_buffer[GENERAL_CONSTANTS::NAV_SERIAL_MESSAGE_SIZE + 1] = {0};
-    int  bytes_read, stripCount, velocity, tubePressure = 0;
+    int  bytes_read, velocity, tubePressure = 0;
+    std::string stripCount;
     int total_bytes_read = 0;
     int status = 0;
     status = write(serialPort, "1", 1);
@@ -85,7 +78,7 @@ void readNavigationNode(int serialPort, TelemetryManager &pod){
     std::string data;
     std::getline(dataStream, data, ',');
     try {
-        stripCount = std::stoi(data);
+        stripCount = data;
         std::getline(dataStream, data, ',');
         velocity = std::stoi(data);
     }
@@ -95,14 +88,13 @@ void readNavigationNode(int serialPort, TelemetryManager &pod){
     }
     dataStream >> tubePressure;
     std::stringstream().swap(dataStream);
-
-    if(stripCount > 0){  //strip count    velocity   pressure
+    if(stripCount == "aa"){  //strip count    velocity   pressure
         pod.countIrTape();
+        //LOG(INFO)<<"strip : "<< stripCount << " velocity : "<< velocity << "  pressure : " << tubePressure;
     }
     pod.telemetry->tubePressure = tubePressure;
     pod.telemetry->stripVelocity = velocity;
 
-    //LOG(INFO)<<"string : "<< stripCount << " velocity : "<< velocity << "  pressure : " << tubePressure;
 }
 
 int32_t NavigationThread(TelemetryManager Pod) {
@@ -130,10 +122,13 @@ int32_t NavigationThread(TelemetryManager Pod) {
             if(success){
                 navNodeUpdateFreq.feed();
                 navNodeHeartbeat.feed();
+                Pod.telemetry->navNodeState = navConnected;
+                Pod.setConnectionFlag(1, CONNECTION_FLAGS::NAVIGATION_HEARTBEAT_INDEX);
             }
             else{
                 if(navNodeHeartbeat.expired()){
                     Pod.setConnectionFlag(0, CONNECTION_FLAGS::NAVIGATION_HEARTBEAT_INDEX);
+                    Pod.telemetry->navNodeState = navNone;
                 }
             }
         }

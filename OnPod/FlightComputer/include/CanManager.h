@@ -47,5 +47,14 @@ T extractCanValue(const __u8 data[], const std::vector<int> &byteIndices, T conv
     return tConverted;
 }
 
+class BroadcastManager{
+public:
+    BroadcastManager();
+    ~BroadcastManager();
+    void addBroadcast(int);
+private:
+    std::vector<int> _broadcastSockts = {};
+
+};
 
 #endif //FLIGHTCOMPUTER_CANMANAGER_H
