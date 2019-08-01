@@ -89,3 +89,4 @@ Testing/ManualCommandTesting/Paradigm_pb2\.py
 Testing/NodeSimulator/Paradigm_pb2\.py
 
 OnPod/FlightComputer/cmake-build-relwithdebinfo/
+.vscode

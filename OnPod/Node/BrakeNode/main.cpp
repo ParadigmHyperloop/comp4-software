@@ -87,7 +87,7 @@ void sendToFlightComputer(void*) {
 void setup() {
     Serial.begin(9600);
     // initialize hardware
-    pinMode(INVERTER_EN, INPUT);
+    pinMode(INVERTER_EN, OUTPUT);
     adc.init();
     hpTransducer.init();
     lpTransducer1.init();
@@ -156,7 +156,6 @@ void loop() {
     switch (pBrakeNodeTelemetry.state) {
         case BrakeNodeStates_bnsBooting: {
             firstTimeBraking = true;
-            pinMode(INVERTER_EN, OUTPUT);
             digitalWrite(INVERTER_EN, false);
             pBrakeNodeTelemetry.state = BrakeNodeStates_bnsBooting;
             branch1Solenoid.open();
@@ -168,7 +167,7 @@ void loop() {
 
         case BrakeNodeStates_bnsStandby: {
             firstTimeBraking = true;
-            pinMode(INVERTER_EN, INPUT);
+            digitalWrite(INVERTER_EN, true);
             pBrakeNodeTelemetry.state = BrakeNodeStates_bnsStandby;
             branch1Solenoid.close();
             branch2Solenoid.close();
@@ -179,7 +178,7 @@ void loop() {
 
         case BrakeNodeStates_bnsFlight: {
             firstTimeBraking = true;
-            pinMode(INVERTER_EN, INPUT);
+            digitalWrite(INVERTER_EN, true);
             pBrakeNodeTelemetry.state = BrakeNodeStates_bnsFlight;
             branch1Solenoid.close();
             branch2Solenoid.close();
@@ -198,13 +197,12 @@ void loop() {
         }
 
         case BrakeNodeStates_bnsBraking: {
+            digitalWrite(INVERTER_EN, false);
             if (firstTimeBraking) {
                 minimumBrakeTimer.after(5000, expireBrakeTimer, (void*)0);
                 brakingTimerActive = true;
                 firstTimeBraking = false;
             }
-            pinMode(INVERTER_EN, OUTPUT);
-            digitalWrite(INVERTER_EN, false);
             pBrakeNodeTelemetry.state = BrakeNodeStates_bnsBraking;
             branch1Solenoid.open();
             branch2Solenoid.open();
@@ -218,7 +216,6 @@ void loop() {
         }
 
         case BrakeNodeStates_bnsSolenoidControl: {
-            pinMode(INVERTER_EN, OUTPUT);
             digitalWrite(INVERTER_EN, false);
             pBrakeNodeTelemetry.state = BrakeNodeStates_bnsSolenoidControl;
             if (pFcCommand.solenoid1Config) {

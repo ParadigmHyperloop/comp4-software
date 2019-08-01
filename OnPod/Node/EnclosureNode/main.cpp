@@ -41,6 +41,7 @@ void sendToFlightComputer(void*) {
 }
 
 void setup() {
+    Serial.begin(9600);
     pinMode(53, OUTPUT);
     pinMode(10, OUTPUT);
     udp.init();

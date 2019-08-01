@@ -48,14 +48,13 @@ void irISR() {
 // send data to flight computer over serial
 void printData() {
     Serial.read();
-    pressure = round(pressureTransducer.read());
     if (strip_detected) {
         velocity = DISTANCE_BEWTEEN_STRIPS * MILLIS_PER_SEC / (strip_time-last_strip_time);
-        sprintf(data_buffer, "%01u,%05lu,%02u", strip_detected, velocity, pressure);
+        sprintf(data_buffer, "aa,%05lu,%02u", strip_detected, velocity, pressure);
         strip_detected = false;
     }
     else {
-        sprintf(data_buffer, "%01u,%05lu,%02u", strip_detected, velocity, pressure);
+        sprintf(data_buffer, "%02u,%05lu,%02u", strip_detected, velocity, pressure);
     }
     Serial.print(data_buffer);
     last_strip_time = strip_time;
@@ -63,7 +62,7 @@ void printData() {
 }
 
 void setup() {
-    Serial.begin(115200);
+    Serial.begin(9600);
     pinMode(RIGHT_IR_INT_PIN, INPUT);
     pinMode(LEFT_IR_INT_PIN, INPUT);
     attachInterrupt(digitalPinToInterrupt(RIGHT_IR_INT_PIN), irISR, RISING);

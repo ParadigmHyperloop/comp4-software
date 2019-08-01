@@ -53,6 +53,13 @@ FcToLvdcNode   pFcCommand         = FcToLvdcNode_init_default;
 LvdcNodeToFc   pLvdcNodeTelemetry = LvdcNodeToFc_init_default;
 LvdcNodeStates lvdcNodeState      = LvdcNodeStates_lvdcBooting;
 
+Timer powerOnTimer;
+bool firstTimeOn = true;
+
+void turnOnInverter(void*) {
+    digitalWrite(INV_CTL, true);
+}
+
 void expireHeartbeatTimer(void*) {
     heartBeatExpired = true;
 }
@@ -133,21 +140,26 @@ void loop() {
     // perform state-specific operations
     switch (pLvdcNodeTelemetry.state) {
         case LvdcNodeStates_lvdcBooting: {
+            firstTimeOn = true;
             digitalWrite(INV_CTL, false);
             digitalWrite(PUMP1_CTL, false);
             digitalWrite(PUMP2_CTL, false);
             break;
         }
         case LvdcNodeStates_lvdcStandby: {
+            firstTimeOn = true;
             digitalWrite(INV_CTL, false);
             digitalWrite(PUMP1_CTL, false);
             digitalWrite(PUMP2_CTL, false);
             break;
         }
         case LvdcNodeStates_lvdcFlight: {
-            digitalWrite(INV_CTL, true);
             digitalWrite(PUMP1_CTL, true);
             digitalWrite(PUMP2_CTL, true);
+            if (firstTimeOn) {
+                powerOnTimer.after(1000, turnOnInverter, (void*)0);
+                firstTimeOn = false;
+            }
             if (heartBeatExpired) {
                 pLvdcNodeTelemetry.state = LvdcNodeStates_lvdcStandby;
             }
@@ -157,5 +169,6 @@ void loop() {
     // send to FC is interval has expired
     txTimer.update();
     fcHeartbeatTimer.update();
+    powerOnTimer.update();
     //internalWatchdog.clear();
 }
