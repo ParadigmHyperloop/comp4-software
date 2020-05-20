@@ -8,7 +8,7 @@ Flask-WTF==0.14.2
 google-api-python-client==1.7.8
 google-auth==1.6.3
 google-auth-httplib2==0.0.3
-httplib2==0.12.1
+httplib2==0.18.0
 idna==2.8
 influxdb==5.2.2
 itsdangerous==1.1.0
